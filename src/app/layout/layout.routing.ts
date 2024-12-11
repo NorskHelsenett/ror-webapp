@@ -63,6 +63,10 @@ export const routes: Routes = [
         path: 'releasenotes',
         loadChildren: () => import('../release-notes/release-notes.module').then((m) => m.ReleaseNotesModule),
       },
+      {
+        path: 'virtualmachines',
+        loadChildren: () => import('../virtualmachines/virtualmachines.module').then((m) => m.VirtualmachinesModule),
+      },
       { path: '**', redirectTo: 'error/404' },
     ],
   },

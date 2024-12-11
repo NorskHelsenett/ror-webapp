@@ -33,6 +33,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
   adminRead$: Observable<boolean> | undefined;
   adminOwner$: Observable<boolean> | undefined;
+  multipleDashboards$: Observable<boolean> | undefined;
   aclFetchError: any;
 
   sse$: Observable<any> | undefined;
@@ -78,6 +79,14 @@ export class LayoutComponent implements OnInit, OnDestroy {
       }),
     );
     this.adminOwner$ = this.aclService.check(AclScopes.ROR, AclScopes.Global, AclAccess.Owner).pipe(
+      share(),
+      catchError((error: any) => {
+        this.aclFetchError = error;
+        this.changeDetector.detectChanges();
+        throw error;
+      }),
+    );
+    this.multipleDashboards$ = this.aclService.check(AclScopes.ROR, AclScopes.VirtualMachine, AclAccess.Owner).pipe(
       share(),
       catchError((error: any) => {
         this.aclFetchError = error;

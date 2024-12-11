@@ -52,6 +52,7 @@
             <!-- active & hover classes 'text-gray-700 dark:text-light' -->
             <!-- inActive classes 'text-gray-400 dark:text-gray-400' -->
             <a
+              *ngIf="(multipleDashboards$ | async) === false"
               routerLink=""
               routerLinkActive="text-gray-800 bg-green-200 dark:bg-green-800 dark:text-white dark:hover:text-light"
               [routerLinkActiveOptions]="{ exact: true }"
@@ -59,6 +60,26 @@
               class="block rounded-md p-2 text-sm text-gray-400 transition-colors duration-200 hover:text-gray-700 dark:hover:text-white"
             >
               {{ 'nav.home' | translate }}
+            </a>
+            <a
+              *ngIf="(multipleDashboards$ | async) === true"
+              routerLink=""
+              routerLinkActive="text-gray-800 bg-green-200 dark:bg-green-800 dark:text-white dark:hover:text-light"
+              [routerLinkActiveOptions]="{ exact: true }"
+              role="menuitem"
+              class="block rounded-md p-2 text-sm text-gray-400 transition-colors duration-200 hover:text-gray-700 dark:hover:text-white"
+            >
+              {{ 'nav.kubernetesclusters' | translate }}
+            </a>
+            <a
+              *ngIf="(multipleDashboards$ | async) === true"
+              routerLink="/virtualmachines"
+              routerLinkActive="text-gray-800 bg-green-200 dark:bg-green-800 dark:text-white dark:hover:text-light"
+              [routerLinkActiveOptions]="{ exact: true }"
+              role="menuitem"
+              class="block rounded-md p-2 text-sm text-gray-400 transition-colors duration-200 hover:text-gray-700 dark:hover:text-white"
+            >
+              {{ 'nav.virtualmachines' | translate }}
             </a>
             <!-- <a
               routerLink="/clusters"

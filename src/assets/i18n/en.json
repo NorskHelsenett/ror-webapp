@@ -160,7 +160,9 @@
     "compliancereports": "Compliance reports",
     "orders": "Orders",
     "resources": "Resources",
-    "resourcesv2": "Resources"
+    "resourcesv2": "Resources",
+    "virtualmachines": "Virtual machines",
+    "kubernetesclusters": "Kubernetes clusters"
   },
   "pages": {
     "about": {
@@ -1453,6 +1455,13 @@
         "header": {
           "tooltip": "For multi sorting, hold down the shift on windows or ⌘ for macos key while clicking on the column headers"
         }
+      }
+    },
+    "virtualmachines": {
+      "title": "Virtual machines",
+      "create": "Create virtual machine",
+      "table": {
+        "empty": "No virtual machines"
       }
     },
     "workspaces": {

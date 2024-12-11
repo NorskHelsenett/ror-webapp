@@ -146,7 +146,9 @@
     "compliancereports": "Samsvarsrapporter",
     "orders": "Ordrer",
     "resources": "Ressurser",
-    "resourcesv2": "Ressurser"
+    "resourcesv2": "Ressurser",
+    "virtualmachines": "Virtuelle maskiner",
+    "kubernetesclusters": "Kubernetes cluster"
   },
   "error": {
     "forbidden": "Forbudt område",
@@ -1445,6 +1447,13 @@
         "header": {
           "tooltip": "For sortering av flere kolonner, hold inne 'shift' (Windows) eller ⌘ (MacOs) og klikk på kolonnene du vil sortere etter"
         }
+      }
+    },
+    "virtualmachines": {
+      "title": "Virtuelle maskiner",
+      "create": "Lag virtuell maskin",
+      "table": {
+        "empty": "Ingen virtuelle maskiner"
       }
     },
     "workspaces": {
