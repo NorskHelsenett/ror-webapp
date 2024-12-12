@@ -160,7 +160,7 @@ export class TypesService {
       },
       {
         displayName: 'Virtual machines',
-        kind: 'Vm',
+        kind: 'VirtualMachine',
         apiVersion: 'general.ror.internal/v1alpha1',
         clusterSpecific: true,
       },
