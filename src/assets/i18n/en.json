@@ -1462,6 +1462,27 @@
       "create": "Create virtual machine",
       "table": {
         "empty": "No virtual machines"
+      },
+      "details": {
+        "title": "Virtual machine",
+        "components": {
+          "title": "Components"
+        },
+        "network": {
+          "title": "Network"
+        },
+        "metadata": {
+          "title": "Metadata"
+        },
+        "logs": {
+          "title": "Logs"
+        },
+        "resources": {
+          "title": "Resources"
+        },
+        "raw": {
+          "title": "Raw"
+        }
       }
     },
     "workspaces": {

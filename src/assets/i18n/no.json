@@ -1454,6 +1454,27 @@
       "create": "Lag virtuell maskin",
       "table": {
         "empty": "Ingen virtuelle maskiner"
+      },
+      "details": {
+        "title": "Virtuellmaskin",
+        "components": {
+          "title": "Komponenter"
+        },
+        "network": {
+          "title": "Nettverk"
+        },
+        "metadata": {
+          "title": "Metadata"
+        },
+        "logs": {
+          "title": "Logger"
+        },
+        "resources": {
+          "title": "Ressurser"
+        },
+        "raw": {
+          "title": "Rådata"
+        }
       }
     },
     "workspaces": {

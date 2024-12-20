@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VirtualmachinesComponent } from './virtualmachines.component';
+import { VirtualmachinesComponent } from '../virtualmachines.component';
 
 describe('VirtualmachinesComponent', () => {
   let component: VirtualmachinesComponent;

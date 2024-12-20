@@ -1,17 +1,18 @@
 import { CommonModule, JsonPipe } from '@angular/common';
 import { Component, ChangeDetectionStrategy, OnDestroy, OnInit, inject } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
-import { ResourcesV2QueryService } from '../resourcesv2/services/resources-v2-query.service';
-import { ResourceQuery } from '@rork8s/ror-resources/models';
+import { ResourcesV2QueryService } from '../../../resourcesv2/services/resources-v2-query.service';
+import { Resource, ResourceQuery } from '@rork8s/ror-resources/models';
 import { SharedModule } from 'primeng/api';
 import { SidebarModule } from 'primeng/sidebar';
-import { ResourceV2DetailsComponent } from '../resourcesv2/components/resource-v2-details/resource-v2-details.component';
-import { ResourcesV2ListComponent } from '../resourcesv2/components/resources-v2-list/resources-v2-list.component';
+import { ResourceV2DetailsComponent } from '../../../resourcesv2/components/resource-v2-details/resource-v2-details.component';
+import { ResourcesV2ListComponent } from '../../../resourcesv2/components/resources-v2-list/resources-v2-list.component';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-virtualmachines',
   standalone: true,
-  imports: [CommonModule, TranslateModule, ResourcesV2ListComponent, SidebarModule, ResourceV2DetailsComponent, JsonPipe, SharedModule],
+  imports: [CommonModule, TranslateModule, ResourcesV2ListComponent, SidebarModule, ResourceV2DetailsComponent, SharedModule],
   templateUrl: './virtualmachines.component.html',
   styleUrl: './virtualmachines.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -21,6 +22,9 @@ export class VirtualmachinesComponent implements OnInit, OnDestroy {
   showExportChoises: boolean;
   sidebarVisible = false;
   selectedResource: any;
+
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
 
   private resourcesV2QueryService = inject(ResourcesV2QueryService);
   private virtualMachineResourceQuery: ResourceQuery = {
@@ -41,8 +45,8 @@ export class VirtualmachinesComponent implements OnInit, OnDestroy {
     return;
   }
 
-  showSelectedResource(resource: any) {
+  showSelectedResource(resource: Resource) {
     this.selectedResource = resource;
-    this.sidebarVisible = true;
+    this.router.navigate(['.', resource?.metadata?.uid], { relativeTo: this.route });
   }
 }
