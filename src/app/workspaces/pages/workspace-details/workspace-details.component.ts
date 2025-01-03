@@ -1,7 +1,7 @@
 import { ClustersService } from '../../../core/services/clusters.service';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { catchError, Observable, Subscription, tap } from 'rxjs';
+import { catchError, finalize, Observable, Subscription, tap } from 'rxjs';
 import { User } from '../../../core/models/user';
 import { Filter } from '../../../core/models/apiFilter';
 import { MetricsService } from '../../../core/services/metrics.service';
@@ -16,6 +16,7 @@ import { PaginationResult } from '../../../core/models/paginatedResult';
 })
 export class WorkspaceDetailsComponent implements OnInit, OnDestroy {
   user$: Observable<User>;
+  workspaceId: string;
   workspaceName: string;
 
   workspaceMetrics$: Observable<any> | undefined;
@@ -62,7 +63,7 @@ export class WorkspaceDetailsComponent implements OnInit, OnDestroy {
       this.route.params
         .pipe(
           tap((data: any) => {
-            this.workspaceName = data?.workspaceName;
+            this.workspaceId = data?.workspaceId;
             this.fetch();
 
             this.changeDetector.detectChanges();
@@ -71,7 +72,7 @@ export class WorkspaceDetailsComponent implements OnInit, OnDestroy {
         .subscribe(),
     );
 
-    this.workspaceName = this.route.snapshot.params['workspaceName'];
+    this.workspaceId = this.route.snapshot.params['workspaceId'];
   }
 
   ngOnDestroy(): void {
@@ -85,9 +86,9 @@ export class WorkspaceDetailsComponent implements OnInit, OnDestroy {
 
   fetchWorkspaceMetrics(): void {
     this.workspaceMetricsError = undefined;
-    this.workspaceMetrics$ = this.metricsService.getForWorkspace(this.workspaceName).pipe(
-      tap(() => {
-        this.changeDetector.detectChanges();
+    this.workspaceMetrics$ = this.metricsService.getForWorkspace(this.workspaceId).pipe(
+      tap((data: any) => {
+        this.workspaceName = data?.name;
       }),
       catchError((error) => {
         switch (error?.status) {
@@ -101,8 +102,10 @@ export class WorkspaceDetailsComponent implements OnInit, OnDestroy {
           }
         }
         this.workspaceMetricsError = error;
-        this.changeDetector.detectChanges();
         return error;
+      }),
+      finalize(() => {
+        this.changeDetector.detectChanges();
       }),
     );
   }
@@ -110,7 +113,7 @@ export class WorkspaceDetailsComponent implements OnInit, OnDestroy {
   fetchClusters(): void {
     this.clustersError = undefined;
     this.filter = { ...this.filter, limit: this.itemsPerPage, skip: this.itemsPerPage * (this.currentPage - 1) };
-    this.clusters$ = this.clusterService.getByWorkspace(this.workspaceName, this.filter).pipe(
+    this.clusters$ = this.clusterService.getByWorkspace(this.workspaceId, this.filter).pipe(
       tap((data: PaginationResult<any>) => {
         if (data.totalCount > 0) {
           this.pageCount = Math.ceil(data.totalCount / this.itemsPerPage);

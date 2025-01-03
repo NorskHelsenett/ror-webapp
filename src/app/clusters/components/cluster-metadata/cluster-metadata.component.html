@@ -57,11 +57,9 @@
             <tr class="hover:bg-grey-light">
               <td class="px-2 py-1">{{ 'pages.clusters.details.metadata.workspace' | translate }}</td>
               <td class="px-2 py-1">
-                <a
-                  class="hover:text-blue-800 hover:underline dark:hover:text-blue-400"
-                  [routerLink]="['../../workspaces', cluster?.workspace?.name]"
-                  >{{ cluster?.workspace?.name }}</a
-                >
+                <a class="hover:text-blue-800 hover:underline dark:hover:text-blue-400" [routerLink]="['../../workspaces', cluster?.workspace?.id]">{{
+                  cluster?.workspace?.name
+                }}</a>
               </td>
             </tr>
             <tr class="hover:bg-grey-light">
@@ -69,7 +67,7 @@
               <td class="px-2 py-1">
                 <a
                   class="hover:text-blue-800 hover:underline dark:hover:text-blue-400"
-                  [routerLink]="['../../admin/datacenter/', cluster?.workspace?.datacenter?.name]"
+                  [routerLink]="['../../admin/datacenter/', cluster?.workspace?.datacenter?.id]"
                   >{{ cluster?.workspace?.datacenter?.name }}</a
                 >
               </td>

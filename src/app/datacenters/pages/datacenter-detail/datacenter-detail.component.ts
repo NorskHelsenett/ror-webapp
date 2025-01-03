@@ -1,6 +1,6 @@
 import { MetricsService } from '../../../core/services/metrics.service';
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { Observable, Subscription, catchError, tap } from 'rxjs';
+import { Observable, Subscription, catchError, map, tap } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Filter } from '../../../core/models/apiFilter';
 import { PaginationResult } from '../../../core/models/paginatedResult';
@@ -13,6 +13,7 @@ import { ConfigService } from '../../../core/services/config.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DatacenterDetailComponent implements OnInit {
+  datacenterId: string = undefined;
   datacenterName: string = undefined;
 
   datacenterMetrics$: Observable<any> | undefined;
@@ -57,7 +58,7 @@ export class DatacenterDetailComponent implements OnInit {
       this.route.params
         .pipe(
           tap((data: any) => {
-            this.datacenterName = data?.datacenterName;
+            this.datacenterId = data?.datacenterName;
             this.fetch();
 
             this.changeDetector.detectChanges();
@@ -66,7 +67,7 @@ export class DatacenterDetailComponent implements OnInit {
         .subscribe(),
     );
 
-    this.datacenterName = this.route.snapshot.params['datacenterName'];
+    this.datacenterId = this.route.snapshot.params['datacenterId'];
   }
 
   fetch(): void {
@@ -76,7 +77,12 @@ export class DatacenterDetailComponent implements OnInit {
 
   fetchDatacenterMetrics(): void {
     this.datacenterMetricsError = undefined;
-    this.datacenterMetrics$ = this.metricsService.getForDatacenter(this.datacenterName).pipe(
+    this.datacenterMetrics$ = this.metricsService.getForDatacenter(this.datacenterId).pipe(
+      map((data: any) => {
+        this.datacenterName = data?.name;
+        this.changeDetector.detectChanges();
+        return data;
+      }),
       catchError((error) => {
         switch (error?.status) {
           case 401: {
@@ -98,7 +104,7 @@ export class DatacenterDetailComponent implements OnInit {
   fetchWorkspaceMetrics(): void {
     this.workspaceMetricsError = undefined;
     this.filter = { ...this.filter, limit: this.itemsPerPage, skip: this.itemsPerPage * (this.currentPage - 1) };
-    this.workspaceMetrics$ = this.metricsService.getForWorkspacesByDatacenter(this.datacenterName, this.filter).pipe(
+    this.workspaceMetrics$ = this.metricsService.getForWorkspacesByDatacenter(this.datacenterId, this.filter).pipe(
       tap((data: PaginationResult<any>) => {
         if (data.totalCount > 0) {
           this.pageCount = Math.ceil(data.totalCount / this.itemsPerPage);

@@ -50,8 +50,8 @@ export class MetricsService {
     return this.httpClient.post<PaginationResult<any>>(url, filter);
   }
 
-  getForWorkspace(workspaceName: string): Observable<any> {
-    const url = `${this.configService.config.rorApi}/v1/metrics/workspace/${workspaceName}`;
+  getForWorkspace(workspaceId: string): Observable<any> {
+    const url = `${this.configService.config.rorApi}/v1/metrics/workspace/${workspaceId}`;
     return this.httpClient.get<any>(url);
   }
 

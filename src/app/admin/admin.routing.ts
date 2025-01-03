@@ -47,7 +47,7 @@ const routes: Routes = [
     component: adminDatacentersPages.AdminDatacenterCreateComponent,
   },
   {
-    path: 'datacenter/:datacenterName/edit',
+    path: 'datacenter/:datacenterId/edit',
     canActivate: [AdminReadGuard],
     component: adminDatacentersPages.AdminDatacenterCreateComponent,
   },

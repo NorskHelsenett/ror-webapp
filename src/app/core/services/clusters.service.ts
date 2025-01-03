@@ -23,8 +23,8 @@ export class ClustersService {
     return this.httpClient.post<PaginationResult<Cluster>>(url, filter);
   }
 
-  getByWorkspace(workspaceName: string, filter: Filter): Observable<PaginationResult<any>> {
-    const url = `${this.configService.config.rorApi}/v1/clusters/workspace/${workspaceName}/filter`;
+  getByWorkspace(workspaceId: string, filter: Filter): Observable<PaginationResult<any>> {
+    const url = `${this.configService.config.rorApi}/v1/clusters/workspace/${workspaceId}/filter`;
     return this.httpClient.post<PaginationResult<any>>(url, filter);
   }
 
