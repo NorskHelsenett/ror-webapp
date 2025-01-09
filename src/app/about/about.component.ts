@@ -1,7 +1,9 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { catchError, Observable, share, tap } from 'rxjs';
+import { catchError, finalize, Observable, share, tap } from 'rxjs';
 import { AboutService } from '../core/services/apihealthcheck.service';
 import { environment } from '../../environments/environment';
+import { Version } from '../core/models/version';
+import { VersionService } from '../core/services/version.service';
 
 @Component({
   selector: 'app-about',
@@ -12,29 +14,51 @@ import { environment } from '../../environments/environment';
 export class AboutComponent implements OnInit {
   appVersion = environment.appVersion;
 
-  healthError: any;
   health$: Observable<any> | undefined;
+  healthError: any;
+
+  version$: Observable<any>;
+  version: Version | undefined;
+  versionError: any;
 
   constructor(
     private aboutService: AboutService,
+    private versionService: VersionService,
     private changeDetector: ChangeDetectorRef,
   ) {}
 
   ngOnInit(): void {
-    this.healthcheck();
+    this.fetch();
   }
 
-  healthcheck(): void {
+  fetch(): void {
     this.healthError = undefined;
     this.health$ = this.aboutService.getHealth().pipe(
       share(),
-      tap(() => {
-        this.changeDetector.detectChanges();
-      }),
       catchError((error) => {
         this.healthError = error;
-        this.changeDetector.detectChanges();
         return error;
+      }),
+      finalize(() => {
+        this.changeDetector.detectChanges();
+      }),
+    );
+
+    this.version$ = this.versionService.getVersion().pipe(
+      share(),
+      tap((data: any) => {
+        this.version = {
+          version: data?.Version,
+          commit: data?.Commit,
+          libVer: data?.LibVer,
+        };
+      }),
+      catchError((error) => {
+        this.versionError = error;
+        return error;
+      }),
+      finalize(() => {
+        this.changeDetector.detectChanges();
       }),
     );
   }
