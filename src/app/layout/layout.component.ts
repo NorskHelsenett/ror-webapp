@@ -23,7 +23,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
   showSubMenu = false;
   showMobileMenu = false;
   showNotifications = false;
-  showSettings = false;
+          showSettings = false;
   showSearch = false;
   lang = '';
   currentYear: number;
