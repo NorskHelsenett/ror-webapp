@@ -8,9 +8,8 @@ describe('ClusterDescriptionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ClusterDescriptionComponent]
-    })
-    .compileComponents();
+      imports: [ClusterDescriptionComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ClusterDescriptionComponent);
     component = fixture.componentInstance;
