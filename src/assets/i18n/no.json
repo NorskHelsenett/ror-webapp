@@ -1,7 +1,9 @@
 {
   "app": {
     "title": "ROR",
-    "owner": "NHN"
+    "titleShort": "ROR",
+    "titleLong": "ROR Webapp",
+    "description": "Release Operate Report"
   },
   "common": {
     "refresh": "Oppdater",
