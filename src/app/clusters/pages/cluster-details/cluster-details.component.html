@@ -29,7 +29,7 @@
           <div class="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6">
             <div class="sm:col-span-1 md:col-span-1 lg:col-span-2 xl:col-span-3 2xl:col-span-4">
               <app-cluster-metrics [metrics]="cluster?.metrics"></app-cluster-metrics>
-              <app-cluster-description [description]="cluster?.metadata?.description"></app-cluster-description>
+              <app-cluster-description [cluster]="cluster" (edit)="switchTab(6)"></app-cluster-description>
               <app-cluster-node-pools class="p-2" [cluster]="cluster"></app-cluster-node-pools>
               <app-cluster-acl class="p-2" [cluster]="cluster"></app-cluster-acl>
             </div>
@@ -56,7 +56,9 @@
         <div class="">
           <div class="dark:bg-darker flex flex-col rounded-md bg-white">
             <div class="p-3 flex flex-col">
+              <!-- todo when cluster agent v2 is active remove this comment-->
               <app-cluster-ingress-table [cluster]="cluster"></app-cluster-ingress-table>
+              <!-- <app-cluster-ingress-list [cluster]="cluster"></app-cluster-ingress-list> -->
             </div>
           </div>
         </div>

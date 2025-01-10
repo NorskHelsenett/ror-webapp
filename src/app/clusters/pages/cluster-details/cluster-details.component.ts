@@ -49,10 +49,6 @@ export class ClusterDetailsComponent implements OnInit, OnDestroy {
       query: 'tab=ingresses',
     },
     {
-      metadata: 'ingress',
-      query: 'tab=ingress',
-    },
-    {
       metadata: 'policyReports',
       query: 'tab=policyReports',
     },
@@ -80,6 +76,10 @@ export class ClusterDetailsComponent implements OnInit, OnDestroy {
       metadata: 'delete',
       query: 'tab=delete',
     },
+    // {
+    //   metadata: 'ingress',
+    //   query: 'tab=ingress',
+    // },
   ];
 
   ingressResourceQuery: ResourceQuery = {
