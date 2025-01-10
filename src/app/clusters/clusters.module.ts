@@ -38,6 +38,7 @@ import { ResourceV2DetailsComponent } from '../resourcesv2/components/resource-v
 import { IngressComponent } from './pages/ingress/ingress.component';
 import { ClusterIngressTableComponent } from './components/cluster-ingress-table/cluster-ingress-table.component';
 import { ClusterResourceTableComponent } from './components/cluster-resource-table/cluster-resource-table.component';
+import { ClusterDescriptionComponent } from './components/cluster-description/cluster-description.component';
 
 @NgModule({
   declarations: [ClustersComponent, ...clustersPages, ...clusterComponents],
@@ -72,12 +73,12 @@ import { ClusterResourceTableComponent } from './components/cluster-resource-tab
     HighlightLineNumbers,
     DialogModule,
     ClusterVulnerabilityComponent,
-
     SidebarModule,
     ResourceV2DetailsComponent,
     IngressComponent,
     ClusterIngressTableComponent,
     ClusterResourceTableComponent,
+    ClusterDescriptionComponent,
   ],
   exports: [ClustersComponent, ...clustersPages, ...clusterComponents],
   providers: [ConfirmationService, ...clusterServices],

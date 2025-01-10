@@ -29,6 +29,7 @@
           <div class="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6">
             <div class="sm:col-span-1 md:col-span-1 lg:col-span-2 xl:col-span-3 2xl:col-span-4">
               <app-cluster-metrics [metrics]="cluster?.metrics"></app-cluster-metrics>
+              <app-cluster-description [description]="cluster?.metadata?.description"></app-cluster-description>
               <app-cluster-node-pools class="p-2" [cluster]="cluster"></app-cluster-node-pools>
               <app-cluster-acl class="p-2" [cluster]="cluster"></app-cluster-acl>
             </div>
