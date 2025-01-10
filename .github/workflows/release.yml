@@ -120,10 +120,11 @@ jobs:
       - build-ror-webapp-container-image
     steps:
       - uses: actions/checkout@v3
-      - name: Install Helm
+
+      - name: Install helm
         uses: azure/setup-helm@v1
         with:
-          version: v3.7.0
+          version: v3.16.4
       - name: install-yq
         run: |
           wget https://github.com/mikefarah/yq/releases/download/${VERSION}/${BINARY}.tar.gz -O - | tar xz && mv ${BINARY} yq && chmod +x yq
