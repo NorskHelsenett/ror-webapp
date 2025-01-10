@@ -117,7 +117,8 @@
     "low": "Lav",
     "summary": "Sammendrag",
     "report": "Rapport",
-    "change": "Change"
+    "change": "Change",
+    "description": "Beskrivelse"
   },
   "nav": {
     "home": "Oversikt",

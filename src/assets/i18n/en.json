@@ -117,7 +117,8 @@
     "low": "Low",
     "summary": "Summary",
     "report": "Report",
-    "change": "Change"
+    "change": "Change",
+    "description": "Description"
   },
   "error": {
     "forbidden": "Forbidden area",
