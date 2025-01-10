@@ -13,6 +13,7 @@ import { VersionService } from '../core/services/version.service';
 })
 export class AboutComponent implements OnInit {
   appVersion = environment.appVersion;
+  commit = environment.commit;
 
   health$: Observable<any> | undefined;
   healthError: any;

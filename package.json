@@ -1,6 +1,7 @@
 {
   "name": "ror-web",
   "version": "0.1.0",
+  "commit": "FFFFFF",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --port 11000",
