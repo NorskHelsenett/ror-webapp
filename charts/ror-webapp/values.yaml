@@ -9,6 +9,11 @@ web:
   apiUrl: https://api.ror.nhn.no
   authUrl: https://auth.sky.nhn.no/dex
   authClientId: ror.nhn.no
+  # ConfigMap for nginx
+  # nginxCM:
+  #   name: nginx-cm
+  #   subPath: default.conf
+  nginxCM: []
 replicaCount: 3
 image:
   repository: ghcr.io/norskhelsenett/ror-webapp
