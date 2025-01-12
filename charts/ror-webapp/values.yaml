@@ -3,12 +3,15 @@
 # Declare variables to be passed into your templates.
 enabled: true
 web:
+  # hosts is a list of hosts that the webapp should be available on
   hosts: 
-    - ror.sky.test.nhn.no
-    - ror.nhn.no
-  apiUrl: https://api.ror.nhn.no
-  authUrl: https://auth.sky.nhn.no/dex
-  authClientId: ror.nhn.no
+    - host.ror.io
+  # apiUrl is the url of the ror api
+  apiUrl: https://api.ror.io
+  # authUrl is the url of the auth server
+  authUrl: https://auth.ror.io/dex
+  # authClientId is the client id of the application registered in the auth server
+  authClientId: clientId
   # ConfigMap for nginx
   # nginxCM:
   #   name: nginx-cm
