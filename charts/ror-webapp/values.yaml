@@ -3,11 +3,20 @@
 # Declare variables to be passed into your templates.
 enabled: true
 web:
-  host: ror.sky.test.nhn.no
-  host2: ror.nhn.no
-  apiUrl: https://api.ror.sky.test.nhn.no
-  apiUrl2: https://api.ror.nhn.no
-  authUrl: https://auth.sky.nhn.no/dex
+  # hosts is a list of hosts that the webapp should be available on
+  hosts: 
+    - host.ror.io
+  # apiUrl is the url of the ror api
+  apiUrl: https://api.ror.io
+  # authUrl is the url of the auth server
+  authUrl: https://auth.ror.io/dex
+  # authClientId is the client id of the application registered in the auth server
+  authClientId: clientId
+  # ConfigMap for nginx
+  # nginxCM:
+  #   name: nginx-cm
+  #   subPath: default.conf
+  nginxCM: []
 replicaCount: 3
 image:
   repository: ghcr.io/norskhelsenett/ror-webapp
