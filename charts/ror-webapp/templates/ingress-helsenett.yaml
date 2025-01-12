@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
-  name: admin-helsenett-ingress
+  name: {{ include "ror-webapp.fullname" . }}helm-ingress
 spec:
   ingressClassName: avi-ingress-class-helsenett
   rules:
@@ -12,7 +12,7 @@ spec:
       paths:
       - backend:
           service:
-            name: {{ include "ror-admin.fullname" . }}
+            name: {{ include "ror-webapp.fullname" . }}
             port:
               number: {{ .Values.service.port }}
         path: {{ .Values.ingress.path }}
@@ -22,7 +22,7 @@ spec:
       paths:
       - backend:
           service:
-            name: {{ include "ror-admin.fullname" . }}
+            name: {{ include "ror-webapp.fullname" . }}
             port:
               number: {{ .Values.service.port }}
         path: {{ .Values.ingress.path }}
@@ -30,7 +30,7 @@ spec:
   tls:
   - hosts:
     - {{ .Values.web.host }}
-    secretName: nhn-ror-admin-tls
+    secretName: nhn-ror-webapp-tls
   - hosts:
     - {{ .Values.web.host2 }}
     secretName: nhn-ror-webapp-tls
