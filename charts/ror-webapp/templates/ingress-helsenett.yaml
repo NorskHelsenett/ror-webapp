@@ -17,9 +17,21 @@ spec:
               number: {{ .Values.service.port }}
         path: {{ .Values.ingress.path }}
         pathType: {{ .Values.ingress.pathType }}
+  - host: {{ .Values.web.host2 }}
+    http:
+      paths:
+      - backend:
+          service:
+            name: {{ include "ror-admin.fullname" . }}
+            port:
+              number: {{ .Values.service.port }}
+        path: {{ .Values.ingress.path }}
+        pathType: {{ .Values.ingress.pathType }}
   tls:
   - hosts:
     - {{ .Values.web.host }}
+    secretName: nhn-ror-admin-tls
+    - {{ .Values.web.host2 }}
     secretName: nhn-ror-admin-tls
 ---
 apiVersion: ako.vmware.com/v1alpha1
