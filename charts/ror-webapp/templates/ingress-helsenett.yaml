@@ -29,10 +29,11 @@ spec:
         pathType: {{ .Values.ingress.pathType }}
   tls:
   - hosts:
-    - secretName: nhn-ror-admin-tls
-      host: {{ .Values.web.host }}
-    - secretName: nhn-ror-webapp-tls
-      host: {{ .Values.web.host2 }}
+    - {{ .Values.web.host }}
+    secretName: nhn-ror-admin-tls
+  - hosts:
+    - {{ .Values.web.host2 }}
+    secretName: nhn-ror-webapp-tls
 
 ---
 apiVersion: ako.vmware.com/v1alpha1
