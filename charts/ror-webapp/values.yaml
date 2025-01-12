@@ -3,11 +3,12 @@
 # Declare variables to be passed into your templates.
 enabled: true
 web:
-  host: ror.sky.test.nhn.no
-  host2: ror.nhn.no
-  apiUrl: https://api.ror.sky.test.nhn.no
-  apiUrl2: https://api.ror.nhn.no
+  hosts: 
+    - ror.sky.test.nhn.no
+    - ror.nhn.no
+  apiUrl: https://api.ror.nhn.no
   authUrl: https://auth.sky.nhn.no/dex
+  authClientId: ror.nhn.no
 replicaCount: 3
 image:
   repository: ghcr.io/norskhelsenett/ror-webapp
