@@ -133,9 +133,7 @@
                         >
                       </td>
                       <td class="max-w-24">
-                        <span [pTooltip]="clusterInfo?.metadata?.description" tooltipPosition="bottom" style="">{{
-                          clusterInfo?.metadata?.description
-                        }}</span>
+                        <span [pTooltip]="clusterInfo?.metadata?.description" tooltipPosition="bottom">{{ clusterInfo?.metadata?.description }}</span>
                       </td>
                       <td class="">
                         <span *ngIf="clusterInfo?.metadata?.billing?.workorder">
