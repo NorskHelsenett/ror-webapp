@@ -1,4 +1,4 @@
-# Default values for ror-admin.
+# Default values for ror-webapp.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 enabled: true
