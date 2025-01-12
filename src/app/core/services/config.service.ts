@@ -67,7 +67,7 @@ export class ConfigService {
     };
 
     if (environment.production) {
-      config.auth.clientId = 'ror.nhn.no';
+      config.auth.clientId = 'ror.sky.test.nhn.no';
       config.auth.issuer = 'https://auth.sky.nhn.no/dex';
       config.rorApi = 'https://api.ror.nhn.no';
       config.auth.requireHttps = true;
