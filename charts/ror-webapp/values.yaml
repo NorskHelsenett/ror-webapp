@@ -4,7 +4,9 @@
 enabled: true
 web:
   host: ror.sky.test.nhn.no
+  host2: ror.nhn.no
   apiUrl: https://api.ror.sky.test.nhn.no
+  apiUrl2: https://api.ror.nhn.no
   authUrl: https://auth.sky.nhn.no/dex
 replicaCount: 3
 image:

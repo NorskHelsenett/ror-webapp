@@ -69,6 +69,6 @@ spec:
       volumes:
         - name: json-configmap-volume
           configMap:
-            name: ror-web-cm-config
+            name: ror-web-cm-config2
         - name: tmp-volume
           emptyDir: {}
