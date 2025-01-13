@@ -1,6 +1,6 @@
 apiVersion: v2
 name: ror-webapp
-description: ROR web
+description: ROR webapp
 
 type: application
 version: 0.1.0

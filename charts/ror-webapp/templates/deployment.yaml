@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "ror-admin.fullname" . }}
+  name: {{ include "ror-webapp.fullname" . }}
   labels:
-    {{- include "ror-admin.labels" . | nindent 4 }}
+    {{- include "ror-webapp.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
@@ -11,7 +11,7 @@ spec:
   revisionHistoryLimit: 2
   selector:
     matchLabels:
-      {{- include "ror-admin.selectorLabels" . | nindent 6 }}
+      {{- include "ror-webapp.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -19,13 +19,13 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "ror-admin.selectorLabels" . | nindent 8 }}
+        {{- include "ror-webapp.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "ror-admin.serviceAccountName" . }}
+      serviceAccountName: {{ include "ror-webapp.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.securityContext | nindent 8 }}
       containers:
@@ -38,6 +38,11 @@ spec:
             - mountPath: /app/assets/config/config.json
               name: json-configmap-volume
               subPath: config.json
+              {{- if .Values.web.nginxCM }}
+            - mountPath: /etc/nginx/conf.d/default.conf
+              name: nginx-cm
+              subPath: {{ .Values.web.nginxCM.subPath | default "default.conf"}}
+              {{- end }}
             - mountPath: /tmp
               name: tmp-volume
           ports:
@@ -69,6 +74,11 @@ spec:
       volumes:
         - name: json-configmap-volume
           configMap:
-            name: ror-web-cm-config
+            name: {{ include "ror-webapp.fullname" . }}-cm-config
+        {{- if .Values.web.nginxCM }}
+        - name: nginx-cm
+          configMap:
+            name: {{ .Values.web.nginxCM.name | default "nginx-cm" }}
+        {{- end }}
         - name: tmp-volume
           emptyDir: {}
