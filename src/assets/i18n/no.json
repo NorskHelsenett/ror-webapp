@@ -118,7 +118,8 @@
     "summary": "Sammendrag",
     "report": "Rapport",
     "change": "Change",
-    "description": "Beskrivelse"
+    "description": "Beskrivelse",
+    "noValue": "Ingen verdi"
   },
   "nav": {
     "home": "Oversikt",
