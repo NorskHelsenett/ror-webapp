@@ -1,15 +1,20 @@
-<div class="grid space-y-8 lg:gap-8 lg:space-y-0 mt-5">
+<div class="grid mt-5">
   <div class="dark:bg-darker flex items-center justify-between overflow-x-auto rounded-md bg-white p-2">
-    <div class="dark:bg-darker col-span-2 overflow-x-auto rounded-md bg-white">
-      <div class="dark:border-primary flex items-center justify-between border-b p-4">
+    <div class="dark:bg-darker col-span-2 overflow-x-auto rounded-md bg-white w-full">
+      <div class="dark:border-primary flex items-end justify-between border-b p-4">
         <h4 class="dark:text-light text-lg font-semibold text-gray-500">{{ 'common.description' | translate }}</h4>
-        <a class="dark:text-primary text-primary cursor-pointer" (click)="editRequested()">{{ 'common.edit' | translate }}</a>
+        <div class="">
+          <a class="dark:text-primary text-primary cursor-pointer" (click)="editRequested()">{{ 'common.edit' | translate }}</a>
+        </div>
       </div>
+
       <div class="overflow-x-auto">
         <div class="relative m-3">
-          <div>
-            <p>{{ cluster?.metadata?.description }}</p>
-          </div>
+          @if (cluster?.metadata?.description) {
+            <div class="whitespace-pre-line">{{ cluster?.metadata?.description }}</div>
+          } @else {
+            <div class="text-gray-500">{{ 'common.noValue' | translate }}</div>
+          }
         </div>
       </div>
     </div>
