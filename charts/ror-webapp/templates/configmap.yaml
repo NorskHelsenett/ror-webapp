@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: ror-web-cm-config
+  name: {{ include "ror-webapp.fullname" . }}-cm-config
 data:
   config.json: |
     {
       "auth": {
           "issuer": "{{ .Values.web.authUrl }}",
-          "clientId": "ror.sky.test.nhn.no",
+          "clientId": "{{ .Values.web.authClientId}}",
           "redirectUri": "/auth/callback",
           "scope": "profile email groups",
           "response_type": "id_token token",
