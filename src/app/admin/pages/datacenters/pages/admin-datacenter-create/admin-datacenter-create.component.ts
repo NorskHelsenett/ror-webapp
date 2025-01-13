@@ -16,6 +16,7 @@ export class AdminDatacenterCreateComponent implements OnInit, OnDestroy {
   createError: any;
   updateError: any;
   datacenterCreateModel: Datacenter | undefined;
+  datacenterId: string;
   datacenterName: string;
 
   datacenter: Datacenter | undefined;
@@ -38,8 +39,8 @@ export class AdminDatacenterCreateComponent implements OnInit, OnDestroy {
       this.route.params
         .pipe(
           tap((data: any) => {
-            if (data && data?.datacenterName?.length > 0) {
-              this.datacenterName = data?.datacenterName;
+            if (data && data?.datacenterId?.length > 0) {
+              this.datacenterId = data?.datacenterId;
               this.fetchDatacenter();
             }
           }),
@@ -69,10 +70,11 @@ export class AdminDatacenterCreateComponent implements OnInit, OnDestroy {
   fetchDatacenter(): void {
     this.subscriptions.add(
       this.datacenterService
-        .getByName(this.datacenterName)
+        .getById(this.datacenterId)
         .pipe(
           tap((datacenter: Datacenter) => {
             this.datacenter = datacenter;
+            this.datacenterName = datacenter?.name;
             this.fillForm();
           }),
           catchError((error) => {

@@ -8,7 +8,7 @@ const routes: Routes = [
     component: DatacentersComponent,
   },
   {
-    path: ':datacenterName',
+    path: ':datacenterId',
     component: datacentersPages.DatacenterDetailComponent,
   },
 ];

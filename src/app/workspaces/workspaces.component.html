@@ -71,14 +71,14 @@
             <ng-template pTemplate="body" let-metric let-expanded="expanded">
               <tr>
                 <td class="whitespace-nowrap px-2 py-2 text-sm font-medium">
-                  <a class="hover:text-blue-800 hover:underline dark:hover:text-blue-400" [routerLink]="['./', metric?.workspace?.name]">{{
+                  <a class="hover:text-blue-800 hover:underline dark:hover:text-blue-400" [routerLink]="['./', metric?.workspace?.id]">{{
                     metric?.workspace?.name
                   }}</a>
                 </td>
                 <td class="whitespace-nowrap px-2 py-2 text-sm font-light">
                   <a
                     class="hover:text-blue-800 hover:underline dark:hover:text-blue-400"
-                    [routerLink]="['../admin/datacenter', metric?.workspace?.datacenter?.name]"
+                    [routerLink]="['../admin/datacenter', metric?.workspace?.datacenter?.id]"
                     >{{ metric?.workspace?.datacenter?.name }}</a
                   >
                 </td>
