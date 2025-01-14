@@ -22,7 +22,6 @@ import localeEnExtra from '@angular/common/locales/extra/en';
 import { CoreModule } from './core/core.modules';
 import { SharedModule } from './shared/shared.module';
 import { MessageService } from 'primeng/api';
-import { ConfigService, configFactory } from './core/services/config.service';
 import { provideHighlightOptions } from 'ngx-highlightjs';
 import { InMemoryScrollingFeature, InMemoryScrollingOptions, withInMemoryScrolling } from '@angular/router';
 import { environment } from '../environments/environment';
@@ -70,17 +69,10 @@ const inMemoryScrollingFeature: InMemoryScrollingFeature = withInMemoryScrolling
     }),
   ],
   providers: [
-    //provideRouter(routes, inMemoryScrollingFeature, withViewTransitions(), withDebugTracing()),
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true,
-    },
-    {
-      provide: APP_INITIALIZER,
-      useFactory: configFactory,
-      multi: true,
-      deps: [ConfigService],
     },
     MessageService,
     provideHighlightOptions({

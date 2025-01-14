@@ -1,4 +1,8 @@
-export interface Config {
+import { InjectionToken } from '@angular/core';
+
+export const APP_CONFIG = new InjectionToken<AppConfig>('app.config');
+
+export interface AppConfig {
   auth: Auth;
   regex: Regex;
   rowsPerPage: number[];
