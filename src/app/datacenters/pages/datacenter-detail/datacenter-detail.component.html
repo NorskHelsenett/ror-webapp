@@ -271,8 +271,8 @@
             <tbody>
               <tr class="transition duration-300 ease-in-out hover:bg-gray-200 dark:hover:bg-gray-500" *ngFor="let workspace of workspaces?.data">
                 <td class="whitespace-nowrap px-2 py-2 text-sm font-medium">
-                  <a class="hover:text-blue-800 hover:underline dark:hover:text-blue-400" [routerLink]="['../../../workspaces', workspace.id]">{{
-                    workspace?.id
+                  <a class="hover:text-blue-800 hover:underline dark:hover:text-blue-400" [routerLink]="['../../../workspaces', workspace?.id]">{{
+                    workspace?.name
                   }}</a>
                 </td>
                 <td class="whitespace-nowrap px-2 py-2 text-sm font-light">

@@ -107,7 +107,7 @@ export class WorkspacesComponent implements OnInit {
 
         let metricsData = [];
         data?.data?.forEach((workspaceMetric: any) => {
-          workspaceMetric.workspace = this.workspaces.find((x: any) => x?.name === workspaceMetric?.id);
+          workspaceMetric.workspace = this.workspaces.find((x: any) => x?.id === workspaceMetric?.id);
           metricsData.push(workspaceMetric);
         });
         return { ...data, data: metricsData };

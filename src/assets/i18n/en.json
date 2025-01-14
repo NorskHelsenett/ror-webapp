@@ -118,7 +118,8 @@
     "summary": "Summary",
     "report": "Report",
     "change": "Change",
-    "description": "Description"
+    "description": "Description",
+    "noValue": "No value"
   },
   "error": {
     "forbidden": "Forbidden area",

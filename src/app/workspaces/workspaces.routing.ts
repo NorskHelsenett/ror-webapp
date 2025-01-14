@@ -9,11 +9,11 @@ const routes: Routes = [
     component: WorkspacesComponent,
   },
   {
-    path: ':workspaceName',
+    path: ':workspaceId',
     component: workspacesPages.WorkspaceDetailsComponent,
   },
   {
-    path: ':workspaceName/edit',
+    path: ':workspaceId/edit',
     component: workspacesPages.WorkspaceNewComponent,
   },
 ];
