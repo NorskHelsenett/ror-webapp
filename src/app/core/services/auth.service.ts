@@ -10,25 +10,14 @@ import { jwtDecode } from 'jwt-decode';
 })
 export class AuthService {
   authenticationEventObservable: Subject<boolean> = new Subject<boolean>();
-  authConfig: AuthConfig = {
-    issuer: this.configService.config.auth.issuer,
-    redirectUri: this.configService.config.auth.redirectUri,
-    clientId: this.configService.config.auth.clientId,
-    responseType: this.configService.config.auth.responseType,
-    scope: this.configService.config.auth.scope,
-    showDebugInformation: false,
-    timeoutFactor: 0.75,
-    postLogoutRedirectUri: this.configService.config.auth.postLogoutRedirectUri,
-    logoutUrl: this.configService.config.auth.logoutUrl,
-    requireHttps: this.configService.config.auth.requireHttps,
-    strictDiscoveryDocumentValidation: this.configService.config.auth.strictDiscoveryDocumentValidation,
-  };
+  authConfig: AuthConfig | undefined;
 
   constructor(
     private oauthService: OAuthService,
     private userService: UserService,
     private configService: ConfigService,
   ) {
+    this.setConfig();
     this.oauthService.configure(this.authConfig);
   }
 
@@ -53,6 +42,7 @@ export class AuthService {
         this.authenticationEventObservable.next(result);
       })
       .catch((error: any) => {
+        console.error('Error logging in', error);
         this.logout();
       });
 
@@ -78,5 +68,22 @@ export class AuthService {
     const exp = new Date(0);
     exp.setUTCSeconds(decodedToken.exp);
     return now > exp;
+  }
+
+  private setConfig() {
+    const config = this.configService.config;
+    this.authConfig = {
+      issuer: config?.auth.issuer,
+      redirectUri: config?.auth?.redirectUri,
+      clientId: config?.auth?.clientId,
+      responseType: config?.auth?.responseType,
+      scope: config?.auth?.scope,
+      showDebugInformation: false,
+      timeoutFactor: 0.75,
+      postLogoutRedirectUri: config?.auth?.postLogoutRedirectUri,
+      logoutUrl: config?.auth?.logoutUrl,
+      requireHttps: config?.auth?.requireHttps,
+      strictDiscoveryDocumentValidation: config?.auth?.strictDiscoveryDocumentValidation,
+    };
   }
 }

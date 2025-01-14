@@ -4,7 +4,7 @@
 enabled: true
 web:
   # hosts is a list of hosts that the webapp should be available on
-  hosts: 
+  hosts:
     - host.ror.io
   # apiUrl is the url of the ror api
   apiUrl: https://api.ror.io
@@ -67,7 +67,7 @@ resources:
     memory: 128Mi
 autoscaling:
   enabled: true
-  minReplicas: 2
+  minReplicas: 1
   maxReplicas: 5
   targetCPUUtilizationPercentage: 85
 nodeSelector: {}

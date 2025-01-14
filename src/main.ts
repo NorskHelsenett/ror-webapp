@@ -4,10 +4,19 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 
-if (environment.production) {
-  enableProdMode();
-}
+import { APP_CONFIG } from './app.config';
 
-platformBrowserDynamic()
-  .bootstrapModule(AppModule)
-  .catch((err) => console.error(err));
+fetch(environment.configPath)
+  .then((response) => response.json())
+  .then((config) => {
+    if (environment.production) {
+      enableProdMode();
+    }
+    platformBrowserDynamic([{ provide: APP_CONFIG, useValue: config }])
+      .bootstrapModule(AppModule)
+      .catch((err) => console.error(err));
+  })
+  .catch((err) => {
+    console.error(err);
+    return 'Failed to load config';
+  });
