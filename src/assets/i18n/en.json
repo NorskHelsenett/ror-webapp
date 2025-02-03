@@ -1469,23 +1469,64 @@
       },
       "details": {
         "title": "Virtual machine",
-        "components": {
-          "title": "Components"
+        "backups": {
+          "title": "Backups"
+        },
+        "detail": {
+          "title": "Details"
+        },
+        "disks": {
+          "title": "Disks",
+          "name": "name",
+          "ismounted": "Is mounted",
+          "size": "Size",
+          "type": "Type"
+        },
+        "events": {
+          "title": "Events"
         },
         "network": {
-          "title": "Network"
+          "title": "Network",
+          "networks": "Networks",
+          "ipv4": "IPv4",
+          "ipv6": "IPv6",
+          "mask": "Mask",
+          "gateway": "Gateway",
+          "dns": "DNS"
         },
         "metadata": {
-          "title": "Metadata"
+          "title": "Metadata",
+          "name": "Name",
+          "provider": "Provider",
+          "lastUpdated": "Last updated",
+          "tags": "Tags"
         },
-        "logs": {
-          "title": "Logs"
-        },
-        "resources": {
-          "title": "Resources"
+        "operatingSystem": {
+          "title": "Operating system",
+          "id": "Id",
+          "name": "name",
+          "version": "Version",
+          "hostname": "Hostname",
+          "powerState": "Power state",
+          "toolVersion": "Tool version",
+          "architecture": "Architecture",
+          "family": "Family"
         },
         "raw": {
           "title": "Raw"
+        },
+        "status": {
+          "title": "Status"
+        },
+        "specs": {
+          "title": "Specs",
+          "cpu": "CPU",
+          "memory": "Memory",
+          "disk": "Disk",
+          "cores": "cores"
+        },
+        "tools": {
+          "title": "Tools"
         }
       }
     },
@@ -1526,6 +1567,12 @@
     "trueOrFalse": {
       "true": "True",
       "false": "False"
+    },
+    "power": {
+      "on": "On",
+      "off": "Off",
+      "suspended": "Suspended",
+      "unknown": "Unknown"
     }
   }
 }

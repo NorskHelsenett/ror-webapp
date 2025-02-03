@@ -1,0 +1,45 @@
+<div class="grid space-y-8 lg:gap-8 lg:space-y-0">
+  <div class="dark:bg-darker flex items-center justify-between overflow-x-auto rounded-md bg-white p-4">
+    <div class="dark:bg-darker col-span-2 overflow-x-auto rounded-md bg-white w-full">
+      <div class="dark:border-primary flex items-center justify-between border-b p-4">
+        <h4 class="dark:text-light text-lg font-semibold text-gray-500">{{ 'pages.virtualmachines.details.metadata.title' | translate }}</h4>
+      </div>
+      <div class="overflow-x-auto">
+        <div class="relative mb-3">
+          <table class="w-full border-collapse text-left">
+            <tbody>
+              <tr class="hover:bg-grey-light">
+                <td class="px-2 py-1">{{ 'pages.virtualmachines.details.metadata.name' | translate }}</td>
+                <td class="px-2 py-1">
+                  {{ virtualmachine?.virtualmachine?.spec?.name }}
+                </td>
+              </tr>
+              <tr class="hover:bg-grey-light">
+                <td class="px-2 py-1">{{ 'pages.virtualmachines.details.metadata.provider' | translate }}</td>
+                <td class="px-2 py-1">
+                  <app-provider [providerTypeOrName]="virtualmachine?.virtualmachine?.provider"></app-provider>
+                </td>
+              </tr>
+              <tr class="hover:bg-grey-light">
+                <td class="px-2 py-1">{{ 'pages.virtualmachines.details.metadata.lastUpdated' | translate }}</td>
+                <td class="px-2 py-1">
+                  <span>{{ toAny(virtualmachine?.virtualmachine?.status?.lastUpdated) | time: 'DD. MMM YYYY HH:mm:ss' }} </span>
+                </td>
+              </tr>
+              <tr class="hover:bg-grey-light">
+                <td class="px-2 py-1">{{ 'pages.virtualmachines.details.metadata.tags' | translate }}</td>
+                <td class="px-2 py-1">
+                  @for (tag of virtualmachine?.virtualmachine?.status?.tags; track tag) {
+                    @if (tag.description) {
+                      <p-badge class="ml-1" value="{{ tag.value }} ({{ tag.description }})" [severity]="getRandomColor()"></p-badge>
+                    }
+                  }
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

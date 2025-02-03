@@ -1461,23 +1461,64 @@
       },
       "details": {
         "title": "Virtuellmaskin",
-        "components": {
-          "title": "Komponenter"
+        "backups": {
+          "title": "Backup"
+        },
+        "detail": {
+          "title": "Detaljer"
+        },
+        "disks": {
+          "title": "Harddisker",
+          "name": "Navn",
+          "ismounted": "Montert",
+          "size": "Størrelse",
+          "type": "Type"
+        },
+        "events": {
+          "title": "Hendelser"
         },
         "network": {
-          "title": "Nettverk"
+          "title": "Nettverk",
+          "networks": "Nettverk",
+          "ipv4": "IPv4",
+          "ipv6": "IPv6",
+          "mask": "Maske",
+          "gateway": "Gateway",
+          "dns": "DNS"
         },
         "metadata": {
-          "title": "Metadata"
+          "title": "Metadata",
+          "name": "Navn",
+          "provider": "Tilbyder",
+          "lastUpdated": "Sist oppdatert",
+          "tags": "Stikkord"
         },
-        "logs": {
-          "title": "Logger"
-        },
-        "resources": {
-          "title": "Ressurser"
+        "operatingSystem": {
+          "title": "Operativsystem",
+          "id": "Id",
+          "name": "Navn",
+          "version": "Versjon",
+          "hostname": "Vertsnavn",
+          "powerState": "Strømstatus",
+          "toolVersion": "Verktøyversjon",
+          "architecture": "Arkitektur",
+          "family": "Familie"
         },
         "raw": {
           "title": "Rådata"
+        },
+        "status": {
+          "title": "Status"
+        },
+        "specs": {
+          "title": "Spesifikasjoner",
+          "cpu": "CPU",
+          "memory": "Minne",
+          "disk": "Disk",
+          "cores": "kjerner"
+        },
+        "tools": {
+          "title": "Verktøy"
         }
       }
     },
@@ -1517,6 +1558,12 @@
     "trueOrFalse": {
       "true": "Sann",
       "false": "Usann"
+    },
+    "power": {
+      "on": "På",
+      "off": "Av",
+      "suspended": "Suspendert",
+      "unknown": "Ukjent"
     }
   }
 }

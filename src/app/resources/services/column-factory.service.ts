@@ -7,6 +7,8 @@ export class ColumnFactoryService {
 
   getColumnDefinitions(apiVersion, kind: string): ColumnDefinition[] {
     switch (kind) {
+      case 'BackupJob':
+        return this.getBackupJob();
       case 'ClusterOrder':
         return this.getClusterOrder();
       case 'Pod':
@@ -40,6 +42,107 @@ export class ColumnFactoryService {
       default:
         return [];
     }
+  }
+
+  private getBackupJob(): ColumnDefinition[] {
+    return [
+      {
+        field: 'metadata.name',
+        header: 'BackupJob name',
+        type: 'text',
+        enabled: true,
+      },
+      {
+        field: 'metadata.namespace',
+        header: 'Namespace',
+        type: 'text',
+        enabled: true,
+      },
+      {
+        field: 'spec.schedule',
+        header: 'Schedule',
+        type: 'text',
+        enabled: true,
+      },
+      {
+        field: 'spec.backupName',
+        header: 'Backup name',
+        type: 'text',
+        enabled: true,
+      },
+      {
+        field: 'spec.backupType',
+        header: 'Backup type',
+        type: 'text',
+        enabled: true,
+      },
+      {
+        field: 'spec.backupLocation',
+        header: 'Backup location',
+        type: 'text',
+        enabled: true,
+      },
+      {
+        field: 'spec.backupRetention',
+        header: 'Backup retention',
+        type: 'text',
+        enabled: true,
+      },
+      {
+        field: 'spec.backupCleanup',
+        header: 'Backup cleanup',
+        type: 'text',
+        enabled: true,
+      },
+      {
+        field: 'spec.backupCleanupRetention',
+        header: 'Backup cleanup retention',
+        type: 'text',
+        enabled: true,
+      },
+      {
+        field: 'spec.backupCleanupLocation',
+        header: 'Backup cleanup location',
+        type: 'text',
+        enabled: true,
+      },
+      {
+        field: 'spec.backupCleanupType',
+        header: 'Backup cleanup type',
+        type: 'text',
+        enabled: true,
+      },
+      {
+        field: 'spec.backupCleanupSchedule',
+        header: 'Backup cleanup schedule',
+        type: 'text',
+        enabled: true,
+      },
+      {
+        field: 'spec.backupCleanupTime',
+        header: 'Backup cleanup time',
+        type: 'text',
+        enabled: true,
+      },
+      {
+        field: 'spec.backupCleanupRetention',
+        header: 'Backup cleanup retention',
+        type: 'text',
+        enabled: true,
+      },
+      {
+        field: 'spec.backupCleanupLocation',
+        header: 'Backup cleanup location',
+        type: 'text',
+        enabled: true,
+      },
+      {
+        field: 'spec.backupCleanupType',
+        header: 'Backup cleanup type',
+        type: 'text',
+        enabled: true,
+      },
+    ];
   }
 
   private getClusterOrder(): ColumnDefinition[] {

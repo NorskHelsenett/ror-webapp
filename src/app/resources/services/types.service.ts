@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { ResourceType } from '../../core/models/resources/resourceType';
-import { OwnerType } from '../../core/models/resources/ownerType';
 
 @Injectable()
 export class TypesService {
@@ -8,6 +7,12 @@ export class TypesService {
 
   getResourceTypes(): ResourceType[] {
     return [
+      {
+        displayName: 'BackupJobs',
+        kind: 'BackupJob',
+        apiVersion: 'backupjob.ror.internal/v1alpha1',
+        clusterSpecific: false,
+      },
       {
         displayName: 'Certificates',
         kind: 'Certificate',

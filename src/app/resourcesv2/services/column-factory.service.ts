@@ -31,6 +31,9 @@ export class ColumnFactoryService {
     if (kind === 'AppProject' && apiVersion === 'argoproj.io/v1alpha1') {
       columns = this.getAppProject();
     }
+    if (kind === 'BackupJob' && apiVersion === 'backupjob.ror.internal/v1alpha1') {
+      columns = this.getBackupJob();
+    }
     if (kind === 'Certificate' && apiVersion === 'cert-manager.io/v1') {
       columns = this.getCertificate();
     }
@@ -226,6 +229,16 @@ export class ColumnFactoryService {
         field: 'metadata.creationTimestamp',
         header: 'Creation Time',
         type: 'date',
+        enabled: true,
+      },
+    ];
+  }
+  getBackupJob(): ColumnDefinition[] {
+    return [
+      {
+        field: 'metadata.name',
+        header: 'Name',
+        type: 'text',
         enabled: true,
       },
     ];

@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
-import { ResourceSet } from '@rork8s/ror-resources/models';
+import { Resource } from '@rork8s/ror-resources/models';
 import { HighlightModule } from 'ngx-highlightjs';
 
 @Component({
@@ -12,5 +12,5 @@ import { HighlightModule } from 'ngx-highlightjs';
   styleUrl: './virtualmachines-raw.component.scss',
 })
 export class VirtualmachinesRawComponent {
-  @Input() resource: ResourceSet;
+  @Input() resource: Resource | undefined;
 }

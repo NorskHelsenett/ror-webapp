@@ -1,0 +1,20 @@
+<div class="grid space-y-8 lg:gap-8 lg:space-y-0">
+  <div class="dark:bg-darker flex items-center justify-between overflow-x-auto rounded-md bg-white p-4">
+    <div class="dark:bg-darker col-span-2 overflow-x-auto rounded-md bg-white w-full">
+      <div class="dark:border-primary flex items-center justify-between border-b p-4">
+        <h4 class="dark:text-light text-lg font-semibold text-gray-500">{{ 'pages.virtualmachines.details.backups.title' | translate }}</h4>
+      </div>
+      <div class="overflow-x-auto">
+        <div class="relative mb-3">
+          <app-resources-v2-list #resourcesTable (resourceSelected)="showSelectedResource($event)"></app-resources-v2-list>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p-sidebar [(visible)]="sidebarVisible" position="right" styleClass="sm:w-full md:w-1/2">
+  @if (selectedResource) {
+    <app-resource-v2-details [resource]="selectedResource"></app-resource-v2-details>
+  }
+</p-sidebar>

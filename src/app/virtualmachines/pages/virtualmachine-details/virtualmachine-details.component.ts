@@ -1,25 +1,50 @@
-import { AsyncPipe, Location } from '@angular/common';
+import { AsyncPipe, Location, NgIf } from '@angular/common';
 import { Resourcesv2Service } from './../../../core/services/resourcesv2.service';
 import { ChangeDetectionStrategy, Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { ResourceSet } from '@rork8s/ror-resources/models';
-import { catchError, finalize, Observable } from 'rxjs';
+import { Resource } from '@rork8s/ror-resources/models';
+import { catchError, finalize, Observable, tap } from 'rxjs';
 import { TabViewModule } from 'primeng/tabview';
 import { VirtualmachinesRawComponent } from '../../components/virtualmachines-raw/virtualmachines-raw.component';
+import { VirtualmachineMetadataComponent } from '../../components/virtualmachine-metadata/virtualmachine-metadata.component';
+import { VirtualmachineToolsComponent } from '../../components/virtualmachine-tools/virtualmachine-tools.component';
+import { VirtualmachineStatusComponent } from '../../components/virtualmachine-status/virtualmachine-status.component';
+import { VirtualmachineNetworkComponent } from '../../components/virtualmachine-network/virtualmachine-network.component';
+import { ProviderComponent } from '../../../shared/components/provider/provider.component';
+import { VirtualmachineOsComponent } from '../../components/virtualmachine-os/virtualmachine-os.component';
+import { VirtualmachineDisksComponent } from '../../components/virtualmachine-disks/virtualmachine-disks.component';
+import { VirtualmachineSpecsComponent } from '../../components/virtualmachine-specs/virtualmachine-specs.component';
+import { VirtualmachineBackupComponent } from '../../components/virtualmachine-backup/virtualmachine-backup.component';
 
 @Component({
   selector: 'app-virtualmachine-details',
   standalone: true,
-  imports: [TranslateModule, AsyncPipe, TabViewModule, VirtualmachinesRawComponent],
+  imports: [
+    TranslateModule,
+    AsyncPipe,
+    TabViewModule,
+    NgIf,
+    VirtualmachinesRawComponent,
+    VirtualmachineMetadataComponent,
+    VirtualmachineToolsComponent,
+    VirtualmachineDisksComponent,
+    VirtualmachineStatusComponent,
+    VirtualmachineNetworkComponent,
+    VirtualmachineSpecsComponent,
+    VirtualmachineOsComponent,
+    VirtualmachineBackupComponent,
+    ProviderComponent,
+  ],
   templateUrl: './virtualmachine-details.component.html',
   styleUrl: './virtualmachine-details.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VirtualmachineDetailsComponent implements OnInit {
   resourceId: string | undefined;
-  resource$: Observable<ResourceSet> | undefined;
+  resource$: Observable<Resource> | undefined;
   resourceFetchError: any;
+  virtualMachine: Resource | undefined;
 
   activeTabIndex = 0;
   selectedTabIndex: number = 0;
@@ -56,6 +81,13 @@ export class VirtualmachineDetailsComponent implements OnInit {
 
   fetchResource() {
     this.resource$ = this.resourcesv2Service.getResourcesById(this.resourceId).pipe(
+      tap((resource: Resource) => {
+        if (!resource || !resource?.virtualmachine) {
+          this.resourceFetchError = 'Resource not found';
+        }
+        this.virtualMachine = resource;
+        console.log('Virtual Machine:', resource);
+      }),
       catchError((error: any) => {
         this.resourceFetchError = error;
         throw error;

@@ -1,0 +1,62 @@
+<div class="grid space-y-8 lg:gap-8 lg:space-y-0">
+  <div class="dark:bg-darker flex items-center justify-between overflow-x-auto rounded-md bg-white p-4">
+    <div class="dark:bg-darker col-span-2 overflow-x-auto rounded-md bg-white">
+      <div class="dark:border-primary flex items-center justify-between border-b p-4">
+        <h4 class="dark:text-light text-lg font-semibold text-gray-500">{{ 'pages.virtualmachines.details.network.networks' | translate }}</h4>
+      </div>
+      <div class="overflow-x-auto">
+        <div class="relative mb-3">
+          @for (network of virtualmachine?.virtualmachine?.status?.networks; track network) {
+            <div>
+              <span class="text-lg">Id: {{ network?.id }}</span>
+              <table class="w-full border-collapse text-left">
+                <tbody>
+                  <tr class="hover:bg-grey-light">
+                    <td class="px-2 py-1">
+                      <p-badge severity="warning" value="{{ 'pages.virtualmachines.details.network.ipv4' | translate }}"></p-badge>
+                    </td>
+                    <td class="px-2 py-1">
+                      {{ network?.ipv4 }}
+                    </td>
+                  </tr>
+                  <tr class="hover:bg-grey-light">
+                    <td class="px-2 py-1">
+                      <p-badge severity="success" value="{{ 'pages.virtualmachines.details.network.ipv6' | translate }}"></p-badge>
+                    </td>
+                    <td class="px-2 py-1">
+                      {{ network?.ipv6 }}
+                    </td>
+                  </tr>
+                  @if (network?.gateway) {
+                    <tr class="hover:bg-grey-light">
+                      <td class="px-2 py-1">{{ 'pages.virtualmachines.details.network.mask' | translate }}</td>
+                      <td class="px-2 py-1">
+                        {{ network?.mask }}
+                      </td>
+                    </tr>
+                  }
+                  <tr class="hover:bg-grey-light">
+                    <td class="px-2 py-1">
+                      <p-badge severity="info" value="{{ 'pages.virtualmachines.details.network.dns' | translate }}"></p-badge>
+                    </td>
+                    <td class="px-2 py-1">
+                      {{ network?.dns }}
+                    </td>
+                  </tr>
+                  @if (network?.gateway) {
+                    <tr class="hover:bg-grey-light">
+                      <td class="px-2 py-1">{{ 'pages.virtualmachines.details.network.gateway' | translate }}</td>
+                      <td class="px-2 py-1">
+                        {{ network?.gateway }}
+                      </td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
