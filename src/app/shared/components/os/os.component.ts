@@ -1,19 +1,19 @@
 import { Component, Input } from '@angular/core';
-import { PowerState } from '../../../core/models/powerstate';
+import { OperationSystemFamilies } from '../../../core/models/operationsystemfamilies';
 import { NgClass, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-power',
+  selector: 'app-os',
   standalone: true,
   imports: [NgSwitch, NgSwitchCase, NgSwitchDefault, NgClass, TranslateModule],
-  templateUrl: './power.component.html',
-  styleUrl: './power.component.scss',
+  templateUrl: './os.component.html',
+  styleUrl: './os.component.scss',
 })
-export class PowerComponent {
-  @Input() powerState: PowerState = PowerState.Unknown;
-  @Input() iconSize: number = 6;
+export class OsComponent {
+  @Input() osFamily: OperationSystemFamilies = OperationSystemFamilies.Unknown;
   @Input() showText: boolean = true;
   @Input() showIcon: boolean = true;
-  powerstates = PowerState;
+  @Input() iconSize: number = 6;
+  osFamilies = OperationSystemFamilies;
 }

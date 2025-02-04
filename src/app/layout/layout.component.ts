@@ -58,6 +58,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
     this.desember = this.bigEventsService.isDesember();
     this.birthday = this.bigEventsService.isRORBirthday();
+    this.currentYear = new Date().getFullYear();
 
     this.setupSSEClients();
 

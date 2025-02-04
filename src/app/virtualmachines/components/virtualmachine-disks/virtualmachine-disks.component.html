@@ -8,21 +8,21 @@
         <div class="relative mb-3">
           @for (disk of virtualmachine?.virtualmachine?.status?.disks; track disk) {
             <div class="mb-5 first:mt-2">
-              <span class="text-lg">Id: {{ disk?.spec?.id }}</span>
+              <!-- <span class="text-lg font-bold">Name: {{ disk?.spec?.name }}</span> -->
               <table class="w-full border-collapse text-left">
                 <tbody>
                   <tr class="hover:bg-grey-light">
-                    <td class="px-2 py-1">{{ 'pages.virtualmachines.details.disks.ismounted' | translate }}</td>
+                    <td class="px-2 py-1 w-32">{{ 'pages.virtualmachines.details.disks.ismounted' | translate }}</td>
                     <td class="px-2 py-1">
                       <app-true-false [trueOrFalse]="disk?.isMounted"></app-true-false>
                     </td>
                   </tr>
-                  <tr class="hover:bg-grey-light">
+                  <!-- <tr class="hover:bg-grey-light">
                     <td class="px-2 py-1">{{ 'pages.virtualmachines.details.disks.name' | translate }}</td>
                     <td class="px-2 py-1">
                       {{ disk?.spec.name }}
                     </td>
-                  </tr>
+                  </tr> -->
                   @if (disk?.isMounted) {
                     <tr class="hover:bg-grey-light">
                       <td class="px-2 py-1">{{ 'pages.virtualmachines.details.disks.size' | translate }}</td>

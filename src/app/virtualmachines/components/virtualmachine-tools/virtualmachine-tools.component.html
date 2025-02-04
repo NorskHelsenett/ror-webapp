@@ -5,7 +5,63 @@
         <h4 class="dark:text-light text-lg font-semibold text-gray-500">{{ 'pages.virtualmachines.details.tools.title' | translate }}</h4>
       </div>
       <div class="overflow-x-auto">
-        <div class="relative mb-3">Tools working</div>
+        <div class="relative mb-3">
+          <table class="w-full border-collapse text-left">
+            <tbody>
+              <tr class="hover:bg-grey-light truncate">
+                <td class="px-2 py-1">{{ 'pages.clusters.details.tools.rorlogin' | translate }}</td>
+                <td class="px-2 py-1 truncate">
+                  <button
+                    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+                  >
+                    {{ 'common.copy' | translate }}
+                  </button>
+                  <!-- <button
+                    (click)="toggleShowLogin()"
+                    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark ml-3 rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+                  >
+                    <span *ngIf="!showLogin">
+                      {{ 'common.show' | translate }}
+                    </span>
+                    <span *ngIf="showLogin">
+                      {{ 'common.hide' | translate }}
+                    </span>
+                  </button> -->
+                </td>
+              </tr>
+              <tr class="hover:bg-grey-light truncate">
+                <td class="px-2 py-1">{{ 'pages.clusters.details.tools.kubectlLogin' | translate }}</td>
+                <td class="px-2 py-1 truncate">
+                  <button
+                    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+                  >
+                    {{ 'common.copy' | translate }}
+                  </button>
+                  <!-- <button
+                    (click)="toggleShowLogin()"
+                    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark ml-3 rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+                  >
+                    <span *ngIf="!showLogin">
+                      {{ 'common.show' | translate }}
+                    </span>
+                    <span *ngIf="showLogin">
+                      {{ 'common.hide' | translate }}
+                    </span>
+                  </button> -->
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" class="px-2 py-1">
+                  <div class="bg-black text-white">
+                    kubectl vsphere login --server={{ virtualmachine?.virtualmachine?.spec.name }} -u someone --insecure-skip-tls-verify
+                    --tanzu-kubernetes-cluster-namespace {{ virtualmachine?.virtualmachine?.spec.name }} --tanzu-kubernetes-cluster-name
+                    {{ virtualmachine?.virtualmachine?.spec.name }}
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>

@@ -11,4 +11,10 @@ import { Resource } from '@rork8s/ror-resources/models';
 })
 export class VirtualmachineToolsComponent {
   @Input() virtualmachine: Resource | undefined;
+
+  showLogin = false;
+
+  toggleShowLogin(): void {
+    this.showLogin = !this.showLogin;
+  }
 }

@@ -32,7 +32,7 @@
     "light": "Lys",
     "dark": "Mørk",
     "madeWith": "Laget med",
-    "viewOnGit": "Link til Helsegitlab repo",
+    "viewOnGit": "Link til ROR repo",
     "tryAgain": "Prøv på nytt",
     "from": "Fra",
     "to": "Til",
@@ -1474,6 +1474,9 @@
           "size": "Størrelse",
           "type": "Type"
         },
+        "edit": {
+          "title": "Rediger"
+        },
         "events": {
           "title": "Hendelser"
         },
@@ -1493,6 +1496,13 @@
           "lastUpdated": "Sist oppdatert",
           "tags": "Stikkord"
         },
+        "metrics": {
+          "title": "Nøkkeltall",
+          "cpu": "CPU",
+          "memory": "Minne",
+          "disk": "Disk",
+          "cores": "kjerner"
+        },
         "operatingSystem": {
           "title": "Operativsystem",
           "id": "Id",
@@ -1504,11 +1514,19 @@
           "architecture": "Arkitektur",
           "family": "Familie"
         },
+        "remotecontrol": {
+          "title": "Fjernkontroll"
+        },
         "raw": {
           "title": "Rådata"
         },
         "status": {
-          "title": "Status"
+          "title": "Status",
+          "turnoff": "Skru av",
+          "turnon": "Skru på",
+          "suspend": "Pause",
+          "restart": "Restart",
+          "delete": "Slett"
         },
         "specs": {
           "title": "Spesifikasjoner",
@@ -1558,6 +1576,12 @@
     "trueOrFalse": {
       "true": "Sann",
       "false": "Usann"
+    },
+    "os": {
+      "linux": "Linux",
+      "windows": "Windows",
+      "mac": "Mac",
+      "unknown": "Ukjent"
     },
     "power": {
       "on": "På",

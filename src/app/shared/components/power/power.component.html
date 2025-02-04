@@ -1,7 +1,7 @@
 <div [ngSwitch]="powerState">
   <div *ngSwitchCase="powerstates.On" class="fill-green-700 dark:fill-green-400 stroke-slate-700 dark:stroke-slate-500 h-50 w-50 flex">
     @if (showIcon) {
-      <svg viewBox="0 0 40 40">
+      <svg viewBox="0 0 40 40" [ngClass]="iconSize === 0 ? 'w-6' : 'w-' + iconSize" class="mr-1">
         <g>
           <g>
             <path
@@ -20,7 +20,7 @@
   </div>
   <div *ngSwitchCase="powerstates.Off" class="fill-red-500 dark:fill-red-500 stroke-slate-800 dark:stroke-slate-800 flex">
     @if (showIcon) {
-      <svg viewBox="0 0 40 40">
+      <svg viewBox="0 0 40 40" [ngClass]="iconSize === 0 ? 'w-6' : 'w-' + iconSize" class="mr-1">
         <g>
           <g>
             <path
@@ -39,7 +39,7 @@
   </div>
   <div *ngSwitchCase="powerstates.Suspended" class="fill-yellow-400 dark:fill-yellow-400 stroke-slate-900 dark:stroke-slate-500 flex">
     @if (showIcon) {
-      <svg width="64px" height="64px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" [ngClass]="iconSize === 0 ? 'w-6' : 'w-' + iconSize" class="mr-1">
         <g>
           <g>
             <path
@@ -58,7 +58,7 @@
   </div>
   <div *ngSwitchDefault class="flex fill-slate-900 dark:fill-slate-100 stroke-slate-900 dark:stroke-slate-500">
     @if (showIcon) {
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" [ngClass]="iconSize === 0 ? 'w-6' : 'w-' + iconSize" class="mr-1">
         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
         <g id="SVGRepo_iconCarrier">

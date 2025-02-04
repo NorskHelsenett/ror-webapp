@@ -45,12 +45,12 @@
                     {{ virtualmachine?.virtualmachine?.status?.operatingSystem?.architecture }}
                   </td>
                 </tr>
-                <!-- <tr class="hover:bg-grey-light">
+                <tr class="hover:bg-grey-light">
                   <td class="px-2 py-1">{{ 'pages.virtualmachines.details.operatingSystem.family' | translate }}</td>
                   <td class="px-2 py-1">
-                    {{ virtualmachine?.virtualmachine?.status?.operatingSystem?.family }}
+                    <app-os [osFamily]="getOsFamily()"></app-os>
                   </td>
-                </tr> -->
+                </tr>
               </tbody>
             </table>
           } @else {

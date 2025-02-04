@@ -16,6 +16,8 @@ import { VirtualmachineOsComponent } from '../../components/virtualmachine-os/vi
 import { VirtualmachineDisksComponent } from '../../components/virtualmachine-disks/virtualmachine-disks.component';
 import { VirtualmachineSpecsComponent } from '../../components/virtualmachine-specs/virtualmachine-specs.component';
 import { VirtualmachineBackupComponent } from '../../components/virtualmachine-backup/virtualmachine-backup.component';
+import { VirtualmachineRemoteControlComponent } from '../../components/virtualmachine-remote-control/virtualmachine-remote-control.component';
+import { VirtualmachineMetricsComponent } from '../../components/virtualmachine-metrics/virtualmachine-metrics.component';
 
 @Component({
   selector: 'app-virtualmachine-details',
@@ -34,7 +36,9 @@ import { VirtualmachineBackupComponent } from '../../components/virtualmachine-b
     VirtualmachineSpecsComponent,
     VirtualmachineOsComponent,
     VirtualmachineBackupComponent,
+    VirtualmachineRemoteControlComponent,
     ProviderComponent,
+    VirtualmachineMetricsComponent,
   ],
   templateUrl: './virtualmachine-details.component.html',
   styleUrl: './virtualmachine-details.component.scss',

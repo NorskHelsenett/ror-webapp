@@ -32,7 +32,7 @@
     "light": "Light",
     "dark": "Dark",
     "madeWith": "Made with",
-    "viewOnGit": "View on Helsegitlab",
+    "viewOnGit": "View on github",
     "tryAgain": "Try again",
     "from": "From",
     "to": "To",
@@ -1482,6 +1482,9 @@
           "size": "Size",
           "type": "Type"
         },
+        "edit": {
+          "title": "Edit"
+        },
         "events": {
           "title": "Events"
         },
@@ -1501,6 +1504,13 @@
           "lastUpdated": "Last updated",
           "tags": "Tags"
         },
+        "metrics": {
+          "title": "Metrics",
+          "cpu": "CPU",
+          "memory": "Memory",
+          "disk": "Disk",
+          "cores": "cores"
+        },
         "operatingSystem": {
           "title": "Operating system",
           "id": "Id",
@@ -1512,11 +1522,19 @@
           "architecture": "Architecture",
           "family": "Family"
         },
+        "remotecontrol": {
+          "title": "Remote control"
+        },
         "raw": {
           "title": "Raw"
         },
         "status": {
-          "title": "Status"
+          "title": "Status",
+          "turnoff": "Turn off",
+          "turnon": "Turn on",
+          "suspend": "Suspend",
+          "restart": "Restart",
+          "delete": "Delete"
         },
         "specs": {
           "title": "Specs",
@@ -1567,6 +1585,12 @@
     "trueOrFalse": {
       "true": "True",
       "false": "False"
+    },
+    "os": {
+      "linux": "Linux",
+      "windows": "Windows",
+      "mac": "Mac",
+      "unknown": "Unknown"
     },
     "power": {
       "on": "On",
