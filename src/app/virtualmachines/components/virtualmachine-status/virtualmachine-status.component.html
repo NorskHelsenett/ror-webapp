@@ -11,28 +11,33 @@
         <div class="relative mb-3 mt-3 flex gap-2">
           @if (virtualmachine?.virtualmachine?.status?.operatingSystem?.powerState === 'poweredOn') {
             <a
+              (click)="turnOff()"
               class="delay-50 hover:bg-red-600 focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-red-700 px-4 py-2 text-sm text-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
             >
               <span>{{ 'pages.virtualmachines.details.status.turnoff' | translate }}</span>
             </a>
           } @else {
             <a
+              (click)="turnOn()"
               class="delay-50 hover:bg-yellow-600 focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-yellow-700 px-4 py-2 text-sm text-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
             >
               <span>{{ 'pages.virtualmachines.details.status.turnon' | translate }}</span>
             </a>
           }
           <a
+            (click)="restart()"
             class="delay-50 hover:bg-yellow-600 focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-yellow-700 px-4 py-2 text-sm text-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
           >
             <span>{{ 'pages.virtualmachines.details.status.restart' | translate }}</span>
           </a>
           <a
+            (click)="suspend()"
             class="delay-50 hover:bg-blue-600 focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-blue-700 px-4 py-2 text-sm text-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
           >
             <span>{{ 'pages.virtualmachines.details.status.suspend' | translate }}</span>
           </a>
           <a
+            (click)="delete()"
             class="delay-50 hover:bg-red-600 focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-red-700 px-4 py-2 text-sm text-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
           >
             <span>{{ 'pages.virtualmachines.details.status.delete' | translate }}</span>
@@ -42,3 +47,13 @@
     </div>
   </div>
 </div>
+<p-confirmDialog
+  [style]="{ width: '25vw' }"
+  [baseZIndex]="10000"
+  [position]="confirmDialogPosition"
+  acceptButtonStyleClass="ml-2 px-4 py-2 text-sm text-white rounded-md bg-red-700 hover:bg-red-500 focus:outline-none focus:ring focus:ring-primary focus:ring-offset-1 focus:ring-offset-white dark:focus:ring-offset-dark"
+  rejectButtonStyleClass="ml-2 px-4 py-2 text-sm text-white rounded-md bg-green-700 hover:bg-green-500 focus:outline-none focus:ring focus:ring-primary focus:ring-offset-1 focus:ring-offset-white dark:focus:ring-offset-dark"
+  acceptLabel="{{ 'common.yes' | translate }}"
+  rejectLabel="{{ 'common.no' | translate }}"
+></p-confirmDialog>
+<p-toast></p-toast>
