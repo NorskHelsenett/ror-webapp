@@ -32,7 +32,7 @@ export class ClusterMetadataPageComponent implements OnInit {
       this.toggleEdit();
       this.refreshRequested.emit();
     } else {
-      console.log('Update failed');
+      console.error('Update failed');
     }
   }
 }

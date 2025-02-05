@@ -1487,7 +1487,8 @@
           "ipv6": "IPv6",
           "mask": "Maske",
           "gateway": "Gateway",
-          "dns": "DNS"
+          "dns": "DNS",
+          "mac": "MAC"
         },
         "metadata": {
           "title": "Metadata",
@@ -1515,7 +1516,10 @@
           "family": "Familie"
         },
         "remotecontrol": {
-          "title": "Fjernkontroll"
+          "title": "Fjernkontroll",
+          "webview": "Webvisning",
+          "mstsc": "Remote desktop",
+          "ssh": "SSH"
         },
         "raw": {
           "title": "Rådata"
@@ -1536,7 +1540,10 @@
           "cores": "kjerner"
         },
         "tools": {
-          "title": "Verktøy"
+          "title": "Verktøy",
+          "sshcommandcopied": "SSH-kommando kopiert",
+          "mstsccommandcopied": "Remote Desktop-kommando kopiert",
+          "unknownOs": "Ukjent operativsystem"
         }
       }
     },

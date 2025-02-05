@@ -31,7 +31,14 @@
                 <td class="px-2 py-1">
                   @for (tag of virtualmachine?.virtualmachine?.status?.tags; track tag) {
                     @if (tag.description) {
-                      <p-badge class="ml-1" value="{{ tag.value }} ({{ tag.description }})" [severity]="getRandomColor()"></p-badge>
+                      <p-badge
+                        class="ml-1"
+                        value="{{ tag.key }} ({{ tag.value }})"
+                        [severity]="getRandomColor()"
+                        pInputText
+                        pTooltip="{{ tag.description }}"
+                        tooltipPosition="bottom"
+                      ></p-badge>
                     }
                   }
                 </td>

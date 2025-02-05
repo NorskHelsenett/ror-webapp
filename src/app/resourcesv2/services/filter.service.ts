@@ -62,7 +62,6 @@ export class FilterService {
 
     let count = 1;
     event?.multiSortMeta.forEach((entry: any) => {
-      console.log('entry', entry);
       let searchField = '';
       let field = String(entry?.field)?.toLowerCase();
       if (field === 'apiversion') {

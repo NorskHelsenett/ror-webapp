@@ -7,12 +7,12 @@
       <div class="overflow-x-auto">
         <div class="relative mb-3">
           @for (network of virtualmachine?.virtualmachine?.status?.networks; track network) {
-            <div>
+            <div class="mb-4 border-b-2 last:border-0">
               <!-- <span class="text-lg">Id: {{ network?.id }}</span> -->
               <table class="w-full border-collapse text-left">
                 <tbody>
                   <tr class="hover:bg-grey-light">
-                    <td class="px-2 py-1">
+                    <td class="px-2 py-1 w-14">
                       <p-badge severity="warning" value="{{ 'pages.virtualmachines.details.network.ipv4' | translate }}"></p-badge>
                     </td>
                     <td class="px-2 py-1">
@@ -25,6 +25,14 @@
                     </td>
                     <td class="px-2 py-1">
                       {{ network?.ipv6 }}
+                    </td>
+                  </tr>
+                  <tr class="hover:bg-grey-light">
+                    <td class="px-2 py-1">
+                      <p-badge severity="warning" value="{{ 'pages.virtualmachines.details.network.mac' | translate }}"></p-badge>
+                    </td>
+                    <td class="px-2 py-1">
+                      {{ network?.mac }}
                     </td>
                   </tr>
                   @if (network?.gateway) {

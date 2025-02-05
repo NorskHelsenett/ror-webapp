@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ColorService } from './../../services/color.service';
+import { Component, inject, Input } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { Resource } from '@rork8s/ror-resources/models';
 import { ChartModule } from 'primeng/chart';
@@ -10,7 +11,7 @@ import { ChartModule } from 'primeng/chart';
   templateUrl: './virtualmachine-metrics.component.html',
   styleUrl: './virtualmachine-metrics.component.scss',
 })
-export class VirtualmachineMetricsComponent implements OnInit {
+export class VirtualmachineMetricsComponent {
   @Input() set virtualmachine(value: Resource | undefined) {
     this._vm = value;
     this.setOptions();
@@ -24,10 +25,7 @@ export class VirtualmachineMetricsComponent implements OnInit {
   data: any;
 
   private _vm: Resource | undefined;
-
-  ngOnInit(): void {
-    return;
-  }
+  private colorService = inject(ColorService);
 
   setOptions(): void {
     this.options = {
@@ -51,18 +49,21 @@ export class VirtualmachineMetricsComponent implements OnInit {
   }
 
   setChartData(): void {
+    const cpuPercentage = this.vm?.virtualmachine?.status?.cpu?.usage / 100;
+    const memoryPercentage = this.vm?.virtualmachine?.status?.memory?.usage / 100;
+
     this.data = {
       labels: ['CPU', 'Memory'],
       datasets: [
         {
-          data: [0, this.vm?.virtualmachine?.status?.cpu?.usage / 100],
-          backgroundColor: 'blue',
+          data: [0, cpuPercentage],
+          backgroundColor: this.colorService.getColorForPercentage(cpuPercentage),
           fill: true,
           label: 'CPU',
         },
         {
-          data: [this.vm?.virtualmachine?.status?.memory?.usage / 100, 0],
-          backgroundColor: 'green',
+          data: [memoryPercentage, 0],
+          backgroundColor: this.colorService.getColorForPercentage(memoryPercentage),
           fill: true,
           label: 'Memory',
         },

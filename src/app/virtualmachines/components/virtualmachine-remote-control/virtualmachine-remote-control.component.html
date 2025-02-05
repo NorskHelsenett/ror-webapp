@@ -1,11 +1,67 @@
 <div class="grid space-y-8 lg:gap-8 lg:space-y-0" w-full>
   <div class="dark:bg-darker flex items-center justify-between overflow-x-auto rounded-md bg-white p-4 w-full">
     <div class="dark:bg-darker col-span-2 overflow-x-auto rounded-md bg-white w-full">
-      <div class="dark:border-primary flex items-center justify-between border-b p-4">
+      <!-- <div class="dark:border-primary flex items-center justify-between border-b p-4">
         <h4 class="dark:text-light text-lg font-semibold text-gray-500">{{ 'pages.virtualmachines.details.remotecontrol.title' | translate }}</h4>
-      </div>
+      </div> -->
       <div class="overflow-x-auto w-full">
-        <div class="relative mb-3"></div>
+        <div class="relative mb-3">
+          <p-tabView styleClass="tabview" [(activeIndex)]="selectedTabIndex" (activeIndexChange)="switchTab($event)" [scrollable]="true">
+            @if (this.virtualmachine?.virtualmachine?.status?.operatingSystem?.family?.toLowerCase()?.includes('linux')) {
+              <p-tabPanel header="{{ 'pages.virtualmachines.details.remotecontrol.ssh' | translate }}">
+                <ng-template pTemplate="header">
+                  <div class="flex text-nowrap">
+                    <i class="pi pi-save mt-1"></i>
+                    <span class="ml-2">{{ 'pages.virtualmachines.details.remotecontrol.ssh' | translate }}</span>
+                  </div>
+                </ng-template>
+                <ng-template pTemplate="content" class="min-h-52">
+                  <div class="">
+                    <div class="bg-black text-green-600">$ {{ sshCommand }}</div>
+                    <button
+                      (click)="copySSHCommand()"
+                      class="focus:ring-primary dark:focus:ring-offset-dark ml-2 rounded-md bg-green-700 px-4 py-2 text-sm text-white hover:bg-green-500 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+                    >
+                      {{ 'common.copy' | translate }}
+                    </button>
+                  </div>
+                </ng-template>
+              </p-tabPanel>
+            }
+
+            @if (this.virtualmachine?.virtualmachine?.status?.operatingSystem?.family?.toLowerCase()?.includes('window')) {
+              <p-tabPanel header="{{ 'pages.virtualmachines.details.remotecontrol.mstsc' | translate }}">
+                <ng-template pTemplate="header">
+                  <div class="flex text-nowrap">
+                    <i class="pi pi-save mt-1"></i>
+                    <span class="ml-2">{{ 'pages.virtualmachines.details.remotecontrol.mstsc' | translate }}</span>
+                  </div>
+                </ng-template>
+                <ng-template pTemplate="content">
+                  <div class="">
+                    <div class="dark:bg-darker flex flex-col rounded-md bg-white">
+                      <div class="p-3 flex flex-col">Remote desktop</div>
+                    </div>
+                  </div>
+                </ng-template>
+              </p-tabPanel>
+            }
+
+            <p-tabPanel>
+              <ng-template pTemplate="header">
+                <div class="flex text-nowrap">
+                  <i class="pi pi-desktop mt-1"></i>
+                  <span class="ml-2">{{ 'pages.virtualmachines.details.remotecontrol.webview' | translate }}</span>
+                </div>
+              </ng-template>
+              <ng-template pTemplate="content">
+                <div class="">
+                  <div class="p-3 flex flex-col">Web view</div>
+                </div>
+              </ng-template>
+            </p-tabPanel>
+          </p-tabView>
+        </div>
       </div>
     </div>
   </div>

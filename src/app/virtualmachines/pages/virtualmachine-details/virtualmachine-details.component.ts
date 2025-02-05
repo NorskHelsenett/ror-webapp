@@ -18,6 +18,7 @@ import { VirtualmachineSpecsComponent } from '../../components/virtualmachine-sp
 import { VirtualmachineBackupComponent } from '../../components/virtualmachine-backup/virtualmachine-backup.component';
 import { VirtualmachineRemoteControlComponent } from '../../components/virtualmachine-remote-control/virtualmachine-remote-control.component';
 import { VirtualmachineMetricsComponent } from '../../components/virtualmachine-metrics/virtualmachine-metrics.component';
+import { OAuthService } from 'angular-oauth2-oidc';
 
 @Component({
   selector: 'app-virtualmachine-details',
@@ -49,7 +50,7 @@ export class VirtualmachineDetailsComponent implements OnInit {
   resource$: Observable<Resource> | undefined;
   resourceFetchError: any;
   virtualMachine: Resource | undefined;
-
+  userClaims: any;
   activeTabIndex = 0;
   selectedTabIndex: number = 0;
   private tabs: any[] = [
@@ -64,6 +65,7 @@ export class VirtualmachineDetailsComponent implements OnInit {
   private location = inject(Location);
   private changeDetector = inject(ChangeDetectorRef);
   private resourcesv2Service = inject(Resourcesv2Service);
+  private oauthService = inject(OAuthService);
 
   constructor() {}
 
@@ -81,6 +83,8 @@ export class VirtualmachineDetailsComponent implements OnInit {
         this.fetchResource();
       }
     });
+
+    this.userClaims = this.oauthService.getIdentityClaims();
   }
 
   fetchResource() {
@@ -90,14 +94,12 @@ export class VirtualmachineDetailsComponent implements OnInit {
           this.resourceFetchError = 'Resource not found';
         }
         this.virtualMachine = resource;
-        console.log('Virtual Machine:', resource);
       }),
       catchError((error: any) => {
         this.resourceFetchError = error;
         throw error;
       }),
       finalize(() => {
-        // Do something
         this.changeDetector.detectChanges();
       }),
     );

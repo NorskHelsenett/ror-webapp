@@ -4,11 +4,12 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ProviderComponent } from '../../../shared/components/provider/provider.component';
 import { SharedModule } from '../../../shared/shared.module';
 import { BadgeModule } from 'primeng/badge';
+import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
   selector: 'app-virtualmachine-metadata',
   standalone: true,
-  imports: [TranslateModule, ProviderComponent, SharedModule, BadgeModule],
+  imports: [TranslateModule, ProviderComponent, SharedModule, BadgeModule, TooltipModule],
   templateUrl: './virtualmachine-metadata.component.html',
   styleUrl: './virtualmachine-metadata.component.scss',
 })

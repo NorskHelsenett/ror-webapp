@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
-import { Resource } from '@rork8s/ror-resources/models';
-import { Badge, BadgeModule } from 'primeng/badge';
+import { BadgeModule } from 'primeng/badge';
 
 @Component({
   selector: 'app-virtualmachine-network',
@@ -11,5 +10,5 @@ import { Badge, BadgeModule } from 'primeng/badge';
   styleUrl: './virtualmachine-network.component.scss',
 })
 export class VirtualmachineNetworkComponent {
-  @Input() virtualmachine: Resource | undefined;
+  @Input() virtualmachine: any | undefined;
 }

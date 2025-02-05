@@ -1495,7 +1495,8 @@
           "ipv6": "IPv6",
           "mask": "Mask",
           "gateway": "Gateway",
-          "dns": "DNS"
+          "dns": "DNS",
+          "mac": "MAC"
         },
         "metadata": {
           "title": "Metadata",
@@ -1523,7 +1524,10 @@
           "family": "Family"
         },
         "remotecontrol": {
-          "title": "Remote control"
+          "title": "Remote control",
+          "webview": "Web view",
+          "mstsc": "Remote desktop",
+          "ssh": "SSH"
         },
         "raw": {
           "title": "Raw"
@@ -1544,7 +1548,10 @@
           "cores": "cores"
         },
         "tools": {
-          "title": "Tools"
+          "title": "Tools",
+          "sshcommandcopied": "SSH command copied",
+          "mstsccommandcopied": "Remote desktop command copied",
+          "unknownOs": "Unknown OS"
         }
       }
     },
