@@ -5,7 +5,7 @@
         <h4 class="dark:text-light text-lg font-semibold text-gray-500">{{ 'pages.virtualmachines.details.status.title' | translate }}</h4>
       </div>
       <div class="mb-3 mt-3">
-        <app-power [iconSize]="14" [powerState]="powerstates.On"></app-power>
+        <app-power [iconSize]="14" [powerState]="getPowerState()"></app-power>
       </div>
       <div class="overflow-x-auto">
         <div class="relative mb-3 mt-3 flex gap-2">

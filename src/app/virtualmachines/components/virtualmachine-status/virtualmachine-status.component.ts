@@ -15,4 +15,20 @@ export class VirtualmachineStatusComponent {
   @Input() virtualmachine: Resource | undefined;
 
   powerstates = PowerState;
+
+  getPowerState(): PowerState {
+    if (!this.virtualmachine) {
+      return PowerState.Unknown;
+    }
+    switch (this.virtualmachine?.virtualmachine?.status?.operatingSystem?.powerState) {
+      case 'poweredOn':
+        return PowerState.On;
+      case 'poweredOff':
+        return PowerState.Off;
+      case 'suspended':
+        return PowerState.Off;
+      default:
+        return PowerState.Unknown;
+    }
+  }
 }
