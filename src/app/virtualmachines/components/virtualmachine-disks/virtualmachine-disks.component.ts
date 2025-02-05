@@ -19,7 +19,7 @@ export class VirtualmachineDisksComponent {
     if (!disk) {
       return -1;
     }
-    const percent = (disk.usageBytes / disk?.spec?.sizeBytes) * 100;
+    const percent = (disk.usageBytes / disk?.sizeBytes) * 100;
     return percent;
   }
 
