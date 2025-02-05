@@ -23,9 +23,7 @@
                 </tr>
                 <tr class="hover:bg-grey-light">
                   <td class="px-2 py-1">{{ 'pages.virtualmachines.details.specs.memory' | translate }}</td>
-                  <td class="px-2 py-1">
-                    {{ convertBytesToGigabytes(virtualmachine?.virtualmachine?.spec?.memory.sizeBytes) }}
-                  </td>
+                  <td class="px-2 py-1">{{ convertBytesToGigabytes(virtualmachine?.virtualmachine?.spec?.memory.sizeBytes) }} Gb</td>
                 </tr>
               </tbody>
             </table>
