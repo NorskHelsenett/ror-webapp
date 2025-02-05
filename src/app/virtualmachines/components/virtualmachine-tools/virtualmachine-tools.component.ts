@@ -1,5 +1,6 @@
 import { AfterContentChecked, Component, inject, Input } from '@angular/core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { Resource } from '@rork8s/ror-resources/models';
 import { ClipboardModule, ClipboardService } from 'ngx-clipboard';
 import { MessageService } from 'primeng/api';
 
@@ -11,7 +12,7 @@ import { MessageService } from 'primeng/api';
   styleUrl: './virtualmachine-tools.component.scss',
 })
 export class VirtualmachineToolsComponent implements AfterContentChecked {
-  @Input() virtualmachine: any | undefined;
+  @Input() virtualmachine: Resource | undefined;
   @Input() userClaims: any = undefined;
 
   showLogin = false;
@@ -24,7 +25,7 @@ export class VirtualmachineToolsComponent implements AfterContentChecked {
 
   ngAfterContentChecked(): void {
     this.sshCommand = `ssh ${this.getUsername()}@${this.virtualmachine?.virtualmachine?.spec?.name}`;
-    this.mstscCommand = `mstsc /v:${this.virtualmachine?.ip}`;
+    this.mstscCommand = `mstsc /v:${this.virtualmachine?.metadata?.name}`;
   }
 
   toggleShowLogin(): void {

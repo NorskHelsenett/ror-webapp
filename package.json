@@ -31,7 +31,7 @@
     "@angular/service-worker": "^18.2.12",
     "@ngx-translate/core": "^16.0.4",
     "@ngx-translate/http-loader": "^16.0.1",
-    "@rork8s/ror-resources": "^1.1.0-rc14",
+    "@rork8s/ror-resources": "^1.1.0-rc16",
     "angular-oauth2-oidc": "^17.0.2",
     "chart.js": "^4.4.7",
     "dayjs": "^1.11.13",

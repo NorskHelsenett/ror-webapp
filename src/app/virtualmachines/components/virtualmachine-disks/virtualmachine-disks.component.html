@@ -17,12 +17,12 @@
                       <app-true-false [trueOrFalse]="disk?.isMounted"></app-true-false>
                     </td>
                   </tr>
-                  <!-- <tr class="hover:bg-grey-light">
-                    <td class="px-2 py-1">{{ 'pages.virtualmachines.details.disks.name' | translate }}</td>
+                  <tr class="hover:bg-grey-light">
+                    <td class="px-2 py-1">{{ 'pages.virtualmachines.details.disks.mountpath' | translate }}</td>
                     <td class="px-2 py-1">
-                      {{ disk?.spec.name }}
+                      {{ disk?.name }}
                     </td>
-                  </tr> -->
+                  </tr>
                   @if (disk?.isMounted) {
                     <tr class="hover:bg-grey-light">
                       <td class="px-2 py-1">{{ 'pages.virtualmachines.details.disks.size' | translate }}</td>
@@ -34,7 +34,7 @@
                   <tr class="hover:bg-grey-light">
                     <td class="px-2 py-1">{{ 'pages.virtualmachines.details.disks.type' | translate }}</td>
                     <td class="px-2 py-1">
-                      {{ disk?.spec?.type }}
+                      {{ disk?.type }}
                     </td>
                   </tr>
                 </tbody>

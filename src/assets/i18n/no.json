@@ -1472,7 +1472,8 @@
           "name": "Navn",
           "ismounted": "Montert",
           "size": "Størrelse",
-          "type": "Type"
+          "type": "Type",
+          "mountpath": "Monteringspunkt"
         },
         "edit": {
           "title": "Rediger"
@@ -1534,10 +1535,10 @@
         },
         "specs": {
           "title": "Spesifikasjoner",
-          "cpu": "CPU",
+          "cpusockets": "CPU Sockets",
+          "cpucorespersockets": "CPU Cores per socket",
           "memory": "Minne",
-          "disk": "Disk",
-          "cores": "kjerner"
+          "disk": "Disk"
         },
         "tools": {
           "title": "Verktøy",

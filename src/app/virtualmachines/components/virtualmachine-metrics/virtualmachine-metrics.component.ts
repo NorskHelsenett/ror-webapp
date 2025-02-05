@@ -53,7 +53,7 @@ export class VirtualmachineMetricsComponent {
     const memoryPercentage = this.vm?.virtualmachine?.status?.memory?.usage / 100;
 
     this.data = {
-      labels: ['CPU', 'Memory'],
+      labels: ['Memory', 'CPU'],
       datasets: [
         {
           data: [0, cpuPercentage],

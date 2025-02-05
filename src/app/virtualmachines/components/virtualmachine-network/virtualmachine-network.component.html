@@ -8,7 +8,6 @@
         <div class="relative mb-3">
           @for (network of virtualmachine?.virtualmachine?.status?.networks; track network) {
             <div class="mb-4 border-b-2 last:border-0">
-              <!-- <span class="text-lg">Id: {{ network?.id }}</span> -->
               <table class="w-full border-collapse text-left">
                 <tbody>
                   <tr class="hover:bg-grey-light">
@@ -16,7 +15,9 @@
                       <p-badge severity="warning" value="{{ 'pages.virtualmachines.details.network.ipv4' | translate }}"></p-badge>
                     </td>
                     <td class="px-2 py-1">
-                      {{ network?.ipv4 }}
+                      @if (network.ipv4) {
+                        <button (click)="copy(network?.ipv4)">{{ network?.ipv4 }} <i class="pi pi-copy"></i></button>
+                      }
                     </td>
                   </tr>
                   <tr class="hover:bg-grey-light">
@@ -24,7 +25,9 @@
                       <p-badge severity="success" value="{{ 'pages.virtualmachines.details.network.ipv6' | translate }}"></p-badge>
                     </td>
                     <td class="px-2 py-1">
-                      {{ network?.ipv6 }}
+                      @if (network.ipv6) {
+                        <button (click)="copy(network?.ipv6)">{{ network?.ipv6 }} <i class="pi pi-copy"></i></button>
+                      }
                     </td>
                   </tr>
                   <tr class="hover:bg-grey-light">
@@ -32,30 +35,30 @@
                       <p-badge severity="warning" value="{{ 'pages.virtualmachines.details.network.mac' | translate }}"></p-badge>
                     </td>
                     <td class="px-2 py-1">
-                      {{ network?.mac }}
+                      @if (network.mac) {
+                        <button (click)="copy(network?.mac)">{{ network?.mac }} <i class="pi pi-copy"></i></button>
+                      }
                     </td>
                   </tr>
-                  @if (network?.gateway) {
+                  @if (network.dns) {
                     <tr class="hover:bg-grey-light">
-                      <td class="px-2 py-1">{{ 'pages.virtualmachines.details.network.mask' | translate }}</td>
                       <td class="px-2 py-1">
-                        {{ network?.mask }}
+                        <p-badge severity="info" value="{{ 'pages.virtualmachines.details.network.dns' | translate }}"></p-badge>
+                      </td>
+                      <td class="px-2 py-1">
+                        @if (network.dns) {
+                          <button (click)="copy(network?.dns)">{{ network?.dns }} <i class="pi pi-copy"></i></button>
+                        }
                       </td>
                     </tr>
                   }
-                  <tr class="hover:bg-grey-light">
-                    <td class="px-2 py-1">
-                      <p-badge severity="info" value="{{ 'pages.virtualmachines.details.network.dns' | translate }}"></p-badge>
-                    </td>
-                    <td class="px-2 py-1">
-                      {{ network?.dns }}
-                    </td>
-                  </tr>
                   @if (network?.gateway) {
                     <tr class="hover:bg-grey-light">
                       <td class="px-2 py-1">{{ 'pages.virtualmachines.details.network.gateway' | translate }}</td>
                       <td class="px-2 py-1">
-                        {{ network?.gateway }}
+                        @if (network.gateway) {
+                          <button (click)="copy(network?.gateway)">{{ network?.gateway }} <i class="pi pi-copy"></i></button>
+                        }
                       </td>
                     </tr>
                   }

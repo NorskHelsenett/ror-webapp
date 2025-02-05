@@ -11,4 +11,8 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class VirtualmachineSpecsComponent {
   @Input() virtualmachine: Resource | undefined;
+
+  convertBytesToGigabytes(bytes: number): number {
+    return bytes / 1024 / 1024 / 1024;
+  }
 }

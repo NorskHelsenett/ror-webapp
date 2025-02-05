@@ -11,7 +11,9 @@
               <tr class="hover:bg-grey-light">
                 <td class="px-2 py-1">{{ 'pages.virtualmachines.details.metadata.name' | translate }}</td>
                 <td class="px-2 py-1">
-                  {{ virtualmachine?.virtualmachine?.spec?.name }}
+                  <button (click)="copy(virtualmachine?.virtualmachine?.spec?.name)">
+                    {{ virtualmachine?.virtualmachine?.spec?.name }} <i class="pi pi-copy"></i>
+                  </button>
                 </td>
               </tr>
               <tr class="hover:bg-grey-light">

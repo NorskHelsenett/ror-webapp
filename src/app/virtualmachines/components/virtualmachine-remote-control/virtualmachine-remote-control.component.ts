@@ -1,11 +1,13 @@
 import { Location } from '@angular/common';
 import { Component, inject, Input } from '@angular/core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { Resource } from '@rork8s/ror-resources/models';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { ClipboardService } from 'ngx-clipboard';
 import { MessageService } from 'primeng/api';
 import { TabViewModule } from 'primeng/tabview';
 import { TerminalModule, TerminalService } from 'primeng/terminal';
+import { VirtualmachineService } from '../../services/virtualmachine.service';
 
 @Component({
   selector: 'app-virtualmachine-remote-control',
@@ -16,7 +18,7 @@ import { TerminalModule, TerminalService } from 'primeng/terminal';
   styleUrl: './virtualmachine-remote-control.component.scss',
 })
 export class VirtualmachineRemoteControlComponent {
-  @Input() virtualmachine: any | undefined;
+  @Input() virtualmachine: Resource | undefined;
   @Input() userClaims: any = undefined;
   activeTabIndex = 0;
   selectedTabIndex: number = 0;
@@ -30,6 +32,7 @@ export class VirtualmachineRemoteControlComponent {
   private messageService = inject(MessageService);
   private translateService = inject(TranslateService);
   private oauthService = inject(OAuthService);
+  private virtualmachineService = inject(VirtualmachineService);
 
   private tabs: any[] = [
     {
@@ -41,25 +44,20 @@ export class VirtualmachineRemoteControlComponent {
   ngAfterContentChecked(): void {
     this.userClaims = this.oauthService.getIdentityClaims();
     this.sshCommand = `ssh ${this.getUsername()}@${this.virtualmachine?.virtualmachine?.spec?.name}`;
-    this.mstscCommand = `mstsc /v:${this.virtualmachine?.ip}`;
+    this.mstscCommand = `mstsc /v:${this.virtualmachine?.metadata?.name}`;
   }
 
   toggleShowLogin(): void {
     this.showLogin = !this.showLogin;
   }
 
-  getUsername(): string {
-    const user = this.userClaims?.email?.split('@')[0];
-    return user;
-  }
-
   copySSHCommand(): void {
-    this.clipboardService.copy(this.sshCommand);
+    this.clipboardService.copy(this.virtualmachineService.getSSHCommand(this.getUsername()));
     this.messageService.add({ severity: 'success', summary: this.translateService.instant('pages.virtualmachines.details.tools.sshcommandcopied') });
   }
 
   copyMstscCommand(): void {
-    this.clipboardService.copy(this.mstscCommand);
+    this.clipboardService.copy(this.virtualmachineService.getMstscCommand());
     this.messageService.add({
       severity: 'success',
       summary: this.translateService.instant('pages.virtualmachines.details.tools.mstsccommandcopied'),
@@ -73,5 +71,10 @@ export class VirtualmachineRemoteControlComponent {
     } catch {
       //ignoring
     }
+  }
+
+  private getUsername(): string {
+    const user = this.userClaims?.email?.split('@')[0];
+    return user;
   }
 }

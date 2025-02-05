@@ -19,6 +19,7 @@ import { VirtualmachineBackupComponent } from '../../components/virtualmachine-b
 import { VirtualmachineRemoteControlComponent } from '../../components/virtualmachine-remote-control/virtualmachine-remote-control.component';
 import { VirtualmachineMetricsComponent } from '../../components/virtualmachine-metrics/virtualmachine-metrics.component';
 import { OAuthService } from 'angular-oauth2-oidc';
+import { VirtualmachineService } from '../../services/virtualmachine.service';
 
 @Component({
   selector: 'app-virtualmachine-details',
@@ -66,8 +67,7 @@ export class VirtualmachineDetailsComponent implements OnInit {
   private changeDetector = inject(ChangeDetectorRef);
   private resourcesv2Service = inject(Resourcesv2Service);
   private oauthService = inject(OAuthService);
-
-  constructor() {}
+  private virtualmachineService = inject(VirtualmachineService);
 
   ngOnInit() {
     const tab = this.activeRoute.snapshot.queryParams['tab'];
@@ -94,6 +94,7 @@ export class VirtualmachineDetailsComponent implements OnInit {
           this.resourceFetchError = 'Resource not found';
         }
         this.virtualMachine = resource;
+        this.virtualmachineService.setVirtualMachine(resource);
       }),
       catchError((error: any) => {
         this.resourceFetchError = error;

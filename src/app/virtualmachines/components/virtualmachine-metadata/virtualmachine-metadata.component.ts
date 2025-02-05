@@ -1,10 +1,12 @@
 import { Resource } from '@rork8s/ror-resources/models';
-import { Component, Input } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
+import { Component, inject, Input } from '@angular/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ProviderComponent } from '../../../shared/components/provider/provider.component';
 import { SharedModule } from '../../../shared/shared.module';
 import { BadgeModule } from 'primeng/badge';
 import { TooltipModule } from 'primeng/tooltip';
+import { ClipboardService } from 'ngx-clipboard';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-virtualmachine-metadata',
@@ -17,6 +19,10 @@ export class VirtualmachineMetadataComponent {
   @Input() virtualmachine: Resource | undefined;
 
   private badgeSeverity: string[] = ['success', 'info', 'warning', 'danger', 'help', 'primary', 'secondary', 'contrast'];
+
+  private clipboardService = inject(ClipboardService);
+  private messageService = inject(MessageService);
+  private translateService = inject(TranslateService);
 
   toAny(event: any): any {
     return event;
@@ -43,5 +49,10 @@ export class VirtualmachineMetadataComponent {
       default:
         return 'success';
     }
+  }
+
+  copy(resource: string): void {
+    this.clipboardService.copy(resource);
+    this.messageService.add({ severity: 'success', summary: this.translateService.instant('common.copied') });
   }
 }

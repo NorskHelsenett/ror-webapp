@@ -1480,7 +1480,8 @@
           "name": "name",
           "ismounted": "Is mounted",
           "size": "Size",
-          "type": "Type"
+          "type": "Type",
+          "mountpath": "Mount path"
         },
         "edit": {
           "title": "Edit"
@@ -1542,10 +1543,10 @@
         },
         "specs": {
           "title": "Specs",
-          "cpu": "CPU",
+          "cpusockets": "CPU Sockets",
+          "cpucorespersockets": "CPU Cores per socket",
           "memory": "Memory",
-          "disk": "Disk",
-          "cores": "cores"
+          "disk": "Disk"
         },
         "tools": {
           "title": "Tools",
