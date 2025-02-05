@@ -1472,6 +1472,8 @@
           "name": "Navn",
           "ismounted": "Montert",
           "size": "Størrelse",
+          "usage": "Bruk",
+          "usagepercentage": "Bruk %",
           "type": "Type",
           "mountpath": "Monteringspunkt"
         },

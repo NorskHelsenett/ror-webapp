@@ -25,9 +25,22 @@
                   </tr>
                   @if (disk?.isMounted) {
                     <tr class="hover:bg-grey-light">
-                      <td class="px-2 py-1">{{ 'pages.virtualmachines.details.disks.size' | translate }}</td>
+                      <td class="px-2 py-1">{{ 'pages.virtualmachines.details.disks.usagepercentage' | translate }}</td>
                       <td class="px-2 py-1">
-                        <p-progressBar [value]="getDiskUsagePercentage(disk) | number: '2.0-2'" [color]="getColorForDiskUsage(disk)"></p-progressBar>
+                        <p-progressBar
+                          [value]="getDiskUsagePercentage(disk) | number: '2.0-2'"
+                          [color]="getColorForDiskUsage(disk)"
+                          [showValue]="true"
+                        ></p-progressBar>
+                      </td>
+                    </tr>
+                    <tr class="hover:bg-grey-light">
+                      <td class="px-2 py-1">{{ 'pages.virtualmachines.details.disks.usage' | translate }}</td>
+                      <td class="px-2 py-1">
+                        <span
+                          >{{ getDiskUsagePercentage(disk) | number: '1.0-2' }}% ({{ convertBytesToGigabytes(disk?.usageBytes) | number: '1.0-2' }} Gb
+                          / {{ convertBytesToGigabytes(disk.sizeBytes) | number: '1.0-2' }} Gb)</span
+                        >
                       </td>
                     </tr>
                   }
