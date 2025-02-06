@@ -1,59 +1,211 @@
 <div class="grid space-y-8 lg:gap-8 lg:space-y-0" w-full>
   <div class="dark:bg-darker flex items-center justify-between overflow-x-auto rounded-md bg-white p-4 w-full">
     <div class="dark:bg-darker col-span-2 overflow-x-auto rounded-md bg-white w-full">
-      <div class="dark:border-primary flex items-center justify-between border-b p-4">
+      <div class="dark:border-primary flex border-b p-4">
         <h4 class="dark:text-light text-lg font-semibold text-gray-500">{{ 'pages.virtualmachines.details.disks.title' | translate }}</h4>
+        <svg
+          class="w-6 h-6 ml-2 fill-green-700"
+          viewBox="0 0 256 256"
+          id="Flat"
+          xmlns="http://www.w3.org/2000/svg"
+          data-darkreader-inline-fill=""
+          style="--darkreader-inline-fill: var(--darkreader-background-000000, #000000)"
+        >
+          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+          <g id="SVGRepo_iconCarrier">
+            <path
+              d="M220.48535,59.51465l-40-40A11.99992,11.99992,0,0,0,172,16H92A20.0226,20.0226,0,0,0,72,36V56H56A20.0226,20.0226,0,0,0,36,76V216a20.0226,20.0226,0,0,0,20,20H164a20.0226,20.0226,0,0,0,20-20V196h20a20.0226,20.0226,0,0,0,20-20V68A12.002,12.002,0,0,0,220.48535,59.51465ZM160,212H60V80h67.0293L160,112.9707Zm40-40H184V108a12.002,12.002,0,0,0-3.51465-8.48535l-40-40A11.99992,11.99992,0,0,0,132,56H96V40h71.0293L200,72.9707Zm-56-28a12,12,0,0,1-12,12H88a12,12,0,0,1,0-24h44A12,12,0,0,1,144,144Zm0,40a12,12,0,0,1-12,12H88a12,12,0,0,1,0-24h44A12,12,0,0,1,144,184Z"
+            ></path>
+          </g>
+        </svg>
       </div>
       <div class="overflow-x-auto w-full">
         <div class="relative mb-3">
-          @for (disk of virtualmachine?.virtualmachine?.status?.disks; track disk) {
-            <div class="mb-5 first:mt-2">
-              <!-- <span class="text-lg font-bold">Name: {{ disk?.spec?.name }}</span> -->
-              <table class="w-full border-collapse text-left">
-                <tbody>
-                  <tr class="hover:bg-grey-light">
-                    <td class="px-2 py-1 w-32">{{ 'pages.virtualmachines.details.disks.ismounted' | translate }}</td>
-                    <td class="px-2 py-1">
-                      <app-true-false [trueOrFalse]="disk?.isMounted"></app-true-false>
-                    </td>
-                  </tr>
-                  <tr class="hover:bg-grey-light">
-                    <td class="px-2 py-1">{{ 'pages.virtualmachines.details.disks.mountpath' | translate }}</td>
-                    <td class="px-2 py-1">
-                      {{ disk?.name }}
-                    </td>
-                  </tr>
-                  @if (disk?.isMounted) {
-                    <tr class="hover:bg-grey-light">
-                      <td class="px-2 py-1">{{ 'pages.virtualmachines.details.disks.usagepercentage' | translate }}</td>
-                      <td class="px-2 py-1">
-                        <p-progressBar
-                          [value]="getDiskUsagePercentage(disk) | number: '2.0-2'"
-                          [color]="getColorForDiskUsage(disk)"
-                          [showValue]="true"
-                        ></p-progressBar>
-                      </td>
-                    </tr>
-                    <tr class="hover:bg-grey-light">
-                      <td class="px-2 py-1">{{ 'pages.virtualmachines.details.disks.usage' | translate }}</td>
-                      <td class="px-2 py-1">
-                        <span
-                          >{{ getDiskUsagePercentage(disk) | number: '1.0-2' }}% ({{ convertBytesToGigabytes(disk?.usageBytes) | number: '1.0-2' }} Gb
-                          / {{ convertBytesToGigabytes(disk.sizeBytes) | number: '1.0-2' }} Gb)</span
+          <p-tabView styleClass="tabview" [scrollable]="true">
+            <p-tabPanel>
+              <ng-template pTemplate="header">
+                <div class="flex text-nowrap">
+                  <i class="pi pi-table mt-1"></i>
+                  <span class="ml-2">{{ 'pages.virtualmachines.details.disks.table' | translate }}</span>
+                </div>
+              </ng-template>
+              <ng-template pTemplate="content">
+                <div class="">
+                  <div>
+                    <div class="dark:bg-transparent flex flex-col gap-4 rounded-md bg-white">
+                      <div class="">
+                        <p-table
+                          [value]="virtualmachine?.virtualmachine?.status?.disks"
+                          [rows]="rows"
+                          [paginator]="true"
+                          [loading]="loading"
+                          [rowsPerPageOptions]="rowsPerPage"
+                          [tableStyle]="{ 'min-width': '75rem' }"
+                          [rowHover]="true"
+                          sortField="group"
+                          [sortOrder]="1"
+                          [totalRecords]="virtualmachine?.virtualmachine?.status?.disks?.length"
+                          [reorderableColumns]="true"
+                          [showCurrentPageReport]="true"
+                          currentPageReportTemplate="{{ 'common.showing' | translate }} {first} {{ 'common.to' | translate | lowercase }} {last} {{
+                            'common.of' | translate | lowercase
+                          }} {totalRecords} {{ 'common.entries' | translate | lowercase }}"
                         >
-                      </td>
-                    </tr>
-                  }
-                  <tr class="hover:bg-grey-light">
-                    <td class="px-2 py-1">{{ 'pages.virtualmachines.details.disks.type' | translate }}</td>
-                    <td class="px-2 py-1">
-                      {{ disk?.type }}
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          }
+                          <ng-template pTemplate="header">
+                            <tr>
+                              <th pSortableColumn="isMounted" class="p-1">
+                                {{ 'pages.virtualmachines.details.disks.ismounted' | translate }} <p-sortIcon field="isMounted"></p-sortIcon>
+                              </th>
+                              <th pSortableColumn="name" class="p-1">
+                                {{ 'pages.virtualmachines.details.disks.name' | translate }} <p-sortIcon field="name"></p-sortIcon>
+                              </th>
+                              <th pSortableColumn="usageBytes" class="p-1">
+                                {{ 'pages.virtualmachines.details.disks.usage' | translate }} <p-sortIcon field="usageBytes"></p-sortIcon>
+                              </th>
+                              <th pSortableColumn="usageBytes" class="p-1 w-[450px]">
+                                {{ 'pages.virtualmachines.details.disks.usagepercentage' | translate }} <p-sortIcon field="usageBytes"></p-sortIcon>
+                              </th>
+                              <th pSortableColumn="type" class="p-1">
+                                {{ 'pages.virtualmachines.details.disks.type' | translate }} <p-sortIcon field="type"></p-sortIcon>
+                              </th>
+                            </tr>
+                            <tr>
+                              <th class="p-1">
+                                <p-columnFilter type="boolean" field="isMounted" matchMode="contains" [showMenu]="false"></p-columnFilter>
+                              </th>
+                              <th class="p-1">
+                                <p-columnFilter type="text" field="name" matchMode="contains" [showMenu]="false"></p-columnFilter>
+                              </th>
+                              <th class="p-1">
+                                <p-columnFilter type="numeric" field="usageBytes" matchMode="contains" [showMenu]="false"></p-columnFilter>
+                              </th>
+                              <th class="p-1">
+                                <!-- <p-columnFilter type="numeric" field="usageBytes" matchMode="contains" [showMenu]="false"></p-columnFilter> -->
+                              </th>
+                              <th class="p-1">
+                                <p-columnFilter type="text" field="type" matchMode="contains" [showMenu]="false"></p-columnFilter>
+                              </th>
+                            </tr>
+                          </ng-template>
+                          <ng-template pTemplate="body" let-disk let-expanded="expanded">
+                            <tr>
+                              <td class="whitespace-nowrap px-6 py-4 text-sm font-medium">
+                                <app-true-false [trueOrFalse]="disk?.isMounted"></app-true-false>
+                              </td>
+                              <td class="whitespace-nowrap px-6 py-4 text-sm font-light">
+                                <span [pTooltip]="tooltipContent" tooltipPosition="bottom">{{ getFileName(disk) }}</span>
+                                <ng-template #tooltipContent>
+                                  <div class="w-full">
+                                    <span> {{ disk?.name }} </span>
+                                  </div>
+                                </ng-template>
+                              </td>
+                              <td class="whitespace-nowrap px-6 py-4 text-sm font-light">
+                                <span
+                                  >{{ getDiskUsagePercentage(disk) | number: '1.0-2' }}% ({{
+                                    convertBytesToGigabytes(disk?.usageBytes) | number: '1.0-2'
+                                  }}
+                                  Gb / {{ convertBytesToGigabytes(disk.sizeBytes) | number: '1.0-2' }} Gb)</span
+                                >
+                              </td>
+                              <td class="whitespace-nowrap px-6 py-4 text-sm font-light">
+                                <p-progressBar
+                                  [value]="getDiskUsagePercentage(disk) | number: '2.0-2'"
+                                  [color]="getColorForDiskUsage(disk)"
+                                  [showValue]="true"
+                                ></p-progressBar>
+                              </td>
+                              <td class="whitespace-nowrap px-6 py-4 text-sm font-light">{{ disk?.type | titlecase }}</td>
+                            </tr>
+                          </ng-template>
+                          <ng-template pTemplate="emptymessage">
+                            <tr>
+                              <td colspan="6">{{ 'common.emptyList' | translate }}</td>
+                            </tr>
+                          </ng-template>
+                        </p-table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </p-tabPanel>
+
+            <p-tabPanel>
+              <ng-template pTemplate="header">
+                <div class="flex text-nowrap">
+                  <i class="pi pi-list mt-1"></i>
+                  <span class="ml-2">{{ 'pages.virtualmachines.details.disks.list' | translate }}</span>
+                </div>
+              </ng-template>
+              <ng-template pTemplate="content">
+                <div class="">
+                  <div>
+                    <div class="dark:bg-transparent flex flex-col gap-4 rounded-md bg-white">
+                      <div class="">
+                        @for (disk of virtualmachine?.virtualmachine?.status?.disks; track disk) {
+                          <div class="mb-5 first:mt-2">
+                            <table class="w-full border-collapse text-left">
+                              <tbody>
+                                <tr class="hover:bg-grey-light">
+                                  <td class="px-2 py-1 w-32">{{ 'pages.virtualmachines.details.disks.ismounted' | translate }}</td>
+                                  <td class="px-2 py-1">
+                                    <app-true-false [trueOrFalse]="disk?.isMounted"></app-true-false>
+                                  </td>
+                                </tr>
+                                <tr class="hover:bg-grey-light">
+                                  <td class="px-2 py-1">{{ 'pages.virtualmachines.details.disks.mountpath' | translate }}</td>
+                                  <td class="px-2 py-1">
+                                    {{ disk?.name }}
+                                  </td>
+                                </tr>
+                                <tr class="hover:bg-grey-light">
+                                  <td class="px-2 py-1">{{ 'pages.virtualmachines.details.disks.name' | translate }}</td>
+                                  <td class="px-2 py-1">
+                                    {{ getFileName(disk) }}
+                                  </td>
+                                </tr>
+                                @if (disk?.isMounted) {
+                                  <tr class="hover:bg-grey-light">
+                                    <td class="px-2 py-1">{{ 'pages.virtualmachines.details.disks.usagepercentage' | translate }}</td>
+                                    <td class="px-2 py-1">
+                                      <p-progressBar
+                                        [value]="getDiskUsagePercentage(disk) | number: '2.0-2'"
+                                        [color]="getColorForDiskUsage(disk)"
+                                        [showValue]="true"
+                                      ></p-progressBar>
+                                    </td>
+                                  </tr>
+                                  <tr class="hover:bg-grey-light">
+                                    <td class="px-2 py-1">{{ 'pages.virtualmachines.details.disks.usage' | translate }}</td>
+                                    <td class="px-2 py-1">
+                                      <span
+                                        >{{ getDiskUsagePercentage(disk) | number: '1.0-2' }}% ({{
+                                          convertBytesToGigabytes(disk?.usageBytes) | number: '1.0-2'
+                                        }}
+                                        Gb / {{ convertBytesToGigabytes(disk.sizeBytes) | number: '1.0-2' }} Gb)</span
+                                      >
+                                    </td>
+                                  </tr>
+                                }
+                                <tr class="hover:bg-grey-light">
+                                  <td class="px-2 py-1">{{ 'pages.virtualmachines.details.disks.type' | translate }}</td>
+                                  <td class="px-2 py-1">
+                                    {{ disk?.type }}
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        }
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </p-tabPanel>
+          </p-tabView>
         </div>
       </div>
     </div>

@@ -6,11 +6,12 @@ import { PowerState } from '../../../core/models/powerstate';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmDialog, ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
+import { VirtualmachineMetricsComponent } from '../virtualmachine-metrics/virtualmachine-metrics.component';
 
 @Component({
   selector: 'app-virtualmachine-status',
   standalone: true,
-  imports: [TranslateModule, PowerComponent, ToastModule, ConfirmDialogModule],
+  imports: [TranslateModule, PowerComponent, ToastModule, ConfirmDialogModule, VirtualmachineMetricsComponent],
   providers: [ConfirmationService],
   templateUrl: './virtualmachine-status.component.html',
   styleUrl: './virtualmachine-status.component.scss',

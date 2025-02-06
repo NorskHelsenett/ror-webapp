@@ -3,11 +3,14 @@ import { Component, inject, Input } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { Resource } from '@rork8s/ror-resources/models';
 import { ChartModule } from 'primeng/chart';
+import { VirtualmachineCpuComponent } from '../virtualmachine-cpu/virtualmachine-cpu.component';
+import { VirtualmachineMemoryComponent } from '../virtualmachine-memory/virtualmachine-memory.component';
+import { VirtualmachinePriceComponent } from '../virtualmachine-price/virtualmachine-price.component';
 
 @Component({
   selector: 'app-virtualmachine-metrics',
   standalone: true,
-  imports: [TranslateModule, ChartModule],
+  imports: [TranslateModule, ChartModule, VirtualmachineCpuComponent, VirtualmachineMemoryComponent, VirtualmachinePriceComponent],
   templateUrl: './virtualmachine-metrics.component.html',
   styleUrl: './virtualmachine-metrics.component.scss',
 })

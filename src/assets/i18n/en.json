@@ -1469,6 +1469,9 @@
       },
       "details": {
         "title": "Virtual machine",
+        "cpu": {
+          "title": "CPU"
+        },
         "backups": {
           "title": "Backups"
         },
@@ -1476,9 +1479,11 @@
           "title": "Details"
         },
         "disks": {
-          "title": "Disks",
-          "name": "name",
-          "ismounted": "Is mounted",
+          "title": "Storage",
+          "table": "Table",
+          "list": "List",
+          "name": "File name",
+          "ismounted": "Mounted",
           "size": "Size",
           "usage": "Usage",
           "usagepercentage": "Usage %",
@@ -1493,13 +1498,17 @@
         },
         "network": {
           "title": "Network",
-          "networks": "Networks",
+          "hostname": "Hostname",
+          "networks": "Network",
           "ipv4": "IPv4",
           "ipv6": "IPv6",
           "mask": "Mask",
           "gateway": "Gateway",
-          "dns": "DNS",
+          "dns": "DNS server",
           "mac": "MAC"
+        },
+        "memory": {
+          "title": "Memory"
         },
         "metadata": {
           "title": "Metadata",
@@ -1537,7 +1546,8 @@
           "title": "Raw"
         },
         "status": {
-          "title": "Status",
+          "title": "Power",
+          "state": "State",
           "turnoff": "Turn off",
           "turnon": "Turn on",
           "suspend": "Suspend",
@@ -1545,7 +1555,7 @@
           "delete": "Delete"
         },
         "specs": {
-          "title": "Specs",
+          "title": "Configuration",
           "cpusockets": "CPU Sockets",
           "cpucorespersockets": "CPU Cores per socket",
           "memory": "Memory",

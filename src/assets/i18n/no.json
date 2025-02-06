@@ -1461,6 +1461,9 @@
       },
       "details": {
         "title": "Virtuellmaskin",
+        "cpu": {
+          "title": "CPU"
+        },
         "backups": {
           "title": "Backup"
         },
@@ -1468,7 +1471,9 @@
           "title": "Detaljer"
         },
         "disks": {
-          "title": "Harddisker",
+          "title": "Lagring",
+          "table": "Tabell",
+          "list": "Liste",
           "name": "Navn",
           "ismounted": "Montert",
           "size": "Størrelse",
@@ -1485,13 +1490,17 @@
         },
         "network": {
           "title": "Nettverk",
+          "hostname": "Vertsnavn",
           "networks": "Nettverk",
           "ipv4": "IPv4",
           "ipv6": "IPv6",
           "mask": "Maske",
           "gateway": "Gateway",
-          "dns": "DNS",
+          "dns": "DNS server",
           "mac": "MAC"
+        },
+        "memory": {
+          "title": "Minne"
         },
         "metadata": {
           "title": "Metadata",
@@ -1529,7 +1538,8 @@
           "title": "Rådata"
         },
         "status": {
-          "title": "Status",
+          "title": "Strømstatus",
+          "state": "Tilstand",
           "turnoff": "Skru av",
           "turnon": "Skru på",
           "suspend": "Pause",
@@ -1537,7 +1547,7 @@
           "delete": "Slett"
         },
         "specs": {
-          "title": "Spesifikasjoner",
+          "title": "Konfigurasjon",
           "cpusockets": "CPU Sockets",
           "cpucorespersockets": "CPU Cores per socket",
           "memory": "Minne",

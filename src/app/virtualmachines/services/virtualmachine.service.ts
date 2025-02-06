@@ -22,4 +22,8 @@ export class VirtualmachineService {
   getMstscCommand(): string {
     return `mstsc /v:${this.virtualmachine?.metadata?.name}`;
   }
+
+  convertBytesToGigabytes(bytes: number): number {
+    return bytes / 1024 / 1024 / 1024;
+  }
 }

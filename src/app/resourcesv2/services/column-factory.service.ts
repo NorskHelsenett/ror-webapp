@@ -125,7 +125,7 @@ export class ColumnFactoryService {
         field: 'virtualmachine.status.operatingSystem.hostName',
         header: 'Hostname',
         type: 'text',
-        enabled: true,
+        enabled: false,
       },
       {
         field: 'virtualmachine.status.operatingSystem.id',

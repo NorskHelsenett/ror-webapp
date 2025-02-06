@@ -17,9 +17,12 @@ import { VirtualmachineDisksComponent } from '../../components/virtualmachine-di
 import { VirtualmachineSpecsComponent } from '../../components/virtualmachine-specs/virtualmachine-specs.component';
 import { VirtualmachineBackupComponent } from '../../components/virtualmachine-backup/virtualmachine-backup.component';
 import { VirtualmachineRemoteControlComponent } from '../../components/virtualmachine-remote-control/virtualmachine-remote-control.component';
-import { VirtualmachineMetricsComponent } from '../../components/virtualmachine-metrics/virtualmachine-metrics.component';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { VirtualmachineService } from '../../services/virtualmachine.service';
+import { VirtualmachineCpuComponent } from '../../components/virtualmachine-cpu/virtualmachine-cpu.component';
+import { VirtualmachinePriceComponent } from '../../components/virtualmachine-price/virtualmachine-price.component';
+import { VirtualmachineMemoryComponent } from '../../components/virtualmachine-memory/virtualmachine-memory.component';
+import { VirtualmachineMetricsComponent } from '../../components/virtualmachine-metrics/virtualmachine-metrics.component';
 
 @Component({
   selector: 'app-virtualmachine-details',
@@ -40,6 +43,9 @@ import { VirtualmachineService } from '../../services/virtualmachine.service';
     VirtualmachineBackupComponent,
     VirtualmachineRemoteControlComponent,
     ProviderComponent,
+    VirtualmachineCpuComponent,
+    VirtualmachineMemoryComponent,
+    VirtualmachinePriceComponent,
     VirtualmachineMetricsComponent,
   ],
   templateUrl: './virtualmachine-details.component.html',

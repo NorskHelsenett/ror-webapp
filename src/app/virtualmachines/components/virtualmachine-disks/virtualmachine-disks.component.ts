@@ -1,19 +1,34 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
-import { DecimalPipe } from '@angular/common';
+import { DecimalPipe, LowerCasePipe, TitleCasePipe } from '@angular/common';
 import { SharedModule } from '../../../shared/shared.module';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { Resource } from '@rork8s/ror-resources/models';
+import { TabViewModule } from 'primeng/tabview';
+import { TableModule } from 'primeng/table';
+import { ConfigService } from '../../../core/services/config.service';
+import { Tooltip, TooltipModule } from 'primeng/tooltip';
 
 @Component({
   selector: 'app-virtualmachine-disks',
   standalone: true,
-  imports: [TranslateModule, DecimalPipe, SharedModule, ProgressBarModule],
+  imports: [TranslateModule, DecimalPipe, SharedModule, ProgressBarModule, TabViewModule, TableModule, TitleCasePipe, LowerCasePipe, TooltipModule],
   templateUrl: './virtualmachine-disks.component.html',
   styleUrl: './virtualmachine-disks.component.scss',
 })
 export class VirtualmachineDisksComponent {
   @Input() virtualmachine: Resource | undefined;
+
+  rows: number;
+  rowsPerPage: number[];
+  loading: boolean;
+
+  private configService = inject(ConfigService);
+
+  constructor() {
+    this.rows = this.configService.config.rows;
+    this.rowsPerPage = this.configService.config.rowsPerPage;
+  }
 
   getDiskUsagePercentage(disk: any): number {
     if (!disk) {
@@ -36,5 +51,10 @@ export class VirtualmachineDisksComponent {
 
   convertBytesToGigabytes(bytes: number): number {
     return bytes / 1024 / 1024 / 1024;
+  }
+
+  getFileName(disk: any): string {
+    const nameSplit = disk?.name?.split('/');
+    return nameSplit ? nameSplit[nameSplit.length - 1] : '';
   }
 }
