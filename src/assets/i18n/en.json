@@ -1506,7 +1506,8 @@
           "name": "Name",
           "provider": "Provider",
           "lastUpdated": "Last updated",
-          "tags": "Tags"
+          "tags": "Tags",
+          "location": "Location"
         },
         "metrics": {
           "title": "Metrics",

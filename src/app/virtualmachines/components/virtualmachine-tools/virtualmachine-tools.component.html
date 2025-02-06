@@ -6,41 +6,30 @@
       </div>
       <div class="overflow-x-auto">
         <div class="relative mb-3">
-          <table class="w-full border-collapse text-left">
-            <tbody>
-              @if (this.virtualmachine?.virtualmachine?.status?.operatingSystem?.family?.toLowerCase()?.includes('windows')) {
-                <tr>
-                  <td colspan="2" class="px-2 py-1">
-                    <div class="bg-black text-white">mstsc /V:{{ virtualmachine?.virtualmachine?.spec?.name }}</div>
-                    <button
-                      (click)="copyMstscCommand()"
-                      class="focus:ring-primary dark:focus:ring-offset-dark ml-2 rounded-md bg-green-700 px-4 py-2 text-sm text-white hover:bg-green-500 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
-                    >
-                      {{ 'common.copy' | translate }}
-                    </button>
-                  </td>
-                </tr>
-              } @else if (this.virtualmachine?.virtualmachine?.status?.operatingSystem?.family?.toLowerCase()?.includes('linux')) {
-                <tr>
-                  <td colspan="2" class="px-2 py-1">
-                    <div class="bg-black text-white">$ {{ sshCommand }}</div>
-                    <button
-                      (click)="copySSHCommand()"
-                      class="focus:ring-primary dark:focus:ring-offset-dark ml-2 rounded-md bg-green-700 px-4 py-2 text-sm text-white hover:bg-green-500 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
-                    >
-                      {{ 'common.copy' | translate }}
-                    </button>
-                  </td>
-                </tr>
-              } @else {
-                <tr>
-                  <td colspan="2" class="px-2 py-1">
-                    <span>{{ 'pages.virtualmachines.details.tools.unknownOs' | translate }}</span>
-                  </td>
-                </tr>
-              }
-            </tbody>
-          </table>
+          @if (this.virtualmachine?.virtualmachine?.status?.operatingSystem?.family?.toLowerCase()?.includes('windows')) {
+            <div>
+              <div class="bg-black text-white p-2 m-2">mstsc /V:{{ virtualmachine?.virtualmachine?.spec?.name }}</div>
+              <button
+                (click)="copyMstscCommand()"
+                class="focus:ring-primary dark:focus:ring-offset-dark ml-2 rounded-md bg-green-700 px-4 py-2 text-sm text-white hover:bg-green-500 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+              >
+                {{ 'common.copy' | translate }}
+              </button>
+            </div>
+          } @else if (this.virtualmachine?.virtualmachine?.status?.operatingSystem?.family?.toLowerCase()?.includes('linux')) {
+            <div>
+              <div class="bg-black text-white m-2 p-2">$ {{ sshCommand }}</div>
+
+              <button
+                (click)="copySSHCommand()"
+                class="focus:ring-primary dark:focus:ring-offset-dark ml-2 rounded-md bg-green-700 px-4 py-2 text-sm text-white hover:bg-green-500 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+              >
+                {{ 'common.copy' | translate }}
+              </button>
+            </div>
+          } @else {
+            <span>{{ 'pages.virtualmachines.details.tools.unknownOs' | translate }}</span>
+          }
         </div>
       </div>
     </div>

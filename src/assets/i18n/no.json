@@ -1498,7 +1498,8 @@
           "name": "Navn",
           "provider": "Tilbyder",
           "lastUpdated": "Sist oppdatert",
-          "tags": "Stikkord"
+          "tags": "Stikkord",
+          "location": "Lokasjon"
         },
         "metrics": {
           "title": "Nøkkeltall",

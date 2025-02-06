@@ -17,6 +17,14 @@
                 </td>
               </tr>
               <tr class="hover:bg-grey-light">
+                <td class="px-2 py-1">{{ 'pages.virtualmachines.details.metadata.location' | translate }}</td>
+                <td class="px-2 py-1">
+                  <button (click)="copy(virtualmachine?.virtualmachine?.status?.location)">
+                    {{ virtualmachine?.virtualmachine?.status?.location }} <i class="pi pi-copy"></i>
+                  </button>
+                </td>
+              </tr>
+              <tr class="hover:bg-grey-light">
                 <td class="px-2 py-1">{{ 'pages.virtualmachines.details.metadata.provider' | translate }}</td>
                 <td class="px-2 py-1">
                   <app-provider [providerTypeOrName]="virtualmachine?.virtualmachine?.provider"></app-provider>
