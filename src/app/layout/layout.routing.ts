@@ -63,6 +63,10 @@ export const routes: Routes = [
         path: 'releasenotes',
         loadChildren: () => import('../release-notes/release-notes.module').then((m) => m.ReleaseNotesModule),
       },
+      {
+        path: 'appstore',
+        loadChildren: () => import('../app-store/app-store.module').then((m) => m.AppStoreModule),
+      },
       { path: '**', redirectTo: 'error/404' },
     ],
   },

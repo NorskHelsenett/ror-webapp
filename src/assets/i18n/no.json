@@ -122,6 +122,8 @@
     "noValue": "Ingen verdi"
   },
   "nav": {
+    "appstore": "App Marked",
+    "k8sclusters": "Kubernetes Cluster",
     "home": "Oversikt",
     "acl": "Tilgangsstyring",
     "apikeys": "Apinøkler",
@@ -594,6 +596,15 @@
         "apikeyHeaderCopied": "Apinøkkel-header kopiert",
         "startOver": "Opprett enda en nøkkel"
       }
+    },
+    "appstore": {
+      "title": "App Marked",
+      "actions": {
+        "install": "Installer",
+        "uninstall": "Avinstaller",
+        "config": "Konfigurer"
+      },
+      "noApps": "Ingen apper funnet"
     },
     "auth": {
       "callback": {

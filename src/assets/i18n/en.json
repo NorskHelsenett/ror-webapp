@@ -136,6 +136,8 @@
     "userFetchError": "Not able to fetch user"
   },
   "nav": {
+    "appstore": "App Market",
+    "k8sclusters": "Kubernetes Clusters",
     "home": "Overview",
     "acl": "Access control list",
     "apikeys": "Api keys",
@@ -594,6 +596,15 @@
         "apikeyHeaderCopied": "Api key header copied",
         "startOver": "Create a new api key"
       }
+    },
+    "appstore": {
+      "title": "App Market",
+      "actions": {
+        "install": "Install",
+        "uninstall": "Uninstall",
+        "config": "Configure"
+      },
+      "noApps": "No apps found"
     },
     "auth": {
       "callback": {

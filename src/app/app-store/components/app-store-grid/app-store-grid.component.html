@@ -1,0 +1,67 @@
+<div>
+  @if (apps$ | async) {}
+</div>
+<div class="w-full">
+  <input
+    type="text"
+    class="w-full p-2 border-2 border-gray-300 dark:border-gray-500 rounded-lg shadow-lg text-2xl"
+    placeholder="Filter apps"
+    #filter
+    (input)="filterApps(filter?.value)"
+  />
+</div>
+<div class="grid sm:grid-cols-1 md: grid-cols-1 lg:grid-col-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 mt-4 w-full">
+  @for (app of filteredApps; let first = $first, last = $last, even = $even, odd = $odd; track app.id) {
+    <div
+      class="shadow-2xl dark:shadow-lg dark:shadow-gray-700 bg-gray-100 border-2 border-gray-300 dark:border-gray-500 dark:bg-gray-800 rounded-lg p-3 flex flex-col m-3"
+    >
+      <div class="mb-3 text-2xl font-bold flex-none">
+        {{ app?.name }}
+      </div>
+      <div class="flex flex-col gap-4 flex-grow">
+        <div>
+          <div class="flex gap-4 h-[200px]">
+            <img [src]="app?.iconUrl" alt="App icon" class="bg-white h-16 w-16" />
+            <p class="text-lg text-wrap truncate">{{ app?.description }}</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="flex flex-col gap-2">
+          <p-badge severity="success" [value]="app?.currentVersion"></p-badge>
+          <div>
+            @for (version of app?.versions; track version) {
+              <p-badge severity="info" class="mr-2" [value]="version"></p-badge>
+            }
+          </div>
+        </div>
+      </div>
+      <div class="flex-none">
+        <div class="flex gap-4 justify-end">
+          <span> {{ app?.price }} NOK </span>
+        </div>
+      </div>
+      <div class="flex-none">
+        <div class="flex justify-end">
+          @if (app?.name?.toLowerCase().includes('postgresql')) {
+            <button class="bg-primary text-white p-2 ml-2 rounded-lg">
+              <span>{{ 'pages.appstore.actions.config' | translate }}</span>
+            </button>
+            <button class="bg-red-800 text-white p-2 ml-2 rounded-lg">
+              <span>{{ 'pages.appstore.actions.uninstall' | translate }}</span>
+            </button>
+          } @else {
+            <button class="bg-primary text-white p-2 rounded-lg ml-2">
+              <span>{{ 'pages.appstore.actions.install' | translate }}</span>
+            </button>
+          }
+        </div>
+      </div>
+    </div>
+  }
+  @if (filteredApps.length === 0) {
+    <div class="text-2xl font-bold text-center w-full">
+      {{ 'pages.appstore.noApps' | translate }}
+    </div>
+  }
+</div>
