@@ -5,8 +5,6 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './app-store-delete.component.html',
-  styleUrl: './app-store-delete.component.scss'
+  styleUrl: './app-store-delete.component.scss',
 })
-export class AppStoreDeleteComponent {
-
-}
+export class AppStoreDeleteComponent {}

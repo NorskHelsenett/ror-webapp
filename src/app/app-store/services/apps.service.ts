@@ -21,6 +21,30 @@ export class AppsService {
       resposible: 'NDL',
       support: true,
       docUrl: 'https://valkey.io/docs/',
+      config: {
+        containers: [
+          {
+            command: ['tail', '-f', '/dev/null'],
+            image: 'bitnami/os-shell',
+            name: 'mycontainer',
+            volumeMounts: [
+              {
+                mountPath: '/mnt',
+                name: 'valkeydata',
+              },
+            ],
+          },
+        ],
+        restartPolicy: 'Never',
+        volumes: [
+          {
+            name: 'valkeydata',
+            persistentVolumeClaim: {
+              claimName: 'valkey-data-new-valkey-primary-0',
+            },
+          },
+        ],
+      },
     },
     {
       name: 'MongoDB',
@@ -30,13 +54,28 @@ export class AppsService {
       currentVersion: '8.0.3',
       versions: ['8.0.3', '7.0.15', '6.0.12'],
       tags: ['database', 'scalability'],
-
       price: 0,
       regions: [AppRegion.Trondheim, AppRegion.Oslo],
       status: 'ready',
       resposible: 'NDL',
       support: true,
       docUrl: 'https://docs.mongodb.com/',
+      config: {
+        architecture: 'replication',
+        auth: {
+          usernames: ['user1', 'user2'],
+          rootPassword: 'newRootPassword123',
+          passwords: ['newUserPassword123', 'newUserPassword144'],
+          databases: ['userdatabase', 'userdatabase2'],
+        },
+        metrics: {
+          username: 'metricsuser',
+          password: 'newMetricsPassword',
+        },
+        passwordUpdateJob: {
+          enabled: true,
+        },
+      },
     },
     {
       name: 'PostGreSQL',
@@ -53,6 +92,18 @@ export class AppsService {
       resposible: 'NDL',
       support: false,
       docUrl: 'https://www.postgresql.org/docs/',
+      config: {
+        architecture: 'replication',
+        auth: {
+          user: 'user',
+          postgresPassword: 'newPostgresPassword123',
+          password: 'newUserPassword123',
+          replicationPassword: 'newReplicationPassword123',
+        },
+        passwordUpdateJob: {
+          enabled: true,
+        },
+      },
     },
     {
       name: 'RabbitMQ',
@@ -68,6 +119,22 @@ export class AppsService {
       resposible: 'NDL',
       support: true,
       docUrl: 'https://www.rabbitmq.com/documentation.html',
+      config: {
+        auth: {
+          password: 'CHANGEME',
+        },
+        extraSecrets: {
+          'load-definition': {
+            'load_definition.json':
+              '{\n  "users": [\n    {\n      "name": "{{ .Values.auth.username }}",\n      "password": "{{ .Values.auth.password }}",\n      "tags": "administrator"\n    }\n  ],\n  "vhosts": [\n    {\n      "name": "/"\n    }\n  ]\n}\n',
+          },
+        },
+        loadDefinition: {
+          enabled: true,
+          existingSecret: 'load-definition',
+        },
+        extraConfiguration: 'load_definitions = /app/load_definition.json\n',
+      },
     },
     {
       name: 'External Secrets Operator',
@@ -83,6 +150,24 @@ export class AppsService {
       resposible: 'NDL',
       support: true,
       docUrl: 'https://external-secrets.io/',
+      config: {
+        prometheus: {
+          enabled: true,
+          service: {
+            port: 8080,
+          },
+        },
+        resources: {
+          requests: {
+            cpu: '10m',
+            memory: '96Mi',
+          },
+          limits: {
+            cpu: '100m',
+            memory: '256Mi',
+          },
+        },
+      },
     },
     {
       name: 'Jaeger',
@@ -98,6 +183,65 @@ export class AppsService {
       resposible: 'NDL',
       support: true,
       docUrl: 'https://www.jaegertracing.io/docs/',
+      config: {
+        storage: {
+          type: 'elasticsearch',
+          elasticsearch: {
+            host: '<HOST>',
+            port: '<PORT>',
+            scheme: 'https',
+            user: '<USER>',
+            password: '<PASSWORD>',
+          },
+        },
+        provisionDataStore: {
+          cassandra: false,
+          elasticsearch: false,
+        },
+        query: {
+          cmdlineParams: {
+            'es.tls.ca': '/tls/es.pem',
+          },
+          extraConfigmapMounts: [
+            {
+              name: 'jaeger-tls',
+              mountPath: '/tls',
+              subPath: '',
+              configMap: 'jaeger-tls',
+              readOnly: true,
+            },
+          ],
+        },
+        collector: {
+          cmdlineParams: {
+            'es.tls.ca': '/tls/es.pem',
+          },
+          extraConfigmapMounts: [
+            {
+              name: 'jaeger-tls',
+              mountPath: '/tls',
+              subPath: '',
+              configMap: 'jaeger-tls',
+              readOnly: true,
+            },
+          ],
+        },
+        spark: {
+          enabled: true,
+          cmdlineParams: {
+            'java.opts': '-Djavax.net.ssl.trustStore=/tls/trust.store -Djavax.net.ssl.trustStorePassword=changeit',
+          },
+          extraConfigmapMounts: [
+            {
+              name: 'jaeger-tls',
+              mountPath: '/tls',
+              subPath: '',
+              configMap: 'jaeger-tls',
+              readOnly: true,
+            },
+          ],
+        },
+      },
     },
     {
       name: 'Redis',
@@ -113,6 +257,30 @@ export class AppsService {
       resposible: 'NDL',
       support: true,
       docUrl: 'https://redis.io/documentation',
+      config: {
+        containers: [
+          {
+            command: ['tail', '-f', '/dev/null'],
+            image: 'bitnami/minideb',
+            name: 'mycontainer',
+            volumeMounts: [
+              {
+                mountPath: '/mnt',
+                name: 'redisdata',
+              },
+            ],
+          },
+        ],
+        restartPolicy: 'Never',
+        volumes: [
+          {
+            name: 'redisdata',
+            persistentVolumeClaim: {
+              claimName: 'redis-data-new-redis-master-0',
+            },
+          },
+        ],
+      },
     },
     {
       name: 'Trident',
@@ -128,6 +296,93 @@ export class AppsService {
       resposible: 'NDL',
       support: true,
       docUrl: 'https://netapp-trident.readthedocs.io/en/latest/',
+      config: {
+        nodeSelector: {},
+        podAnnotations: {},
+        deploymentAnnotations: {},
+        tolerations: [],
+        affinity: {
+          nodeAffinity: {
+            requiredDuringSchedulingIgnoredDuringExecution: {
+              nodeSelectorTerms: [
+                {
+                  matchExpressions: [
+                    {
+                      key: 'kubernetes.io/arch',
+                      operator: 'In',
+                      values: ['arm64', 'amd64'],
+                    },
+                    {
+                      key: 'kubernetes.io/os',
+                      operator: 'In',
+                      values: ['linux'],
+                    },
+                  ],
+                },
+              ],
+            },
+          },
+        },
+        imageRegistry: '',
+        imagePullPolicy: 'IfNotPresent',
+        imagePullSecrets: [],
+        kubeletDir: '',
+        operatorDebug: true,
+        operatorImage: '',
+        operatorImageTag: '',
+        tridentIPv6: false,
+        tridentK8sTimeout: 0,
+        tridentHttpRequestTimeout: '90s',
+        tridentSilenceAutosupport: false,
+        tridentAutosupportImage: '',
+        tridentAutosupportImageTag: '24.06',
+        tridentAutosupportProxy: '',
+        tridentAutosupportInsecure: false,
+        tridentLogFormat: 'text',
+        tridentDisableAuditLog: true,
+        tridentDebug: false,
+        tridentLogWorkflows: '',
+        tridentLogLayers: '',
+        tridentImage: '',
+        tridentImageTag: '',
+        tridentEnableNodePrep: false,
+        tridentSkipK8sVersionCheck: false,
+        tridentProbePort: '',
+        windows: false,
+        enableForceDetach: false,
+        cloudProvider: '',
+        cloudIdentity: '',
+        enableACP: false,
+        acpImage: '',
+        iscsiSelfHealingInterval: '5m0s',
+        iscsiSelfHealingWaitTime: '7m0s',
+        configuratorReconcileInterval: '30m0s',
+        forceInstallRancherClusterRoles: false,
+        anfConfigurator: {
+          enabled: false,
+          virtualNetwork: '',
+          subnet: '',
+          subscriptionID: '',
+          tenantID: '',
+          location: '',
+          clientCredentials: '',
+          capacityPools: [],
+          netappAccounts: [],
+          resourceGroups: [],
+          customerEncryptionKeys: {},
+        },
+        ontapConfigurator: {
+          enabled: false,
+          svms: [
+            {
+              fsxnID: '',
+              svmName: '',
+              protocols: [],
+              authType: '',
+            },
+          ],
+        },
+      },
     },
     {
       name: 'Ceph',
@@ -143,6 +398,17 @@ export class AppsService {
       resposible: 'NDL',
       support: true,
       docUrl: 'https://docs.ceph.com/en/latest/',
+      config: {
+        encryptionKMSConfig: {
+          encryptionKMSType: 'metadata',
+          secretName: 'cephfs-encryption-passphrase',
+          secretNamespace: 'my-namespace',
+        },
+        storageClass: {
+          encrypted: true,
+          encryptionKMSID: 'kubernetes',
+        },
+      },
     },
   ];
 

@@ -618,7 +618,10 @@
         "namespaceError": "Invalid namespace, minimum 3 characters, and just characters, numbers and -",
         "valuesOverride": "Values override",
         "submit": "Install",
-        "installing": "Installing ..."
+        "installing": "Installing ...",
+        "namespaces": "Namespace",
+        "namespacesPlaceholder": "Choose namespace",
+        "namespacesError": "Invalid namespace, minimum 3 characters, and just characters, numbers and -"
       },
       "filter": {
         "title": "Filter",

@@ -10,13 +10,13 @@
     (input)="filterApps(filter?.value)"
   />
 </div>
-<div class="grid sm:grid-cols-1 md: grid-cols-1 lg:grid-col-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 mt-4 w-full">
+<div class="grid sm:grid-cols-none md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 mt-4 w-full">
   @for (app of filteredApps; let first = $first, last = $last, even = $even, odd = $odd; track app.id) {
     <div
       class="shadow-2xl dark:shadow-lg dark:shadow-gray-700 bg-gray-100 border-2 border-gray-300 dark:border-gray-500 dark:bg-gray-800 rounded-lg p-3 flex flex-col"
     >
       <div class="mb-3 text-2xl font-bold flex-none">
-        {{ app?.name }}
+        <a [routerLink]="[app?.id, 'install']">{{ app?.name }}</a>
       </div>
       <div class="flex flex-col gap-4 flex-grow">
         <div>

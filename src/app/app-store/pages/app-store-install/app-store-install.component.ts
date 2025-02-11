@@ -1,6 +1,6 @@
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AsyncPipe, CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormsModule, ReactiveFormsModule, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
@@ -14,6 +14,9 @@ import { AppsService } from '../../services/apps.service';
 import { MonacoEditorModule } from 'ngx-monaco-editor-v2';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { Namespace } from '../../models/namespace';
+import { NamespacesService } from '../../services/namespaces.service';
+import YAML from 'yaml';
 
 @Component({
   selector: 'app-app-store-install',
@@ -46,6 +49,10 @@ export class AppStoreInstallComponent implements OnInit, OnDestroy {
   appId: string | undefined;
   fetchClustersError: any;
 
+  namespaces$: Observable<Namespace[]> | undefined;
+  namespaces: Namespace[] = [];
+  fetchNamespacesError: any;
+
   editorOptions = { theme: 'vs-dark', language: 'yaml' };
   codeDefault: string = `values:
     prop1: test1
@@ -61,6 +68,7 @@ export class AppStoreInstallComponent implements OnInit, OnDestroy {
   private appService = inject(AppsService);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
+  private namespacesService = inject(NamespacesService);
   private subscriptions = new Subscription();
 
   private messageService = inject(MessageService);
@@ -82,9 +90,9 @@ export class AppStoreInstallComponent implements OnInit, OnDestroy {
         )
         .subscribe(),
     );
-    this.code = this.codeDefault;
 
     this.fetchClusters();
+    this.fetchNamespaces();
   }
 
   ngOnDestroy(): void {
@@ -97,6 +105,12 @@ export class AppStoreInstallComponent implements OnInit, OnDestroy {
         .getAppById(this.appId)
         .pipe(
           map((app: App) => {
+            if (!app) {
+              this.code = this.codeDefault;
+            } else {
+              this.app = app;
+              this.code = YAML.stringify(app?.config);
+            }
             this.app = app;
             return app;
           }),
@@ -105,6 +119,20 @@ export class AppStoreInstallComponent implements OnInit, OnDestroy {
           }),
         )
         .subscribe(),
+    );
+  }
+
+  fetchNamespaces(): void {
+    this.namespaces$ = this.namespacesService.getNamespaces().pipe(
+      map((namespaces: Namespace[]) => {
+        this.namespaces = namespaces;
+        return namespaces;
+      }),
+      catchError((error) => {
+        console.error('Error fetching namespaces', error);
+        this.fetchNamespacesError = error;
+        return [];
+      }),
     );
   }
 
@@ -137,7 +165,11 @@ export class AppStoreInstallComponent implements OnInit, OnDestroy {
 
   reset(): void {
     this.appInstallForm.reset();
-    this.code = this.codeDefault;
+    if (!this.app) {
+      this.code = this.codeDefault;
+    } else {
+      this.code = YAML.stringify(this.app?.config);
+    }
     this.changeDetector.detectChanges();
   }
 

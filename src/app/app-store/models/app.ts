@@ -12,6 +12,7 @@ export interface App {
   resposible: string;
   support: boolean;
   docUrl: string;
+  config: any;
 }
 
 export enum AppStatus {

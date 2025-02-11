@@ -8,9 +8,8 @@ describe('AppStoreGridFilterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppStoreGridFilterComponent]
-    })
-    .compileComponents();
+      imports: [AppStoreGridFilterComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(AppStoreGridFilterComponent);
     component = fixture.componentInstance;

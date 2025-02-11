@@ -8,9 +8,8 @@ describe('AppStoreCreateComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppStoreCreateComponent]
-    })
-    .compileComponents();
+      imports: [AppStoreCreateComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(AppStoreCreateComponent);
     component = fixture.componentInstance;

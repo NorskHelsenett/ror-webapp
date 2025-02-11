@@ -8,9 +8,8 @@ describe('AppStoreDeleteComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppStoreDeleteComponent]
-    })
-    .compileComponents();
+      imports: [AppStoreDeleteComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(AppStoreDeleteComponent);
     component = fixture.componentInstance;

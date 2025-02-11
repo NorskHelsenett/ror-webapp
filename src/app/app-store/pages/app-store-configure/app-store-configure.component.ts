@@ -5,8 +5,6 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './app-store-configure.component.html',
-  styleUrl: './app-store-configure.component.scss'
+  styleUrl: './app-store-configure.component.scss',
 })
-export class AppStoreConfigureComponent {
-
-}
+export class AppStoreConfigureComponent {}

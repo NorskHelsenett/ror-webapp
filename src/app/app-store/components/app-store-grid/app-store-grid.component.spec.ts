@@ -8,9 +8,8 @@ describe('AppStoreGridComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppStoreGridComponent]
-    })
-    .compileComponents();
+      imports: [AppStoreGridComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(AppStoreGridComponent);
     component = fixture.componentInstance;

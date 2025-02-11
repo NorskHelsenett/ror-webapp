@@ -618,7 +618,10 @@
         "namespaceError": "Mangler namespace, eller ugyldige tegn",
         "valuesOverride": "Verdier",
         "submit": "Installer",
-        "installing": "Installerer ..."
+        "installing": "Installerer ...",
+        "namespaces": "Namespace",
+        "namespacesPlaceholder": "Velg namespaces",
+        "namespacesError": "Mangler namespaces, eller ugyldige tegn"
       },
       "filter": {
         "title": "Filter",
