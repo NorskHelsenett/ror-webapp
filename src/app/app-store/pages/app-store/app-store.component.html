@@ -21,11 +21,22 @@
   >
     {{ 'common.refresh' | translate }}
   </button>
+  <a
+    [routerLink]="['./create']"
+    class="delay-50 hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark float-left rounded-md bg-green-700 px-4 py-2 text-sm text-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+  >
+    <span>{{ 'common.create' | translate }}</span>
+  </a>
 </div>
 
 <div class="m-4">
   <div class="flex row">
-    <!-- <div>filter</div> -->
-    <app-app-store-grid></app-app-store-grid>
+    <app-app-store-filter #gridFilter class="w-1/6 mt-20"></app-app-store-filter>
+    <app-app-store-grid
+      class="w-full"
+      #appGrid
+      [sortingChanged]="gridFilter.sortingChange()"
+      [categoriesChanged]="gridFilter.categoriesChange()"
+    ></app-app-store-grid>
   </div>
 </div>

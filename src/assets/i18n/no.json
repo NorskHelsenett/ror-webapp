@@ -604,7 +604,29 @@
         "uninstall": "Avinstaller",
         "config": "Konfigurer"
       },
-      "noApps": "Ingen apper funnet"
+      "noApps": "Ingen apper funnet",
+      "currentVersion": "Nåværende versjon",
+      "supportedVersions": "Støttede versjoner",
+      "deleteConfirmation": "Er du sikker på at du vil avinstallere appen?",
+      "deleteSuccess": "Appen er avinstallert",
+      "documentation": "Dokumentasjon",
+      "install": {
+        "title": "Installer app",
+        "clusters": "Velg cluster",
+        "clustersPlaceholder": "Velg cluster",
+        "namespace": "Namespace",
+        "namespaceError": "Mangler namespace, eller ugyldige tegn",
+        "valuesOverride": "Verdier",
+        "submit": "Installer",
+        "installing": "Installerer ..."
+      },
+      "filter": {
+        "title": "Filter",
+        "asc": "Stigende",
+        "desc": "Synkende",
+        "categories": "Kategorier",
+        "clear": "Nullstill"
+      }
     },
     "auth": {
       "callback": {

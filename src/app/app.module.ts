@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClient, HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
@@ -25,6 +25,7 @@ import { MessageService } from 'primeng/api';
 import { provideHighlightOptions } from 'ngx-highlightjs';
 import { InMemoryScrollingFeature, InMemoryScrollingOptions, withInMemoryScrolling } from '@angular/router';
 import { environment } from '../environments/environment';
+import { MonacoEditorModule } from 'ngx-monaco-editor-v2';
 
 registerLocaleData(localeNo, localeNoExtra);
 registerLocaleData(localeEn, localeEnExtra);
@@ -67,6 +68,7 @@ const inMemoryScrollingFeature: InMemoryScrollingFeature = withInMemoryScrolling
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000',
     }),
+    MonacoEditorModule.forRoot(),
   ],
   providers: [
     {

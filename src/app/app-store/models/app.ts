@@ -11,6 +11,7 @@ export interface App {
   status: string;
   resposible: string;
   support: boolean;
+  docUrl: string;
 }
 
 export enum AppStatus {

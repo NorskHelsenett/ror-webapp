@@ -604,7 +604,29 @@
         "uninstall": "Uninstall",
         "config": "Configure"
       },
-      "noApps": "No apps found"
+      "noApps": "No apps found",
+      "currentVersion": "Current version",
+      "supportedVersions": "Supported versions",
+      "deleteConfirmation": "Are you sure you want to uninstall this app?",
+      "deleteSuccess": "App uninstalled successfully",
+      "documentation": "Documentation",
+      "install": {
+        "title": "Install app",
+        "clusters": "Choose cluster",
+        "clustersPlaceholder": "Choose cluster",
+        "namespace": "Namespace",
+        "namespaceError": "Invalid namespace, minimum 3 characters, and just characters, numbers and -",
+        "valuesOverride": "Values override",
+        "submit": "Install",
+        "installing": "Installing ..."
+      },
+      "filter": {
+        "title": "Filter",
+        "asc": "Ascending",
+        "desc": "Descending",
+        "categories": "Categories",
+        "clear": "Clear"
+      }
     },
     "auth": {
       "callback": {
