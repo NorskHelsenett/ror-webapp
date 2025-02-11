@@ -102,5 +102,6 @@ export class AppStoreGridComponent implements OnInit {
 
   filterApps(filterQuery: string): void {
     this.filterQuery.set(filterQuery);
+    this.fetch();
   }
 }
