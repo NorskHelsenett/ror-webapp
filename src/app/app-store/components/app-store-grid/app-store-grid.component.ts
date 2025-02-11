@@ -44,16 +44,16 @@ export class AppStoreGridComponent implements OnInit {
 
     this.categories = value;
     this.filterApps(this.filterQuery());
+    this.fetch();
   }
 
   apps$: Observable<App[]> | undefined;
-  apps: App[] = [];
 
   filterQuery = signal<string>('');
   filteredApps: App[] = [];
   categories: string[] = [];
 
-  private sorting = 'desc';
+  private sorting = 'asc';
 
   private appsService = inject(AppsService);
   private confirmationService = inject(ConfirmationService);
@@ -76,30 +76,31 @@ export class AppStoreGridComponent implements OnInit {
   fetch(): void {
     this.apps$ = this.appsService.getApps().pipe(
       map((apps: App[]) => {
-        this.apps = apps.sort((a: App, b: App) => {
+        this.filteredApps = apps;
+
+        this.filteredApps = this.filteredApps.sort((a: App, b: App) => {
           if (this.sorting === 'asc') {
             return a.name.localeCompare(b.name);
           } else {
             return b.name.localeCompare(a.name);
           }
         });
-        this.filteredApps = apps;
-        return apps;
+
+        this.filteredApps = this.filteredApps?.filter((app: App) => {
+          return app?.name?.toLowerCase()?.includes(this.filterQuery()?.toLowerCase());
+        });
+
+        if (this.categories?.length > 0) {
+          this.filteredApps = this.filteredApps.filter((app: App) => {
+            return app?.tags?.some((tag: string) => this.categories?.includes(tag?.toLowerCase()));
+          });
+        }
+        return this.filteredApps;
       }),
     );
   }
 
   filterApps(filterQuery: string): void {
     this.filterQuery.set(filterQuery);
-
-    this.filteredApps = this.apps?.filter((app: App) => {
-      return app?.name?.toLowerCase()?.includes(filterQuery?.toLowerCase());
-    });
-
-    if (this.categories?.length > 0) {
-      this.filteredApps = this.filteredApps.filter((app: App) => {
-        return app.tags.some((tag: string) => this.categories.includes(tag));
-      });
-    }
   }
 }

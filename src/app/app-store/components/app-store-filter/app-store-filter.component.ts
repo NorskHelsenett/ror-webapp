@@ -15,7 +15,7 @@ import { App } from '../../models/app';
   styleUrl: './app-store-filter.component.scss',
 })
 export class AppStoreFilterComponent implements OnInit, OnDestroy {
-  @Output() sortingChange = signal<string>('desc');
+  @Output() sortingChange = signal<string>('asc');
   @Output() categoriesChange = signal<string[]>([]);
   selectedSorting = 'asc';
 
