@@ -122,7 +122,7 @@
     "noValue": "Ingen verdi"
   },
   "nav": {
-    "appstore": "App Marked",
+    "appmarket": "App Market",
     "k8sclusters": "Kubernetes Cluster",
     "home": "Oversikt",
     "acl": "Tilgangsstyring",
@@ -597,8 +597,8 @@
         "startOver": "Opprett enda en nøkkel"
       }
     },
-    "appstore": {
-      "title": "App Marked",
+    "appmarket": {
+      "title": "App Market",
       "actions": {
         "install": "Installer",
         "uninstall": "Avinstaller",
@@ -612,8 +612,11 @@
       "documentation": "Dokumentasjon",
       "install": {
         "title": "Installer app",
+        "clusterid": "Cluster id",
+        "workspace": "Arbeidsområde",
         "clusters": "Velg cluster",
         "clustersPlaceholder": "Velg cluster",
+        "clusterError": "Mangler cluster, eller ugyldige tegn",
         "namespace": "Namespace",
         "namespaceError": "Mangler namespace, eller ugyldige tegn",
         "valuesOverride": "Verdier",

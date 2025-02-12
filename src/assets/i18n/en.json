@@ -136,7 +136,7 @@
     "userFetchError": "Not able to fetch user"
   },
   "nav": {
-    "appstore": "App Market",
+    "appmarket": "App Market",
     "k8sclusters": "Kubernetes Clusters",
     "home": "Overview",
     "acl": "Access control list",
@@ -597,7 +597,7 @@
         "startOver": "Create a new api key"
       }
     },
-    "appstore": {
+    "appmarket": {
       "title": "App Market",
       "actions": {
         "install": "Install",
@@ -612,8 +612,11 @@
       "documentation": "Documentation",
       "install": {
         "title": "Install app",
+        "clusterid": "Cluster id",
+        "workspace": "Workspace",
         "clusters": "Choose cluster",
         "clustersPlaceholder": "Choose cluster",
+        "clusterError": "Missing cluster selection",
         "namespace": "Namespace",
         "namespaceError": "Invalid namespace, minimum 3 characters, and just characters, numbers and -",
         "valuesOverride": "Values override",
