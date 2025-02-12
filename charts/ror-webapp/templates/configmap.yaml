@@ -17,6 +17,8 @@ data:
       "regex": {
           "forms": "^[@()\\/:?\\r\\n.,a-zA-Z æøåÆØÅ0-9_-]+$"
       },
+      externalDocsUrl: "{{ .Values.docs.externalDocsUrl }}",
+      docsUrl: "{{ .Values.docs.docsUrl }}",
       "rowsPerPage": [10, 25, 50, 75, 100],
       "rows": 25,
       "rorApi": "{{ .Values.web.apiUrl }}",

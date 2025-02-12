@@ -9,6 +9,8 @@ export interface AppConfig {
   rows: number;
   rorApi: string;
   sse: SSE;
+  docsUrl: string;
+  externalDocsUrl: string;
 }
 
 export interface Auth {
