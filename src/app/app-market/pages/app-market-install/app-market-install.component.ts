@@ -4,7 +4,6 @@ import { ChangeDetectorRef, Component, inject, OnDestroy, OnInit } from '@angula
 import { FormGroup, FormsModule, ReactiveFormsModule, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
-import { ClustersService } from '../../../core/services/clusters.service';
 import { catchError, finalize, map, Observable, Subscription, tap } from 'rxjs';
 import { Cluster } from '../../../core/models/cluster';
 import { DropdownModule } from 'primeng/dropdown';
@@ -17,6 +16,8 @@ import { Namespace } from '../../models/namespace';
 import { NamespacesService } from '../../services/namespaces.service';
 import YAML from 'yaml';
 import { MockClustersService } from '../../services/mock-clusters.service';
+import { DomSanitizer } from '@angular/platform-browser';
+import { version } from 'os';
 
 @Component({
   selector: 'app-app-market-install',
@@ -40,6 +41,7 @@ export class AppMarketInstallComponent implements OnInit, OnDestroy {
   appInstallForm: FormGroup = new FormGroup({
     cluster: new FormControl('', [Validators.required]),
     namespace: new FormControl('', [Validators.required, Validators.minLength(1)]),
+    version: new FormControl('', [Validators.required]),
     values: new FormControl(''),
   });
 
@@ -70,6 +72,7 @@ export class AppMarketInstallComponent implements OnInit, OnDestroy {
   private route = inject(ActivatedRoute);
   private namespacesService = inject(NamespacesService);
   private subscriptions = new Subscription();
+  private sanitizer = inject(DomSanitizer);
 
   private messageService = inject(MessageService);
   private translateService = inject(TranslateService);
@@ -78,6 +81,7 @@ export class AppMarketInstallComponent implements OnInit, OnDestroy {
     this.appInstallForm = this.formBuilder.group({
       cluster: [null, [Validators.required]],
       namespace: [null, [Validators.required, Validators.minLength(1)]],
+      version: [null, [Validators.required]],
       values: [''],
     });
     this.subscriptions.add(
@@ -111,6 +115,8 @@ export class AppMarketInstallComponent implements OnInit, OnDestroy {
               this.app = app;
               this.code = YAML.stringify(app?.config);
             }
+            this.appInstallForm.patchValue({ version: app?.currentVersion });
+
             this.app = app;
             return app;
           }),
@@ -161,13 +167,19 @@ export class AppMarketInstallComponent implements OnInit, OnDestroy {
     //this.appmarketform?.get('namespace')?.setValue(namespace);
   }
 
+  versionSelected(event: any): void {
+    //this.appmarketform?.get('namespace')?.setValue(namespace);
+  }
+
   reset(): void {
     this.appInstallForm.reset();
     if (!this.app) {
       this.code = this.codeDefault;
     } else {
       this.code = YAML.stringify(this.app?.config);
+      this.appInstallForm.patchValue({ version: this.app?.currentVersion });
     }
+
     this.changeDetector.detectChanges();
   }
 
@@ -176,5 +188,9 @@ export class AppMarketInstallComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       this.router.navigate(['/appmarket']);
     }, 750);
+  }
+
+  getSafelyUrl(url: string): any {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 }
