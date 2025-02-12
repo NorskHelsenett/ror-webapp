@@ -73,3 +73,6 @@ autoscaling:
 nodeSelector: {}
 tolerations: []
 affinity: {}
+docs:
+  externalDocsUrl: https://norskhelsenett.github.io/ror/
+  docsUrl: https://norskhelsenett.github.io/ror/

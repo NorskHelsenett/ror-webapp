@@ -11,6 +11,8 @@
   "regex": {
     "forms": "^[@()\\/:?\\r\\n.,a-zA-Z æøåÆØÅ0-9_-]+$"
   },
+  "docsUrl": "https://norskhelsenett.github.io/ror/",
+  "externalDocsUrl": "https://norskhelsenett.github.io/ror/",
   "rowsPerPage": [10, 25, 50, 75, 100],
   "rows": 25,
   "rorApi": "http://localhost:10000",

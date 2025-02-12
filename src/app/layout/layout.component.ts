@@ -1,5 +1,5 @@
 import { TranslateService } from '@ngx-translate/core';
-import { ChangeDetectionStrategy, Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ChangeDetectorRef, OnDestroy, effect } from '@angular/core';
 import { ThemeService } from '../core/services/theme.service';
 import { Observable, Subscription, catchError, share, tap } from 'rxjs';
 import { AuthService } from '../core/services/auth.service';
@@ -9,6 +9,7 @@ import { SseService } from '../create/create-cluster/services/sse.service';
 import { SignalService } from '../create/create-cluster/services/signal.service';
 import { BigEventsService } from '../core/services/big-events.service';
 import { environment } from '../../environments/environment';
+import { ConfigService } from '../core/services/config.service';
 
 @Component({
   selector: 'app-layout',
@@ -30,6 +31,8 @@ export class LayoutComponent implements OnInit, OnDestroy {
   birthday = false;
   desember = false;
   christmas = false;
+  rorDocsUrl: string | undefined;
+  externalDocsUrl: string | undefined;
 
   adminRead$: Observable<boolean> | undefined;
   adminOwner$: Observable<boolean> | undefined;
@@ -48,6 +51,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
     private sseService: SseService,
     private signalService: SignalService,
     private bigEventsService: BigEventsService,
+    private configService: ConfigService,
   ) {}
 
   ngOnInit(): void {
@@ -59,6 +63,9 @@ export class LayoutComponent implements OnInit, OnDestroy {
     this.birthday = this.bigEventsService.isRORBirthday();
 
     this.setupSSEClients();
+
+    this.rorDocsUrl = this.configService.config.docsUrl;
+    this.externalDocsUrl = this.configService.config.externalDocsUrl;
 
     this.changeDetector.detectChanges();
   }
