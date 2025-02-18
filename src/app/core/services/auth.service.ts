@@ -19,6 +19,7 @@ export class AuthService {
   ) {
     this.setConfig();
     this.oauthService.configure(this.authConfig);
+    this.oauthService.initCodeFlow();
   }
 
   getToken(): string | null {
@@ -28,6 +29,7 @@ export class AuthService {
   logout() {
     this.userService.user.next(null);
     this.oauthService.logOut();
+    this.oauthService.revokeTokenAndLogout();
     window.location.reload();
   }
 
@@ -37,7 +39,7 @@ export class AuthService {
 
   login() {
     this.oauthService
-      .loadDiscoveryDocumentAndLogin()
+      .loadDiscoveryDocumentAndTryLogin()
       .then((result: boolean) => {
         this.authenticationEventObservable.next(result);
       })

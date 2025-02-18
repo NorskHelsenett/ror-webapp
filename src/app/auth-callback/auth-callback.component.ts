@@ -20,25 +20,32 @@ export class AuthCallbackComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.oauthService.loadDiscoveryDocumentAndLogin();
+    console.log('' + window.location);
+
+    setTimeout(() => {
+      this.oauthService.initCodeFlow();
+      this.changeDetector.detectChanges();
+    }, 5000);
+    this.oauthService.loadDiscoveryDocumentAndTryLogin();
+    this.oauthService.refreshToken();
     this.oauthService.setupAutomaticSilentRefresh();
 
     // Automatically load user profile
     this.oauthService.events.pipe(filter((e) => e?.type === 'token_received')).subscribe((_) => {
       this.oauthService.loadUserProfile();
       this.changeDetector.detectChanges();
-      this.redirect();
+      //this.redirect();
       return;
     });
 
     this.changeDetector.detectChanges();
-    this.redirect();
+    //this.redirect();
   }
 
   redirect(): void {
-    setTimeout(() => {
-      this.router.navigate([this.relativePath]);
-      this.changeDetector.detectChanges();
-    }, 0);
+    // setTimeout(() => {
+    //   this.router.navigate([this.relativePath]);
+    //   this.changeDetector.detectChanges();
+    // }, 0);
   }
 }

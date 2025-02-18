@@ -11,6 +11,7 @@ export interface AppConfig {
   sse: SSE;
   docsUrl: string;
   externalDocsUrl: string;
+  clientSecret: string;
 }
 
 export interface Auth {

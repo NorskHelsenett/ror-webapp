@@ -28,7 +28,8 @@ export class AppComponent implements OnInit, OnDestroy {
     private translateService: TranslateService,
   ) {
     this.oauthService.configure(this.authService.authConfig);
-    this.oauthService.loadDiscoveryDocumentAndLogin();
+    this.oauthService.initCodeFlow();
+    this.oauthService.loadDiscoveryDocumentAndTryLogin();
     this.oauthService.setupAutomaticSilentRefresh();
     this.oauthService.events.pipe(filter((e) => e?.type === 'token_received')).subscribe((_) => {
       this.oauthService.loadUserProfile();
