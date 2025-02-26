@@ -825,6 +825,7 @@
         "nodePools": {
           "title": "Node pools",
           "machineClass": "Machine class",
+          "create": "Create node pool",
           "table": {
             "column": {
               "name": "Name",

@@ -65,6 +65,24 @@
       </ng-template>
     </p-tabPanel>
 
+    @if (adminOwner$ | async) {
+      <p-tabPanel header="nodepools">
+        <ng-template pTemplate="header">
+          <div class="flex text-nowrap">
+            <i class="pi pi-qrcode mt-1"></i>
+            <span class="ml-2">{{ 'pages.clusters.details.nodePools.title' | translate }}</span>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="content">
+          <div class="">
+            <div class="dark:bg-darker flex flex-col rounded-md bg-white">
+              <app-cluster-nodepools></app-cluster-nodepools>
+            </div>
+          </div>
+        </ng-template>
+      </p-tabPanel>
+    }
+
     <p-tabPanel>
       <ng-template pTemplate="header">
         <div class="flex text-nowrap">

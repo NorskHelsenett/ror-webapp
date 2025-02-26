@@ -1,6 +1,6 @@
 import { OAuthService } from 'angular-oauth2-oidc';
 import { MetricsService } from '../../../core/services/metrics.service';
-import { Component, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy, AfterContentInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subscription, tap, catchError, share, finalize } from 'rxjs';
 import { Location } from '@angular/common';
@@ -9,6 +9,7 @@ import { AclService } from '../../../core/services/acl.service';
 import { ClustersService } from '../../../core/services/clusters.service';
 import { ResourceType } from '../../../core/models/resources/resourceType';
 import { ResourceQuery } from '@rork8s/ror-resources/models';
+import { ClusterService } from '../../services';
 
 @Component({
   selector: 'app-cluster-details',
@@ -16,7 +17,7 @@ import { ResourceQuery } from '@rork8s/ror-resources/models';
   styleUrls: ['./cluster-details.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ClusterDetailsComponent implements OnInit, OnDestroy {
+export class ClusterDetailsComponent implements OnInit, OnDestroy, AfterContentInit, AfterViewInit {
   clusterId: string | undefined;
 
   cluster$: Observable<any> | undefined;
@@ -47,6 +48,10 @@ export class ClusterDetailsComponent implements OnInit, OnDestroy {
     {
       metadata: 'ingresses',
       query: 'tab=ingresses',
+    },
+    {
+      metadata: 'nodepools',
+      query: 'tab=nodepools',
     },
     {
       metadata: 'policyReports',
@@ -99,20 +104,26 @@ export class ClusterDetailsComponent implements OnInit, OnDestroy {
     private router: Router,
     private location: Location,
     private changeDetector: ChangeDetectorRef,
-    private clusterService: ClustersService,
+    private clustersService: ClustersService,
+    private clusterService: ClusterService,
     private metricsService: MetricsService,
     private oauthService: OAuthService,
     private aclService: AclService,
-  ) {}
+  ) {
+    this.adminOwner$ = this.aclService.check(AclScopes.ROR, AclScopes.Global, AclAccess.Owner).pipe(
+      share(),
+      tap(() => {
+        this.setSelectedTab();
+      }),
+      catchError((error: any) => {
+        this.aclFetchError = error;
+        this.changeDetector.detectChanges();
+        throw error;
+      }),
+    );
+  }
 
   ngOnInit(): void {
-    const tab = this.route.snapshot.queryParams['tab'];
-    this.tabs.forEach((value: any, index: number) => {
-      if (tab == value?.metadata) {
-        this.selectedTabIndex = index;
-      }
-    });
-
     this.subscriptions.add(
       this.route.params
         .pipe(
@@ -125,18 +136,32 @@ export class ClusterDetailsComponent implements OnInit, OnDestroy {
     );
     this.userClaims = this.oauthService.getIdentityClaims();
     this.clusterId = this.route.snapshot.params['id'];
-    this.adminOwner$ = this.aclService.check(AclScopes.ROR, AclScopes.Global, AclAccess.Owner).pipe(
-      share(),
-      catchError((error: any) => {
-        this.aclFetchError = error;
-        this.changeDetector.detectChanges();
-        throw error;
-      }),
-    );
   }
+
+  ngAfterContentInit(): void {}
+
+  ngAfterViewInit(): void {}
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
+  }
+
+  setSelectedTab(): void {
+    const tab = this.route.snapshot.queryParams['tab'];
+    // this.tabs.forEach((value: any, index: number) => {
+    //   if (tab == value?.metadata) {
+    //       this.selectedTabIndex = index;
+    //     }
+    //   });
+    for (let index = 0; index < this.tabs.length; index++) {
+      const element = this.tabs[index];
+
+      if (tab == element?.metadata) {
+        this.selectedTabIndex = index;
+        console.log('selectedTabIndex', this.selectedTabIndex);
+        break;
+      }
+    }
   }
 
   fetch(): void {
@@ -146,8 +171,11 @@ export class ClusterDetailsComponent implements OnInit, OnDestroy {
 
   fetchCluster(clusterId: string): void {
     this.clusterError = undefined;
-    this.cluster$ = this.clusterService.getById(clusterId).pipe(
+    this.cluster$ = this.clustersService.getById(clusterId).pipe(
       share(),
+      tap((cluster: any) => {
+        this.clusterService.setCluster(cluster);
+      }),
       catchError((error) => {
         switch (error?.status) {
           case 401: {
