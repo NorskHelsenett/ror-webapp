@@ -834,7 +834,29 @@
               "osImage": "Image",
               "arch": "Architecture",
               "cpu": "CPU",
-              "mem": "MEM"
+              "cores": "Cores",
+              "mem": "MEM",
+              "nodeCount": "Node count"
+            }
+          },
+          "createorupdate": {
+            "createTitle": "Create node pool",
+            "updateTitle": "Update node pool",
+            "form": {
+              "name": "Name",
+              "nameError": "Name is missing or invalid characters",
+              "machineClass": "Machine class",
+              "machineClassError": "Machine class is missing",
+              "autoScale": "Auto scale",
+              "autoScaleDescription": "The cluster can be automatically scaled up or down. This can have a significant impact on the pricing of your cluster.",
+              "autoScaleError": "Auto scale is missing",
+              "minNodes": "Min nodes",
+              "minNodesError": "Min nodes is missing or invalid",
+              "maxNodes": "Max nodes",
+              "maxNodesError": "Max nodes is missing or invalid"
+            },
+            "summary": {
+              "title": "Summary"
             }
           }
         },

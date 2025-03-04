@@ -62,34 +62,37 @@
         <h4 class="dark:text-light text-lg font-semibold text-gray-500">{{ 'pages.create.cluster.steps.resources.title' | translate }}</h4>
       </div>
       <div class="grid grid-cols-1 p-3 2xl:grid-cols-3">
-        <table class="dark:text-light relative text-gray-900 sm:col-span-1 lg:col-span-2">
-          <thead class="border-b">
-            <tr>
-              <th scope="col" class="px-1 py-1 text-left font-medium">
-                {{ 'pages.create.cluster.steps.resources.table.machineClass' | translate }}
-              </th>
-              <th scope="col" class="px-1 py-1 text-left font-medium">{{ 'pages.create.cluster.steps.resources.table.cpu' | translate }}</th>
-              <th scope="col" class="px-1 py-1 text-left font-medium">
-                {{ 'pages.create.cluster.steps.resources.table.memory' | translate }}
-              </th>
-              <th scope="col" class="px-1 py-1 text-left font-medium">
-                {{ 'pages.create.cluster.steps.resources.table.price' | translate }}
-              </th>
-              <th scope="col" class="px-1 py-1 text-left font-medium"></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="transition duration-300 ease-in-out hover:bg-gray-200 dark:hover:bg-gray-500" *ngFor="let price of pricesFiltered">
-              <td class="whitespace-nowrap px-1 py-1 font-light">{{ price?.machineClass | titlecase }}</td>
-              <td class="whitespace-nowrap px-1 py-1 font-light">{{ price?.cpu }}</td>
-              <td class="whitespace-nowrap px-1 py-1 font-light">{{ price?.memory }} Gb</td>
-              <td class="whitespace-nowrap px-1 py-1 font-light">{{ price?.price }} NOK</td>
-              <td class="whitespace-nowrap px-1 py-1 font-light">
-                <button (click)="addNodePool(price)"><i class="pi pi-plus-circle text-green-700"></i></button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="flex flex-col lg:col-span-2 sm:col-span-1">
+          <table class="dark:text-light relative text-gray-900">
+            <thead class="border-b">
+              <tr>
+                <th scope="col" class="px-1 py-1 text-left font-medium">
+                  {{ 'pages.create.cluster.steps.resources.table.machineClass' | translate }}
+                </th>
+                <th scope="col" class="px-1 py-1 text-left font-medium">{{ 'pages.create.cluster.steps.resources.table.cpu' | translate }}</th>
+                <th scope="col" class="px-1 py-1 text-left font-medium">
+                  {{ 'pages.create.cluster.steps.resources.table.memory' | translate }}
+                </th>
+                <th scope="col" class="px-1 py-1 text-left font-medium">
+                  {{ 'pages.create.cluster.steps.resources.table.price' | translate }}
+                </th>
+                <th scope="col" class="px-1 py-1 text-left font-medium"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="transition duration-300 ease-in-out hover:bg-gray-200 dark:hover:bg-gray-500" *ngFor="let price of pricesFiltered">
+                <td class="whitespace-nowrap px-1 py-1 font-light">{{ price?.machineClass | titlecase }}</td>
+                <td class="whitespace-nowrap px-1 py-1 font-light">{{ price?.cpu }}</td>
+                <td class="whitespace-nowrap px-1 py-1 font-light">{{ price?.memory }} Gb</td>
+                <td class="whitespace-nowrap px-1 py-1 font-light">{{ price?.price }} NOK</td>
+                <td class="whitespace-nowrap px-1 py-1 font-light">
+                  <button (click)="addNodePool(price)"><i class="pi pi-plus-circle text-green-700"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="flex-grow"></div>
+        </div>
         <div class="sm:ml-0 md:col-span-1 xl:ml-3">
           <h4 class="dark:text-light text-lg font-semibold text-gray-500">
             {{ 'pages.create.cluster.steps.resources.selectedTitle' | translate }}

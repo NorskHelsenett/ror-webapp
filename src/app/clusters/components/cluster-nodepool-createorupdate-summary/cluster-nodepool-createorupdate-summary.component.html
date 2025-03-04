@@ -1,0 +1,19 @@
+<div>
+  <span class="text-lg">{{ 'pages.clusters.details.nodePools.createorupdate.summary.title' | translate }}</span>
+  <table>
+    <tbody>
+      <tr>
+        <td>{{ 'pages.clusters.details.nodePools.createorupdate.form.name' | translate }}</td>
+        <td class="text-lg">{{ nodepoolForm?.get('name')?.value }}</td>
+      </tr>
+      <tr>
+        <td>{{ 'pages.clusters.details.nodePools.createorupdate.form.machineClass' | translate }}</td>
+        <td class="text-lg">{{ nodepoolForm?.get('name')?.value }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="border-1 border-gray-400 bg-black">
+  <pre>{{ nodepoolForm?.value | json }}</pre>
+</div>

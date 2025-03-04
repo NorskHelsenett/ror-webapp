@@ -835,7 +835,29 @@
               "osImage": "Image",
               "arch": "Arkitektur",
               "cpu": "CPU",
-              "mem": "MEM"
+              "cores": "Kjerner",
+              "mem": "MEM",
+              "nodeCount": "Antall noder"
+            }
+          },
+          "createorupdate": {
+            "createTitle": "Lag nodegruppe",
+            "updateTitle": "Oppdater nodegruppe",
+            "form": {
+              "name": "Navn",
+              "nameError": "Navn mangler, eller ugyldige tegn",
+              "machineClass": "Maskinklasse",
+              "machineClassError": "Maskinklasse mangler",
+              "autoScale": "Autoskalering",
+              "autoScaleDescription": "Clusteret kan automatisk skalere opp og ned basert på last, prisen vil variere basert antall noder",
+              "autoScaleError": "Mangler autoskalering",
+              "minNodes": "Min antall noder",
+              "minNodesError": "Mangler min antall noder",
+              "maxNodes": "Maks antall noder",
+              "maxNodesError": "Mangler maks antall noder"
+            },
+            "summary": {
+              "title": "Oppsummering"
             }
           }
         },
