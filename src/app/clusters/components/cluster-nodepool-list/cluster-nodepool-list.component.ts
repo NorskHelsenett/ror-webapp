@@ -8,6 +8,7 @@ import { SharedModule } from '../../../shared/shared.module';
 import { ButtonModule } from 'primeng/button';
 import { ClusterNodeListComponent } from '../cluster-node-list/cluster-node-list.component';
 import { ClusterNodepoolCreateorupdateComponent } from '../cluster-nodepool-createorupdate/cluster-nodepool-createorupdate.component';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-cluster-nodepool-list',
@@ -28,12 +29,14 @@ import { ClusterNodepoolCreateorupdateComponent } from '../cluster-nodepool-crea
 })
 export class ClusterNodepoolListComponent implements OnInit, OnDestroy {
   @Input() nodepools: any[] = [];
+  @Input() cluster: any;
   showNodepoolEditor: boolean = false;
   rows = 10;
   rowsPerPage: number[] = [10, 20, 50];
   selectedNodepool: any | undefined;
 
   private configService = inject(ConfigService);
+  private messageService = inject(MessageService);
   private changeDetector = inject(ChangeDetectorRef);
 
   constructor() {}
@@ -49,5 +52,13 @@ export class ClusterNodepoolListComponent implements OnInit, OnDestroy {
     this.selectedNodepool = nodePool;
     this.showNodepoolEditor = !this.showNodepoolEditor;
     this.changeDetector.detectChanges();
+  }
+
+  deleteNodepool(nodePool: any): void {
+    console.log('Nodepool deleted', nodePool);
+    this.messageService.add({ severity: 'success', summary: 'Nodepool deleted', detail: 'Nodepool deleted successfully' });
+
+    const newlist = this.cluster?.topology?.nodePools.filter((np: any) => np?.name !== nodePool?.name);
+    this.cluster.topology.nodePools = newlist;
   }
 }

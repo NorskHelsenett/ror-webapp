@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { ClusterService } from '../../services';
 import { JsonPipe } from '@angular/common';
@@ -16,6 +16,7 @@ import { ClusterNodepoolListComponent } from '../../components/cluster-nodepool-
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ClusterNodepoolsComponent implements OnInit, OnDestroy {
+  @Input() cluster: any;
   prices: Price[];
 
   private clusterService = inject(ClusterService);

@@ -867,7 +867,7 @@
               "tags": "Tags",
               "tagsHelp": "Additional tags for node pool?",
               "tagsError": "Missing tags",
-              "labels": "Labels",
+              "labels": "Node labels",
               "labelList": "Label list",
               "labelsHelp": "Additional labels for node pool?",
               "labelsError": "Missing labels",
@@ -875,9 +875,18 @@
               "deleteLabel": "Delete label",
               "labelKey": "Key",
               "labelKeyError": "Key is missing or invalid characters",
+              "labelKeyExists": "Key already exists",
               "labelValue": "Value",
               "labelValueError": "Value is missing or invalid characters",
-              "submitLabel": "Add"
+              "submitLabel": "Add",
+              "create": "Create",
+              "createSuccess": "Node pool created successfully",
+              "createError": "Error when creating node pool",
+              "update": "Update",
+              "updateSuccess": "Node pool updated successfully",
+              "updateError": "Error when updating node pool",
+              "success": "Success",
+              "error": "Error"
             },
             "summary": {
               "title": "Summary"

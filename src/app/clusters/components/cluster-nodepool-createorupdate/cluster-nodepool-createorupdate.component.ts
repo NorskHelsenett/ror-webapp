@@ -1,24 +1,25 @@
 import { ProviderFeaturesService } from './../../../core/services/provider-features.service';
 import { NodepoolService } from './../../services/nodepool.service';
 import { ChangeDetectorRef, Component, EventEmitter, inject, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { catchError, finalize, map, Subscription } from 'rxjs';
-import { TranslateModule } from '@ngx-translate/core';
+import { catchError, finalize, map, min, Subscription } from 'rxjs';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ClusterService } from '../../services';
 import { TableModule } from 'primeng/table';
 import { PriceService } from '../../../core/services/price.service';
 import { Price } from '../../../core/models/price';
 import { SharedModule } from '../../../shared/shared.module';
-import { CommonModule, JsonPipe, LowerCasePipe, TitleCasePipe } from '@angular/common';
+import { CommonModule, LowerCasePipe, TitleCasePipe } from '@angular/common';
 import { ConfigService } from '../../../core/services/config.service';
 import { ProviderComponent } from '../../../shared/components/provider/provider.component';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { ClusterNodepoolCreateorupdateSummaryComponent } from '../cluster-nodepool-createorupdate-summary/cluster-nodepool-createorupdate-summary.component';
 import { CheckboxModule } from 'primeng/checkbox';
 import { Label } from '../../../core/models/label';
-import { uniqueNamesGenerator, Config, adjectives, colors, animals } from 'unique-names-generator';
+import { uniqueNamesGenerator, Config, adjectives, colors, animals, names } from 'unique-names-generator';
 import { DropdownModule } from 'primeng/dropdown';
-import { uniquePropertyValidator } from '../../../shared/validators/uniquePropertyValidator';
+import { Resourcesv2Service } from '../../../core/services/resourcesv2.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-cluster-nodepool-createorupdate',
@@ -34,7 +35,6 @@ import { uniquePropertyValidator } from '../../../shared/validators/uniqueProper
     InputNumberModule,
     FormsModule,
     ClusterNodepoolCreateorupdateSummaryComponent,
-    JsonPipe,
     CheckboxModule,
     DropdownModule,
     CommonModule,
@@ -52,16 +52,28 @@ export class ClusterNodepoolCreateorupdateComponent implements OnInit, OnDestroy
   get nodepool(): any | undefined {
     return this.nodePool;
   }
+  @Input() cluster: any;
+
+  private clusterService = inject(ClusterService);
+  private configService = inject(ConfigService);
+  private priceService = inject(PriceService);
+  private changeDetector = inject(ChangeDetectorRef);
+  private formbuilder = inject(FormBuilder);
+  private messageService = inject(MessageService);
+  private providerFeaturesService = inject(ProviderFeaturesService);
+  private resourceV2Service = inject(Resourcesv2Service);
+  private nodepoolService = inject(NodepoolService);
+  private translateService = inject(TranslateService);
 
   @Output() close = new EventEmitter<void>();
 
   clusterId: string | undefined;
+
   nodePoolId: string | undefined;
   nodePool: any | undefined;
   prices: Price[] = [];
   rows: number = 10;
   rowsPerPage: number[] = [10, 20, 50];
-  labels: Label[] = [];
   tags: string[] = [];
 
   nodepoolForm: FormGroup = this.nodepoolService?.nodepoolForm;
@@ -71,17 +83,12 @@ export class ClusterNodepoolCreateorupdateComponent implements OnInit, OnDestroy
 
   pricesFetchError: any;
   showLabelEdit: boolean = false;
+  maxNodes: number = 10;
 
   get labelsArray(): any {
     return this.nodepoolForm?.get('labels');
   }
 
-  private clusterService = inject(ClusterService);
-  private configService = inject(ConfigService);
-  private priceService = inject(PriceService);
-  private changeDetector = inject(ChangeDetectorRef);
-  private formbuilder = inject(FormBuilder);
-  private providerFeaturesService = inject(ProviderFeaturesService);
   private subscriptions = new Subscription();
   private customConfig: Config = {
     dictionaries: [adjectives, colors],
@@ -92,7 +99,7 @@ export class ClusterNodepoolCreateorupdateComponent implements OnInit, OnDestroy
   private labelPattern = /^[a-zA-Z0-9-_./]{1,63}$/;
   private labelValuePattern = /(([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9])?/;
 
-  constructor(private nodepoolService: NodepoolService) {}
+  constructor() {}
 
   ngOnInit(): void {
     this.rows = this.configService?.config?.rows;
@@ -104,18 +111,7 @@ export class ClusterNodepoolCreateorupdateComponent implements OnInit, OnDestroy
       autoScale: [false, [Validators.required]],
       minNodes: [1, [Validators.required]],
       maxNodes: [3, [Validators.required]],
-      labels: this.formbuilder.array(
-        [
-          // this.formbuilder.group(
-          //   {
-          //     key: ['', [Validators.required, Validators.pattern(this.labelPattern)]],
-          //     value: ['', [Validators.required, Validators.pattern(this.labelValuePattern)]],
-          //   },
-          //   { validators: [] },
-          // ),
-        ],
-        { validators: [] },
-      ),
+      labels: this.formbuilder.array([], { validators: [] }),
       tags: this.formbuilder.array([], { validators: [Validators.pattern(this.labelPattern)] }),
     });
 
@@ -189,14 +185,45 @@ export class ClusterNodepoolCreateorupdateComponent implements OnInit, OnDestroy
     if (!this.nodePool) {
       return;
     }
+
+    const nodeCount = this.nodePool?.nodes?.length;
+
     this.nodepoolForm?.patchValue({
       name: this.nodePool?.name,
+      minNodes: nodeCount,
+      autoScale: false,
+      maxNodes: this.nodePool?.maxNodes || this.maxNodes,
     });
   }
 
   addLabel(keyInput: HTMLInputElement, valueInput: HTMLInputElement): void {
     if (!keyInput?.value) {
+      this.messageService?.add({
+        severity: 'error',
+        summary: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.error'),
+        detail: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.labelKeyError'),
+      });
       return;
+    }
+
+    if (!valueInput?.value) {
+      this.messageService?.add({
+        severity: 'error',
+        summary: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.error'),
+        detail: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.labelValueError'),
+      });
+      return;
+    }
+
+    for (const label of this.nodepoolForm.get('labels')?.value) {
+      if (label?.key === keyInput.value) {
+        this.messageService?.add({
+          severity: 'error',
+          summary: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.error'),
+          detail: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.labelKeyExists'),
+        });
+        return;
+      }
     }
 
     (this.nodepoolForm.get('labels') as FormArray).push(
@@ -210,6 +237,7 @@ export class ClusterNodepoolCreateorupdateComponent implements OnInit, OnDestroy
     valueInput.value = '';
 
     keyInput.focus();
+    this.changeDetector.detectChanges();
   }
 
   removeLabel(label: FormControl): void {
@@ -239,29 +267,106 @@ export class ClusterNodepoolCreateorupdateComponent implements OnInit, OnDestroy
 
   submit(): void {
     if (this.nodepoolForm?.valid) {
-      //this.nodepoolService?.create(this.nodepoolForm?.value);
-      this.hide();
-    }
-  }
+      const nodePool = this.nodepoolForm?.value;
 
-  getMaxMinNodes(): number {
-    const minNodes = this.nodepoolForm?.get('minNodes')?.value;
-    const maxNodes = this.nodepoolForm?.get('maxNodes')?.value;
-    const autoScale = this.nodepoolForm?.get('autoScale')?.value;
-    return 10;
+      let nodes = [];
+      for (let i = 0; i < nodePool.minNodes; i++) {
+        let name = `${nodePool?.name}-${this.getRandomShortName()}`;
+        nodes.push({
+          name: name,
+          role: 'worker',
+          created: new Date(),
+          osImage: 'ACoolDistro',
+          machineName: name,
+          metrics: {
+            priceMonth: -1,
+            priceYear: -12,
+            cpu: 0,
+            memory: 0,
+            cpuConsumed: 0,
+            memoryConsumed: 0,
+            cpuPercentage: 0,
+            memoryPercentage: 0,
+            nodePoolCount: 0,
+            nodeCount: 0,
+            clusterCount: 0,
+          },
+          architecture: 'amd64',
+          containerRuntimeVersion: 'containerd://2.0.0',
+          kernelVersion: 'unknown',
+          kubeProxyVersion: 'unknown',
+          kubeletVersion: 'unknown',
+          operatingSystem: 'linux',
+          machineClass: nodePool?.price?.machineClass,
+        });
+      }
+
+      this.cluster?.topology?.nodePools?.push({
+        name: `${nodePool?.name}-${this.getRandomShortName()}`,
+        machineClass: nodePool?.price?.machineClass,
+        metrics: {
+          priceMonth: nodePool?.price?.price,
+          priceYear: nodePool?.price?.price * 12,
+          cpu: nodePool?.price?.cpu,
+          memory: nodePool?.price?.memory,
+          cpuConsumed: 0,
+          memoryConsumed: 0,
+          cpuPercentage: 0,
+          memoryPercentage: 0,
+          nodePoolCount: 0,
+          nodeCount: nodePool?.minNodes,
+          clusterCount: 0,
+        },
+        nodes: nodes,
+        minNodes: 1,
+      });
+
+      this.messageService?.add({
+        severity: 'success',
+        summary: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.success'),
+        detail: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.createSuccess'),
+      });
+      setTimeout(() => {
+        this.hide();
+      }, 100);
+    } else {
+      this.messageService?.add({
+        severity: 'error',
+        summary: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.error'),
+        detail: 'Form is invalid',
+      });
+    }
   }
 
   getMinMaxNodes(): number {
     const minNodes = this.nodepoolForm?.get('minNodes')?.value;
     const maxNodes = this.nodepoolForm?.get('maxNodes')?.value;
-    // const autoScale = this.nodepoolForm?.get('autoScale')?.value;
-    // if (!autoScale) {
-    //   return 10;
-    // }
     return minNodes;
   }
 
+  minNodesChanged(event: any): void {
+    const minNodes = this.nodepoolForm?.get('minNodes')?.value;
+    const maxNodes = this.nodepoolForm?.get('maxNodes')?.value;
+    if (minNodes > maxNodes) {
+      this.nodepoolForm?.get('maxNodes')?.setValue(minNodes);
+    }
+    this.changeDetector.detectChanges();
+  }
+
   autoscaleChanged(event: any): void {
+    if (event?.checked) {
+      const minNodes = this.nodepoolForm?.get('minNodes')?.value;
+      const maxNodes = this.nodepoolForm?.get('maxNodes')?.value;
+      if (maxNodes !== 0) {
+        let mxNodes = minNodes + 1;
+        if (mxNodes > this.maxNodes) {
+          mxNodes = this.maxNodes;
+        }
+        this.nodepoolForm?.get('maxNodes')?.setValue(mxNodes);
+      } else {
+        this.nodepoolForm?.get('maxNodes')?.setValue(this.maxNodes);
+      }
+    }
     this.changeDetector.detectChanges();
   }
 
@@ -273,14 +378,26 @@ export class ClusterNodepoolCreateorupdateComponent implements OnInit, OnDestroy
     return randomName;
   }
 
+  private getRandomShortName(): string {
+    const randomName = uniqueNamesGenerator({
+      dictionaries: [names],
+    });
+    return randomName;
+  }
+
   private setDefaultPrice(): void {
-    if (this.prices.length > 0) {
-      this.selectedPrice = this.prices.find((price) => price.machineClass.includes('medium'));
-      // this.nodepoolForm?.patchValue({
-      //   price: this.selectedPrice?.machineClass,
-      // });
-      this.nodepoolForm?.get('price')?.setValue(this.selectedPrice);
-      this.changeDetector.detectChanges();
+    if (!this.prices || this.prices?.length === 0) {
+      return;
     }
+
+    this.selectedPrice = this.prices.find((price: Price) => price?.machineClass?.includes('medium'));
+    this.nodepoolForm?.get('price')?.setValue(this.selectedPrice);
+
+    if (this.nodePool) {
+      this.selectedPrice = this.prices.find((price: Price) => price?.machineClass === this.nodePool?.machineClass);
+      this.nodepoolForm?.get('price')?.setValue(this.selectedPrice);
+    }
+
+    this.changeDetector.detectChanges();
   }
 }

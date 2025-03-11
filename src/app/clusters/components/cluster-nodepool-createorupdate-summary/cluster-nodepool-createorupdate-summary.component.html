@@ -41,7 +41,7 @@
             <div class="flex gap-3">
               <span>{{ nodepoolForm?.get('minNodes')?.value }} nodes </span>
               <span>*</span>
-              <span>{{ nodepoolForm?.get('price')?.value?.price | currency: 'NOK' : 'symbol' : '4.2-2' : 'no' }}</span>
+              <span>{{ nodepoolForm?.get('price')?.value?.price | currency: 'NOK' : 'symbol-narrow' : '4.2-2' : 'no' }}</span>
             </div>
           </td>
         }
@@ -50,26 +50,36 @@
         <tr>
           <td class="align-top">{{ 'pages.clusters.details.nodePools.createorupdate.form.estimatedPricePrMonth' | translate }}</td>
           <td>
-            <div class="flex gap-3">
-              <span class="font-bold"
+            <div class="flex gap-3 font-bold">
+              <span
                 >{{
-                  nodepoolForm?.get('price')?.value?.price * nodepoolForm?.get('minNodes')?.value | currency: 'NOK' : 'symbol' : '4.2-2' : 'no'
+                  nodepoolForm?.get('price')?.value?.price * nodepoolForm?.get('minNodes')?.value | currency: 'NOK' : 'symbol-narrow' : '4.2-2' : 'no'
                 }}
-                NOK</span
-              >
+              </span>
+              <span>-</span>
+              <span>{{
+                nodepoolForm?.get('price')?.value?.price * nodepoolForm?.get('maxNodes')?.value | currency: 'NOK' : 'symbol-narrow' : '4.2-2' : 'no'
+              }}</span>
             </div>
           </td>
         </tr>
         <tr>
           <td class="align-top">{{ 'pages.clusters.details.nodePools.createorupdate.form.estimatedPricePrYear' | translate }}</td>
           <td>
-            <div class="flex gap-3">
-              <span class="font-bold"
+            <div class="flex gap-3 font-bold">
+              <span
                 >{{
-                  nodepoolForm?.get('price')?.value?.price * nodepoolForm?.get('minNodes')?.value * 12 | currency: 'NOK' : 'symbol' : '4.2-2' : 'no'
+                  nodepoolForm?.get('price')?.value?.price * nodepoolForm?.get('minNodes')?.value * 12
+                    | currency: 'NOK' : 'symbol-narrow' : '4.2-2' : 'no'
                 }}
-                NOK</span
-              >
+              </span>
+              <span>-</span>
+              <span
+                >{{
+                  nodepoolForm?.get('price')?.value?.price * nodepoolForm?.get('maxNodes')?.value * 12
+                    | currency: 'NOK' : 'symbol-narrow' : '4.2-2' : 'no'
+                }}
+              </span>
             </div>
           </td>
         </tr>
@@ -77,26 +87,25 @@
         <tr>
           <td class="align-top">{{ 'pages.clusters.details.nodePools.createorupdate.form.estimatedPricePrMonth' | translate }}</td>
           <td>
-            <div class="flex gap-3">
-              <span class="font-bold"
+            <div class="flex gap-3 font-bold">
+              <span
                 >{{
-                  nodepoolForm?.get('price')?.value?.price * nodepoolForm?.get('minNodes')?.value | currency: 'NOK' : 'symbol' : '4.2-2' : 'no'
+                  nodepoolForm?.get('price')?.value?.price * nodepoolForm?.get('minNodes')?.value | currency: 'NOK' : 'symbol-narrow' : '4.2-2' : 'no'
                 }}
-                NOK</span
-              >
+              </span>
             </div>
           </td>
         </tr>
         <tr>
           <td class="align-top">{{ 'pages.clusters.details.nodePools.createorupdate.form.estimatedPricePrYear' | translate }}</td>
           <td>
-            <div class="flex gap-3">
-              <span class="font-bold"
+            <div class="flex gap-3 font-bold">
+              <span
                 >{{
-                  nodepoolForm?.get('price')?.value?.price * nodepoolForm?.get('minNodes')?.value * 12 | currency: 'NOK' : 'symbol' : '4.2-2' : 'no'
+                  nodepoolForm?.get('price')?.value?.price * nodepoolForm?.get('minNodes')?.value * 12
+                    | currency: 'NOK' : 'symbol-narrow' : '4.2-2' : 'no'
                 }}
-                NOK</span
-              >
+              </span>
             </div>
           </td>
         </tr>

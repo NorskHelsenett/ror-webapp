@@ -7,7 +7,7 @@
       <div class="p-4">
         <div class="">
           <div class="overflow-x-auto">
-            <app-cluster-nodepool-list [nodepools]="getCluster()?.topology?.nodePools"></app-cluster-nodepool-list>
+            <app-cluster-nodepool-list [cluster]="cluster" [nodepools]="getCluster()?.topology?.nodePools"></app-cluster-nodepool-list>
           </div>
         </div>
       </div>

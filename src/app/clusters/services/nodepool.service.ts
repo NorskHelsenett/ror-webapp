@@ -6,4 +6,8 @@ import { FormGroup } from '@angular/forms';
 })
 export class NodepoolService {
   public nodepoolForm: FormGroup | undefined;
+
+  create(): void {}
+
+  update(): void {}
 }

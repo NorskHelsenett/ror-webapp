@@ -62,12 +62,21 @@
           <td>{{ nodepool?.metrics?.cpu }}</td>
           <td>{{ nodepool?.metrics?.memory | formatBytes: 2 : true }}</td>
           <td>
-            <button
-              (click)="toggleNodepoolEditor(nodepool)"
-              class="focus:ring-primary dark:focus:ring-offset-dark ml-2 rounded-md bg-green-700 px-4 py-2 text-sm text-white hover:bg-green-500 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
-            >
-              {{ 'common.edit' | translate }}
-            </button>
+            <div class="flex gap-3">
+              <button
+                (click)="toggleNodepoolEditor(nodepool)"
+                class="focus:ring-primary dark:focus:ring-offset-dark ml-2 rounded-md bg-green-700 px-4 py-2 text-sm text-white hover:bg-green-500 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+              >
+                {{ 'common.edit' | translate }}
+              </button>
+              <button
+                (click)="deleteNodepool(nodepool)"
+                [disabled]="nodepools?.length === 1"
+                class="focus:ring-primary dark:focus:ring-offset-dark ml-2 rounded-md bg-red-700 px-4 py-2 text-sm text-white hover:bg-red-500 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white disabled:bg-slate-700 disabled:text-gray-100"
+              >
+                {{ 'common.delete' | translate }}
+              </button>
+            </div>
           </td>
         </tr>
       </ng-template>
@@ -90,5 +99,9 @@
     </p-table>
   </div>
 } @else {
-  <app-cluster-nodepool-createorupdate (close)="toggleNodepoolEditor()" [nodepool]="selectedNodepool"></app-cluster-nodepool-createorupdate>
+  <app-cluster-nodepool-createorupdate
+    (close)="toggleNodepoolEditor()"
+    [cluster]="cluster"
+    [nodepool]="selectedNodepool"
+  ></app-cluster-nodepool-createorupdate>
 }
