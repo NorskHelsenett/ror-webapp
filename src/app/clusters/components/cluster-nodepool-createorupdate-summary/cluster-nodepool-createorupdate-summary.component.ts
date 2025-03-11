@@ -1,17 +1,16 @@
-import { JsonPipe } from '@angular/common';
+import { CurrencyPipe, JsonPipe, TitleCasePipe } from '@angular/common';
 import { NodepoolService } from './../../services/nodepool.service';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import { Subscription } from 'rxjs';
+import { SharedModule } from '../../../shared/shared.module';
 
 @Component({
   selector: 'app-cluster-nodepool-createorupdate-summary',
   standalone: true,
-  imports: [TranslateModule, JsonPipe],
+  imports: [TranslateModule, JsonPipe, TitleCasePipe, SharedModule, CurrencyPipe],
   templateUrl: './cluster-nodepool-createorupdate-summary.component.html',
   styleUrl: './cluster-nodepool-createorupdate-summary.component.scss',
-  //changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ClusterNodepoolCreateorupdateSummaryComponent implements OnInit, OnDestroy {
   private changeDetector = inject(ChangeDetectorRef);

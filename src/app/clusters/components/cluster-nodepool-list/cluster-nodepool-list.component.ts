@@ -1,7 +1,7 @@
 import { NodePool } from './../../../core/models/clusterOrder';
 import { LowerCasePipe, TitleCasePipe } from '@angular/common';
 import { ConfigService } from './../../../core/services/config.service';
-import { Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Input, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { TableModule } from 'primeng/table';
 import { SharedModule } from '../../../shared/shared.module';
@@ -24,6 +24,7 @@ import { ClusterNodepoolCreateorupdateComponent } from '../cluster-nodepool-crea
   ],
   templateUrl: './cluster-nodepool-list.component.html',
   styleUrl: './cluster-nodepool-list.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ClusterNodepoolListComponent implements OnInit, OnDestroy {
   @Input() nodepools: any[] = [];
@@ -33,6 +34,7 @@ export class ClusterNodepoolListComponent implements OnInit, OnDestroy {
   selectedNodepool: any | undefined;
 
   private configService = inject(ConfigService);
+  private changeDetector = inject(ChangeDetectorRef);
 
   constructor() {}
 
@@ -46,5 +48,6 @@ export class ClusterNodepoolListComponent implements OnInit, OnDestroy {
   toggleNodepoolEditor(nodePool?: any): void {
     this.selectedNodepool = nodePool;
     this.showNodepoolEditor = !this.showNodepoolEditor;
+    this.changeDetector.detectChanges();
   }
 }

@@ -21,86 +21,77 @@
     </button>
   </div>
 </div>
-<div class="grid grid-cols-3 gap-4 mt-4">
+<div class="grid grid-cols-3 mt-4">
   <div class="col-span-2">
     <div class="overflow-x-auto">
-      <form [formGroup]="nodepoolForm" class="">
-        <div class="mb-3">
+      <form [formGroup]="nodepoolForm" class="flex flex-col gap-5">
+        <div class="mb-3 border-solid border-2 border-gray-600 p-5 rounded-lg">
           <div class="">
-            <h5>{{ 'pages.clusters.details.nodePools.createorupdate.form.name' | translate }}</h5>
+            <span class="text-lg font-bold">{{ 'pages.clusters.details.nodePools.createorupdate.form.name' | translate }}</span>
             <div class="flex flex-col">
-              <input
-                class="p-inputtext-lg border text-lg w-1/3 sm:w-full md:w-1/3"
-                type="text"
-                pInputText
-                formControlName="name"
-                [autofocus]="true"
-              />
+              <div class="flex flex-row gap-4">
+                <input
+                  class="p-inputtext-lg border text-lg w-1/3 sm:w-full md:w-1/3"
+                  type="text"
+                  pInputText
+                  formControlName="name"
+                  [autofocus]="true"
+                />
+                <button (click)="proposeNewName()" type="button" class="flex gap-2 p-3">
+                  <i class="pi pi-replay"></i> {{ 'pages.clusters.details.nodePools.createorupdate.form.nameRandom' | translate }}
+                </button>
+              </div>
               @if (nodepoolForm.get('name').errors && nodepoolForm.get('name').touched && nodepoolForm.get('name').dirty) {
                 <span class="text-red-400">{{ 'pages.clusters.details.nodePools.createorupdate.form.nameError' | translate }} </span>
               }
             </div>
           </div>
         </div>
-        <div class="mb-3 w-full">
+        <div class="mb-3 w-full border-solid border-2 border-gray-600 p-5 rounded-lg">
           <div class="">
-            <h5>{{ 'pages.clusters.details.nodePools.createorupdate.form.machineClass' | translate }}</h5>
+            <span class="text-lg font-bold">{{ 'pages.clusters.details.nodePools.createorupdate.form.machineClass' | translate }}</span>
             <div class="flex flex-col">
-              <p-table
-                class="w-full"
-                [value]="prices"
-                [rows]="rows"
-                [paginator]="false"
-                [rowsPerPageOptions]="rowsPerPage"
+              <p-dropdown
+                [options]="prices"
+                placeholder="{{ 'pages.clusters.details.nodePools.createorupdate.form.machineClassPlaceholder' | translate }}"
+                optionLabel="machineClass"
+                [showClear]="true"
                 formControlName="price"
-                [rowHover]="true"
-                responsiveLayout="stack"
-                [totalRecords]="prices?.length"
-                [reorderableColumns]="true"
+                [filter]="true"
+                filterBy="machineClass"
                 dataKey="id"
-                [showCurrentPageReport]="true"
-                selectionMode="single"
-                [(selection)]="selectedPrice"
-                (selectionChange)="onPriceSelected($event)"
-                currentPageReportTemplate="{{ 'common.showing' | translate }} {first} {{ 'common.to' | translate | lowercase }} {last} {{
-                  'common.of' | translate | lowercase
-                }} {totalRecords} {{ 'common.entries' | translate | lowercase }}"
+                (onChange)="onPriceChange($event)"
+                [autofocus]="true"
               >
-                <ng-template pTemplate="header">
-                  <tr>
-                    <th pSortableColumn="name" class="p-1">
-                      {{ 'pages.prices.table.column.machineClass' | translate }} <p-sortIcon field="machineClass"></p-sortIcon>
-                    </th>
-                    <th pSortableColumn="machineClass" class="p-1">
-                      {{ 'pages.prices.table.column.price' | translate }} <p-sortIcon field="price"></p-sortIcon>
-                    </th>
-                    <th pSortableColumn="metrics.nodeCount" class="p-1">
-                      {{ 'pages.prices.table.column.cpu' | translate }} <p-sortIcon field="cpu"></p-sortIcon>
-                    </th>
-                    <th pSortableColumn="metrics.cpu" class="p-1">
-                      {{ 'pages.prices.table.column.memory' | translate }} <p-sortIcon field="memory"></p-sortIcon>
-                    </th>
-                    <th pSortableColumn="metrics.memory" class="p-1">
-                      {{ 'pages.prices.table.column.provider' | translate }} <p-sortIcon field="provider"></p-sortIcon>
-                    </th>
-                  </tr>
+                <ng-template let-price pTemplate="item">
+                  <div class="flex flex-col w-[500px] gap-1">
+                    <span class="text-lg">{{ price?.machineClass | titlecase }}</span>
+                    <span class="text-sm truncate block"
+                      >{{ 'pages.clusters.details.nodePools.createorupdate.form.cpu' | translate }}: {{ price?.cpu }}</span
+                    >
+                    <span class="text-sm truncate block"
+                      >{{ 'pages.clusters.details.nodePools.createorupdate.form.memory' | translate }}: {{ price?.memory }} Gb</span
+                    >
+                    <span class="text-sm truncate block"
+                      >{{ 'pages.clusters.details.nodePools.createorupdate.form.pricePrNode' | translate }}: {{ price?.price }} NOK</span
+                    >
+                  </div>
                 </ng-template>
-                <ng-template pTemplate="body" let-price let-expanded="expanded" let-rowIndex="rowIndex">
-                  <tr [pSelectableRow]="price">
-                    <td>{{ price?.machineClass | titlecase }}</td>
-                    <td>{{ price?.price }}</td>
-                    <td>{{ price?.cpu }}</td>
-                    <td>{{ price?.memory }}</td>
-                    <td><app-provider [providerTypeOrName]="price?.provider"></app-provider></td>
-                  </tr>
-                </ng-template>
+                <ng-template let-price pTemplate="selectedItem">
+                  <div class="flex flex-row w-[500px] gap-1">
+                    <span class="text-lg">{{ price?.machineClass | titlecase }}</span>
 
-                <ng-template pTemplate="emptymessage">
-                  <tr>
-                    <td colspan="6">{{ 'common.emptyList' | translate }}</td>
-                  </tr>
+                    <span class="text-sm mt-1">({{ 'pages.clusters.details.nodePools.createorupdate.form.cpu' | translate }}: {{ price?.cpu }}</span>
+                    <span class="text-sm mt-1"
+                      >{{ 'pages.clusters.details.nodePools.createorupdate.form.memory' | translate }}: {{ price?.memory }} Gb</span
+                    >
+                    <span class="text-sm mt-1"
+                      >{{ 'pages.clusters.details.nodePools.createorupdate.form.price' | translate }}: {{ price?.price }} NOK)</span
+                    >
+                  </div>
                 </ng-template>
-              </p-table>
+              </p-dropdown>
+
               @if (nodepoolForm.get('price').errors && nodepoolForm.get('price').touched && nodepoolForm.get('price').dirty) {
                 <span class="text-red-400">{{ 'pages.clusters.details.nodePools.createorupdate.form.machineClassError' | translate }} </span>
               }
@@ -108,12 +99,18 @@
           </div>
         </div>
 
-        <div class="mb-3">
+        <div class="mb-3 border-solid border-2 border-gray-600 p-5 rounded-lg">
           <div class="">
             <div>
               <div class="flex flex-row gap-4">
-                <p-checkbox [binary]="true" formControlName="autoScale" inputId="override-checkbox"></p-checkbox>
-                <span>{{ 'pages.clusters.details.nodePools.createorupdate.form.autoScale' | translate }}</span>
+                <p-checkbox
+                  class="ml-1"
+                  [binary]="true"
+                  formControlName="autoScale"
+                  inputId="override-checkbox"
+                  (onChange)="autoscaleChanged($event)"
+                ></p-checkbox>
+                <span class="text-lg font-bold">{{ 'pages.clusters.details.nodePools.createorupdate.form.autoScale' | translate }}</span>
               </div>
               <div>
                 {{ 'pages.clusters.details.nodePools.createorupdate.form.autoScaleDescription' | translate }}
@@ -123,9 +120,10 @@
               }
             </div>
 
-            <div class="mt-4">
+            <div class="mb-3">
               <div class="flex flex-row gap-4">
-                <div class="">
+                <div class="flex flex-col gap-4">
+                  <span class="">{{ 'pages.clusters.details.nodePools.createorupdate.form.minNodes' | translate }}</span>
                   <p-inputNumber
                     [format]="false"
                     [showButtons]="true"
@@ -137,7 +135,7 @@
                     formControlName="minNodes"
                     styleClass="bg-green-600"
                     [min]="1"
-                    [max]="nodepoolForm?.get('maxNodes')?.value || 10"
+                    [max]="getMaxMinNodes()"
                     [size]="1"
                     [allowEmpty]="false"
                   >
@@ -147,7 +145,8 @@
                   }
                 </div>
                 @if (nodepoolForm.get('autoScale').value) {
-                  <div class="">
+                  <div class="flex flex-col gap-4">
+                    <span>{{ 'pages.clusters.details.nodePools.createorupdate.form.maxNodes' | translate }}</span>
                     <p-inputNumber
                       [format]="false"
                       [showButtons]="true"
@@ -158,7 +157,7 @@
                       inputStyleClass=""
                       styleClass="bg-green-600"
                       formControlName="maxNodes"
-                      [min]="nodepoolForm?.get('minNodes')?.value || 1"
+                      [min]="getMinMaxNodes()"
                       [max]="10"
                       [size]="1"
                       [allowEmpty]="false"
@@ -173,12 +172,109 @@
             </div>
           </div>
         </div>
+
+        <div class="mb-3 border-solid border-2 border-gray-600 p-5 rounded-lg">
+          <div class="">
+            <span class="text-lg font-bold">{{ 'pages.clusters.details.nodePools.createorupdate.form.labels' | translate }}</span>
+            <table class="mt-2 w-3/4">
+              <thead>
+                <tr>
+                  <th class="w-1/3 text-left">{{ 'pages.clusters.details.nodePools.createorupdate.form.labelKey' | translate }}</th>
+                  <th class="w-1/3 text-left">{{ 'pages.clusters.details.nodePools.createorupdate.form.labelValue' | translate }}</th>
+                  <th class="w-1/3"></th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <ng-container formArrayName="labels">
+                  <ng-container *ngFor="let labelForm of labelsArray?.controls; let i = index">
+                    <tr [formGroupName]="i">
+                      <td>
+                        <div class="text-lg">{{ labelForm?.value?.key }}</div>
+                      </td>
+                      <td>
+                        <div class="text-lg">{{ labelForm?.value?.value }}</div>
+                      </td>
+                      <td>
+                        <button
+                          (click)="removeLabel(labelForm)"
+                          class="hover:bg-red-500 focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-red-700 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+                        >
+                          <i class="pi pi-trash"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  </ng-container>
+                </ng-container>
+              </tbody>
+            </table>
+            @if (nodepoolForm.get('labels').errors && nodepoolForm.get('labels').touched && nodepoolForm.get('labels').dirty) {
+              <span class="text-red-400">{{ 'pages.clusters.details.nodePools.createorupdate.form.labelsError' | translate }} </span>
+            }
+          </div>
+          <div class="mt-3">
+            <form [formGroup]="labelForm">
+              <div class="flex gap-4">
+                <div class="flex flex-col gap-4 w-1/3">
+                  <input
+                    class="p-inputtext-lg border text-lg rounded-lg"
+                    type="text"
+                    placeholder="{{ 'pages.clusters.details.nodePools.createorupdate.form.labelKey' | translate }}"
+                    pInputText
+                    formControlName="key"
+                    [autofocus]="true"
+                    #labelKeyElement
+                    (keyup.enter)="labelValueElement.focus()"
+                  />
+                  @if (labelForm.get('key').errors && labelForm.get('key').touched && labelForm.get('key').dirty && !labelForm.get('key').pristine) {
+                    <span class="text-red-400">{{ 'pages.clusters.details.nodePools.createorupdate.form.labelKeyError' | translate }} </span>
+                  }
+                </div>
+                <div class="flex flex-col gap-4 w-1/3">
+                  <input
+                    class="p-inputtext-lg border text-lg rounded-lg"
+                    type="text"
+                    placeholder="{{ 'pages.clusters.details.nodePools.createorupdate.form.labelValue' | translate }}"
+                    pInputText
+                    formControlName="value"
+                    [autofocus]="true"
+                    #labelValueElement
+                    (keyup.enter)="addLabel(labelKeyElement, labelValueElement)"
+                  />
+                  @if (
+                    labelForm.get('value').errors &&
+                    labelForm.get('value').touched &&
+                    labelForm.get('value').dirty &&
+                    !labelForm.get('value').pristine
+                  ) {
+                    <span class="text-red-400">{{ 'pages.clusters.details.nodePools.createorupdate.form.labelValueError' | translate }} </span>
+                  }
+                </div>
+                <div>
+                  <button
+                    [disabled]="!labelForm.valid"
+                    (click)="addLabel(labelKeyElement, labelValueElement)"
+                    class="hover:bg-primary-dark disabled:bg-gray-600 focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-blue-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+                  >
+                    {{ 'pages.clusters.details.nodePools.createorupdate.form.submitLabel' | translate }}
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
       </form>
     </div>
   </div>
-  <div class="">
+  <div class="border-solid border-2 border-gray-600 p-5 rounded-lg ml-3">
     <app-cluster-nodepool-createorupdate-summary [nodepoolForm]="nodepoolForm"></app-cluster-nodepool-createorupdate-summary>
   </div>
 </div>
-
-<!-- <pre>{{ nodepoolForm?.value | json }}</pre> -->
+<!--
+<code>
+  <pre class="bg-black mb-2">{{ nodepoolForm?.value | json }}</pre>
+  <div class="bg-black mb-2" *ngFor="let control of nodepoolForm?.controls | keyvalue; let i = index">
+    <span>{{ i }}</span>
+    <pre>{{ control.value.errors | json }}</pre>
+  </div>
+</code> -->
