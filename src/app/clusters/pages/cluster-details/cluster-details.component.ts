@@ -152,17 +152,11 @@ export class ClusterDetailsComponent implements OnInit, OnDestroy, AfterContentI
 
   setSelectedTab(): void {
     const tab = this.route.snapshot.queryParams['tab'];
-    // this.tabs.forEach((value: any, index: number) => {
-    //   if (tab == value?.metadata) {
-    //       this.selectedTabIndex = index;
-    //     }
-    //   });
     for (let index = 0; index < this.tabs.length; index++) {
       const element = this.tabs[index];
 
       if (tab == element?.metadata) {
         this.selectedTabIndex = index;
-        console.log('selectedTabIndex', this.selectedTabIndex);
         break;
       }
     }

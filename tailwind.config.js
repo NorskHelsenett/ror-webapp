@@ -15,5 +15,8 @@ module.exports = {
     {
       pattern: /hljs+/,
     },
+    {
+      pattern: /bg-[\w-]+-[50-900]/,
+    },
   ],
 };

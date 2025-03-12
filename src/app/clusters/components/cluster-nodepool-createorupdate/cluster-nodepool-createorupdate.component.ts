@@ -1,7 +1,7 @@
 import { ProviderFeaturesService } from './../../../core/services/provider-features.service';
 import { NodepoolService } from './../../services/nodepool.service';
 import { ChangeDetectorRef, Component, EventEmitter, inject, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { catchError, finalize, map, min, Subscription } from 'rxjs';
+import { catchError, finalize, map, Subscription } from 'rxjs';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ClusterService } from '../../services';
@@ -15,11 +15,12 @@ import { ProviderComponent } from '../../../shared/components/provider/provider.
 import { InputNumberModule } from 'primeng/inputnumber';
 import { ClusterNodepoolCreateorupdateSummaryComponent } from '../cluster-nodepool-createorupdate-summary/cluster-nodepool-createorupdate-summary.component';
 import { CheckboxModule } from 'primeng/checkbox';
-import { Label } from '../../../core/models/label';
 import { uniqueNamesGenerator, Config, adjectives, colors, animals, names } from 'unique-names-generator';
 import { DropdownModule } from 'primeng/dropdown';
 import { Resourcesv2Service } from '../../../core/services/resourcesv2.service';
 import { MessageService } from 'primeng/api';
+import * as CryptoJs from 'crypto-js';
+import { ColorService } from '../../../core/services/color.service';
 
 @Component({
   selector: 'app-cluster-nodepool-createorupdate',
@@ -64,6 +65,7 @@ export class ClusterNodepoolCreateorupdateComponent implements OnInit, OnDestroy
   private resourceV2Service = inject(Resourcesv2Service);
   private nodepoolService = inject(NodepoolService);
   private translateService = inject(TranslateService);
+  private colorService = inject(ColorService);
 
   @Output() close = new EventEmitter<void>();
 
@@ -74,10 +76,10 @@ export class ClusterNodepoolCreateorupdateComponent implements OnInit, OnDestroy
   prices: Price[] = [];
   rows: number = 10;
   rowsPerPage: number[] = [10, 20, 50];
-  tags: string[] = [];
 
   nodepoolForm: FormGroup = this.nodepoolService?.nodepoolForm;
   labelForm: FormGroup | undefined;
+  tagForm: FormGroup | undefined;
   nodepoolFetchError: any;
   selectedPrice: Price | undefined;
 
@@ -87,6 +89,10 @@ export class ClusterNodepoolCreateorupdateComponent implements OnInit, OnDestroy
 
   get labelsArray(): any {
     return this.nodepoolForm?.get('labels');
+  }
+
+  get tagsArray(): any {
+    return this.nodepoolForm?.get('tags');
   }
 
   private subscriptions = new Subscription();
@@ -102,6 +108,7 @@ export class ClusterNodepoolCreateorupdateComponent implements OnInit, OnDestroy
   constructor() {}
 
   ngOnInit(): void {
+    this.fetchPrices();
     this.rows = this.configService?.config?.rows;
     this.rowsPerPage = this.configService?.config?.rowsPerPage;
 
@@ -112,17 +119,22 @@ export class ClusterNodepoolCreateorupdateComponent implements OnInit, OnDestroy
       minNodes: [1, [Validators.required]],
       maxNodes: [3, [Validators.required]],
       labels: this.formbuilder.array([], { validators: [] }),
-      tags: this.formbuilder.array([], { validators: [Validators.pattern(this.labelPattern)] }),
+      tags: this.formbuilder.array([], { validators: [] }),
     });
+    this.nodepoolService.nodepoolForm = form;
+    this.nodepoolForm = form;
 
     this.labelForm = this.formbuilder.group({
       key: ['', [Validators.required, Validators.pattern(this.labelPattern)]],
       value: ['', [Validators.required, Validators.pattern(this.labelValuePattern)]],
     });
-    this.fetchPrices();
 
-    this.nodepoolService.nodepoolForm = form;
-    this.nodepoolForm = form;
+    this.tagForm = this.formbuilder.group({
+      key: ['', [Validators.required, Validators.pattern(this.labelPattern)]],
+      value: ['', [Validators.required, Validators.pattern(this.labelValuePattern)]],
+      color: ['', [Validators.required]],
+    });
+
     this.proposeNewName();
 
     if (this.nodePool) {
@@ -240,16 +252,60 @@ export class ClusterNodepoolCreateorupdateComponent implements OnInit, OnDestroy
     this.changeDetector.detectChanges();
   }
 
+  addTag(tagkeyInput: HTMLInputElement, tagvalueInput: HTMLInputElement): void {
+    if (!tagkeyInput?.value) {
+      this.messageService?.add({
+        severity: 'error',
+        summary: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.error'),
+        detail: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.tagKeyError'),
+      });
+      return;
+    }
+
+    if (!tagvalueInput?.value) {
+      this.messageService?.add({
+        severity: 'error',
+        summary: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.error'),
+        detail: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.tagValueError'),
+      });
+      return;
+    }
+
+    for (const tag of this.nodepoolForm.get('tags')?.value) {
+      if (tag?.key === tagkeyInput.value) {
+        this.messageService?.add({
+          severity: 'error',
+          summary: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.error'),
+          detail: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.labelKeyExists'),
+        });
+        return;
+      }
+    }
+
+    const colorHash = this.stringToSixCharHex(tagkeyInput.value);
+    let color = this.colorService.getHexColor(colorHash);
+
+    (this.nodepoolForm.get('tags') as FormArray).push(
+      this.formbuilder.group({
+        key: [tagkeyInput.value, [Validators.required, Validators.pattern(this.labelPattern)]],
+        value: [tagvalueInput.value, [Validators.required, Validators.pattern(this.labelValuePattern)]],
+        color: [color, [Validators.required]],
+      }),
+    );
+
+    tagkeyInput.value = '';
+    tagvalueInput.value = '';
+
+    tagkeyInput.focus();
+    this.changeDetector.detectChanges();
+  }
+
   removeLabel(label: FormControl): void {
     (this.nodepoolForm.get('labels') as FormArray).removeAt((this.nodepoolForm.get('labels') as FormArray).controls.indexOf(label));
   }
 
-  addTag(tag: string): void {
-    this.tags.push(tag);
-  }
-
-  removeTag(tag: string): void {
-    this.tags = this.tags.filter((t) => t !== tag);
+  removeTag(tag: FormControl): void {
+    (this.nodepoolForm.get('tags') as FormArray).removeAt((this.nodepoolForm.get('tags') as FormArray).controls.indexOf(tag));
   }
 
   getShortName(): string {
@@ -370,6 +426,10 @@ export class ClusterNodepoolCreateorupdateComponent implements OnInit, OnDestroy
     this.changeDetector.detectChanges();
   }
 
+  getColorFromHex(hex: string): string {
+    return this.colorService.getTailwindColorName(hex);
+  }
+
   private getRandomName(): string {
     const randomName: string = uniqueNamesGenerator({
       dictionaries: [adjectives, colors, animals],
@@ -399,5 +459,24 @@ export class ClusterNodepoolCreateorupdateComponent implements OnInit, OnDestroy
     }
 
     this.changeDetector.detectChanges();
+  }
+
+  private stringToSixCharHex(input: string): string {
+    // Convert string to a numeric hash
+    let hash = 0;
+    for (let i = 0; i < input.length; i++) {
+      const char = input.charCodeAt(i);
+      hash = (hash << 5) - hash + char;
+      hash = hash & hash; // Convert to 32bit integer
+    }
+
+    // Convert to hex and ensure positive value
+    const hex = (hash >>> 0).toString(16).toUpperCase();
+
+    // Pad or truncate to 6 characters
+    if (hex.length < 6) {
+      return hex.padStart(6, '0');
+    }
+    return hex.slice(0, 6);
   }
 }
