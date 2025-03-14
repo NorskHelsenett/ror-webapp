@@ -39,6 +39,8 @@ import { IngressComponent } from './pages/ingress/ingress.component';
 import { ClusterIngressTableComponent } from './components/cluster-ingress-table/cluster-ingress-table.component';
 import { ClusterResourceTableComponent } from './components/cluster-resource-table/cluster-resource-table.component';
 import { ClusterDescriptionComponent } from './components/cluster-description/cluster-description.component';
+import { ClusterNodepoolsComponent } from './pages/cluster-nodepools/cluster-nodepools.component';
+import { ClusterNodePoolsComponent } from './components/cluster-node-pools/cluster-node-pools.component';
 
 @NgModule({
   declarations: [ClustersComponent, ...clustersPages, ...clusterComponents],
@@ -79,6 +81,8 @@ import { ClusterDescriptionComponent } from './components/cluster-description/cl
     ClusterIngressTableComponent,
     ClusterResourceTableComponent,
     ClusterDescriptionComponent,
+    ClusterNodepoolsComponent,
+    ClusterNodePoolsComponent,
   ],
   exports: [ClustersComponent, ...clustersPages, ...clusterComponents],
   providers: [ConfirmationService, ...clusterServices],

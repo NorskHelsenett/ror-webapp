@@ -3,12 +3,18 @@ import { PriceService } from '../../../core/services/price.service';
 import { Component, Input, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { Price } from '../../../core/models/price';
 import { ConfigService } from '../../../core/services/config.service';
+import { TranslateModule } from '@ngx-translate/core';
+import { TableModule } from 'primeng/table';
+import { CommonModule, LowerCasePipe } from '@angular/common';
+import { SharedModule } from '../../../shared/shared.module';
 
 @Component({
   selector: 'app-cluster-node-pools',
   templateUrl: './cluster-node-pools.component.html',
   styleUrls: ['./cluster-node-pools.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [TranslateModule, TableModule, LowerCasePipe, SharedModule, CommonModule],
 })
 export class ClusterNodePoolsComponent implements OnInit, OnDestroy {
   @Input() cluster: any = undefined;

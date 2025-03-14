@@ -3,7 +3,6 @@ import { ClusterComplianceReportComponent } from './cluster-compliance-report/cl
 import { ClusterDeleteComponent } from './cluster-delete/cluster-delete.component';
 import { ClusterConditionsComponent } from './cluster-conditions/cluster-conditions.component';
 import { ClusterIngressListComponent } from './cluster-ingress-list/cluster-ingress-list.component';
-import { ClusterNodePoolsComponent } from './cluster-node-pools/cluster-node-pools.component';
 import { ClusterMetadataComponent } from './cluster-metadata/cluster-metadata.component';
 import { ClusterMetricsComponent } from './cluster-metrics/cluster-metrics.component';
 import { ClusterRawComponent } from './cluster-raw/cluster-raw.component';
@@ -27,7 +26,6 @@ export * from './cluster-compliance-report/cluster-compliance-report.component';
 export * from './cluster-delete/cluster-delete.component';
 export * from './cluster-conditions/cluster-conditions.component';
 export * from './cluster-ingress-list/cluster-ingress-list.component';
-export * from './cluster-node-pools/cluster-node-pools.component';
 export * from './cluster-metadata/cluster-metadata.component';
 export * from './cluster-metrics/cluster-metrics.component';
 export * from './cluster-raw/cluster-raw.component';
@@ -52,7 +50,6 @@ export const clusterComponents = [
   ClusterDeleteComponent,
   ClusterConditionsComponent,
   ClusterIngressListComponent,
-  ClusterNodePoolsComponent,
   ClusterMetadataComponent,
   ClusterMetricsComponent,
   ClusterRawComponent,

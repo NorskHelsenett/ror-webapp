@@ -826,6 +826,7 @@
         "nodePools": {
           "title": "Nodegrupper",
           "machineClass": "Maskinklasse",
+          "create": "Lag nodegruppe",
           "table": {
             "column": {
               "name": "Navn",
@@ -834,7 +835,68 @@
               "osImage": "Image",
               "arch": "Arkitektur",
               "cpu": "CPU",
-              "mem": "MEM"
+              "cores": "Kjerner",
+              "mem": "MEM",
+              "nodeCount": "Antall noder"
+            }
+          },
+          "createorupdate": {
+            "createTitle": "Lag nodegruppe",
+            "updateTitle": "Oppdater nodegruppe",
+            "form": {
+              "name": "Navn",
+              "nameError": "Navn mangler, eller ugyldige tegn",
+              "nameRandom": "Generer navn",
+              "machineClass": "Maskinklasse",
+              "machineClassError": "Maskinklasse mangler",
+              "machineClassPlaceholder": "Velg maskinklasse",
+              "cpu": "CPU",
+              "memory": "Minne",
+              "pricePrNode": "Pris per node",
+              "price": "Pris",
+              "priceCalculation": "Prisberegning",
+              "estimatedPricePrMonth": "Estimert pris per måned",
+              "estimatedPricePrYear": "Estimert pris per år",
+              "autoScale": "Autoskalering",
+              "autoScaleDescription": "Clusteret kan automatisk skalere opp og ned basert på last, prisen vil variere basert antall noder",
+              "autoScaleError": "Mangler autoskalering",
+              "nodes": "Noder",
+              "minNodes": "Min antall noder",
+              "minNodesError": "Mangler min antall noder",
+              "maxNodes": "Maks antall noder",
+              "maxNodesError": "Mangler maks antall noder",
+              "tags": "Stikkord",
+              "tagsHelp": "Ekstra stikkord for nodegruppen?",
+              "tagsError": "Mangler stikkord",
+              "tagKey": "Nøkkel",
+              "tagValue": "Verdi",
+              "tagKeyError": "Mangler nøkkel, eller ugyldige tegn",
+              "tagValueError": "Mangler verdi, eller ugyldige tegn",
+              "tagKeyExists": "Nøkkel eksisterer",
+              "labels": "Node labels/etiketter",
+              "labelList": "Labels/Etikettliste",
+              "labelsHelp": "Ekstra label/etiketter for nodegruppen?",
+              "labelsError": "Mangler label/etiketter",
+              "addLabel": "Ny label/etikett",
+              "deleteLabel": "Slett label/etikett",
+              "labelKey": "Nøkkel",
+              "labelKeyError": "Mangler nøkkel, eller ugyldige tegn",
+              "labelKeyExists": "Nøkkel eksisterer",
+              "labelValue": "Verdi",
+              "labelValueError": "Mangler verdi, eller ugyldige tegn",
+              "submitLabel": "Opprett",
+              "submitTag": "Opprett",
+              "create": "Lag nodegruppe",
+              "createSuccess": "Nodegruppe opprettet",
+              "createError": "Feil ved opprettelse av nodegruppe",
+              "update": "Oppdater nodegruppe",
+              "updateSuccess": "Nodegruppe oppdatert",
+              "updateError": "Feil ved oppdatering av nodegruppe",
+              "success": "Vellykket",
+              "error": "Feilsituasjon"
+            },
+            "summary": {
+              "title": "Oppsummering"
             }
           }
         },
