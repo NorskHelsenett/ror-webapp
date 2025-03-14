@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Observable, Subscription, catchError, finalize, share, tap } from 'rxjs';
@@ -17,8 +17,10 @@ import { FilterService } from '../../../core/services/filter.service';
   templateUrl: './apikeys.component.html',
   styleUrls: ['./apikeys.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class ApikeysComponent implements OnInit {
+  private configService = inject(ConfigService);
   user$: Observable<User> | undefined;
   refreshList: boolean;
 
@@ -59,7 +61,6 @@ export class ApikeysComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
     private translateService: TranslateService,
-    private configService: ConfigService,
     private signalService: SignalService,
   ) {}
 

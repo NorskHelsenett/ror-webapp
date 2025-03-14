@@ -5,6 +5,7 @@ import { Component, Input, OnInit } from '@angular/core';
   selector: 'app-cluster-ingress-metadata',
   templateUrl: './cluster-ingress-metadata.component.html',
   styleUrls: ['./cluster-ingress-metadata.component.scss'],
+  standalone: false,
 })
 export class ClusterIngressMetadataComponent implements OnInit {
   @Input() cluster: any = undefined;

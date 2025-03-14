@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { ConfigService } from './config.service';
 import { Observable } from 'rxjs';
 import { Provider, ProviderKubernetesVersion } from '../models/provider';
@@ -9,10 +9,8 @@ import { ClusterProvider } from '../../clusters/models/clusterProvider';
   providedIn: 'root',
 })
 export class ProvidersService {
-  constructor(
-    private httpClient: HttpClient,
-    private configService: ConfigService,
-  ) {}
+  private configService = inject(ConfigService);
+  private httpClient = inject(HttpClient);
 
   get(): Observable<Array<Provider>> {
     const url = `${this.configService.config.rorApi}/v1/providers`;

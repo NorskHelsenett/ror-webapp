@@ -11,6 +11,7 @@ import { OperatorConfigsService } from '../../../core/services/operator-configs.
   templateUrl: './config-operatorconfig-create-update.component.html',
   styleUrls: ['./config-operatorconfig-create-update.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class ConfigOperatorconfigCreateUpdateComponent implements OnInit, OnDestroy {
   id: string;

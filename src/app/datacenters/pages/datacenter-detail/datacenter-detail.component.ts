@@ -1,5 +1,5 @@
 import { MetricsService } from '../../../core/services/metrics.service';
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject } from '@angular/core';
 import { Observable, Subscription, catchError, map, tap } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Filter } from '../../../core/models/apiFilter';
@@ -11,8 +11,15 @@ import { ConfigService } from '../../../core/services/config.service';
   templateUrl: './datacenter-detail.component.html',
   styleUrls: ['./datacenter-detail.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class DatacenterDetailComponent implements OnInit {
+  private configService = inject(ConfigService);
+  private metricsService = inject(MetricsService);
+  private changeDetector = inject(ChangeDetectorRef);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+
   datacenterId: string = undefined;
   datacenterName: string = undefined;
 
@@ -44,14 +51,6 @@ export class DatacenterDetailComponent implements OnInit {
   pageSizes = this.configService.config.rowsPerPage;
 
   private subscriptions = new Subscription();
-
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private changeDetector: ChangeDetectorRef,
-    private metricsService: MetricsService,
-    private configService: ConfigService,
-  ) {}
 
   ngOnInit(): void {
     this.subscriptions.add(

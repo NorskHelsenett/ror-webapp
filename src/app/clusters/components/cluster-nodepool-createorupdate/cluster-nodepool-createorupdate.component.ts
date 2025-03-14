@@ -9,9 +9,8 @@ import { TableModule } from 'primeng/table';
 import { PriceService } from '../../../core/services/price.service';
 import { Price } from '../../../core/models/price';
 import { SharedModule } from '../../../shared/shared.module';
-import { CommonModule, LowerCasePipe, TitleCasePipe } from '@angular/common';
+import { CommonModule, TitleCasePipe } from '@angular/common';
 import { ConfigService } from '../../../core/services/config.service';
-import { ProviderComponent } from '../../../shared/components/provider/provider.component';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { ClusterNodepoolCreateorupdateSummaryComponent } from '../cluster-nodepool-createorupdate-summary/cluster-nodepool-createorupdate-summary.component';
 import { CheckboxModule } from 'primeng/checkbox';
@@ -24,14 +23,11 @@ import { ColorService } from '../../../core/services/color.service';
 
 @Component({
   selector: 'app-cluster-nodepool-createorupdate',
-  standalone: true,
   imports: [
     TranslateModule,
     ReactiveFormsModule,
     TableModule,
-    LowerCasePipe,
     SharedModule,
-    ProviderComponent,
     TitleCasePipe,
     InputNumberModule,
     FormsModule,

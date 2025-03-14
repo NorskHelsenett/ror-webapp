@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -17,8 +17,10 @@ import { ConfigService } from '../../../core/services/config.service';
   templateUrl: './acl-create-update.component.html',
   styleUrls: ['./acl-create-update.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class AclCreateUpdateComponent implements OnInit, OnDestroy {
+  private configService = inject(ConfigService);
   @Input() set acl(value: AclV2 | undefined) {
     if (!value) {
       this.permission = undefined;
@@ -61,7 +63,6 @@ export class AclCreateUpdateComponent implements OnInit, OnDestroy {
     private translateService: TranslateService,
     private oauthService: OAuthService,
     private clustersService: ClustersService,
-    private configService: ConfigService,
   ) {}
 
   ngOnInit(): void {

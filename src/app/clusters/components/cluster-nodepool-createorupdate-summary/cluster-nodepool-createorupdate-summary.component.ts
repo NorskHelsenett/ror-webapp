@@ -1,4 +1,4 @@
-import { CurrencyPipe, JsonPipe, TitleCasePipe } from '@angular/common';
+import { CurrencyPipe, TitleCasePipe } from '@angular/common';
 import { NodepoolService } from './../../services/nodepool.service';
 import { ChangeDetectorRef, Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
@@ -7,8 +7,7 @@ import { SharedModule } from '../../../shared/shared.module';
 
 @Component({
   selector: 'app-cluster-nodepool-createorupdate-summary',
-  standalone: true,
-  imports: [TranslateModule, JsonPipe, TitleCasePipe, SharedModule, CurrencyPipe],
+  imports: [TranslateModule, TitleCasePipe, SharedModule, CurrencyPipe],
   templateUrl: './cluster-nodepool-createorupdate-summary.component.html',
   styleUrl: './cluster-nodepool-createorupdate-summary.component.scss',
 })

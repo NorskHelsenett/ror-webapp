@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Table } from 'primeng/table';
 import { Subscription } from 'rxjs';
@@ -9,8 +9,10 @@ import { ConfigService } from '../../../core/services/config.service';
   templateUrl: './policy-policy.component.html',
   styleUrls: ['./policy-policy.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class PolicyPolicyComponent implements OnInit {
+  private configService = inject(ConfigService);
   @ViewChildren('policyTable')
   tables: QueryList<Table>;
 
@@ -40,7 +42,6 @@ export class PolicyPolicyComponent implements OnInit {
   constructor(
     private changeDetector: ChangeDetectorRef,
     private translateService: TranslateService,
-    private configService: ConfigService,
   ) {}
 
   ngOnInit(): void {

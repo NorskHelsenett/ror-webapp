@@ -21,7 +21,6 @@ import { Resource, ResourceSet } from '@rork8s/ror-resources/models';
 
 @Component({
   selector: 'app-resources-v2-list',
-  standalone: true,
   imports: [CommonModule, TranslateModule, SharedModule, TableModule, MultiSelectModule, FormsModule, DropdownModule, TooltipModule],
   templateUrl: './resources-v2-list.component.html',
   styleUrl: './resources-v2-list.component.scss',

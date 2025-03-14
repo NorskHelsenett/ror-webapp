@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './release-notes.component.html',
   styleUrl: './release-notes.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class ReleaseNotesComponent implements OnInit {
   isDark = false;

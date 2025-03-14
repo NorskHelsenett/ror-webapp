@@ -10,7 +10,6 @@ import { ResourceQuery } from '@rork8s/ror-resources/models';
 
 @Component({
   selector: 'app-resourcesv2-filter',
-  standalone: true,
   imports: [CommonModule, FormsModule, ReactiveFormsModule, TranslateModule, DropdownModule],
   templateUrl: './resourcesv2-filter.component.html',
   styleUrl: './resourcesv2-filter.component.scss',

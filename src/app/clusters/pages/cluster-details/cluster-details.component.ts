@@ -1,9 +1,9 @@
+import { Location } from '@angular/common';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { MetricsService } from '../../../core/services/metrics.service';
 import { Component, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy, AfterContentInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subscription, tap, catchError, share, finalize } from 'rxjs';
-import { Location } from '@angular/common';
 import { AclScopes, AclAccess } from '../../../core/models/acl-scopes';
 import { AclService } from '../../../core/services/acl.service';
 import { ClustersService } from '../../../core/services/clusters.service';
@@ -16,6 +16,7 @@ import { ClusterService } from '../../services';
   templateUrl: './cluster-details.component.html',
   styleUrls: ['./cluster-details.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class ClusterDetailsComponent implements OnInit, OnDestroy, AfterContentInit, AfterViewInit {
   clusterId: string | undefined;

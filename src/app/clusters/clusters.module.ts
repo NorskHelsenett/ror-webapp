@@ -13,7 +13,7 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { TabViewModule } from 'primeng/tabview';
 import { DropdownModule } from 'primeng/dropdown';
-import { ChipsModule } from 'primeng/chips';
+import { ChipModule } from 'primeng/chip';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { CardModule } from 'primeng/card';
 import { BadgeModule } from 'primeng/badge';
@@ -23,7 +23,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { TagModule } from 'primeng/tag';
 import { OrganizationChartModule } from 'primeng/organizationchart';
-import { InputTextareaModule } from 'primeng/inputtextarea';
+import { TextareaModule } from 'primeng/textarea';
 import { RippleModule } from 'primeng/ripple';
 import { DialogModule } from 'primeng/dialog';
 import { ClusterVulnerabilityComponent } from './components/cluster-vulnerability/cluster-vulnerability.component';
@@ -41,6 +41,7 @@ import { ClusterResourceTableComponent } from './components/cluster-resource-tab
 import { ClusterDescriptionComponent } from './components/cluster-description/cluster-description.component';
 import { ClusterNodepoolsComponent } from './pages/cluster-nodepools/cluster-nodepools.component';
 import { ClusterNodePoolsComponent } from './components/cluster-node-pools/cluster-node-pools.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [ClustersComponent, ...clustersPages, ...clusterComponents],
@@ -55,7 +56,7 @@ import { ClusterNodePoolsComponent } from './components/cluster-node-pools/clust
     SelectButtonModule,
     ButtonModule,
     DropdownModule,
-    ChipsModule,
+    ChipModule,
     InputNumberModule,
     TableModule,
     MultiSelectModule,
@@ -67,7 +68,7 @@ import { ClusterNodePoolsComponent } from './components/cluster-node-pools/clust
     ConfirmDialogModule,
     TagModule,
     OrganizationChartModule,
-    InputTextareaModule,
+    TextareaModule,
     RippleModule,
     NgOptimizedImage,
     ProviderComponent,
@@ -83,6 +84,7 @@ import { ClusterNodePoolsComponent } from './components/cluster-node-pools/clust
     ClusterDescriptionComponent,
     ClusterNodepoolsComponent,
     ClusterNodePoolsComponent,
+    RouterModule,
   ],
   exports: [ClustersComponent, ...clustersPages, ...clusterComponents],
   providers: [ConfirmationService, ...clusterServices],

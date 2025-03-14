@@ -1,5 +1,5 @@
 import { TranslateService } from '@ngx-translate/core';
-import { ChangeDetectionStrategy, Component, OnInit, ChangeDetectorRef, OnDestroy, effect } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ChangeDetectorRef, OnDestroy, inject, PLATFORM_ID, Inject } from '@angular/core';
 import { ThemeService } from '../core/services/theme.service';
 import { Observable, Subscription, catchError, share, tap } from 'rxjs';
 import { AuthService } from '../core/services/auth.service';
@@ -10,14 +10,17 @@ import { SignalService } from '../create/create-cluster/services/signal.service'
 import { BigEventsService } from '../core/services/big-events.service';
 import { environment } from '../../environments/environment';
 import { ConfigService } from '../core/services/config.service';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class LayoutComponent implements OnInit, OnDestroy {
+  private configService = inject(ConfigService);
   appVersion = environment.appVersion;
   isDark = false;
   showUserMenu = false;
@@ -43,6 +46,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
   private subscriptions = new Subscription();
 
   constructor(
+    @Inject(PLATFORM_ID) private platformId: object,
     private changeDetector: ChangeDetectorRef,
     private themeService: ThemeService,
     private authService: AuthService,
@@ -51,7 +55,6 @@ export class LayoutComponent implements OnInit, OnDestroy {
     private sseService: SseService,
     private signalService: SignalService,
     private bigEventsService: BigEventsService,
-    private configService: ConfigService,
   ) {}
 
   ngOnInit(): void {
@@ -62,7 +65,9 @@ export class LayoutComponent implements OnInit, OnDestroy {
     this.desember = this.bigEventsService.isDesember();
     this.birthday = this.bigEventsService.isRORBirthday();
 
-    this.setupSSEClients();
+    if (isPlatformBrowser(this.platformId)) {
+      this.setupSSEClients();
+    }
 
     this.rorDocsUrl = this.configService.config.docsUrl;
     this.externalDocsUrl = this.configService.config.externalDocsUrl;
@@ -135,7 +140,10 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
     this.translateService.use(lang);
     this.lang = lang;
-    localStorage.setItem('language', lang);
+
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem('language', lang);
+    }
     this.changeDetector.detectChanges();
   }
 

@@ -7,6 +7,7 @@ import 'dayjs/locale/en';
 
 @Pipe({
   name: 'time',
+  standalone: false,
 })
 export class TimePipe implements PipeTransform {
   constructor() {

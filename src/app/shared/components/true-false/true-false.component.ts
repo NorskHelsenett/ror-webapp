@@ -4,6 +4,7 @@ import { Component, Input } from '@angular/core';
   selector: 'app-true-false',
   templateUrl: './true-false.component.html',
   styleUrls: ['./true-false.component.scss'],
+  standalone: false,
 })
 export class TrueFalseComponent {
   @Input()

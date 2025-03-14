@@ -7,7 +7,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-cluster-ingress-table',
-  standalone: true,
   imports: [TranslateModule, ResourcesV2ListComponent],
   templateUrl: './cluster-ingress-table.component.html',
   styleUrl: './cluster-ingress-table.component.scss',

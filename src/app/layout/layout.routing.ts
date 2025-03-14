@@ -39,10 +39,10 @@ export const routes: Routes = [
         path: 'prices',
         loadChildren: () => import('../prices/prices.module').then((m) => m.PricesModule),
       },
-      {
-        path: 'resources',
-        loadChildren: () => import('../resources/resources.module').then((m) => m.ResourcesModule),
-      },
+      // {
+      //   path: 'resources',
+      //   loadChildren: () => import('../resources/resources.module').then((m) => m.ResourcesModule),
+      // },
       {
         path: 'resourcesv2',
         loadChildren: () => import('../resourcesv2/resourcesv2.module').then((m) => m.ResourcesV2Module),
@@ -63,10 +63,10 @@ export const routes: Routes = [
         path: 'releasenotes',
         loadChildren: () => import('../release-notes/release-notes.module').then((m) => m.ReleaseNotesModule),
       },
-      { path: '**', redirectTo: 'error/404' },
+      //{ path: '**', redirectTo: 'error/404' },
     ],
   },
-  { path: '**', redirectTo: 'error/404' },
+  //{ path: '**', redirectTo: 'error/404' },
 ];
 
 @NgModule({

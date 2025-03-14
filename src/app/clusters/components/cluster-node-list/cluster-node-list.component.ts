@@ -7,7 +7,6 @@ import { SharedModule } from '../../../shared/shared.module';
 
 @Component({
   selector: 'app-cluster-node-list',
-  standalone: true,
   imports: [TranslateModule, TableModule, LowerCasePipe, SharedModule],
   templateUrl: './cluster-node-list.component.html',
   styleUrl: './cluster-node-list.component.scss',

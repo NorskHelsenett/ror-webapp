@@ -8,6 +8,7 @@ import { Resource, ResourceQuery, ResourceRoute, ResourceSet } from '@rork8s/ror
   selector: 'app-cluster-notifications',
   templateUrl: './cluster-notifications.component.html',
   styleUrl: './cluster-notifications.component.scss',
+  standalone: false,
 })
 export class ClusterNotificationsComponent implements OnInit {
   @Input({ required: true }) cluster!: any;

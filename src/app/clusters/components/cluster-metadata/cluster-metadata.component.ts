@@ -7,6 +7,7 @@ import { ClipboardService } from 'ngx-clipboard';
   selector: 'app-cluster-metadata',
   templateUrl: './cluster-metadata.component.html',
   styleUrls: ['./cluster-metadata.component.scss'],
+  standalone: false,
 })
 export class ClusterMetadataComponent implements OnInit {
   @Input() cluster: any = undefined;

@@ -10,6 +10,7 @@ import { PriceService } from '../../../../../core/services/price.service';
   selector: 'app-admin-prices-create',
   templateUrl: './admin-prices-create.component.html',
   styleUrls: ['./admin-prices-create.component.scss'],
+  standalone: false,
 })
 export class AdminPricesCreateComponent implements OnInit, OnDestroy {
   priceForm: FormGroup | undefined;

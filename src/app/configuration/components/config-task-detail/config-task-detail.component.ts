@@ -7,6 +7,7 @@ import { Task } from '../../../core/models/task';
   templateUrl: './config-task-detail.component.html',
   styleUrls: ['./config-task-detail.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
+  standalone: false,
 })
 export class ConfigTaskDetailComponent implements OnInit {
   @Input()

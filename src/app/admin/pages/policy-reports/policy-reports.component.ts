@@ -9,6 +9,7 @@ import { PolicyReportsService } from '../../../core/services/policy-reports.serv
   selector: 'app-policy-reports',
   templateUrl: './policy-reports.component.html',
   styleUrls: ['./policy-reports.component.scss'],
+  standalone: false,
 })
 export class PolicyReportsComponent implements OnInit {
   policyReportsPerCluster$: Observable<PolicyReportGlobal[]>;

@@ -9,6 +9,7 @@ import { AclService } from '../../../core/services/acl.service';
   templateUrl: './acl-create-update.component.html',
   styleUrls: ['./acl-create-update.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class AclCreateUpdateComponent implements OnInit, OnDestroy {
   id: string;

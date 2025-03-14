@@ -6,6 +6,7 @@ import { ClusterService } from '../../services';
   templateUrl: './cluster-metadata-page.component.html',
   styleUrl: './cluster-metadata-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class ClusterMetadataPageComponent implements OnInit {
   @Input() cluster: any;

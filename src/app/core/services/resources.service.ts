@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { ConfigService } from './config.service';
 import { Observable } from 'rxjs';
 import { ResourceQuery, ResourceSet } from '@rork8s/ror-resources/models';
@@ -8,10 +8,8 @@ import { ResourceQuery, ResourceSet } from '@rork8s/ror-resources/models';
   providedIn: 'root',
 })
 export class ResourcesService {
-  constructor(
-    private httpClient: HttpClient,
-    private configService: ConfigService,
-  ) {}
+  private configService = inject(ConfigService);
+  private httpClient = inject(HttpClient);
 
   getResources<T>(query: ResourceQuery): Observable<ResourceSet> {
     const queryString = JSON.stringify(query);

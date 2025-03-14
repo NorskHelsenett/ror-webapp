@@ -3,6 +3,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
   name: 'formatBytes',
+  standalone: false,
 })
 export class FormatBytesPipe implements PipeTransform {
   constructor(private unitformaterService: UnitformaterService) {}

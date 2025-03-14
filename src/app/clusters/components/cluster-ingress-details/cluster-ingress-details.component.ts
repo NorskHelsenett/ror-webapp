@@ -6,7 +6,6 @@ import { ClusterIngressMetaComponent } from '../cluster-ingress-meta/cluster-ing
 
 @Component({
   selector: 'app-cluster-ingress-details',
-  standalone: true,
   imports: [HighlightModule, ClusterIngressMetaComponent],
   templateUrl: './cluster-ingress-details.component.html',
   styleUrl: './cluster-ingress-details.component.scss',

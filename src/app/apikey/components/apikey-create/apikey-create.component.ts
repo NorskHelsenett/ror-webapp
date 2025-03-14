@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, inject, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { ClipboardService } from 'ngx-clipboard';
@@ -12,8 +12,10 @@ import { ConfigService } from '../../../core/services/config.service';
   selector: 'app-apikey-create',
   templateUrl: './apikey-create.component.html',
   styleUrls: ['./apikey-create.component.scss'],
+  standalone: false,
 })
 export class ApikeyCreateComponent implements OnInit, OnDestroy {
+  private configService = inject(ConfigService);
   @Output() cancelRequested = new EventEmitter<void>();
   @Output() created = new EventEmitter<void>();
 
@@ -36,7 +38,6 @@ export class ApikeyCreateComponent implements OnInit, OnDestroy {
     private clipboardService: ClipboardService,
     private messageService: MessageService,
     private translateService: TranslateService,
-    private configService: ConfigService,
   ) {}
 
   ngOnInit(): void {

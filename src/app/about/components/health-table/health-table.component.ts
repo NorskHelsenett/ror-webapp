@@ -5,6 +5,7 @@ import { HealthCheckService } from '../../../core/models/healthcheckservice';
   selector: 'app-health-table',
   templateUrl: './health-table.component.html',
   styleUrls: ['./health-table.component.scss'],
+  standalone: false,
 })
 export class HealthTableComponent implements OnInit {
   @Input() health: any[] = [];

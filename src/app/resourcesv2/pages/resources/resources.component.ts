@@ -16,7 +16,6 @@ import { ResourceV2DetailsComponent } from '../../components/resource-v2-details
 
 @Component({
   selector: 'app-resources',
-  standalone: true,
   imports: [
     CommonModule,
     TranslateModule,

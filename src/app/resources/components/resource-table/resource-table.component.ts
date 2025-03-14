@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Params, Router, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
@@ -29,7 +29,6 @@ import { ResourceQuery } from '@rork8s/ror-resources/models';
 
 @Component({
   selector: 'app-resource-table',
-  standalone: true,
   imports: [
     CommonModule,
     SharedModule,
@@ -51,6 +50,7 @@ import { ResourceQuery } from '@rork8s/ror-resources/models';
   styleUrl: './resource-table.component.scss',
 })
 export class ResourceTableComponent implements OnInit, OnDestroy {
+  private configService = inject(ConfigService);
   @Input() clusterId: string = undefined;
 
   resourcesFetchError: any;
@@ -97,7 +97,6 @@ export class ResourceTableComponent implements OnInit, OnDestroy {
     private columnFactoryService: ColumnFactoryService,
     private typesService: TypesService,
     private clustersService: ClustersService,
-    private configService: ConfigService,
   ) {}
 
   ngOnInit(): void {

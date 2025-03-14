@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { closest } from 'color-2-name';
-import { COLORDEF, RGBCOLORDEF } from 'color-2-name/lib/types';
 
 @Injectable({
   providedIn: 'root',
@@ -26,11 +25,11 @@ export class ColorService {
     if (colorHex.charAt(0) !== '#') {
       colorHex = `#${colorHex}`;
     }
-    const closestColor: COLORDEF = closest(colorHex, this.rorColors, { info: true });
+    const closestColor: any = closest(colorHex, this.rorColors, { info: true });
     return closestColor?.hex;
   }
 
-  private rorColors: RGBCOLORDEF[] = [
+  private rorColors: [number, number, number, string][] = [
     [248, 250, 252, 'slate-50'],
     [241, 245, 249, 'slate-100'],
     [226, 232, 240, 'slate-200'],

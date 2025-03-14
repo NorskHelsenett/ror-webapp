@@ -26,7 +26,7 @@ export const routes: Routes = [
     path: 'cluster/:id/ingress/:ingressid',
     component: IngressComponent,
   },
-  { path: '**', redirectTo: 'error/404' },
+  //{ path: '**', redirectTo: 'error/404' },
 ];
 
 export const DashboardRoutingModule = RouterModule.forChild(routes);

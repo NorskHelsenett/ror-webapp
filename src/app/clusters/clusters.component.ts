@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { FilterMatchMode, PrimeNGConfig, SelectItem } from 'primeng/api';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
+import { FilterMatchMode, SelectItem } from 'primeng/api';
+import { PrimeNG } from 'primeng/config';
 import { catchError, finalize, map, Observable, share, Subscription, tap } from 'rxjs';
 
 import { Cluster } from '../core/models/cluster';
@@ -16,14 +17,18 @@ import { AclAccess, AclScopes } from '../core/models/acl-scopes';
 import { AclService } from '../core/services/acl.service';
 import { SignalService } from '../create/create-cluster/services/signal.service';
 import { ClusterEnvironment } from '../core/models/clusterEnvironment';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-clusters',
   templateUrl: './clusters.component.html',
   styleUrls: ['./clusters.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class ClustersComponent implements OnInit, OnDestroy {
+  private configService = inject(ConfigService);
+
   clusters$: Observable<PaginationResult<Cluster>> | undefined;
   clustersError: any;
 
@@ -73,12 +78,12 @@ export class ClustersComponent implements OnInit, OnDestroy {
   private subscriptions = new Subscription();
 
   constructor(
+    @Inject(PLATFORM_ID) private platformId: object,
     private changeDetector: ChangeDetectorRef,
     private clusterService: ClustersService,
     private filterService: FilterService,
-    private primengConfig: PrimeNGConfig,
+    private primengConfig: PrimeNG,
     private exportService: ExportService,
-    private configService: ConfigService,
     private aclService: AclService,
     private signalService: SignalService,
   ) {
@@ -91,7 +96,7 @@ export class ClustersComponent implements OnInit, OnDestroy {
     this.fetchMetadata();
     this.setupEvents();
 
-    this.primengConfig.ripple = true;
+    this.primengConfig.ripple.set(true);
   }
 
   ngOnDestroy(): void {
@@ -110,7 +115,9 @@ export class ClustersComponent implements OnInit, OnDestroy {
   }
 
   setupColumns(): void {
-    this.selectedColumns = JSON.parse(localStorage.getItem('cluster-table-columns'));
+    if (isPlatformBrowser(this.platformId)) {
+      this.selectedColumns = JSON.parse(localStorage.getItem('cluster-table-columns'));
+    }
     this.baseCols = [
       {
         field: 'workspace.datacenter.provider',
@@ -259,9 +266,12 @@ export class ClustersComponent implements OnInit, OnDestroy {
 
   resetColumns(): void {
     this.selectedColumns = this.baseCols;
-    localStorage.removeItem('cluster-table-columns');
-    localStorage.removeItem('cluster-table');
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.removeItem('cluster-table-columns');
+      localStorage.removeItem('cluster-table');
+    }
     this.fetchClusters(undefined);
+
     this.changeDetector.detectChanges();
   }
 
@@ -329,8 +339,12 @@ export class ClustersComponent implements OnInit, OnDestroy {
 
     return duration.minutes();
   }
+
   updateColumns(): void {
-    let tableState: Object = JSON.parse(localStorage.getItem('cluster-table'));
+    let tableState: Object;
+    if (isPlatformBrowser(this.platformId)) {
+      tableState: Object = JSON.parse(localStorage.getItem('cluster-table'));
+    }
     if (!tableState) {
       tableState = { first: 0, rows: this.rows };
     }
@@ -345,8 +359,10 @@ export class ClustersComponent implements OnInit, OnDestroy {
       ];
     }
     tableState['columnOrder'] = this.selectedColumns.map((col) => col['field']);
-    localStorage.setItem('cluster-table-columns', JSON.stringify(this.selectedColumns));
-    localStorage.setItem('cluster-table', JSON.stringify(tableState));
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem('cluster-table-columns', JSON.stringify(this.selectedColumns));
+      localStorage.setItem('cluster-table', JSON.stringify(tableState));
+    }
   }
 
   exportToExcel(): void {

@@ -1,5 +1,5 @@
 import { Filter } from '../models/apiFilter';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { PaginationResult } from '../models/paginatedResult';
@@ -13,10 +13,8 @@ import { ConfigService } from './config.service';
   providedIn: 'root',
 })
 export class ClustersService {
-  constructor(
-    private httpClient: HttpClient,
-    private configService: ConfigService,
-  ) {}
+  private configService = inject(ConfigService);
+  private httpClient = inject(HttpClient);
 
   getByFilter(filter: Filter): Observable<PaginationResult<Cluster>> {
     const url = `${this.configService.config.rorApi}/v1/clusters/filter`;

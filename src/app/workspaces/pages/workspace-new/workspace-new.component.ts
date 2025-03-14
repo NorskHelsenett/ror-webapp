@@ -11,6 +11,7 @@ import { ProjectService } from '../../../core/services/project.service';
   selector: 'app-workspace-new',
   templateUrl: './workspace-new.component.html',
   styleUrls: ['./workspace-new.component.scss'],
+  standalone: false,
 })
 export class WorkspaceNewComponent implements OnInit, OnDestroy {
   form: FormGroup;

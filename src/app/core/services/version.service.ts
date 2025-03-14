@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { ConfigService } from './config.service';
 import { Observable } from 'rxjs';
 
@@ -7,10 +7,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class VersionService {
-  constructor(
-    private httpClient: HttpClient,
-    private configService: ConfigService,
-  ) {}
+  private configService = inject(ConfigService);
+  private httpClient = inject(HttpClient);
 
   getVersion(): Observable<any> {
     const url = `${this.configService.config.rorApi}/v1/info/version`;

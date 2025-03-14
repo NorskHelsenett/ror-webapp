@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Component, inject, Input, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { Table } from 'primeng/table';
 import { ConfigService } from '../../../core/services/config.service';
 
@@ -6,8 +6,10 @@ import { ConfigService } from '../../../core/services/config.service';
   selector: 'app-policy-namespace',
   templateUrl: './policy-namespace.component.html',
   styleUrls: ['./policy-namespace.component.scss'],
+  standalone: false,
 })
 export class PolicyNamespaceComponent implements OnInit {
+  private configService = inject(ConfigService);
   @ViewChildren('namespaceTable')
   tables: QueryList<Table>;
 
@@ -16,8 +18,6 @@ export class PolicyNamespaceComponent implements OnInit {
 
   resultFilter: string[] = ['failed', 'error', 'passed', 'warning', 'skipped'];
   resultFilterValue: string[];
-
-  constructor(private configService: ConfigService) {}
 
   ngOnInit(): void {
     this.resultFilterValue = ['failed'];

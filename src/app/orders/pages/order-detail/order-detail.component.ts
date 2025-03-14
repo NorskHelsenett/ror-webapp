@@ -17,6 +17,7 @@ import { Workspace } from '../../../core/models/workspace';
   templateUrl: './order-detail.component.html',
   styleUrls: ['./order-detail.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class OrderDetailComponent implements OnInit {
   order$: Observable<ClusterOrder> | undefined;

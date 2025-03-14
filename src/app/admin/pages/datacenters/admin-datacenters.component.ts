@@ -1,6 +1,6 @@
 import { DatacenterService } from '../../../core/services/datacenter.service';
 import { catchError, finalize, Observable, share } from 'rxjs';
-import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy, inject } from '@angular/core';
 import { AclScopes, AclAccess } from '../../../core/models/acl-scopes';
 import { AclService } from '../../../core/services/acl.service';
 import { ConfigService } from '../../../core/services/config.service';
@@ -10,8 +10,11 @@ import { ConfigService } from '../../../core/services/config.service';
   templateUrl: './admin-datacenters.component.html',
   styleUrls: ['./admin-datacenters.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class AdminDatacentersComponent implements OnInit {
+  private configService = inject(ConfigService);
+
   datacenters$: Observable<any>;
   datacentersError: any;
   adminRead$: Observable<boolean> | undefined;
@@ -25,7 +28,6 @@ export class AdminDatacentersComponent implements OnInit {
     private changeDetector: ChangeDetectorRef,
     private datacentersService: DatacenterService,
     private aclService: AclService,
-    private configService: ConfigService,
   ) {}
 
   ngOnInit(): void {

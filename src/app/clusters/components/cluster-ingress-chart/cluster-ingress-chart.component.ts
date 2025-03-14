@@ -17,7 +17,6 @@ import { HealthStatus } from '../../../core/models/healthstatus';
 
 @Component({
   selector: 'app-cluster-ingress-chart',
-  standalone: true,
   imports: [CommonModule, NgOptimizedImage, TranslateModule, OrganizationChartModule, TooltipModule],
   templateUrl: './cluster-ingress-chart.component.html',
   styleUrl: './cluster-ingress-chart.component.scss',

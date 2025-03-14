@@ -15,7 +15,6 @@ import { catchError, Observable, share, tap } from 'rxjs';
 
 @Component({
   selector: 'app-cluster-nodepool-list',
-  standalone: true,
   imports: [
     TranslateModule,
     TableModule,
@@ -71,7 +70,6 @@ export class ClusterNodepoolListComponent implements OnInit, OnDestroy {
   }
 
   deleteNodepool(nodePool: any): void {
-    console.log('Nodepool deleted', nodePool);
     this.messageService.add({ severity: 'success', summary: 'Nodepool deleted', detail: 'Nodepool deleted successfully' });
 
     const newlist = this.cluster?.topology?.nodePools.filter((np: any) => np?.name !== nodePool?.name);
