@@ -50,6 +50,10 @@ export class ClusterDetailsComponent implements OnInit, OnDestroy, AfterContentI
       query: 'tab=ingresses',
     },
     {
+      metadata: 'nodepools',
+      query: 'tab=nodepools',
+    },
+    {
       metadata: 'policyReports',
       query: 'tab=policyReports',
     },
@@ -68,10 +72,6 @@ export class ClusterDetailsComponent implements OnInit, OnDestroy, AfterContentI
     {
       metadata: 'metadata',
       query: 'tab=metadata',
-    },
-    {
-      metadata: 'nodepools',
-      query: 'tab=nodepools',
     },
     {
       metadata: 'resources',

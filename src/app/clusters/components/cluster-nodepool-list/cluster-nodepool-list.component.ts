@@ -1,5 +1,5 @@
 import { NodePool } from './../../../core/models/clusterOrder';
-import { LowerCasePipe, TitleCasePipe } from '@angular/common';
+import { AsyncPipe, LowerCasePipe, TitleCasePipe } from '@angular/common';
 import { ConfigService } from './../../../core/services/config.service';
 import { ChangeDetectionStrategy, Component, inject, Input, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
@@ -9,6 +9,9 @@ import { ButtonModule } from 'primeng/button';
 import { ClusterNodeListComponent } from '../cluster-node-list/cluster-node-list.component';
 import { ClusterNodepoolCreateorupdateComponent } from '../cluster-nodepool-createorupdate/cluster-nodepool-createorupdate.component';
 import { MessageService } from 'primeng/api';
+import { AclService } from '../../../core/services/acl.service';
+import { AclAccess, AclScopes } from '../../../core/models/acl-scopes';
+import { catchError, Observable, share, tap } from 'rxjs';
 
 @Component({
   selector: 'app-cluster-nodepool-list',
@@ -22,6 +25,7 @@ import { MessageService } from 'primeng/api';
     ButtonModule,
     ClusterNodeListComponent,
     ClusterNodepoolCreateorupdateComponent,
+    AsyncPipe,
   ],
   templateUrl: './cluster-nodepool-list.component.html',
   styleUrl: './cluster-nodepool-list.component.scss',
@@ -34,9 +38,12 @@ export class ClusterNodepoolListComponent implements OnInit, OnDestroy {
   rows = 10;
   rowsPerPage: number[] = [10, 20, 50];
   selectedNodepool: any | undefined;
+  aclFetchError: any;
+  adminOwner$: Observable<boolean> | undefined;
 
   private configService = inject(ConfigService);
   private messageService = inject(MessageService);
+  private aclService = inject(AclService);
   private changeDetector = inject(ChangeDetectorRef);
 
   constructor() {}
@@ -44,6 +51,15 @@ export class ClusterNodepoolListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.rows = this.configService?.config?.rows;
     this.rowsPerPage = this.configService?.config?.rowsPerPage;
+
+    this.adminOwner$ = this.aclService.check(AclScopes.ROR, AclScopes.Global, AclAccess.Owner).pipe(
+      share(),
+      catchError((error: any) => {
+        this.aclFetchError = error;
+        this.changeDetector.detectChanges();
+        throw error;
+      }),
+    );
   }
 
   ngOnDestroy(): void {}
