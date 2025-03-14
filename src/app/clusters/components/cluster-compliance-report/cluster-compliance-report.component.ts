@@ -8,6 +8,7 @@ import { ExportService } from '../../../core/services/export.service';
   selector: 'app-cluster-compliance-report',
   templateUrl: './cluster-compliance-report.component.html',
   styleUrl: './cluster-compliance-report.component.scss',
+  standalone: false,
 })
 export class ClusterComplianceReportComponent implements OnInit {
   @Input() clusterId: string;

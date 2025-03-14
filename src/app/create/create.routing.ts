@@ -8,7 +8,7 @@ const routes: Routes = [
     canActivate: [AdminCreateGuard],
     loadChildren: () => import('./create-cluster/create-cluster.module').then((m) => m.CreateClusterModule),
   },
-  { path: '**', redirectTo: 'error/404' },
+  //{ path: '**', redirectTo: 'error/404' },
 ];
 
 @NgModule({

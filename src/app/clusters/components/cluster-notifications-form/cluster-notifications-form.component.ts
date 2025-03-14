@@ -8,6 +8,7 @@ import { Resource, ResourceRoute, ResourceSet } from '@rork8s/ror-resources/mode
   selector: 'app-cluster-notifications-form',
   templateUrl: './cluster-notifications-form.component.html',
   styleUrl: './cluster-notifications-form.component.scss',
+  standalone: false,
 })
 export class ClusterNotificationsFormComponent implements OnInit {
   @Input() resource: Resource;

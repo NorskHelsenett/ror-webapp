@@ -1,6 +1,6 @@
 import { ClusterFormService } from './services/cluster-form.service';
 import { Subscription, tap } from 'rxjs';
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ChangeDetectorRef, inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -11,8 +11,15 @@ import { environment } from '../../../environments/environment';
   templateUrl: './create-cluster.component.html',
   styleUrls: ['./create-cluster.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class CreateClusterComponent implements OnInit, OnDestroy {
+  private clusterFormService = inject(ClusterFormService);
+
+  private translateService = inject(TranslateService);
+  private changeDetector = inject(ChangeDetectorRef);
+  private fb = inject(FormBuilder);
+
   items: MenuItem[];
   activeIndex: number = 0;
   environment = environment;
@@ -21,13 +28,6 @@ export class CreateClusterComponent implements OnInit, OnDestroy {
   nodePools: any[] | undefined;
 
   private subscriptions = new Subscription();
-
-  constructor(
-    private changeDetector: ChangeDetectorRef,
-    private translateService: TranslateService,
-    private fb: FormBuilder,
-    private clusterFormService: ClusterFormService,
-  ) {}
 
   ngOnInit() {
     this.setupSteps();

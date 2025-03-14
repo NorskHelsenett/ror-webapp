@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
@@ -13,8 +13,10 @@ import { ProjectService } from '../../../../../core/services/project.service';
   templateUrl: './projects-create.component.html',
   styleUrls: ['./projects-create.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class ProjectsCreateComponent implements OnInit, OnDestroy {
+  private configService = inject(ConfigService);
   projectId: string = '';
   projectForm: FormGroup;
   projectModel: Project;
@@ -39,7 +41,6 @@ export class ProjectsCreateComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     private translateService: TranslateService,
-    private configService: ConfigService,
   ) {}
 
   ngOnInit(): void {

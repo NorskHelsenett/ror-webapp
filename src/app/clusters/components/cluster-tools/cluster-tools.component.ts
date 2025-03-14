@@ -8,6 +8,7 @@ import { Ingress } from '../../../core/models/ingress';
   selector: 'app-cluster-tools',
   templateUrl: './cluster-tools.component.html',
   styleUrls: ['./cluster-tools.component.scss'],
+  standalone: false,
 })
 export class ClusterToolsComponent implements OnInit {
   @Input() cluster: any = undefined;

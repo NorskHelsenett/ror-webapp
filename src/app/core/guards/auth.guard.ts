@@ -21,7 +21,8 @@ export class AuthGuard {
         subscriber.next(true);
       });
     } else {
-      this.authService.login();
+      //this.authService.login();
+      this.router.navigate(['/auth/login']);
       return this.authService.authenticationEventObservable;
     }
   }

@@ -14,6 +14,7 @@ import { Task } from '../../../core/models/task';
   templateUrl: './configuration.component.html',
   styleUrls: ['./configuration.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class ConfigurationComponent implements OnInit, OnDestroy {
   user$: Observable<User> | undefined;

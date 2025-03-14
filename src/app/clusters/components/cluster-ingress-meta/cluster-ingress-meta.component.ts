@@ -11,7 +11,6 @@ import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-cluster-ingress-meta',
-  standalone: true,
   imports: [CommonModule, HighlightModule, SharedModule, TableModule, TranslateModule, RouterModule],
   templateUrl: './cluster-ingress-meta.component.html',
   styleUrl: './cluster-ingress-meta.component.scss',

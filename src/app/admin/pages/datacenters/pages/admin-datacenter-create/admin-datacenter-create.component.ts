@@ -9,6 +9,7 @@ import { Datacenter } from '../../../../../core/models/datacenter';
   selector: 'app-admin-datacenter-create',
   templateUrl: './admin-datacenter-create.component.html',
   styleUrls: ['./admin-datacenter-create.component.scss'],
+  standalone: false,
 })
 export class AdminDatacenterCreateComponent implements OnInit, OnDestroy {
   datacenterForm: FormGroup | undefined;

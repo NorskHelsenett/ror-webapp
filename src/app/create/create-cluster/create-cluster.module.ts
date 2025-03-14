@@ -11,7 +11,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AutoFocusModule } from 'primeng/autofocus';
 import { StepsModule } from 'primeng/steps';
 import { DropdownModule } from 'primeng/dropdown';
-import { ChipsModule } from 'primeng/chips';
+import { ChipModule } from 'primeng/chip';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { TagModule } from 'primeng/tag';
@@ -29,7 +29,7 @@ import { ProviderComponent } from '../../shared/components/provider/provider.com
     StepsModule,
     TranslateModule,
     DropdownModule,
-    ChipsModule,
+    ChipModule,
     InputNumberModule,
     RadioButtonModule,
     SharedModule,

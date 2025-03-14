@@ -9,6 +9,7 @@ import { ThemeService } from '../../../core/services/theme.service';
   templateUrl: './cluster-ingress-rules.component.html',
   styleUrls: ['./cluster-ingress-rules.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class ClusterIngressRulesComponent implements OnInit {
   @Input() cluster: any = undefined;

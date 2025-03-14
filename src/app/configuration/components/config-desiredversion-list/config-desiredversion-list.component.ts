@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input, OnDestroy } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { catchError, Subscription, tap } from 'rxjs';
@@ -11,8 +11,10 @@ import { DesiredversionsService } from '../../../core/services/desiredversions.s
   templateUrl: './config-desiredversion-list.component.html',
   styleUrls: ['./config-desiredversion-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class ConfigDesiredversionListComponent implements OnDestroy {
+  private configService = inject(ConfigService);
   @Input()
   desiredVersion: DesiredVersion[] | undefined;
   desiredVersionsFetchError: any;
@@ -27,7 +29,6 @@ export class ConfigDesiredversionListComponent implements OnDestroy {
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
     private translateService: TranslateService,
-    private configService: ConfigService,
   ) {}
 
   ngOnDestroy(): void {

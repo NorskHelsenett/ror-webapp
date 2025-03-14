@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -13,8 +13,10 @@ import { DesiredversionsService } from '../../../core/services/desiredversions.s
   templateUrl: './config-desiredversion-create-update.component.html',
   styleUrls: ['./config-desiredversion-create-update.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class ConfigDesiredversionCreateUpdateComponent implements OnInit, OnDestroy {
+  private configService = inject(ConfigService);
   formGroup: FormGroup;
   createError: boolean;
   updateError: boolean;
@@ -30,7 +32,6 @@ export class ConfigDesiredversionCreateUpdateComponent implements OnInit, OnDest
     private desiredVersionsService: DesiredversionsService,
     private messageService: MessageService,
     private translateService: TranslateService,
-    private configService: ConfigService,
   ) {
     this.desiredVersion = this?.router?.getCurrentNavigation()?.extras?.state as DesiredVersion;
   }

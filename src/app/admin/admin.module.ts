@@ -9,7 +9,7 @@ import { adminDatacentersPages } from './pages/datacenters/pages';
 import { adminPricesPages } from './pages/prices/pages';
 
 import { InputTextModule } from 'primeng/inputtext';
-import { InputTextareaModule } from 'primeng/inputtextarea';
+import { TextareaModule } from 'primeng/textarea';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { CalendarModule } from 'primeng/calendar';
@@ -22,7 +22,7 @@ import { ToggleButtonModule } from 'primeng/togglebutton';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { DropdownModule } from 'primeng/dropdown';
-import { ChipsModule } from 'primeng/chips';
+import { ChipModule } from 'primeng/chip';
 import { TagModule } from 'primeng/tag';
 import { TabViewModule } from 'primeng/tabview';
 
@@ -47,7 +47,7 @@ import { InputIconModule } from 'primeng/inputicon';
     FormsModule,
     ReactiveFormsModule,
     InputTextModule,
-    InputTextareaModule,
+    TextareaModule,
     InputNumberModule,
     InputSwitchModule,
     CalendarModule,
@@ -60,7 +60,7 @@ import { InputIconModule } from 'primeng/inputicon';
     ConfirmDialogModule,
     ToastModule,
     DropdownModule,
-    ChipsModule,
+    ChipModule,
     TagModule,
     DatacentersModule,
     ConfigurationModule,

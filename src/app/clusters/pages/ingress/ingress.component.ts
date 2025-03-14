@@ -18,7 +18,6 @@ import { ClusterIngressRawComponent } from '../../components/cluster-ingress-raw
 
 @Component({
   selector: 'app-ingress',
-  standalone: true,
   imports: [
     CommonModule,
     TranslateModule,
@@ -27,7 +26,6 @@ import { ClusterIngressRawComponent } from '../../components/cluster-ingress-raw
     HighlightModule,
     TabViewModule,
     ClusterIngressAnnotationsComponent,
-
     ClusterIngressDetailsComponent,
     ClusterIngressChartComponent,
     ClusterIngressCertmanagerComponent,

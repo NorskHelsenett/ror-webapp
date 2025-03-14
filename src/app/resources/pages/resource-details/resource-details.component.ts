@@ -9,7 +9,6 @@ import { ErrorComponent } from '../../../shared/components/error/error.component
 
 @Component({
   selector: 'app-resource-details',
-  standalone: true,
   imports: [CommonModule, RouterModule, TranslateModule, SharedModule, ErrorComponent],
   templateUrl: './resource-details.component.html',
   styleUrl: './resource-details.component.scss',

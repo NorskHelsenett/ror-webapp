@@ -7,6 +7,7 @@ import { OrderService } from '../../../core/services/order.service';
   templateUrl: './order-list.component.html',
   styleUrl: './order-list.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class OrderListComponent implements OnInit, OnDestroy {
   orders$: Observable<any> | undefined;

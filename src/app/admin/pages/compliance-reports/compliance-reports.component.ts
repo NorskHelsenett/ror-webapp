@@ -7,6 +7,7 @@ import { Observable, catchError, concatMap, groupBy, map, mergeAll, mergeMap, of
   selector: 'app-compliance-reports',
   templateUrl: './compliance-reports.component.html',
   styleUrl: './compliance-reports.component.scss',
+  standalone: false,
 })
 export class ComplianceReportsComponent implements OnInit {
   complianceReports$: Observable<ComplianceReportGlobal[]>;

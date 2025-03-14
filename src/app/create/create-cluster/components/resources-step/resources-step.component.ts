@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit, ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit, ChangeDetectorRef, inject } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ClusterFormService } from '../../services/cluster-form.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -17,8 +17,10 @@ import { ClusterProvider } from '../../../../clusters/models/clusterProvider';
   templateUrl: './resources-step.component.html',
   styleUrls: ['./resources-step.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class ResourcesStepComponent implements OnInit {
+  private clusterFormService = inject(ClusterFormService);
   @Input() clusterForm: FormGroup = this.clusterFormService.clusterForm;
 
   nodePools: ClusterCapasity[] = [];
@@ -65,7 +67,7 @@ export class ResourcesStepComponent implements OnInit {
     private changeDetector: ChangeDetectorRef,
     private router: Router,
     private route: ActivatedRoute,
-    private clusterFormService: ClusterFormService,
+
     private priceService: PriceService,
     private translateService: TranslateService,
     private providersService: ProvidersService,

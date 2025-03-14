@@ -4,5 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-forbidden',
   templateUrl: './forbidden.component.html',
   styleUrls: ['./forbidden.component.scss'],
+  standalone: false,
 })
 export class ForbiddenComponent {}

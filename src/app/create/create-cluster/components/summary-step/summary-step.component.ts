@@ -1,6 +1,6 @@
 import { TranslateService } from '@ngx-translate/core';
 import { MessageService } from 'primeng/api';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ClusterFormService } from '../../services/cluster-form.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -16,8 +16,10 @@ import { OrderService } from '../../../../core/services/order.service';
   templateUrl: './summary-step.component.html',
   styleUrls: ['./summary-step.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class SummaryStepComponent implements OnInit {
+  private clusterFormService = inject(ClusterFormService);
   @Input() clusterForm: FormGroup = this.clusterFormService.clusterForm;
 
   account: any | undefined;
@@ -29,7 +31,6 @@ export class SummaryStepComponent implements OnInit {
     private changeDetector: ChangeDetectorRef,
     private router: Router,
     private route: ActivatedRoute,
-    private clusterFormService: ClusterFormService,
     private oauthService: OAuthService,
     private orderService: OrderService,
     private messageService: MessageService,

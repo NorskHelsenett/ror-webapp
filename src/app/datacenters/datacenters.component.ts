@@ -8,6 +8,7 @@ import { DatacenterService } from '../core/services/datacenter.service';
   templateUrl: './datacenters.component.html',
   styleUrls: ['./datacenters.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class DatacentersComponent implements OnInit {
   datacenters$: Observable<any> | undefined;

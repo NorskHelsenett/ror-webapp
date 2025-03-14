@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
-import { Location } from '@angular/common';
+import { isPlatformBrowser, Location } from '@angular/common';
+import { ChangeDetectionStrategy, Component, OnInit, ChangeDetectorRef, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { AclService } from '../core/services/acl.service';
@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './userprofile.component.html',
   styleUrls: ['./userprofile.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class UserprofileComponent implements OnInit, OnDestroy {
   idToken: string | undefined;
@@ -35,6 +36,7 @@ export class UserprofileComponent implements OnInit, OnDestroy {
   private subscriptions = new Subscription();
 
   constructor(
+    @Inject(PLATFORM_ID) private platformId: object,
     private changeDetector: ChangeDetectorRef,
     private route: ActivatedRoute,
     private location: Location,
@@ -50,15 +52,17 @@ export class UserprofileComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.idToken = this.oauthService.getIdToken();
-    this.accessToken = this.oauthService.getAccessToken();
-    this.claims = this.oauthService.getIdentityClaims();
-    if (this.claims != undefined) {
-      this.expDate = new Date(this.claims?.exp * 1000);
-      this.iatDate = new Date(this.claims?.iat * 1000);
-      this.changeDetector.detectChanges();
+    if (isPlatformBrowser(this.platformId)) {
+      this.idToken = this.oauthService.getIdToken();
+      this.accessToken = this.oauthService.getAccessToken();
+      this.claims = this.oauthService.getIdentityClaims();
+      if (this.claims != undefined) {
+        this.expDate = new Date(this.claims?.exp * 1000);
+        this.iatDate = new Date(this.claims?.iat * 1000);
+        this.changeDetector.detectChanges();
+      }
+      this.authHeaders = this.oauthService.authorizationHeader();
     }
-    this.authHeaders = this.oauthService.authorizationHeader();
   }
 
   ngOnDestroy(): void {
@@ -68,7 +72,9 @@ export class UserprofileComponent implements OnInit, OnDestroy {
   switchTab(selectedIndex: number): void {
     try {
       const tab = this.tabs[selectedIndex];
-      this.location.replaceState('userprofile', tab?.query);
+      if (isPlatformBrowser(this.platformId)) {
+        this.location.replaceState('userprofile', tab?.query);
+      }
     } catch {
       //ignoring
     }

@@ -1,5 +1,5 @@
 import { TranslateService } from '@ngx-translate/core';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { catchError, finalize, Observable, share, Subscription } from 'rxjs';
 import { FilterService } from '../../../core/services/filter.service';
@@ -17,8 +17,10 @@ import { ProjectService } from '../../../core/services/project.service';
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class ProjectsComponent implements OnInit {
+  private configService = inject(ConfigService);
   projects$: Observable<PaginationResult<Project>> | undefined;
   projectsError: any;
   columns: any[] = [];
@@ -46,7 +48,6 @@ export class ProjectsComponent implements OnInit {
     private messageService: MessageService,
     private translateService: TranslateService,
     private exportService: ExportService,
-    private configService: ConfigService,
   ) {}
 
   ngOnInit(): void {

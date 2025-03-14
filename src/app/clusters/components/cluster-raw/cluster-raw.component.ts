@@ -8,6 +8,7 @@ import { MessageService } from 'primeng/api';
   selector: 'app-cluster-raw',
   templateUrl: './cluster-raw.component.html',
   styleUrls: ['./cluster-raw.component.scss'],
+  standalone: false,
 })
 export class ClusterRawComponent {
   @Input() cluster: any = undefined;

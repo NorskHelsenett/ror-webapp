@@ -8,7 +8,6 @@ import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-cluster-ingress-certmanager',
-  standalone: true,
   imports: [TableModule, ButtonModule, SharedModule, TranslateModule],
   templateUrl: './cluster-ingress-certmanager.component.html',
   styleUrl: './cluster-ingress-certmanager.component.scss',

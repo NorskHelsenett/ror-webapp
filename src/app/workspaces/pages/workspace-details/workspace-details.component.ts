@@ -1,5 +1,6 @@
+import { config } from './../../../app.config.server';
 import { ClustersService } from '../../../core/services/clusters.service';
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, finalize, Observable, Subscription, tap } from 'rxjs';
 import { User } from '../../../core/models/user';
@@ -13,8 +14,10 @@ import { PaginationResult } from '../../../core/models/paginatedResult';
   selector: 'app-workspace-details',
   templateUrl: './workspace-details.component.html',
   styleUrls: ['./workspace-details.component.scss'],
+  standalone: false,
 })
 export class WorkspaceDetailsComponent implements OnInit, OnDestroy {
+  private configService = inject(ConfigService);
   user$: Observable<User>;
   workspaceId: string;
   workspaceName: string;
@@ -54,7 +57,6 @@ export class WorkspaceDetailsComponent implements OnInit, OnDestroy {
     private metricsService: MetricsService,
     private clusterService: ClustersService,
     private userService: UserService,
-    private configService: ConfigService,
   ) {}
 
   ngOnInit(): void {

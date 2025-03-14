@@ -11,6 +11,7 @@ import { ThemeService } from '../core/services/theme.service';
   templateUrl: './metrics.component.html',
   styleUrls: ['./metrics.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class MetricsComponent implements OnInit, OnDestroy {
   chartOptions: ChartOptions = {

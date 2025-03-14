@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ClusterFormService } from '../../services/cluster-form.service';
 import { Observable, Subscription, catchError, share, tap } from 'rxjs';
@@ -13,8 +13,10 @@ import { AclService } from '../../../../core/services/acl.service';
   templateUrl: './metadata-step.component.html',
   styleUrls: ['./metadata-step.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class MetadataStepComponent implements OnInit, OnDestroy {
+  private clusterFormService = inject(ClusterFormService);
   @Input() clusterForm: FormGroup = this.clusterFormService.clusterForm;
 
   availableCriticalities: any[];
@@ -36,7 +38,6 @@ export class MetadataStepComponent implements OnInit, OnDestroy {
     private changeDetector: ChangeDetectorRef,
     private router: Router,
     private route: ActivatedRoute,
-    private clusterFormService: ClusterFormService,
     private oauthService: OAuthService,
     private translateService: TranslateService,
     private aclService: AclService,

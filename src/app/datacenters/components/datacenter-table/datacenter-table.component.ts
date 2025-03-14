@@ -4,6 +4,7 @@ import { Component, Input, OnInit } from '@angular/core';
   selector: 'app-datacenter-table',
   templateUrl: './datacenter-table.component.html',
   styleUrls: ['./datacenter-table.component.scss'],
+  standalone: false,
 })
 export class DatacenterTableComponent implements OnInit {
   @Input() datacenters: any[] = [];

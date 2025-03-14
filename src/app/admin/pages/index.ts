@@ -1,6 +1,5 @@
 import { AdminDatacentersComponent } from './datacenters/admin-datacenters.component';
 import { AdminPricesComponent } from './prices/admin-prices.component';
-import { AdminAuditlogsComponent } from './auditlogs/admin-auditlogs.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { PolicyReportsComponent } from './policy-reports/policy-reports.component';
 import { PerPolicyTableComponent } from './policy-reports/per-policy-table/per-policy-table.component';
@@ -21,7 +20,6 @@ export * from './compliance-reports/compliance-reports.component';
 export const adminPages = [
   AdminDatacentersComponent,
   AdminPricesComponent,
-  AdminAuditlogsComponent,
   ProjectsComponent,
   PolicyReportsComponent,
   PerPolicyTableComponent,

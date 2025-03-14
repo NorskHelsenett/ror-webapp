@@ -10,6 +10,7 @@ import { VersionService } from '../core/services/version.service';
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class AboutComponent implements OnInit {
   appVersion = environment.appVersion;

@@ -8,7 +8,6 @@ import { SharedModule } from '../../../shared/shared.module';
 
 @Component({
   selector: 'app-resource-v2-details',
-  standalone: true,
   imports: [CommonModule, HighlightModule, TranslateModule, JsonPipe, SharedModule, AsyncPipe],
   templateUrl: './resource-v2-details.component.html',
   styleUrl: './resource-v2-details.component.scss',

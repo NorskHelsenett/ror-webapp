@@ -4,6 +4,7 @@ import { Component, Input, OnInit } from '@angular/core';
   selector: 'app-cluster-metrics',
   templateUrl: './cluster-metrics.component.html',
   styleUrls: ['./cluster-metrics.component.scss'],
+  standalone: false,
 })
 export class ClusterMetricsComponent implements OnInit {
   @Input() metrics: any = undefined;

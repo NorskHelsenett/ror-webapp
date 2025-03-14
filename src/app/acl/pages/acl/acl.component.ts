@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Observable, Subscription, catchError, finalize, share } from 'rxjs';
@@ -16,8 +16,11 @@ import { FilterService } from '../../../core/services/filter.service';
   templateUrl: './acl.component.html',
   styleUrls: ['./acl.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class AclComponent implements OnInit, OnDestroy {
+  private configService = inject(ConfigService);
+
   user$: Observable<User> | undefined;
   acl$: Observable<PaginationResult<AclV2>> | undefined;
   fetchError: any;
@@ -45,7 +48,6 @@ export class AclComponent implements OnInit, OnDestroy {
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
     private translateService: TranslateService,
-    private configService: ConfigService,
   ) {}
 
   ngOnInit(): void {

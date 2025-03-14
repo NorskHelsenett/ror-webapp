@@ -4,7 +4,6 @@ import { CommonModule, KeyValuePipe } from '@angular/common';
 
 @Component({
   selector: 'app-cluster-ingress-annotations',
-  standalone: true,
   imports: [CommonModule, KeyValuePipe],
   templateUrl: './cluster-ingress-annotations.component.html',
   styleUrl: './cluster-ingress-annotations.component.scss',

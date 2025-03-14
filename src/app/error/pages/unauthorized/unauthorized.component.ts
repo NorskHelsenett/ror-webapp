@@ -4,5 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-unauthorized',
   templateUrl: './unauthorized.component.html',
   styleUrls: ['./unauthorized.component.scss'],
+  standalone: false,
 })
 export class UnauthorizedComponent {}

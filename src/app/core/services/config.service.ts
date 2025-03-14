@@ -1,18 +1,48 @@
-import { Inject, Injectable } from '@angular/core';
-import { APP_CONFIG, AppConfig } from '../../../app.config';
+import { Inject, Injectable, Optional, PLATFORM_ID, REQUEST } from '@angular/core';
+import { environment } from '../../../environments/environment';
+import { AppConfig } from '../../../app.config';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ConfigService {
-  config: AppConfig;
+  config: AppConfig = {
+    auth: {
+      issuer: 'http://localhost:5556/dex',
+      clientId: 'ror.sky.test.nhn.no',
+      redirectUri: '/auth/callback',
+      scope: 'openid profile email groups offline_access',
+      responseType: 'code',
+      requireHttps: false,
+      strictDiscoveryDocumentValidation: false,
+      postLogoutRedirectUri: '/auth/logout',
+      logoutUrl: '/auth/logout',
+    },
+    regex: {
+      forms: '^[@()\\/:?\\r\\n.,a-zA-Z æøåÆØÅ0-9_-]+$',
+    },
+    docsUrl: 'https://norskhelsenett.github.io/ror/',
+    externalDocsUrl: 'https://norskhelsenett.github.io/ror/',
+    rowsPerPage: [10, 25, 50, 75, 100],
+    rows: 25,
+    rorApi: 'http://localhost:10000',
+    sse: {
+      postfixUrl: '/v1/events/listen',
+      method: 'GET',
+      timeout: 30000,
+    },
+  };
 
-  constructor(@Inject(APP_CONFIG) config: AppConfig) {
+  setConfig(config: AppConfig): void {
+    this.createConfig(config);
+  }
+
+  getConfig(): AppConfig {
+    return this.config;
+  }
+
+  private createConfig(config: AppConfig): void {
     this.config = config;
-    if (!config) {
-      console.error('Config not loaded');
-      return;
-    }
-    this.config.auth.redirectUri = window.location.origin + this.config.auth.redirectUri;
   }
 }

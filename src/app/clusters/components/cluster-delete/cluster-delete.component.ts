@@ -11,6 +11,7 @@ import { ResourceQuery } from '@rork8s/ror-resources/models';
   selector: 'app-cluster-delete',
   templateUrl: './cluster-delete.component.html',
   styleUrl: './cluster-delete.component.scss',
+  standalone: false,
 })
 export class ClusterDeleteComponent implements OnInit {
   @Input() cluster: any | undefined;

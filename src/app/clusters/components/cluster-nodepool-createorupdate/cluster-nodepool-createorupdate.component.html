@@ -136,7 +136,7 @@
                     styleClass="bg-green-600"
                     [min]="1"
                     [max]="maxNodes"
-                    [size]="1"
+                    [size]="'large'"
                     [allowEmpty]="false"
                     (ngModelChange)="minNodesChanged($event)"
                   >
@@ -160,7 +160,7 @@
                       formControlName="maxNodes"
                       [min]="getMinMaxNodes()"
                       [max]="maxNodes"
-                      [size]="1"
+                      [size]="'large'"
                       [allowEmpty]="false"
                     >
                     </p-inputNumber>

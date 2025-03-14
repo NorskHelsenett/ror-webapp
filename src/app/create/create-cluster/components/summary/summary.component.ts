@@ -5,6 +5,7 @@ import { Component, Input } from '@angular/core';
   selector: 'app-summary',
   templateUrl: './summary.component.html',
   styleUrls: ['./summary.component.scss'],
+  standalone: false,
 })
 export class SummaryComponent {
   @Input() value: any;

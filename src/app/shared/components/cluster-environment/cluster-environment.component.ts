@@ -4,6 +4,7 @@ import { Component, Input } from '@angular/core';
   selector: 'app-cluster-environment',
   templateUrl: './cluster-environment.component.html',
   styleUrls: ['./cluster-environment.component.scss'],
+  standalone: false,
 })
 export class ClusterEnvironmentComponent {
   @Input()

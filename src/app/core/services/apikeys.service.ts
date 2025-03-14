@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Filter } from '../models/apiFilter';
 import { PaginationResult } from '../models/paginatedResult';
@@ -10,10 +10,8 @@ import { ConfigService } from './config.service';
   providedIn: 'root',
 })
 export class ApikeysService {
-  constructor(
-    private httpClient: HttpClient,
-    private configService: ConfigService,
-  ) {}
+  private configService = inject(ConfigService);
+  private httpClient = inject(HttpClient);
 
   getById(id: string): Observable<ApiKey> {
     let url = `${this.configService.config.rorApi}/v1/apikeys/${id}`;

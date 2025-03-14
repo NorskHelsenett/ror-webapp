@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 import { catchError, Observable, share, Subscription, tap } from 'rxjs';
@@ -14,8 +14,10 @@ import { ProjectService } from '../../../../../core/services/project.service';
   templateUrl: './project-details.component.html',
   styleUrls: ['./project-details.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class ProjectDetailsComponent implements OnInit {
+  private configService = inject(ConfigService);
   adminRead$: Observable<boolean> | undefined;
   adminReadFetchError: any;
   project$: Observable<Project> = undefined;
@@ -37,7 +39,6 @@ export class ProjectDetailsComponent implements OnInit {
     private projectService: ProjectService,
     private translateService: TranslateService,
     private aclService: AclService,
-    private configService: ConfigService,
   ) {}
 
   ngOnInit(): void {

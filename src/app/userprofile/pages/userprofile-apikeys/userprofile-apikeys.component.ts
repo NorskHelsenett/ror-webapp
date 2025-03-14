@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, Input, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationService, LazyLoadEvent, MessageService } from 'primeng/api';
 import { Observable, Subscription, catchError, finalize, share, tap } from 'rxjs';
@@ -13,8 +13,10 @@ import { UserApikeysService } from '../../../core/services/user-apikeys.service'
   selector: 'app-userprofile-apikeys',
   templateUrl: './userprofile-apikeys.component.html',
   styleUrls: ['./userprofile-apikeys.component.scss'],
+  standalone: false,
 })
 export class UserprofileApikeysComponent implements OnInit {
+  private configService = inject(ConfigService);
   @Input()
   upn: string;
 
@@ -39,7 +41,6 @@ export class UserprofileApikeysComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private translateService: TranslateService,
     private messageService: MessageService,
-    private configService: ConfigService,
   ) {}
 
   ngOnInit(): void {

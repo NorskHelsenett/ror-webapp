@@ -19,6 +19,7 @@ import ClusterNameValidator from '../../../shared/validators/clusterNameValidato
   styleUrls: ['./cluster-new.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
+  standalone: false,
 })
 export class ClusterNewComponent implements OnInit {
   clusterForm: FormGroup | undefined;

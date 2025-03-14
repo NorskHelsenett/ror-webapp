@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, inject, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { MessageService, ConfirmationService, ConfirmEventType } from 'primeng/api';
@@ -15,8 +15,10 @@ import { ProjectService } from '../../../core/services/project.service';
   templateUrl: './cluster-details-edit.component.html',
   styleUrls: ['./cluster-details-edit.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class ClusterDetailsEditComponent implements OnInit, OnDestroy {
+  private configService = inject(ConfigService);
   @Input() cluster: any | undefined;
   @Output() invalidCount = new EventEmitter<number>();
   @Output() updateOk = new EventEmitter<boolean>();
@@ -51,7 +53,6 @@ export class ClusterDetailsEditComponent implements OnInit, OnDestroy {
     private translateService: TranslateService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
-    private configService: ConfigService,
   ) {}
 
   ngOnInit(): void {

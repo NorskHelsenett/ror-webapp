@@ -4,7 +4,6 @@ import { Component, Input } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-  standalone: true,
   imports: [CommonModule, TranslateModule, NgOptimizedImage],
   selector: 'app-provider',
   templateUrl: './provider.component.html',

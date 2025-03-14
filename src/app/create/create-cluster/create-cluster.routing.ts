@@ -26,7 +26,7 @@ const routes: Routes = [
       },
     ],
   },
-  { path: '**', redirectTo: 'error/404' },
+  //{ path: '**', redirectTo: 'error/404' },
 ];
 
 @NgModule({

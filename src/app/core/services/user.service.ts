@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { User } from '../models/user';
 import { ConfigService } from './config.service';
@@ -8,12 +8,10 @@ import { ConfigService } from './config.service';
   providedIn: 'root',
 })
 export class UserService {
-  user: BehaviorSubject<User> = new BehaviorSubject<User>(null);
+  private configService = inject(ConfigService);
+  private httpClient = inject(HttpClient);
 
-  constructor(
-    private httpClient: HttpClient,
-    private configService: ConfigService,
-  ) {}
+  user: BehaviorSubject<User> = new BehaviorSubject<User>(null);
 
   getUser(): Observable<User> {
     const url = `${this.configService.config.rorApi}/v1/users/self`;

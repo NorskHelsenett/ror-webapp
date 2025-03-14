@@ -6,6 +6,7 @@ import { MenuItem } from 'primeng/api';
   selector: 'app-export-button',
   templateUrl: './export-button.component.html',
   styleUrl: './export-button.component.scss',
+  standalone: false,
 })
 export class ExportComponent {
   @Input({ required: true }) exportObjects: any[];

@@ -4,6 +4,7 @@ import { Component, Input } from '@angular/core';
   selector: 'app-policy-bar',
   templateUrl: './policy-bar.component.html',
   styleUrls: ['./policy-bar.component.scss'],
+  standalone: false,
 })
 export class PolicyBarComponent {
   @Input() failed: number;

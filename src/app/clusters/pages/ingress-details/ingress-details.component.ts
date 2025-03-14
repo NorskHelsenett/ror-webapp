@@ -9,6 +9,7 @@ import { ClustersService } from '../../../core/services/clusters.service';
   templateUrl: './ingress-details.component.html',
   styleUrls: ['./ingress-details.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class IngressDetailsComponent implements OnInit, OnDestroy {
   clusterId: string | undefined;

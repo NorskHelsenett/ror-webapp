@@ -25,6 +25,7 @@ import { AclAccess, AclScopes } from '../core/models/acl-scopes';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   isDark: boolean;

@@ -7,6 +7,7 @@ import { MessageService } from 'primeng/api';
   selector: 'app-userprofile-details',
   templateUrl: './userprofile-details.component.html',
   styleUrls: ['./userprofile-details.component.scss'],
+  standalone: false,
 })
 export class UserprofileDetailsComponent implements OnInit {
   @Input()

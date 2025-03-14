@@ -12,7 +12,6 @@ import { SharedModule } from '../../../shared/shared.module';
 
 @Component({
   selector: 'app-resources-filter',
-  standalone: true,
   imports: [CommonModule, FormsModule, TranslateModule, DropdownModule, FormsModule, SharedModule],
   templateUrl: './resources-filter.component.html',
   styleUrl: './resources-filter.component.scss',

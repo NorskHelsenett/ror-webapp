@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { OperatorConfig } from '../models/operatorconfig';
 import { ConfigService } from './config.service';
@@ -8,10 +8,8 @@ import { ConfigService } from './config.service';
   providedIn: 'root',
 })
 export class OperatorConfigsService {
-  constructor(
-    private httpClient: HttpClient,
-    private configService: ConfigService,
-  ) {}
+  private configService = inject(ConfigService);
+  private httpClient = inject(HttpClient);
 
   getAll(): Observable<OperatorConfig[]> {
     const url = `${this.configService.config.rorApi}/v1/operatorconfigs`;

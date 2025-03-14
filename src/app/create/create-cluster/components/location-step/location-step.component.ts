@@ -1,5 +1,5 @@
 import { FormGroup } from '@angular/forms';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { tap, Subscription, Observable, catchError, map } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -19,8 +19,10 @@ import { Provider } from '../../../../core/models/provider';
   templateUrl: './location-step.component.html',
   styleUrls: ['./location-step.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class LocationStepComponent implements OnInit, OnDestroy {
+  private clusterFormService = inject(ClusterFormService);
   @Input() clusterForm: FormGroup = this.clusterFormService.clusterForm;
 
   workspaces: Workspace[] = [];
@@ -41,7 +43,6 @@ export class LocationStepComponent implements OnInit, OnDestroy {
     private changeDetector: ChangeDetectorRef,
     private router: Router,
     private route: ActivatedRoute,
-    private clusterFormService: ClusterFormService,
     private workspacesService: WorkspacesService,
     private projectService: ProjectService,
     private oauthService: OAuthService,

@@ -9,6 +9,7 @@ import { PolicyReportsService } from '../../../../core/services/policy-reports.s
   selector: 'app-per-policy-table',
   templateUrl: './per-policy-table.component.html',
   styleUrls: ['./per-policy-table.component.scss'],
+  standalone: false,
 })
 export class PerPolicyTableComponent implements OnInit {
   @Input() clusterID: string;

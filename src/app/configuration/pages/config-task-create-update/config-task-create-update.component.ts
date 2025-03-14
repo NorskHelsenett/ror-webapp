@@ -11,6 +11,7 @@ import { Task } from '../../../core/models/task';
   templateUrl: './config-task-create-update.component.html',
   styleUrls: ['./config-task-create-update.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class ConfigTaskCreateUpdateComponent implements OnInit, OnDestroy {
   id: string;
