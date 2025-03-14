@@ -40,9 +40,9 @@ export class AuthService {
     if (isPlatformBrowser(this.platformId)) {
       this.oauthService.logOut();
     }
-    // if (isPlatformBrowser(this.platformId)) {
-    //   window.location.reload();
-    // }
+    if (isPlatformBrowser(this.platformId)) {
+      window.location.reload();
+    }
   }
 
   isAuthenticated(): boolean {
@@ -65,10 +65,9 @@ export class AuthService {
     //   });
     if (isPlatformBrowser(this.platformId)) {
       this.oauthService.loadDiscoveryDocumentAndLogin();
+      // Optional
+      this.oauthService.setupAutomaticSilentRefresh();
     }
-
-    // Optional
-    //this.oauthService.setupAutomaticSilentRefresh();
   }
 
   refresh() {

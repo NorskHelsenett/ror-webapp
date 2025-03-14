@@ -1,7 +1,5 @@
-import { Inject, Injectable, Optional, PLATFORM_ID, REQUEST } from '@angular/core';
-import { environment } from '../../../environments/environment';
-import { AppConfig } from '../../../app.config';
-import { isPlatformBrowser } from '@angular/common';
+import { Injectable } from '@angular/core';
+import { AppConfig } from '../../../app-config';
 
 @Injectable({
   providedIn: 'root',
