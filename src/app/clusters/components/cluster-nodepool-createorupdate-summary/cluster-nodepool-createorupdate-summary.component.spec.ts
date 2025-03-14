@@ -8,9 +8,8 @@ describe('ClusterNodepoolCreateorupdateSummaryComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ClusterNodepoolCreateorupdateSummaryComponent]
-    })
-    .compileComponents();
+      imports: [ClusterNodepoolCreateorupdateSummaryComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ClusterNodepoolCreateorupdateSummaryComponent);
     component = fixture.componentInstance;
