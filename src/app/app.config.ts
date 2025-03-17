@@ -9,12 +9,12 @@ import { OAuthStorage, provideOAuthClient } from 'angular-oauth2-oidc';
 import { MessageService } from 'primeng/api';
 import { providePrimeNG } from 'primeng/config';
 import { AuthInterceptor } from './core/interceptors/auth-interceptor';
-import Aura from '@primeng/themes/aura';
 import { provideHighlightOptions } from 'ngx-highlightjs';
 import { provideServiceWorker } from '@angular/service-worker';
 import { TranslateLoader, TranslateModule, MissingTranslationHandler } from '@ngx-translate/core';
 import { CustomMissingTranslationHandler, HttpLoaderFactory } from './core/i18n/i18nfunctions';
 import { isPlatformServer } from '@angular/common';
+import RorTheme from './themes/ror-theme';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -66,12 +66,12 @@ export const appConfig: ApplicationConfig = {
     providePrimeNG({
       ripple: true,
       theme: {
-        preset: Aura,
+        preset: RorTheme,
         options: {
           darkModeSelector: '.dark',
           cssLayer: {
             name: 'primeng',
-            order: 'theme, base, primeng',
+            order: 'base, app-styles, theme, primeng',
           },
         },
       },

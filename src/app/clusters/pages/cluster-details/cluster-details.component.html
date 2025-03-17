@@ -16,7 +16,7 @@
 
   <app-cluster-conditions [conditions]="cluster?.status?.conditions"></app-cluster-conditions>
 
-  <p-tabView styleClass="tabview" [(activeIndex)]="selectedTabIndex" (activeIndexChange)="switchTab($event)" [scrollable]="true">
+  <p-tabView [(activeIndex)]="selectedTabIndex" (activeIndexChange)="switchTab($event)" [scrollable]="true">
     <p-tabPanel>
       <ng-template pTemplate="header">
         <div class="flex text-nowrap">

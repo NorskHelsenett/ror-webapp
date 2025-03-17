@@ -1,25 +1,25 @@
-import { ConfigService } from './core/services/config.service';
-import { config } from './app.config.server';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { Subscription, filter, tap } from 'rxjs';
 
 import { TranslateService } from '@ngx-translate/core';
 
-import { ThemeService } from './core/services/theme.service';
 import { Title } from '@angular/platform-browser';
 import { AuthService } from './core/services/auth.service';
-import { isPlatformBrowser, NgClass } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ToastModule } from 'primeng/toast';
 import { environment } from '../environments/environment';
+import { registerLocaleData } from '@angular/common';
+import localeNo from '@angular/common/locales/no';
+registerLocaleData(localeNo);
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterModule, ToastModule, NgClass],
+  imports: [RouterModule, ToastModule],
   standalone: true,
 })
 export class AppComponent implements OnInit, OnDestroy {
@@ -32,7 +32,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private changeDetector: ChangeDetectorRef,
     private oauthService: OAuthService,
     private authService: AuthService,
-    private themeService: ThemeService,
+    //private themeService: ThemeService,
     private titleService: Title,
     private translateService: TranslateService,
   ) {
@@ -60,12 +60,12 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subscriptions.add(
-      this.themeService?.isDark?.subscribe((value) => {
-        this.isDark = value;
-        this.changeDetector.detectChanges();
-      }),
-    );
+    // this.subscriptions.add(
+    //   this.themeService?.isDark?.subscribe((value) => {
+    //     this.isDark = value;
+    //     this.changeDetector.detectChanges();
+    //   }),
+    // );
 
     this.subscriptions.add(
       this.translateService.onLangChange

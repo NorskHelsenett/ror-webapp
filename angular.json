@@ -30,20 +30,7 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              {
-                "bundleName": "dark",
-                "inject": false,
-                "input": "src/dark.scss"
-              },
-              {
-                "bundleName": "light",
-                "inject": false,
-                "input": "src/light.scss"
-              },
-              "src/kwd.scss",
-              "src/styles.scss"
-            ],
+            "styles": ["src/kwd.scss", "src/styles.scss"],
             "scripts": [],
             "server": "src/main.server.ts",
             "outputMode": "server",

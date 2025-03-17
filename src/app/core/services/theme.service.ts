@@ -14,17 +14,17 @@ export class ThemeService {
     @Inject(PLATFORM_ID) private platformId: object,
     private hljsLoader: HighlightLoader,
   ) {
-    let isDark = false;
+    let isDark = true;
     if (isPlatformBrowser(this.platformId)) {
       isDark = localStorage.getItem('isDark') == 'true';
     }
 
     if (isDark === true) {
       this.isDark.next(true);
-      this.switchTheme('dark');
+      this.setDarkTheme();
     } else {
       this.isDark.next(false);
-      this.switchTheme('light');
+      this.setLightTheme();
     }
   }
 
@@ -35,19 +35,35 @@ export class ThemeService {
     }
 
     if (this.isDark?.getValue() === true) {
-      this.switchTheme('dark');
+      this.setDarkTheme();
     } else {
-      this.switchTheme('light');
+      this.setLightTheme();
     }
   }
 
   switchTheme(theme: string) {
     if (isPlatformBrowser(this.platformId)) {
-      let themeLink = this.document?.getElementById('app-theme') as HTMLLinkElement;
-      if (themeLink) {
-        themeLink.href = `${theme}.css`;
-      }
       this.hljsLoader.setTheme(theme === 'dark' ? 'assets/styles/highlight/tokyo-night-dark.css' : 'assets/styles/highlight/tokyo-night-light.css');
+    }
+  }
+
+  setLightTheme(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      document?.querySelector('html')?.classList.toggle('dark');
+      this.saveTheme();
+    }
+  }
+
+  setDarkTheme(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      document?.querySelector('html')?.classList.toggle('dark');
+      this.saveTheme();
+    }
+  }
+
+  private saveTheme(): void {
+    if (!isPlatformBrowser(this.platformId)) {
+      localStorage.setItem('isDark', this.isDark?.getValue().toString());
     }
   }
 }
