@@ -19,13 +19,8 @@
         <!-- Dashboards links  -->
         <div>
           <!-- active & hover classes 'bg-primary-100 dark:bg-primary-->
-          <a
-            href="#"
-            class="dark:text-light hover:bg-primary-100 dark:hover:bg-primary flex items-center rounded-md p-2 text-gray-500 transition-colors"
-            role="button"
-            aria-haspopup="true"
-          >
-            <span aria-hidden="true">
+          <span class="flex items-center rounded-md p-2 text-gray-500 dark:text-gray-400">
+            <!-- <span aria-hidden="true">
               <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path
                   stroke-linecap="round"
@@ -34,9 +29,9 @@
                   d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
                 />
               </svg>
-            </span>
+            </span> -->
             <span class="ml-2 text-sm"> {{ 'common.dashboard' | translate }} </span>
-            <span class="ml-auto" aria-hidden="true">
+            <!-- <span class="ml-auto" aria-hidden="true">
               <svg
                 class="h-4 w-4 transform transition-transform"
                 xmlns="http://www.w3.org/2000/svg"
@@ -46,17 +41,16 @@
               >
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
-            </span>
-          </a>
+            </span> -->
+          </span>
           <div role="menu" class="mt-2 space-y-2 px-7" aria-label="Dashboards">
             <!-- active & hover classes 'text-gray-700 dark:text-light' -->
             <!-- inActive classes 'text-gray-400 dark:text-gray-400' -->
             <a
               routerLink=""
-              routerLinkActive="text-gray-800 bg-green-200 dark:bg-green-800 dark:text-white dark:hover:text-light"
               [routerLinkActiveOptions]="{ exact: true }"
-              role="menuitem"
-              class="block rounded-md p-2 text-sm text-gray-400 transition-colors duration-200 hover:text-gray-700 dark:hover:text-white"
+              routerLinkActive="dark:bg-green-800 text-white"
+              class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
             >
               {{ 'nav.home' | translate }}
             </a>
@@ -71,13 +65,8 @@
           </div>
         </div>
         <div>
-          <a
-            href="#"
-            class="dark:text-light hover:bg-primary-100 dark:hover:bg-primary flex items-center rounded-md p-2 text-gray-500 transition-colors"
-            role="button"
-            aria-haspopup="true"
-          >
-            <span aria-hidden="true">
+          <span class="flex items-center rounded-md p-2 text-gray-500 dark:text-gray-500">
+            <!-- <span aria-hidden="true">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
                 <path
                   stroke-linecap="round"
@@ -85,9 +74,9 @@
                   d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z"
                 />
               </svg>
-            </span>
+            </span> -->
             <span class="ml-2 text-sm"> {{ 'nav.metricsMenu' | translate }} </span>
-            <span class="ml-auto" aria-hidden="true">
+            <!-- <span class="ml-auto" aria-hidden="true">
               <svg
                 class="h-4 w-4 transform transition-transform"
                 xmlns="http://www.w3.org/2000/svg"
@@ -97,29 +86,24 @@
               >
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
-            </span>
-          </a>
+            </span> -->
+          </span>
           <div role="menu" class="mt-2 space-y-2 px-7" aria-label="Dashboards">
             <!-- active & hover classes 'text-gray-700 dark:text-light' -->
             <!-- inActive classes 'text-gray-400 dark:text-gray-400' -->
             <a
               routerLink="metrics"
-              routerLinkActive="text-gray-800 bg-green-200 dark:bg-green-800 dark:text-white dark:hover:text-light"
               role="menuitem"
-              class="block rounded-md p-2 text-sm text-gray-400 transition-colors duration-200 hover:text-gray-700 dark:hover:text-white"
+              routerLinkActive="dark:bg-green-800 text-white"
+              class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
             >
               {{ 'nav.metrics' | translate }}
             </a>
           </div>
         </div>
         <div>
-          <a
-            href="#"
-            class="dark:text-light hover:bg-primary-100 dark:hover:bg-primary flex items-center rounded-md p-2 text-gray-500 transition-colors"
-            role="button"
-            aria-haspopup="true"
-          >
-            <span aria-hidden="true">
+          <span class="flex items-center rounded-md p-2 text-gray-500 dark:text-gray-500">
+            <!-- <span aria-hidden="true">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path
                   stroke-linecap="round"
@@ -127,9 +111,9 @@
                   d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"
                 />
               </svg>
-            </span>
+            </span> -->
             <span class="ml-2 text-sm"> {{ 'nav.pricesMenu' | translate }} </span>
-            <span class="ml-auto" aria-hidden="true">
+            <!-- <span class="ml-auto" aria-hidden="true">
               <svg
                 class="h-4 w-4 transform transition-transform"
                 xmlns="http://www.w3.org/2000/svg"
@@ -139,16 +123,16 @@
               >
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
-            </span>
-          </a>
+            </span> -->
+          </span>
           <div role="menu" class="mt-2 space-y-2 px-7" aria-label="Dashboards">
             <!-- active & hover classes 'text-gray-700 dark:text-light' -->
             <!-- inActive classes 'text-gray-400 dark:text-gray-400'-->
             <a
               routerLink="prices"
-              routerLinkActive="text-gray-800 bg-green-200 dark:bg-green-800 dark:text-white dark:hover:text-light"
               role="menuitem"
-              class="block rounded-md p-2 text-sm text-gray-400 transition-colors duration-200 hover:text-gray-700 dark:hover:text-white"
+              routerLinkActive="dark:bg-green-800 text-white"
+              class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
             >
               {{ 'nav.prices' | translate }}
             </a>
@@ -156,13 +140,8 @@
         </div>
 
         <div>
-          <a
-            href="#"
-            class="dark:text-light hover:bg-primary-100 dark:hover:bg-primary flex items-center rounded-md p-2 text-gray-500 transition-colors"
-            role="button"
-            aria-haspopup="true"
-          >
-            <span aria-hidden="true">
+          <span class="flex items-center rounded-md p-2 text-gray-500 dark:text-gray-500">
+            <!-- <span aria-hidden="true">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
                 <path
                   stroke-linecap="round"
@@ -170,9 +149,9 @@
                   d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75"
                 />
               </svg>
-            </span>
+            </span> -->
             <span class="ml-2 text-sm"> {{ 'nav.adminMenu' | translate }} </span>
-            <span class="ml-auto" aria-hidden="true">
+            <!-- <span class="ml-auto" aria-hidden="true">
               <svg
                 class="h-4 w-4 transform transition-transform"
                 xmlns="http://www.w3.org/2000/svg"
@@ -182,43 +161,43 @@
               >
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
-            </span>
-          </a>
+            </span> -->
+          </span>
           <div role="menu" class="mt-2 space-y-2 px-7" aria-label="administration">
             <!-- active & hover classes 'text-gray-700 dark:text-light' -->
             <!-- inActive classes 'text-gray-400 dark:text-gray-400' -->
             <ng-container *ngIf="lang && lang === 'no'">
               <a
                 routerLink="/workspaces"
-                routerLinkActive="text-gray-800 bg-green-200 dark:bg-green-800 dark:text-white dark:hover:text-light"
                 role="menuitem"
-                class="block rounded-md p-2 text-sm text-gray-400 transition-colors duration-200 hover:text-gray-700 dark:hover:text-white"
+                routerLinkActive="dark:bg-green-800 text-white"
+                class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
               >
                 {{ 'nav.workspaces' | translate }}
               </a>
               <a
                 *ngIf="(adminOwner$ | async) === true"
                 routerLink="admin/apikeys"
-                routerLinkActive="text-gray-800 bg-green-200 dark:bg-green-800 dark:text-white dark:hover:text-light"
                 role="menuitem"
-                class="block rounded-md p-2 text-sm text-gray-400 transition-colors duration-200 hover:text-gray-700 dark:hover:text-white"
+                routerLinkActive="dark:bg-green-800 text-white"
+                class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
               >
                 {{ 'nav.apikeys' | translate }}
               </a>
               <a
                 *ngIf="(adminRead$ | async) === true"
                 routerLink="admin/auditlogs"
-                routerLinkActive="text-gray-800 bg-green-200 dark:bg-green-800 dark:text-white dark:hover:text-light"
                 role="menuitem"
-                class="block rounded-md p-2 text-sm text-gray-400 transition-colors duration-200 hover:text-gray-700 dark:hover:text-white"
+                routerLinkActive="dark:bg-green-800 text-white"
+                class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
               >
                 {{ 'nav.auditlogs' | translate }}
               </a>
               <a
                 routerLink="admin/datacenter"
-                routerLinkActive="text-gray-800 bg-green-200 dark:bg-green-800 dark:text-white dark:hover:text-light"
                 role="menuitem"
-                class="block rounded-md p-2 text-sm text-gray-400 transition-colors duration-200 hover:text-gray-700 dark:hover:text-white"
+                routerLinkActive="dark:bg-green-800 text-white"
+                class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
               >
                 {{ 'nav.datacenters' | translate }}
               </a>
@@ -234,62 +213,62 @@
               <a
                 *ngIf="(adminRead$ | async) === true"
                 routerLink="admin/policyreports"
-                routerLinkActive="text-gray-800 bg-green-200 dark:bg-green-800 dark:text-white dark:hover:text-light"
                 role="menuitem"
-                class="block rounded-md p-2 text-sm text-gray-400 transition-colors duration-200 hover:text-gray-700 dark:hover:text-white"
+                routerLinkActive="dark:bg-green-800 text-white"
+                class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
               >
                 {{ 'nav.policyreports' | translate }}
               </a>
               <a
                 *ngIf="(adminRead$ | async) === true"
                 routerLink="admin/prices"
-                routerLinkActive="text-gray-800 bg-green-200 dark:bg-green-800 dark:text-white dark:hover:text-light"
                 role="menuitem"
-                class="block rounded-md p-2 text-sm text-gray-400 transition-colors duration-200 hover:text-gray-700 dark:hover:text-white"
+                routerLinkActive="dark:bg-green-800 text-white"
+                class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
               >
                 {{ 'nav.prices' | translate }}
               </a>
               <a
                 routerLink="admin/projects"
-                routerLinkActive="text-gray-800 bg-green-200 dark:bg-green-800 dark:text-white dark:hover:text-light"
                 role="menuitem"
-                class="block rounded-md p-2 text-sm text-gray-400 transition-colors duration-200 hover:text-gray-700 dark:hover:text-white"
+                routerLinkActive="dark:bg-green-800 text-white"
+                class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
               >
                 {{ 'nav.projects' | translate }}
               </a>
               <a
                 *ngIf="(adminOwner$ | async) === true"
                 routerLink="resourcesv2"
-                routerLinkActive="text-gray-800 bg-green-200 dark:bg-green-800 dark:text-white dark:hover:text-light"
                 role="menuitem"
-                class="block rounded-md p-2 text-sm text-gray-400 transition-colors duration-200 hover:text-gray-700 dark:hover:text-white"
+                routerLinkActive="dark:bg-green-800 text-white"
+                class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
               >
                 {{ 'nav.resourcesv2' | translate }}
               </a>
               <a
                 *ngIf="(adminOwner$ | async) === true"
                 routerLink="admin/compliancereports"
-                routerLinkActive="text-gray-800 bg-green-200 dark:bg-green-800 dark:text-white dark:hover:text-light"
                 role="menuitem"
-                class="block rounded-md p-2 text-sm text-gray-400 transition-colors duration-200 hover:text-gray-700 dark:hover:text-white"
+                routerLinkActive="dark:bg-green-800 text-white"
+                class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
               >
                 {{ 'nav.compliancereports' | translate }}
               </a>
               <a
                 *ngIf="(adminRead$ | async) === true"
                 routerLink="/admin/vulnerabilityreports"
-                routerLinkActive="text-gray-800 bg-green-200 dark:bg-green-800 dark:text-white dark:hover:text-light"
                 role="menuitem"
-                class="block rounded-md p-2 text-sm text-gray-400 transition-colors duration-200 hover:text-gray-700 dark:hover:text-white"
+                routerLinkActive="dark:bg-green-800 text-white"
+                class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
               >
                 {{ 'nav.vulnerabilityreports' | translate }}
               </a>
               <a
                 *ngIf="(adminOwner$ | async) === true"
                 routerLink="admin/acl"
-                routerLinkActive="text-gray-800 bg-green-200 dark:bg-green-800 dark:text-white dark:hover:text-light"
                 role="menuitem"
-                class="block rounded-md p-2 text-sm text-gray-400 transition-colors duration-200 hover:text-gray-700 dark:hover:text-white"
+                routerLinkActive="dark:bg-green-800 text-white"
+                class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
               >
                 {{ 'nav.acl' | translate }}
               </a>
@@ -299,105 +278,105 @@
               <a
                 *ngIf="(adminOwner$ | async) === true"
                 routerLink="admin/acl"
-                routerLinkActive="text-gray-800 bg-green-200 dark:bg-green-800 dark:text-white dark:hover:text-light"
                 role="menuitem"
-                class="block rounded-md p-2 text-sm text-gray-400 transition-colors duration-200 hover:text-gray-700 dark:hover:text-white"
+                routerLinkActive="dark:bg-green-800 text-white"
+                class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
               >
                 {{ 'nav.acl' | translate }}
               </a>
               <a
                 *ngIf="(adminOwner$ | async) === true"
                 routerLink="admin/apikeys"
-                routerLinkActive="text-gray-800 bg-green-200 dark:bg-green-800 dark:text-white dark:hover:text-light"
                 role="menuitem"
-                class="block rounded-md p-2 text-sm text-gray-400 transition-colors duration-200 hover:text-gray-700 dark:hover:text-white"
+                routerLinkActive="dark:bg-green-800 text-white"
+                class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
               >
                 {{ 'nav.apikeys' | translate }}
               </a>
               <a
                 *ngIf="(adminOwner$ | async) === true"
                 routerLink="admin/auditlogs"
-                routerLinkActive="text-gray-800 bg-green-200 dark:bg-green-800 dark:text-white dark:hover:text-light"
                 role="menuitem"
-                class="block rounded-md p-2 text-sm text-gray-400 transition-colors duration-200 hover:text-gray-700 dark:hover:text-white"
+                routerLinkActive="dark:bg-green-800 text-white"
+                class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
               >
                 {{ 'nav.auditlogs' | translate }}
               </a>
               <a
                 *ngIf="(adminOwner$ | async) === true"
                 routerLink="admin/configuration"
-                routerLinkActive="text-gray-800 bg-green-200 dark:bg-green-800 dark:text-white dark:hover:text-light"
                 role="menuitem"
-                class="block rounded-md p-2 text-sm text-gray-400 transition-colors duration-200 hover:text-gray-700 dark:hover:text-white"
+                routerLinkActive="dark:bg-green-800 text-white"
+                class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
               >
                 {{ 'nav.configuration' | translate }}
               </a>
               <a
                 *ngIf="(adminOwner$ | async) === true"
                 routerLink="admin/compliancereports"
-                routerLinkActive="text-gray-800 bg-green-200 dark:bg-green-800 dark:text-white dark:hover:text-light"
                 role="menuitem"
-                class="block rounded-md p-2 text-sm text-gray-400 transition-colors duration-200 hover:text-gray-700 dark:hover:text-white"
+                routerLinkActive="dark:bg-green-800 text-white"
+                class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
               >
                 {{ 'nav.compliancereports' | translate }}
               </a>
               <a
                 routerLink="admin/datacenter"
-                routerLinkActive="text-gray-800 bg-green-200 dark:bg-green-800 dark:text-white dark:hover:text-light"
                 role="menuitem"
-                class="block rounded-md p-2 text-sm text-gray-400 transition-colors duration-200 hover:text-gray-700 dark:hover:text-white"
+                routerLinkActive="dark:bg-green-800 text-white"
+                class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
               >
                 {{ 'nav.datacenters' | translate }}
               </a>
               <a
                 *ngIf="(adminRead$ | async) === true"
                 routerLink="admin/policyreports"
-                routerLinkActive="text-gray-800 bg-green-200 dark:bg-green-800 dark:text-white dark:hover:text-light"
                 role="menuitem"
-                class="block rounded-md p-2 text-sm text-gray-400 transition-colors duration-200 hover:text-gray-700 dark:hover:text-white"
+                routerLinkActive="dark:bg-green-800 text-white"
+                class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
               >
                 {{ 'nav.policyreports' | translate }}
               </a>
               <a
                 *ngIf="(adminRead$ | async) === true"
                 routerLink="admin/prices"
-                routerLinkActive="text-gray-800 bg-green-200 dark:bg-green-800 dark:text-white dark:hover:text-light"
                 role="menuitem"
-                class="block rounded-md p-2 text-sm text-gray-400 transition-colors duration-200 hover:text-gray-700 dark:hover:text-white"
+                routerLinkActive="dark:bg-green-800 text-white"
+                class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
               >
                 {{ 'nav.prices' | translate }}
               </a>
               <a
                 routerLink="admin/projects"
-                routerLinkActive="text-gray-800 bg-green-200 dark:bg-green-800 dark:text-white dark:hover:text-light"
                 role="menuitem"
-                class="block rounded-md p-2 text-sm text-gray-400 transition-colors duration-200 hover:text-gray-700 dark:hover:text-white"
+                routerLinkActive="dark:bg-green-800 text-white"
+                class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
               >
                 {{ 'nav.projects' | translate }}
               </a>
               <a
                 *ngIf="(adminOwner$ | async) === true"
                 routerLink="resourcesv2"
-                routerLinkActive="text-gray-800 bg-green-200 dark:bg-green-800 dark:text-white dark:hover:text-light"
                 role="menuitem"
-                class="block rounded-md p-2 text-sm text-gray-400 transition-colors duration-200 hover:text-gray-700 dark:hover:text-white"
+                routerLinkActive="dark:bg-green-800 text-white"
+                class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
               >
                 {{ 'nav.resourcesv2' | translate }}
               </a>
               <a
                 *ngIf="(adminRead$ | async) === true"
                 routerLink="/admin/vulnerabilityreports"
-                routerLinkActive="text-gray-800 bg-green-200 dark:bg-green-800 dark:text-white dark:hover:text-light"
                 role="menuitem"
-                class="block rounded-md p-2 text-sm text-gray-400 transition-colors duration-200 hover:text-gray-700 dark:hover:text-white"
+                routerLinkActive="dark:bg-green-800 text-white"
+                class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
               >
                 {{ 'nav.vulnerabilityreports' | translate }}
               </a>
               <a
                 routerLink="/workspaces"
-                routerLinkActive="text-gray-800 bg-green-200 dark:bg-green-800 dark:text-white dark:hover:text-light"
                 role="menuitem"
-                class="block rounded-md p-2 text-sm text-gray-400 transition-colors duration-200 hover:text-gray-700 dark:hover:text-white"
+                routerLinkActive="dark:bg-green-800 text-white"
+                class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
               >
                 {{ 'nav.workspaces' | translate }}
               </a>
@@ -406,13 +385,8 @@
         </div>
 
         <div>
-          <a
-            href="#"
-            class="dark:text-light hover:bg-primary-100 dark:hover:bg-primary flex items-center rounded-md p-2 text-gray-500 transition-colors"
-            role="button"
-            aria-haspopup="true"
-          >
-            <span aria-hidden="true">
+          <a class="flex items-center rounded-md p-2 text-gray-500 dark:text-gray-500">
+            <!-- <span aria-hidden="true">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path
                   stroke-linecap="round"
@@ -420,9 +394,9 @@
                   d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                 />
               </svg>
-            </span>
+            </span> -->
             <span class="ml-2 text-sm"> {{ 'nav.help' | translate }} </span>
-            <span class="ml-auto" aria-hidden="true">
+            <!-- <span class="ml-auto" aria-hidden="true">
               <svg
                 class="h-4 w-4 transform transition-transform"
                 xmlns="http://www.w3.org/2000/svg"
@@ -432,7 +406,7 @@
               >
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
-            </span>
+            </span> -->
           </a>
           <div role="menu" class="mt-2 space-y-2 px-7" aria-label="Dashboards">
             <!-- active & hover classes 'text-gray-700 dark:text-light' -->
@@ -441,7 +415,8 @@
               href="{{ externalDocsUrl }}"
               target="_blank"
               role="menuitem"
-              class="dark:hover:text-light block rounded-md p-2 text-sm text-gray-400 transition-colors duration-200 hover:text-gray-700"
+              routerLinkActive="dark:bg-green-800 text-white"
+              class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
             >
               {{ 'nav.doc' | translate }}
             </a>
@@ -451,9 +426,9 @@
             <!-- inActive classes 'text-gray-400 dark:text-gray-400' -->
             <a
               routerLink="/about"
-              routerLinkActive="text-gray-800 bg-green-200 dark:bg-green-800 dark:text-white dark:hover:text-light"
               role="menuitem"
-              class="block rounded-md p-2 text-sm text-gray-400 transition-colors duration-200 hover:text-gray-700 dark:hover:text-white"
+              routerLinkActive="dark:bg-green-800 text-white"
+              class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
             >
               {{ 'nav.about' | translate }}
             </a>
@@ -463,9 +438,9 @@
             <!-- inActive classes 'text-gray-400 dark:text-gray-400' -->
             <a
               routerLink="/releasenotes"
-              routerLinkActive="text-gray-800 bg-green-200 dark:bg-green-800 dark:text-white dark:hover:text-light"
               role="menuitem"
-              class="block rounded-md p-2 text-sm text-gray-400 transition-colors duration-200 hover:text-gray-700 dark:hover:text-white"
+              routerLinkActive="dark:bg-green-800 text-white"
+              class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
             >
               {{ 'nav.releasenotes' | translate }}
             </a>
@@ -485,14 +460,14 @@
     </div>
   </aside>
 
-  <div class="flex w-full flex-col overflow-y-auto overflow-x-hidden">
+  <div class="flex w-full flex-col overflow-x-hidden overflow-y-auto">
     <!-- Navbar -->
     <header class="dark:bg-darker sticky top-0 z-10 bg-white">
       <div class="dark:border-primary-darker flex items-center justify-between border-b p-2">
         <!-- Mobile menu button  -->
         <button
           (click)="toggleMobileMenu(); showUserMenu = false; showSubMenu = false"
-          class="text-primary-lighter bg-primary-50 hover:text-primary hover:bg-primary-100 dark:hover:text-light dark:hover:bg-primary-dark dark:bg-dark rounded-md p-1 transition-colors duration-200 focus:outline-none focus:ring md:hidden"
+          class="text-primary-lighter bg-primary-50 hover:text-primary hover:bg-primary-100 dark:hover:text-light dark:hover:bg-primary-dark dark:bg-dark rounded-md p-1 transition-colors duration-200 focus:ring focus:outline-none md:hidden"
         >
           <span class="sr-only">Open main menu </span>
           <span aria-hidden="true">
@@ -503,7 +478,7 @@
         </button>
 
         <!-- Brand -->
-        <a href="index.html" class="text-primary-dark dark:text-light inline-block text-2xl font-bold uppercase tracking-wider">
+        <a href="index.html" class="text-primary-dark dark:text-light inline-block text-2xl font-bold tracking-wider uppercase">
           <div class="flex">
             <img class="h-12 w-12" ngSrc="/assets/icons/ror.svg" alt="ROR logo" height="708" width="708" priority />
             <span class="w-auto p-3">{{ 'app.title' | translate }} </span>
@@ -516,7 +491,7 @@
         <!-- Mobile sub menu button -->
         <button
           (click)="toggleSubMenu()"
-          class="text-primary-lighter bg-primary-50 hover:text-primary hover:bg-primary-100 dark:hover:text-light dark:hover:bg-primary-dark dark:bg-dark rounded-md p-1 transition-colors duration-200 focus:outline-none focus:ring md:hidden"
+          class="text-primary-lighter bg-primary-50 hover:text-primary hover:bg-primary-100 dark:hover:text-light dark:hover:bg-primary-dark dark:bg-dark rounded-md p-1 transition-colors duration-200 focus:ring focus:outline-none md:hidden"
         >
           <span class="sr-only">Open sub manu</span>
           <span aria-hidden="true">
@@ -535,9 +510,9 @@
         <nav aria-label="Secondary" class="hidden space-x-2 md:flex md:items-center">
           <!-- Toggle dark theme button -->
           <button aria-hidden="true" class="relative focus:outline-none" (click)="toggleDark()">
-            <div class="bg-primary-100 dark:bg-primary-lighter h-6 w-12 rounded-full outline-none transition"></div>
+            <div class="bg-primary-100 dark:bg-primary-lighter h-6 w-12 rounded-full transition outline-none"></div>
             <div
-              class="absolute left-0 top-0 inline-flex h-6 w-6 scale-110 transform items-center justify-center rounded-full shadow-sm transition-all duration-150"
+              class="absolute top-0 left-0 inline-flex h-6 w-6 scale-110 transform items-center justify-center rounded-full shadow-sm transition-all duration-150"
             >
               <svg *ngIf="!isDark" class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path
@@ -624,7 +599,7 @@
               type="button"
               aria-haspopup="true"
               (click)="toggleUserMenu()"
-              class="rounded-full transition-opacity duration-200 focus:outline-none focus:ring dark:opacity-75 dark:hover:opacity-100 dark:focus:opacity-100"
+              class="rounded-full transition-opacity duration-200 focus:ring focus:outline-none dark:opacity-75 dark:hover:opacity-100 dark:focus:opacity-100"
             >
               <span class="sr-only">User menu</span>
               @if (!desember) {
@@ -637,7 +612,7 @@
             <!-- User dropdown menu -->
             <div
               [hidden]="!showUserMenu"
-              class="dark:bg-dark absolute right-0 top-12 w-48 rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+              class="dark:bg-dark ring-opacity-5 absolute top-12 right-0 w-48 rounded-md bg-white py-1 shadow-lg ring-1 ring-black focus:outline-none"
               tabindex="-1"
               role="menu"
               aria-orientation="vertical"
@@ -678,9 +653,9 @@
           <div class="space-x-2">
             <!-- Toggle dark theme button -->
             <button aria-hidden="true" class="relative focus:outline-none" (click)="toggleDark()">
-              <div class="bg-primary-100 dark:bg-primary-lighter h-6 w-12 rounded-full outline-none transition"></div>
+              <div class="bg-primary-100 dark:bg-primary-lighter h-6 w-12 rounded-full transition outline-none"></div>
               <div
-                class="absolute left-0 top-0 inline-flex h-6 w-6 scale-110 transform items-center justify-center rounded-full shadow-sm transition-all duration-200"
+                class="absolute top-0 left-0 inline-flex h-6 w-6 scale-110 transform items-center justify-center rounded-full shadow-sm transition-all duration-200"
               >
                 <svg *ngIf="!isDark" class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
@@ -768,7 +743,7 @@
               (click)="toggleUserMenu(); toggleMobileMenu()"
               type="button"
               aria-haspopup="true"
-              class="block rounded-full transition-opacity duration-200 focus:outline-none focus:ring dark:opacity-75 dark:hover:opacity-100 dark:focus:opacity-100"
+              class="block rounded-full transition-opacity duration-200 focus:ring focus:outline-none dark:opacity-75 dark:hover:opacity-100 dark:focus:opacity-100"
             >
               <span class="sr-only">User menu</span>
               <img class="h-10 w-10 rounded-full" ngSrc="/assets/images/blank_profile.png" height="50" width="50" alt="User menu" />
@@ -777,7 +752,7 @@
             <!-- User dropdown menu -->
             <div
               [hidden]="!showUserMenu"
-              class="dark:bg-dark absolute right-0 top-12 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5"
+              class="dark:bg-dark ring-opacity-5 absolute top-12 right-0 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black"
               role="menu"
               aria-orientation="vertical"
               aria-label="User menu"
@@ -892,7 +867,7 @@
               role="button"
               aria-haspopup="true"
             >
-              <span aria-hidden="true">
+              <!-- <span aria-hidden="true">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path
                     stroke-linecap="round"
@@ -900,9 +875,9 @@
                     d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"
                   />
                 </svg>
-              </span>
+              </span> -->
               <span class="ml-2 text-sm"> {{ 'nav.pricesMenu' | translate }} </span>
-              <span class="ml-auto" aria-hidden="true">
+              <!-- <span class="ml-auto" aria-hidden="true">
                 <svg
                   class="h-4 w-4 transform transition-transform"
                   xmlns="http://www.w3.org/2000/svg"
@@ -912,7 +887,7 @@
                 >
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                 </svg>
-              </span>
+              </span> -->
             </a>
             <div role="menu" class="mt-2 space-y-2 px-7" aria-label="Dashboards">
               <!-- active & hover classes 'text-gray-700 dark:text-light' -->
@@ -1007,7 +982,7 @@
         <a
           href="{{ rorDocsUrl }}"
           target="_blank"
-          class="delay-50 focus:ring-primary dark:focus:ring-offset-dark flex flex-row rounded-md px-4 py-2 text-sm text-gray-700 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white dark:text-white"
+          class="focus:ring-primary dark:focus:ring-offset-dark flex flex-row rounded-md px-4 py-2 text-sm text-gray-700 delay-50 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none dark:text-white"
         >
           <i class="pi pi-spin pi-github" style="font-size: 2rem"></i>
           <span class="ml-2"> {{ 'common.viewOnGit' | translate }}</span>
@@ -1042,7 +1017,7 @@
   >
     <div class="absolute left-0 -translate-x-full transform p-2">
       <!-- Close button -->
-      <button class="rounded-md p-2 text-white focus:outline-none focus:ring" (click)="toggleSettings()">
+      <button class="rounded-md p-2 text-white focus:ring focus:outline-none" (click)="toggleSettings()">
         <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
         </svg>
@@ -1074,7 +1049,7 @@
             <button
               *ngIf="isDark"
               (click)="toggleDark()"
-              class="dark:border-primary dark:hover:text-primary-100 dark:hover:border-primary-light focus:ring-primary-lighter dark:focus:ring-offset-dark dark:focus:ring-primary-dark flex items-center justify-center space-x-4 rounded-md border px-4 py-2 transition-colors hover:border-gray-900 hover:text-gray-900 focus:outline-none focus:ring focus:ring-offset-2"
+              class="dark:border-primary dark:hover:text-primary-100 dark:hover:border-primary-light focus:ring-primary-lighter dark:focus:ring-offset-dark dark:focus:ring-primary-dark flex items-center justify-center space-x-4 rounded-md border px-4 py-2 transition-colors hover:border-gray-900 hover:text-gray-900 focus:ring focus:ring-offset-2 focus:outline-none"
             >
               <span>
                 <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1093,7 +1068,7 @@
             <button
               (click)="toggleDark()"
               *ngIf="!isDark"
-              class="dark:border-primary dark:hover:text-primary-100 dark:hover:border-primary-light focus:ring-primary-lighter dark:focus:ring-offset-dark dark:focus:ring-primary-dark flex items-center justify-center space-x-4 rounded-md border px-4 py-2 transition-colors hover:border-gray-900 hover:text-gray-900 focus:outline-none focus:ring focus:ring-offset-2"
+              class="dark:border-primary dark:hover:text-primary-100 dark:hover:border-primary-light focus:ring-primary-lighter dark:focus:ring-offset-dark dark:focus:ring-primary-dark flex items-center justify-center space-x-4 rounded-md border px-4 py-2 transition-colors hover:border-gray-900 hover:text-gray-900 focus:ring focus:ring-offset-2 focus:outline-none"
             >
               <span>
                 <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1123,13 +1098,13 @@
             <button
               (click)="useLanguage('no')"
               [ngClass]="{ 'border-green-700 dark:bg-green-500': lang === 'no' }"
-              class="dark:border-primary dark:hover:text-primary-100 dark:hover:border-primary-light focus:ring-primary-lighter dark:focus:ring-offset-dark dark:focus:ring-primary-dark flex items-center justify-center space-x-4 rounded-md border px-4 py-2 transition-colors hover:border-gray-900 hover:text-gray-900 focus:outline-none focus:ring focus:ring-offset-2"
+              class="dark:border-primary dark:hover:text-primary-100 dark:hover:border-primary-light focus:ring-primary-lighter dark:focus:ring-offset-dark dark:focus:ring-primary-dark flex items-center justify-center space-x-4 rounded-md border px-4 py-2 transition-colors hover:border-gray-900 hover:text-gray-900 focus:ring focus:ring-offset-2 focus:outline-none"
             >
               <span>Norsk</span>
             </button>
             <button
               (click)="useLanguage('en')"
-              class="dark:border-primary dark:hover:text-primary-100 dark:hover:border-primary-light focus:ring-primary-lighter dark:focus:ring-offset-dark dark:focus:ring-primary-dark flex items-center justify-center space-x-4 rounded-md border px-4 py-2 transition-colors hover:border-gray-900 hover:text-gray-900 focus:outline-none focus:ring focus:ring-offset-2"
+              class="dark:border-primary dark:hover:text-primary-100 dark:hover:border-primary-light focus:ring-primary-lighter dark:focus:ring-offset-dark dark:focus:ring-primary-dark flex items-center justify-center space-x-4 rounded-md border px-4 py-2 transition-colors hover:border-gray-900 hover:text-gray-900 focus:ring focus:ring-offset-2 focus:outline-none"
               [ngClass]="{ 'border-green-700 dark:bg-green-500': lang === 'en' }"
             >
               <span>English</span>
@@ -1158,7 +1133,7 @@
   >
     <div class="absolute right-0 translate-x-full transform p-2">
       <!-- Close button -->
-      <button class="rounded-md p-2 text-white focus:outline-none focus:ring" (click)="toggleNotifications()">
+      <button class="rounded-md p-2 text-white focus:ring focus:outline-none" (click)="toggleNotifications()">
         <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
         </svg>
@@ -1193,7 +1168,7 @@
                     />
                   </svg>
                 </span>
-                <div class="bg-primary-50 dark:bg-primary-darker absolute left-1/2 -ml-px -mt-3 h-24 p-px"></div>
+                <div class="bg-primary-50 dark:bg-primary-darker absolute left-1/2 -mt-3 -ml-px h-24 p-px"></div>
               </div>
               <div class="flex-1 overflow-hidden">
                 <h5 class="dark:text-light text-sm font-semibold text-gray-600">New project "KWD Dashboard" created</h5>
@@ -1215,7 +1190,7 @@
                     />
                   </svg>
                 </span>
-                <div class="bg-primary-50 dark:bg-primary-darker absolute left-1/2 -ml-px -mt-3 h-24 p-px"></div>
+                <div class="bg-primary-50 dark:bg-primary-darker absolute left-1/2 -mt-3 -ml-px h-24 p-px"></div>
               </div>
               <div class="flex-1 overflow-hidden">
                 <h5 class="dark:text-light text-sm font-semibold text-gray-600">KWD Dashboard v0.0.2 was released</h5>
@@ -1238,7 +1213,7 @@
                       />
                     </svg>
                   </span>
-                  <div class="bg-primary-50 dark:bg-primary-darker absolute left-1/2 -ml-px -mt-3 h-24 p-px"></div>
+                  <div class="bg-primary-50 dark:bg-primary-darker absolute left-1/2 -mt-3 -ml-px h-24 p-px"></div>
                 </div>
                 <div class="flex-1 overflow-hidden">
                   <h5 class="dark:text-light text-sm font-semibold text-gray-600">New project "KWD Dashboard" created</h5>
@@ -1258,7 +1233,7 @@
                 <span class="rounded-ful relative z-10 inline-block overflow-visible">
                   <img class="h-9 w-9 rounded-full object-cover" alt="" />
                 </span>
-                <div class="bg-primary-50 dark:bg-primary-darker absolute left-1/2 -ml-px -mt-3 h-24 p-px"></div>
+                <div class="bg-primary-50 dark:bg-primary-darker absolute left-1/2 -mt-3 -ml-px h-24 p-px"></div>
               </div>
               <div class="flex-1 overflow-hidden">
                 <h5 class="dark:text-light text-sm font-semibold text-gray-600">User</h5>
@@ -1273,7 +1248,7 @@
                 <span class="rounded-ful relative z-10 inline-block overflow-visible">
                   <img class="h-9 w-9 rounded-full object-cover" alt="empty" />
                 </span>
-                <div class="bg-primary-50 dark:bg-primary-darker absolute left-1/2 -ml-px -mt-3 h-24 p-px"></div>
+                <div class="bg-primary-50 dark:bg-primary-darker absolute left-1/2 -mt-3 -ml-px h-24 p-px"></div>
               </div>
               <div class="flex-1 overflow-hidden">
                 <h5 class="dark:text-light text-sm font-semibold text-gray-600">John</h5>
@@ -1288,7 +1263,7 @@
                 <span class="rounded-ful relative z-10 inline-block overflow-visible">
                   <img class="h-9 w-9 rounded-full object-cover" alt="" />
                 </span>
-                <div class="bg-primary-50 dark:bg-primary-darker absolute left-1/2 -ml-px -mt-3 h-24 p-px"></div>
+                <div class="bg-primary-50 dark:bg-primary-darker absolute left-1/2 -mt-3 -ml-px h-24 p-px"></div>
               </div>
               <div class="flex-1 overflow-hidden">
                 <h5 class="dark:text-light text-sm font-semibold text-gray-600"></h5>
@@ -1304,7 +1279,7 @@
                   <span class="rounded-ful relative z-10 inline-block overflow-visible">
                     <img class="h-9 w-9 rounded-full object-cover" alt="" />
                   </span>
-                  <div class="bg-primary-50 dark:bg-primary-darker absolute left-1/2 -ml-px -mt-3 h-24 p-px"></div>
+                  <div class="bg-primary-50 dark:bg-primary-darker absolute left-1/2 -mt-3 -ml-px h-24 p-px"></div>
                 </div>
                 <div class="flex-1 overflow-hidden">
                   <h5 class="dark:text-light text-sm font-semibold text-gray-600"></h5>
@@ -1329,7 +1304,7 @@
   >
     <div class="absolute right-0 translate-x-full transform p-2">
       <!-- Close button -->
-      <button class="rounded-md p-2 text-white focus:outline-none focus:ring" (click)="toggleSearch()">
+      <button class="rounded-md p-2 text-white focus:ring focus:outline-none" (click)="toggleSearch()">
         <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
         </svg>
@@ -1350,7 +1325,7 @@
         </span>
         <input
           type="text"
-          class="dark:bg-dark dark:text-light w-full rounded-full border py-2 pl-10 pr-4 focus:outline-none focus:ring dark:border-transparent"
+          class="dark:bg-dark dark:text-light w-full rounded-full border py-2 pr-4 pl-10 focus:ring focus:outline-none dark:border-transparent"
           [placeholder]="'layout.search.placeholder' | translate"
         />
       </div>

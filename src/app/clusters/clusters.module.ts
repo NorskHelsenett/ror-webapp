@@ -26,6 +26,7 @@ import { OrganizationChartModule } from 'primeng/organizationchart';
 import { TextareaModule } from 'primeng/textarea';
 import { RippleModule } from 'primeng/ripple';
 import { DialogModule } from 'primeng/dialog';
+import { TabsModule } from 'primeng/tabs';
 import { ClusterVulnerabilityComponent } from './components/cluster-vulnerability/cluster-vulnerability.component';
 
 import { ProviderComponent } from '../shared/components/provider/provider.component';
@@ -85,6 +86,7 @@ import { RouterModule } from '@angular/router';
     ClusterNodepoolsComponent,
     ClusterNodePoolsComponent,
     RouterModule,
+    TabsModule,
   ],
   exports: [ClustersComponent, ...clustersPages, ...clusterComponents],
   providers: [ConfirmationService, ...clusterServices],

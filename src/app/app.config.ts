@@ -15,6 +15,7 @@ import { TranslateLoader, TranslateModule, MissingTranslationHandler } from '@ng
 import { CustomMissingTranslationHandler, HttpLoaderFactory } from './core/i18n/i18nfunctions';
 import { isPlatformServer } from '@angular/common';
 import RorTheme from './themes/ror-theme';
+import { ThemeService } from './core/services/theme.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -62,6 +63,7 @@ export const appConfig: ApplicationConfig = {
       }),
     ]),
     MessageService,
+    ThemeService,
     provideAnimationsAsync(),
     providePrimeNG({
       ripple: true,
@@ -69,6 +71,7 @@ export const appConfig: ApplicationConfig = {
         preset: RorTheme,
         options: {
           darkModeSelector: '.dark',
+          variants: '',
           cssLayer: {
             name: 'primeng',
             order: 'base, app-styles, theme, primeng',
