@@ -1,14 +1,14 @@
 <div class="grid space-y-8 lg:gap-8 lg:space-y-0">
   <div class="dark:bg-darker flex items-center justify-between overflow-x-auto rounded-md bg-white">
     <div class="dark:bg-darker col-span-2 overflow-x-auto rounded-md bg-white">
-      <div class="dark:border-primary flex border-b p-4 text-red-500 gap-5">
-        <h1 class="dark:text-red-500 text-red-500 text-md font-semibold">{{ 'pages.clusters.details.delete.subTitle' | translate }}</h1>
+      <div class="dark:border-primary flex gap-5 border-b p-4 text-red-500">
+        <h1 class="text-md font-semibold text-red-500 dark:text-red-500">{{ 'pages.clusters.details.delete.subTitle' | translate }}</h1>
         :
-        <h2 class="dark:text-red-500 text-lg text-red-500 font-semibold">{{ 'pages.clusters.details.delete.title' | translate }}</h2>
+        <h2 class="text-lg font-semibold text-red-500 dark:text-red-500">{{ 'pages.clusters.details.delete.title' | translate }}</h2>
         <div class="flex-col">
           <button
             (click)="refresh()"
-            class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+            class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
           >
             {{ 'common.refresh' | translate }}
           </button>
@@ -19,11 +19,11 @@
           <div class="overflow-x-auto">
             <div>{{ 'pages.clusters.details.delete.maintext' | translate }}</div>
             <div class="mt-2">{{ 'pages.clusters.details.delete.subtext' | translate }}</div>
-            <div class="mt-3 p-4 text-lg bg-red-300 dark:bg-red-800 text-gray-900 dark:text-gray-200">
+            <div class="mt-3 bg-red-300 p-4 text-lg text-gray-900 dark:bg-red-800 dark:text-gray-200">
               {{ 'pages.clusters.details.delete.sub2text' | translate }}
             </div>
 
-            <code class="mt-5 mb- text-sm sm:text-base inline-flex text-left items-center space-x-4 bg-gray-800 text-white rounded-lg p-4 pl-6">
+            <code class="mb- mt-5 inline-flex items-center space-x-4 rounded-lg bg-gray-800 p-4 pl-6 text-left text-sm text-white sm:text-base">
               <span class="flex gap-4">
                 <span class="shrink-0 text-gray-500"> $ </span>
 
@@ -50,7 +50,7 @@
                 (click)="scheduleDeletion()"
                 pButton
                 pRipple
-                class="focus:ring-primary dark:focus:ring-offset-dark ml-2 content-end rounded-md bg-red-700 px-4 py-2 text-sm text-white hover:bg-red-500 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+                class="focus:ring-primary dark:focus:ring-offset-dark ml-2 content-end rounded-md bg-red-700 px-4 py-2 text-sm text-white hover:bg-red-500 focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
               >
                 {{ 'common.delete' | translate }}
               </button>

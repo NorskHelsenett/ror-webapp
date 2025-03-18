@@ -43,20 +43,20 @@
           <div class="">
             <p-dropdown [options]="rowsPerPage" [(ngModel)]="rows" (onChange)="selectedRowsChange($event)">
               <ng-template let-row pTemplate="item">
-                <div class="flex align-items-center gap-2">
+                <div class="align-items-center flex gap-2">
                   <div>{{ row }}</div>
                 </div>
               </ng-template>
             </p-dropdown>
           </div>
-          <app-export-button class="md:justify-self-end mt-1" [exportObjects]="export()" [filename]="exportFilename"></app-export-button>
+          <app-export-button class="mt-1 md:justify-self-end" [exportObjects]="export()" [filename]="exportFilename"></app-export-button>
         </div>
       </div>
     </ng-template>
     <ng-template pTemplate="header" let-columns>
       <tr>
         <th *ngFor="let col of columns" [pSortableColumn]="col?.field" class="">
-          <div class="flex flex-cols">
+          <div class="flex-cols flex">
             <span class="">{{ col?.header }}</span>
             <p-sortIcon [field]="col?.field" pTooltip="{{ 'pages.resourcesv2.list.header.tooltip' | translate }}"></p-sortIcon>
           </div>
@@ -111,9 +111,9 @@
             <ng-container>{{ extractData(resource, col.field) }}</ng-container>
           }
         </td>
-        <td *ngIf="resource" class="w-40 h-10">
+        <td *ngIf="resource" class="h-10 w-40">
           <a
-            class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+            class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
             (click)="setSelectedResource(resource)"
           >
             {{ 'common.details' | translate }}
@@ -137,7 +137,7 @@
       </tr>
     </ng-template>
     <ng-template pTemplate="summary">
-      <div class="text-center flex">
+      <div class="flex text-center">
         <span class="text-pretty">{{ 'pages.resourcesv2.list.fetchCount' | translate: { count: resources?.length } }}</span>
       </div>
 
@@ -145,7 +145,7 @@
         <button
           *ngIf="showLoadMore"
           (click)="loadMore()"
-          class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+          class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
         >
           {{ 'common.loadMore' | translate }}
         </button>

@@ -12,7 +12,7 @@
     <button
       [disabled]="!createIsHidden"
       (click)="toggleCreateVisibility()"
-      class="delay-50 hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark float-left rounded-md bg-green-700 px-4 py-2 text-sm text-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white disabled:cursor-not-allowed disabled:bg-gray-500 disabled:opacity-75 disabled:hover:bg-gray-800"
+      class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark float-left rounded-md bg-green-700 px-4 py-2 text-sm text-white transition delay-50 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none disabled:cursor-not-allowed disabled:bg-gray-500 disabled:opacity-75 disabled:hover:bg-gray-800"
     >
       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
@@ -20,7 +20,7 @@
     </button>
     <button
       (click)="fetchApikeys(lastFilter)"
-      class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark ml-2 rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+      class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark ml-2 rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
     >
       {{ 'common.refresh' | translate }}
     </button>
@@ -91,7 +91,7 @@
                 <button
                   (click)="deleteApiKey(apikey)"
                   icon="pi pi-trash"
-                  class="focus:ring-primary dark:focus:ring-offset-dark ml-2 flex rounded-md bg-red-700 px-4 py-2 text-sm text-white hover:bg-red-500 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+                  class="focus:ring-primary dark:focus:ring-offset-dark ml-2 flex rounded-md bg-red-700 px-4 py-2 text-sm text-white hover:bg-red-500 focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
                     <path

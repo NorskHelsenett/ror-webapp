@@ -32,21 +32,21 @@
   </thead>
   <tbody>
     <tr class="transition duration-300 ease-in-out hover:bg-gray-200 dark:hover:bg-gray-500" *ngFor="let datacenter of datacenters">
-      <td class="whitespace-nowrap px-2 py-2 text-sm font-medium">
+      <td class="px-2 py-2 text-sm font-medium whitespace-nowrap">
         <a class="hover:text-blue-800 hover:underline dark:hover:text-blue-400" [routerLink]="['./admin/datacenter', datacenter.id]">{{
           datacenter.id
         }}</a>
       </td>
-      <td class="whitespace-nowrap px-2 py-2 text-sm font-light">
+      <td class="px-2 py-2 text-sm font-light whitespace-nowrap">
         {{ datacenter?.metrics?.cpuPercentage }} % ({{ datacenter?.metrics?.cpu }} {{ 'pages.datacenters.table.column.cores' | translate }})
       </td>
       <!-- <td class="text-sm font-light px-2 py-2 whitespace-nowrap">{{ datacenter?.metrics?.cpuConsumed }} Milli value</td> -->
-      <td class="whitespace-nowrap px-2 py-2 text-sm font-light">
+      <td class="px-2 py-2 text-sm font-light whitespace-nowrap">
         {{ datacenter?.metrics?.memoryPercentage }} % ({{ datacenter?.metrics?.memory | formatBytes: 2 : true }})
       </td>
       <!-- <td class="text-sm font-light px-2 py-2 whitespace-nowrap">{{ datacenter?.metrics?.memoryConsumed | formatBytes: 2:true }}</td> -->
       <!-- <td class="text-sm font-light px-2 py-2 whitespace-nowrap">{{ datacenter?.metrics?.nodePoolCount }}</td> -->
-      <td class="whitespace-nowrap px-2 py-2 text-sm font-light">{{ datacenter?.metrics?.clusterCount }}</td>
+      <td class="px-2 py-2 text-sm font-light whitespace-nowrap">{{ datacenter?.metrics?.clusterCount }}</td>
       <!-- <td class="text-sm font-light px-2 py-2 whitespace-nowrap">{{ datacenter?.metrics?.priceMonth }}</td>
       <td class="text-sm font-light px-2 py-2 whitespace-nowrap">{{ datacenter?.metrics?.priceYear }}</td> -->
     </tr>

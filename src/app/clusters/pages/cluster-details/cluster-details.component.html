@@ -8,7 +8,7 @@
 
     <button
       (click)="fetch()"
-      class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+      class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
     >
       {{ 'common.refresh' | translate }}
     </button>
@@ -54,7 +54,7 @@
       <ng-template pTemplate="content">
         <div class="">
           <div class="dark:bg-darker flex flex-col rounded-md bg-white">
-            <div class="p-3 flex flex-col">
+            <div class="flex flex-col p-3">
               <!-- todo when cluster agent v2 is active remove this comment-->
               <!-- <app-cluster-ingress-table [cluster]="cluster"></app-cluster-ingress-table> -->
               <app-cluster-ingress-list [cluster]="cluster"></app-cluster-ingress-list>

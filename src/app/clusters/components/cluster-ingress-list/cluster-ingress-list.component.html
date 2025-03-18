@@ -1,6 +1,6 @@
 <div class="grid space-y-8 lg:gap-8 lg:space-y-0">
   <div class="dark:bg-darker flex items-center justify-between overflow-x-auto rounded-md bg-white">
-    <div class="dark:bg-darker col-span-2 overflow-x-auto rounded-md bg-white w-full">
+    <div class="dark:bg-darker col-span-2 w-full overflow-x-auto rounded-md bg-white">
       <div class="dark:border-primary flex items-center justify-between border-b p-4">
         <h4 class="dark:text-light text-lg font-semibold text-gray-500">{{ 'pages.clusters.details.ingresses.title' | translate }}</h4>
       </div>
@@ -74,7 +74,7 @@
                     <span *ngIf="ingress?.class?.endsWith('helsenett')">{{ 'pages.clusters.details.ingresses.health' | translate }}</span>
                     <span *ngIf="ingress?.class?.endsWith('datacenter')">{{ 'pages.clusters.details.ingresses.datacenter' | translate }}</span>
                   </td>
-                  <td class="whitespace-nowrap px-1 py-1 pl-2 align-top text-sm font-light">
+                  <td class="px-1 py-1 pl-2 align-top text-sm font-light whitespace-nowrap">
                     <span>{{ ingress?.namespace }}</span>
                   </td>
 

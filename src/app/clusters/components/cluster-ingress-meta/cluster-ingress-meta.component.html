@@ -15,7 +15,7 @@
   <div class="flex items-center">
     <span class="mr-2">{{ 'pages.clusters.details.ingresses.meta.cluster' | translate }}:</span>
     <span class="font-bold"
-      ><a [routerLink]="['../../']" class="hover:underline hover:cursor-pointer">{{ cluster?.clusterName }}</a></span
+      ><a [routerLink]="['../../']" class="hover:cursor-pointer hover:underline">{{ cluster?.clusterName }}</a></span
     >
   </div>
   <div class="flex items-center">
@@ -35,7 +35,7 @@
 
 <div>
   @if (getIngressStatus()?.healthy === false) {
-    <div class="text-red-500 mt-3">
+    <div class="mt-3 text-red-500">
       <table>
         <thead>
           <tr class="text-left">

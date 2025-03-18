@@ -17,22 +17,22 @@
     >
       <ng-template pTemplate="header" let-columns>
         <tr>
-          <th class="border-r dark:border-primary-darker" rowspan="2" class="p-1">
+          <th class="dark:border-primary-darker border-r" rowspan="2" class="p-1">
             {{ 'pages.admin.compliancereports.' + 'cluster' | translate }}
           </th>
-          <th class="border-r border-b dark:border-primary-darker" colspan="2" class="p-1">CIS</th>
-          <th class="border-b dark:border-primary-darker" colspan="2" class="p-1">NSA</th>
+          <th class="dark:border-primary-darker border-r border-b" colspan="2" class="p-1">CIS</th>
+          <th class="dark:border-primary-darker border-b" colspan="2" class="p-1">NSA</th>
         </tr>
         <tr>
-          <th class="border-r dark:border-primary-darker" pSortableColumn="cis.passcount" class="p-1">
+          <th class="dark:border-primary-darker border-r" pSortableColumn="cis.passcount" class="p-1">
             {{ 'pages.admin.compliancereports.' + 'passcount' | translate }}
             <p-sortIcon field="cis.passcount"></p-sortIcon>
           </th>
-          <th class="border-r dark:border-primary-darker" pSortableColumn="cis.failcount" class="p-1">
+          <th class="dark:border-primary-darker border-r" pSortableColumn="cis.failcount" class="p-1">
             {{ 'pages.admin.compliancereports.' + 'failcount' | translate }}
             <p-sortIcon field="cis.failcount"></p-sortIcon>
           </th>
-          <th class="border-r dark:border-primary-darker" pSortableColumn="nsa.passcount" class="p-1">
+          <th class="dark:border-primary-darker border-r" pSortableColumn="nsa.passcount" class="p-1">
             {{ 'pages.admin.compliancereports.' + 'passcount' | translate }}
             <p-sortIcon field="nsa.passcount"></p-sortIcon>
           </th>

@@ -21,7 +21,7 @@
     >
   </div>
 
-  <div class="flex flex-col mt-3">
+  <div class="mt-3 flex flex-col">
     <h5>{{ 'pages.create.cluster.steps.metadata.sensitivity' | translate }}</h5>
     <p-dropdown
       [options]="availableSensitivities"
@@ -34,7 +34,7 @@
       (onChange)="updateEvent($event)"
     >
       <ng-template let-sensitivity pTemplate="item">
-        <div class="flex flex-col w-[500px]">
+        <div class="flex w-[500px] flex-col">
           <span class="text-lg">{{ sensitivity?.name }}</span>
         </div>
       </ng-template>
@@ -58,7 +58,7 @@
     </div>
   </div>
 
-  <div class="flex flex-col mt-3">
+  <div class="mt-3 flex flex-col">
     <h5>{{ 'pages.create.cluster.steps.metadata.criticality' | translate }}</h5>
     <p-dropdown
       [options]="availableCriticalities"
@@ -71,7 +71,7 @@
       (onChange)="updateEvent($event)"
     >
       <ng-template let-criticality pTemplate="item">
-        <div class="flex flex-col w-[500px]">
+        <div class="flex w-[500px] flex-col">
           <span class="text-lg">{{ criticality?.name }}</span>
         </div>
       </ng-template>
@@ -105,18 +105,18 @@
     </div>
   </div>
 
-  <div class="flex justify-start mt-3">
+  <div class="mt-3 flex justify-start">
     <a
       [routerLink]="['../resources']"
-      class="flex-none delay-50 hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark float-left rounded-md bg-gray-600 px-4 py-2 text-sm text-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+      class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark float-left flex-none rounded-md bg-gray-600 px-4 py-2 text-sm text-white transition delay-50 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
     >
       <span>{{ 'common.previous' | translate }}</span>
     </a>
-    <div class="flex-none ml-3"></div>
+    <div class="ml-3 flex-none"></div>
     <button
       [routerLink]="['../summary']"
       [disabled]="!clusterForm.get('ownergroup').valid || !clusterForm.get('sensitivity').valid || !clusterForm.get('criticality').valid"
-      class="flex-none delay-50 hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark float-left rounded-md bg-green-700 px-4 py-2 text-sm text-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white disabled:cursor-not-allowed disabled:bg-gray-900 disabled:opacity-25 disabled:hover:bg-gray-900"
+      class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark float-left flex-none rounded-md bg-green-700 px-4 py-2 text-sm text-white transition delay-50 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none disabled:cursor-not-allowed disabled:bg-gray-900 disabled:opacity-25 disabled:hover:bg-gray-900"
     >
       <span>{{ 'common.next' | translate }}</span>
     </button>

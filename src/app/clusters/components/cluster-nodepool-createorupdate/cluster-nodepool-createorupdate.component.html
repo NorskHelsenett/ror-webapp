@@ -1,4 +1,4 @@
-<div class="flex gap-4 w-full">
+<div class="flex w-full gap-4">
   <div class="flex items-start justify-start">
     <i class="pi pi-qrcode mt-1 mr-1"></i>
     @if (!nodePool) {
@@ -15,23 +15,23 @@
   <div class="justify-end">
     <button
       (click)="cancel()"
-      class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+      class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
     >
       {{ 'common.cancel' | translate }}
     </button>
   </div>
 </div>
-<div class="grid grid-cols-3 mt-4">
+<div class="mt-4 grid grid-cols-3">
   <div class="col-span-2">
     <div class="overflow-x-auto">
       <form [formGroup]="nodepoolForm" class="flex flex-col gap-5">
-        <div class="mb-3 border-solid border-2 border-gray-600 p-5 rounded-lg">
+        <div class="mb-3 rounded-lg border-2 border-solid border-gray-600 p-5">
           <div class="">
             <span class="text-lg font-bold">{{ 'pages.clusters.details.nodePools.createorupdate.form.name' | translate }}</span>
             <div class="flex flex-col">
               <div class="flex flex-row gap-4">
                 <input
-                  class="p-inputtext-lg border text-lg w-1/3 sm:w-full md:w-1/3"
+                  class="p-inputtext-lg w-1/3 border text-lg sm:w-full md:w-1/3"
                   type="text"
                   pInputText
                   formControlName="name"
@@ -47,7 +47,7 @@
             </div>
           </div>
         </div>
-        <div class="mb-3 w-full border-solid border-2 border-gray-600 p-5 rounded-lg">
+        <div class="mb-3 w-full rounded-lg border-2 border-solid border-gray-600 p-5">
           <div class="">
             <span class="text-lg font-bold">{{ 'pages.clusters.details.nodePools.createorupdate.form.machineClass' | translate }}</span>
             <div class="flex flex-col">
@@ -64,28 +64,28 @@
                 [autofocus]="true"
               >
                 <ng-template let-price pTemplate="item">
-                  <div class="flex flex-col w-[500px] gap-1">
+                  <div class="flex w-[500px] flex-col gap-1">
                     <span class="text-lg">{{ price?.machineClass | titlecase }}</span>
-                    <span class="text-sm truncate block"
+                    <span class="block truncate text-sm"
                       >{{ 'pages.clusters.details.nodePools.createorupdate.form.cpu' | translate }}: {{ price?.cpu }}</span
                     >
-                    <span class="text-sm truncate block"
+                    <span class="block truncate text-sm"
                       >{{ 'pages.clusters.details.nodePools.createorupdate.form.memory' | translate }}: {{ price?.memory }} Gb</span
                     >
-                    <span class="text-sm truncate block"
+                    <span class="block truncate text-sm"
                       >{{ 'pages.clusters.details.nodePools.createorupdate.form.pricePrNode' | translate }}: {{ price?.price }} NOK</span
                     >
                   </div>
                 </ng-template>
                 <ng-template let-price pTemplate="selectedItem">
-                  <div class="flex flex-row w-[500px] gap-1">
+                  <div class="flex w-[500px] flex-row gap-1">
                     <span class="text-lg">{{ price?.machineClass | titlecase }}</span>
 
-                    <span class="text-sm mt-1">({{ 'pages.clusters.details.nodePools.createorupdate.form.cpu' | translate }}: {{ price?.cpu }}</span>
-                    <span class="text-sm mt-1"
+                    <span class="mt-1 text-sm">({{ 'pages.clusters.details.nodePools.createorupdate.form.cpu' | translate }}: {{ price?.cpu }}</span>
+                    <span class="mt-1 text-sm"
                       >{{ 'pages.clusters.details.nodePools.createorupdate.form.memory' | translate }}: {{ price?.memory }} Gb</span
                     >
-                    <span class="text-sm mt-1"
+                    <span class="mt-1 text-sm"
                       >{{ 'pages.clusters.details.nodePools.createorupdate.form.price' | translate }}: {{ price?.price }} NOK)</span
                     >
                   </div>
@@ -99,7 +99,7 @@
           </div>
         </div>
 
-        <div class="mb-3 border-solid border-2 border-gray-600 p-5 rounded-lg">
+        <div class="mb-3 rounded-lg border-2 border-solid border-gray-600 p-5">
           <div class="">
             <div>
               <div class="flex flex-row gap-4">
@@ -174,7 +174,7 @@
           </div>
         </div>
 
-        <div class="mb-3 border-solid border-2 border-gray-600 p-5 rounded-lg">
+        <div class="mb-3 rounded-lg border-2 border-solid border-gray-600 p-5">
           <div class="">
             <span class="text-lg font-bold">{{ 'pages.clusters.details.nodePools.createorupdate.form.tags' | translate }}</span>
             <table class="mt-2 w-3/4">
@@ -199,7 +199,7 @@
                       <td class="text-center text-lg" [ngClass]="'bg-' + getColorFromHex(tagForm?.value?.color)">
                         <button
                           (click)="removeTag(tagForm)"
-                          class="hover:bg-red-500 focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-red-700 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+                          class="focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-red-700 text-sm text-white hover:bg-red-500 focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
                         >
                           <i class="pi pi-trash"></i>
                         </button>
@@ -216,9 +216,9 @@
           <div class="mt-3">
             <form [formGroup]="tagForm">
               <div class="flex gap-4">
-                <div class="flex flex-col gap-4 w-1/3">
+                <div class="flex w-1/3 flex-col gap-4">
                   <input
-                    class="p-inputtext-lg border text-lg rounded-lg"
+                    class="p-inputtext-lg rounded-lg border text-lg"
                     type="text"
                     placeholder="{{ 'pages.clusters.details.nodePools.createorupdate.form.tagKey' | translate }}"
                     pInputText
@@ -230,9 +230,9 @@
                     <span class="text-red-400">{{ 'pages.clusters.details.nodePools.createorupdate.form.tagKeyError' | translate }} </span>
                   }
                 </div>
-                <div class="flex flex-col gap-4 w-1/3">
+                <div class="flex w-1/3 flex-col gap-4">
                   <input
-                    class="p-inputtext-lg border text-lg rounded-lg"
+                    class="p-inputtext-lg rounded-lg border text-lg"
                     type="text"
                     placeholder="{{ 'pages.clusters.details.nodePools.createorupdate.form.tagValue' | translate }}"
                     pInputText
@@ -249,7 +249,7 @@
                     type="button"
                     [disabled]="!tagForm.valid"
                     (click)="addTag(tagKeyElement, tagValueElement)"
-                    class="hover:bg-primary-dark disabled:bg-gray-600 focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-blue-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+                    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-blue-700 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none disabled:bg-gray-600"
                   >
                     {{ 'pages.clusters.details.nodePools.createorupdate.form.submitTag' | translate }}
                   </button>
@@ -259,7 +259,7 @@
           </div>
         </div>
 
-        <div class="mb-3 border-solid border-2 border-gray-600 p-5 rounded-lg">
+        <div class="mb-3 rounded-lg border-2 border-solid border-gray-600 p-5">
           <div class="">
             <span class="text-lg font-bold">{{ 'pages.clusters.details.nodePools.createorupdate.form.labels' | translate }}</span>
             <table class="mt-2 w-3/4">
@@ -284,7 +284,7 @@
                       <td>
                         <button
                           (click)="removeLabel(labelForm)"
-                          class="hover:bg-red-500 focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-red-700 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+                          class="focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-red-700 text-sm text-white hover:bg-red-500 focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
                         >
                           <i class="pi pi-trash"></i>
                         </button>
@@ -301,9 +301,9 @@
           <div class="mt-3">
             <form [formGroup]="labelForm">
               <div class="flex gap-4">
-                <div class="flex flex-col gap-4 w-1/3">
+                <div class="flex w-1/3 flex-col gap-4">
                   <input
-                    class="p-inputtext-lg border text-lg rounded-lg"
+                    class="p-inputtext-lg rounded-lg border text-lg"
                     type="text"
                     placeholder="{{ 'pages.clusters.details.nodePools.createorupdate.form.labelKey' | translate }}"
                     pInputText
@@ -315,9 +315,9 @@
                     <span class="text-red-400">{{ 'pages.clusters.details.nodePools.createorupdate.form.labelKeyError' | translate }} </span>
                   }
                 </div>
-                <div class="flex flex-col gap-4 w-1/3">
+                <div class="flex w-1/3 flex-col gap-4">
                   <input
-                    class="p-inputtext-lg border text-lg rounded-lg"
+                    class="p-inputtext-lg rounded-lg border text-lg"
                     type="text"
                     placeholder="{{ 'pages.clusters.details.nodePools.createorupdate.form.labelValue' | translate }}"
                     pInputText
@@ -339,7 +339,7 @@
                     type="button"
                     [disabled]="!labelForm.valid"
                     (click)="addLabel(labelKeyElement, labelValueElement)"
-                    class="hover:bg-primary-dark disabled:bg-gray-600 focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-blue-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+                    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-blue-700 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none disabled:bg-gray-600"
                   >
                     {{ 'pages.clusters.details.nodePools.createorupdate.form.submitLabel' | translate }}
                   </button>
@@ -353,7 +353,7 @@
           <button
             (click)="submit()"
             [disabled]="!nodepoolForm.valid"
-            class="cursor-pointer bg-green-700 p-3 rounded-lg text-white disabled:bg-slate-500 disabled:text-black"
+            class="cursor-pointer rounded-lg bg-green-700 p-3 text-white disabled:bg-slate-500 disabled:text-black"
           >
             @if (nodePoolId) {
               <span>{{ 'pages.clusters.details.nodePools.createorupdate.form.update' | translate }}</span>
@@ -365,7 +365,7 @@
       </form>
     </div>
   </div>
-  <div class="border-solid border-2 border-gray-600 p-5 rounded-lg ml-3">
+  <div class="ml-3 rounded-lg border-2 border-solid border-gray-600 p-5">
     <app-cluster-nodepool-createorupdate-summary [nodepoolForm]="nodepoolForm"></app-cluster-nodepool-createorupdate-summary>
   </div>
 </div>

@@ -102,7 +102,7 @@
     </svg>
     <span *ngIf="showText">{{ providerTypeOrName | titlecase }}</span>
   </div>
-  <div *ngSwitchDefault class="flex dark:fill-white gap-2">
+  <div *ngSwitchDefault class="flex gap-2 dark:fill-white">
     <svg
       *ngIf="showIcon"
       [ngClass]="iconSize === '' ? 'w-6' : iconSize"

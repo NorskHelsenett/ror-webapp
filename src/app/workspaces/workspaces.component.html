@@ -2,7 +2,7 @@
   <h1 class="text-2xl font-semibold">{{ 'pages.workspaces.title' | translate }}</h1>
   <button
     (click)="fetchMetrics(lastTableEvent)"
-    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
   >
     {{ 'common.refresh' | translate }}
   </button>
@@ -70,26 +70,26 @@
             </ng-template>
             <ng-template pTemplate="body" let-metric let-expanded="expanded">
               <tr>
-                <td class="whitespace-nowrap px-2 py-2 text-sm font-medium">
+                <td class="px-2 py-2 text-sm font-medium whitespace-nowrap">
                   <a class="hover:text-blue-800 hover:underline dark:hover:text-blue-400" [routerLink]="['./', metric?.workspace?.id]">{{
                     metric?.workspace?.name
                   }}</a>
                 </td>
-                <td class="whitespace-nowrap px-2 py-2 text-sm font-light">
+                <td class="px-2 py-2 text-sm font-light whitespace-nowrap">
                   <a
                     class="hover:text-blue-800 hover:underline dark:hover:text-blue-400"
                     [routerLink]="['../admin/datacenter', metric?.workspace?.datacenter?.id]"
                     >{{ metric?.workspace?.datacenter?.name }}</a
                   >
                 </td>
-                <td class="whitespace-nowrap px-2 py-2 text-sm font-light">
+                <td class="px-2 py-2 text-sm font-light whitespace-nowrap">
                   {{ metric?.cpuPercentage }} % ({{ metric?.cpu }} {{ 'pages.workspaces.table.column.cores' | translate }})
                 </td>
-                <td class="whitespace-nowrap px-2 py-2 text-sm font-light">
+                <td class="px-2 py-2 text-sm font-light whitespace-nowrap">
                   {{ metric?.memoryPercentage }} % ({{ metric?.memory | formatBytes: 2 : true }})
                 </td>
-                <td class="whitespace-nowrap px-2 py-2 text-sm font-light">{{ metric?.clusterCount }}</td>
-                <td class="whitespace-nowrap px-2 py-2 text-sm font-light">{{ metric?.nodeCount }}</td>
+                <td class="px-2 py-2 text-sm font-light whitespace-nowrap">{{ metric?.clusterCount }}</td>
+                <td class="px-2 py-2 text-sm font-light whitespace-nowrap">{{ metric?.nodeCount }}</td>
               </tr>
             </ng-template>
             <ng-template pTemplate="emptymessage">

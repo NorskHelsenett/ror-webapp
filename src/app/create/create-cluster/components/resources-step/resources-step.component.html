@@ -48,7 +48,7 @@
     <div class="mt-3" *ngIf="clusterName">
       <h5>{{ 'pages.create.cluster.steps.resources.clusterName' | translate }}</h5>
       <div class="flex flex-col">
-        <span class="text-3xl text-bg-green-700" [ngClass]="{ 'text-red-700': !clusterForm.get('clusterName').valid }">{{
+        <span class="text-bg-green-700 text-3xl" [ngClass]="{ 'text-red-700': !clusterForm.get('clusterName').valid }">{{
           clusterName | lowercase
         }}</span>
         <span *ngIf="!clusterForm.get('clusterName').valid" class="text-xl text-red-500">{{
@@ -62,7 +62,7 @@
         <h4 class="dark:text-light text-lg font-semibold text-gray-500">{{ 'pages.create.cluster.steps.resources.title' | translate }}</h4>
       </div>
       <div class="grid grid-cols-1 p-3 2xl:grid-cols-3">
-        <div class="flex flex-col lg:col-span-2 sm:col-span-1">
+        <div class="flex flex-col sm:col-span-1 lg:col-span-2">
           <table class="dark:text-light relative text-gray-900">
             <thead class="border-b">
               <tr>
@@ -81,11 +81,11 @@
             </thead>
             <tbody>
               <tr class="transition duration-300 ease-in-out hover:bg-gray-200 dark:hover:bg-gray-500" *ngFor="let price of pricesFiltered">
-                <td class="whitespace-nowrap px-1 py-1 font-light">{{ price?.machineClass | titlecase }}</td>
-                <td class="whitespace-nowrap px-1 py-1 font-light">{{ price?.cpu }}</td>
-                <td class="whitespace-nowrap px-1 py-1 font-light">{{ price?.memory }} Gb</td>
-                <td class="whitespace-nowrap px-1 py-1 font-light">{{ price?.price }} NOK</td>
-                <td class="whitespace-nowrap px-1 py-1 font-light">
+                <td class="px-1 py-1 font-light whitespace-nowrap">{{ price?.machineClass | titlecase }}</td>
+                <td class="px-1 py-1 font-light whitespace-nowrap">{{ price?.cpu }}</td>
+                <td class="px-1 py-1 font-light whitespace-nowrap">{{ price?.memory }} Gb</td>
+                <td class="px-1 py-1 font-light whitespace-nowrap">{{ price?.price }} NOK</td>
+                <td class="px-1 py-1 font-light whitespace-nowrap">
                   <button (click)="addNodePool(price)"><i class="pi pi-plus-circle text-green-700"></i></button>
                 </td>
               </tr>
@@ -179,18 +179,18 @@
       </div>
     </div>
 
-    <div class="flex justify-start mt-3">
+    <div class="mt-3 flex justify-start">
       <a
         [routerLink]="['../new']"
-        class="flex-none delay-50 hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark float-left rounded-md bg-gray-600 px-4 py-2 text-sm text-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+        class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark float-left flex-none rounded-md bg-gray-600 px-4 py-2 text-sm text-white transition delay-50 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
       >
         <span>{{ 'common.previous' | translate }}</span>
       </a>
-      <div class="flex-none ml-3"></div>
+      <div class="ml-3 flex-none"></div>
       <button
         [routerLink]="['../metadata']"
         [disabled]="!validform()"
-        class="flex-none delay-50 hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark float-left rounded-md bg-green-700 px-4 py-2 text-sm text-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white disabled:cursor-not-allowed disabled:bg-gray-900 disabled:opacity-25 disabled:hover:bg-gray-900"
+        class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark float-left flex-none rounded-md bg-green-700 px-4 py-2 text-sm text-white transition delay-50 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none disabled:cursor-not-allowed disabled:bg-gray-900 disabled:opacity-25 disabled:hover:bg-gray-900"
       >
         <span>{{ 'common.next' | translate }}</span>
       </button>

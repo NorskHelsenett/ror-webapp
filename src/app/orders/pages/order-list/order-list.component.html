@@ -10,7 +10,7 @@
 
         <button
           (click)="fetchOrders()"
-          class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark ml-2 rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+          class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark ml-2 rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
         >
           {{ 'common.refresh' | translate }}
         </button>
@@ -41,13 +41,13 @@
             <ng-template pTemplate="header">
               <tr>
                 <th style="min-width: 15rem" class="p-1">
-                  <div class="flex align-items-center">
+                  <div class="align-items-center flex">
                     Cluster name
                     <p-columnFilter type="text" field="name" display="menu"></p-columnFilter>
                   </div>
                 </th>
                 <th style="min-width: 15rem" class="p-1">
-                  <div class="flex align-items-center">
+                  <div class="align-items-center flex">
                     Kind
                     <p-columnFilter type="text" field="kind" display="menu"></p-columnFilter>
                   </div>
