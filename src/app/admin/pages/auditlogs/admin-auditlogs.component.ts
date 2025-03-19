@@ -1,3 +1,4 @@
+import { HighlightDifferencePipe } from './../../../shared/pipes/highlight-difference.pipe';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { PrimeNG } from 'primeng/config';
 import { Observable, catchError, finalize, share, tap } from 'rxjs';
@@ -13,17 +14,28 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
-import { TimePipe } from '../../../shared/pipes/time.pipe';
-import { SharedModule } from '../../../shared/shared.module';
 import { FieldsetModule } from 'primeng/fieldset';
+import { TimePipe } from '../../../shared/pipes/time.pipe';
+import { HighlightModule } from 'ngx-highlightjs';
 
 @Component({
   selector: 'app-admin-auditlogs',
   templateUrl: './admin-auditlogs.component.html',
   styleUrls: ['./admin-auditlogs.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [TableModule, AsyncPipe, TranslateModule, MultiSelectModule, CommonModule, FormsModule, ButtonModule, SharedModule, FieldsetModule],
-  standalone: true,
+  imports: [
+    TableModule,
+    AsyncPipe,
+    TranslateModule,
+    MultiSelectModule,
+    CommonModule,
+    FormsModule,
+    ButtonModule,
+    FieldsetModule,
+    TimePipe,
+    HighlightModule,
+    HighlightDifferencePipe,
+  ],
 })
 export class AdminAuditlogsComponent implements OnInit {
   private configService = inject(ConfigService);

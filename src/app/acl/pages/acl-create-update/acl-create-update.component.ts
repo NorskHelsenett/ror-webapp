@@ -1,17 +1,21 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Subscription, catchError } from 'rxjs';
 import { AclV2 } from '../../../core/models/aclv2';
 import { AclService } from '../../../core/services/acl.service';
+import { TranslateModule } from '@ngx-translate/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AclCreateUpdateComponent } from '../../component';
 
 @Component({
   selector: 'app-acl-create-update-page',
   templateUrl: './acl-create-update.component.html',
   styleUrls: ['./acl-create-update.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
+  imports: [TranslateModule, CommonModule, RouterModule, FormsModule, ReactiveFormsModule, AclCreateUpdateComponent],
 })
-export class AclCreateUpdateComponent implements OnInit, OnDestroy {
+export class AclCreateUpdatePageComponent implements OnInit, OnDestroy {
   id: string;
   acl: AclV2;
   fetchError: any;

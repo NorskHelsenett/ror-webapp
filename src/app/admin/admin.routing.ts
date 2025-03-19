@@ -13,7 +13,7 @@ import { AdminCreateGuard as AdminOwnerGuard } from '../core/guards/admin-create
 import { PolicyReportsComponent } from './pages/policy-reports/policy-reports.component';
 import { ComplianceReportsComponent } from './pages/compliance-reports/compliance-reports.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: 'acl',
     canActivate: [AdminOwnerGuard],
@@ -22,12 +22,12 @@ const routes: Routes = [
   {
     path: 'acl/create',
     canActivate: [AdminOwnerGuard],
-    component: aclPages.AclCreateUpdateComponent,
+    component: aclPages.AclCreateUpdatePageComponent,
   },
   {
     path: 'acl/:id/edit',
     canActivate: [AdminOwnerGuard],
-    component: aclPages.AclCreateUpdateComponent,
+    component: aclPages.AclCreateUpdatePageComponent,
   },
   {
     path: 'apikeys',

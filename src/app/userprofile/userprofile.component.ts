@@ -1,16 +1,20 @@
+import { UserprofileDetailsComponent } from './pages/userprofile-details/userprofile-details.component';
 import { isPlatformBrowser, Location } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit, ChangeDetectorRef, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { AclService } from '../core/services/acl.service';
 import { Subscription } from 'rxjs';
+import { TabViewModule } from 'primeng/tabview';
+import { TranslateModule } from '@ngx-translate/core';
+import { UserprofileApikeysComponent } from './pages';
 
 @Component({
   selector: 'app-userprofile',
   templateUrl: './userprofile.component.html',
   styleUrls: ['./userprofile.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
+  imports: [TranslateModule, TabViewModule, UserprofileDetailsComponent, UserprofileApikeysComponent],
 })
 export class UserprofileComponent implements OnInit, OnDestroy {
   idToken: string | undefined;

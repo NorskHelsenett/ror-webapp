@@ -8,11 +8,10 @@ import { ResourceType } from '../../../core/models/resources/resourceType';
 import { Cluster } from '../../../core/models/cluster';
 import { ResourceFilter } from '../../models/resourceFilter';
 import { UtilsService } from '../../../shared/services/utils.service';
-import { SharedModule } from '../../../shared/shared.module';
 
 @Component({
   selector: 'app-resources-filter',
-  imports: [CommonModule, FormsModule, TranslateModule, DropdownModule, FormsModule, SharedModule],
+  imports: [CommonModule, FormsModule, TranslateModule, DropdownModule, FormsModule],
   templateUrl: './resources-filter.component.html',
   styleUrl: './resources-filter.component.scss',
 })

@@ -20,7 +20,7 @@
                     argoIngress?.ingressrules[0].ipaddresses !== null &&
                     argoIngress?.ingressrules[0].ipaddresses.length > 0
                   "
-                  ><span class="w-14 truncate overflow-hidden text-clip">{{ argoIngress?.ingressrules[0].hostname }}</span></a
+                  ><span class="w-14 overflow-hidden truncate text-clip">{{ argoIngress?.ingressrules[0].hostname }}</span></a
                 >
               </td>
               <td
@@ -49,7 +49,7 @@
                     grafanaIngress?.ingressrules[0].ipaddresses !== null &&
                     grafanaIngress?.ingressrules[0].ipaddresses.length > 0
                   "
-                  ><span class="w-14 truncate overflow-hidden text-clip">{{ grafanaIngress?.ingressrules[0].hostname }}</span></a
+                  ><span class="w-14 overflow-hidden truncate text-clip">{{ grafanaIngress?.ingressrules[0].hostname }}</span></a
                 >
               </td>
               <td
@@ -70,7 +70,7 @@
               <td class="truncate px-2 py-1">
                 <button
                   (click)="copyRorLogin()"
-                  class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
+                  class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
                 >
                   {{ 'common.copy' | translate }}
                 </button>
@@ -92,7 +92,7 @@
               <td class="truncate px-2 py-1">
                 <button
                   (click)="copyLogin()"
-                  class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
+                  class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
                 >
                   {{ 'common.copy' | translate }}
                 </button>

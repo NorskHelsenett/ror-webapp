@@ -18,6 +18,7 @@ import RorTheme from './themes/ror-theme';
 import { ThemeService } from './core/services/theme.service';
 import { provideServerRouting } from '@angular/ssr';
 import { serverRoutes } from './app.routes.server';
+import { TypesService } from './resources/services/types.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -68,6 +69,7 @@ export const appConfig: ApplicationConfig = {
     MessageService,
     ThemeService,
     ConfirmationService,
+    TypesService,
     provideAnimationsAsync(),
     providePrimeNG({
       ripple: true,

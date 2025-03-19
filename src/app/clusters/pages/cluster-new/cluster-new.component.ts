@@ -16,7 +16,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { DropdownModule } from 'primeng/dropdown';
-import { SharedModule } from '../../../shared/shared.module';
+import { SpinnerComponent } from '../../../shared/components';
 
 @Component({
   selector: 'app-cluster-new',
@@ -24,7 +24,7 @@ import { SharedModule } from '../../../shared/shared.module';
   styleUrls: ['./cluster-new.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [TranslateModule, CommonModule, InputNumberModule, FormsModule, ReactiveFormsModule, DropdownModule, SharedModule],
+  imports: [TranslateModule, CommonModule, InputNumberModule, FormsModule, ReactiveFormsModule, DropdownModule, SpinnerComponent],
 })
 export class ClusterNewComponent implements OnInit {
   clusterForm: FormGroup | undefined;

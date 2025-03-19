@@ -3,7 +3,7 @@
 </div>
 
 <div *ngIf="!error; else errorComponent" class="flex flex-col">
-  <div class="flex flex-row-reverse xl:pt-2 xl:pr-2">
+  <div class="flex flex-row-reverse xl:pr-2 xl:pt-2">
     <app-export-button [exportObjects]="formatExport(complianceReports$ | async)" [filename]="'compliance'"></app-export-button>
   </div>
   <div class="dark:bg-darker rounded-md bg-white xl:m-2 xl:p-2">
@@ -20,7 +20,7 @@
           <th class="dark:border-primary-darker border-r" rowspan="2" class="p-1">
             {{ 'pages.admin.compliancereports.' + 'cluster' | translate }}
           </th>
-          <th class="dark:border-primary-darker border-r border-b" colspan="2" class="p-1">CIS</th>
+          <th class="dark:border-primary-darker border-b border-r" colspan="2" class="p-1">CIS</th>
           <th class="dark:border-primary-darker border-b" colspan="2" class="p-1">NSA</th>
         </tr>
         <tr>

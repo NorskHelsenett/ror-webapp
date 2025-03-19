@@ -4,6 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-icon-sort-asc',
   templateUrl: './icon-sort-asc.component.html',
   styleUrls: ['./icon-sort-asc.component.scss'],
-  standalone: false,
+  imports: [],
 })
 export class IconSortAscComponent {}

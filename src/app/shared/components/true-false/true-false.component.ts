@@ -1,10 +1,14 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
+import { TagModule } from 'primeng/tag';
+import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
   selector: 'app-true-false',
   templateUrl: './true-false.component.html',
   styleUrls: ['./true-false.component.scss'],
-  standalone: false,
+  imports: [TranslateModule, CommonModule, TagModule, TooltipModule],
 })
 export class TrueFalseComponent {
   @Input()

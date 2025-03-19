@@ -2,13 +2,17 @@ import { MetricsService } from '../core/services/metrics.service';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { catchError, Observable } from 'rxjs';
 import { DatacenterService } from '../core/services/datacenter.service';
+import { TranslateModule } from '@ngx-translate/core';
+import { CommonModule } from '@angular/common';
+import { DatacenterTableComponent } from './components';
+import { SpinnerComponent } from '../shared/components';
 
 @Component({
   selector: 'app-datacenters',
   templateUrl: './datacenters.component.html',
   styleUrls: ['./datacenters.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
+  imports: [TranslateModule, CommonModule, DatacenterTableComponent, SpinnerComponent],
 })
 export class DatacentersComponent implements OnInit {
   datacenters$: Observable<any> | undefined;

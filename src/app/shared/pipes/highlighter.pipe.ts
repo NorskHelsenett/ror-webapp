@@ -3,7 +3,6 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 @Pipe({
   name: 'highlighter',
-  standalone: false,
 })
 export class HighlighterPipe implements PipeTransform {
   constructor(private sanitizer: DomSanitizer) {}

@@ -3,11 +3,11 @@ import { NodepoolService } from './../../services/nodepool.service';
 import { ChangeDetectorRef, Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import { SharedModule } from '../../../shared/shared.module';
+import { TrueFalseComponent } from '../../../shared/components';
 
 @Component({
   selector: 'app-cluster-nodepool-createorupdate-summary',
-  imports: [TranslateModule, TitleCasePipe, SharedModule, CurrencyPipe],
+  imports: [TranslateModule, TitleCasePipe, CurrencyPipe, TrueFalseComponent],
   templateUrl: './cluster-nodepool-createorupdate-summary.component.html',
   styleUrl: './cluster-nodepool-createorupdate-summary.component.scss',
 })

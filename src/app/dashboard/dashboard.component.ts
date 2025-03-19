@@ -19,12 +19,13 @@ import dayjsDuration from 'dayjs/plugin/duration';
 import dayjsRelativeTime from 'dayjs/plugin/relativeTime';
 import { AclService } from '../core/services/acl.service';
 import { AclAccess, AclScopes } from '../core/models/acl-scopes';
-import { SharedModule } from '../shared/shared.module';
 import { TableModule } from 'primeng/table';
 import { RouterModule } from '@angular/router';
 import { CommonModule, LowerCasePipe, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
 import { ClustersComponent } from '../clusters/clusters.component';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { FormatBytesPipe } from '../shared/pipes';
+import { SpinnerComponent } from '../shared/components';
 
 @Component({
   selector: 'app-dashboard',
@@ -33,7 +34,6 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     TranslateModule,
-    SharedModule,
     TableModule,
     RouterModule,
     LowerCasePipe,
@@ -43,6 +43,8 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     ClustersComponent,
     ConfirmDialogModule,
     CommonModule,
+    FormatBytesPipe,
+    SpinnerComponent,
   ],
   standalone: true,
 })

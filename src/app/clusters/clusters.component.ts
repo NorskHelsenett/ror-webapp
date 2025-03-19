@@ -23,9 +23,11 @@ import { RouterModule } from '@angular/router';
 import { TableModule } from 'primeng/table';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SharedModule } from '../shared/shared.module';
 import { ProviderComponent } from '../shared/components/provider/provider.component';
 import { TooltipModule } from 'primeng/tooltip';
+import { ClusterEnvironmentComponent, ClusterStatusComponent } from '../shared/components';
+import { FormatBytesPipe } from '../shared/pipes';
+import { TimePipe } from '../shared/pipes/time.pipe';
 
 @Component({
   selector: 'app-clusters',
@@ -40,9 +42,12 @@ import { TooltipModule } from 'primeng/tooltip';
     MultiSelectModule,
     FormsModule,
     ReactiveFormsModule,
-    SharedModule,
     ProviderComponent,
     TooltipModule,
+    ClusterStatusComponent,
+    FormatBytesPipe,
+    TimePipe,
+    ClusterEnvironmentComponent,
   ],
   standalone: true,
 })

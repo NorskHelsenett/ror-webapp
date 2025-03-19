@@ -4,7 +4,7 @@
       @if (adminOwner$ | async) {
         <a
           (click)="toggleNodepoolEditor()"
-          class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark float-left rounded-md bg-green-700 px-4 py-2 text-sm text-white transition delay-50 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
+          class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark delay-50 float-left rounded-md bg-green-700 px-4 py-2 text-sm text-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
         >
           <span>{{ 'pages.clusters.details.nodePools.create' | translate }}</span>
         </a>
@@ -68,14 +68,14 @@
               <div class="flex gap-3">
                 <button
                   (click)="toggleNodepoolEditor(nodepool)"
-                  class="focus:ring-primary dark:focus:ring-offset-dark ml-2 rounded-md bg-green-700 px-4 py-2 text-sm text-white hover:bg-green-500 focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
+                  class="focus:ring-primary dark:focus:ring-offset-dark ml-2 rounded-md bg-green-700 px-4 py-2 text-sm text-white hover:bg-green-500 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
                 >
                   {{ 'common.edit' | translate }}
                 </button>
                 <button
                   (click)="deleteNodepool(nodepool)"
                   [disabled]="nodepools?.length === 1"
-                  class="focus:ring-primary dark:focus:ring-offset-dark ml-2 rounded-md bg-red-700 px-4 py-2 text-sm text-white hover:bg-red-500 focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none disabled:bg-slate-700 disabled:text-gray-100"
+                  class="focus:ring-primary dark:focus:ring-offset-dark ml-2 rounded-md bg-red-700 px-4 py-2 text-sm text-white hover:bg-red-500 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white disabled:bg-slate-700 disabled:text-gray-100"
                 >
                   {{ 'common.delete' | translate }}
                 </button>
@@ -88,7 +88,7 @@
         <tr>
           <td colspan="6">
             <div class="">
-              <div class="my-auto mr-0 ml-3">
+              <div class="my-auto ml-3 mr-0">
                 <app-cluster-node-list [nodes]="nodepool?.nodes"></app-cluster-node-list>
               </div>
             </div>

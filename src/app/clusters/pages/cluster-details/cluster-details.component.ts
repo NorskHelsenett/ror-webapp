@@ -1,5 +1,5 @@
 import { ClusterDescriptionComponent } from './../../components/cluster-description/cluster-description.component';
-import { CommonModule, Location, NgOptimizedImage } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { MetricsService } from '../../../core/services/metrics.service';
 import { Component, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy, AfterContentInit, AfterViewInit } from '@angular/core';
@@ -32,9 +32,9 @@ import { ClusterNodepoolsComponent } from '../cluster-nodepools/cluster-nodepool
 import { BadgeModule } from 'primeng/badge';
 import { ClusterMetadataPageComponent } from '../cluster-metadata-page/cluster-metadata-page.component';
 import { ClusterResourceTableComponent } from '../../components/cluster-resource-table/cluster-resource-table.component';
-import { SharedModule } from '../../../shared/shared.module';
 import { SidebarModule } from 'primeng/sidebar';
 import { ResourceV2DetailsComponent } from '../../../resourcesv2/components/resource-v2-details/resource-v2-details.component';
+import { SpinnerComponent } from '../../../shared/components';
 
 @Component({
   selector: 'app-cluster-details',
@@ -44,7 +44,6 @@ import { ResourceV2DetailsComponent } from '../../../resourcesv2/components/reso
   imports: [
     TranslateModule,
     CommonModule,
-    SharedModule,
     RouterModule,
     ClusterConditionsComponent,
     TabViewModule,
@@ -64,10 +63,9 @@ import { ResourceV2DetailsComponent } from '../../../resourcesv2/components/reso
     ClusterResourceTableComponent,
     ClusterNotificationsComponent,
     ClusterDeleteComponent,
-    SharedModule,
+    SpinnerComponent,
     SidebarModule,
     ResourceV2DetailsComponent,
-    NgOptimizedImage,
   ],
   providers: [ClusterService],
 })

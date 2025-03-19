@@ -4,7 +4,6 @@ import { ConfigService } from './../../../core/services/config.service';
 import { ChangeDetectionStrategy, Component, inject, Input, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { TableModule } from 'primeng/table';
-import { SharedModule } from '../../../shared/shared.module';
 import { ButtonModule } from 'primeng/button';
 import { ClusterNodeListComponent } from '../cluster-node-list/cluster-node-list.component';
 import { ClusterNodepoolCreateorupdateComponent } from '../cluster-nodepool-createorupdate/cluster-nodepool-createorupdate.component';
@@ -12,6 +11,7 @@ import { MessageService } from 'primeng/api';
 import { AclService } from '../../../core/services/acl.service';
 import { AclAccess, AclScopes } from '../../../core/models/acl-scopes';
 import { catchError, Observable, share, tap } from 'rxjs';
+import { FormatBytesPipe } from '../../../shared/pipes';
 
 @Component({
   selector: 'app-cluster-nodepool-list',
@@ -19,12 +19,12 @@ import { catchError, Observable, share, tap } from 'rxjs';
     TranslateModule,
     TableModule,
     LowerCasePipe,
-    SharedModule,
     TitleCasePipe,
     ButtonModule,
     ClusterNodeListComponent,
     ClusterNodepoolCreateorupdateComponent,
     AsyncPipe,
+    FormatBytesPipe,
   ],
   templateUrl: './cluster-nodepool-list.component.html',
   styleUrl: './cluster-nodepool-list.component.scss',

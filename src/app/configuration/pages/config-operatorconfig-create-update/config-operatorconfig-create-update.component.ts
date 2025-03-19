@@ -1,17 +1,18 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
+import { LangChangeEvent, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { catchError, Subscription, tap } from 'rxjs';
 import { OperatorConfig } from '../../../core/models/operatorconfig';
 import { OperatorConfigsService } from '../../../core/services/operator-configs.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-config-operatorconfig-create-update',
   templateUrl: './config-operatorconfig-create-update.component.html',
   styleUrls: ['./config-operatorconfig-create-update.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
+  imports: [TranslateModule, CommonModule],
 })
 export class ConfigOperatorconfigCreateUpdateComponent implements OnInit, OnDestroy {
   id: string;

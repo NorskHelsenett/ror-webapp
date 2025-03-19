@@ -4,11 +4,11 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input } 
 import { TranslateModule } from '@ngx-translate/core';
 import { HighlightModule } from 'ngx-highlightjs';
 import { Observable } from 'rxjs';
-import { SharedModule } from '../../../shared/shared.module';
+import { SpinnerComponent } from '../../../shared/components';
 
 @Component({
   selector: 'app-resource-v2-details',
-  imports: [CommonModule, HighlightModule, TranslateModule, JsonPipe, SharedModule, AsyncPipe],
+  imports: [CommonModule, HighlightModule, TranslateModule, JsonPipe, AsyncPipe, SpinnerComponent],
   templateUrl: './resource-v2-details.component.html',
   styleUrl: './resource-v2-details.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

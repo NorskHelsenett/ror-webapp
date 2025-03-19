@@ -2,7 +2,7 @@
   <div class="dark:bg-darker flex flex-col rounded-md bg-white">
     <div class="flex items-center justify-between p-4">
       <div>
-        <h6 class="dark:text-primary-lighter text-xs leading-none font-medium tracking-wider text-gray-500 uppercase">
+        <h6 class="dark:text-primary-lighter text-xs font-medium uppercase leading-none tracking-wider text-gray-500">
           {{ 'pages.clusters.details.metrics.priceMonth' | translate }}
         </h6>
         <span class="text-xl font-semibold">{{ metrics?.priceMonth || 0 | currency: 'NOK' : 'symbol' : '.0' : 'no' }}</span>
@@ -36,7 +36,7 @@
   <div class="dark:bg-darker flex flex-col rounded-md bg-white">
     <div class="flex items-center justify-between p-4">
       <div>
-        <h6 class="dark:text-primary-lighter text-xs leading-none font-medium tracking-wider text-gray-500 uppercase">
+        <h6 class="dark:text-primary-lighter text-xs font-medium uppercase leading-none tracking-wider text-gray-500">
           {{ 'nav.nodes' | translate }}
         </h6>
         <span class="text-xl font-semibold">{{ metrics?.nodeCount || 0 }}</span>
@@ -69,7 +69,7 @@
   <div class="dark:bg-darker flex flex-col rounded-md bg-white">
     <div class="flex items-center justify-between p-4">
       <div>
-        <h6 class="dark:text-primary-lighter text-xs leading-none font-medium tracking-wider text-gray-500 uppercase">
+        <h6 class="dark:text-primary-lighter text-xs font-medium uppercase leading-none tracking-wider text-gray-500">
           {{ 'pages.dashboard.metrics.cpu' | translate }}
         </h6>
         <span class="text-xl font-semibold">{{ metrics?.cpuPercentage || 0 }} %</span>
@@ -102,7 +102,7 @@
   <div class="dark:bg-darker flex flex-col rounded-md bg-white">
     <div class="flex items-center justify-between p-4">
       <div>
-        <h6 class="dark:text-primary-lighter text-xs leading-none font-medium tracking-wider text-gray-500 uppercase">
+        <h6 class="dark:text-primary-lighter text-xs font-medium uppercase leading-none tracking-wider text-gray-500">
           {{ 'pages.dashboard.metrics.memory' | translate }}
         </h6>
         <span class="text-xl font-semibold">{{ metrics?.memoryPercentage || 0 }} %</span>

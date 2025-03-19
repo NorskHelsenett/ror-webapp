@@ -1,17 +1,22 @@
+import { ButtonModule } from 'primeng/button';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input, OnDestroy } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { catchError, Subscription, tap } from 'rxjs';
 import { DesiredVersion } from '../../../core/models/desiredversion';
 import { ConfigService } from '../../../core/services/config.service';
 import { DesiredversionsService } from '../../../core/services/desiredversions.service';
+import { CommonModule } from '@angular/common';
+import { TableModule } from 'primeng/table';
+import { RouterModule } from '@angular/router';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @Component({
   selector: 'app-config-desiredversion-list',
   templateUrl: './config-desiredversion-list.component.html',
   styleUrls: ['./config-desiredversion-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
+  imports: [TranslateModule, CommonModule, TableModule, ButtonModule, RouterModule, ConfirmDialogModule],
 })
 export class ConfigDesiredversionListComponent implements OnDestroy {
   private configService = inject(ConfigService);

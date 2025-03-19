@@ -2,13 +2,13 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, effect, inject }
 import { ClusterIngressService } from '../../services/cluster-ingress.service';
 import { Resource } from '@rork8s/ror-resources/models';
 import { TableModule } from 'primeng/table';
-import { SharedModule } from '../../../shared/shared.module';
 import { ButtonModule } from 'primeng/button';
 import { TranslateModule } from '@ngx-translate/core';
+import { TimePipe } from '../../../shared/pipes/time.pipe';
 
 @Component({
   selector: 'app-cluster-ingress-certmanager',
-  imports: [TableModule, ButtonModule, SharedModule, TranslateModule],
+  imports: [TableModule, ButtonModule, TranslateModule, TimePipe],
   templateUrl: './cluster-ingress-certmanager.component.html',
   styleUrl: './cluster-ingress-certmanager.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

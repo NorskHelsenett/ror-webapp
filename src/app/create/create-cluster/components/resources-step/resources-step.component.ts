@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit, ChangeDetectorRef, inject } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClusterFormService } from '../../services/cluster-form.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Observable, tap, Subscription, map } from 'rxjs';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ClusterCapasity } from '../../../../clusters/models/clusterCapasity';
 import { ClusterEnvironment } from '../../../../core/models/clusterEnvironment';
 import { Price } from '../../../../core/models/price';
@@ -11,13 +11,17 @@ import { ProviderKubernetesVersion } from '../../../../core/models/provider';
 import { PriceService } from '../../../../core/services/price.service';
 import { ProvidersService } from '../../../../core/services/providers.service';
 import { ClusterProvider } from '../../../../clusters/models/clusterProvider';
+import { CommonModule } from '@angular/common';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { RadioButtonModule } from 'primeng/radiobutton';
 
 @Component({
   selector: 'app-resources-step',
   templateUrl: './resources-step.component.html',
   styleUrls: ['./resources-step.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
+  imports: [TranslateModule, CommonModule, RouterModule, FormsModule, ReactiveFormsModule, DropdownModule, InputNumberModule, RadioButtonModule],
 })
 export class ResourcesStepComponent implements OnInit {
   private clusterFormService = inject(ClusterFormService);

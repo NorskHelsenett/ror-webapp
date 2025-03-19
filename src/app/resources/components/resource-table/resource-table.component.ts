@@ -24,14 +24,13 @@ import { OwnerType } from '../../../core/models/resources/ownerType';
 import { ResourceType } from '../../../core/models/resources/resourceType';
 import { ClustersService } from '../../../core/services/clusters.service';
 import { ConfigService } from '../../../core/services/config.service';
-import { SharedModule } from '../../../shared/shared.module';
 import { ResourceQuery } from '@rork8s/ror-resources/models';
+import { ExportComponent, SpinnerComponent } from '../../../shared/components';
 
 @Component({
   selector: 'app-resource-table',
   imports: [
     CommonModule,
-    SharedModule,
     TranslateModule,
     RouterModule,
     TableModule,
@@ -44,8 +43,10 @@ import { ResourceQuery } from '@rork8s/ror-resources/models';
     SidebarModule,
     HighlightModule,
     HighlightLineNumbers,
+    ExportComponent,
+    SpinnerComponent,
   ],
-  providers: [ResourcesService, ColumnFactoryService, TypesService, Location],
+  providers: [ResourcesService, ColumnFactoryService, TypesService],
   templateUrl: './resource-table.component.html',
   styleUrl: './resource-table.component.scss',
 })

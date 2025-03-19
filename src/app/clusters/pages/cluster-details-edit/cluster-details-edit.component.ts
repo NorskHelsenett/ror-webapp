@@ -14,7 +14,7 @@ import { RouterModule } from '@angular/router';
 import { TagModule } from 'primeng/tag';
 import { DropdownModule } from 'primeng/dropdown';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { SharedModule } from '../../../shared/shared.module';
+import { SpinnerComponent } from '../../../shared/components';
 
 @Component({
   selector: 'app-cluster-details-edit',
@@ -24,15 +24,14 @@ import { SharedModule } from '../../../shared/shared.module';
   imports: [
     TranslateModule,
     CommonModule,
-    SharedModule,
     RouterModule,
     TagModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     DropdownModule,
-    SharedModule,
     ConfirmDialogModule,
+    SpinnerComponent,
   ],
 })
 export class ClusterDetailsEditComponent implements OnInit, OnDestroy {

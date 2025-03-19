@@ -4,7 +4,11 @@ import { AuthGuard } from './core/guards/auth.guard';
 export const routes: Routes = [
   {
     path: 'error',
-    loadChildren: () => import('./error/error.module').then((m) => m.ErrorModule),
+    //loadChildren: () => import('./error/error.module').then((m) => m.ErrorModule),
+    async loadChildren() {
+      const m = await import('./error/error-routing');
+      return m.routes;
+    },
   },
   {
     path: 'auth/callback',

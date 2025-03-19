@@ -120,7 +120,7 @@
                   </div>
                 </div>
 
-                <div class="col-span-2 mt-3 ml-3">
+                <div class="col-span-2 ml-3 mt-3">
                   <h5>{{ 'pages.clusters.new.form.tags' | translate }}</h5>
                   <div class="">
                     <p-chips formControlName="tags"></p-chips>
@@ -158,11 +158,11 @@
                   </thead>
                   <tbody>
                     <tr class="transition duration-300 ease-in-out hover:bg-gray-200 dark:hover:bg-gray-500" *ngFor="let price of pricesFiltered">
-                      <td class="px-1 py-1 text-sm font-light whitespace-nowrap">{{ price?.machineClass | titlecase }}</td>
-                      <td class="px-1 py-1 text-sm font-light whitespace-nowrap">{{ price?.cpu }}</td>
-                      <td class="px-1 py-1 text-sm font-light whitespace-nowrap">{{ price?.memory }} Gb</td>
-                      <td class="px-1 py-1 text-sm font-light whitespace-nowrap">{{ price?.price }} NOK</td>
-                      <td class="px-1 py-1 text-sm font-light whitespace-nowrap">
+                      <td class="whitespace-nowrap px-1 py-1 text-sm font-light">{{ price?.machineClass | titlecase }}</td>
+                      <td class="whitespace-nowrap px-1 py-1 text-sm font-light">{{ price?.cpu }}</td>
+                      <td class="whitespace-nowrap px-1 py-1 text-sm font-light">{{ price?.memory }} Gb</td>
+                      <td class="whitespace-nowrap px-1 py-1 text-sm font-light">{{ price?.price }} NOK</td>
+                      <td class="whitespace-nowrap px-1 py-1 text-sm font-light">
                         <div class="">
                           <p-inputNumber
                             [(ngModel)]="price.count"
@@ -183,7 +183,7 @@
                           </p-inputNumber>
                         </div>
                       </td>
-                      <td class="px-1 py-1 text-sm font-light whitespace-nowrap">
+                      <td class="whitespace-nowrap px-1 py-1 text-sm font-light">
                         <button (click)="addNodePool(price)"><i class="pi pi-plus-circle text-green-700"></i></button>
                       </td>
                     </tr>
@@ -277,13 +277,13 @@
               <button
                 [disabled]="!clusterForm?.valid"
                 (click)="createCluster()"
-                class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none disabled:bg-gray-500 disabled:hover:bg-gray-800"
+                class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white disabled:bg-gray-500 disabled:hover:bg-gray-800"
               >
                 {{ 'common.create' | translate }}
               </button>
               <button
                 (click)="reset(true)"
-                class="hover:bg-primary-lighter focus:ring-primary dark:focus:ring-offset-dark ml-3 rounded-md bg-neutral-500 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
+                class="hover:bg-primary-lighter focus:ring-primary dark:focus:ring-offset-dark ml-3 rounded-md bg-neutral-500 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
               >
                 {{ 'common.reset' | translate }}
               </button>

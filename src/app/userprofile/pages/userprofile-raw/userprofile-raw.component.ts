@@ -1,10 +1,12 @@
+import { JsonPipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-userprofile-raw',
   templateUrl: './userprofile-raw.component.html',
   styleUrls: ['./userprofile-raw.component.scss'],
-  standalone: false,
+  imports: [TranslateModule, JsonPipe],
 })
 export class UserprofileRawComponent implements OnInit {
   @Input()

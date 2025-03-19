@@ -7,11 +7,6 @@ export const routes: Routes = [
     path: '',
     component: LayoutComponent,
     children: [
-      // {
-      //   path: '',
-      //   loadChildren: () => import('../dashboard/dashboard.module').then((m) => m.DashboardModule),
-      // }
-      // ,
       {
         path: '',
         async loadChildren() {
@@ -21,50 +16,66 @@ export const routes: Routes = [
       },
       {
         path: 'datacenters',
-        loadChildren: () => import('../datacenters/datacenters.module').then((m) => m.DatacentersModule),
+        async loadChildren() {
+          const m = await import('../datacenters/datacenters.routing');
+          return m.routes;
+        },
       },
       {
         path: 'workspaces',
-        loadChildren: () => import('../workspaces/workspaces.module').then((m) => m.WorkspacesModule),
+        async loadChildren() {
+          const m = await import('../workspaces/workspaces.routing');
+          return m.routes;
+        },
       },
-      // {
-      //   path: 'clusters',
-      //   loadChildren: () => import('../clusters/clusters.module').then((m) => m.ClustersModule),
-      // },
-      // {
-      //   path: '',
-      //   async loadChildren() {
-      //     const m = await import('../clusters/');
-      //     return m.routes;
-      //   },
-      // },
       {
-        path: 'create',
-        loadChildren: () => import('../create/create.module').then((m) => m.CreateModule),
+        path: 'create/cluster',
+        async loadChildren() {
+          const m = await import('../create/create-cluster/create-cluster.routing');
+          return m.routes;
+        },
       },
       {
         path: 'metrics',
-        loadChildren: () => import('../metrics/metrics.module').then((m) => m.MetricsModule),
+        async loadComponent() {
+          const m = await import('../metrics/metrics.component');
+          return m.MetricsComponent;
+        },
       },
       {
         path: 'orders',
-        loadChildren: () => import('../orders/orders.module').then((m) => m.OrdersModule),
+        async loadChildren() {
+          const m = await import('../orders/orders.routing');
+          return m.routes;
+        },
       },
       {
         path: 'prices',
-        loadChildren: () => import('../prices/prices.module').then((m) => m.PricesModule),
+        async loadComponent() {
+          const m = await import('../prices/prices.component');
+          return m.PricesComponent;
+        },
       },
-      // {
-      //   path: 'resources',
-      //   loadChildren: () => import('../resources/resources.module').then((m) => m.ResourcesModule),
-      // },
+      {
+        path: 'resources',
+        async loadChildren() {
+          const m = await import('../resources/resources.routing');
+          return m.routes;
+        },
+      },
       {
         path: 'resourcesv2',
-        loadChildren: () => import('../resourcesv2/resourcesv2.module').then((m) => m.ResourcesV2Module),
+        async loadComponent() {
+          const m = await import('../resourcesv2/pages/resources/resources.component');
+          return m.ResourcesComponent;
+        },
       },
       {
         path: 'userprofile',
-        loadChildren: () => import('../userprofile/userprofile.module').then((m) => m.UserprofileModule),
+        async loadComponent() {
+          const m = await import('../userprofile/userprofile.component');
+          return m.UserprofileComponent;
+        },
       },
       {
         path: 'about',
@@ -75,16 +86,22 @@ export const routes: Routes = [
       },
       {
         path: 'admin',
-        loadChildren: () => import('../admin/admin.module').then((m) => m.AdminModule),
+        async loadChildren() {
+          const m = await import('../admin/admin.routing');
+          return m.routes;
+        },
       },
       {
         path: 'releasenotes',
-        loadChildren: () => import('../release-notes/release-notes.module').then((m) => m.ReleaseNotesModule),
+        async loadComponent() {
+          const m = await import('../release-notes/release-notes.component');
+          return m.ReleaseNotesComponent;
+        },
       },
-      //{ path: '**', redirectTo: 'error/404' },
+      { path: '**', redirectTo: 'error/404' },
     ],
   },
-  //{ path: '**', redirectTo: 'error/404' },
+  { path: '**', redirectTo: 'error/404' },
 ];
 
 @NgModule({

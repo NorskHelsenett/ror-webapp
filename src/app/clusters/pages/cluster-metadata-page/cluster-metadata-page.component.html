@@ -7,13 +7,13 @@
             <span class="flex-grow"></span>
             <button
               (click)="toggleEdit()"
-              class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark float-left rounded-md bg-green-700 px-4 py-2 text-sm text-white transition delay-50 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none disabled:cursor-not-allowed disabled:bg-gray-500 disabled:opacity-75 disabled:hover:bg-gray-800"
+              class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark delay-50 float-left rounded-md bg-green-700 px-4 py-2 text-sm text-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white disabled:cursor-not-allowed disabled:bg-gray-500 disabled:opacity-75 disabled:hover:bg-gray-800"
             >
               {{ 'common.edit' | translate }}
             </button>
             <button
               (click)="refreshRequested.emit()"
-              class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark ml-2 rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
+              class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark ml-2 rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
             >
               {{ 'common.refresh' | translate }}
             </button>
@@ -68,7 +68,7 @@
                   <tr class="hover:bg-grey-light">
                     <td class="px-2 py-1 align-top">{{ 'pages.clusters.details.metadata.description' | translate }}</td>
                     <td class="px-2 py-1 font-bold">
-                      <div class="bg-slate-200 p-4 whitespace-pre-line dark:bg-gray-800">
+                      <div class="whitespace-pre-line bg-slate-200 p-4 dark:bg-gray-800">
                         {{ cluster?.metadata?.description }}
                       </div>
                     </td>
@@ -136,7 +136,7 @@
                                     <td class="text-sm">{{ 'pages.clusters.details.metadata.upn' | translate }}:</td>
                                   </tr>
                                   <tr>
-                                    <td class="pl-3 text-lg break-all">
+                                    <td class="break-all pl-3 text-lg">
                                       <a href="mailto:{{ role?.contactInfo?.upn }}">{{ role?.contactInfo?.upn }}</a>
                                     </td>
                                   </tr>
@@ -144,7 +144,7 @@
                                     <td class="text-sm">{{ 'pages.clusters.details.metadata.email' | translate }}:</td>
                                   </tr>
                                   <tr>
-                                    <td class="pl-3 text-lg break-all">
+                                    <td class="break-all pl-3 text-lg">
                                       <a href="mailto:{{ role?.contactInfo?.email }}">{{ role?.contactInfo?.email }}</a>
                                     </td>
                                   </tr>
@@ -152,7 +152,7 @@
                                     <td class="text-sm">{{ 'pages.clusters.details.metadata.phone' | translate }}:</td>
                                   </tr>
                                   <tr>
-                                    <td class="pl-3 text-lg break-words">
+                                    <td class="break-words pl-3 text-lg">
                                       <a href="tel:{{ role?.contactInfo?.phone }}" *ngIf="role?.contactInfo?.phone?.length > 0">
                                         {{ role?.contactInfo?.phone }}</a
                                       >

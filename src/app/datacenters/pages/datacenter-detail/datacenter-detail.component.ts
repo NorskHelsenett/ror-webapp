@@ -1,17 +1,33 @@
 import { MetricsService } from '../../../core/services/metrics.service';
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject } from '@angular/core';
 import { Observable, Subscription, catchError, map, tap } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Filter } from '../../../core/models/apiFilter';
 import { PaginationResult } from '../../../core/models/paginatedResult';
 import { ConfigService } from '../../../core/services/config.service';
+import { TranslateModule } from '@ngx-translate/core';
+import { CommonModule } from '@angular/common';
+import { FormatBytesPipe } from '../../../shared/pipes';
+import { SpinnerComponent } from '../../../shared/components';
+import { IconSortAscComponent, IconSortDescComponent } from '../../../shared/icons';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-datacenter-detail',
   templateUrl: './datacenter-detail.component.html',
   styleUrls: ['./datacenter-detail.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
+  imports: [
+    TranslateModule,
+    CommonModule,
+    FormatBytesPipe,
+    SpinnerComponent,
+    IconSortAscComponent,
+    IconSortDescComponent,
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
 })
 export class DatacenterDetailComponent implements OnInit {
   private configService = inject(ConfigService);

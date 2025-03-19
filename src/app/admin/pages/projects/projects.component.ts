@@ -1,4 +1,4 @@
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { catchError, finalize, Observable, share, Subscription } from 'rxjs';
@@ -11,13 +11,30 @@ import { AclService } from '../../../core/services/acl.service';
 import { ConfigService } from '../../../core/services/config.service';
 import { ExportService } from '../../../core/services/export.service';
 import { ProjectService } from '../../../core/services/project.service';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { TableModule } from 'primeng/table';
+import { Dropdown, DropdownModule } from 'primeng/dropdown';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TimePipe } from '../../../shared/pipes/time.pipe';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @Component({
   selector: 'app-projects',
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
+  imports: [
+    TranslateModule,
+    CommonModule,
+    RouterModule,
+    TableModule,
+    DropdownModule,
+    FormsModule,
+    ReactiveFormsModule,
+    TimePipe,
+    ConfirmDialogModule,
+  ],
 })
 export class ProjectsComponent implements OnInit {
   private configService = inject(ConfigService);

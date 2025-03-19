@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { MessageService } from 'primeng/api';
 import { Observable, Subscription, catchError, map } from 'rxjs';
@@ -11,13 +11,28 @@ import { PaginationResult } from '../../../core/models/paginatedResult';
 import { AclService } from '../../../core/services/acl.service';
 import { ClustersService } from '../../../core/services/clusters.service';
 import { ConfigService } from '../../../core/services/config.service';
+import { CommonModule } from '@angular/common';
+import { InputDropdownComponent } from '../../../shared/components/input-dropdown/input-dropdown.component';
+import { DropdownModule } from 'primeng/dropdown';
+import { TimePipe } from '../../../shared/pipes/time.pipe';
 
 @Component({
   selector: 'app-acl-create-update',
   templateUrl: './acl-create-update.component.html',
   styleUrls: ['./acl-create-update.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
+  imports: [
+    TranslateModule,
+    CommonModule,
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
+    InputDropdownComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    DropdownModule,
+    TimePipe,
+  ],
 })
 export class AclCreateUpdateComponent implements OnInit, OnDestroy {
   private configService = inject(ConfigService);

@@ -1,7 +1,6 @@
-import { config } from './../../../app.config.server';
 import { ClustersService } from '../../../core/services/clusters.service';
 import { ChangeDetectorRef, Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { catchError, finalize, Observable, Subscription, tap } from 'rxjs';
 import { User } from '../../../core/models/user';
 import { Filter } from '../../../core/models/apiFilter';
@@ -9,12 +8,30 @@ import { MetricsService } from '../../../core/services/metrics.service';
 import { UserService } from '../../../core/services/user.service';
 import { ConfigService } from '../../../core/services/config.service';
 import { PaginationResult } from '../../../core/models/paginatedResult';
+import { TranslateModule } from '@ngx-translate/core';
+import { CommonModule } from '@angular/common';
+import { FormatBytesPipe } from '../../../shared/pipes';
+import { ClusterStatusComponent, SpinnerComponent } from '../../../shared/components';
+import { IconSortAscComponent, IconSortDescComponent } from '../../../shared/icons';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-workspace-details',
   templateUrl: './workspace-details.component.html',
   styleUrls: ['./workspace-details.component.scss'],
-  standalone: false,
+  imports: [
+    TranslateModule,
+    CommonModule,
+    FormatBytesPipe,
+    SpinnerComponent,
+    IconSortAscComponent,
+    IconSortDescComponent,
+    ClusterStatusComponent,
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
+    SpinnerComponent,
+  ],
 })
 export class WorkspaceDetailsComponent implements OnInit, OnDestroy {
   private configService = inject(ConfigService);

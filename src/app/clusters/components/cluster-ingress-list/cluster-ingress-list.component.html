@@ -74,7 +74,7 @@
                     <span *ngIf="ingress?.class?.endsWith('helsenett')">{{ 'pages.clusters.details.ingresses.health' | translate }}</span>
                     <span *ngIf="ingress?.class?.endsWith('datacenter')">{{ 'pages.clusters.details.ingresses.datacenter' | translate }}</span>
                   </td>
-                  <td class="px-1 py-1 pl-2 align-top text-sm font-light whitespace-nowrap">
+                  <td class="whitespace-nowrap px-1 py-1 pl-2 align-top text-sm font-light">
                     <span>{{ ingress?.namespace }}</span>
                   </td>
 

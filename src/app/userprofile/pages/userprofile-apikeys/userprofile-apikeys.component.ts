@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, inject, Input, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ConfirmationService, LazyLoadEvent, MessageService } from 'primeng/api';
 import { Observable, Subscription, catchError, finalize, share, tap } from 'rxjs';
 import { FilterService } from '../../../core/services/filter.service';
@@ -8,12 +8,18 @@ import { ApiKey } from '../../../core/models/apikey';
 import { PaginationResult } from '../../../core/models/paginatedResult';
 import { ConfigService } from '../../../core/services/config.service';
 import { UserApikeysService } from '../../../core/services/user-apikeys.service';
+import { CommonModule } from '@angular/common';
+import { UserprofileCreateApikeyComponent } from '../../components';
+import { TableModule } from 'primeng/table';
+import { TimePipe } from '../../../shared/pipes/time.pipe';
+import { SpinnerComponent } from '../../../shared/components';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @Component({
   selector: 'app-userprofile-apikeys',
   templateUrl: './userprofile-apikeys.component.html',
   styleUrls: ['./userprofile-apikeys.component.scss'],
-  standalone: false,
+  imports: [TranslateModule, CommonModule, UserprofileCreateApikeyComponent, TableModule, TimePipe, SpinnerComponent, ConfirmDialogModule],
 })
 export class UserprofileApikeysComponent implements OnInit {
   private configService = inject(ConfigService);

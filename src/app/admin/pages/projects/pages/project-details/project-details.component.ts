@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { LangChangeEvent, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { catchError, Observable, share, Subscription, tap } from 'rxjs';
 import { AclScopes, AclAccess } from '../../../../../core/models/acl-scopes';
 import { ClusterInfo } from '../../../../../core/models/clusterInfo';
@@ -8,13 +8,29 @@ import { Project } from '../../../../../core/models/project';
 import { AclService } from '../../../../../core/services/acl.service';
 import { ConfigService } from '../../../../../core/services/config.service';
 import { ProjectService } from '../../../../../core/services/project.service';
+import { CommonModule } from '@angular/common';
+import { TableModule } from 'primeng/table';
+import { TooltipModule } from 'primeng/tooltip';
+import { ClusterEnvironmentComponent, SpinnerComponent } from '../../../../../shared/components';
+import { TagModule } from 'primeng/tag';
+import { TimePipe } from '../../../../../shared/pipes/time.pipe';
 
 @Component({
   selector: 'app-project-details',
   templateUrl: './project-details.component.html',
   styleUrls: ['./project-details.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
+  imports: [
+    TranslateModule,
+    CommonModule,
+    RouterModule,
+    TableModule,
+    TooltipModule,
+    ClusterEnvironmentComponent,
+    SpinnerComponent,
+    TagModule,
+    TimePipe,
+  ],
 })
 export class ProjectDetailsComponent implements OnInit {
   private configService = inject(ConfigService);

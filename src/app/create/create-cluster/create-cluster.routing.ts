@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CreateClusterComponent } from './create-cluster.component';
 import * as createClusterComponents from './components';
-const routes: Routes = [
+
+export const routes: Routes = [
   {
     path: '',
     component: CreateClusterComponent,

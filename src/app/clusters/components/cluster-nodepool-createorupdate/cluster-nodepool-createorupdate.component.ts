@@ -8,7 +8,6 @@ import { ClusterService } from '../../services';
 import { TableModule } from 'primeng/table';
 import { PriceService } from '../../../core/services/price.service';
 import { Price } from '../../../core/models/price';
-import { SharedModule } from '../../../shared/shared.module';
 import { CommonModule, TitleCasePipe } from '@angular/common';
 import { ConfigService } from '../../../core/services/config.service';
 import { InputNumberModule } from 'primeng/inputnumber';
@@ -27,7 +26,6 @@ import { ColorService } from '../../../core/services/color.service';
     TranslateModule,
     ReactiveFormsModule,
     TableModule,
-    SharedModule,
     TitleCasePipe,
     InputNumberModule,
     FormsModule,

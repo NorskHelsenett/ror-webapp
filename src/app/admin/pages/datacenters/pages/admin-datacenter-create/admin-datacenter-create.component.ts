@@ -1,15 +1,17 @@
 import { Subscription, tap, catchError } from 'rxjs';
 import { DatacenterService } from '../../../../../core/services/datacenter.service';
 import { ChangeDetectorRef, Component, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Datacenter } from '../../../../../core/models/datacenter';
+import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-admin-datacenter-create',
   templateUrl: './admin-datacenter-create.component.html',
   styleUrls: ['./admin-datacenter-create.component.scss'],
-  standalone: false,
+  imports: [TranslateModule, CommonModule, FormsModule, ReactiveFormsModule],
 })
 export class AdminDatacenterCreateComponent implements OnInit, OnDestroy {
   datacenterForm: FormGroup | undefined;

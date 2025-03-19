@@ -1,19 +1,22 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClusterFormService } from '../../services/cluster-form.service';
 import { Observable, Subscription, catchError, share, tap } from 'rxjs';
 import { OAuthService } from 'angular-oauth2-oidc';
-import { TranslateService } from '@ngx-translate/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AclScopes, AclAccess } from '../../../../core/models/acl-scopes';
 import { AclService } from '../../../../core/services/acl.service';
+import { CommonModule } from '@angular/common';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputDropdownComponent } from '../../../../shared/components/input-dropdown/input-dropdown.component';
 
 @Component({
   selector: 'app-metadata-step',
   templateUrl: './metadata-step.component.html',
   styleUrls: ['./metadata-step.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
+  imports: [TranslateModule, CommonModule, RouterModule, DropdownModule, InputDropdownComponent, FormsModule, ReactiveFormsModule],
 })
 export class MetadataStepComponent implements OnInit, OnDestroy {
   private clusterFormService = inject(ClusterFormService);

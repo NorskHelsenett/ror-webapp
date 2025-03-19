@@ -1,11 +1,10 @@
 import { Resourcesv2Service } from './../../../core/services/resourcesv2.service';
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject, OnDestroy } from '@angular/core';
 import { catchError, finalize, map, Observable, Subscription, tap } from 'rxjs';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ClustersService } from '../../../core/services/clusters.service';
-import { SharedModule } from '../../../shared/shared.module';
 import { HighlightModule } from 'ngx-highlightjs';
 import { TabViewModule } from 'primeng/tabview';
 import { ClusterIngressAnnotationsComponent } from '../../components/cluster-ingress-annotations/cluster-ingress-annotations.component';
@@ -15,13 +14,13 @@ import { ClusterIngressDetailsComponent } from '../../components/cluster-ingress
 import { ClusterIngressChartComponent } from '../../components/cluster-ingress-chart/cluster-ingress-chart.component';
 import { ClusterIngressCertmanagerComponent } from '../../components/cluster-ingress-certmanager/cluster-ingress-certmanager.component';
 import { ClusterIngressRawComponent } from '../../components/cluster-ingress-raw/cluster-ingress-raw.component';
+import { SpinnerComponent } from '../../../shared/components';
 
 @Component({
   selector: 'app-ingress',
   imports: [
     CommonModule,
     TranslateModule,
-    SharedModule,
     RouterLink,
     HighlightModule,
     TabViewModule,
@@ -30,7 +29,7 @@ import { ClusterIngressRawComponent } from '../../components/cluster-ingress-raw
     ClusterIngressChartComponent,
     ClusterIngressCertmanagerComponent,
     ClusterIngressRawComponent,
-    NgOptimizedImage,
+    SpinnerComponent,
   ],
   templateUrl: './ingress.component.html',
   styleUrl: './ingress.component.scss',

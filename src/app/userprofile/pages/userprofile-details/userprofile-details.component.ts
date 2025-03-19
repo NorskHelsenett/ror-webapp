@@ -1,13 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ClipboardService } from 'ngx-clipboard';
 import { MessageService } from 'primeng/api';
+import { TimePipe } from '../../../shared/pipes/time.pipe';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-userprofile-details',
   templateUrl: './userprofile-details.component.html',
   styleUrls: ['./userprofile-details.component.scss'],
-  standalone: false,
+  imports: [TranslateModule, CommonModule, TimePipe],
 })
 export class UserprofileDetailsComponent implements OnInit {
   @Input()

@@ -2,7 +2,7 @@
   <h1 class="flex-grow text-2xl font-semibold">{{ 'pages.workspaces.details.title' | translate }}: {{ workspaceName }}</h1>
 
   <a
-    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
+    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
     (click)="fetch()"
   >
     {{ 'common.refresh' | translate }}
@@ -15,7 +15,7 @@
       <div class="dark:bg-darker flex flex-col rounded-md bg-white">
         <div class="flex items-center justify-between p-4">
           <div>
-            <h6 class="dark:text-primary-lighter text-xs leading-none font-medium tracking-wider text-gray-500 uppercase">
+            <h6 class="dark:text-primary-lighter text-xs font-medium uppercase leading-none tracking-wider text-gray-500">
               {{ 'nav.clusters' | translate }}
             </h6>
             <span class="text-xl font-semibold">{{ workspaceMetrics?.metrics?.clusterCount || 0 }}</span>
@@ -50,7 +50,7 @@
       <div class="dark:bg-darker flex flex-col rounded-md bg-white">
         <div class="flex items-center justify-between p-4">
           <div>
-            <h6 class="dark:text-primary-lighter text-xs leading-none font-medium tracking-wider text-gray-500 uppercase">
+            <h6 class="dark:text-primary-lighter text-xs font-medium uppercase leading-none tracking-wider text-gray-500">
               {{ 'nav.nodes' | translate }}
             </h6>
             <span class="text-xl font-semibold">{{ workspaceMetrics?.metrics?.nodeCount || 0 }}</span>
@@ -83,7 +83,7 @@
       <div class="dark:bg-darker flex flex-col rounded-md bg-white">
         <div class="flex items-center justify-between p-4">
           <div>
-            <h6 class="dark:text-primary-lighter text-xs leading-none font-medium tracking-wider text-gray-500 uppercase">
+            <h6 class="dark:text-primary-lighter text-xs font-medium uppercase leading-none tracking-wider text-gray-500">
               {{ 'pages.dashboard.metrics.cpu' | translate }}
             </h6>
             <span class="text-xl font-semibold">{{ workspaceMetrics?.metrics?.cpuPercentage }} %</span>
@@ -116,7 +116,7 @@
       <div class="dark:bg-darker flex flex-col rounded-md bg-white">
         <div class="flex items-center justify-between p-4">
           <div>
-            <h6 class="dark:text-primary-lighter text-xs leading-none font-medium tracking-wider text-gray-500 uppercase">
+            <h6 class="dark:text-primary-lighter text-xs font-medium uppercase leading-none tracking-wider text-gray-500">
               {{ 'pages.dashboard.metrics.memory' | translate }}
             </h6>
             <span class="text-xl font-semibold">{{ workspaceMetrics?.metrics?.memoryPercentage }} %</span>
@@ -149,7 +149,7 @@
       <div class="dark:bg-darker flex flex-col rounded-md bg-white">
         <div class="flex items-center justify-between p-4">
           <div>
-            <h6 class="dark:text-primary-lighter text-xs leading-none font-medium tracking-wider text-gray-500 uppercase">
+            <h6 class="dark:text-primary-lighter text-xs font-medium uppercase leading-none tracking-wider text-gray-500">
               {{ 'pages.clusters.details.metrics.priceMonth' | translate }}
             </h6>
             <span class="text-xl font-semibold">{{ workspaceMetrics?.metrics?.priceMonth || 0 | currency: 'NOK' : 'symbol' : '.0' : 'no' }}</span>
@@ -211,12 +211,12 @@
                     <a (click)="changeSort('clustername')">{{ 'pages.workspaces.table.column.name' | translate }}</a>
                     <app-icon-sort-asc
                       (click)="changeSort('clustername')"
-                      class="mt-1 ml-1 text-green-600"
+                      class="ml-1 mt-1 text-green-600"
                       *ngIf="filter?.sort[0].sortField === 'clustername' && filter?.sort[0].sortOrder === 1"
                     ></app-icon-sort-asc>
                     <app-icon-sort-desc
                       (click)="changeSort('clustername')"
-                      class="mt-1 ml-1 text-green-600"
+                      class="ml-1 mt-1 text-green-600"
                       *ngIf="filter.sort[0].sortField === 'clustername' && filter?.sort[0].sortOrder === -1"
                     ></app-icon-sort-desc>
                   </div>
@@ -226,12 +226,12 @@
                     <a (click)="changeSort('metrics.cpupercentage')">{{ 'pages.workspaces.table.column.cpu' | translate }}</a>
                     <app-icon-sort-asc
                       (click)="changeSort('metrics.cpupercentage')"
-                      class="mt-1 ml-1 text-green-600"
+                      class="ml-1 mt-1 text-green-600"
                       *ngIf="filter?.sort[0].sortField === 'metrics.cpupercentage' && filter?.sort[0].sortOrder === 1"
                     ></app-icon-sort-asc>
                     <app-icon-sort-desc
                       (click)="changeSort('metrics.cpupercentage')"
-                      class="mt-1 ml-1 text-green-600"
+                      class="ml-1 mt-1 text-green-600"
                       *ngIf="filter.sort[0].sortField === 'metrics.cpupercentage' && filter?.sort[0].sortOrder === -1"
                     ></app-icon-sort-desc>
                   </div>
@@ -241,12 +241,12 @@
                     <a (click)="changeSort('metrics.memorypercentage')">{{ 'pages.workspaces.table.column.memory' | translate }}</a>
                     <app-icon-sort-asc
                       (click)="changeSort('metrics.memorypercentage')"
-                      class="mt-1 ml-1 text-green-600"
+                      class="ml-1 mt-1 text-green-600"
                       *ngIf="filter?.sort[0].sortField === 'metrics.memorypercentage' && filter?.sort[0].sortOrder === 1"
                     ></app-icon-sort-asc>
                     <app-icon-sort-desc
                       (click)="changeSort('metrics.memorypercentage')"
-                      class="mt-1 ml-1 text-green-600"
+                      class="ml-1 mt-1 text-green-600"
                       *ngIf="filter.sort[0].sortField === 'metrics.memorypercentage' && filter?.sort[0].sortOrder === -1"
                     ></app-icon-sort-desc>
                   </div>
@@ -256,12 +256,12 @@
                     <a (click)="changeSort('metrics.nodepoolcount')">{{ 'pages.workspaces.table.column.nodePools' | translate }}</a>
                     <app-icon-sort-asc
                       (click)="changeSort('metrics.nodepoolcount')"
-                      class="mt-1 ml-1 text-green-600"
+                      class="ml-1 mt-1 text-green-600"
                       *ngIf="filter?.sort[0].sortField === 'metrics.nodepoolcount' && filter?.sort[0].sortOrder === 1"
                     ></app-icon-sort-asc>
                     <app-icon-sort-desc
                       (click)="changeSort('metrics.nodepoolcount')"
-                      class="mt-1 ml-1 text-green-600"
+                      class="ml-1 mt-1 text-green-600"
                       *ngIf="filter.sort[0].sortField === 'metrics.nodepoolcount' && filter?.sort[0].sortOrder === -1"
                     ></app-icon-sort-desc>
                   </div>
@@ -271,12 +271,12 @@
                     <a (click)="changeSort('metrics.nodecount')">{{ 'pages.workspaces.table.column.nodes' | translate }}</a>
                     <app-icon-sort-asc
                       (click)="changeSort('metrics.nodecount')"
-                      class="mt-1 ml-1 text-green-600"
+                      class="ml-1 mt-1 text-green-600"
                       *ngIf="filter?.sort[0].sortField === 'metrics.nodecount' && filter?.sort[0].sortOrder === 1"
                     ></app-icon-sort-asc>
                     <app-icon-sort-desc
                       (click)="changeSort('metrics.nodecount')"
-                      class="mt-1 ml-1 text-green-600"
+                      class="ml-1 mt-1 text-green-600"
                       *ngIf="filter.sort[0].sortField === 'metrics.nodecount' && filter?.sort[0].sortOrder === -1"
                     ></app-icon-sort-desc>
                   </div>
@@ -288,12 +288,12 @@
                     >
                     <app-icon-sort-asc
                       (click)="changeSort('metrics.pricemonth')"
-                      class="mt-1 ml-1 text-green-600"
+                      class="ml-1 mt-1 text-green-600"
                       *ngIf="filter?.sort[0].sortField === 'metrics.pricemonth' && filter?.sort[0].sortOrder === 1"
                     ></app-icon-sort-asc>
                     <app-icon-sort-desc
                       (click)="changeSort('metrics.pricemonth')"
-                      class="mt-1 ml-1 text-green-600"
+                      class="ml-1 mt-1 text-green-600"
                       *ngIf="filter.sort[0].sortField === 'metrics.pricemonth' && filter?.sort[0].sortOrder === -1"
                     ></app-icon-sort-desc>
                   </div>
@@ -305,12 +305,12 @@
                     >
                     <app-icon-sort-asc
                       (click)="changeSort('metrics.priceyear')"
-                      class="mt-1 ml-1 text-green-600"
+                      class="ml-1 mt-1 text-green-600"
                       *ngIf="filter?.sort[0].sortField === 'metrics.priceyear' && filter?.sort[0].sortOrder === 1"
                     ></app-icon-sort-asc>
                     <app-icon-sort-desc
                       (click)="changeSort('metrics.priceyear')"
-                      class="mt-1 ml-1 text-green-600"
+                      class="ml-1 mt-1 text-green-600"
                       *ngIf="filter.sort[0].sortField === 'metrics.priceyear' && filter?.sort[0].sortOrder === -1"
                     ></app-icon-sort-desc>
                   </div>
@@ -319,24 +319,24 @@
             </thead>
             <tbody>
               <tr class="transition duration-300 ease-in-out hover:bg-gray-200 dark:hover:bg-gray-500" *ngFor="let cluster of clusters?.data">
-                <td class="flex-rows flex px-2 py-2 text-sm font-medium whitespace-nowrap">
+                <td class="flex-rows flex whitespace-nowrap px-2 py-2 text-sm font-medium">
                   <app-cluster-status [status]="cluster?.status?.health"></app-cluster-status>
                   <a class="ml-2 hover:text-blue-800 hover:underline dark:hover:text-blue-400" [routerLink]="['../../cluster', cluster.clusterId]">{{
                     cluster?.clusterName
                   }}</a>
                 </td>
-                <td class="px-2 py-2 text-sm font-light whitespace-nowrap">
+                <td class="whitespace-nowrap px-2 py-2 text-sm font-light">
                   {{ cluster?.metrics?.cpuPercentage }} % ({{ cluster?.metrics?.cpu }} {{ 'pages.workspaces.table.column.cores' | translate }})
                 </td>
-                <td class="px-2 py-2 text-sm font-light whitespace-nowrap">
+                <td class="whitespace-nowrap px-2 py-2 text-sm font-light">
                   {{ cluster?.metrics.memoryPercentage }} % ({{ cluster?.metrics?.memory | formatBytes: 2 : true }})
                 </td>
-                <td class="px-2 py-2 text-sm font-light whitespace-nowrap">{{ cluster?.metrics?.nodePoolCount }}</td>
-                <td class="px-2 py-2 text-sm font-light whitespace-nowrap">{{ cluster?.metrics?.nodeCount }}</td>
-                <td class="px-2 py-2 text-sm font-light whitespace-nowrap">
+                <td class="whitespace-nowrap px-2 py-2 text-sm font-light">{{ cluster?.metrics?.nodePoolCount }}</td>
+                <td class="whitespace-nowrap px-2 py-2 text-sm font-light">{{ cluster?.metrics?.nodeCount }}</td>
+                <td class="whitespace-nowrap px-2 py-2 text-sm font-light">
                   {{ cluster?.metrics?.priceMonth | currency: 'NOK' : 'symbol' : '.0' : 'no' }}
                 </td>
-                <td class="px-2 py-2 text-sm font-light whitespace-nowrap">
+                <td class="whitespace-nowrap px-2 py-2 text-sm font-light">
                   {{ cluster?.metrics?.priceYear | currency: 'NOK' : 'symbol' : '.0' : 'no' }}
                 </td>
               </tr>
@@ -365,7 +365,7 @@
                   <div class="relative inline-flex">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      class="pointer-events-none absolute top-0 right-0 m-3 h-4 w-4"
+                      class="pointer-events-none absolute right-0 top-0 m-3 h-4 w-4"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -376,7 +376,7 @@
                     <select
                       [(ngModel)]="currentPage"
                       (ngModelChange)="setPage(currentPage)"
-                      class="h-8 appearance-none rounded-full border border-gray-300 bg-white pr-8 pl-2 text-gray-600 hover:border-gray-400 focus:outline-none dark:border-green-300 dark:bg-green-700 dark:text-white"
+                      class="h-8 appearance-none rounded-full border border-gray-300 bg-white pl-2 pr-8 text-gray-600 hover:border-gray-400 focus:outline-none dark:border-green-300 dark:bg-green-700 dark:text-white"
                     >
                       <option *ngFor="let pageNumber of pages" [value]="pageNumber">{{ pageNumber }}</option>
                     </select>
@@ -407,10 +407,10 @@
             </div>
             <div class="flex-none">
               <div class="relative inline-flex">
-                <span class="mt-2 mr-2">{{ 'common.pageSize' | translate }}</span>
+                <span class="mr-2 mt-2">{{ 'common.pageSize' | translate }}</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="pointer-events-none absolute top-0 right-0 m-3 h-4 w-4"
+                  class="pointer-events-none absolute right-0 top-0 m-3 h-4 w-4"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -421,7 +421,7 @@
                 <select
                   [(ngModel)]="itemsPerPage"
                   (change)="itemPerPageChanged(itemsPerPage)"
-                  class="h-8 appearance-none rounded-full border border-gray-300 bg-white pr-8 pl-2 text-gray-600 hover:border-gray-400 focus:outline-none dark:border-green-300 dark:bg-green-700 dark:text-white"
+                  class="h-8 appearance-none rounded-full border border-gray-300 bg-white pl-2 pr-8 text-gray-600 hover:border-gray-400 focus:outline-none dark:border-green-300 dark:bg-green-700 dark:text-white"
                 >
                   <option *ngFor="let limit of pageSizes" [ngValue]="limit">{{ limit }}</option>
                 </select>

@@ -3,7 +3,7 @@
 </div>
 
 <div *ngIf="policyReportsPerCluster$ | async as policyReportsPerCluster; else errorOrLoading" class="flex flex-col">
-  <div class="flex flex-row-reverse xl:pt-2 xl:pr-2">
+  <div class="flex flex-row-reverse xl:pr-2 xl:pt-2">
     <app-export-button [exportObjects]="formatExport(policyReportsPerCluster)" [filename]="'policy'"></app-export-button>
   </div>
   <div class="dark:bg-darker rounded-md bg-white xl:m-2 xl:p-2">

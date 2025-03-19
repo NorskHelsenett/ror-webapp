@@ -1,25 +1,22 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { HighlightResult } from 'highlight.js';
 import { Task } from '../../../core/models/task';
+import { TranslateModule } from '@ngx-translate/core';
+import { CommonModule } from '@angular/common';
+import { HighlightModule } from 'ngx-highlightjs';
 
 @Component({
   selector: 'app-config-task-detail',
   templateUrl: './config-task-detail.component.html',
   styleUrls: ['./config-task-detail.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  standalone: false,
+  imports: [TranslateModule, CommonModule, HighlightModule],
 })
-export class ConfigTaskDetailComponent implements OnInit {
+export class ConfigTaskDetailComponent {
   @Input()
   task: Task;
 
   response!: HighlightResult;
-
-  constructor() {}
-
-  ngOnInit(): void {
-    return;
-  }
 
   onHighlight(e: HighlightResult) {
     this.response = {

@@ -2,7 +2,7 @@
   <h1 class="text-2xl font-semibold">{{ 'pages.dashboard.title' | translate }}</h1>
   <button
     (click)="fetch()"
-    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
+    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
   >
     {{ 'common.refresh' | translate }}
   </button>
@@ -13,7 +13,7 @@
     <div class="dark:bg-darker flex flex-col rounded-md bg-white">
       <div class="flex items-center justify-between p-4">
         <div>
-          <h6 class="dark:text-primary-lighter text-xs leading-none font-medium tracking-wider text-gray-500 uppercase">
+          <h6 class="dark:text-primary-lighter text-xs font-medium uppercase leading-none tracking-wider text-gray-500">
             {{ 'nav.datacenters' | translate }}
           </h6>
           <span class="text-xl font-semibold"> {{ metricsForUser?.datacenterCount || 0 }} </span>
@@ -47,7 +47,7 @@
     <div class="dark:bg-darker flex flex-col rounded-md bg-white">
       <div class="flex items-center justify-between p-4">
         <div>
-          <h6 class="dark:text-primary-lighter text-xs leading-none font-medium tracking-wider text-gray-500 uppercase">
+          <h6 class="dark:text-primary-lighter text-xs font-medium uppercase leading-none tracking-wider text-gray-500">
             {{ 'nav.workspaces' | translate }}
           </h6>
           <span class="text-xl font-semibold"> {{ metricsForUser?.workspaceCount || 0 }} </span>
@@ -82,7 +82,7 @@
     <div class="dark:bg-darker flex flex-col rounded-md bg-white">
       <div class="flex items-center justify-between p-4">
         <div>
-          <h6 class="dark:text-primary-lighter text-xs leading-none font-medium tracking-wider text-gray-500 uppercase">
+          <h6 class="dark:text-primary-lighter text-xs font-medium uppercase leading-none tracking-wider text-gray-500">
             {{ 'nav.clusters' | translate }}
           </h6>
           <span class="text-xl font-semibold">{{ metricsForUser?.clusterCount || 0 }}</span>
@@ -117,7 +117,7 @@
     <div class="dark:bg-darker flex flex-col rounded-md bg-white">
       <div class="flex items-center justify-between p-4">
         <div>
-          <h6 class="dark:text-primary-lighter text-xs leading-none font-medium tracking-wider text-gray-500 uppercase">
+          <h6 class="dark:text-primary-lighter text-xs font-medium uppercase leading-none tracking-wider text-gray-500">
             {{ 'nav.nodes' | translate }}
           </h6>
           <span class="text-xl font-semibold">{{ metricsForUser?.nodeCount || 0 }}</span>
@@ -150,7 +150,7 @@
     <div class="dark:bg-darker flex flex-col rounded-md bg-white">
       <div class="flex items-center justify-between p-4">
         <div>
-          <h6 class="dark:text-primary-lighter text-xs leading-none font-medium tracking-wider text-gray-500 uppercase">
+          <h6 class="dark:text-primary-lighter text-xs font-medium uppercase leading-none tracking-wider text-gray-500">
             {{ 'pages.dashboard.metrics.cpu' | translate }}
           </h6>
           <span class="text-xl font-semibold">{{ totalCpuPercentage }} %</span>
@@ -183,7 +183,7 @@
     <div class="dark:bg-darker flex flex-col rounded-md bg-white">
       <div class="flex items-center justify-between p-4">
         <div>
-          <h6 class="dark:text-primary-lighter text-xs leading-none font-medium tracking-wider text-gray-500 uppercase">
+          <h6 class="dark:text-primary-lighter text-xs font-medium uppercase leading-none tracking-wider text-gray-500">
             {{ 'pages.dashboard.metrics.memory' | translate }}
           </h6>
           <span class="text-xl font-semibold">{{ totalMemoryPercentage }} %</span>
@@ -235,7 +235,7 @@
       <h2 class="flex-grow text-xl">{{ 'pages.dashboard.orders.title' | translate }}</h2>
       <button
         (click)="fetchOrders()"
-        class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
+        class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
       >
         {{ 'common.refresh' | translate }}
       </button>
@@ -272,7 +272,7 @@
             <a
               *ngIf="(adminRead$ | async) === true"
               routerLink="orders/{{ order?.metadata?.uid }}"
-              class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md px-4 py-2 text-lg hover:bg-sky-700 hover:text-gray-50 focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none dark:text-white dark:hover:bg-sky-600 hover:dark:text-white"
+              class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md px-4 py-2 text-lg hover:bg-sky-700 hover:text-gray-50 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white dark:text-white dark:hover:bg-sky-600 hover:dark:text-white"
             >
               {{ order?.spec?.cluster }}</a
             >
@@ -305,14 +305,14 @@
               <a
                 *ngIf="(adminRead$ | async) === true"
                 routerLink="orders/{{ order?.metadata?.uid }}"
-                class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-sky-500 px-4 py-2 text-sm text-white hover:bg-sky-700 focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none dark:bg-sky-500 dark:hover:bg-sky-600"
+                class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-sky-500 px-4 py-2 text-sm text-white hover:bg-sky-700 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white dark:bg-sky-500 dark:hover:bg-sky-600"
               >
                 {{ 'common.details' | translate }}
               </a>
               <button
                 *ngIf="(adminDelete$ | async) === true"
                 (click)="deleteOrder(order?.metadata?.uid)"
-                class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-red-500 px-4 py-2 text-sm text-white hover:bg-red-700 focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none dark:bg-red-700 dark:hover:bg-red-600"
+                class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-red-500 px-4 py-2 text-sm text-white hover:bg-red-700 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white dark:bg-red-700 dark:hover:bg-red-600"
               >
                 {{ 'common.delete' | translate }}
               </button>

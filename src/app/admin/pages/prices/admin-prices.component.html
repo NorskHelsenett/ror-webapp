@@ -8,13 +8,13 @@
       <div>
         <button
           (click)="fetch()"
-          class="focus:ring-primary dark:focus:ring-offset-dark float-right ml-2 rounded-md bg-green-700 px-4 py-2 text-sm text-white hover:bg-green-500 focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
+          class="focus:ring-primary dark:focus:ring-offset-dark float-right ml-2 rounded-md bg-green-700 px-4 py-2 text-sm text-white hover:bg-green-500 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
         >
           {{ 'common.refresh' | translate }}
         </button>
         <a
           routerLink="./create"
-          class="focus:ring-primary dark:focus:ring-offset-dark float-right rounded-md bg-green-700 px-4 py-2 text-sm text-white hover:bg-green-500 focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
+          class="focus:ring-primary dark:focus:ring-offset-dark float-right rounded-md bg-green-700 px-4 py-2 text-sm text-white hover:bg-green-500 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
         >
           {{ 'common.create' | translate }}
         </a>
@@ -84,26 +84,26 @@
           </ng-template>
           <ng-template pTemplate="body" let-price let-expanded="expanded">
             <tr>
-              <td class="px-6 py-4 text-sm font-medium whitespace-nowrap">{{ price?.machineClass | titlecase }}</td>
-              <td class="px-6 py-4 text-sm font-light whitespace-nowrap">{{ price?.price }} NOK</td>
-              <td class="px-6 py-4 text-sm font-light whitespace-nowrap">{{ price?.cpu }}</td>
-              <td class="px-6 py-4 text-sm font-light whitespace-nowrap">{{ price?.memory }}</td>
-              <td class="px-6 py-4 text-sm font-light whitespace-nowrap">{{ price?.provider | titlecase }}</td>
-              <td class="px-6 py-4 text-sm font-light whitespace-nowrap">
+              <td class="whitespace-nowrap px-6 py-4 text-sm font-medium">{{ price?.machineClass | titlecase }}</td>
+              <td class="whitespace-nowrap px-6 py-4 text-sm font-light">{{ price?.price }} NOK</td>
+              <td class="whitespace-nowrap px-6 py-4 text-sm font-light">{{ price?.cpu }}</td>
+              <td class="whitespace-nowrap px-6 py-4 text-sm font-light">{{ price?.memory }}</td>
+              <td class="whitespace-nowrap px-6 py-4 text-sm font-light">{{ price?.provider | titlecase }}</td>
+              <td class="whitespace-nowrap px-6 py-4 text-sm font-light">
                 {{ price?.from | time: 'DD. MMM YYYY HH:mm:ss' }}
               </td>
-              <td class="px-6 py-4 text-sm font-light whitespace-nowrap">{{ (price?.to | time: 'DD. MMM YYYY HH:mm:ss') || '' }}</td>
+              <td class="whitespace-nowrap px-6 py-4 text-sm font-light">{{ (price?.to | time: 'DD. MMM YYYY HH:mm:ss') || '' }}</td>
               <td>
                 <button
                   routerLink="./{{ price?.id }}/edit"
-                  class="focus:ring-primary dark:focus:ring-offset-dark ml-2 rounded-md bg-green-700 px-4 py-2 text-sm text-white hover:bg-green-500 focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
+                  class="focus:ring-primary dark:focus:ring-offset-dark ml-2 rounded-md bg-green-700 px-4 py-2 text-sm text-white hover:bg-green-500 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
                 >
                   {{ 'common.edit' | translate }}
                 </button>
               </td>
               <td>
                 <button
-                  class="focus:ring-primary dark:focus:ring-offset-dark ml-2 rounded-md bg-gray-700 px-4 py-2 text-sm text-white hover:bg-gray-500 focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
+                  class="focus:ring-primary dark:focus:ring-offset-dark ml-2 rounded-md bg-gray-700 px-4 py-2 text-sm text-white hover:bg-gray-500 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
                   disabled
                 >
                   {{ 'common.delete' | translate }}

@@ -1,10 +1,10 @@
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-  imports: [CommonModule, TranslateModule, NgOptimizedImage],
+  imports: [CommonModule, TranslateModule],
   selector: 'app-provider',
   templateUrl: './provider.component.html',
   styleUrls: ['./provider.component.scss'],

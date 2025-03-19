@@ -1,19 +1,23 @@
+import { ToggleButtonModule } from 'primeng/togglebutton';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
+import { LangChangeEvent, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { catchError, Subscription, tap } from 'rxjs';
 import { environment } from '../../../../../../environments/environment';
 import { Project } from '../../../../../core/models/project';
 import { ConfigService } from '../../../../../core/services/config.service';
 import { ProjectService } from '../../../../../core/services/project.service';
+import { CommonModule } from '@angular/common';
+import { DropdownModule } from 'primeng/dropdown';
+import { ChipModule } from 'primeng/chip';
 
 @Component({
   selector: 'app-projects-create',
   templateUrl: './projects-create.component.html',
   styleUrls: ['./projects-create.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
+  imports: [TranslateModule, CommonModule, FormsModule, ReactiveFormsModule, ToggleButtonModule, DropdownModule, ChipModule],
 })
 export class ProjectsCreateComponent implements OnInit, OnDestroy {
   private configService = inject(ConfigService);

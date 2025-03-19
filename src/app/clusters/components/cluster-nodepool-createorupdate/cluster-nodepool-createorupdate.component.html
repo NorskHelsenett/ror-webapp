@@ -1,6 +1,6 @@
 <div class="flex w-full gap-4">
   <div class="flex items-start justify-start">
-    <i class="pi pi-qrcode mt-1 mr-1"></i>
+    <i class="pi pi-qrcode mr-1 mt-1"></i>
     @if (!nodePool) {
       <h4 class="dark:text-light text-lg font-semibold text-gray-500">
         {{ 'pages.clusters.details.nodePools.createorupdate.createTitle' | translate }}
@@ -15,7 +15,7 @@
   <div class="justify-end">
     <button
       (click)="cancel()"
-      class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
+      class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
     >
       {{ 'common.cancel' | translate }}
     </button>
@@ -199,7 +199,7 @@
                       <td class="text-center text-lg" [ngClass]="'bg-' + getColorFromHex(tagForm?.value?.color)">
                         <button
                           (click)="removeTag(tagForm)"
-                          class="focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-red-700 text-sm text-white hover:bg-red-500 focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
+                          class="focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-red-700 text-sm text-white hover:bg-red-500 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
                         >
                           <i class="pi pi-trash"></i>
                         </button>
@@ -249,7 +249,7 @@
                     type="button"
                     [disabled]="!tagForm.valid"
                     (click)="addTag(tagKeyElement, tagValueElement)"
-                    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-blue-700 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none disabled:bg-gray-600"
+                    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-blue-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white disabled:bg-gray-600"
                   >
                     {{ 'pages.clusters.details.nodePools.createorupdate.form.submitTag' | translate }}
                   </button>
@@ -284,7 +284,7 @@
                       <td>
                         <button
                           (click)="removeLabel(labelForm)"
-                          class="focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-red-700 text-sm text-white hover:bg-red-500 focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
+                          class="focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-red-700 text-sm text-white hover:bg-red-500 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
                         >
                           <i class="pi pi-trash"></i>
                         </button>
@@ -339,7 +339,7 @@
                     type="button"
                     [disabled]="!labelForm.valid"
                     (click)="addLabel(labelKeyElement, labelValueElement)"
-                    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-blue-700 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none disabled:bg-gray-600"
+                    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-blue-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white disabled:bg-gray-600"
                   >
                     {{ 'pages.clusters.details.nodePools.createorupdate.form.submitLabel' | translate }}
                   </button>

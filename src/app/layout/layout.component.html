@@ -460,14 +460,14 @@
     </div>
   </aside>
 
-  <div class="flex w-full flex-col overflow-x-hidden overflow-y-auto">
+  <div class="flex w-full flex-col overflow-y-auto overflow-x-hidden">
     <!-- Navbar -->
     <header class="dark:bg-darker sticky top-0 z-10 bg-white">
       <div class="dark:border-primary-darker flex items-center justify-between border-b p-2">
         <!-- Mobile menu button  -->
         <button
           (click)="toggleMobileMenu(); showUserMenu = false; showSubMenu = false"
-          class="text-primary-lighter bg-primary-50 hover:text-primary hover:bg-primary-100 dark:hover:text-light dark:hover:bg-primary-dark dark:bg-dark rounded-md p-1 transition-colors duration-200 focus:ring focus:outline-none md:hidden"
+          class="text-primary-lighter bg-primary-50 hover:text-primary hover:bg-primary-100 dark:hover:text-light dark:hover:bg-primary-dark dark:bg-dark rounded-md p-1 transition-colors duration-200 focus:outline-none focus:ring md:hidden"
         >
           <span class="sr-only">Open main menu </span>
           <span aria-hidden="true">
@@ -478,20 +478,20 @@
         </button>
 
         <!-- Brand -->
-        <a href="index.html" class="text-primary-dark dark:text-light inline-block text-2xl font-bold tracking-wider uppercase">
+        <a href="index.html" class="text-primary-dark dark:text-light inline-block text-2xl font-bold uppercase tracking-wider">
           <div class="flex">
-            <img class="h-12 w-12" ngSrc="/assets/icons/ror.svg" alt="ROR logo" height="708" width="708" priority />
+            <img class="h-12 w-12" src="/assets/icons/ror.svg" alt="ROR logo" height="708" width="708" priority />
             <span class="w-auto p-3">{{ 'app.title' | translate }} </span>
 
-            <img *ngIf="birthday" class="w-12" ngSrc="/assets/images/crown.png" width="50" height="50" alt="birthday" />
-            <img *ngIf="birthday" class="w-12" ngSrc="/assets/images/tada.png" width="50" height="50" alt="birthday" />
+            <img *ngIf="birthday" class="w-12" src="/assets/images/crown.png" width="50" height="50" alt="birthday" />
+            <img *ngIf="birthday" class="w-12" src="/assets/images/tada.png" width="50" height="50" alt="birthday" />
           </div>
         </a>
 
         <!-- Mobile sub menu button -->
         <button
           (click)="toggleSubMenu()"
-          class="text-primary-lighter bg-primary-50 hover:text-primary hover:bg-primary-100 dark:hover:text-light dark:hover:bg-primary-dark dark:bg-dark rounded-md p-1 transition-colors duration-200 focus:ring focus:outline-none md:hidden"
+          class="text-primary-lighter bg-primary-50 hover:text-primary hover:bg-primary-100 dark:hover:text-light dark:hover:bg-primary-dark dark:bg-dark rounded-md p-1 transition-colors duration-200 focus:outline-none focus:ring md:hidden"
         >
           <span class="sr-only">Open sub manu</span>
           <span aria-hidden="true">
@@ -510,9 +510,9 @@
         <nav aria-label="Secondary" class="hidden space-x-2 md:flex md:items-center">
           <!-- Toggle dark theme button -->
           <button aria-hidden="true" class="relative focus:outline-none" (click)="toggleDark()">
-            <div class="bg-primary-100 dark:bg-primary-lighter h-6 w-12 rounded-full transition outline-none"></div>
+            <div class="bg-primary-100 dark:bg-primary-lighter h-6 w-12 rounded-full outline-none transition"></div>
             <div
-              class="absolute top-0 left-0 inline-flex h-6 w-6 scale-110 transform items-center justify-center rounded-full shadow-sm transition-all duration-150"
+              class="absolute left-0 top-0 inline-flex h-6 w-6 scale-110 transform items-center justify-center rounded-full shadow-sm transition-all duration-150"
             >
               <svg *ngIf="!isDark" class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path
@@ -599,11 +599,11 @@
               type="button"
               aria-haspopup="true"
               (click)="toggleUserMenu()"
-              class="rounded-full transition-opacity duration-200 focus:ring focus:outline-none dark:opacity-75 dark:hover:opacity-100 dark:focus:opacity-100"
+              class="rounded-full transition-opacity duration-200 focus:outline-none focus:ring dark:opacity-75 dark:hover:opacity-100 dark:focus:opacity-100"
             >
               <span class="sr-only">User menu</span>
               @if (!desember) {
-                <img class="h-10 w-10 rounded-full" ngSrc="/assets/images/blank_profile.png" height="50" width="50" alt="User" />
+                <img class="h-10 w-10 rounded-full" src="/assets/images/blank_profile.png" height="50" width="50" alt="User" />
               } @else {
                 <app-santa></app-santa>
               }
@@ -612,7 +612,7 @@
             <!-- User dropdown menu -->
             <div
               [hidden]="!showUserMenu"
-              class="dark:bg-dark ring-opacity-5 absolute top-12 right-0 w-48 rounded-md bg-white py-1 shadow-lg ring-1 ring-black focus:outline-none"
+              class="dark:bg-dark absolute right-0 top-12 w-48 rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
               tabindex="-1"
               role="menu"
               aria-orientation="vertical"
@@ -653,9 +653,9 @@
           <div class="space-x-2">
             <!-- Toggle dark theme button -->
             <button aria-hidden="true" class="relative focus:outline-none" (click)="toggleDark()">
-              <div class="bg-primary-100 dark:bg-primary-lighter h-6 w-12 rounded-full transition outline-none"></div>
+              <div class="bg-primary-100 dark:bg-primary-lighter h-6 w-12 rounded-full outline-none transition"></div>
               <div
-                class="absolute top-0 left-0 inline-flex h-6 w-6 scale-110 transform items-center justify-center rounded-full shadow-sm transition-all duration-200"
+                class="absolute left-0 top-0 inline-flex h-6 w-6 scale-110 transform items-center justify-center rounded-full shadow-sm transition-all duration-200"
               >
                 <svg *ngIf="!isDark" class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
@@ -743,16 +743,16 @@
               (click)="toggleUserMenu(); toggleMobileMenu()"
               type="button"
               aria-haspopup="true"
-              class="block rounded-full transition-opacity duration-200 focus:ring focus:outline-none dark:opacity-75 dark:hover:opacity-100 dark:focus:opacity-100"
+              class="block rounded-full transition-opacity duration-200 focus:outline-none focus:ring dark:opacity-75 dark:hover:opacity-100 dark:focus:opacity-100"
             >
               <span class="sr-only">User menu</span>
-              <img class="h-10 w-10 rounded-full" ngSrc="/assets/images/blank_profile.png" height="50" width="50" alt="User menu" />
+              <img class="h-10 w-10 rounded-full" src="/assets/images/blank_profile.png" height="50" width="50" alt="User menu" />
             </button>
 
             <!-- User dropdown menu -->
             <div
               [hidden]="!showUserMenu"
-              class="dark:bg-dark ring-opacity-5 absolute top-12 right-0 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black"
+              class="dark:bg-dark absolute right-0 top-12 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5"
               role="menu"
               aria-orientation="vertical"
               aria-label="User menu"
@@ -982,7 +982,7 @@
         <a
           href="{{ rorDocsUrl }}"
           target="_blank"
-          class="focus:ring-primary dark:focus:ring-offset-dark flex flex-row rounded-md px-4 py-2 text-sm text-gray-700 delay-50 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none dark:text-white"
+          class="focus:ring-primary dark:focus:ring-offset-dark delay-50 flex flex-row rounded-md px-4 py-2 text-sm text-gray-700 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white dark:text-white"
         >
           <i class="pi pi-spin pi-github" style="font-size: 2rem"></i>
           <span class="ml-2"> {{ 'common.viewOnGit' | translate }}</span>
@@ -1017,7 +1017,7 @@
   >
     <div class="absolute left-0 -translate-x-full transform p-2">
       <!-- Close button -->
-      <button class="rounded-md p-2 text-white focus:ring focus:outline-none" (click)="toggleSettings()">
+      <button class="rounded-md p-2 text-white focus:outline-none focus:ring" (click)="toggleSettings()">
         <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
         </svg>
@@ -1049,7 +1049,7 @@
             <button
               *ngIf="isDark"
               (click)="toggleDark()"
-              class="dark:border-primary dark:hover:text-primary-100 dark:hover:border-primary-light focus:ring-primary-lighter dark:focus:ring-offset-dark dark:focus:ring-primary-dark flex items-center justify-center space-x-4 rounded-md border px-4 py-2 transition-colors hover:border-gray-900 hover:text-gray-900 focus:ring focus:ring-offset-2 focus:outline-none"
+              class="dark:border-primary dark:hover:text-primary-100 dark:hover:border-primary-light focus:ring-primary-lighter dark:focus:ring-offset-dark dark:focus:ring-primary-dark flex items-center justify-center space-x-4 rounded-md border px-4 py-2 transition-colors hover:border-gray-900 hover:text-gray-900 focus:outline-none focus:ring focus:ring-offset-2"
             >
               <span>
                 <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1068,7 +1068,7 @@
             <button
               (click)="toggleDark()"
               *ngIf="!isDark"
-              class="dark:border-primary dark:hover:text-primary-100 dark:hover:border-primary-light focus:ring-primary-lighter dark:focus:ring-offset-dark dark:focus:ring-primary-dark flex items-center justify-center space-x-4 rounded-md border px-4 py-2 transition-colors hover:border-gray-900 hover:text-gray-900 focus:ring focus:ring-offset-2 focus:outline-none"
+              class="dark:border-primary dark:hover:text-primary-100 dark:hover:border-primary-light focus:ring-primary-lighter dark:focus:ring-offset-dark dark:focus:ring-primary-dark flex items-center justify-center space-x-4 rounded-md border px-4 py-2 transition-colors hover:border-gray-900 hover:text-gray-900 focus:outline-none focus:ring focus:ring-offset-2"
             >
               <span>
                 <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1098,13 +1098,13 @@
             <button
               (click)="useLanguage('no')"
               [ngClass]="{ 'border-green-700 dark:bg-green-500': lang === 'no' }"
-              class="dark:border-primary dark:hover:text-primary-100 dark:hover:border-primary-light focus:ring-primary-lighter dark:focus:ring-offset-dark dark:focus:ring-primary-dark flex items-center justify-center space-x-4 rounded-md border px-4 py-2 transition-colors hover:border-gray-900 hover:text-gray-900 focus:ring focus:ring-offset-2 focus:outline-none"
+              class="dark:border-primary dark:hover:text-primary-100 dark:hover:border-primary-light focus:ring-primary-lighter dark:focus:ring-offset-dark dark:focus:ring-primary-dark flex items-center justify-center space-x-4 rounded-md border px-4 py-2 transition-colors hover:border-gray-900 hover:text-gray-900 focus:outline-none focus:ring focus:ring-offset-2"
             >
               <span>Norsk</span>
             </button>
             <button
               (click)="useLanguage('en')"
-              class="dark:border-primary dark:hover:text-primary-100 dark:hover:border-primary-light focus:ring-primary-lighter dark:focus:ring-offset-dark dark:focus:ring-primary-dark flex items-center justify-center space-x-4 rounded-md border px-4 py-2 transition-colors hover:border-gray-900 hover:text-gray-900 focus:ring focus:ring-offset-2 focus:outline-none"
+              class="dark:border-primary dark:hover:text-primary-100 dark:hover:border-primary-light focus:ring-primary-lighter dark:focus:ring-offset-dark dark:focus:ring-primary-dark flex items-center justify-center space-x-4 rounded-md border px-4 py-2 transition-colors hover:border-gray-900 hover:text-gray-900 focus:outline-none focus:ring focus:ring-offset-2"
               [ngClass]="{ 'border-green-700 dark:bg-green-500': lang === 'en' }"
             >
               <span>English</span>
@@ -1133,7 +1133,7 @@
   >
     <div class="absolute right-0 translate-x-full transform p-2">
       <!-- Close button -->
-      <button class="rounded-md p-2 text-white focus:ring focus:outline-none" (click)="toggleNotifications()">
+      <button class="rounded-md p-2 text-white focus:outline-none focus:ring" (click)="toggleNotifications()">
         <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
         </svg>
@@ -1168,7 +1168,7 @@
                     />
                   </svg>
                 </span>
-                <div class="bg-primary-50 dark:bg-primary-darker absolute left-1/2 -mt-3 -ml-px h-24 p-px"></div>
+                <div class="bg-primary-50 dark:bg-primary-darker absolute left-1/2 -ml-px -mt-3 h-24 p-px"></div>
               </div>
               <div class="flex-1 overflow-hidden">
                 <h5 class="dark:text-light text-sm font-semibold text-gray-600">New project "KWD Dashboard" created</h5>
@@ -1190,7 +1190,7 @@
                     />
                   </svg>
                 </span>
-                <div class="bg-primary-50 dark:bg-primary-darker absolute left-1/2 -mt-3 -ml-px h-24 p-px"></div>
+                <div class="bg-primary-50 dark:bg-primary-darker absolute left-1/2 -ml-px -mt-3 h-24 p-px"></div>
               </div>
               <div class="flex-1 overflow-hidden">
                 <h5 class="dark:text-light text-sm font-semibold text-gray-600">KWD Dashboard v0.0.2 was released</h5>
@@ -1213,7 +1213,7 @@
                       />
                     </svg>
                   </span>
-                  <div class="bg-primary-50 dark:bg-primary-darker absolute left-1/2 -mt-3 -ml-px h-24 p-px"></div>
+                  <div class="bg-primary-50 dark:bg-primary-darker absolute left-1/2 -ml-px -mt-3 h-24 p-px"></div>
                 </div>
                 <div class="flex-1 overflow-hidden">
                   <h5 class="dark:text-light text-sm font-semibold text-gray-600">New project "KWD Dashboard" created</h5>
@@ -1233,7 +1233,7 @@
                 <span class="rounded-ful relative z-10 inline-block overflow-visible">
                   <img class="h-9 w-9 rounded-full object-cover" alt="" />
                 </span>
-                <div class="bg-primary-50 dark:bg-primary-darker absolute left-1/2 -mt-3 -ml-px h-24 p-px"></div>
+                <div class="bg-primary-50 dark:bg-primary-darker absolute left-1/2 -ml-px -mt-3 h-24 p-px"></div>
               </div>
               <div class="flex-1 overflow-hidden">
                 <h5 class="dark:text-light text-sm font-semibold text-gray-600">User</h5>
@@ -1248,7 +1248,7 @@
                 <span class="rounded-ful relative z-10 inline-block overflow-visible">
                   <img class="h-9 w-9 rounded-full object-cover" alt="empty" />
                 </span>
-                <div class="bg-primary-50 dark:bg-primary-darker absolute left-1/2 -mt-3 -ml-px h-24 p-px"></div>
+                <div class="bg-primary-50 dark:bg-primary-darker absolute left-1/2 -ml-px -mt-3 h-24 p-px"></div>
               </div>
               <div class="flex-1 overflow-hidden">
                 <h5 class="dark:text-light text-sm font-semibold text-gray-600">John</h5>
@@ -1263,7 +1263,7 @@
                 <span class="rounded-ful relative z-10 inline-block overflow-visible">
                   <img class="h-9 w-9 rounded-full object-cover" alt="" />
                 </span>
-                <div class="bg-primary-50 dark:bg-primary-darker absolute left-1/2 -mt-3 -ml-px h-24 p-px"></div>
+                <div class="bg-primary-50 dark:bg-primary-darker absolute left-1/2 -ml-px -mt-3 h-24 p-px"></div>
               </div>
               <div class="flex-1 overflow-hidden">
                 <h5 class="dark:text-light text-sm font-semibold text-gray-600"></h5>
@@ -1279,7 +1279,7 @@
                   <span class="rounded-ful relative z-10 inline-block overflow-visible">
                     <img class="h-9 w-9 rounded-full object-cover" alt="" />
                   </span>
-                  <div class="bg-primary-50 dark:bg-primary-darker absolute left-1/2 -mt-3 -ml-px h-24 p-px"></div>
+                  <div class="bg-primary-50 dark:bg-primary-darker absolute left-1/2 -ml-px -mt-3 h-24 p-px"></div>
                 </div>
                 <div class="flex-1 overflow-hidden">
                   <h5 class="dark:text-light text-sm font-semibold text-gray-600"></h5>
@@ -1304,7 +1304,7 @@
   >
     <div class="absolute right-0 translate-x-full transform p-2">
       <!-- Close button -->
-      <button class="rounded-md p-2 text-white focus:ring focus:outline-none" (click)="toggleSearch()">
+      <button class="rounded-md p-2 text-white focus:outline-none focus:ring" (click)="toggleSearch()">
         <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
         </svg>
@@ -1325,7 +1325,7 @@
         </span>
         <input
           type="text"
-          class="dark:bg-dark dark:text-light w-full rounded-full border py-2 pr-4 pl-10 focus:ring focus:outline-none dark:border-transparent"
+          class="dark:bg-dark dark:text-light w-full rounded-full border py-2 pl-10 pr-4 focus:outline-none focus:ring dark:border-transparent"
           [placeholder]="'layout.search.placeholder' | translate"
         />
       </div>
