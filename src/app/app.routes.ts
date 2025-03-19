@@ -8,7 +8,6 @@ export const routes: Routes = [
   },
   {
     path: 'auth/callback',
-    //loadChildren: () => import('./auth-callback/auth-callback.module').then((m) => m.AuthCallbackModule),
     loadComponent: () => import('./auth/callback/callback.component').then((m) => m.CallbackComponent),
   },
   {
@@ -18,9 +17,9 @@ export const routes: Routes = [
   {
     path: '',
     canActivate: [AuthGuard],
-    //loadChildren: () => import('./layout/layout.module').then((m) => m.LayoutModule),
-    loadChildren() {
-      return import('./layout/layout.routing').then((m) => m.routes);
+    async loadChildren() {
+      const m = await import('./layout/layout.routing');
+      return m.routes;
     },
   },
   { path: '**', redirectTo: 'error/404' },

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit, ChangeDetectorRef, ViewEncapsulation } from '@angular/core';
 import { forkJoin, Observable, catchError, tap } from 'rxjs';
 import { ClusterModel } from '../../models/clusterModel';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { ClusterCapasity } from '../../models/clusterCapasity';
 import { Price } from '../../../core/models/price';
@@ -12,6 +12,11 @@ import { PriceService } from '../../../core/services/price.service';
 import { ClusterEnvironment } from '../../../core/models/clusterEnvironment';
 import { ClustersService } from '../../../core/services/clusters.service';
 import ClusterNameValidator from '../../../shared/validators/clusterNameValidator';
+import { TranslateModule } from '@ngx-translate/core';
+import { CommonModule } from '@angular/common';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { DropdownModule } from 'primeng/dropdown';
+import { SharedModule } from '../../../shared/shared.module';
 
 @Component({
   selector: 'app-cluster-new',
@@ -19,7 +24,7 @@ import ClusterNameValidator from '../../../shared/validators/clusterNameValidato
   styleUrls: ['./cluster-new.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  standalone: false,
+  imports: [TranslateModule, CommonModule, InputNumberModule, FormsModule, ReactiveFormsModule, DropdownModule, SharedModule],
 })
 export class ClusterNewComponent implements OnInit {
   clusterForm: FormGroup | undefined;

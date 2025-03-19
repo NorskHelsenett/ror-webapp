@@ -7,6 +7,7 @@ import { CommonModule, KeyValuePipe } from '@angular/common';
   imports: [CommonModule, KeyValuePipe],
   templateUrl: './cluster-ingress-annotations.component.html',
   styleUrl: './cluster-ingress-annotations.component.scss',
+  standalone: true,
 })
 export class ClusterIngressAnnotationsComponent implements OnInit {
   resource: any | undefined;

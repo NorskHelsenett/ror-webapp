@@ -1,14 +1,18 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ResourcesService } from '../../../core/services/resources.service';
 import { catchError, Observable, tap } from 'rxjs';
 import { Resource, ResourceRoute, ResourceSet } from '@rork8s/ror-resources/models';
+import { TranslateModule } from '@ngx-translate/core';
+import { CommonModule } from '@angular/common';
+import { DropdownModule } from 'primeng/dropdown';
 
 @Component({
   selector: 'app-cluster-notifications-form',
   templateUrl: './cluster-notifications-form.component.html',
   styleUrl: './cluster-notifications-form.component.scss',
-  standalone: false,
+  standalone: true,
+  imports: [TranslateModule, CommonModule, FormsModule, DropdownModule, ReactiveFormsModule],
 })
 export class ClusterNotificationsFormComponent implements OnInit {
   @Input() resource: Resource;

@@ -7,6 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
   imports: [TranslateModule],
   templateUrl: './cluster-description.component.html',
   styleUrl: './cluster-description.component.scss',
+  standalone: true,
 })
 export class ClusterDescriptionComponent {
   @Input() cluster: any;

@@ -1,13 +1,20 @@
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { MessageService } from 'primeng/api';
 import { Component, Input, OnInit } from '@angular/core';
 import { ClipboardService } from 'ngx-clipboard';
+import { CommonModule } from '@angular/common';
+import { SharedModule } from '../../../shared/shared.module';
+import { RouterModule } from '@angular/router';
+import { TooltipModule } from 'primeng/tooltip';
+import { ProviderComponent } from '../../../shared/components/provider/provider.component';
+import { TagModule } from 'primeng/tag';
 
 @Component({
   selector: 'app-cluster-metadata',
   templateUrl: './cluster-metadata.component.html',
   styleUrls: ['./cluster-metadata.component.scss'],
-  standalone: false,
+  standalone: true,
+  imports: [TranslateModule, CommonModule, SharedModule, RouterModule, TooltipModule, ProviderComponent, TagModule],
 })
 export class ClusterMetadataComponent implements OnInit {
   @Input() cluster: any = undefined;

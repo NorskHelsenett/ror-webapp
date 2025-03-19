@@ -12,6 +12,7 @@ import { TranslateModule } from '@ngx-translate/core';
   templateUrl: './cluster-ingress-certmanager.component.html',
   styleUrl: './cluster-ingress-certmanager.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
 })
 export class ClusterIngressCertmanagerComponent {
   certificates: Resource[] = [];

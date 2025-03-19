@@ -1,15 +1,17 @@
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { MessageService } from 'primeng/api';
 import { Observable, catchError } from 'rxjs';
 import { PolicyReportGlobal, PolicyReportGlobalQueryType } from '../../../../core/models/policyReport';
 import { PolicyReportsService } from '../../../../core/services/policy-reports.service';
+import { CommonModule } from '@angular/common';
+import { TableModule } from 'primeng/table';
 
 @Component({
   selector: 'app-per-policy-table',
   templateUrl: './per-policy-table.component.html',
   styleUrls: ['./per-policy-table.component.scss'],
-  standalone: false,
+  imports: [TranslateModule, CommonModule, TableModule],
 })
 export class PerPolicyTableComponent implements OnInit {
   @Input() clusterID: string;

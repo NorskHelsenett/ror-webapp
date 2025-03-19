@@ -10,6 +10,8 @@ import * as configPages from '../configuration/pages';
 import * as apikeysPages from '../apikey/pages';
 import * as aclPages from '../acl/pages';
 import { AdminCreateGuard as AdminOwnerGuard } from '../core/guards/admin-create.guard';
+import { PolicyReportsComponent } from './pages/policy-reports/policy-reports.component';
+import { ComplianceReportsComponent } from './pages/compliance-reports/compliance-reports.component';
 
 const routes: Routes = [
   {
@@ -131,7 +133,7 @@ const routes: Routes = [
   {
     path: 'policyreports',
     canActivate: [AdminReadGuard],
-    component: adminPages.PolicyReportsComponent,
+    component: PolicyReportsComponent,
   },
   {
     path: 'vulnerabilityreports',
@@ -141,7 +143,7 @@ const routes: Routes = [
   {
     path: 'compliancereports',
     canActivate: [AdminReadGuard],
-    component: adminPages.ComplianceReportsComponent,
+    component: ComplianceReportsComponent,
   },
 ];
 

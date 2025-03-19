@@ -10,6 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   imports: [TranslateModule, ResourcesV2ListComponent],
   templateUrl: './cluster-ingress-table.component.html',
   styleUrl: './cluster-ingress-table.component.scss',
+  standalone: true,
 })
 export class ClusterIngressTableComponent implements OnInit {
   @Input() cluster: any | undefined;

@@ -22,6 +22,7 @@ import { HealthStatus } from '../../../core/models/healthstatus';
   styleUrl: './cluster-ingress-chart.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.Emulated,
+  standalone: true,
 })
 export class ClusterIngressChartComponent {
   data: TreeNode[] = [];

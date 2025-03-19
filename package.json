@@ -46,7 +46,7 @@
     "jwt-decode": "^4.0.0",
     "ngx-clipboard": "^16.0.0",
     "ngx-highlightjs": "^14.0.0",
-    "ngx-sse-client": "^19.0.0",
+    "ngx-sse-client": "^19.0.1",
     "primeicons": "^7.0.0",
     "primeng": "19.0.10",
     "rxjs": "~7.8.2",

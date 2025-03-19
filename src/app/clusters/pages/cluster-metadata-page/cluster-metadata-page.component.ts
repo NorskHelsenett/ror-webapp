@@ -1,12 +1,18 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ClusterService } from '../../services';
+import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
+import { SharedModule } from 'primeng/api';
+import { RouterModule } from '@angular/router';
+import { TagModule } from 'primeng/tag';
+import { ClusterDetailsEditComponent } from '../cluster-details-edit/cluster-details-edit.component';
 
 @Component({
   selector: 'app-cluster-metadata-page',
   templateUrl: './cluster-metadata-page.component.html',
   styleUrl: './cluster-metadata-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
+  imports: [TranslateModule, CommonModule, SharedModule, RouterModule, TagModule, ClusterDetailsEditComponent],
 })
 export class ClusterMetadataPageComponent implements OnInit {
   @Input() cluster: any;

@@ -2,12 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { ComplianceReportsService } from '../../../core/services/compliance-reports.service';
 import { ComplianceReport, ComplianceReportGlobal, ComplianceReportReport, ComplianceReportSummary } from '../../../core/models/complianceReport';
 import { Observable, catchError, concatMap, groupBy, map, mergeAll, mergeMap, of, tap, toArray } from 'rxjs';
+import { TranslateModule } from '@ngx-translate/core';
+import { SharedModule } from '../../../shared/shared.module';
+import { CommonModule } from '@angular/common';
+import { TableModule } from 'primeng/table';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-compliance-reports',
   templateUrl: './compliance-reports.component.html',
   styleUrl: './compliance-reports.component.scss',
-  standalone: false,
+  imports: [TranslateModule, CommonModule, SharedModule, TableModule, RouterModule],
 })
 export class ComplianceReportsComponent implements OnInit {
   complianceReports$: Observable<ComplianceReportGlobal[]>;

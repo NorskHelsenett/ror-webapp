@@ -6,7 +6,7 @@ import { provideClientHydration, withEventReplay } from '@angular/platform-brows
 import { provideHttpClient, withFetch, withInterceptorsFromDi, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { OAuthStorage, provideOAuthClient } from 'angular-oauth2-oidc';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { providePrimeNG } from 'primeng/config';
 import { AuthInterceptor } from './core/interceptors/auth-interceptor';
 import { provideHighlightOptions } from 'ngx-highlightjs';
@@ -16,6 +16,8 @@ import { CustomMissingTranslationHandler, HttpLoaderFactory } from './core/i18n/
 import { isPlatformServer } from '@angular/common';
 import RorTheme from './themes/ror-theme';
 import { ThemeService } from './core/services/theme.service';
+import { provideServerRouting } from '@angular/ssr';
+import { serverRoutes } from './app.routes.server';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -30,6 +32,7 @@ export const appConfig: ApplicationConfig = {
         onSameUrlNavigation: 'ignore',
       }),
     ),
+    provideServerRouting(serverRoutes),
     provideClientHydration(withEventReplay()),
     provideHttpClient(withFetch(), withInterceptorsFromDi()),
     {
@@ -64,6 +67,7 @@ export const appConfig: ApplicationConfig = {
     ]),
     MessageService,
     ThemeService,
+    ConfirmationService,
     provideAnimationsAsync(),
     providePrimeNG({
       ripple: true,

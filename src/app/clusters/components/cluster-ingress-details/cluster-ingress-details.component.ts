@@ -10,6 +10,7 @@ import { ClusterIngressMetaComponent } from '../cluster-ingress-meta/cluster-ing
   templateUrl: './cluster-ingress-details.component.html',
   styleUrl: './cluster-ingress-details.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
 })
 export class ClusterIngressDetailsComponent {
   cluster: any | undefined;

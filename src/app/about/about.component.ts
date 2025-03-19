@@ -4,13 +4,17 @@ import { AboutService } from '../core/services/apihealthcheck.service';
 import { environment } from '../../environments/environment';
 import { Version } from '../core/models/version';
 import { VersionService } from '../core/services/version.service';
+import { TranslateModule } from '@ngx-translate/core';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { SharedModule } from '../shared/shared.module';
+import { HealthTableComponent } from './components/health-table/health-table.component';
 
 @Component({
   selector: 'app-about',
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
+  imports: [TranslateModule, CommonModule, NgOptimizedImage, SharedModule, HealthTableComponent],
 })
 export class AboutComponent implements OnInit {
   appVersion = environment.appVersion;

@@ -17,14 +17,34 @@ import { AclAccess, AclScopes } from '../core/models/acl-scopes';
 import { AclService } from '../core/services/acl.service';
 import { SignalService } from '../create/create-cluster/services/signal.service';
 import { ClusterEnvironment } from '../core/models/clusterEnvironment';
-import { isPlatformBrowser } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
+import { RouterModule } from '@angular/router';
+import { TableModule } from 'primeng/table';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from '../shared/shared.module';
+import { ProviderComponent } from '../shared/components/provider/provider.component';
+import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
   selector: 'app-clusters',
   templateUrl: './clusters.component.html',
   styleUrls: ['./clusters.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
+  imports: [
+    TranslateModule,
+    CommonModule,
+    RouterModule,
+    TableModule,
+    MultiSelectModule,
+    FormsModule,
+    ReactiveFormsModule,
+    SharedModule,
+    ProviderComponent,
+    TooltipModule,
+  ],
+  standalone: true,
 })
 export class ClustersComponent implements OnInit, OnDestroy {
   private configService = inject(ConfigService);

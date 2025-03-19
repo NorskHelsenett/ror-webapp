@@ -1,11 +1,17 @@
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { Component, Input, OnInit } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
+import { ClusterStatusComponent } from '../../../shared/components';
+import { SharedModule } from '../../../shared/shared.module';
+import { TooltipModule } from 'primeng/tooltip';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-cluster-ingress-metadata',
   templateUrl: './cluster-ingress-metadata.component.html',
   styleUrls: ['./cluster-ingress-metadata.component.scss'],
-  standalone: false,
+  standalone: true,
+  imports: [TranslateModule, SharedModule, TooltipModule, RouterModule, CommonModule],
 })
 export class ClusterIngressMetadataComponent implements OnInit {
   @Input() cluster: any = undefined;

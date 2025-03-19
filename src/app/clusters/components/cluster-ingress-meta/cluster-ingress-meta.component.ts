@@ -15,6 +15,7 @@ import { RouterModule } from '@angular/router';
   templateUrl: './cluster-ingress-meta.component.html',
   styleUrl: './cluster-ingress-meta.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
 })
 export class ClusterIngressMetaComponent {
   cluster: any | undefined;

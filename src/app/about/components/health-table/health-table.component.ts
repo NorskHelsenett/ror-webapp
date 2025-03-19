@@ -1,11 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { HealthCheckService } from '../../../core/models/healthcheckservice';
+import { TranslateModule } from '@ngx-translate/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-health-table',
   templateUrl: './health-table.component.html',
   styleUrls: ['./health-table.component.scss'],
-  standalone: false,
+  imports: [TranslateModule, CommonModule],
 })
 export class HealthTableComponent implements OnInit {
   @Input() health: any[] = [];

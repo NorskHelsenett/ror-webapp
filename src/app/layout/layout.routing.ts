@@ -7,9 +7,17 @@ export const routes: Routes = [
     path: '',
     component: LayoutComponent,
     children: [
+      // {
+      //   path: '',
+      //   loadChildren: () => import('../dashboard/dashboard.module').then((m) => m.DashboardModule),
+      // }
+      // ,
       {
         path: '',
-        loadChildren: () => import('../dashboard/dashboard.module').then((m) => m.DashboardModule),
+        async loadChildren() {
+          const m = await import('../dashboard/dashboard.routing');
+          return m.routes;
+        },
       },
       {
         path: 'datacenters',
@@ -19,10 +27,17 @@ export const routes: Routes = [
         path: 'workspaces',
         loadChildren: () => import('../workspaces/workspaces.module').then((m) => m.WorkspacesModule),
       },
-      {
-        path: 'clusters',
-        loadChildren: () => import('../clusters/clusters.module').then((m) => m.ClustersModule),
-      },
+      // {
+      //   path: 'clusters',
+      //   loadChildren: () => import('../clusters/clusters.module').then((m) => m.ClustersModule),
+      // },
+      // {
+      //   path: '',
+      //   async loadChildren() {
+      //     const m = await import('../clusters/');
+      //     return m.routes;
+      //   },
+      // },
       {
         path: 'create',
         loadChildren: () => import('../create/create.module').then((m) => m.CreateModule),
@@ -53,7 +68,10 @@ export const routes: Routes = [
       },
       {
         path: 'about',
-        loadChildren: () => import('../about/about.module').then((m) => m.AboutModule),
+        async loadComponent() {
+          const m = await import('../about/about.component');
+          return m.AboutComponent;
+        },
       },
       {
         path: 'admin',
