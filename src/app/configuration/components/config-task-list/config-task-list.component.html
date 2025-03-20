@@ -9,7 +9,7 @@
   [rows]="10"
   [rowsPerPageOptions]="rowsPerPage"
 >
-  <ng-template pTemplate="header">
+  <ng-template #header>
     <tr>
       <th style="width: 5rem" class="p-1"></th>
       <th pSortableColumn="name">{{ 'pages.configuration.tasks.table.columns.name' | translate }} <p-sortIcon field="name"></p-sortIcon></th>
@@ -23,7 +23,7 @@
       <th></th>
     </tr>
   </ng-template>
-  <ng-template pTemplate="body" let-task let-expanded="expanded">
+  <ng-template #body let-task let-expanded="expanded">
     <tr>
       <td>
         <button
@@ -59,14 +59,14 @@
       </td>
     </tr>
   </ng-template>
-  <ng-template pTemplate="rowexpansion" let-task>
+  <ng-template #expandedrow let-task>
     <tr>
       <td colspan="10">
         <app-config-task-detail [task]="task"></app-config-task-detail>
       </td>
     </tr>
   </ng-template>
-  <ng-template pTemplate="emptymessage">
+  <ng-template #emptymessage>
     <tr>
       <td colspan="6">{{ 'common.emptyList' | translate }}</td>
     </tr>

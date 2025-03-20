@@ -1,21 +1,73 @@
+import { ClusterDescriptionComponent } from './../../components/cluster-description/cluster-description.component';
+import { CommonModule, Location } from '@angular/common';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { MetricsService } from '../../../core/services/metrics.service';
 import { Component, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy, AfterContentInit, AfterViewInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Observable, Subscription, tap, catchError, share, finalize } from 'rxjs';
-import { Location } from '@angular/common';
 import { AclScopes, AclAccess } from '../../../core/models/acl-scopes';
 import { AclService } from '../../../core/services/acl.service';
 import { ClustersService } from '../../../core/services/clusters.service';
 import { ResourceType } from '../../../core/models/resources/resourceType';
 import { ResourceQuery } from '@rork8s/ror-resources/models';
 import { ClusterService } from '../../services';
+import { TranslateModule } from '@ngx-translate/core';
+
+import {
+  ClusterACLComponent,
+  ClusterComplianceReportComponent,
+  ClusterConditionsComponent,
+  ClusterDeleteComponent,
+  ClusterIngressListComponent,
+  ClusterMetadataComponent,
+  ClusterMetricsComponent,
+  ClusterNotificationsComponent,
+  ClusterPolicyReportComponent,
+  ClusterRawComponent,
+  ClusterToolsComponent,
+  ClusterVulnerabilityReportComponent,
+} from '../../components';
+import { TabViewModule } from 'primeng/tabview';
+import { ClusterNodepoolsComponent } from '../cluster-nodepools/cluster-nodepools.component';
+import { BadgeModule } from 'primeng/badge';
+import { ClusterMetadataPageComponent } from '../cluster-metadata-page/cluster-metadata-page.component';
+import { ClusterResourceTableComponent } from '../../components/cluster-resource-table/cluster-resource-table.component';
+import { SidebarModule } from 'primeng/sidebar';
+import { ResourceV2DetailsComponent } from '../../../resourcesv2/components/resource-v2-details/resource-v2-details.component';
+import { SpinnerComponent } from '../../../shared/components';
 
 @Component({
   selector: 'app-cluster-details',
   templateUrl: './cluster-details.component.html',
   styleUrls: ['./cluster-details.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    TranslateModule,
+    CommonModule,
+    RouterModule,
+    ClusterConditionsComponent,
+    TabViewModule,
+    ClusterMetricsComponent,
+    ClusterDescriptionComponent,
+    ClusterACLComponent,
+    ClusterMetadataComponent,
+    ClusterToolsComponent,
+    ClusterIngressListComponent,
+    ClusterNodepoolsComponent,
+    ClusterPolicyReportComponent,
+    ClusterVulnerabilityReportComponent,
+    ClusterComplianceReportComponent,
+    ClusterRawComponent,
+    BadgeModule,
+    ClusterMetadataPageComponent,
+    ClusterResourceTableComponent,
+    ClusterNotificationsComponent,
+    ClusterDeleteComponent,
+    SpinnerComponent,
+    SidebarModule,
+    ResourceV2DetailsComponent,
+  ],
+  providers: [ClusterService],
 })
 export class ClusterDetailsComponent implements OnInit, OnDestroy, AfterContentInit, AfterViewInit {
   clusterId: string | undefined;

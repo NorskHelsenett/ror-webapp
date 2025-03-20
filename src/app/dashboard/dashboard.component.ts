@@ -1,5 +1,5 @@
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
+import { LangChangeEvent, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { MetricsTotal } from '../core/models/metricsTotal';
 import { ThemeService } from '../core/services/theme.service';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
@@ -19,12 +19,34 @@ import dayjsDuration from 'dayjs/plugin/duration';
 import dayjsRelativeTime from 'dayjs/plugin/relativeTime';
 import { AclService } from '../core/services/acl.service';
 import { AclAccess, AclScopes } from '../core/models/acl-scopes';
+import { TableModule } from 'primeng/table';
+import { RouterModule } from '@angular/router';
+import { CommonModule, LowerCasePipe, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
+import { ClustersComponent } from '../clusters/clusters.component';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { FormatBytesPipe } from '../shared/pipes';
+import { SpinnerComponent } from '../shared/components';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    TranslateModule,
+    TableModule,
+    RouterModule,
+    LowerCasePipe,
+    NgSwitch,
+    NgSwitchCase,
+    NgSwitchDefault,
+    ClustersComponent,
+    ConfirmDialogModule,
+    CommonModule,
+    FormatBytesPipe,
+    SpinnerComponent,
+  ],
+  standalone: true,
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   isDark: boolean;

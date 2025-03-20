@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { TranslateService } from '@ngx-translate/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, inject, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { MessageService, ConfirmationService, ConfirmEventType } from 'primeng/api';
 import { catchError, Observable, of, Subscription, tap } from 'rxjs';
 import { ClusterMetadata } from '../../../core/models/clusterMetadata';
@@ -9,14 +9,33 @@ import { Project, ProjectRole } from '../../../core/models/project';
 import { ClustersService } from '../../../core/services/clusters.service';
 import { ConfigService } from '../../../core/services/config.service';
 import { ProjectService } from '../../../core/services/project.service';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { TagModule } from 'primeng/tag';
+import { DropdownModule } from 'primeng/dropdown';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { SpinnerComponent } from '../../../shared/components';
 
 @Component({
   selector: 'app-cluster-details-edit',
   templateUrl: './cluster-details-edit.component.html',
   styleUrls: ['./cluster-details-edit.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    TranslateModule,
+    CommonModule,
+    RouterModule,
+    TagModule,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    DropdownModule,
+    ConfirmDialogModule,
+    SpinnerComponent,
+  ],
 })
 export class ClusterDetailsEditComponent implements OnInit, OnDestroy {
+  private configService = inject(ConfigService);
   @Input() cluster: any | undefined;
   @Output() invalidCount = new EventEmitter<number>();
   @Output() updateOk = new EventEmitter<boolean>();
@@ -51,7 +70,6 @@ export class ClusterDetailsEditComponent implements OnInit, OnDestroy {
     private translateService: TranslateService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
-    private configService: ConfigService,
   ) {}
 
   ngOnInit(): void {

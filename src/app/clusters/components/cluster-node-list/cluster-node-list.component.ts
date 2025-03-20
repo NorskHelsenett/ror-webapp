@@ -3,12 +3,11 @@ import { TranslateModule } from '@ngx-translate/core';
 import { TableModule } from 'primeng/table';
 import { ConfigService } from '../../../core/services/config.service';
 import { LowerCasePipe } from '@angular/common';
-import { SharedModule } from '../../../shared/shared.module';
+import { FormatBytesPipe } from '../../../shared/pipes';
 
 @Component({
   selector: 'app-cluster-node-list',
-  standalone: true,
-  imports: [TranslateModule, TableModule, LowerCasePipe, SharedModule],
+  imports: [TranslateModule, TableModule, LowerCasePipe, FormatBytesPipe],
   templateUrl: './cluster-node-list.component.html',
   styleUrl: './cluster-node-list.component.scss',
 })

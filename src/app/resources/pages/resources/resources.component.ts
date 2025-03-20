@@ -4,7 +4,6 @@ import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-resources',
-  standalone: true,
   imports: [TranslateModule, ResourceTableComponent],
   providers: [],
   templateUrl: './resources.component.html',

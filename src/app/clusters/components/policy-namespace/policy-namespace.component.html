@@ -19,7 +19,7 @@
   [rowsPerPageOptions]="rowsPerPage"
   [paginator]="true"
 >
-  <ng-template pTemplate="header">
+  <ng-template #header>
     <tr>
       <th style="width: 5rem" class="p-1"></th>
       <th pSortableColumn="name" class="p-1">{{ 'pages.clusters.details.policyreports.name' | translate }} <p-sortIcon field="name"></p-sortIcon></th>
@@ -42,7 +42,7 @@
       </th>
     </tr>
   </ng-template>
-  <ng-template pTemplate="body" let-policy let-nestedExpanded="expanded">
+  <ng-template #body let-policy let-nestedExpanded="expanded">
     <tr>
       <td>
         <button
@@ -64,14 +64,14 @@
       <td>{{ policy?.skipped }}</td>
     </tr>
   </ng-template>
-  <ng-template pTemplate="rowexpansion" let-policy>
+  <ng-template #expandedrow let-policy>
     <tr>
       <td colspan="10">
         <app-policy-policy [policy]="policy"></app-policy-policy>
       </td>
     </tr>
   </ng-template>
-  <ng-template pTemplate="emptymessage">
+  <ng-template #emptymessage>
     <tr>
       <td colspan="6">
         {{ 'common.emptyList' | translate }}

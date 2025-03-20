@@ -1,23 +1,28 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input, OnInit } from '@angular/core';
 import { ConfigService } from '../../../core/services/config.service';
+import { TranslateModule } from '@ngx-translate/core';
+import { CommonModule } from '@angular/common';
+import { TableModule } from 'primeng/table';
+import { RouterModule } from '@angular/router';
+import { TooltipModule } from 'primeng/tooltip';
+import { ClusterStatusComponent } from '../../../shared/components';
 
 @Component({
   selector: 'app-cluster-ingress-list',
   templateUrl: './cluster-ingress-list.component.html',
   styleUrls: ['./cluster-ingress-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [TranslateModule, CommonModule, TableModule, RouterModule, TooltipModule, ClusterStatusComponent],
 })
 export class ClusterIngressListComponent implements OnInit {
+  private configService = inject(ConfigService);
+  private changeDetector = inject(ChangeDetectorRef);
   @Input() cluster: any = undefined;
 
   ingresses: any[] = [];
   rows = this.configService.config.rows;
   rowsPerPage = this.configService.config.rowsPerPage;
-
-  constructor(
-    private changeDetector: ChangeDetectorRef,
-    private configService: ConfigService,
-  ) {}
 
   ngOnInit(): void {
     if (!this.cluster) {

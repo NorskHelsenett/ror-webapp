@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Filter } from '../models/apiFilter';
 import { ClusterInfo } from '../models/clusterInfo';
@@ -11,10 +11,8 @@ import { ConfigService } from './config.service';
   providedIn: 'root',
 })
 export class ProjectService {
-  constructor(
-    private httpClient: HttpClient,
-    private configService: ConfigService,
-  ) {}
+  private configService = inject(ConfigService);
+  private httpClient = inject(HttpClient);
 
   getByFilter(filter: Filter): Observable<PaginationResult<Project>> {
     let url = `${this.configService.config.rorApi}/v1/projects/filter`;

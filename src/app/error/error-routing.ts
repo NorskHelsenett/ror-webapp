@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import * as errorPages from './pages/index';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     component: ErrorComponent,

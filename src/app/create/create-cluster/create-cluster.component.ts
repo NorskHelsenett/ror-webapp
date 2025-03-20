@@ -1,18 +1,29 @@
+import { StepsModule } from 'primeng/steps';
 import { ClusterFormService } from './services/cluster-form.service';
 import { Subscription, tap } from 'rxjs';
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ChangeDetectorRef, inject } from '@angular/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { environment } from '../../../environments/environment';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { SummaryComponent } from './components';
 
 @Component({
   selector: 'app-create-cluster',
   templateUrl: './create-cluster.component.html',
   styleUrls: ['./create-cluster.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [TranslateModule, CommonModule, FormsModule, ReactiveFormsModule, StepsModule, RouterModule, SummaryComponent],
 })
 export class CreateClusterComponent implements OnInit, OnDestroy {
+  private clusterFormService = inject(ClusterFormService);
+
+  private translateService = inject(TranslateService);
+  private changeDetector = inject(ChangeDetectorRef);
+  private fb = inject(FormBuilder);
+
   items: MenuItem[];
   activeIndex: number = 0;
   environment = environment;
@@ -21,13 +32,6 @@ export class CreateClusterComponent implements OnInit, OnDestroy {
   nodePools: any[] | undefined;
 
   private subscriptions = new Subscription();
-
-  constructor(
-    private changeDetector: ChangeDetectorRef,
-    private translateService: TranslateService,
-    private fb: FormBuilder,
-    private clusterFormService: ClusterFormService,
-  ) {}
 
   ngOnInit() {
     this.setupSteps();

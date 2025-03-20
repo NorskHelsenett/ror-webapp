@@ -8,7 +8,7 @@
   [rows]="10"
   [rowsPerPageOptions]="rowsPerPage"
 >
-  <ng-template pTemplate="header">
+  <ng-template #header>
     <tr>
       <th style="width: 5rem"></th>
       <th pSortableColumn="spec.imagePostfix">
@@ -17,7 +17,7 @@
       <th></th>
     </tr>
   </ng-template>
-  <ng-template pTemplate="body" let-operatorconfig let-expanded="expanded">
+  <ng-template #body let-operatorconfig let-expanded="expanded">
     <tr>
       <td>
         <button
@@ -42,7 +42,7 @@
       </td>
     </tr>
   </ng-template>
-  <ng-template pTemplate="rowexpansion" let-operatorconfigdetail>
+  <ng-template #expandedrow let-operatorconfigdetail>
     <tr>
       <td colspan="10">
         <div class="dark:bg-darker rounded-md bg-white">
@@ -60,7 +60,7 @@
                 [rowsPerPageOptions]="rowsPerPage"
                 [paginator]="true"
               >
-                <ng-template pTemplate="header">
+                <ng-template #header>
                   <tr>
                     <th pSortableColumn="index" class="p-1">
                       {{ 'pages.configuration.operatorconfigs.table.table.columns.index' | translate }} <p-sortIcon field="index"></p-sortIcon>
@@ -76,7 +76,7 @@
                     </th>
                   </tr>
                 </ng-template>
-                <ng-template pTemplate="body" let-task let-nestedExpanded="expanded">
+                <ng-template #body let-task let-nestedExpanded="expanded">
                   <tr>
                     <td>{{ task?.index }}</td>
                     <td>{{ task?.name }}</td>
@@ -85,7 +85,7 @@
                   </tr>
                 </ng-template>
 
-                <ng-template pTemplate="emptymessage">
+                <ng-template #emptymessage>
                   <tr>
                     <td colspan="6">{{ 'common.emptyList' | translate }}</td>
                   </tr>
@@ -97,7 +97,7 @@
       </td>
     </tr>
   </ng-template>
-  <ng-template pTemplate="emptymessage">
+  <ng-template #emptymessage>
     <tr>
       <td colspan="6">{{ 'common.emptyList' | translate }}</td>
     </tr>

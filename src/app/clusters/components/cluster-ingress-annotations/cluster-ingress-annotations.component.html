@@ -1,6 +1,6 @@
 @defer (when resource) {
   @for (annotation of resource?.metadata?.annotations | keyvalue; track $index) {
-    <div class="flex items gap-3 mb-2">
+    <div class="items mb-2 flex gap-3">
       <div class="w-2/5">
         <p>{{ annotation.key }}</p>
       </div>

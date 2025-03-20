@@ -1,9 +1,12 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-status',
   templateUrl: './status.component.html',
   styleUrls: ['./status.component.scss'],
+  imports: [TranslateModule, CommonModule],
 })
 export class StatusComponent implements OnInit {
   @Input() updatedDate: Date | undefined;

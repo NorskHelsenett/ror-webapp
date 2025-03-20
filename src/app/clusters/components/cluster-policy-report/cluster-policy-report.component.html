@@ -38,7 +38,7 @@
   ></app-policy-bar>
 
   <p-table [value]="policyreports?.namespaces" dataKey="name" sortField="failed" [sortOrder]="-1">
-    <ng-template pTemplate="header">
+    <ng-template #header>
       <tr>
         <th style="width: 5rem" class="p-1"></th>
         <th pSortableColumn="name">
@@ -64,7 +64,7 @@
         </th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-namespace let-expanded="expanded">
+    <ng-template #body let-namespace let-expanded="expanded">
       <tr>
         <td>
           <button
@@ -85,7 +85,7 @@
         <td>{{ namespace?.skipped }}</td>
       </tr>
     </ng-template>
-    <ng-template pTemplate="rowexpansion" let-namespace>
+    <ng-template #expandedrow let-namespace>
       <tr>
         <td colspan="10">
           <div class="grid gap-8">
@@ -100,7 +100,7 @@
         </td>
       </tr>
     </ng-template>
-    <ng-template pTemplate="emptymessage">
+    <ng-template #emptymessage>
       <tr>
         <td colspan="7">{{ 'common.emptyList' | translate }}</td>
       </tr>

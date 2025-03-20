@@ -20,7 +20,7 @@
             'common.of' | translate | lowercase
           }} {totalRecords} {{ 'common.entries' | translate | lowercase }}"
         >
-          <ng-template pTemplate="header">
+          <ng-template #header>
             <tr>
               <th pSortableColumn="groupName" class="p-1">
                 {{ 'pages.clusters.details.acl.table.columns.groupName' | translate }} <p-sortIcon field="groupName"></p-sortIcon>
@@ -32,12 +32,12 @@
               </th>
             </tr>
           </ng-template>
-          <ng-template pTemplate="body" let-acl>
+          <ng-template #body let-acl>
             <tr>
               <td>{{ acl?.groupName }}</td>
             </tr>
           </ng-template>
-          <ng-template pTemplate="emptymessage">
+          <ng-template #emptymessage>
             <tr>
               <td colspan="6">{{ 'common.emptyList' | translate }}</td>
             </tr>

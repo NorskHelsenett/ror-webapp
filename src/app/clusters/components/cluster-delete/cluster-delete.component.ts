@@ -1,16 +1,19 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ClipboardService } from 'ngx-clipboard';
 import { MessageService } from 'primeng/api';
 import { ResourcesService } from '../../../core/services/resources.service';
 import { Observable, catchError, share, tap } from 'rxjs';
 import { ResourceNamespace } from '../../../core/models/resources';
 import { ResourceQuery } from '@rork8s/ror-resources/models';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-cluster-delete',
   templateUrl: './cluster-delete.component.html',
   styleUrl: './cluster-delete.component.scss',
+  standalone: true,
+  imports: [TranslateModule, CommonModule],
 })
 export class ClusterDeleteComponent implements OnInit {
   @Input() cluster: any | undefined;

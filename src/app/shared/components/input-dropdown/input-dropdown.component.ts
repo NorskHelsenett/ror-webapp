@@ -6,7 +6,6 @@ import { CheckboxModule } from 'primeng/checkbox';
 
 @Component({
   selector: 'app-input-dropdown',
-  standalone: true,
   imports: [TranslateModule, DropdownModule, ReactiveFormsModule, CheckboxModule, FormsModule],
   templateUrl: './input-dropdown.component.html',
   styleUrl: './input-dropdown.component.scss',

@@ -3,7 +3,7 @@
 </div>
 
 <div *ngIf="policyReportsPerCluster$ | async as policyReportsPerCluster; else errorOrLoading" class="flex flex-col">
-  <div class="flex flex-row-reverse xl:pt-2 xl:pr-2">
+  <div class="flex flex-row-reverse xl:pr-2 xl:pt-2">
     <app-export-button [exportObjects]="formatExport(policyReportsPerCluster)" [filename]="'policy'"></app-export-button>
   </div>
   <div class="dark:bg-darker rounded-md bg-white xl:m-2 xl:p-2">
@@ -15,7 +15,7 @@
       [sortOrder]="-1"
       [tableStyle]="{ 'min-width': '50rem' }"
     >
-      <ng-template pTemplate="header" let-columns>
+      <ng-template #header let-columns>
         <tr>
           <th style="width: 5rem" class="p-1"></th>
           <th *ngFor="let col of columns" [pSortableColumn]="col?.field" class="p-1">
@@ -24,7 +24,7 @@
           </th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-policyReport let-columns="columns" let-expanded="expanded">
+      <ng-template #body let-policyReport let-columns="columns" let-expanded="expanded">
         <tr>
           <td>
             <button
@@ -48,7 +48,7 @@
           </td>
         </tr>
       </ng-template>
-      <ng-template pTemplate="rowexpansion" let-policyReport>
+      <ng-template #expandedrow let-policyReport>
         <tr>
           <td colspan="4">
             <div class="grid gap-8">
@@ -63,7 +63,7 @@
           </td>
         </tr>
       </ng-template>
-      <ng-template pTemplate="emptymessage">
+      <ng-template #emptymessage>
         <tr>
           <td colspan="4">
             {{ 'common.emptyList' | translate }}

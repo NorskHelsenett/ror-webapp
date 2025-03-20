@@ -1,14 +1,18 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
-import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
+import { LangChangeEvent, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TreeNode } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import { ThemeService } from '../../../core/services/theme.service';
+import { OrganizationChartModule } from 'primeng/organizationchart';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-cluster-ingress-rules',
   templateUrl: './cluster-ingress-rules.component.html',
   styleUrls: ['./cluster-ingress-rules.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [TranslateModule, OrganizationChartModule, CommonModule],
 })
 export class ClusterIngressRulesComponent implements OnInit {
   @Input() cluster: any = undefined;

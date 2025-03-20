@@ -51,7 +51,6 @@
                     rows="5"
                     cols="30"
                     pInputTextarea
-                    [autoResize]="true"
                     formControlName="description"
                   >
                   </textarea>
@@ -125,7 +124,7 @@
 
                   <div class="mt-5 flex flex-col">
                     <label> {{ 'pages.admin.projects.form.serviceTags' | translate }}</label>
-                    <p-chips formControlName="tags"></p-chips>
+                    <p-chip formControlName="tags"></p-chip>
                     <span
                       *ngIf="
                         projectForm.get('projectMetadata').get('tags').touched &&

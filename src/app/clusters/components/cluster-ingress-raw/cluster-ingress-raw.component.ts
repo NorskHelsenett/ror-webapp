@@ -8,11 +8,11 @@ import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-cluster-ingress-raw',
-  standalone: true,
   imports: [TranslateModule, HighlightModule, JsonPipe],
   templateUrl: './cluster-ingress-raw.component.html',
   styleUrl: './cluster-ingress-raw.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
 })
 export class ClusterIngressRawComponent {
   showIngress: boolean = true;

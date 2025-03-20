@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { ClusterService } from '../../services';
-import { JsonPipe } from '@angular/common';
 import { PriceService } from '../../../core/services/price.service';
 import { Subscription } from 'rxjs';
 import { Price } from '../../../core/models/price';
@@ -9,8 +8,7 @@ import { ClusterNodepoolListComponent } from '../../components/cluster-nodepool-
 
 @Component({
   selector: 'app-cluster-nodepools',
-  standalone: true,
-  imports: [TranslateModule, ClusterNodepoolListComponent, JsonPipe],
+  imports: [TranslateModule, ClusterNodepoolListComponent],
   templateUrl: './cluster-nodepools.component.html',
   styleUrl: './cluster-nodepools.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

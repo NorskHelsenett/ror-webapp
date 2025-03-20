@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ConfigService } from './config.service';
 import { ClusterOrder, ClusterOrderModel } from '../models/clusterOrder';
@@ -8,10 +8,8 @@ import { ClusterOrder, ClusterOrderModel } from '../models/clusterOrder';
   providedIn: 'root',
 })
 export class OrderService {
-  constructor(
-    private httpClient: HttpClient,
-    private configService: ConfigService,
-  ) {}
+  private configService = inject(ConfigService);
+  private httpClient = inject(HttpClient);
 
   orderCluster(clusterOrder: ClusterOrderModel): Observable<boolean> {
     let url = `${this.configService.config.rorApi}/v1/orders/cluster`;

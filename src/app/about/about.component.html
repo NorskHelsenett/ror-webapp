@@ -9,7 +9,7 @@
       <div class="dark:bg-darker flex justify-between overflow-x-auto rounded-md bg-white p-4">
         <div class="dark:bg-darker rounded-md bg-white">
           <div class="p-3">
-            <img class="" ngSrc="/assets/icons/ror.svg" alt="Ror logo" height="350" width="350" priority />
+            <img class="" src="/assets/icons/ror.svg" alt="Ror logo" height="350" width="350" priority />
             <p class="mb-2">{{ 'pages.about.content' | translate }}</p>
           </div>
         </div>
@@ -95,11 +95,11 @@
         </ng-template>
       </div>
     </div>
-    <button
+    <a
       (click)="fetch()"
-      class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark float-left m-2 max-h-10 rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+      class="focus:ring-primary dark:focus:ring-offset-dark float-left m-2 max-h-10 rounded-md bg-green-700 px-4 py-2 text-sm text-white hover:bg-green-700 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
     >
       {{ 'common.refresh' | translate }}
-    </button>
+    </a>
   </div>
 </div>

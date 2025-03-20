@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Params, Router, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
@@ -24,15 +24,13 @@ import { OwnerType } from '../../../core/models/resources/ownerType';
 import { ResourceType } from '../../../core/models/resources/resourceType';
 import { ClustersService } from '../../../core/services/clusters.service';
 import { ConfigService } from '../../../core/services/config.service';
-import { SharedModule } from '../../../shared/shared.module';
 import { ResourceQuery } from '@rork8s/ror-resources/models';
+import { ExportComponent, SpinnerComponent } from '../../../shared/components';
 
 @Component({
   selector: 'app-resource-table',
-  standalone: true,
   imports: [
     CommonModule,
-    SharedModule,
     TranslateModule,
     RouterModule,
     TableModule,
@@ -45,12 +43,15 @@ import { ResourceQuery } from '@rork8s/ror-resources/models';
     SidebarModule,
     HighlightModule,
     HighlightLineNumbers,
+    ExportComponent,
+    SpinnerComponent,
   ],
-  providers: [ResourcesService, ColumnFactoryService, TypesService, Location],
+  providers: [ResourcesService, ColumnFactoryService, TypesService],
   templateUrl: './resource-table.component.html',
   styleUrl: './resource-table.component.scss',
 })
 export class ResourceTableComponent implements OnInit, OnDestroy {
+  private configService = inject(ConfigService);
   @Input() clusterId: string = undefined;
 
   resourcesFetchError: any;
@@ -97,7 +98,6 @@ export class ResourceTableComponent implements OnInit, OnDestroy {
     private columnFactoryService: ColumnFactoryService,
     private typesService: TypesService,
     private clustersService: ClustersService,
-    private configService: ConfigService,
   ) {}
 
   ngOnInit(): void {

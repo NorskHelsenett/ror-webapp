@@ -1,14 +1,23 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { catchError, finalize, Observable } from 'rxjs';
 import { PriceService } from '../../../core/services/price.service';
 import { ConfigService } from '../../../core/services/config.service';
+import { TranslateModule } from '@ngx-translate/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { TableModule } from 'primeng/table';
+import { SpinnerComponent } from '../../../shared/components';
+import { TimePipe } from '../../../shared/pipes/time.pipe';
 
 @Component({
   selector: 'app-admin-prices',
   templateUrl: './admin-prices.component.html',
   styleUrls: ['./admin-prices.component.scss'],
+  imports: [TranslateModule, CommonModule, RouterModule, TableModule, SpinnerComponent, TimePipe],
 })
 export class AdminPricesComponent implements OnInit {
+  private configService = inject(ConfigService);
+
   prices$: Observable<any>;
   pricesError: any;
   loading: boolean;
@@ -19,7 +28,6 @@ export class AdminPricesComponent implements OnInit {
   constructor(
     private changeDetector: ChangeDetectorRef,
     private pricesService: PriceService,
-    private configService: ConfigService,
   ) {}
 
   ngOnInit(): void {

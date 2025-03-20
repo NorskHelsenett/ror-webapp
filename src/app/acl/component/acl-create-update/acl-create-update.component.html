@@ -3,31 +3,7 @@
     <div class="">
       <div class="mb-3 mt-3 flex flex-col md:w-4/5 lg:w-1/2 xl:w-96">
         <label><span class="text-red-800 dark:text-red-300">*</span> {{ 'pages.acl.form.group' | translate }}</label>
-        <!-- <p-dropdown
-          [showClear]="true"
-          [group]="true"
-          formControlName="group"
-          optionLabel="label"
-          optionValue="value"
-          [options]="suggestedGroups"
-          [editable]="true"
-          [autofocus]="true"
-          emptyMessage="{{ 'common.emptyList' | translate }}"
-          placeholder="{{ 'pages.acl.create.groupPlaceholder' | translate }}"
-          class="w-full"
-          styleClass="w-full"
-        >
-          <ng-template let-group pTemplate="group">
-            <div class="align-items-center flex">
-              <strong>{{ group?.label }}</strong>
-            </div>
-          </ng-template>
-          <ng-template let-item pTemplate="item">
-            <div class="align-items-center flex gap-2">
-              <div class="pl-3">{{ item?.label }}</div>
-            </div>
-          </ng-template>
-        </p-dropdown> -->
+
         <app-input-dropdown
           [formGroup]="aclForm"
           [controlName]="'group'"

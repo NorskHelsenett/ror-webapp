@@ -10,7 +10,7 @@
   sortField="key"
   [sortOrder]="1"
 >
-  <ng-template pTemplate="header">
+  <ng-template #header>
     <tr>
       <th pSortableColumn="key" class="p-1">
         {{ 'pages.configuration.desiredVersion.table.columns.key' | translate }} <p-sortIcon field="key"></p-sortIcon>
@@ -21,7 +21,7 @@
       <th class="p-1"></th>
     </tr>
   </ng-template>
-  <ng-template pTemplate="body" let-desiredVersion>
+  <ng-template #body let-desiredVersion>
     <tr>
       <td>{{ desiredVersion?.key }}</td>
       <td>
@@ -54,7 +54,7 @@
       </td>
     </tr>
   </ng-template>
-  <ng-template pTemplate="emptymessage">
+  <ng-template #emptymessage>
     <tr>
       <td colspan="6">{{ 'common.emptyList' | translate }}</td>
     </tr>

@@ -11,7 +11,7 @@
               <div class="mb-5 flex justify-center">
                 <div class="m-3 flex flex-col border p-3 text-center" *ngFor="let ingressRule of ingress?.ingressrules">
                   <div class="flex justify-center">
-                    <img alt="avi" class="h-8 w-8" ngSrc="/assets/icons/tanzu/avi.png" height="80" width="80" />
+                    <img alt="avi" class="h-8 w-8" src="/assets/icons/tanzu/avi.png" height="80" width="80" />
                   </div>
                   <span>{{ ingressRule?.hostname }}</span>
                   <ul class="flex flex-col">
@@ -29,7 +29,7 @@
                 <ng-template let-node pTemplate="ingress">
                   <div class="flex flex-col items-center justify-center text-center">
                     <ng-container class="">
-                      <img ngSrc="/assets/icons/k8s/resources/labeled/ing.svg" alt="ingress" height="66" width="68" />
+                      <img src="/assets/icons/k8s/resources/labeled/ing.svg" alt="ingress" height="66" width="68" />
                     </ng-container>
 
                     <span class="">{{ node?.label }}</span>
@@ -70,7 +70,7 @@
 
                 <ng-template let-node pTemplate="service">
                   <div class="flex flex-col items-center justify-center text-center">
-                    <img ngSrc="/assets/icons/k8s/resources/labeled/svc.svg" alt="service" height="66" width="68" />
+                    <img src="/assets/icons/k8s/resources/labeled/svc.svg" alt="service" height="66" width="68" />
                     <span>{{ node?.label }}</span>
                     <span *ngIf="!node?.label" class="mt-2 font-bold text-red-500">{{
                       'pages.clusters.details.ingresses.services.noService' | translate
@@ -85,7 +85,7 @@
                 </ng-template>
                 <ng-template let-node pTemplate="pod">
                   <div class="flex flex-col items-center justify-center text-center">
-                    <img ngSrc="/assets/icons/k8s/resources/labeled/pod.svg" alt="pod" height="66" width="68" />
+                    <img src="/assets/icons/k8s/resources/labeled/pod.svg" alt="pod" height="66" width="68" />
                     <span>{{ node?.label }}</span>
                   </div>
                 </ng-template>

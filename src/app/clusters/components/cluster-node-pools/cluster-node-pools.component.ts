@@ -1,22 +1,24 @@
 import { Subscription } from 'rxjs';
 import { PriceService } from '../../../core/services/price.service';
-import { Component, Input, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef, inject } from '@angular/core';
 import { Price } from '../../../core/models/price';
 import { ConfigService } from '../../../core/services/config.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { TableModule } from 'primeng/table';
 import { CommonModule, LowerCasePipe } from '@angular/common';
-import { SharedModule } from '../../../shared/shared.module';
+import { FormatBytesPipe } from '../../../shared/pipes';
 
 @Component({
   selector: 'app-cluster-node-pools',
   templateUrl: './cluster-node-pools.component.html',
   styleUrls: ['./cluster-node-pools.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [TranslateModule, TableModule, LowerCasePipe, SharedModule, CommonModule],
+  imports: [TranslateModule, TableModule, LowerCasePipe, CommonModule, FormatBytesPipe],
 })
 export class ClusterNodePoolsComponent implements OnInit, OnDestroy {
+  private configService = inject(ConfigService);
+  private changeDetector = inject(ChangeDetectorRef);
+  private priceService = inject(PriceService);
   @Input() cluster: any = undefined;
 
   rows = this.configService.config.rows;
@@ -24,12 +26,6 @@ export class ClusterNodePoolsComponent implements OnInit, OnDestroy {
 
   private prices: Price[];
   private subscriptions = new Subscription();
-
-  constructor(
-    private changeDetector: ChangeDetectorRef,
-    private priceService: PriceService,
-    private configService: ConfigService,
-  ) {}
 
   ngOnInit(): void {
     this.subscriptions.add(

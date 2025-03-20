@@ -1,19 +1,26 @@
 import { WorkspacesService } from '../core/services/workspaces.service';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { catchError, finalize, map, Observable, share, tap } from 'rxjs';
 import { MetricsService } from '../core/services/metrics.service';
 import { Filter } from '../core/models/apiFilter';
 import { PaginationResult } from '../core/models/paginatedResult';
 import { FilterService } from '../core/services/filter.service';
 import { ConfigService } from '../core/services/config.service';
+import { TranslateModule } from '@ngx-translate/core';
+import { TableModule } from 'primeng/table';
+import { CommonModule } from '@angular/common';
+import { Router, RouterModule } from '@angular/router';
+import { FormatBytesPipe } from '../shared/pipes';
 
 @Component({
   selector: 'app-workspaces',
   templateUrl: './workspaces.component.html',
   styleUrls: ['./workspaces.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [TranslateModule, CommonModule, TableModule, RouterModule, FormatBytesPipe],
 })
 export class WorkspacesComponent implements OnInit {
+  private configService = inject(ConfigService);
   workspaces$: Observable<any> | undefined;
   workspaces: any[];
   workspacesError: any;
@@ -50,7 +57,6 @@ export class WorkspacesComponent implements OnInit {
     private workspaceService: WorkspacesService,
     private metricsService: MetricsService,
     private filterService: FilterService,
-    private configService: ConfigService,
   ) {}
 
   ngOnInit(): void {

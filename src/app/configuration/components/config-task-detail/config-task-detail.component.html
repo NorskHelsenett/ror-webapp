@@ -101,7 +101,7 @@
       <td class="px-2 py-1 align-top">{{ 'pages.configuration.tasks.table.columns.scripts' | translate }}</td>
       <td class="px-2 py-1">
         <div *ngFor="let script of task?.config?.scripts?.fileNameAndData">
-          <h1 class="mb-1 dark:text-white flex-grow text-lg text-gray-800">{{ script?.filename }}:</h1>
+          <h1 class="mb-1 flex-grow text-lg text-gray-800 dark:text-white">{{ script?.filename }}:</h1>
           <pre class="mb-3"><code [highlight]="script?.data" language="bash" (highlighted)="onHighlight($event)" lineNumbers></code></pre>
         </div>
       </td>
