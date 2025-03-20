@@ -14,7 +14,7 @@
       'common.of' | translate | lowercase
     }} {totalRecords} {{ 'common.entries' | translate | lowercase }}"
   >
-    <ng-template pTemplate="caption">
+    <ng-template #caption>
       <div class="xs:flex-none sm:flex sm:justify-between">
         <div *ngIf="clusters$ | async as clusters">
           <app-resources-filter
@@ -52,7 +52,7 @@
         <app-export-button class="md:justify-self-end" [exportObjects]="export()" [filename]="'resources'"></app-export-button>
       </div>
     </ng-template>
-    <ng-template pTemplate="header" let-columns>
+    <ng-template #header let-columns>
       <tr>
         <th *ngFor="let col of columns" [pSortableColumn]="col?.field" class="p-1">
           <div class="flex-cols flex">
@@ -76,7 +76,7 @@
         <th class="p-1"></th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-resource let-columns="columns">
+    <ng-template #body let-resource let-columns="columns">
       <tr>
         <td *ngFor="let col of columns">
           {{ extractData(resource, col.field) }}
@@ -90,7 +90,7 @@
         </td>
       </tr>
     </ng-template>
-    <ng-template pTemplate="emptymessage">
+    <ng-template #emptymessage>
       <tr>
         <td colspan="7">
           <span *ngIf="filter?.kind && filter.scope">{{ 'pages.resources.table.empty' | translate }}</span>

@@ -23,7 +23,7 @@
                 'common.of' | translate | lowercase
               }} {totalRecords} {{ 'common.entries' | translate | lowercase }}"
             >
-              <ng-template pTemplate="header">
+              <ng-template #header>
                 <tr>
                   <th pSortableColumn="name" class="p-1">
                     {{ 'pages.clusters.details.ingresses.name' | translate }} <p-sortIcon field="name"></p-sortIcon>
@@ -55,7 +55,7 @@
                   <th></th>
                 </tr>
               </ng-template>
-              <ng-template pTemplate="body" let-ingress>
+              <ng-template #body let-ingress>
                 <tr>
                   <td>
                     <a class="ml-2 hover:text-blue-800 hover:underline dark:hover:text-blue-400" [routerLink]="['ingresses', ingress?.name]">
@@ -100,7 +100,7 @@
                   </td>
                 </tr>
               </ng-template>
-              <ng-template pTemplate="emptymessage">
+              <ng-template #emptymessage>
                 <tr>
                   <td colspan="6">{{ 'common.emptyList' | translate }}</td>
                 </tr>

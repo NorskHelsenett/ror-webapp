@@ -16,12 +16,12 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
             </svg>
           </a>
-          <button
+          <a
             (click)="fetch(lastLazyLoad)"
-            class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark ml-2 rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+            class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark ml-2 cursor-pointer rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
           >
             {{ 'common.refresh' | translate }}
-          </button>
+          </a>
         </div>
         <div class="relative p-3">
           <div>
@@ -45,7 +45,7 @@
                 'common.of' | translate | lowercase
               }} {totalRecords} {{ 'common.entries' | translate | lowercase }}"
             >
-              <ng-template pTemplate="header">
+              <ng-template #header>
                 <tr>
                   <th pSortableColumn="group" class="p-1">
                     {{ 'pages.acl.table.columns.group' | translate }} <p-sortIcon field="group"></p-sortIcon>
@@ -204,7 +204,7 @@
                   <th class="p-1"></th>
                 </tr>
               </ng-template>
-              <ng-template pTemplate="body" let-acl let-expanded="expanded">
+              <ng-template #body let-acl let-expanded="expanded">
                 <tr>
                   <td>
                     <a class="ml-2 cursor-pointer hover:text-blue-800 hover:underline dark:hover:text-blue-400" routerLink="./{{ acl?.id }}/edit">{{
@@ -235,23 +235,23 @@
                   </td>
                   <td>
                     <div class="flex">
-                      <button
+                      <a
                         routerLink="./{{ acl?.id }}/edit"
                         class="focus:ring-primary dark:focus:ring-offset-dark ml-2 rounded-md bg-green-700 px-4 py-2 text-sm text-white hover:bg-green-500 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
                       >
                         {{ 'common.edit' | translate }}
-                      </button>
-                      <button
+                      </a>
+                      <a
                         (click)="delete(acl)"
                         class="focus:ring-primary dark:focus:ring-offset-dark ml-2 flex rounded-md bg-red-700 px-4 py-2 text-sm text-white hover:bg-red-500 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
                       >
                         <span class="">{{ 'common.delete' | translate }}</span>
-                      </button>
+                      </a>
                     </div>
                   </td>
                 </tr>
               </ng-template>
-              <ng-template pTemplate="emptymessage">
+              <ng-template #emptymessage>
                 <tr>
                   <td colspan="6">{{ 'common.emptyList' | translate }}</td>
                 </tr>

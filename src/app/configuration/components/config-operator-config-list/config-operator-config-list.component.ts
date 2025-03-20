@@ -15,6 +15,7 @@ import { RouterModule } from '@angular/router';
 })
 export class ConfigOperatorConfigListComponent {
   private configService = inject(ConfigService);
+
   @Input() operatorConfigs: OperatorConfig[] | undefined;
 
   rowsPerPage = this.configService.config.rowsPerPage;

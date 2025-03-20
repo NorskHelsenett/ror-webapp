@@ -27,6 +27,7 @@
       </div>
     </div>
   </div>
+
   <a
     *ngIf="(adminCreate$ | async) === true"
     [routerLink]="['./create/cluster']"
@@ -36,7 +37,7 @@
   </a>
   <a
     (click)="fetchClusters(lastLazyLoad)"
-    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark cursor-pointer rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
   >
     {{ 'common.refresh' | translate }}
   </a>
@@ -71,7 +72,7 @@
         'common.of' | translate | lowercase
       }} {totalRecords} {{ 'common.entries' | translate | lowercase }}"
     >
-      <ng-template pTemplate="caption">
+      <ng-template #caption>
         <div class="flex justify-between">
           <p-multiSelect
             [maxSelectedLabels]="0"
@@ -94,7 +95,7 @@
           </div>
         </div>
       </ng-template>
-      <ng-template pTemplate="header" let-columns>
+      <ng-template #header let-columns>
         <tr>
           <ng-container *ngFor="let col of columns">
             @if (col?.field === 'healthStatus.health') {
@@ -257,7 +258,7 @@
           </th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-cluster let-columns="columns">
+      <ng-template #body let-cluster let-columns="columns">
         <tr [pSelectableRow]="cluster">
           <td *ngFor="let col of columns">
             <div [ngSwitch]="col.field">
@@ -338,7 +339,7 @@
           </td>
         </tr>
       </ng-template>
-      <ng-template pTemplate="emptymessage">
+      <ng-template #emptymessage>
         <tr>
           <td colspan="7">{{ 'common.emptyList' | translate }}</td>
         </tr>

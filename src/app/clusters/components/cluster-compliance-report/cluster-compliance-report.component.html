@@ -29,7 +29,7 @@
     </div>
   </div>
   <p-table [value]="complianceReports" [columns]="mainColumns" dataKey="metadata.name">
-    <ng-template pTemplate="header" let-columns>
+    <ng-template #header let-columns>
       <tr>
         <th class="p-1"></th>
         <th *ngFor="let col of columns" [pSortableColumn]="col?.field" class="p-1">
@@ -38,7 +38,7 @@
         </th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-complianceReport let-columns="columns" let-expanded="expanded">
+    <ng-template #body let-complianceReport let-columns="columns" let-expanded="expanded">
       <tr>
         <td>
           <button
@@ -53,12 +53,12 @@
         <td *ngFor="let col of columns">{{ getValue(complianceReport, col?.field) }}</td>
       </tr>
     </ng-template>
-    <ng-template pTemplate="rowexpansion" let-complianceReport>
+    <ng-template #expandedrow let-complianceReport>
       <tr>
         <td class="pt-0" colspan="7">
           <div class="px-12 pb-3">
             <p-table [value]="complianceReport?.reports" [columns]="subColumns" dataKey="id" [sortOrder]="-1" sortField="totalfail">
-              <ng-template pTemplate="header" let-columns>
+              <ng-template #header let-columns>
                 <tr>
                   <th *ngFor="let col of columns" [pSortableColumn]="col?.field">
                     {{ 'pages.clusters.details.compliancereports.table.details.' + col?.header | translate }}
@@ -66,12 +66,12 @@
                   </th>
                 </tr>
               </ng-template>
-              <ng-template pTemplate="body" let-report let-columns="columns">
+              <ng-template #body let-report let-columns="columns">
                 <tr>
                   <td *ngFor="let col of columns">{{ getValue(report, col?.field) }}</td>
                 </tr>
               </ng-template>
-              <ng-template pTemplate="emptymessage">
+              <ng-template #emptymessage>
                 <tr>
                   <td colspan="7">{{ 'common.emptyList' | translate }}</td>
                 </tr>
@@ -81,7 +81,7 @@
         </td>
       </tr>
     </ng-template>
-    <ng-template pTemplate="emptymessage">
+    <ng-template #emptymessage>
       <tr>
         <td colspan="7">{{ 'common.emptyList' | translate }}</td>
       </tr>

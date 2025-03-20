@@ -8,16 +8,15 @@
       <div class="dark:border-primary flex items-center justify-between border-b p-3">
         <span class="flex-grow"></span>
 
-        <button
+        <a
           (click)="fetchOrders()"
-          class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark ml-2 rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+          class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark ml-2 cursor-pointer rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
         >
           {{ 'common.refresh' | translate }}
-        </button>
+        </a>
       </div>
       <div class="p-3">
         <div *ngIf="orders$ | async as orders">
-          <!-- <p-table [value]="orders$ | async" autoLayout=""></p-table> -->
           <p-table
             #ordersTable
             [value]="orders?.clusterorders"
@@ -29,7 +28,7 @@
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
             [globalFilterFields]="['spec.cluster', 'kind']"
           >
-            <ng-template pTemplate="caption">
+            <ng-template #caption>
               <div class="flex">
                 <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash" (click)="ordersTable.clear()"></button>
                 <span class="p-input-icon-left ml-auto">
@@ -38,7 +37,7 @@
                 </span>
               </div>
             </ng-template>
-            <ng-template pTemplate="header">
+            <ng-template #header>
               <tr>
                 <th style="min-width: 15rem" class="p-1">
                   <div class="align-items-center flex">
@@ -54,7 +53,7 @@
                 </th>
               </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-order>
+            <ng-template #body let-order>
               <tr>
                 <td>
                   <a
@@ -69,7 +68,7 @@
                 </td>
               </tr>
             </ng-template>
-            <ng-template pTemplate="emptymessage">
+            <ng-template #emptymessage>
               <tr>
                 <td colspan="7">No orders found.</td>
               </tr>

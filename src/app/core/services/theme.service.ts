@@ -26,6 +26,8 @@ export class ThemeService {
       this.isDark.next(false);
       this.setLightTheme();
     }
+
+    this.switchTheme();
   }
 
   setDark(setDark: boolean): void {
@@ -39,11 +41,13 @@ export class ThemeService {
     } else {
       this.setLightTheme();
     }
+
+    this.switchTheme();
   }
 
-  switchTheme(theme: string) {
+  switchTheme() {
     if (isPlatformBrowser(this.platformId)) {
-      this.hljsLoader.setTheme(theme === 'dark' ? 'assets/styles/highlight/tokyo-night-dark.css' : 'assets/styles/highlight/tokyo-night-light.css');
+      this.hljsLoader.setTheme(this.isDark.value ? 'assets/styles/highlight/tokyo-night-light.css' : 'assets/styles/highlight/tokyo-night-dark.css');
     }
   }
 

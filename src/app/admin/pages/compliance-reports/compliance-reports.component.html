@@ -15,7 +15,7 @@
       [sortOrder]="-1"
       [tableStyle]="{ 'min-width': '50rem' }"
     >
-      <ng-template pTemplate="header" let-columns>
+      <ng-template #header let-columns>
         <tr>
           <th class="dark:border-primary-darker border-r" rowspan="2" class="p-1">
             {{ 'pages.admin.compliancereports.' + 'cluster' | translate }}
@@ -42,7 +42,7 @@
           </th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-complianceReport let-columns="columns">
+      <ng-template #body let-complianceReport let-columns="columns">
         <tr>
           <td *ngFor="let column of columns">
             <ng-container *ngIf="column?.field === 'clusterid'">
@@ -60,7 +60,7 @@
           </td>
         </tr>
       </ng-template>
-      <ng-template pTemplate="emptymessage">
+      <ng-template #emptymessage>
         <tr>
           <td [attr.colspan]="columns?.length">
             {{ 'common.emptyList' | translate }}

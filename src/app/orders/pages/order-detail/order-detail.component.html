@@ -4,18 +4,18 @@
       <span>{{ 'pages.orders.details.title' | translate }}</span>
     </h1>
 
-    <button
+    <a
       (click)="fetchOrder()"
-      class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark ml-2 rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+      class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark ml-2 cursor-pointer rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
     >
       {{ 'common.refresh' | translate }}
-    </button>
-    <button
+    </a>
+    <a
       (click)="deleteOrder()"
-      class="focus:ring-primary dark:focus:ring-offset-dark ml-2 flex rounded-md bg-red-700 px-4 py-2 text-sm text-white hover:bg-red-500 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+      class="focus:ring-primary dark:focus:ring-offset-dark ml-2 flex cursor-pointer rounded-md bg-red-700 px-4 py-2 text-sm text-white hover:bg-red-500 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
     >
       {{ 'common.delete' | translate }}
-    </button>
+    </a>
   </div>
 
   <div class="m-4">

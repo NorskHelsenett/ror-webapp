@@ -21,12 +21,12 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
             </svg>
           </button>
-          <button
+          <a
             (click)="fetch(lastLazyLoad)"
-            class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark ml-2 rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+            class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark ml-2 cursor-pointer rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
           >
             {{ 'common.refresh' | translate }}
-          </button>
+          </a>
         </div>
         <div class="p-3">
           <div>
@@ -51,7 +51,7 @@
                 'common.of' | translate | lowercase
               }} {totalRecords} {{ 'common.entries' | translate | lowercase }}"
             >
-              <ng-template pTemplate="header">
+              <ng-template #header>
                 <tr>
                   <th pSortableColumn="displayName" class="p-1">
                     {{ 'pages.apikeys.table.columns.displayName' | translate }} <p-sortIcon field="displayName"></p-sortIcon>
@@ -104,7 +104,7 @@
                   <th class="p-1"></th>
                 </tr>
               </ng-template>
-              <ng-template pTemplate="body" let-apikey let-expanded="expanded">
+              <ng-template #body let-apikey let-expanded="expanded">
                 <tr>
                   <td>{{ apikey?.displayName }}</td>
                   <td>{{ apikey?.identifier }}</td>
@@ -146,7 +146,7 @@
                   </td>
                 </tr>
               </ng-template>
-              <ng-template pTemplate="emptymessage">
+              <ng-template #emptymessage>
                 <tr>
                   <td colspan="6">{{ 'common.emptyList' | translate }}</td>
                 </tr>

@@ -1,6 +1,6 @@
 <div *ngIf="policyReports$ | async as policyReports; else errorOrLoading">
   <p-table [value]="policyReports" [columns]="cols" sortField="fail" [sortOrder]="-1" [tableStyle]="{ 'min-width': '50rem' }">
-    <ng-template pTemplate="header" let-columns>
+    <ng-template #header let-columns>
       <tr>
         <th *ngFor="let col of columns" [pSortableColumn]="col?.field" class="p-1">
           {{ 'pages.admin.policyreports.' + col?.header | translate }}
@@ -8,7 +8,7 @@
         </th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-policyReport let-columns="columns">
+    <ng-template #body let-policyReport let-columns="columns">
       <tr>
         <td *ngFor="let col of columns">
           {{ policyReport[col?.field] }}

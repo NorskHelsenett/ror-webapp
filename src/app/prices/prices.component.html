@@ -10,12 +10,12 @@
     </svg>
   </a>
 
-  <button
+  <a
     (click)="fetch()"
-    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark cursor-pointer rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
   >
     {{ 'common.refresh' | translate }}
-  </button>
+  </a>
 </div>
 
 <div class="mt-2">
@@ -50,7 +50,7 @@
                     'common.of' | translate | lowercase
                   }} {totalRecords} {{ 'common.entries' | translate | lowercase }}"
                 >
-                  <ng-template pTemplate="header">
+                  <ng-template #header>
                     <tr>
                       <th pSortableColumn="machineClass" class="p-1">
                         {{ 'pages.prices.table.column.machineClass' | translate }} <p-sortIcon field="machineClass"></p-sortIcon>
@@ -94,7 +94,7 @@
                       </th>
                     </tr>
                   </ng-template>
-                  <ng-template pTemplate="body" let-price let-expanded="expanded">
+                  <ng-template #body let-price let-expanded="expanded">
                     <tr>
                       <td class="whitespace-nowrap px-6 py-4 text-sm font-medium">{{ price?.machineClass | titlecase }}</td>
                       <td class="whitespace-nowrap px-6 py-4 text-sm font-light">{{ price?.price }} NOK</td>
@@ -107,7 +107,7 @@
                       <td class="whitespace-nowrap px-6 py-4 text-sm font-light">{{ (price?.to | time: 'DD. MMM YYYY HH:mm:ss') || '' }}</td>
                     </tr>
                   </ng-template>
-                  <ng-template pTemplate="emptymessage">
+                  <ng-template #emptymessage>
                     <tr>
                       <td colspan="6">{{ 'common.emptyList' | translate }}</td>
                     </tr>

@@ -68,15 +68,15 @@
             <tr class="hover:bg-grey-light truncate">
               <td class="px-2 py-1">{{ 'pages.clusters.details.tools.rorlogin' | translate }}</td>
               <td class="truncate px-2 py-1">
-                <button
+                <a
                   (click)="copyRorLogin()"
                   class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
                 >
                   {{ 'common.copy' | translate }}
-                </button>
-                <!-- <button
+                </a>
+                <!-- <a
                   (click)="toggleShowLogin()"
-                  class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark ml-3 rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+                  class="cursor-pointer hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark ml-3 rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
                 >
                   <span *ngIf="!showLogin">
                     {{ 'common.show' | translate }}
@@ -84,18 +84,18 @@
                   <span *ngIf="showLogin">
                     {{ 'common.hide' | translate }}
                   </span>
-                </button> -->
+                </a> -->
               </td>
             </tr>
             <tr class="hover:bg-grey-light truncate">
               <td class="px-2 py-1">{{ 'pages.clusters.details.tools.kubectlLogin' | translate }}</td>
               <td class="truncate px-2 py-1">
-                <button
+                <a
                   (click)="copyLogin()"
-                  class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+                  class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark cursor-pointer rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
                 >
                   {{ 'common.copy' | translate }}
-                </button>
+                </a>
                 <!-- <button
                   (click)="toggleShowLogin()"
                   class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark ml-3 rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"

@@ -1,12 +1,12 @@
 <div class="dark:border-primary-darker flex items-center gap-4 border-b px-4 py-4 lg:py-6">
   <h1 class="flex-grow text-2xl font-semibold">{{ 'pages.metrics.title' | translate }}</h1>
 
-  <button
+  <a
     (click)="fetchCustomMetrics()"
-    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark cursor-pointer rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
   >
     {{ 'common.refresh' | translate }}
-  </button>
+  </a>
 </div>
 
 <div class="mt-2">

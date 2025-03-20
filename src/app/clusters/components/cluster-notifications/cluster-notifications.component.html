@@ -3,7 +3,7 @@
 } @else {
   @if (!routeError) {
     <p-table [value]="resources$ | async" dataKey="metadata.uid" [tableStyle]="{ 'min-width': '50rem' }">
-      <ng-template pTemplate="caption">
+      <ng-template caption>
         <div class="flex gap-2">
           <button pButton pRipple (click)="handleCreate()" class="rounded-md bg-green-700 px-3 py-2 text-white hover:bg-green-600 focus:bg-green-600">
             {{ 'pages.clusters.details.notifications.route.configure' | translate }}
@@ -15,14 +15,14 @@
           }
         </div>
       </ng-template>
-      <ng-template pTemplate="header">
+      <ng-template #header>
         <tr>
           <th>{{ 'pages.clusters.details.notifications.route.resource' | translate }}</th>
           <th>{{ 'pages.clusters.details.notifications.route.slack.workspace' | translate }}</th>
           <th>{{ 'pages.clusters.details.notifications.route.slack.channel' | translate }}</th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-resource>
+      <ng-template #body let-resource>
         @for (slack of resource.route.spec.receivers.slack; track $index) {
           <tr>
             <td>{{ 'Vulnerability' }}</td>
@@ -31,7 +31,7 @@
           </tr>
         }
       </ng-template>
-      <ng-template pTemplate="emptymessage">
+      <ng-template #emptymessage>
         <tr>
           <td colspan="7">{{ 'common.emptyList' | translate }}</td>
         </tr>

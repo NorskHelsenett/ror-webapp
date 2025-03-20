@@ -6,14 +6,14 @@ import { ConfigService } from '../../../core/services/config.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { TableModule } from 'primeng/table';
 import { CommonModule, LowerCasePipe } from '@angular/common';
-import { SharedModule } from '../../../shared/shared.module';
+import { FormatBytesPipe } from '../../../shared/pipes';
 
 @Component({
   selector: 'app-cluster-node-pools',
   templateUrl: './cluster-node-pools.component.html',
   styleUrls: ['./cluster-node-pools.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [TranslateModule, TableModule, LowerCasePipe, SharedModule, CommonModule],
+  imports: [TranslateModule, TableModule, LowerCasePipe, CommonModule, FormatBytesPipe],
 })
 export class ClusterNodePoolsComponent implements OnInit, OnDestroy {
   private configService = inject(ConfigService);

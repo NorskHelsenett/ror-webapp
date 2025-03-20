@@ -5,18 +5,18 @@
         <div class="dark:bg-darker flex w-full flex-col rounded-md bg-white">
           <div class="dark:border-primary flex justify-between border-b p-3">
             <span class="flex-grow"></span>
-            <button
+            <a
               (click)="toggleEdit()"
-              class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark delay-50 float-left rounded-md bg-green-700 px-4 py-2 text-sm text-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white disabled:cursor-not-allowed disabled:bg-gray-500 disabled:opacity-75 disabled:hover:bg-gray-800"
+              class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark delay-50 float-left cursor-pointer rounded-md bg-green-700 px-4 py-2 text-sm text-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white disabled:cursor-not-allowed disabled:bg-gray-500 disabled:opacity-75 disabled:hover:bg-gray-800"
             >
               {{ 'common.edit' | translate }}
-            </button>
-            <button
+            </a>
+            <a
               (click)="refreshRequested.emit()"
-              class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark ml-2 rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+              class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark ml-2 cursor-pointer rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
             >
               {{ 'common.refresh' | translate }}
-            </button>
+            </a>
           </div>
           @if (!edit) {
             <div class="w-full p-3">

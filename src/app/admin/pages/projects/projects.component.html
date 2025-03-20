@@ -43,12 +43,12 @@
       <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
     </svg>
   </a>
-  <button
+  <a
     (click)="fetchProjects(lastLazyLoad)"
-    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark cursor-pointer rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
   >
     {{ 'common.refresh' | translate }}
-  </button>
+  </a>
 </div>
 
 <div class="dark:bg-darker rounded-md bg-white xl:m-2 xl:p-2">
@@ -72,7 +72,7 @@
     responsiveLayout="stack"
     styleClass="p-datatable-sm"
   >
-    <ng-template pTemplate="header">
+    <ng-template #header>
       <tr>
         <ng-container *ngFor="let col of columns">
           <th pSortableColumn="{{ col?.field }}">
@@ -118,7 +118,7 @@
         <th class="p-1"></th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-project let-columns="columns">
+    <ng-template #body let-project let-columns="columns">
       <tr>
         <td *ngFor="let col of columns">
           <div [ngSwitch]="col.field">
@@ -154,20 +154,20 @@
           </div>
         </td>
         <td class="" *ngIf="(adminRead$ | async) === true">
-          <button
+          <a
             routerLink="./{{ project?.id }}/edit"
-            class="p-button-sm focus:ring-primary dark:focus:ring-offset-dark ml-2 rounded-md bg-green-700 px-4 py-2 text-sm text-white hover:bg-green-500 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+            class="focus:ring-primary dark:focus:ring-offset-dark ml-2 rounded-md bg-green-700 px-4 py-2 text-sm text-white hover:bg-green-500 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
           >
             {{ 'common.edit' | translate }}
-          </button>
+          </a>
         </td>
         <td class="" *ngIf="(adminRead$ | async) === true">
-          <button
+          <a
             (click)="deleteProject(project)"
-            class="p-button-sm focus:ring-primary dark:focus:ring-offset-dark ml-2 rounded-md bg-red-700 px-4 py-2 text-sm text-white hover:bg-red-500 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+            class="focus:ring-primary dark:focus:ring-offset-dark ml-2 rounded-md bg-red-700 px-4 py-2 text-sm text-white hover:bg-red-500 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
           >
             {{ 'common.delete' | translate }}
-          </button>
+          </a>
         </td>
       </tr>
     </ng-template>
