@@ -118,28 +118,28 @@
 
           <span class="mt-3 text-red-800 dark:text-red-300">* {{ 'common.required' | translate }}</span>
 
-          <div class="mt-5 flex">
+          <div class="mt-5 flex gap-3">
             <button
               [disabled]="!apikeyForm?.valid"
               (click)="create()"
-              class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white disabled:cursor-not-allowed disabled:bg-gray-500 disabled:opacity-75 disabled:hover:bg-gray-800"
+              class="rounded-md bg-green-500 px-4 py-2 text-lg text-gray-800 hover:bg-green-100 hover:text-white disabled:bg-gray-300 disabled:text-gray-100 disabled:hover:bg-gray-100 dark:text-gray-100 hover:dark:bg-green-500 dark:hover:text-gray-100"
             >
               {{ 'common.create' | translate }}
             </button>
 
-            <button
+            <a
               (click)="reset()"
-              class="hover:bg-primary-lighter focus:ring-primary dark:focus:ring-offset-dark ml-3 rounded-md bg-neutral-500 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+              class="rounded-md bg-gray-400 px-4 py-2 text-lg text-gray-800 hover:bg-gray-500 dark:text-gray-100 dark:hover:bg-gray-900 dark:hover:text-gray-100"
             >
               {{ 'common.reset' | translate }}
-            </button>
+            </a>
 
-            <button
+            <a
               (click)="cancel()"
-              class="hover:bg-primary-lighter focus:ring-primary dark:focus:ring-offset-dark ml-3 rounded-md bg-neutral-500 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+              class="rounded-md bg-orange-400 px-4 py-2 text-lg text-gray-800 hover:bg-orange-500 dark:text-gray-100 dark:hover:bg-orange-500 dark:hover:text-gray-100"
             >
               {{ 'common.cancel' | translate }}
-            </button>
+            </a>
           </div>
           <div *ngIf="apikeyCreateError">
             <div class="mx-auto my-4 flex items-center rounded-md bg-red-200 px-6 py-4 text-lg">

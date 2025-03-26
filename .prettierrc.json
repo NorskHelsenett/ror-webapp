@@ -4,5 +4,19 @@
   "endOfLine": "auto",
   "printWidth": 150,
   "plugins": ["prettier-plugin-tailwindcss"],
-  "tailwindStylesheet": "./styles.css"
+  "tailwindStylesheet": "./styles.css",
+  "overrides": [
+    {
+      "files": "*.yml",
+      "options": {
+        "tabWidth": 2
+      }
+    },
+    {
+      "files": "*.yaml",
+      "options": {
+        "tabWidth": 2
+      }
+    }
+  ]
 }

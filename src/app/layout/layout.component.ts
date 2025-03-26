@@ -27,7 +27,7 @@ import { RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
 export class LayoutComponent implements OnInit, OnDestroy {
   private configService = inject(ConfigService);
   appVersion = environment.appVersion;
-  isDark = false;
+  isDark: boolean | undefined;
   showUserMenu = false;
   showSubMenu = false;
   showMobileMenu = false;
@@ -63,7 +63,12 @@ export class LayoutComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.isDark = this.themeService.isDark.value;
+    this.subscriptions.add(
+      this.themeService.isDark.subscribe((isDark) => {
+        this.isDark = isDark;
+        this.changeDetector.detectChanges();
+      }),
+    );
     this.lang = this.translateService.currentLang;
     this.fetchAcl();
 
@@ -105,6 +110,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
   }
 
   toggleDark(): void {
+    console.log('toggleDark, isDark:', this.isDark);
     this.isDark = !this.isDark;
     this.themeService.setDark(this.isDark);
   }

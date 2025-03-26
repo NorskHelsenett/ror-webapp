@@ -14,7 +14,7 @@ export class ThemeService {
     @Inject(PLATFORM_ID) private platformId: object,
     private hljsLoader: HighlightLoader,
   ) {
-    let isDark = true;
+    let isDark = false;
     if (isPlatformBrowser(this.platformId)) {
       isDark = localStorage.getItem('isDark') == 'true';
     }
@@ -32,10 +32,6 @@ export class ThemeService {
 
   setDark(setDark: boolean): void {
     this.isDark.next(setDark);
-    if (isPlatformBrowser(this.platformId)) {
-      localStorage['isDark'] = setDark;
-    }
-
     if (this.isDark?.getValue() === true) {
       this.setDarkTheme();
     } else {
@@ -53,21 +49,15 @@ export class ThemeService {
 
   setLightTheme(): void {
     if (isPlatformBrowser(this.platformId)) {
-      document?.querySelector('html')?.classList.toggle('dark');
-      this.saveTheme();
+      localStorage.setItem('isDark', false.toString());
+      document?.querySelector('html')?.classList.remove('dark');
     }
   }
 
   setDarkTheme(): void {
     if (isPlatformBrowser(this.platformId)) {
-      document?.querySelector('html')?.classList.toggle('dark');
-      this.saveTheme();
-    }
-  }
-
-  private saveTheme(): void {
-    if (!isPlatformBrowser(this.platformId)) {
-      localStorage.setItem('isDark', this.isDark?.getValue().toString());
+      localStorage.setItem('isDark', true.toString());
+      document?.querySelector('html')?.classList.add('dark');
     }
   }
 }

@@ -2,24 +2,27 @@
   <h1 class="text-2xl font-semibold">{{ 'pages.profile.title' | translate }}</h1>
 </div>
 
-<p-tabView styleClass="tabview" (activeIndexChange)="switchTab($event)" [activeIndex]="selectedTabIndex">
-  <p-tabPanel>
-    <ng-template pTemplate="header">
-      <i class="pi pi-user"></i>
-      <span class="ml-2">{{ 'pages.profile.details.title' | translate }}</span>
-    </ng-template>
-    <ng-template pTemplate="content">
+<p-tabs [value]="tabIndex" scrollable #tabs (valueChange)="switchTab($event)">
+  <p-tablist>
+    <p-tab [value]="0">
+      <div class="flex">
+        <i-lucide [img]="userIcon" class=""></i-lucide>
+        <span class="ml-2">{{ 'pages.profile.details.title' | translate }}</span>
+      </div>
+    </p-tab>
+    <p-tab [value]="1">
+      <div class="flex">
+        <i-lucide [img]="keyIcon" class=""></i-lucide>
+        <span class="ml-2">{{ 'pages.profile.apikeys.title' | translate }}</span>
+      </div>
+    </p-tab>
+  </p-tablist>
+  <p-tabpanels>
+    <p-tabpanel [value]="0">
       <app-userprofile-details [claims]="claims" [exp]="expDate" [iat]="iatDate" [accessToken]="accessToken"></app-userprofile-details>
-    </ng-template>
-  </p-tabPanel>
-
-  <p-tabPanel>
-    <ng-template pTemplate="header">
-      <i class="pi pi-key"></i>
-      <span class="ml-2">{{ 'pages.profile.apikeys.title' | translate }}</span>
-    </ng-template>
-    <ng-template pTemplate="content">
+    </p-tabpanel>
+    <p-tabpanel [value]="1">
       <app-userprofile-apikeys [upn]="claims?.email"></app-userprofile-apikeys>
-    </ng-template>
-  </p-tabPanel>
-</p-tabView>
+    </p-tabpanel>
+  </p-tabpanels>
+</p-tabs>

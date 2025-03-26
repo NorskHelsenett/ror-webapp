@@ -459,7 +459,7 @@ const BaseTheme = definePreset(Aura, {
         },
         text: {
           color: '{surface.700}',
-          hoverColor: '{surface.800}',
+          hoverColor: '{surface.500}',
           mutedColor: '{surface.500}',
           hoverMutedColor: '{surface.600}',
         },
@@ -490,7 +490,7 @@ const BaseTheme = definePreset(Aura, {
         list: {
           option: {
             focusBackground: '{surface.100}',
-            selectedBackground: '{highlight.background}',
+            selectedBackground: '{surface.800}',
             selectedFocusBackground: '{highlight.focus.background}',
             color: '{text.color}',
             focusColor: '{text.hover.color}',
@@ -533,17 +533,17 @@ const BaseTheme = definePreset(Aura, {
       dark: {
         surface: {
           0: '#ffffff',
-          50: '#f6f6f6',
-          100: '#d4d4d5',
-          200: '#b1b1b3',
-          300: '#8f8f92',
-          400: '#6c6c70',
-          500: '#4a4a4f',
-          600: '#3f3f43',
-          700: '#343437',
-          800: '#29292b',
-          900: '#1e1e20',
-          950: '#131314',
+          50: '#fafafa',
+          100: '#f4f4f5',
+          200: '#e4e4e7',
+          300: '#d4d4d8',
+          400: '#a1a1aa',
+          500: '#71717a',
+          600: '#52525b',
+          700: '#3f3f46',
+          800: '#27272a',
+          900: '#18181b',
+          950: '#09090b',
         },
         primary: {
           color: '{primary.400}',
@@ -659,13 +659,3 @@ const BaseTheme = definePreset(Aura, {
   },
 });
 export default BaseTheme;
-// export const appConfig: ApplicationConfig = {
-//     providers: [
-//         provideAnimationsAsync(),
-//         providePrimeNG({
-//             theme: {
-//                preset: MyPreset,
-//             }
-//         })
-//     ]
-// };

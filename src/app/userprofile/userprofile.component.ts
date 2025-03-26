@@ -1,22 +1,25 @@
 import { UserprofileDetailsComponent } from './pages/userprofile-details/userprofile-details.component';
 import { isPlatformBrowser, Location } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit, ChangeDetectorRef, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy, Inject, PLATFORM_ID, ViewChild, effect, AfterViewInit } from '@angular/core';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { AclService } from '../core/services/acl.service';
 import { Subscription } from 'rxjs';
-import { TabViewModule } from 'primeng/tabview';
 import { TranslateModule } from '@ngx-translate/core';
 import { UserprofileApikeysComponent } from './pages';
+import { Tabs, TabsModule } from 'primeng/tabs';
+import { LucideAngularModule, UserIcon, KeyIcon } from 'lucide-angular';
 
 @Component({
   selector: 'app-userprofile',
   templateUrl: './userprofile.component.html',
   styleUrls: ['./userprofile.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [TranslateModule, TabViewModule, UserprofileDetailsComponent, UserprofileApikeysComponent],
+  imports: [TranslateModule, TabsModule, UserprofileDetailsComponent, UserprofileApikeysComponent, LucideAngularModule, RouterModule],
 })
-export class UserprofileComponent implements OnInit, OnDestroy {
+export class UserprofileComponent implements OnInit, OnDestroy, AfterViewInit {
+  readonly userIcon = UserIcon;
+  readonly keyIcon = KeyIcon;
+  @ViewChild('tabs') tabsComponent: Tabs | undefined;
   idToken: string | undefined;
   accessToken: string | undefined;
   claims: any;
@@ -25,7 +28,8 @@ export class UserprofileComponent implements OnInit, OnDestroy {
   iatDate: Date = new Date(1970);
   rawIsHidden = true;
 
-  selectedTabIndex: number = 0;
+  tabIndex: string | number = 0;
+
   tabs: any[] = [
     {
       metadata: '',
@@ -46,16 +50,16 @@ export class UserprofileComponent implements OnInit, OnDestroy {
     private location: Location,
     private oauthService: OAuthService,
     private aclService: AclService,
-  ) {}
+  ) {
+    effect(() => {
+      this.tabsComponent?.value?.subscribe((value) => {
+        this.tabIndex = value;
+        this.switchTab(null);
+      });
+    });
+  }
 
   ngOnInit(): void {
-    const tab = this.route.snapshot.queryParams['tab'];
-    this.tabs.forEach((value: any, index: number) => {
-      if (tab == value?.metadata) {
-        this.selectedTabIndex = index;
-      }
-    });
-
     if (isPlatformBrowser(this.platformId)) {
       this.idToken = this.oauthService.getIdToken();
       this.accessToken = this.oauthService.getAccessToken();
@@ -69,18 +73,28 @@ export class UserprofileComponent implements OnInit, OnDestroy {
     }
   }
 
+  ngAfterViewInit(): void {
+    this.tabIndex = 0;
+    if (isPlatformBrowser(this.platformId)) {
+      const tab = this.route.snapshot.queryParams['tab'];
+      this.tabs.forEach((value: any, index: number) => {
+        if (tab == value?.metadata) {
+          this.tabIndex = index;
+          const newtab: string | number = index;
+          this.switchTab(index);
+        }
+      });
+    }
+    this.changeDetector.detectChanges();
+  }
+
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
 
-  switchTab(selectedIndex: number): void {
-    try {
-      const tab = this.tabs[selectedIndex];
-      if (isPlatformBrowser(this.platformId)) {
-        this.location.replaceState('userprofile', tab?.query);
-      }
-    } catch {
-      //ignoring
+  switchTab(event: any): void {
+    if (isPlatformBrowser(this.platformId)) {
+      this.location.replaceState('userprofile', this.tabs[this.tabIndex]?.query);
     }
   }
 }
