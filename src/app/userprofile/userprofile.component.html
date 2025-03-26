@@ -2,17 +2,17 @@
   <h1 class="text-2xl font-semibold">{{ 'pages.profile.title' | translate }}</h1>
 </div>
 
-<p-tabs [value]="tabIndex" scrollable #tabs (valueChange)="switchTab($event)">
-  <p-tablist>
-    <p-tab [value]="0">
+<p-tabs [value]="tabIndex" scrollable #tabs (valueChange)="switchTab()">
+  <p-tablist class>
+    <p-tab [value]="0" [ngClass]="{ 'bg-green-500 text-white dark:bg-green-700 dark:text-white': tabIndex === 0 }">
       <div class="flex">
-        <i-lucide [img]="userIcon" class=""></i-lucide>
+        <i-lucide [img]="userIcon"></i-lucide>
         <span class="ml-2">{{ 'pages.profile.details.title' | translate }}</span>
       </div>
     </p-tab>
-    <p-tab [value]="1">
+    <p-tab [value]="1" [ngClass]="{ 'bg-green-500 text-white dark:bg-green-700 dark:text-white': tabIndex === 1 }">
       <div class="flex">
-        <i-lucide [img]="keyIcon" class=""></i-lucide>
+        <i-lucide [img]="keyIcon"></i-lucide>
         <span class="ml-2">{{ 'pages.profile.apikeys.title' | translate }}</span>
       </div>
     </p-tab>

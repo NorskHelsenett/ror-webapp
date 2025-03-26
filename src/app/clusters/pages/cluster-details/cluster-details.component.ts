@@ -27,7 +27,6 @@ import {
   ClusterToolsComponent,
   ClusterVulnerabilityReportComponent,
 } from '../../components';
-import { TabViewModule } from 'primeng/tabview';
 import { ClusterNodepoolsComponent } from '../cluster-nodepools/cluster-nodepools.component';
 import { BadgeModule } from 'primeng/badge';
 import { ClusterMetadataPageComponent } from '../cluster-metadata-page/cluster-metadata-page.component';
@@ -35,6 +34,7 @@ import { ClusterResourceTableComponent } from '../../components/cluster-resource
 import { SidebarModule } from 'primeng/sidebar';
 import { ResourceV2DetailsComponent } from '../../../resourcesv2/components/resource-v2-details/resource-v2-details.component';
 import { SpinnerComponent } from '../../../shared/components';
+import { TabsModule } from 'primeng/tabs';
 
 @Component({
   selector: 'app-cluster-details',
@@ -46,7 +46,7 @@ import { SpinnerComponent } from '../../../shared/components';
     CommonModule,
     RouterModule,
     ClusterConditionsComponent,
-    TabViewModule,
+    TabsModule,
     ClusterMetricsComponent,
     ClusterDescriptionComponent,
     ClusterACLComponent,
