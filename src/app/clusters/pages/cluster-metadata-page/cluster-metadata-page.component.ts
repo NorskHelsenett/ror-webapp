@@ -6,15 +6,17 @@ import { SharedModule } from 'primeng/api';
 import { RouterModule } from '@angular/router';
 import { TagModule } from 'primeng/tag';
 import { ClusterDetailsEditComponent } from '../cluster-details-edit/cluster-details-edit.component';
+import { LucideAngularModule, LucidePersonStanding } from 'lucide-angular';
 
 @Component({
   selector: 'app-cluster-metadata-page',
   templateUrl: './cluster-metadata-page.component.html',
   styleUrl: './cluster-metadata-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [TranslateModule, CommonModule, SharedModule, RouterModule, TagModule, ClusterDetailsEditComponent],
+  imports: [TranslateModule, CommonModule, SharedModule, RouterModule, TagModule, ClusterDetailsEditComponent, LucideAngularModule],
 })
 export class ClusterMetadataPageComponent implements OnInit {
+  personStandingIcon = LucidePersonStanding;
   @Input() cluster: any;
   @Output() refreshRequested = new EventEmitter<void>();
   edit = false;

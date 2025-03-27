@@ -1,8 +1,20 @@
 import { ClusterDescriptionComponent } from './../../components/cluster-description/cluster-description.component';
-import { CommonModule, Location } from '@angular/common';
+import { CommonModule, isPlatformBrowser, Location } from '@angular/common';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { MetricsService } from '../../../core/services/metrics.service';
-import { Component, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy, AfterContentInit, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ChangeDetectorRef,
+  ChangeDetectionStrategy,
+  AfterContentInit,
+  AfterViewInit,
+  Inject,
+  PLATFORM_ID,
+  ViewChild,
+  effect,
+} from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Observable, Subscription, tap, catchError, share, finalize } from 'rxjs';
 import { AclScopes, AclAccess } from '../../../core/models/acl-scopes';
@@ -34,7 +46,7 @@ import { ClusterResourceTableComponent } from '../../components/cluster-resource
 import { SidebarModule } from 'primeng/sidebar';
 import { ResourceV2DetailsComponent } from '../../../resourcesv2/components/resource-v2-details/resource-v2-details.component';
 import { SpinnerComponent } from '../../../shared/components';
-import { TabsModule } from 'primeng/tabs';
+import { Tabs, TabsModule } from 'primeng/tabs';
 
 @Component({
   selector: 'app-cluster-details',
@@ -81,7 +93,7 @@ export class ClusterDetailsComponent implements OnInit, OnDestroy, AfterContentI
 
   editInvalidCount: string;
 
-  activeTabIndex = 0;
+  activeTabIndex: string | number = 0;
 
   selectedTabIndex: number = 0;
   adminOwner$: Observable<boolean> | undefined;
@@ -90,6 +102,8 @@ export class ClusterDetailsComponent implements OnInit, OnDestroy, AfterContentI
   resourceTypes: ResourceType[];
   selectedResource: any | undefined;
   sidebarVisible = false;
+
+  @ViewChild('tabs') tabsComponent: Tabs | undefined;
 
   private subscriptions = new Subscription();
   private tabs: any[] = [
@@ -156,6 +170,7 @@ export class ClusterDetailsComponent implements OnInit, OnDestroy, AfterContentI
   resourceQuery: ResourceQuery = {};
 
   constructor(
+    @Inject(PLATFORM_ID) private platformId: object,
     private route: ActivatedRoute,
     private router: Router,
     private location: Location,
@@ -177,6 +192,15 @@ export class ClusterDetailsComponent implements OnInit, OnDestroy, AfterContentI
         throw error;
       }),
     );
+
+    effect(() => {
+      this.tabsComponent?.value?.subscribe((value) => {
+        console.log('effect value', value);
+        this.activeTabIndex = value;
+        this.switchTab();
+        this.changeDetector.detectChanges();
+      });
+    });
   }
 
   ngOnInit(): void {
@@ -196,7 +220,23 @@ export class ClusterDetailsComponent implements OnInit, OnDestroy, AfterContentI
 
   ngAfterContentInit(): void {}
 
-  ngAfterViewInit(): void {}
+  ngAfterViewInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      this.activeTabIndex = 0;
+      this.route.queryParams.subscribe((params) => {
+        const tab = params['tab'];
+        if (params['tab']) {
+          this.tabs.forEach((value: any, index: number) => {
+            if (tab == value?.metadata) {
+              this.activeTabIndex = index;
+              this.switchTab();
+            }
+          });
+        }
+      });
+    }
+    this.changeDetector.detectChanges();
+  }
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
@@ -288,12 +328,22 @@ export class ClusterDetailsComponent implements OnInit, OnDestroy, AfterContentI
     this.changeDetector.detectChanges();
   }
 
-  switchTab(selectedIndex: number): void {
+  switchTab(): void {
+    console.log('switchTab', this.activeTabIndex);
     try {
-      const tab = this.tabs[selectedIndex];
+      const tab = this.tabs[this.activeTabIndex];
       this.location.replaceState(`cluster/${this.clusterId}`, tab?.query);
     } catch {
       //ignoring
+    }
+  }
+
+  setTab(index: number): void {
+    if (isPlatformBrowser(this.platformId)) {
+      console.log('setTab', index);
+      this.activeTabIndex = index;
+      this.switchTab();
+      this.changeDetector.detectChanges();
     }
   }
 

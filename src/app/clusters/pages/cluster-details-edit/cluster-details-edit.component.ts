@@ -1,4 +1,15 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, inject, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { MessageService, ConfirmationService, ConfirmEventType } from 'primeng/api';
@@ -12,9 +23,10 @@ import { ProjectService } from '../../../core/services/project.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { TagModule } from 'primeng/tag';
-import { DropdownModule } from 'primeng/dropdown';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { SpinnerComponent } from '../../../shared/components';
+import { SelectModule } from 'primeng/select';
+import { ChipModule } from 'primeng/chip';
 
 @Component({
   selector: 'app-cluster-details-edit',
@@ -29,12 +41,14 @@ import { SpinnerComponent } from '../../../shared/components';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    DropdownModule,
+    ChipModule,
+
     ConfirmDialogModule,
     SpinnerComponent,
+    SelectModule,
   ],
 })
-export class ClusterDetailsEditComponent implements OnInit, OnDestroy {
+export class ClusterDetailsEditComponent implements OnInit, OnDestroy, AfterViewInit {
   private configService = inject(ConfigService);
   @Input() cluster: any | undefined;
   @Output() invalidCount = new EventEmitter<number>();
@@ -76,6 +90,9 @@ export class ClusterDetailsEditComponent implements OnInit, OnDestroy {
     this.setAvailableRoles();
     this.setupObservables();
     this.setupAvailableCriticalitiesAndSensitivities();
+  }
+
+  ngAfterViewInit(): void {
     this.setupForm();
     this.invalidCount.emit(this.getInvalidCount(this.clusterModelForm));
   }

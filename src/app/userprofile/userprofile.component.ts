@@ -76,23 +76,17 @@ export class UserprofileComponent implements OnInit, OnDestroy, AfterViewInit {
     if (isPlatformBrowser(this.platformId)) {
       this.tabIndex = 0;
       if (isPlatformBrowser(this.platformId)) {
-        const tab = this.route.snapshot.queryParams['tab'];
         this.route.queryParams.subscribe((params) => {
+          const tab = params['tab'];
           if (params['tab']) {
             this.tabs.forEach((value: any, index: number) => {
               if (tab == value?.metadata) {
+                this.tabIndex = index;
                 this.switchTab();
               }
             });
           }
         });
-        // this.tabs.forEach((value: any, index: number) => {
-        //   if (tab == value?.metadata) {
-        //     this.tabIndex = index;
-        //     const newtab: string | number = index;
-        //     this.switchTab(index);
-        //   }
-        // });
       }
       this.changeDetector.detectChanges();
     }

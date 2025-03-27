@@ -3,13 +3,13 @@
     <div class="dark:bg-darker rounded-md bg-white">
       <div class="dark:bg-darker rounded-md bg-white">
         <div class="relative p-3">
-          <div *ngIf="projects$ | async as projects; else loadingOrError">
+          <ng-container *ngIf="projects$ | async as projects; else loadingOrError">
             <form [formGroup]="clusterModelForm">
               <div class="flex flex-col">
                 <div class="">
                   <div class="flex flex-col">
                     <label><span class="text-red-800 dark:text-red-300">*</span> {{ 'pages.clusters.details.edit.form.project' | translate }}</label>
-                    <p-dropdown
+                    <p-select
                       [options]="projects?.data"
                       placeholder="{{ 'pages.clusters.details.edit.form.projectHelp' | translate }}"
                       optionLabel="name"
@@ -32,7 +32,7 @@
                           <small class="truncate">{{ project?.description }}</small>
                         </div>
                       </ng-template>
-                    </p-dropdown>
+                    </p-select>
 
                     <span
                       *ngIf="
@@ -51,7 +51,7 @@
                       ><span class="text-red-800 dark:text-red-300">*</span>
                       {{ 'pages.clusters.details.edit.form.criticalityLevel' | translate }}</label
                     >
-                    <p-dropdown
+                    <p-select
                       [options]="availableCriticalities"
                       formControlName="criticality"
                       optionValue="value"
@@ -68,7 +68,7 @@
                         <div>
                           <div>{{ criticality?.name }}</div>
                         </div>
-                      </ng-template></p-dropdown
+                      </ng-template></p-select
                     >
                     <span
                       *ngIf="
@@ -109,7 +109,7 @@
                       ><span class="text-red-800 dark:text-red-300">*</span>
                       {{ 'pages.clusters.details.edit.form.sensitivityLevel' | translate }}</label
                     >
-                    <p-dropdown
+                    <p-select
                       [options]="availableSensitivities"
                       formControlName="sensitivity"
                       optionValue="value"
@@ -127,7 +127,7 @@
                           <div>{{ sensitivity?.name }}</div>
                         </div>
                       </ng-template>
-                    </p-dropdown>
+                    </p-select>
                     <div class="flex">
                       <span
                         *ngIf="
@@ -197,13 +197,13 @@
                           <label
                             ><span class="text-red-800 dark:text-red-300">*</span> {{ 'pages.admin.projects.form.roles.roleName' | translate }}
                           </label>
-                          <p-dropdown
+                          <p-select
                             [options]="availableRoles"
                             formControlName="roleDefinition"
                             optionValue="value"
                             optionLabel="name"
                             placeholder="{{ 'pages.admin.projects.form.roles.placeholder' | translate }}"
-                          ></p-dropdown>
+                          ></p-select>
                           <div class="flex">
                             <span
                               *ngIf="
@@ -339,7 +339,7 @@
 
                   <div class="mt-10 flex flex-col">
                     <label> {{ 'pages.clusters.details.edit.form.serviceTags' | translate }}</label>
-                    <p-chips formControlName="tags"></p-chips>
+                    <p-chip formControlName="tags"></p-chip>
                     <span
                       *ngIf="clusterModelForm.get('tags').touched && clusterModelForm.get('tags').dirty && clusterModelForm.get('tags').errors"
                       class="text-red-400"
@@ -400,7 +400,7 @@
                 </div>
               </div>
             </form>
-          </div>
+          </ng-container>
           <ng-template #loadingOrError>
             <ng-container *ngIf="projectsFetchError; else dataLoading">
               <div class="mx-auto my-4 flex items-center rounded-md bg-red-200 px-6 py-4 text-lg">

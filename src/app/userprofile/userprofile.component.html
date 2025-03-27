@@ -2,7 +2,7 @@
   <h1 class="text-2xl font-semibold">{{ 'pages.profile.title' | translate }}</h1>
 </div>
 
-<p-tabs [value]="tabIndex" scrollable #tabs (valueChange)="switchTab()">
+<p-tabs [(value)]="tabIndex" lazy="true" scrollable #tabs (valueChange)="switchTab()">
   <p-tablist class>
     <p-tab [value]="0" [ngClass]="{ 'bg-green-500 text-white dark:bg-green-700 dark:text-white': tabIndex === 0 }">
       <div class="flex">

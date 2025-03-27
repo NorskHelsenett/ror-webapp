@@ -4,7 +4,13 @@
       <div class="dark:border-primary flex items-end justify-between border-b p-4">
         <h4 class="dark:text-light text-lg font-semibold text-gray-500">{{ 'common.description' | translate }}</h4>
         <div class="">
-          <a class="dark:text-primary text-primary cursor-pointer" (click)="editRequested()">{{ 'common.edit' | translate }}</a>
+          <a
+            [routerLink]="['./']"
+            [queryParams]="{ tab: 'metadata' }"
+            (click)="editRequested()"
+            class="dark:text-primary text-primary cursor-pointer"
+            >{{ 'common.edit' | translate }}</a
+          >
         </div>
       </div>
 

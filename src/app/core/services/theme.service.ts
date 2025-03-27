@@ -43,7 +43,9 @@ export class ThemeService {
 
   switchTheme() {
     if (isPlatformBrowser(this.platformId)) {
-      this.hljsLoader.setTheme(this.isDark.value ? 'assets/styles/highlight/tokyo-night-light.css' : 'assets/styles/highlight/tokyo-night-dark.css');
+      this.hljsLoader.setTheme(
+        this.isDark.getValue() ? 'assets/styles/highlight/tokyo-night-dark.css' : 'assets/styles/highlight/tokyo-night-light.css',
+      );
     }
   }
 
