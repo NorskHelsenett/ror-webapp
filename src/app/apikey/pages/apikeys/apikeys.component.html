@@ -83,7 +83,7 @@
                   <th class="p-1">
                     <p-columnFilter field="type" matchMode="equals" [showMenu]="false">
                       <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                        <p-dropdown
+                        <p-select
                           [ngModel]="selectedType"
                           [options]="types"
                           (onChange)="filter($event.value)"
@@ -94,7 +94,7 @@
                           <ng-template let-type pTemplate="item">
                             <span>{{ type }}</span>
                           </ng-template>
-                        </p-dropdown>
+                        </p-select>
                       </ng-template>
                     </p-columnFilter>
                   </th>

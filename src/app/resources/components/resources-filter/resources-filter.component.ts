@@ -1,17 +1,17 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import { DropdownModule } from 'primeng/dropdown';
 import { OwnerType } from '../../../core/models/resources/ownerType';
 import { ResourceType } from '../../../core/models/resources/resourceType';
 import { Cluster } from '../../../core/models/cluster';
 import { ResourceFilter } from '../../models/resourceFilter';
 import { UtilsService } from '../../../shared/services/utils.service';
+import { SelectModule } from 'primeng/select';
 
 @Component({
   selector: 'app-resources-filter',
-  imports: [CommonModule, FormsModule, TranslateModule, DropdownModule, FormsModule],
+  imports: [CommonModule, FormsModule, TranslateModule, SelectModule, FormsModule],
   templateUrl: './resources-filter.component.html',
   styleUrl: './resources-filter.component.scss',
 })

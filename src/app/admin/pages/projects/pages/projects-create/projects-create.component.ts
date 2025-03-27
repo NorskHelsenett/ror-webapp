@@ -9,15 +9,15 @@ import { Project } from '../../../../../core/models/project';
 import { ConfigService } from '../../../../../core/services/config.service';
 import { ProjectService } from '../../../../../core/services/project.service';
 import { CommonModule } from '@angular/common';
-import { DropdownModule } from 'primeng/dropdown';
 import { ChipModule } from 'primeng/chip';
+import { SelectModule } from 'primeng/select';
 
 @Component({
   selector: 'app-projects-create',
   templateUrl: './projects-create.component.html',
   styleUrls: ['./projects-create.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [TranslateModule, CommonModule, FormsModule, ReactiveFormsModule, ToggleButtonModule, DropdownModule, ChipModule],
+  imports: [TranslateModule, CommonModule, FormsModule, ReactiveFormsModule, ToggleButtonModule, SelectModule, ChipModule],
 })
 export class ProjectsCreateComponent implements OnInit, OnDestroy {
   private configService = inject(ConfigService);

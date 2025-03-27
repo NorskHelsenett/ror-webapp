@@ -14,27 +14,17 @@ import { ProjectService } from '../../../core/services/project.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { TableModule } from 'primeng/table';
-import { Dropdown, DropdownModule } from 'primeng/dropdown';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TimePipe } from '../../../shared/pipes/time.pipe';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { SelectModule } from 'primeng/select';
 
 @Component({
   selector: 'app-projects',
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    TranslateModule,
-    CommonModule,
-    RouterModule,
-    TableModule,
-    DropdownModule,
-    FormsModule,
-    ReactiveFormsModule,
-    TimePipe,
-    ConfirmDialogModule,
-  ],
+  imports: [TranslateModule, CommonModule, RouterModule, TableModule, SelectModule, FormsModule, ReactiveFormsModule, TimePipe, ConfirmDialogModule],
 })
 export class ProjectsComponent implements OnInit {
   private configService = inject(ConfigService);

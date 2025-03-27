@@ -169,13 +169,13 @@
                           <label
                             ><span class="text-red-800 dark:text-red-300">*</span> {{ 'pages.admin.projects.form.roles.roleName' | translate }}
                           </label>
-                          <p-dropdown
+                          <p-select
                             [options]="availableRoles"
                             formControlName="roleDefinition"
                             optionValue="value"
                             optionLabel="name"
                             placeholder="{{ 'pages.admin.projects.form.roles.placeholder' | translate }}"
-                          ></p-dropdown>
+                          ></p-select>
                           <div class="flex">
                             <span
                               *ngIf="

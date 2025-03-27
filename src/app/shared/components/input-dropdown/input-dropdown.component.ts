@@ -1,12 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import { DropdownModule } from 'primeng/dropdown';
 import { CheckboxModule } from 'primeng/checkbox';
+import { SelectModule } from 'primeng/select';
 
 @Component({
   selector: 'app-input-dropdown',
-  imports: [TranslateModule, DropdownModule, ReactiveFormsModule, CheckboxModule, FormsModule],
+  imports: [TranslateModule, SelectModule, ReactiveFormsModule, CheckboxModule, FormsModule],
   templateUrl: './input-dropdown.component.html',
   styleUrl: './input-dropdown.component.scss',
 })

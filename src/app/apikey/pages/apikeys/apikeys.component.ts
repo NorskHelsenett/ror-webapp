@@ -17,8 +17,8 @@ import { TimePipe } from '../../../shared/pipes/time.pipe';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { SpinnerComponent } from '../../../shared/components';
 import { TableModule } from 'primeng/table';
-import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SelectModule } from 'primeng/select';
 
 @Component({
   selector: 'app-apikeys',
@@ -33,7 +33,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ConfirmDialogModule,
     ApikeyCreateComponent,
     TableModule,
-    DropdownModule,
+    SelectModule,
     FormsModule,
     ReactiveFormsModule,
   ],

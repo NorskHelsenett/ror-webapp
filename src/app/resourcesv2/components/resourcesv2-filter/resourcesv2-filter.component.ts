@@ -1,16 +1,16 @@
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { ResourcesV2QueryService } from '../../services/resources-v2-query.service';
-import { DropdownModule } from 'primeng/dropdown';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { Cluster } from '../../../core/models/cluster';
 import { ResourceType } from '../../../core/models/resources/resourceType';
 import { ResourceQuery } from '@rork8s/ror-resources/models';
+import { SelectModule } from 'primeng/select';
 
 @Component({
   selector: 'app-resourcesv2-filter',
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, TranslateModule, DropdownModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, TranslateModule, SelectModule],
   templateUrl: './resourcesv2-filter.component.html',
   styleUrl: './resourcesv2-filter.component.scss',
 })

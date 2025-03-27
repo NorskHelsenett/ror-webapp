@@ -4,7 +4,7 @@
     <div class="mt-3">
       <h5>{{ 'pages.create.cluster.steps.metadata.env' | translate }}</h5>
       <div class="flex flex-col">
-        <p-dropdown
+        <p-select
           [options]="environments"
           placeholder="{{ 'pages.create.cluster.steps.metadata.envPlaceholder' | translate }}"
           optionLabel="name"
@@ -12,7 +12,7 @@
           [selectOnFocus]="true"
           formControlName="environment"
           (onChange)="clusterNameChanged()"
-        ></p-dropdown>
+        ></p-select>
         <span
           *ngIf="clusterForm.get('environment').touched && clusterForm.get('environment').dirty && clusterForm.get('environment').errors"
           class="text-red-400"
@@ -160,7 +160,7 @@
     <div class="mt-3" *ngIf="clusterForm?.get('provider')?.value?.type !== 'k3d'">
       <h5>{{ 'pages.create.cluster.steps.resources.k8sVersion' | translate }}</h5>
       <div class="flex flex-col">
-        <p-dropdown
+        <p-select
           [options]="k8sVersions"
           placeholder="{{ 'pages.create.cluster.steps.resources.k8sVersionPlaceholder' | translate }}"
           optionLabel="name"
@@ -170,7 +170,7 @@
           formControlName="k8sVersion"
           (onChange)="updateEvent($event)"
         >
-        </p-dropdown>
+        </p-select>
         <span
           *ngIf="clusterForm.get('k8sVersion').touched && clusterForm.get('k8sVersion').dirty && clusterForm.get('k8sVersion').errors"
           class="text-red-400"

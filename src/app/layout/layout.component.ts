@@ -110,7 +110,6 @@ export class LayoutComponent implements OnInit, OnDestroy {
   }
 
   toggleDark(): void {
-    console.log('toggleDark, isDark:', this.isDark);
     this.isDark = !this.isDark;
     this.themeService.setDark(this.isDark);
   }

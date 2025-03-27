@@ -12,12 +12,12 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { FormsModule } from '@angular/forms';
 import { AclService } from '../../../core/services/acl.service';
 import { AclAccess, AclScopes } from '../../../core/models/acl-scopes';
-import { DropdownModule } from 'primeng/dropdown';
 import { FilterService } from '../../services/filter.service';
 import { ColumnDefinition } from '../../../resources/models/columnDefinition';
 import { TooltipModule } from 'primeng/tooltip';
 import { Resource, ResourceSet } from '@rork8s/ror-resources/models';
 import { ExportComponent, SpinnerComponent } from '../../../shared/components';
+import { SelectModule } from 'primeng/select';
 
 @Component({
   selector: 'app-resources-v2-list',
@@ -27,7 +27,7 @@ import { ExportComponent, SpinnerComponent } from '../../../shared/components';
     TableModule,
     MultiSelectModule,
     FormsModule,
-    DropdownModule,
+    SelectModule,
     TooltipModule,
     ExportComponent,
     SpinnerComponent,

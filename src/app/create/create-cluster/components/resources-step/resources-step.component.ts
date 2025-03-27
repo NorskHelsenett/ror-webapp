@@ -12,16 +12,16 @@ import { PriceService } from '../../../../core/services/price.service';
 import { ProvidersService } from '../../../../core/services/providers.service';
 import { ClusterProvider } from '../../../../clusters/models/clusterProvider';
 import { CommonModule } from '@angular/common';
-import { DropdownModule } from 'primeng/dropdown';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { SelectModule } from 'primeng/select';
 
 @Component({
   selector: 'app-resources-step',
   templateUrl: './resources-step.component.html',
   styleUrls: ['./resources-step.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [TranslateModule, CommonModule, RouterModule, FormsModule, ReactiveFormsModule, DropdownModule, InputNumberModule, RadioButtonModule],
+  imports: [TranslateModule, CommonModule, RouterModule, FormsModule, ReactiveFormsModule, SelectModule, InputNumberModule, RadioButtonModule],
 })
 export class ResourcesStepComponent implements OnInit {
   private clusterFormService = inject(ClusterFormService);

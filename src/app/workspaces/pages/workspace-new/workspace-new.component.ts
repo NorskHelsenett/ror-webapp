@@ -8,13 +8,13 @@ import { Project } from '../../../core/models/project';
 import { ProjectService } from '../../../core/services/project.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
-import { DropdownModule } from 'primeng/dropdown';
+import { SelectModule } from 'primeng/select';
 
 @Component({
   selector: 'app-workspace-new',
   templateUrl: './workspace-new.component.html',
   styleUrls: ['./workspace-new.component.scss'],
-  imports: [TranslateModule, CommonModule, FormsModule, ReactiveFormsModule, DropdownModule],
+  imports: [TranslateModule, CommonModule, FormsModule, ReactiveFormsModule, SelectModule],
 })
 export class WorkspaceNewComponent implements OnInit, OnDestroy {
   form: FormGroup;

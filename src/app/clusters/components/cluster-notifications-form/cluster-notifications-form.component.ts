@@ -5,14 +5,14 @@ import { catchError, Observable, tap } from 'rxjs';
 import { Resource, ResourceRoute, ResourceSet } from '@rork8s/ror-resources/models';
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
-import { DropdownModule } from 'primeng/dropdown';
+import { SelectModule } from 'primeng/select';
 
 @Component({
   selector: 'app-cluster-notifications-form',
   templateUrl: './cluster-notifications-form.component.html',
   styleUrl: './cluster-notifications-form.component.scss',
   standalone: true,
-  imports: [TranslateModule, CommonModule, FormsModule, DropdownModule, ReactiveFormsModule],
+  imports: [TranslateModule, CommonModule, FormsModule, SelectModule, ReactiveFormsModule],
 })
 export class ClusterNotificationsFormComponent implements OnInit {
   @Input() resource: Resource;

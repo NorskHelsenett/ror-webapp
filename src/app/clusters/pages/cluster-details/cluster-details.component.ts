@@ -195,7 +195,6 @@ export class ClusterDetailsComponent implements OnInit, OnDestroy, AfterContentI
 
     effect(() => {
       this.tabsComponent?.value?.subscribe((value) => {
-        console.log('effect value', value);
         this.activeTabIndex = value;
         this.switchTab();
         this.changeDetector.detectChanges();
@@ -329,7 +328,6 @@ export class ClusterDetailsComponent implements OnInit, OnDestroy, AfterContentI
   }
 
   switchTab(): void {
-    console.log('switchTab', this.activeTabIndex);
     try {
       const tab = this.tabs[this.activeTabIndex];
       this.location.replaceState(`cluster/${this.clusterId}`, tab?.query);
@@ -340,7 +338,6 @@ export class ClusterDetailsComponent implements OnInit, OnDestroy, AfterContentI
 
   setTab(index: number): void {
     if (isPlatformBrowser(this.platformId)) {
-      console.log('setTab', index);
       this.activeTabIndex = index;
       this.switchTab();
       this.changeDetector.detectChanges();

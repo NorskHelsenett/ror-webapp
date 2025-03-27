@@ -15,15 +15,15 @@ import { ProvidersService } from '../../../../core/services/providers.service';
 import { Provider } from '../../../../core/models/provider';
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
-import { DropdownModule } from 'primeng/dropdown';
 import { ProviderComponent } from '../../../../shared/components/provider/provider.component';
+import { SelectModule } from 'primeng/select';
 
 @Component({
   selector: 'app-location-step',
   templateUrl: './location-step.component.html',
   styleUrls: ['./location-step.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [TranslateModule, CommonModule, RouterModule, FormsModule, ReactiveFormsModule, DropdownModule, ProviderComponent],
+  imports: [TranslateModule, CommonModule, RouterModule, FormsModule, ReactiveFormsModule, SelectModule, ProviderComponent],
 })
 export class LocationStepComponent implements OnInit, OnDestroy {
   private clusterFormService = inject(ClusterFormService);

@@ -4,13 +4,13 @@
       <form class="flex flex-col gap-4" [formGroup]="routeForm">
         <div class="flex flex-col">
           <label class="text-xl font-bold" for="apiVersion">{{ 'pages.clusters.details.notifications.notificationkind' | translate }}</label>
-          <p-dropdown
+          <p-select
             formControlName="messageType"
             [options]="dropdownOptions"
             optionLabel="label"
             [showClear]="false"
             [placeholder]="dropdownOptions[0].label"
-          ></p-dropdown>
+          ></p-select>
         </div>
         <div>
           <h2 class="text-xl font-bold">{{ 'pages.clusters.details.notifications.receivers' | translate }}</h2>

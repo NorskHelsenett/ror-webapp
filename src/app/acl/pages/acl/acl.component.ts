@@ -15,8 +15,8 @@ import { SpinnerComponent, TrueFalseComponent } from '../../../shared/components
 import { RouterModule } from '@angular/router';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { TableModule } from 'primeng/table';
-import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SelectModule } from 'primeng/select';
 
 @Component({
   selector: 'app-acl',
@@ -31,7 +31,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     SpinnerComponent,
     ConfirmDialogModule,
     TableModule,
-    DropdownModule,
+    SelectModule,
     FormsModule,
     ReactiveFormsModule,
   ],

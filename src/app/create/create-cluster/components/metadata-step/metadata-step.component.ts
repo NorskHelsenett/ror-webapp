@@ -8,15 +8,15 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AclScopes, AclAccess } from '../../../../core/models/acl-scopes';
 import { AclService } from '../../../../core/services/acl.service';
 import { CommonModule } from '@angular/common';
-import { DropdownModule } from 'primeng/dropdown';
 import { InputDropdownComponent } from '../../../../shared/components/input-dropdown/input-dropdown.component';
+import { SelectModule } from 'primeng/select';
 
 @Component({
   selector: 'app-metadata-step',
   templateUrl: './metadata-step.component.html',
   styleUrls: ['./metadata-step.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [TranslateModule, CommonModule, RouterModule, DropdownModule, InputDropdownComponent, FormsModule, ReactiveFormsModule],
+  imports: [TranslateModule, CommonModule, RouterModule, SelectModule, InputDropdownComponent, FormsModule, ReactiveFormsModule],
 })
 export class MetadataStepComponent implements OnInit, OnDestroy {
   private clusterFormService = inject(ClusterFormService);

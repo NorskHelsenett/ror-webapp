@@ -23,7 +23,7 @@
 
   <div class="mt-3 flex flex-col">
     <h5>{{ 'pages.create.cluster.steps.metadata.sensitivity' | translate }}</h5>
-    <p-dropdown
+    <p-select
       [options]="availableSensitivities"
       placeholder="{{ 'pages.create.cluster.steps.metadata.sensitivityPlaceholder' | translate }}"
       optionLabel="name"
@@ -38,7 +38,7 @@
           <span class="text-lg">{{ sensitivity?.name }}</span>
         </div>
       </ng-template>
-    </p-dropdown>
+    </p-select>
     <span
       *ngIf="clusterForm.get('sensitivity').touched && clusterForm.get('sensitivity').dirty && clusterForm.get('sensitivity').errors"
       class="text-red-400"
@@ -60,7 +60,7 @@
 
   <div class="mt-3 flex flex-col">
     <h5>{{ 'pages.create.cluster.steps.metadata.criticality' | translate }}</h5>
-    <p-dropdown
+    <p-select
       [options]="availableCriticalities"
       placeholder="{{ 'pages.create.cluster.steps.metadata.criticalityPlaceholder' | translate }}"
       optionLabel="name"
@@ -75,7 +75,7 @@
           <span class="text-lg">{{ criticality?.name }}</span>
         </div>
       </ng-template>
-    </p-dropdown>
+    </p-select>
     <span
       *ngIf="clusterForm.get('criticality').touched && clusterForm.get('criticality').dirty && clusterForm.get('criticality').errors"
       class="text-red-400"

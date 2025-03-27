@@ -1,5 +1,12 @@
-@use 'tailwindcss' as *;
 @use 'primeicons/primeicons.css' as *;
+@use 'tailwindcss' as *;
+@custom-variant dark {
+  @media not print {
+    .dark {
+      @slot;
+    }
+  }
+}
 
 input {
   padding: 0.5rem 0.5rem;

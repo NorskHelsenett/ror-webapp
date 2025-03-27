@@ -34,7 +34,7 @@ export class SseService {
         });
       };
       this.eventSource.onerror = (error: any) => {
-        console.log('error', error);
+        console.error('error', error);
         this.ngZone.runGuarded(() => {
           this.error = error;
           this.isConnected = false;

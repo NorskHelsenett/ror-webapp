@@ -99,7 +99,7 @@
         <th class="p-1">
           <p-columnFilter field="active" matchMode="equals" [showMenu]="false">
             <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-              <p-dropdown
+              <p-select
                 appendTo="body"
                 [ngModel]="value"
                 [options]="accessTypes"
@@ -110,7 +110,7 @@
                 [showClear]="true"
                 [filter]="false"
               >
-              </p-dropdown>
+              </p-select>
             </ng-template>
           </p-columnFilter>
         </th>

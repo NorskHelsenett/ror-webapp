@@ -42,7 +42,6 @@ import { ChipModule } from 'primeng/chip';
     FormsModule,
     ReactiveFormsModule,
     ChipModule,
-
     ConfirmDialogModule,
     SpinnerComponent,
     SelectModule,

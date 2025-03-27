@@ -8,14 +8,14 @@ import { ApiKey } from '../../../core/models/apikey';
 import { ApikeysService } from '../../../core/services/apikeys.service';
 import { ConfigService } from '../../../core/services/config.service';
 import { CommonModule } from '@angular/common';
-import { DropdownModule } from 'primeng/dropdown';
-import { CalendarModule } from 'primeng/calendar';
+import { DatePickerModule } from 'primeng/datepicker';
+import { SelectModule } from 'primeng/select';
 
 @Component({
   selector: 'app-apikey-create',
   templateUrl: './apikey-create.component.html',
   styleUrls: ['./apikey-create.component.scss'],
-  imports: [TranslateModule, CommonModule, FormsModule, ReactiveFormsModule, DropdownModule, CalendarModule],
+  imports: [TranslateModule, CommonModule, FormsModule, ReactiveFormsModule, SelectModule, DatePickerModule],
 })
 export class ApikeyCreateComponent implements OnInit, OnDestroy {
   private configService = inject(ConfigService);

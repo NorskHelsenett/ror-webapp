@@ -41,13 +41,13 @@
           <div class="flex-grow"></div>
 
           <div class="">
-            <p-dropdown [options]="rowsPerPage" [(ngModel)]="rows" (onChange)="selectedRowsChange($event)">
+            <p-select [options]="rowsPerPage" [(ngModel)]="rows" (onChange)="selectedRowsChange($event)">
               <ng-template let-row pTemplate="item">
                 <div class="align-items-center flex gap-2">
                   <div>{{ row }}</div>
                 </div>
               </ng-template>
-            </p-dropdown>
+            </p-select>
           </div>
           <app-export-button class="mt-1 md:justify-self-end" [exportObjects]="export()" [filename]="exportFilename"></app-export-button>
         </div>

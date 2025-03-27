@@ -13,8 +13,8 @@ import { ClustersService } from '../../../core/services/clusters.service';
 import { ConfigService } from '../../../core/services/config.service';
 import { CommonModule } from '@angular/common';
 import { InputDropdownComponent } from '../../../shared/components/input-dropdown/input-dropdown.component';
-import { DropdownModule } from 'primeng/dropdown';
 import { TimePipe } from '../../../shared/pipes/time.pipe';
+import { SelectModule } from 'primeng/select';
 
 @Component({
   selector: 'app-acl-create-update',
@@ -30,7 +30,7 @@ import { TimePipe } from '../../../shared/pipes/time.pipe';
     InputDropdownComponent,
     FormsModule,
     ReactiveFormsModule,
-    DropdownModule,
+    SelectModule,
     TimePipe,
   ],
 })

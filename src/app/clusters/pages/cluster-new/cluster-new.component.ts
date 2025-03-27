@@ -15,8 +15,8 @@ import ClusterNameValidator from '../../../shared/validators/clusterNameValidato
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { InputNumberModule } from 'primeng/inputnumber';
-import { DropdownModule } from 'primeng/dropdown';
 import { SpinnerComponent } from '../../../shared/components';
+import { SelectModule } from 'primeng/select';
 
 @Component({
   selector: 'app-cluster-new',
@@ -24,7 +24,7 @@ import { SpinnerComponent } from '../../../shared/components';
   styleUrls: ['./cluster-new.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [TranslateModule, CommonModule, InputNumberModule, FormsModule, ReactiveFormsModule, DropdownModule, SpinnerComponent],
+  imports: [TranslateModule, CommonModule, InputNumberModule, FormsModule, ReactiveFormsModule, SelectModule, SpinnerComponent],
 })
 export class ClusterNewComponent implements OnInit {
   clusterForm: FormGroup | undefined;

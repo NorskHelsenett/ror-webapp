@@ -89,7 +89,7 @@
                   <th class="p-1">
                     <p-columnFilter field="access.read" matchMode="equals" [showMenu]="false" style="width: 0.2rem">
                       <ng-template pTemplate="filter" let-value let-filter="filterCallback" style="width: 0.2rem">
-                        <p-dropdown
+                        <p-select
                           [style]="{ width: '3rem' }"
                           autowidth="false"
                           appendTo="body"
@@ -102,14 +102,14 @@
                           [showClear]="true"
                           [filter]="false"
                         >
-                        </p-dropdown>
+                        </p-select>
                       </ng-template>
                     </p-columnFilter>
                   </th>
                   <th class="p-1">
                     <p-columnFilter field="access.create" matchMode="equals" [showMenu]="false">
                       <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                        <p-dropdown
+                        <p-select
                           [style]="{ width: '3rem' }"
                           appendTo="body"
                           [ngModel]="value"
@@ -121,14 +121,14 @@
                           [showClear]="true"
                           [filter]="false"
                         >
-                        </p-dropdown>
+                        </p-select>
                       </ng-template>
                     </p-columnFilter>
                   </th>
                   <th class="p-1">
                     <p-columnFilter field="access.update" matchMode="equals" [showMenu]="false">
                       <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                        <p-dropdown
+                        <p-select
                           [style]="{ width: '3rem' }"
                           appendTo="body"
                           [ngModel]="value"
@@ -140,14 +140,14 @@
                           [showClear]="true"
                           [filter]="false"
                         >
-                        </p-dropdown>
+                        </p-select>
                       </ng-template>
                     </p-columnFilter>
                   </th>
                   <th class="p-1">
                     <p-columnFilter field="access.delete" matchMode="equals" [showMenu]="false">
                       <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                        <p-dropdown
+                        <p-select
                           [style]="{ width: '3rem' }"
                           appendTo="body"
                           [ngModel]="value"
@@ -159,14 +159,14 @@
                           [showClear]="true"
                           [filter]="false"
                         >
-                        </p-dropdown>
+                        </p-select>
                       </ng-template>
                     </p-columnFilter>
                   </th>
                   <th class="p-1">
                     <p-columnFilter field="access.owner" matchMode="equals" [showMenu]="false">
                       <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                        <p-dropdown
+                        <p-select
                           [style]="{ width: '3rem' }"
                           appendTo="body"
                           [ngModel]="value"
@@ -178,14 +178,14 @@
                           [showClear]="true"
                           [filter]="false"
                         >
-                        </p-dropdown>
+                        </p-select>
                       </ng-template>
                     </p-columnFilter>
                   </th>
                   <th class="p-1">
                     <p-columnFilter field="kubernetes.logon" matchMode="equals" [showMenu]="false">
                       <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                        <p-dropdown
+                        <p-select
                           [style]="{ width: '3rem' }"
                           appendTo="body"
                           [ngModel]="value"
@@ -197,7 +197,7 @@
                           [showClear]="true"
                           [filter]="false"
                         >
-                        </p-dropdown>
+                        </p-select>
                       </ng-template>
                     </p-columnFilter>
                   </th>

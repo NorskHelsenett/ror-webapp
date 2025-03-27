@@ -9,7 +9,7 @@
     />
   }
   @if (!override) {
-    <p-dropdown
+    <p-select
       [showClear]="showClear"
       [group]="groupSupport"
       [optionLabel]="optionLabel"
@@ -21,7 +21,7 @@
       [formControlName]="controlName"
     >
       <ng-content></ng-content>
-    </p-dropdown>
+    </p-select>
   }
 
   @if (couldOverride) {
