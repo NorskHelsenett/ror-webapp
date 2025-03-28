@@ -8,23 +8,23 @@ export const routes: Routes = [
     path: '',
     component: CreateClusterComponent,
     children: [
-      { path: '', redirectTo: 'new', pathMatch: 'full' },
-      {
-        path: 'new',
-        component: createClusterComponents.LocationStepComponent,
-      },
-      {
-        path: 'resources',
-        component: createClusterComponents.ResourcesStepComponent,
-      },
-      {
-        path: 'metadata',
-        component: createClusterComponents.MetadataStepComponent,
-      },
-      {
-        path: 'summary',
-        component: createClusterComponents.SummaryStepComponent,
-      },
+      { path: '', redirectTo: '', pathMatch: 'full' },
+      // {
+      //   path: 'new',
+      //   component: createClusterComponents.LocationStepComponent,
+      // },
+      // {
+      //   path: 'resources',
+      //   component: createClusterComponents.ResourcesStepComponent,
+      // },
+      // {
+      //   path: 'metadata',
+      //   component: createClusterComponents.MetadataStepComponent,
+      // },
+      // {
+      //   path: 'summary',
+      //   component: createClusterComponents.SummaryStepComponent,
+      // },
     ],
   },
   //{ path: '**', redirectTo: 'error/404' },

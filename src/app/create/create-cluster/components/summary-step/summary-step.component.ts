@@ -1,6 +1,6 @@
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { MessageService } from 'primeng/api';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, inject, Input, model, OnInit, Output } from '@angular/core';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClusterFormService } from '../../services/cluster-form.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
@@ -24,6 +24,8 @@ export class SummaryStepComponent implements OnInit {
   private clusterFormService = inject(ClusterFormService);
   @Input() clusterForm: FormGroup = this.clusterFormService.clusterForm;
 
+  prevStep = model();
+
   account: any | undefined;
   createError: any | undefined;
 
@@ -40,9 +42,9 @@ export class SummaryStepComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (this.clusterFormService.clusterForm.pristine) {
-      this.router.navigate(['../'], { relativeTo: this.route });
-    }
+    // if (this.clusterFormService.clusterForm.pristine) {
+    //   this.router.navigate(['../'], { relativeTo: this.route });
+    // }
 
     this.account = this.oauthService.getIdentityClaims();
   }
@@ -151,7 +153,7 @@ export class SummaryStepComponent implements OnInit {
     let hasFalse = Array.from(validMap.values()).some((value) => value === false);
 
     let providerConfigValid = false;
-    if (this.clusterFormService?.selectedProvider?.type?.toLocaleLowerCase() === ClusterProvider.PrivatSky?.toLocaleLowerCase()) {
+    if (this.clusterFormService?.selectedProvider?.type?.toLocaleLowerCase() === ClusterProvider.Tanzu?.toLocaleLowerCase()) {
       providerConfigValid = this.clusterFormService?.clusterForm?.get('providerConfig')?.get('tanzu')?.valid;
     } else if (this.clusterFormService?.selectedProvider?.type?.toLocaleLowerCase() === ClusterProvider.Talos?.toLocaleLowerCase()) {
       providerConfigValid = true;
@@ -169,6 +171,10 @@ export class SummaryStepComponent implements OnInit {
     }
 
     return providerValid && providerConfigValid && !hasFalse && ownerGroupValid;
+  }
+
+  prevSteps(): void {
+    this.prevStep.set(true);
   }
 
   private createTagArray(): Map<string, string> {

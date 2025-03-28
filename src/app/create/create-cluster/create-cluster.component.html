@@ -3,14 +3,155 @@
 </div>
 
 <form [formGroup]="clusterForm">
-  <div class="xs:p-2 flex flex-col-reverse gap-3 p-1 sm:p-2 md:p-4 xl:flex-row">
+  <div class="xs:p-2 m-2 flex flex-col-reverse gap-3 p-1 sm:p-2 md:p-4 xl:flex-row">
     <div class="sm:basis-full md:basis-2/3">
       <div class="dark:bg-darker flex flex-col rounded-md bg-white pb-3">
-        <p-steps [model]="items" [readonly]="false" [activeIndex]="activeIndex" (activeIndexChange)="onActiveIndexChange($event)"></p-steps>
+        <!-- <p-steps [model]="items" [readonly]="false" [activeIndex]="activeIndex" (activeIndexChange)="onActiveIndexChange($event)"></p-steps> -->
+        <div class="card flex justify-center">
+          <p-stepper [(value)]="activeStep" class="m-3 w-full">
+            <p-step-list>
+              <p-step [value]="1" class="flex flex-auto flex-row gap-2">
+                <ng-template #content let-activateCallback="activateCallback" let-value="value">
+                  <div class="inline-flex flex-col gap-2 bg-transparent">
+                    <span
+                      class="inline-flex h-12 w-12 items-center justify-center rounded-full"
+                      [ngClass]="{
+                        'bg-primary text-primary-contrast border-primary': value <= activeStep,
+                        'border-surface': value > activeStep,
+                      }"
+                    >
+                      <i class="pi pi-user"></i>
+                    </span>
+                  </div>
+                  {{ 'pages.create.cluster.steps.location.title' | translate }}
+                </ng-template>
+              </p-step>
+
+              <p-step [value]="2" class="flex flex-auto flex-row gap-2">
+                <ng-template #content let-activateCallback="activateCallback" let-value="value">
+                  <div class="inline-flex flex-col gap-2 bg-transparent">
+                    <span
+                      class="inline-flex h-12 w-12 items-center justify-center rounded-full"
+                      [ngClass]="{
+                        'bg-primary text-primary-contrast': value <= activeStep,
+                        'border-surface': value > activeStep,
+                      }"
+                    >
+                      <i class="pi pi-star"></i>
+                    </span>
+                  </div>
+                  <span>{{ 'pages.create.cluster.steps.resources.title' | translate }}</span>
+                </ng-template>
+              </p-step>
+
+              <p-step [value]="3" class="flex flex-auto flex-row gap-2">
+                <ng-template #content let-activateCallback="activateCallback" let-value="value">
+                  <div class="inline-flex flex-col gap-2 bg-transparent">
+                    <span
+                      class="inline-flex h-12 w-12 items-center justify-center rounded-full"
+                      [ngClass]="{
+                        'bg-primary text-primary-contrast': value <= activeStep,
+                        'border-surface': value > activeStep,
+                      }"
+                    >
+                      <i class="pi pi-id-card"></i>
+                    </span>
+                  </div>
+                  <span>{{ 'pages.create.cluster.steps.metadata.title' | translate }}</span>
+                </ng-template>
+              </p-step>
+
+              <p-step [value]="4" class="flex flex-auto flex-row gap-2">
+                <ng-template #content let-activateCallback="activateCallback" let-value="value">
+                  <div class="inline-flex flex-col gap-2 bg-transparent">
+                    <span
+                      class="inline-flex h-12 w-12 items-center justify-center rounded-full"
+                      [ngClass]="{
+                        'bg-primary text-primary-contrast border-primary': value <= activeStep,
+                        'border-surface': value > activeStep,
+                      }"
+                    >
+                      <i class="pi pi-id-card"></i>
+                    </span>
+                  </div>
+                  <span>{{ 'pages.create.cluster.steps.summary.title' | translate }}</span>
+                </ng-template>
+              </p-step>
+            </p-step-list>
+
+            <p-step-panels>
+              <p-step-panel [value]="1">
+                <ng-template #content let-activateCallback="activateCallback">
+                  <!-- <div class="mx-auto flex flex-col gap-2" style="min-height: 16rem; max-width: 20rem">
+                    <div class="mb-4 mt-4 text-center text-xl font-semibold">Create your account</div>
+                    noe
+                  </div>-->
+                  <div>
+                    <app-location-step (nextStepChange)="activateCallback(2)"></app-location-step>
+                  </div>
+                  <!-- <div class="flex justify-end pt-6">
+                    <p-button (onClick)="activateCallback(2)" label="Next" icon="pi pi-arrow-right" iconPos="right" />
+                  </div> -->
+                </ng-template>
+              </p-step-panel>
+
+              <p-step-panel [value]="2">
+                <ng-template #content let-activateCallback="activateCallback">
+                  <!-- <div class="mx-auto flex flex-col gap-2" style="min-height: 16rem; max-width: 24rem">
+                    <div class="mb-4 mt-4 text-center text-xl font-semibold">Choose your interests</div>
+                    <div class="flex flex-wrap justify-center gap-4">jau da</div>
+                  </div>-->
+                  <div>
+                    <app-resources-step (nextStepChange)="activateCallback(3)" (prevStepChange)="activateCallback(1)"></app-resources-step>
+                  </div>
+                  <!-- <div class="flex justify-between pt-6">
+                    <p-button (onClick)="activateCallback(1)" label="Back" severity="secondary" icon="pi pi-arrow-left" />
+                    <p-button (onClick)="activateCallback(3)" label="Next" icon="pi pi-arrow-right" iconPos="right" />
+                  </div> -->
+                </ng-template>
+              </p-step-panel>
+
+              <p-step-panel [value]="3">
+                <ng-template #content let-activateCallback="activateCallback">
+                  <!-- <div class="mx-auto flex flex-col gap-2" style="min-height: 16rem; max-width: 24rem">
+                    <div class="mb-4 mt-4 text-center text-xl font-semibold">Account created successfully</div>
+                    <div class="text-center">
+                      <img alt="logo" src="https://primefaces.org/cdn/primeng/images/stepper/content.svg" />
+                    </div>
+                  </div> -->
+                  <div>
+                    <app-metadata-step (nextstepChange)="activateCallback(4)" (prevstepChange)="activateCallback(2)"></app-metadata-step>
+                  </div>
+                  <!-- <div class="flex justify-between pt-6">
+                    <p-button (onClick)="activateCallback(2)" label="Back" severity="secondary" icon="pi pi-arrow-left" />
+                    <p-button (onClick)="activateCallback(4)" label="Next" severity="secondary" icon="pi pi-arrow-right" />
+                  </div> -->
+                </ng-template>
+              </p-step-panel>
+
+              <p-step-panel [value]="4">
+                <ng-template #content let-activateCallback="activateCallback">
+                  <!-- <div class="mx-auto flex flex-col gap-2" style="min-height: 16rem; max-width: 24rem">
+                    <div class="mb-4 mt-4 text-center text-xl font-semibold">Account created successfully</div>
+                    <div class="text-center">
+                      <img alt="logo" src="https://primefaces.org/cdn/primeng/images/stepper/content.svg" />
+                    </div>
+                  </div> -->
+                  <div>
+                    <app-summary-step (prevStepChange)="activateCallback(3)"></app-summary-step>
+                  </div>
+                  <!-- <div class="flex justify-start pt-6">
+                    <p-button (onClick)="activateCallback(3)" label="Back" severity="secondary" icon="pi pi-arrow-left" />
+                  </div> -->
+                </ng-template>
+              </p-step-panel>
+            </p-step-panels>
+          </p-stepper>
+        </div>
       </div>
-      <div class="dark:bg-darker mt-3 flex flex-col rounded-md bg-white p-10">
+      <!-- <div class="dark:bg-darker mt-3 flex flex-col rounded-md bg-white p-10">
         <router-outlet></router-outlet>
-      </div>
+      </div> -->
     </div>
 
     <div class="xs:basis-full md:basis-1/3">

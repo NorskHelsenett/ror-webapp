@@ -70,8 +70,8 @@ export class ClusterNewComponent implements OnInit {
 
   providerOptions: any[] = [
     {
-      name: ClusterProvider[ClusterProvider.PrivatSky].toString(),
-      value: ClusterProvider.PrivatSky,
+      name: ClusterProvider[ClusterProvider.Tanzu].toString(),
+      value: ClusterProvider.Tanzu,
     },
     // {
     //   name: ClusterProvider[ClusterProvider.Azure].toString(),
@@ -160,7 +160,7 @@ export class ClusterNewComponent implements OnInit {
 
   providerChanged(event: any): void {
     const selectedProvider = this.clusterForm.controls['provider'].value;
-    if (selectedProvider === ClusterProvider.PrivatSky) {
+    if (selectedProvider === ClusterProvider.Tanzu) {
       this.pricesFiltered = this.pricesAll.filter((x: any) => {
         if (x?.provider === 'tanzu') {
           return x;

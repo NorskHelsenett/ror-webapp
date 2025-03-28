@@ -1,6 +1,6 @@
 export enum ClusterProvider {
   Unknown = 'Unknown',
-  PrivatSky = 'Tanzu',
+  Tanzu = 'Tanzu',
   Azure = 'AKS',
   Kind = 'Kind',
   K3d = 'K3D',

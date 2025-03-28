@@ -1,8 +1,7 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit, ChangeDetectorRef, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit, ChangeDetectorRef, inject, model } from '@angular/core';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClusterFormService } from '../../services/cluster-form.service';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { Observable, tap, Subscription, map } from 'rxjs';
+import { Observable, tap, Subscription } from 'rxjs';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ClusterCapasity } from '../../../../clusters/models/clusterCapasity';
 import { ClusterEnvironment } from '../../../../core/models/clusterEnvironment';
@@ -21,11 +20,13 @@ import { SelectModule } from 'primeng/select';
   templateUrl: './resources-step.component.html',
   styleUrls: ['./resources-step.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [TranslateModule, CommonModule, RouterModule, FormsModule, ReactiveFormsModule, SelectModule, InputNumberModule, RadioButtonModule],
+  imports: [TranslateModule, CommonModule, FormsModule, ReactiveFormsModule, SelectModule, InputNumberModule, RadioButtonModule],
 })
 export class ResourcesStepComponent implements OnInit {
   private clusterFormService = inject(ClusterFormService);
   @Input() clusterForm: FormGroup = this.clusterFormService.clusterForm;
+  nextStep = model();
+  prevStep = model();
 
   nodePools: ClusterCapasity[] = [];
 
@@ -69,19 +70,12 @@ export class ResourcesStepComponent implements OnInit {
 
   constructor(
     private changeDetector: ChangeDetectorRef,
-    private router: Router,
-    private route: ActivatedRoute,
-
     private priceService: PriceService,
     private translateService: TranslateService,
     private providersService: ProvidersService,
   ) {}
 
   ngOnInit(): void {
-    if (this.clusterFormService?.clusterForm?.pristine) {
-      this.router.navigate(['../'], { relativeTo: this.route });
-      this.changeDetector.detectChanges();
-    }
     this.fetchK8sVersions();
 
     this.haOptions = this.setupHaOptions();
@@ -205,6 +199,9 @@ export class ResourcesStepComponent implements OnInit {
   }
 
   private fetchPrices(): void {
+    this.pricesAll = [];
+    this.pricesFiltered = [];
+
     this.prices$ = this.priceService.getAll().pipe(
       tap((prices: Price[]) => {
         prices.forEach((price: any) => {
@@ -269,5 +266,13 @@ export class ResourcesStepComponent implements OnInit {
       return;
     }
     this.clusterFormService?.clusterForm?.get('k8sVersion')?.setValue(availableK8sversion[0]);
+  }
+
+  nextSteps(): void {
+    this.nextStep.set(true);
+  }
+
+  previousSteps(): void {
+    this.prevStep.set(true);
   }
 }

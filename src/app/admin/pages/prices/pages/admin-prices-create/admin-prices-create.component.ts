@@ -6,12 +6,13 @@ import { catchError, Subscription, tap } from 'rxjs';
 import { Price } from '../../../../../core/models/price';
 import { PriceService } from '../../../../../core/services/price.service';
 import { TranslateModule } from '@ngx-translate/core';
+import { DatePickerModule } from 'primeng/datepicker';
 
 @Component({
   selector: 'app-admin-prices-create',
   templateUrl: './admin-prices-create.component.html',
   styleUrls: ['./admin-prices-create.component.scss'],
-  imports: [TranslateModule, CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [TranslateModule, CommonModule, FormsModule, ReactiveFormsModule, DatePickerModule],
 })
 export class AdminPricesCreateComponent implements OnInit, OnDestroy {
   priceForm: FormGroup | undefined;

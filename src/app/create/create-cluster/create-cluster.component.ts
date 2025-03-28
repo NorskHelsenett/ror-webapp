@@ -1,4 +1,3 @@
-import { StepsModule } from 'primeng/steps';
 import { ClusterFormService } from './services/cluster-form.service';
 import { Subscription, tap } from 'rxjs';
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ChangeDetectorRef, inject } from '@angular/core';
@@ -8,14 +7,29 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { environment } from '../../../environments/environment';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { SummaryComponent } from './components';
+import { LocationStepComponent, MetadataStepComponent, ResourcesStepComponent, SummaryComponent, SummaryStepComponent } from './components';
+import { StepperModule } from 'primeng/stepper';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-create-cluster',
   templateUrl: './create-cluster.component.html',
   styleUrls: ['./create-cluster.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [TranslateModule, CommonModule, FormsModule, ReactiveFormsModule, StepsModule, RouterModule, SummaryComponent],
+  imports: [
+    TranslateModule,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    StepperModule,
+    RouterModule,
+    SummaryComponent,
+    ButtonModule,
+    LocationStepComponent,
+    ResourcesStepComponent,
+    SummaryStepComponent,
+    MetadataStepComponent,
+  ],
 })
 export class CreateClusterComponent implements OnInit, OnDestroy {
   private clusterFormService = inject(ClusterFormService);
@@ -27,6 +41,8 @@ export class CreateClusterComponent implements OnInit, OnDestroy {
   items: MenuItem[];
   activeIndex: number = 0;
   environment = environment;
+
+  activeStep: number = 1;
 
   clusterForm: FormGroup = this.clusterFormService?.clusterForm;
   nodePools: any[] | undefined;

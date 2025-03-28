@@ -1,10 +1,9 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input, model, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClusterFormService } from '../../services/cluster-form.service';
 import { Observable, Subscription, catchError, share, tap } from 'rxjs';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AclScopes, AclAccess } from '../../../../core/models/acl-scopes';
 import { AclService } from '../../../../core/services/acl.service';
 import { CommonModule } from '@angular/common';
@@ -16,11 +15,13 @@ import { SelectModule } from 'primeng/select';
   templateUrl: './metadata-step.component.html',
   styleUrls: ['./metadata-step.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [TranslateModule, CommonModule, RouterModule, SelectModule, InputDropdownComponent, FormsModule, ReactiveFormsModule],
+  imports: [TranslateModule, CommonModule, SelectModule, InputDropdownComponent, FormsModule, ReactiveFormsModule],
 })
-export class MetadataStepComponent implements OnInit, OnDestroy {
+export class MetadataStepComponent implements OnInit, OnDestroy, AfterViewInit {
   private clusterFormService = inject(ClusterFormService);
   @Input() clusterForm: FormGroup = this.clusterFormService.clusterForm;
+  nextstep = model();
+  prevstep = model();
 
   availableCriticalities: any[];
   selectedCriticality: any;
@@ -39,19 +40,23 @@ export class MetadataStepComponent implements OnInit, OnDestroy {
 
   constructor(
     private changeDetector: ChangeDetectorRef,
-    private router: Router,
-    private route: ActivatedRoute,
     private oauthService: OAuthService,
     private translateService: TranslateService,
     private aclService: AclService,
   ) {}
-
   ngOnInit(): void {
-    if (this.clusterFormService?.clusterForm?.pristine) {
-      this.router.navigate(['../'], { relativeTo: this.route });
-      this.changeDetector.detectChanges();
-    }
+    this.setup();
+  }
 
+  ngAfterViewInit(): void {}
+
+  ngOnDestroy(): void {
+    if (this.subscriptions) {
+      this.subscriptions.unsubscribe();
+    }
+  }
+
+  setup(): void {
     this.fetchAcl();
 
     this.setupCriticalityAndSensitivity();
@@ -69,12 +74,6 @@ export class MetadataStepComponent implements OnInit, OnDestroy {
     this.accessGroups = this.accessGroups.filter((x: any) => x?.name !== null);
 
     this.changeDetector.detectChanges();
-  }
-
-  ngOnDestroy(): void {
-    if (this.subscriptions) {
-      this.subscriptions.unsubscribe();
-    }
   }
 
   fetchAcl(): void {
@@ -154,7 +153,11 @@ export class MetadataStepComponent implements OnInit, OnDestroy {
     return ownerGroupValid;
   }
 
-  updateEvent(event: any): void {
-    this.changeDetector.detectChanges();
+  nextSteps(): void {
+    this.nextstep.set(true);
+  }
+
+  previousSteps(): void {
+    this.prevstep.set(true);
   }
 }

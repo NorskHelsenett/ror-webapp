@@ -1,5 +1,5 @@
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, inject, Input, model, OnDestroy, OnInit, Output } from '@angular/core';
 import { tap, Subscription, Observable, catchError, map } from 'rxjs';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
@@ -29,6 +29,8 @@ export class LocationStepComponent implements OnInit, OnDestroy {
   private clusterFormService = inject(ClusterFormService);
   @Input() clusterForm: FormGroup = this.clusterFormService.clusterForm;
 
+  nextStep = model();
+
   workspaces: Workspace[] = [];
 
   azureSubscriptions: any[] = [];
@@ -45,8 +47,6 @@ export class LocationStepComponent implements OnInit, OnDestroy {
 
   constructor(
     private changeDetector: ChangeDetectorRef,
-    private router: Router,
-    private route: ActivatedRoute,
     private workspacesService: WorkspacesService,
     private projectService: ProjectService,
     private oauthService: OAuthService,
@@ -54,10 +54,6 @@ export class LocationStepComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    if (this.clusterFormService.clusterForm.pristine) {
-      this.router.navigate(['../'], { relativeTo: this.route });
-    }
-
     this.fetchProviders();
 
     this.account = this.oauthService?.getIdentityClaims();
@@ -68,6 +64,10 @@ export class LocationStepComponent implements OnInit, OnDestroy {
     this.clusterFormService.clusterForm?.get('provider')?.valueChanges.subscribe((value: any) => {
       this.providerChanged(value);
     });
+
+    if (this.clusterFormService.selectedProvider?.type?.toLocaleLowerCase() === ClusterProvider.Tanzu.toLocaleLowerCase()) {
+      this.fetchWorkspaces(ClusterProvider.Tanzu);
+    }
 
     this.changeDetector.detectChanges();
   }
@@ -92,6 +92,11 @@ export class LocationStepComponent implements OnInit, OnDestroy {
         this.changeDetector.detectChanges();
         return providers;
       }),
+      catchError((error) => {
+        this.providersError = error;
+        this.changeDetector.detectChanges();
+        throw error;
+      }),
     );
   }
 
@@ -113,8 +118,8 @@ export class LocationStepComponent implements OnInit, OnDestroy {
   providerChanged(event: any): void {
     this.clusterFormService.selectedProvider = this.clusterForm?.controls['provider']?.value;
 
-    if (this.clusterFormService.selectedProvider?.type?.toLocaleLowerCase() === ClusterProvider.PrivatSky.toLocaleLowerCase()) {
-      this.fetchWorkspaces(ClusterProvider.PrivatSky);
+    if (this.clusterFormService.selectedProvider?.type?.toLocaleLowerCase() === ClusterProvider.Tanzu.toLocaleLowerCase()) {
+      this.fetchWorkspaces(ClusterProvider.Tanzu);
     } else if (this.clusterFormService.selectedProvider?.type?.toLocaleLowerCase() === ClusterProvider.Azure.toLocaleLowerCase()) {
       // todo fetch azure stuff
     } else if (this.clusterFormService.selectedProvider?.type?.toLocaleLowerCase() === ClusterProvider.Unknown.toLocaleLowerCase()) {
@@ -128,6 +133,9 @@ export class LocationStepComponent implements OnInit, OnDestroy {
   }
 
   fetchWorkspaces(provider: ClusterProvider): void {
+    if (provider !== ClusterProvider.Tanzu) {
+      return;
+    }
     this.subscriptions.add(
       this.workspacesService
         .get()
@@ -156,7 +164,7 @@ export class LocationStepComponent implements OnInit, OnDestroy {
     const projectValid = this.clusterFormService?.clusterForm?.get('project')?.valid;
 
     let providerConfigValid = false;
-    if (this.clusterFormService?.selectedProvider?.type?.toLocaleLowerCase() === ClusterProvider.PrivatSky?.toLocaleLowerCase()) {
+    if (this.clusterFormService?.selectedProvider?.type?.toLocaleLowerCase() === ClusterProvider.Tanzu?.toLocaleLowerCase()) {
       providerConfigValid = this.clusterFormService?.clusterForm?.get('providerConfig')?.get('tanzu')?.valid;
     } else if (this.clusterFormService?.selectedProvider?.type?.toLocaleLowerCase() === ClusterProvider.Azure?.toLocaleLowerCase()) {
       providerConfigValid = this.clusterFormService?.clusterForm?.get('providerConfig')?.get('azure')?.valid;
@@ -169,5 +177,9 @@ export class LocationStepComponent implements OnInit, OnDestroy {
     }
 
     return providerValid && providerConfigValid && projectValid;
+  }
+
+  nextSteps(): void {
+    this.nextStep.set(true);
   }
 }
