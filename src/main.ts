@@ -1,4 +1,4 @@
-import { enableProdMode, inject } from '@angular/core';
+import { enableProdMode } from '@angular/core';
 
 import { environment } from './environments/environment';
 
