@@ -122,19 +122,38 @@
                     </div>
                   </div>
 
-                  <div class="mt-5 flex flex-col">
-                    <label> {{ 'pages.admin.projects.form.serviceTags' | translate }}</label>
-                    <p-chip formControlName="tags"></p-chip>
-                    <span
-                      *ngIf="
-                        projectForm.get('projectMetadata').get('tags').touched &&
-                        projectForm.get('projectMetadata').get('tags').dirty &&
-                        projectForm.get('projectMetadata').get('tags').errors
-                      "
-                      class="text-red-400"
-                      >{{ 'pages.admin.projects.form.serviceTagsError' | translate }}</span
-                    >
-                    <span id="tags-help">{{ 'pages.admin.projects.form.serviceTagsHelp' | translate }}</span>
+                  <div class="mt-10 flex flex-col" [formGroup]="tagForm">
+                    <div class="mt-5 flex flex-col">
+                      <label> {{ 'pages.admin.projects.form.serviceTags' | translate }}</label>
+
+                      <div class="flex gap-3">
+                        <input class="text-lg" type="text" formControlName="tag" minlength="2" #tagInput (keyup.enter)="addTag(tagInput?.value)" />
+                        <button
+                          [disabled]="!tagForm?.valid"
+                          (click)="addTag(tagInput?.value)"
+                          type="button"
+                          class="rounded-lg bg-green-600 p-2 text-white disabled:bg-gray-300 dark:disabled:bg-gray-300"
+                        >
+                          {{ 'common.create' | translate }}
+                        </button>
+                      </div>
+                      <div class="mt-3 flex gap-3">
+                        @for (tag of tags; track tag) {
+                          <p-chip [removable]="true" (onRemove)="removeTag(tag)" [ngClass]="'bg-' + getColorByText(tag)">
+                            <div [ngClass]="'bg-' + getColorByText(tag)">{{ tag }}</div>
+                          </p-chip>
+                        }
+                      </div>
+                      <span
+                        *ngIf="
+                          projectForm.get('projectMetadata').get('tags').touched &&
+                          projectForm.get('projectMetadata').get('tags').dirty &&
+                          projectForm.get('projectMetadata').get('tags').errors
+                        "
+                        class="text-red-400"
+                        >{{ 'pages.admin.projects.form.serviceTagsError' | translate }}</span
+                      >
+                    </div>
                   </div>
 
                   <div class="dark:border-primary flex justify-between border-b p-4">

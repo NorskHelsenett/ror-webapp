@@ -44,7 +44,7 @@
     "file-saver": "^2.0.5",
     "highlight.js": "^11.11.1",
     "jwt-decode": "^4.0.0",
-    "lucide-angular": "^0.484.0",
+    "lucide-angular": "^0.485.0",
     "ngx-clipboard": "^16.0.0",
     "ngx-highlightjs": "^14.0.0",
     "ngx-sse-client": "^19.0.1",
