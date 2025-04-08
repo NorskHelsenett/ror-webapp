@@ -1,6 +1,6 @@
 <form [formGroup]="clusterForm">
   <div class="w-full md:w-1/2">
-    <app-summary [value]="clusterForm?.value" [relativeTo]="'..'"></app-summary>
+    <app-summary [value]="clusterForm?.value" (gotoStep)="linkToStep($event)"></app-summary>
   </div>
   <div class="mt-3 flex justify-start">
     <a

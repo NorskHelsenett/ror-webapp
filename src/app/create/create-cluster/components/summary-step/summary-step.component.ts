@@ -8,7 +8,7 @@ import { OAuthService } from 'angular-oauth2-oidc';
 import { Subscription, catchError } from 'rxjs';
 import { environment } from '../../../../../environments/environment';
 import { ClusterProvider } from '../../../../clusters/models/clusterProvider';
-import { ClusterOrderModel, ClusterOrderType, ProviderConfig } from '../../../../core/models/clusterOrder';
+import { ClusterOrderModel, ClusterOrderType } from '../../../../core/models/clusterOrder';
 import { OrderService } from '../../../../core/services/order.service';
 import { CommonModule } from '@angular/common';
 import { SummaryComponent } from '../summary/summary.component';
@@ -23,6 +23,7 @@ import { SummaryComponent } from '../summary/summary.component';
 export class SummaryStepComponent implements OnInit {
   private clusterFormService = inject(ClusterFormService);
   @Input() clusterForm: FormGroup = this.clusterFormService.clusterForm;
+  @Output() gotoStep = new EventEmitter<number | string>();
 
   prevStep = model();
 
@@ -42,12 +43,9 @@ export class SummaryStepComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // if (this.clusterFormService.clusterForm.pristine) {
-    //   this.router.navigate(['../'], { relativeTo: this.route });
-    // }
-
     this.account = this.oauthService.getIdentityClaims();
   }
+
   createCluster(): void {
     this.createError = undefined;
     this.changeDetector.detectChanges();
@@ -175,6 +173,10 @@ export class SummaryStepComponent implements OnInit {
 
   prevSteps(): void {
     this.prevStep.set(true);
+  }
+
+  linkToStep(step: number | string): void {
+    this.gotoStep.emit(step);
   }
 
   private createTagArray(): Map<string, string> {

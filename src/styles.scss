@@ -1,5 +1,8 @@
+@use 'kwd.scss' as *;
 @use 'primeicons/primeicons.css' as *;
 @use 'tailwindcss' as *;
+
+@custom-variant dark (&:where(.dark, .dark *));
 
 input {
   padding: 0.5rem 0.5rem;

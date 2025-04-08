@@ -30,8 +30,6 @@ export class InputDropdownComponent {
 
   override: boolean;
 
-  constructor() {}
-
   onOverride() {
     if (this.clearTextOnOverride) {
       this.formGroup?.get(this.controlName)?.setValue('');

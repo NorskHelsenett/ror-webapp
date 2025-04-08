@@ -1,5 +1,5 @@
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input, model, OnDestroy, OnInit } from '@angular/core';
-import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ClusterFormService } from '../../services/cluster-form.service';
 import { Observable, Subscription, catchError, share, tap } from 'rxjs';
 import { OAuthService } from 'angular-oauth2-oidc';
@@ -9,17 +9,26 @@ import { AclService } from '../../../../core/services/acl.service';
 import { CommonModule } from '@angular/common';
 import { InputDropdownComponent } from '../../../../shared/components/input-dropdown/input-dropdown.component';
 import { SelectModule } from 'primeng/select';
+import { ConfigService } from '../../../../core/services/config.service';
+import { ChipModule } from 'primeng/chip';
+import { ColorService } from '../../../../core/services/color.service';
+import { HexService } from '../../../../core/services/hex.service';
 
 @Component({
   selector: 'app-metadata-step',
   templateUrl: './metadata-step.component.html',
   styleUrls: ['./metadata-step.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [TranslateModule, CommonModule, SelectModule, InputDropdownComponent, FormsModule, ReactiveFormsModule],
+  imports: [TranslateModule, CommonModule, SelectModule, InputDropdownComponent, FormsModule, ReactiveFormsModule, ChipModule],
 })
 export class MetadataStepComponent implements OnInit, OnDestroy, AfterViewInit {
   private clusterFormService = inject(ClusterFormService);
+  private configService = inject(ConfigService);
+  private colorService = inject(ColorService);
+  private hexService = inject(HexService);
+
   @Input() clusterForm: FormGroup = this.clusterFormService.clusterForm;
+
   nextstep = model();
   prevstep = model();
 
@@ -36,10 +45,15 @@ export class MetadataStepComponent implements OnInit, OnDestroy, AfterViewInit {
   adminOwner$: Observable<boolean> | undefined;
   aclFetchError: any;
 
+  tagForm: FormGroup;
+  tags: string[] = [];
+
   private subscriptions = new Subscription();
+  private rortextregex = this.configService.config.regex.forms;
 
   constructor(
     private changeDetector: ChangeDetectorRef,
+    private fb: FormBuilder,
     private oauthService: OAuthService,
     private translateService: TranslateService,
     private aclService: AclService,
@@ -58,6 +72,10 @@ export class MetadataStepComponent implements OnInit, OnDestroy, AfterViewInit {
 
   setup(): void {
     this.fetchAcl();
+
+    this.tagForm = this.fb.group({
+      tag: [null, { validators: [Validators.required, Validators.minLength(1), Validators.pattern(this.rortextregex)] }],
+    });
 
     this.setupCriticalityAndSensitivity();
     this.subscriptions.add(this.translateService.onLangChange.subscribe(() => this.setupCriticalityAndSensitivity()));
@@ -159,5 +177,49 @@ export class MetadataStepComponent implements OnInit, OnDestroy, AfterViewInit {
 
   previousSteps(): void {
     this.prevstep.set(true);
+  }
+
+  addTag(tag: string): void {
+    if (!tag || tag.length === 0) {
+      return;
+    }
+
+    this.tags.push(tag);
+    this.clusterFormService.clusterForm?.patchValue({ tags: this.tags });
+    this.tagForm.reset();
+    this.changeDetector.detectChanges();
+  }
+
+  removeTag(tag: string): void {
+    if (!tag || tag.length === 0) {
+      return;
+    }
+    this.tags = this.tags.filter((t) => t !== tag);
+    this.clusterFormService.clusterForm?.patchValue({ tags: this.tags });
+    this.changeDetector.detectChanges();
+  }
+
+  getColorByText(text: string): string {
+    const consthexColor = this.hexService.stringToSixCharHex(text);
+    const color = this.colorService.getTailwindColorName(consthexColor);
+    if (color) {
+      return color;
+    } else {
+      return 'gray-500';
+    }
+  }
+
+  private createServiceTagArray(): Map<string, string> {
+    let serviceTags: Map<string, string> = new Map();
+    const formServiceTags = this.clusterFormService.clusterForm?.get('tags')?.getRawValue();
+    if (!formServiceTags || formServiceTags?.length == 0) {
+      return serviceTags;
+    }
+
+    formServiceTags.forEach((tag: string) => {
+      serviceTags.set(tag, '');
+    });
+
+    return serviceTags;
   }
 }

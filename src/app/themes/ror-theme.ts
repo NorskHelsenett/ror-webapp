@@ -25,10 +25,10 @@ export const RorTheme = definePreset(BaseTheme, {
           activeColor: '{zinc.800}',
         },
         highlight: {
-          background: '{zinc.500}',
-          focusBackground: '{zinc.50}',
+          background: '{zinc.800}',
+          focusBackground: '{zinc.300}',
           color: '#ffffff',
-          focusColor: '#ffffff',
+          focusColor: '#000000',
         },
       },
       dark: {

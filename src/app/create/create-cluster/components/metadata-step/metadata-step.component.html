@@ -94,12 +94,39 @@
     </div>
 
     <div class="mt-3">
-      <h5>{{ 'pages.create.cluster.steps.metadata.tags' | translate }}</h5>
-      <div class="">
-        <p-chips formControlName="tags"></p-chips>
-        <span *ngIf="clusterForm.get('tags').touched && clusterForm.get('tags').dirty && clusterForm.get('tags').errors" class="text-red-400">{{
-          'pages.create.cluster.steps.metadata.tagsError' | translate
-        }}</span>
+      <div class="mt-10 flex flex-col" [formGroup]="tagForm">
+        <div class="mt-5 flex flex-col">
+          <label> {{ 'pages.admin.projects.form.serviceTags' | translate }}</label>
+
+          <div class="flex gap-3">
+            <input
+              class="border border-gray-600 text-lg"
+              type="text"
+              formControlName="tag"
+              minlength="2"
+              #tagInput
+              (keyup.enter)="addTag(tagInput?.value)"
+            />
+            <button
+              [disabled]="!tagForm?.valid"
+              (click)="addTag(tagInput?.value)"
+              type="button"
+              class="rounded-lg bg-green-600 p-2 text-white disabled:bg-gray-300 dark:disabled:bg-gray-400"
+            >
+              {{ 'common.create' | translate }}
+            </button>
+          </div>
+          <div class="mt-3 flex gap-3">
+            @for (tag of tags; track tag) {
+              <p-chip [removable]="true" (onRemove)="removeTag(tag)" [ngClass]="'bg-' + getColorByText(tag)">
+                <div [ngClass]="'bg-' + getColorByText(tag)">{{ tag }}</div>
+              </p-chip>
+            }
+          </div>
+          <span *ngIf="clusterForm?.get('tags').touched && clusterForm?.get('tags').dirty && clusterForm?.get('tags').errors" class="text-red-400">{{
+            'pages.admin.projects.form.serviceTagsError' | translate
+          }}</span>
+        </div>
       </div>
     </div>
 
@@ -113,6 +140,7 @@
       <div class="ml-3 flex-none"></div>
       <button
         (click)="nextSteps()"
+        type="button"
         [disabled]="!clusterForm.get('ownergroup').valid || !clusterForm.get('sensitivity').valid || !clusterForm.get('criticality').valid"
         class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark delay-50 float-left flex-none rounded-md bg-green-700 px-4 py-2 text-sm text-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white disabled:cursor-not-allowed disabled:bg-gray-900 disabled:opacity-25 disabled:hover:bg-gray-900"
       >

@@ -53,6 +53,7 @@ export class ThemeService {
     if (isPlatformBrowser(this.platformId)) {
       localStorage.setItem('isDark', false.toString());
       document?.querySelector('html')?.classList.remove('dark');
+      document?.querySelector('body')?.classList.remove('dark');
     }
   }
 
@@ -60,6 +61,7 @@ export class ThemeService {
     if (isPlatformBrowser(this.platformId)) {
       localStorage.setItem('isDark', true.toString());
       document?.querySelector('html')?.classList.add('dark');
+      document?.querySelector('body')?.classList.add('dark');
     }
   }
 }

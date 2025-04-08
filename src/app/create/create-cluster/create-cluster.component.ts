@@ -158,4 +158,10 @@ export class CreateClusterComponent implements OnInit, OnDestroy {
   getNodePoolSum(): number {
     return this.clusterFormService.getNodePoolSum();
   }
+
+  linkToStep(step: number | string): void {
+    this.activeStep = step as number;
+    this.activeIndex = (step as number) - 1;
+    this.changeDetector.detectChanges();
+  }
 }

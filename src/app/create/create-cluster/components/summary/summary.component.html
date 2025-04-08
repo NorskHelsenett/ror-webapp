@@ -7,31 +7,31 @@
 
   <div>{{ 'pages.create.cluster.steps.summary.project' | translate }}</div>
   <div class="font-bold underline">
-    <a routerLink="{{ relativeTo }}/new">{{ value?.project?.name }}</a>
+    <a (click)="linkToStep(1)" class="cursor-pointer">{{ value?.project?.name }}</a>
   </div>
   <div class="">{{ 'pages.create.cluster.steps.summary.workorder' | translate }}</div>
   <div class="font-bold underline">
-    <a routerLink="{{ relativeTo }}/new">{{ value?.project?.projectMetadata?.billing?.workorder }}</a>
+    <a (click)="linkToStep(1)" class="cursor-pointer">{{ value?.project?.projectMetadata?.billing?.workorder }}</a>
   </div>
 
   <div class="">{{ 'pages.create.cluster.steps.summary.provider' | translate }}</div>
   <div class="font-bold underline">
-    <a routerLink="{{ relativeTo }}/new">{{ value?.provider?.name }}</a>
+    <a (click)="linkToStep(1)" class="cursor-pointer">{{ value?.provider?.name }}</a>
   </div>
 
   <ng-container [ngSwitch]="true">
     <ng-container *ngSwitchCase="value?.provider?.type?.toLowerCase() === 'tanzu'">
       <div>{{ 'pages.create.cluster.steps.summary.workspace' | translate }}</div>
       <div class="font-bold underline">
-        <a routerLink="{{ relativeTo }}/new">{{ value?.providerConfig?.tanzu?.workspace?.name }}</a>
+        <a (click)="linkToStep(1)" class="cursor-pointer">{{ value?.providerConfig?.tanzu?.workspace?.name }}</a>
       </div>
       <div>{{ 'pages.create.cluster.steps.summary.datacenter' | translate }}</div>
       <div class="font-bold underline">
-        <a routerLink="{{ relativeTo }}/new">{{ value?.providerConfig?.tanzu?.workspace?.datacenter?.name }}</a>
+        <a (click)="linkToStep(1)" class="cursor-pointer">{{ value?.providerConfig?.tanzu?.workspace?.datacenter?.name }}</a>
       </div>
       <div>{{ 'pages.create.cluster.steps.summary.location' | translate }}</div>
       <div class="font-bold underline">
-        <a routerLink="{{ relativeTo }}/new">
+        <a (click)="linkToStep(1)" class="cursor-pointer">
           {{ value?.providerConfig?.tanzu?.workspace?.datacenter?.location?.region }}
           {{ value?.providerConfig?.tanzu?.workspace?.datacenter?.location?.country }}
         </a>
@@ -40,22 +40,22 @@
     <ng-container *ngSwitchCase="'AKS'">
       <div>{{ 'pages.create.cluster.steps.summary.subscription' | translate }}</div>
       <div class="font-bold underline">
-        <a routerLink="{{ relativeTo }}/new">{{ value?.providerConfig?.azure?.subscription?.name }}</a>
+        <a (click)="linkToStep(1)" class="cursor-pointer">{{ value?.providerConfig?.azure?.subscription?.name }}</a>
       </div>
       <div>{{ 'pages.create.cluster.steps.summary.resourceGroup' | translate }}</div>
       <div class="font-bold underline">
-        <a routerLink="{{ relativeTo }}/new">{{ value?.providerConfig?.azure?.resourceGroup?.name }}</a>
+        <a (click)="linkToStep(1)" class="cursor-pointer">{{ value?.providerConfig?.azure?.resourceGroup?.name }}</a>
       </div>
       <div>{{ 'pages.create.cluster.steps.summary.region' | translate }}</div>
       <div class="font-bold underline">
-        <a routerLink="{{ relativeTo }}/new">{{ value?.providerConfig?.azure?.region?.name }}</a>
+        <a (click)="linkToStep(1)" class="cursor-pointer">{{ value?.providerConfig?.azure?.region?.name }}</a>
       </div>
     </ng-container>
   </ng-container>
 
   <div class="mt-3">{{ 'pages.create.cluster.steps.summary.availability' | translate }}</div>
   <div class="font-bold underline">
-    <a routerLink="{{ relativeTo }}/resources" *ngIf="value?.availability?.label"
+    <a (click)="linkToStep(2)" class="cursor-pointer" *ngIf="value?.availability?.label"
       >{{ value?.availability?.label }} ({{ value?.availability?.price }} NOK)</a
     >
   </div>
@@ -64,7 +64,7 @@
     <div class="">{{ 'pages.create.cluster.steps.summary.k8sVersion' | translate }}</div>
     <div class="flex gap-3">
       <div class="font-bold underline">
-        <a routerLink="{{ relativeTo }}/resources">
+        <a (click)="linkToStep(2)" class="cursor-pointer">
           {{ value?.k8sVersion?.name }}
         </a>
       </div>
@@ -73,11 +73,11 @@
 
   <div class="">{{ 'pages.create.cluster.steps.summary.env' | translate }}</div>
   <div class="font-bold underline">
-    <a routerLink="{{ relativeTo }}/resources"> {{ value?.environment?.name }}</a>
+    <a (click)="linkToStep(2)" class="cursor-pointer"> {{ value?.environment?.name }}</a>
   </div>
   <div>{{ 'pages.create.cluster.steps.summary.clustername' | translate }}</div>
   <div class="font-bold underline">
-    <a routerLink="{{ relativeTo }}/resources"
+    <a (click)="linkToStep(2)" class="cursor-pointer"
       ><span *ngIf="value?.environment">{{ value?.environment?.prefix }}-</span>{{ value?.clusterName }}</a
     >
   </div>
@@ -90,29 +90,29 @@
   <div class="flex gap-3">
     <ul>
       <li *ngFor="let cap of value?.capasity" class="font-bold underline">
-        <a routerLink="{{ relativeTo }}/resources">{{ cap?.count }} x {{ cap?.machineClass }} = {{ cap?.price + cap?.count }}</a>
+        <a (click)="linkToStep(2)" class="cursor-pointer">{{ cap?.count }} x {{ cap?.machineClass }} = {{ cap?.price + cap?.count }}</a>
       </li>
     </ul>
   </div>
 
   <div class="mt-3">{{ 'pages.create.cluster.steps.summary.ownergroup' | translate }}</div>
   <div class="flex gap-3 font-bold">
-    <a routerLink="{{ relativeTo }}/metadata">
+    <a (click)="linkToStep(3)" class="cursor-pointer">
       <span>{{ value?.ownergroup }}</span>
     </a>
   </div>
 
   <div>{{ 'pages.create.cluster.steps.summary.sensiticity' | translate }}</div>
   <div class="font-bold underline">
-    <a routerLink="{{ relativeTo }}/metadata">{{ value?.sensitivity?.name }}</a>
+    <a (click)="linkToStep(3)" class="cursor-pointer">{{ value?.sensitivity?.name }}</a>
   </div>
   <div>{{ 'pages.create.cluster.steps.summary.criticality' | translate }}</div>
   <div class="font-bold underline">
-    <a routerLink="{{ relativeTo }}/metadata">{{ value?.criticality?.name }}</a>
+    <a (click)="linkToStep(3)" class="cursor-pointer">{{ value?.criticality?.name }}</a>
   </div>
   <div>{{ 'pages.create.cluster.steps.summary.tags' | translate }}</div>
   <div class="flex gap-3 font-bold">
-    <a routerLink="{{ relativeTo }}/metadata">
+    <a (click)="linkToStep(3)" class="cursor-pointer">
       <p-tag class="mr-1" *ngFor="let tag of value?.tags" severity="success" [value]="tag"></p-tag>
     </a>
   </div>
@@ -120,13 +120,13 @@
   <div class="mt-3">{{ 'pages.create.cluster.steps.summary.sumMonth' | translate }}</div>
   <div class="font-bold">
     <ng-container *ngIf="getNodePoolSum() > 0"
-      ><a routerLink="{{ relativeTo }}/resources">{{ getNodePoolSum() }} NOK</a></ng-container
+      ><a (click)="linkToStep(2)" class="cursor-pointer">{{ getNodePoolSum() }} NOK</a></ng-container
     >
   </div>
   <div>{{ 'pages.create.cluster.steps.summary.sumYear' | translate }}</div>
   <div class="font-bold">
     <ng-container *ngIf="getNodePoolSum() > 0"
-      ><a routerLink="{{ relativeTo }}/resources">{{ getNodePoolSum() * 12 }} NOK</a></ng-container
+      ><a (click)="linkToStep(2)" class="cursor-pointer">{{ getNodePoolSum() * 12 }} NOK</a></ng-container
     >
   </div>
 </div>
