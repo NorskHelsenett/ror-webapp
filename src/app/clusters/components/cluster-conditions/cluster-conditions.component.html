@@ -1,7 +1,7 @@
 <ng-container *ngIf="conditions?.length > 0">
   <ng-container *ngFor="let condition of conditions">
     <div
-      class="xs:flex-none m-3 rounded-lg bg-gradient-to-r from-red-700 to-yellow-500 p-3 text-white shadow-pink-500 drop-shadow-lg hover:from-yellow-500 hover:to-red-700 md:flex dark:shadow-red-300"
+      class="xs:flex-none m-3 rounded-lg bg-gradient-to-r from-red-700 to-yellow-500 p-3 text-white shadow-pink-500 drop-shadow-lg hover:from-yellow-500 hover:to-red-700 dark:shadow-red-300 md:flex"
       *ngIf="condition?.type === 'ToolingOk' && condition?.status === 'False'"
     >
       <span class="relative mr-3 flex h-6 w-6">
