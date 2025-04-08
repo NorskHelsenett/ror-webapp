@@ -17,7 +17,7 @@
         >
           <ng-template let-group pTemplate="group">
             <div class="align-items-center flex">
-              <strong>{{ group?.label }} gaslkdfdsa</strong>
+              <strong>{{ group?.label }}</strong>
             </div>
           </ng-template>
           <ng-template let-item pTemplate="item">
@@ -32,7 +32,6 @@
             class="text-red-400"
             >{{ 'pages.acl.form.groupError' | translate }}</span
           >
-          <!-- <span id="group-help">{{ 'pages.acl.form.groupHelp' | translate }}</span> -->
         </div>
       </div>
       <div class="mb-3 mt-3">
@@ -102,7 +101,6 @@
             class="text-red-400"
             >{{ 'pages.acl.form.subjectError' | translate }}</span
           >
-          <!-- <span id="subject-help">{{ 'pages.acl.form.subjectHelp' | translate }}</span> -->
         </div>
       </div>
 
@@ -295,6 +293,3 @@
     </div>
   </div>
 </form>
-<div class="bg-black p-3 text-green-500">
-  <pre>{{ suggestedSubjects | json }}</pre>
-</div>
