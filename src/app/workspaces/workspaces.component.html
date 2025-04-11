@@ -36,7 +36,6 @@
             [rowsPerPageOptions]="rowsPerPage"
             [tableStyle]="{ 'min-width': '75rem' }"
             [rowHover]="true"
-            responsiveLayout="stack"
             sortField="group"
             [sortOrder]="1"
             [totalRecords]="(workspaceMetrics$ | async)?.totalCount"

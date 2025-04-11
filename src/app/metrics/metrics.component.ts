@@ -26,7 +26,8 @@ export class MetricsComponent implements OnInit, OnDestroy {
     animation: false,
     responsive: false,
   };
-  chartData: any | undefined;
+  chartDataNHNTooling: any | undefined;
+  chartDataK8sVersions: any | undefined;
   isDark = false;
 
   backgroundColors = ['#00467A', '#372770', '#6B1E27', '#E85800'];
@@ -35,7 +36,8 @@ export class MetricsComponent implements OnInit, OnDestroy {
   customMetrics$: Observable<any> | undefined;
   data$: Observable<any> | undefined;
   metricsError: any;
-  customMetricsData: MetricsCustom | undefined;
+  customMetricsDataNHNTooling: MetricsCustom | undefined;
+  customMetricsDataK8sVersions: MetricsCustom | undefined;
 
   display: boolean = false;
 
@@ -54,7 +56,8 @@ export class MetricsComponent implements OnInit, OnDestroy {
         this.changeDetector.detectChanges();
       }),
     );
-    this.fetchData();
+    this.fetchDataNHNTooling();
+    this.fetchDataK8sVersions();
     this.fetchCustomMetrics();
   }
 
@@ -74,21 +77,22 @@ export class MetricsComponent implements OnInit, OnDestroy {
       interval(2000)
         .pipe(
           tap(() => {
-            this.fetchData();
+            this.fetchDataNHNTooling();
+            this.fetchDataK8sVersions();
           }),
         )
         .subscribe(),
     );
   }
 
-  fetchData(): void {
+  fetchDataNHNTooling(): void {
     this.subscriptions.add(
       this.metricsService
         .getForClusterByProperty('versions.nhntooling.version')
         .pipe(
           tap((data: MetricsCustom) => {
-            this.customMetricsData = data;
-            this.setChartData();
+            this.customMetricsDataNHNTooling = data;
+            this.setChartDataNHNTooling();
             this.changeDetector.detectChanges();
           }),
           catchError((error) => {
@@ -100,16 +104,57 @@ export class MetricsComponent implements OnInit, OnDestroy {
     );
   }
 
-  setChartData(): void {
+  fetchDataK8sVersions(): void {
+    this.subscriptions.add(
+      this.metricsService
+        .getForClusterByProperty('versions.kubernetes')
+        .pipe(
+          tap((data: MetricsCustom) => {
+            this.customMetricsDataK8sVersions = data;
+            this.setChartDataK8sVersions();
+            this.changeDetector.detectChanges();
+          }),
+          catchError((error) => {
+            this.metricsError = error;
+            return error;
+          }),
+        )
+        .subscribe(),
+    );
+  }
+
+  setChartDataNHNTooling(): void {
     let labels: string[] = [];
     let data: number[] = [];
 
-    this.customMetricsData?.data?.forEach((element: MetricsCustomItem) => {
+    this.customMetricsDataNHNTooling?.data?.forEach((element: MetricsCustomItem) => {
       labels.push(element?.text);
       data.push(element?.value);
     });
 
-    this.chartData = {
+    this.chartDataNHNTooling = {
+      responsive: true,
+      labels: labels,
+      datasets: [
+        {
+          data: data,
+          backgroundColor: this.isDark ? this.backgroundColors : this.lightbackgroundColors,
+          hoverBackgroundColor: this.isDark ? this.lightbackgroundColors : this.backgroundColors,
+        },
+      ],
+    };
+  }
+
+  setChartDataK8sVersions(): void {
+    let labels: string[] = [];
+    let data: number[] = [];
+
+    this.customMetricsDataK8sVersions?.data?.forEach((element: MetricsCustomItem) => {
+      labels.push(element?.text);
+      data.push(element?.value);
+    });
+
+    this.chartDataK8sVersions = {
       responsive: true,
       labels: labels,
       datasets: [

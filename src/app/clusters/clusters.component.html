@@ -50,7 +50,7 @@
 </div>
 
 <div class="dark:bg-darker rounded-md bg-white xl:m-4">
-  <div *ngIf="!clustersError; else error" class="overflow-auto">
+  <div *ngIf="!clustersError; else error" class="">
     <p-table
       *ngIf="selectedColumns && selectedColumns?.length > 0"
       [columns]="selectedColumns"
@@ -61,7 +61,6 @@
       [lazy]="true"
       (onLazyLoad)="fetchClusters($event)"
       [loading]="loading"
-      responsiveLayout="stack"
       [rowHover]="true"
       stateStorage="local"
       stateKey="cluster-table"

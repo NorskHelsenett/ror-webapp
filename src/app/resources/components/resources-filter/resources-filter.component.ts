@@ -38,15 +38,15 @@ export class ResourcesFilterComponent {
       return;
     }
 
-    this.selectedResourceType = this.resourceTypes.find((x) => x.apiVersion === value.apiVersion && x.kind === value.kind);
-    this.selectedOwner = this.owners.find((x) => x.scope === value.scope);
+    this.selectedResourceType = this.resourceTypes?.find((x) => x.apiVersion === value.apiVersion && x.kind === value.kind);
+    this.selectedOwner = this.owners?.find((x) => x.scope === value.scope);
     if (this.selectedOwner?.clusterSpesific) {
       this.showClusterDropdown = true;
     }
     if (this.clusterId) {
-      this.selectedCluster = this.clusters.find((x) => x.clusterId === this.clusterId);
+      this.selectedCluster = this.clusters?.find((x) => x.clusterId === this.clusterId);
     } else {
-      this.selectedCluster = this.clusters.find((x) => x.clusterId === value.clusterId);
+      this.selectedCluster = this.clusters?.find((x) => x.clusterId === value.clusterId);
     }
   }
 

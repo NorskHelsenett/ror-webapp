@@ -24,7 +24,6 @@
     [loading]="loading"
     [totalRecords]="(auditlogs$ | async)?.totalCount"
     [globalFilterFields]="['metadata.user.name', 'metadata.category']"
-    responsiveLayout="stack"
     styleClass="p-datatable-sm"
     stateStorage="local"
     stateKey="auditlogs-table"

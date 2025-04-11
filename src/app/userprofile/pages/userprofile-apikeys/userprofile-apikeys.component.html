@@ -39,7 +39,6 @@
           [rowsPerPageOptions]="rowsPerPage"
           [tableStyle]="{ 'min-width': '75rem' }"
           [rowHover]="true"
-          responsiveLayout="stack"
           sortField="displayName"
           [sortOrder]="1"
           [totalRecords]="(apikeys$ | async)?.totalCount"

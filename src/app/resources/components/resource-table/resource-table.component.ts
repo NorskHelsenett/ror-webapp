@@ -26,6 +26,7 @@ import { ClustersService } from '../../../core/services/clusters.service';
 import { ConfigService } from '../../../core/services/config.service';
 import { ResourceQuery } from '@rork8s/ror-resources/models';
 import { ExportComponent, SpinnerComponent } from '../../../shared/components';
+import { UtilsService } from '../../../shared/services';
 
 @Component({
   selector: 'app-resource-table',
@@ -46,7 +47,7 @@ import { ExportComponent, SpinnerComponent } from '../../../shared/components';
     ExportComponent,
     SpinnerComponent,
   ],
-  providers: [ResourcesService, ColumnFactoryService, TypesService],
+  providers: [ResourcesService, ColumnFactoryService, TypesService, UtilsService],
   templateUrl: './resource-table.component.html',
   styleUrl: './resource-table.component.scss',
 })
@@ -107,7 +108,7 @@ export class ResourceTableComponent implements OnInit, OnDestroy {
     }
 
     if (this.clusterId) {
-      this.resourceTypes = this.resourceTypes.filter((x) => x.clusterSpecific);
+      this.resourceTypes = this.resourceTypes?.filter((x) => x.clusterSpecific);
     }
 
     this.getClusters();

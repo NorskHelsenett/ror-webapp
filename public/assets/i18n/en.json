@@ -1390,7 +1390,8 @@
     },
     "metrics": {
       "title": "Metrics",
-      "nhnTooling": "Distribution of NHN Tooling versions"
+      "nhnTooling": "Distribution of NHN Tooling versions",
+      "kubernetesVersions": "Distribution of Kubernetes versions"
     },
     "orders": {
       "title": "Orders",

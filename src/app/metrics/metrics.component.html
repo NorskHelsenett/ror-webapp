@@ -15,10 +15,10 @@
       <div class="dark:bg-darker items-center justify-between rounded-md bg-white p-2">
         <div class="dark:bg-darker rounded-md bg-white">
           <div class="dark:border-primary flex items-center justify-between border-b p-4">
-            <h4 class="dark:text-light flex-grow text-lg font-semibold text-gray-500">{{ 'pages.metrics.nhnTooling' | translate }}</h4>
+            <h4 class="dark:text-light flex-grow text-lg font-semibold text-gray-500">{{ 'pages.metrics.kubernetesVersions' | translate }}</h4>
             <button
               type="button"
-              (click)="showDialog(dialog)"
+              (click)="showDialog(dialogK8sVersions)"
               icon="pi pi-info-circle"
               class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
             >
@@ -26,7 +26,26 @@
             </button>
           </div>
           <div class="relative p-3">
-            <p-chart type="bar" [data]="chartData" [options]="chartOptions"></p-chart>
+            <p-chart type="bar" [data]="chartDataK8sVersions" [options]="chartOptions"></p-chart>
+          </div>
+        </div>
+      </div>
+
+      <div class="dark:bg-darker items-center justify-between rounded-md bg-white p-2">
+        <div class="dark:bg-darker rounded-md bg-white">
+          <div class="dark:border-primary flex items-center justify-between border-b p-4">
+            <h4 class="dark:text-light flex-grow text-lg font-semibold text-gray-500">{{ 'pages.metrics.nhnTooling' | translate }}</h4>
+            <button
+              type="button"
+              (click)="showDialog(dialogNHNTooling)"
+              icon="pi pi-info-circle"
+              class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+            >
+              {{ 'common.fullscreen' | translate }}
+            </button>
+          </div>
+          <div class="relative p-3">
+            <p-chart type="bar" [data]="chartDataNHNTooling" [options]="chartOptions"></p-chart>
           </div>
         </div>
       </div>
@@ -34,6 +53,10 @@
   </div>
 </div>
 
-<p-dialog #dialog [(visible)]="display">
-  <p-chart type="bar" [data]="chartData" [options]="chartOptions"> </p-chart>
+<p-dialog #dialogNHNTooling [(visible)]="display" [maximizable]="true">
+  <p-chart type="bar" [data]="chartDataNHNTooling" [options]="chartOptions"> </p-chart>
+</p-dialog>
+
+<p-dialog #dialogK8sVersions [(visible)]="display" [maximizable]="true">
+  <p-chart type="bar" [data]="chartDataK8sVersions" [options]="chartOptions"> </p-chart>
 </p-dialog>

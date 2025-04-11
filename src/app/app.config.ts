@@ -80,7 +80,7 @@ export const appConfig: ApplicationConfig = {
           variants: '',
           cssLayer: {
             name: 'primeng',
-            order: 'tailwind-base, base, app-styles, theme, primeng',
+            order: 'tailwind-base, app-styles, theme, base, primeng',
           },
         },
       },

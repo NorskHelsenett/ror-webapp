@@ -19,7 +19,7 @@
           {{ 'common.create' | translate }}
         </a>
       </div>
-      <div class="overflow-x-auto">
+      <div class="">
         <p-table
           [value]="prices$ | async"
           [rows]="rows"
@@ -28,7 +28,6 @@
           [rowsPerPageOptions]="rowsPerPage"
           [tableStyle]="{ 'min-width': '75rem' }"
           [rowHover]="true"
-          responsiveLayout="stack"
           sortField="group"
           [sortOrder]="1"
           [totalRecords]="(prices$ | async)?.length"
