@@ -1,4 +1,4 @@
-import { enableProdMode } from '@angular/core';
+import { enableProdMode, isDevMode } from '@angular/core';
 
 import { environment } from './environments/environment';
 
@@ -24,7 +24,7 @@ if (environment.production) {
 
   if (isPlatformBrowser) {
     let origin = window.location.origin;
-    if (environment.production) {
+    if (!isDevMode()) {
       origin = origin.replace(/:\d+$/, '');
     }
 
