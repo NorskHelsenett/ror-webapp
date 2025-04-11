@@ -4,4 +4,4 @@ LABEL org.opencontainers.image.source https://github.com/norskhelsenett/ror
 WORKDIR /app
 
 COPY nginx/http_prod.conf /etc/nginx/conf.d/default.conf
-COPY dist/ror-web/browser /app
+COPY dist/ror-webapp/browser /app
