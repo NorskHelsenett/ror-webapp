@@ -3,11 +3,17 @@ import { Observable, catchError, of } from 'rxjs';
 import { ComplianceReport } from '../../../core/models/complianceReport';
 import { ComplianceReportsService } from '../../../core/services/compliance-reports.service';
 import { ExportService } from '../../../core/services/export.service';
+import { TranslateModule } from '@ngx-translate/core';
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-cluster-compliance-report',
   templateUrl: './cluster-compliance-report.component.html',
   styleUrl: './cluster-compliance-report.component.scss',
+  standalone: true,
+  imports: [TranslateModule, TableModule, ButtonModule, CommonModule],
 })
 export class ClusterComplianceReportComponent implements OnInit {
   @Input() clusterId: string;

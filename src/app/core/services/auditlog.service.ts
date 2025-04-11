@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Filter } from '../models/apiFilter';
 import { AuditLog } from '../models/auditlog';
@@ -10,10 +10,8 @@ import { ConfigService } from './config.service';
   providedIn: 'root',
 })
 export class AuditlogService {
-  constructor(
-    private httpClient: HttpClient,
-    private configService: ConfigService,
-  ) {}
+  private configService = inject(ConfigService);
+  private httpClient = inject(HttpClient);
 
   getAll(): Observable<AuditLog[]> {
     let url = `${this.configService.config.rorApi}/v1/auditlogs`;

@@ -4,13 +4,13 @@
       <form class="flex flex-col gap-4" [formGroup]="routeForm">
         <div class="flex flex-col">
           <label class="text-xl font-bold" for="apiVersion">{{ 'pages.clusters.details.notifications.notificationkind' | translate }}</label>
-          <p-dropdown
+          <p-select
             formControlName="messageType"
             [options]="dropdownOptions"
             optionLabel="label"
             [showClear]="false"
             [placeholder]="dropdownOptions[0].label"
-          ></p-dropdown>
+          ></p-select>
         </div>
         <div>
           <h2 class="text-xl font-bold">{{ 'pages.clusters.details.notifications.receivers' | translate }}</h2>
@@ -22,12 +22,12 @@
                 <ng-container [formGroupName]="$index">
                   <div class="flex flex-col">
                     <input class="p-inputtext-lg border text-lg" type="text" pInputText formControlName="channelId" />
-                    <div class="flex gap-2 m-2">
+                    <div class="m-2 flex gap-2">
                       @if ($last) {
                         <button
                           pButton
                           pRipple
-                          class="text-white p-1 rounded-md bg-green-700 hover:bg-green-600 focus:bg-green-600"
+                          class="rounded-md bg-green-700 p-1 text-white hover:bg-green-600 focus:bg-green-600"
                           (click)="addSlackReceiver('')"
                           [disabled]="!routeForm.valid"
                         >
@@ -37,7 +37,7 @@
                           <button
                             pButton
                             pRipple
-                            class="text-white p-1 rounded-md bg-red-700 hover:bg-red-600 focus:bg-red-600"
+                            class="rounded-md bg-red-700 p-1 text-white hover:bg-red-600 focus:bg-red-600"
                             (click)="removeSlackReceiver($index)"
                           >
                             {{ 'pages.clusters.details.notifications.removeSlackChannel' | translate }}
@@ -80,7 +80,7 @@
           <button
             pButton
             pRipple
-            class="focus:ring-primary dark:focus:ring-offset-dark rounded-md px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white bg-gray-500 hover:bg-gray-700"
+            class="focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-gray-500 px-4 py-2 text-sm text-white hover:bg-gray-700 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
             (click)="cancel()"
           >
             {{ 'common.cancel' | translate }}

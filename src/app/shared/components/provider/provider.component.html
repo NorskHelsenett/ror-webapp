@@ -5,7 +5,7 @@
     "
     class="flex gap-2"
   >
-    <img [ngClass]="iconSize === '' ? 'w-6' : iconSize" ngSrc="/assets/icons/tanzu/tanzu.png" alt="Tanzu" width="6" height="6" /><span
+    <img [ngClass]="iconSize === '' ? 'w-6' : iconSize" src="/assets/icons/tanzu/tanzu.png" alt="Tanzu" width="6" height="6" /><span
       *ngIf="showText"
       >{{ providerTypeOrName | titlecase }}</span
     >
@@ -14,27 +14,23 @@
     <img
       *ngIf="showIcon"
       [ngClass]="iconSize === '' ? 'w-6' : iconSize"
-      ngSrc="/assets/icons/k3d/k3d_logo_black_blue.svg"
+      src="/assets/icons/k3d/k3d_logo_black_blue.svg"
       width="6"
       height="6"
       alt="K3D"
     /><span *ngIf="showText">{{ providerTypeOrName | titlecase }}</span>
   </div>
   <div *ngSwitchCase="providerTypeOrName === 'kind' || providerTypeOrName === 'KIND' || providerTypeOrName === 'Kind'" class="flex gap-2">
-    <img
-      *ngIf="showIcon"
-      [ngClass]="iconSize === '' ? 'w-6' : iconSize"
-      ngSrc="/assets/icons/kind/kind-logo.png"
-      width="6"
-      height="6"
-      alt="K3D"
-    /><span *ngIf="showText">{{ providerTypeOrName | titlecase }}</span>
+    <img *ngIf="showIcon" [ngClass]="iconSize === '' ? 'w-6' : iconSize" src="/assets/icons/kind/kind-logo.png" width="6" height="6" alt="K3D" /><span
+      *ngIf="showText"
+      >{{ providerTypeOrName | titlecase }}</span
+    >
   </div>
   <div *ngSwitchCase="providerTypeOrName === 'talos' || providerTypeOrName === 'TALOS' || providerTypeOrName === 'Talos'" class="flex gap-2">
     <img
       *ngIf="showIcon"
       [ngClass]="iconSize === '' ? 'w-6' : iconSize"
-      ngSrc="/assets/icons/talos/talos-logo.svg"
+      src="/assets/icons/talos/talos-logo.svg"
       width="6"
       height="6"
       alt="K3D"
@@ -102,7 +98,7 @@
     </svg>
     <span *ngIf="showText">{{ providerTypeOrName | titlecase }}</span>
   </div>
-  <div *ngSwitchDefault class="flex dark:fill-white gap-2">
+  <div *ngSwitchDefault class="flex gap-2 dark:fill-white">
     <svg
       *ngIf="showIcon"
       [ngClass]="iconSize === '' ? 'w-6' : iconSize"

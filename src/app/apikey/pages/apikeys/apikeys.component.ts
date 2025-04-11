@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { ApikeyCreateComponent } from './../../components/apikey-create/apikey-create.component';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Observable, Subscription, catchError, finalize, share, tap } from 'rxjs';
 import { User } from '../../../core/models/user';
@@ -11,14 +12,34 @@ import { ConfigService } from '../../../core/services/config.service';
 import { UserService } from '../../../core/services/user.service';
 import { SignalService } from '../../../create/create-cluster/services/signal.service';
 import { FilterService } from '../../../core/services/filter.service';
+import { CommonModule } from '@angular/common';
+import { TimePipe } from '../../../shared/pipes/time.pipe';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { SpinnerComponent } from '../../../shared/components';
+import { TableModule } from 'primeng/table';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SelectModule } from 'primeng/select';
 
 @Component({
   selector: 'app-apikeys',
   templateUrl: './apikeys.component.html',
   styleUrls: ['./apikeys.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    TranslateModule,
+    CommonModule,
+    TimePipe,
+    SpinnerComponent,
+    ConfirmDialogModule,
+    ApikeyCreateComponent,
+    TableModule,
+    SelectModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
 })
 export class ApikeysComponent implements OnInit {
+  private configService = inject(ConfigService);
   user$: Observable<User> | undefined;
   refreshList: boolean;
 
@@ -59,7 +80,6 @@ export class ApikeysComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
     private translateService: TranslateService,
-    private configService: ConfigService,
     private signalService: SignalService,
   ) {}
 

@@ -1,21 +1,85 @@
+import { ClusterDescriptionComponent } from './../../components/cluster-description/cluster-description.component';
+import { CommonModule, isPlatformBrowser, Location } from '@angular/common';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { MetricsService } from '../../../core/services/metrics.service';
-import { Component, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy, AfterContentInit, AfterViewInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ChangeDetectorRef,
+  ChangeDetectionStrategy,
+  AfterContentInit,
+  AfterViewInit,
+  Inject,
+  PLATFORM_ID,
+  ViewChild,
+  effect,
+} from '@angular/core';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Observable, Subscription, tap, catchError, share, finalize } from 'rxjs';
-import { Location } from '@angular/common';
 import { AclScopes, AclAccess } from '../../../core/models/acl-scopes';
 import { AclService } from '../../../core/services/acl.service';
 import { ClustersService } from '../../../core/services/clusters.service';
 import { ResourceType } from '../../../core/models/resources/resourceType';
 import { ResourceQuery } from '@rork8s/ror-resources/models';
 import { ClusterService } from '../../services';
+import { TranslateModule } from '@ngx-translate/core';
+
+import {
+  ClusterACLComponent,
+  ClusterComplianceReportComponent,
+  ClusterConditionsComponent,
+  ClusterDeleteComponent,
+  ClusterIngressListComponent,
+  ClusterMetadataComponent,
+  ClusterMetricsComponent,
+  ClusterNotificationsComponent,
+  ClusterPolicyReportComponent,
+  ClusterRawComponent,
+  ClusterToolsComponent,
+  ClusterVulnerabilityReportComponent,
+} from '../../components';
+import { ClusterNodepoolsComponent } from '../cluster-nodepools/cluster-nodepools.component';
+import { BadgeModule } from 'primeng/badge';
+import { ClusterMetadataPageComponent } from '../cluster-metadata-page/cluster-metadata-page.component';
+import { ClusterResourceTableComponent } from '../../components/cluster-resource-table/cluster-resource-table.component';
+import { SidebarModule } from 'primeng/sidebar';
+import { ResourceV2DetailsComponent } from '../../../resourcesv2/components/resource-v2-details/resource-v2-details.component';
+import { SpinnerComponent } from '../../../shared/components';
+import { Tabs, TabsModule } from 'primeng/tabs';
 
 @Component({
   selector: 'app-cluster-details',
   templateUrl: './cluster-details.component.html',
   styleUrls: ['./cluster-details.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    TranslateModule,
+    CommonModule,
+    RouterModule,
+    ClusterConditionsComponent,
+    TabsModule,
+    ClusterMetricsComponent,
+    ClusterDescriptionComponent,
+    ClusterACLComponent,
+    ClusterMetadataComponent,
+    ClusterToolsComponent,
+    ClusterIngressListComponent,
+    ClusterNodepoolsComponent,
+    ClusterPolicyReportComponent,
+    ClusterVulnerabilityReportComponent,
+    ClusterComplianceReportComponent,
+    ClusterRawComponent,
+    BadgeModule,
+    ClusterMetadataPageComponent,
+    ClusterResourceTableComponent,
+    ClusterNotificationsComponent,
+    ClusterDeleteComponent,
+    SpinnerComponent,
+    SidebarModule,
+    ResourceV2DetailsComponent,
+  ],
+  providers: [ClusterService],
 })
 export class ClusterDetailsComponent implements OnInit, OnDestroy, AfterContentInit, AfterViewInit {
   clusterId: string | undefined;
@@ -29,7 +93,7 @@ export class ClusterDetailsComponent implements OnInit, OnDestroy, AfterContentI
 
   editInvalidCount: string;
 
-  activeTabIndex = 0;
+  activeTabIndex: string | number = 0;
 
   selectedTabIndex: number = 0;
   adminOwner$: Observable<boolean> | undefined;
@@ -38,6 +102,8 @@ export class ClusterDetailsComponent implements OnInit, OnDestroy, AfterContentI
   resourceTypes: ResourceType[];
   selectedResource: any | undefined;
   sidebarVisible = false;
+
+  @ViewChild('tabs') tabsComponent: Tabs | undefined;
 
   private subscriptions = new Subscription();
   private tabs: any[] = [
@@ -104,6 +170,7 @@ export class ClusterDetailsComponent implements OnInit, OnDestroy, AfterContentI
   resourceQuery: ResourceQuery = {};
 
   constructor(
+    @Inject(PLATFORM_ID) private platformId: object,
     private route: ActivatedRoute,
     private router: Router,
     private location: Location,
@@ -125,6 +192,14 @@ export class ClusterDetailsComponent implements OnInit, OnDestroy, AfterContentI
         throw error;
       }),
     );
+
+    effect(() => {
+      this.tabsComponent?.value?.subscribe((value) => {
+        this.activeTabIndex = value;
+        this.switchTab();
+        this.changeDetector.detectChanges();
+      });
+    });
   }
 
   ngOnInit(): void {
@@ -144,7 +219,23 @@ export class ClusterDetailsComponent implements OnInit, OnDestroy, AfterContentI
 
   ngAfterContentInit(): void {}
 
-  ngAfterViewInit(): void {}
+  ngAfterViewInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      this.activeTabIndex = 0;
+      this.route.queryParams.subscribe((params) => {
+        const tab = params['tab'];
+        if (params['tab']) {
+          this.tabs.forEach((value: any, index: number) => {
+            if (tab == value?.metadata) {
+              this.activeTabIndex = index;
+              this.switchTab();
+            }
+          });
+        }
+      });
+    }
+    this.changeDetector.detectChanges();
+  }
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
@@ -236,12 +327,20 @@ export class ClusterDetailsComponent implements OnInit, OnDestroy, AfterContentI
     this.changeDetector.detectChanges();
   }
 
-  switchTab(selectedIndex: number): void {
+  switchTab(): void {
     try {
-      const tab = this.tabs[selectedIndex];
+      const tab = this.tabs[this.activeTabIndex];
       this.location.replaceState(`cluster/${this.clusterId}`, tab?.query);
     } catch {
       //ignoring
+    }
+  }
+
+  setTab(index: number): void {
+    if (isPlatformBrowser(this.platformId)) {
+      this.activeTabIndex = index;
+      this.switchTab();
+      this.changeDetector.detectChanges();
     }
   }
 

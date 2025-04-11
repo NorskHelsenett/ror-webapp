@@ -1,14 +1,20 @@
 import { OAuthService } from 'angular-oauth2-oidc';
 import { Component, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Observable, Subscription, tap, catchError } from 'rxjs';
 import { ClustersService } from '../../../core/services/clusters.service';
+import { TranslateModule } from '@ngx-translate/core';
+import { ClusterIngressMetadataComponent, ClusterIngressRulesComponent } from '../../components';
+import { CommonModule } from '@angular/common';
+import { SpinnerComponent } from '../../../shared/components';
 
 @Component({
   selector: 'app-ingress-details',
   templateUrl: './ingress-details.component.html',
   styleUrls: ['./ingress-details.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [TranslateModule, RouterModule, ClusterIngressMetadataComponent, ClusterIngressRulesComponent, CommonModule, SpinnerComponent],
+  standalone: true,
 })
 export class IngressDetailsComponent implements OnInit, OnDestroy {
   clusterId: string | undefined;

@@ -1,11 +1,11 @@
 <div class="dark:border-primary-darker flex items-center justify-between border-b px-4 py-4 lg:py-6">
   <h1 class="flex-grow text-2xl font-semibold">{{ 'pages.admin.auditlogs.title' | translate }}</h1>
-  <button
+  <a
     (click)="fetchAuditlogs(lastLazyLoad)"
-    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark cursor-pointer rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
   >
     {{ 'common.refresh' | translate }}
-  </button>
+  </a>
 </div>
 
 <div class="dark:bg-darker rounded-md bg-white xl:m-2 xl:p-2">
@@ -24,12 +24,11 @@
     [loading]="loading"
     [totalRecords]="(auditlogs$ | async)?.totalCount"
     [globalFilterFields]="['metadata.user.name', 'metadata.category']"
-    responsiveLayout="stack"
     styleClass="p-datatable-sm"
     stateStorage="local"
     stateKey="auditlogs-table"
   >
-    <ng-template pTemplate="header">
+    <ng-template #header>
       <tr>
         <th style="width: 5rem" class="p-1"></th>
         <th pSortableColumn="metadata.category" class="p-1">
@@ -106,7 +105,7 @@
         <th class="p-1"></th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-auditlog let-rowIndex="rowIndex" let-expanded="expanded" let-columns="columns">
+    <ng-template #body let-auditlog let-rowIndex="rowIndex" let-expanded="expanded" let-columns="columns">
       <tr>
         <td>
           <button
@@ -124,7 +123,7 @@
         <td>{{ auditlog?.metadata?.timestamp | time: 'DD. MMM YYYY HH:mm:ss' }}</td>
       </tr>
     </ng-template>
-    <ng-template pTemplate="rowexpansion" let-auditlog let-rowIndex="rowIndex">
+    <ng-template #expandedrow let-auditlog let-rowIndex="rowIndex">
       <tr>
         <td colspan="6">
           <div class="p-3">

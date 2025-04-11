@@ -1,13 +1,16 @@
 import { ClipboardService } from 'ngx-clipboard';
 import { Component, Input, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Ingress } from '../../../core/models/ingress';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-cluster-tools',
   templateUrl: './cluster-tools.component.html',
   styleUrls: ['./cluster-tools.component.scss'],
+  standalone: true,
+  imports: [TranslateModule, CommonModule],
 })
 export class ClusterToolsComponent implements OnInit {
   @Input() cluster: any = undefined;

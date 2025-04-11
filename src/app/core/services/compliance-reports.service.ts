@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { ConfigService } from './config.service';
 import { Observable } from 'rxjs';
 import { ComplianceReport } from '../models/complianceReport';
@@ -8,10 +8,8 @@ import { ComplianceReport } from '../models/complianceReport';
   providedIn: 'root',
 })
 export class ComplianceReportsService {
-  constructor(
-    private httpClient: HttpClient,
-    private configService: ConfigService,
-  ) {}
+  private configService = inject(ConfigService);
+  private httpClient = inject(HttpClient);
 
   getComplianceReports(id: string): Observable<ComplianceReport[]> {
     const url: string = `${this.configService.config.rorApi}/v1/clusters/${id}/views/compliancereports`;

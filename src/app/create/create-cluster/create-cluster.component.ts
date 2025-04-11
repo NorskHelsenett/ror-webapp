@@ -1,33 +1,53 @@
 import { ClusterFormService } from './services/cluster-form.service';
 import { Subscription, tap } from 'rxjs';
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ChangeDetectorRef, inject } from '@angular/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { environment } from '../../../environments/environment';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { LocationStepComponent, MetadataStepComponent, ResourcesStepComponent, SummaryComponent, SummaryStepComponent } from './components';
+import { StepperModule } from 'primeng/stepper';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-create-cluster',
   templateUrl: './create-cluster.component.html',
   styleUrls: ['./create-cluster.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    TranslateModule,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    StepperModule,
+    RouterModule,
+    SummaryComponent,
+    ButtonModule,
+    LocationStepComponent,
+    ResourcesStepComponent,
+    SummaryStepComponent,
+    MetadataStepComponent,
+  ],
 })
 export class CreateClusterComponent implements OnInit, OnDestroy {
+  private clusterFormService = inject(ClusterFormService);
+
+  private translateService = inject(TranslateService);
+  private changeDetector = inject(ChangeDetectorRef);
+  private fb = inject(FormBuilder);
+
   items: MenuItem[];
   activeIndex: number = 0;
   environment = environment;
+
+  activeStep: number = 1;
 
   clusterForm: FormGroup = this.clusterFormService?.clusterForm;
   nodePools: any[] | undefined;
 
   private subscriptions = new Subscription();
-
-  constructor(
-    private changeDetector: ChangeDetectorRef,
-    private translateService: TranslateService,
-    private fb: FormBuilder,
-    private clusterFormService: ClusterFormService,
-  ) {}
 
   ngOnInit() {
     this.setupSteps();
@@ -137,5 +157,11 @@ export class CreateClusterComponent implements OnInit, OnDestroy {
 
   getNodePoolSum(): number {
     return this.clusterFormService.getNodePoolSum();
+  }
+
+  linkToStep(step: number | string): void {
+    this.activeStep = step as number;
+    this.activeIndex = (step as number) - 1;
+    this.changeDetector.detectChanges();
   }
 }

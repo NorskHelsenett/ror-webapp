@@ -1,5 +1,5 @@
 <div class="xs:flex-none sm:flex sm:gap-2 md:gap-3">
-  <p-dropdown
+  <p-select
     [options]="resourceTypes"
     [(ngModel)]="selectedResourceType"
     (onChange)="selectedResourceTypeChange($event)"
@@ -12,17 +12,17 @@
     filterBy="displayName"
   >
     <ng-template pTemplate="selectedItem" let-resourceType>
-      <div class="flex align-items-center gap-2">
+      <div class="align-items-center flex gap-2">
         <div>{{ resourceType?.displayName }}</div>
       </div>
     </ng-template>
     <ng-template let-resourceType pTemplate="item">
-      <div class="flex align-items-center gap-2">
+      <div class="align-items-center flex gap-2">
         <div>{{ resourceType?.displayName }}</div>
       </div>
     </ng-template>
-  </p-dropdown>
-  <p-dropdown
+  </p-select>
+  <p-select
     *ngIf="clusterId === undefined"
     [options]="owners"
     [(ngModel)]="selectedOwner"
@@ -36,17 +36,17 @@
     filterBy="scope"
   >
     <ng-template pTemplate="selectedItem" let-owner>
-      <div class="flex align-items-center gap-2">
+      <div class="align-items-center flex gap-2">
         <div>{{ owner?.scope }}</div>
       </div>
     </ng-template>
     <ng-template let-owner pTemplate="item">
-      <div class="flex align-items-center gap-2">
+      <div class="align-items-center flex gap-2">
         <div>{{ owner?.scope }}</div>
       </div>
     </ng-template>
-  </p-dropdown>
-  <p-dropdown
+  </p-select>
+  <p-select
     *ngIf="showClusterDropdown && clusterId === undefined"
     [(ngModel)]="selectedCluster"
     [options]="clusters"
@@ -54,7 +54,7 @@
     [showClear]="true"
     placeholder="{{ 'pages.resources.filter.cluster.placeholder' | translate }}"
     (onChange)="selectedClusterIdChange($event)"
-  ></p-dropdown>
+  ></p-select>
   <button (click)="resetFilter()">
     {{ 'common.reset' | translate }}
   </button>

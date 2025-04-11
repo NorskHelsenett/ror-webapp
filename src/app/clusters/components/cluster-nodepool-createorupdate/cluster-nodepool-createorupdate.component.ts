@@ -1,6 +1,6 @@
 import { ProviderFeaturesService } from './../../../core/services/provider-features.service';
 import { NodepoolService } from './../../services/nodepool.service';
-import { ChangeDetectorRef, Component, EventEmitter, inject, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, inject, Input, OnDestroy, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { catchError, finalize, map, Subscription } from 'rxjs';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -8,36 +8,29 @@ import { ClusterService } from '../../services';
 import { TableModule } from 'primeng/table';
 import { PriceService } from '../../../core/services/price.service';
 import { Price } from '../../../core/models/price';
-import { SharedModule } from '../../../shared/shared.module';
-import { CommonModule, LowerCasePipe, TitleCasePipe } from '@angular/common';
+import { CommonModule, TitleCasePipe } from '@angular/common';
 import { ConfigService } from '../../../core/services/config.service';
-import { ProviderComponent } from '../../../shared/components/provider/provider.component';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { ClusterNodepoolCreateorupdateSummaryComponent } from '../cluster-nodepool-createorupdate-summary/cluster-nodepool-createorupdate-summary.component';
 import { CheckboxModule } from 'primeng/checkbox';
 import { uniqueNamesGenerator, Config, adjectives, colors, animals, names } from 'unique-names-generator';
-import { DropdownModule } from 'primeng/dropdown';
 import { Resourcesv2Service } from '../../../core/services/resourcesv2.service';
 import { MessageService } from 'primeng/api';
-import * as CryptoJs from 'crypto-js';
 import { ColorService } from '../../../core/services/color.service';
+import { SelectModule } from 'primeng/select';
 
 @Component({
   selector: 'app-cluster-nodepool-createorupdate',
-  standalone: true,
   imports: [
     TranslateModule,
     ReactiveFormsModule,
     TableModule,
-    LowerCasePipe,
-    SharedModule,
-    ProviderComponent,
     TitleCasePipe,
     InputNumberModule,
     FormsModule,
     ClusterNodepoolCreateorupdateSummaryComponent,
     CheckboxModule,
-    DropdownModule,
+    SelectModule,
     CommonModule,
   ],
   templateUrl: './cluster-nodepool-createorupdate.component.html',

@@ -1,21 +1,19 @@
 import { Routes, RouterModule } from '@angular/router';
 import { WorkspacesComponent } from './workspaces.component';
+import { WorkspaceDetailsComponent } from './pages/workspace-details/workspace-details.component';
+import { WorkspaceNewComponent } from './pages/workspace-new/workspace-new.component';
 
-import * as workspacesPages from './pages';
-
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     component: WorkspacesComponent,
   },
   {
     path: ':workspaceId',
-    component: workspacesPages.WorkspaceDetailsComponent,
+    component: WorkspaceDetailsComponent,
   },
   {
     path: ':workspaceId/edit',
-    component: workspacesPages.WorkspaceNewComponent,
+    component: WorkspaceNewComponent,
   },
 ];
-
-export const WorkspacesRoutingModule = RouterModule.forChild(routes);

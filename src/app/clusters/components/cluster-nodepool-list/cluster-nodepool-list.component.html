@@ -4,7 +4,7 @@
       @if (adminOwner$ | async) {
         <a
           (click)="toggleNodepoolEditor()"
-          class="delay-50 hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark float-left rounded-md bg-green-700 px-4 py-2 text-sm text-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+          class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark delay-50 float-left rounded-md bg-green-700 px-4 py-2 text-sm text-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
         >
           <span>{{ 'pages.clusters.details.nodePools.create' | translate }}</span>
         </a>
@@ -25,7 +25,7 @@
         'common.of' | translate | lowercase
       }} {totalRecords} {{ 'common.entries' | translate | lowercase }}"
     >
-      <ng-template pTemplate="header">
+      <ng-template #header>
         <tr>
           <th class="w-4"></th>
           <th pSortableColumn="name" class="p-1">
@@ -46,7 +46,7 @@
           <th></th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-nodepool let-expanded="expanded" let-rowIndex="rowIndex">
+      <ng-template #body let-nodepool let-expanded="expanded" let-rowIndex="rowIndex">
         <tr>
           <td>
             <button
@@ -84,7 +84,7 @@
           </td>
         </tr>
       </ng-template>
-      <ng-template pTemplate="rowexpansion" let-nodepool let-rowIndex="rowIndex">
+      <ng-template #expandedrow let-nodepool let-rowIndex="rowIndex">
         <tr>
           <td colspan="6">
             <div class="">
@@ -95,7 +95,7 @@
           </td>
         </tr>
       </ng-template>
-      <ng-template pTemplate="emptymessage">
+      <ng-template emptymessage>
         <tr>
           <td colspan="6">{{ 'common.emptyList' | translate }}</td>
         </tr>

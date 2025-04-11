@@ -1,19 +1,17 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import { DropdownModule } from 'primeng/dropdown';
 import { OwnerType } from '../../../core/models/resources/ownerType';
 import { ResourceType } from '../../../core/models/resources/resourceType';
 import { Cluster } from '../../../core/models/cluster';
 import { ResourceFilter } from '../../models/resourceFilter';
 import { UtilsService } from '../../../shared/services/utils.service';
-import { SharedModule } from '../../../shared/shared.module';
+import { SelectModule } from 'primeng/select';
 
 @Component({
   selector: 'app-resources-filter',
-  standalone: true,
-  imports: [CommonModule, FormsModule, TranslateModule, DropdownModule, FormsModule, SharedModule],
+  imports: [CommonModule, FormsModule, TranslateModule, SelectModule, FormsModule],
   templateUrl: './resources-filter.component.html',
   styleUrl: './resources-filter.component.scss',
 })
@@ -40,15 +38,15 @@ export class ResourcesFilterComponent {
       return;
     }
 
-    this.selectedResourceType = this.resourceTypes.find((x) => x.apiVersion === value.apiVersion && x.kind === value.kind);
-    this.selectedOwner = this.owners.find((x) => x.scope === value.scope);
+    this.selectedResourceType = this.resourceTypes?.find((x) => x.apiVersion === value.apiVersion && x.kind === value.kind);
+    this.selectedOwner = this.owners?.find((x) => x.scope === value.scope);
     if (this.selectedOwner?.clusterSpesific) {
       this.showClusterDropdown = true;
     }
     if (this.clusterId) {
-      this.selectedCluster = this.clusters.find((x) => x.clusterId === this.clusterId);
+      this.selectedCluster = this.clusters?.find((x) => x.clusterId === this.clusterId);
     } else {
-      this.selectedCluster = this.clusters.find((x) => x.clusterId === value.clusterId);
+      this.selectedCluster = this.clusters?.find((x) => x.clusterId === value.clusterId);
     }
   }
 

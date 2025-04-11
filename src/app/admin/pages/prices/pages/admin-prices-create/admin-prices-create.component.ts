@@ -1,15 +1,18 @@
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, Subscription, tap } from 'rxjs';
 import { Price } from '../../../../../core/models/price';
 import { PriceService } from '../../../../../core/services/price.service';
+import { TranslateModule } from '@ngx-translate/core';
+import { DatePickerModule } from 'primeng/datepicker';
 
 @Component({
   selector: 'app-admin-prices-create',
   templateUrl: './admin-prices-create.component.html',
   styleUrls: ['./admin-prices-create.component.scss'],
+  imports: [TranslateModule, CommonModule, FormsModule, ReactiveFormsModule, DatePickerModule],
 })
 export class AdminPricesCreateComponent implements OnInit, OnDestroy {
   priceForm: FormGroup | undefined;

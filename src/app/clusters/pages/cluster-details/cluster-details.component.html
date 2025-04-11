@@ -1,35 +1,116 @@
 <div *ngIf="cluster$ | async as cluster; else loadingOrError">
   <div class="dark:border-primary-darker flex items-center justify-between border-b px-4 py-4 lg:py-6">
     <div class="flex gap-2">
-      <img ngSrc="/assets/icons/k8s/logo.svg" alt="k8s logo" height="5" width="30" />
+      <img src="/assets/icons/k8s/logo.svg" alt="k8s logo" height="5" width="30" />
       <h1 *ngIf="cluster?.clusterName.length > 0" class="text-2xl font-semibold">{{ cluster?.clusterName }}</h1>
       <h1 *ngIf="cluster?.clusterName.length === 0" class="text-2xl font-semibold">{{ clusterId }}</h1>
     </div>
 
-    <button
+    <a
       (click)="fetch()"
-      class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+      class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark cursor-pointer rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
     >
       {{ 'common.refresh' | translate }}
-    </button>
+    </a>
   </div>
 
   <app-cluster-conditions [conditions]="cluster?.status?.conditions"></app-cluster-conditions>
 
-  <p-tabView styleClass="tabview" [(activeIndex)]="selectedTabIndex" (activeIndexChange)="switchTab($event)" [scrollable]="true">
-    <p-tabPanel>
-      <ng-template pTemplate="header">
+  <p-tabs [(value)]="activeTabIndex" scrollable lazy="true" #tabs (valueChange)="switchTab()">
+    <p-tablist>
+      <p-tab [value]="0" [ngClass]="{ 'bg-green-500 text-white dark:bg-green-700 dark:text-white': activeTabIndex === 0 }">
         <div class="flex text-nowrap">
           <i class="pi pi-server mt-1"></i>
           <span class="ml-2">{{ 'pages.clusters.details.title' | translate }}</span>
         </div>
-      </ng-template>
-      <ng-template pTemplate="content">
+      </p-tab>
+
+      <p-tab [value]="1" [ngClass]="{ 'bg-green-500 text-white dark:bg-green-700 dark:text-white': activeTabIndex === 1 }">
+        <div class="flex text-nowrap">
+          <i class="pi pi-file mt-1"></i>
+          <span class="ml-2">{{ 'pages.clusters.details.ingresses.title' | translate }}</span>
+        </div>
+      </p-tab>
+
+      <p-tab [value]="2" [ngClass]="{ 'bg-green-500 text-white dark:bg-green-700 dark:text-white': activeTabIndex === 2 }">
+        <div class="flex text-nowrap">
+          <i class="pi pi-qrcode mt-1"></i>
+          <span class="ml-2">{{ 'pages.clusters.details.nodePools.title' | translate }}</span>
+        </div>
+      </p-tab>
+
+      <p-tab [value]="3" [ngClass]="{ 'bg-green-500 text-white dark:bg-green-700 dark:text-white': activeTabIndex === 3 }">
+        <div class="flex text-nowrap">
+          <i class="pi pi-list mt-1"></i>
+          <span class="ml-2">{{ 'pages.clusters.details.policyreports.title' | translate }}</span>
+        </div>
+      </p-tab>
+
+      <p-tab [value]="4" [ngClass]="{ 'bg-green-500 text-white dark:bg-green-700 dark:text-white': activeTabIndex === 4 }">
+        <div class="flex text-nowrap">
+          <i class="pi pi-list mt-1"></i>
+          <span class="ml-2">{{ 'pages.clusters.details.vulnerabilityreports.title' | translate }}</span>
+        </div>
+      </p-tab>
+
+      <p-tab [value]="5" [ngClass]="{ 'bg-green-500 text-white dark:bg-green-700 dark:text-white': activeTabIndex === 5 }">
+        <div class="flex text-nowrap">
+          <i class="pi pi-list mt-1"></i>
+          <span class="ml-2">{{ 'pages.clusters.details.compliancereports.title' | translate }}</span>
+        </div>
+      </p-tab>
+
+      <p-tab [value]="6" [ngClass]="{ 'bg-green-500 text-white dark:bg-green-700 dark:text-white': activeTabIndex === 6 }">
+        <div class="flex text-nowrap">
+          <i class="pi pi-file mt-1"></i>
+          <span class="ml-2">{{ 'pages.clusters.details.raw' | translate }}</span>
+        </div>
+      </p-tab>
+
+      <p-tab [value]="7" [ngClass]="{ 'bg-green-500 text-white dark:bg-green-700 dark:text-white': activeTabIndex === 7 }">
+        <div class="flex text-nowrap">
+          <i class="pi pi-cog mt-1"></i>
+          <span class="ml-2">{{ 'pages.clusters.details.metadata.title' | translate }}</span>
+          <p-badge
+            *ngIf="editInvalidCount?.length > 0 && editInvalidCount !== '0'"
+            class="ml-1"
+            [value]="editInvalidCount"
+            severity="danger"
+          ></p-badge>
+        </div>
+      </p-tab>
+
+      @if (adminOwner$ | async) {
+        <p-tab [value]="8" [ngClass]="{ 'bg-green-500 text-white dark:bg-green-700 dark:text-white': activeTabIndex === 8 }">
+          <div class="flex text-nowrap">
+            <i class="pi pi-server mt-1"></i>
+            <span class="ml-2">{{ 'pages.clusters.details.resources.title' | translate }}</span>
+          </div>
+        </p-tab>
+
+        <p-tab [value]="9" [ngClass]="{ 'bg-green-500 text-white dark:bg-green-700 dark:text-white': activeTabIndex === 9 }">
+          <div class="flex text-nowrap">
+            <i class="pi pi-bell mt-1"></i>
+            <span class="ml-2">{{ 'pages.clusters.details.notifications.title' | translate }}</span>
+          </div>
+        </p-tab>
+
+        <p-tab [value]="10" [ngClass]="{ 'bg-green-500 text-white dark:bg-green-700 dark:text-white': activeTabIndex === 10 }">
+          <div class="flex text-nowrap text-red-500 dark:text-red-400">
+            <i class="pi pi-ban mt-1"></i>
+            <span class="ml-2">{{ 'pages.clusters.details.delete.title' | translate }}</span>
+          </div>
+        </p-tab>
+      }
+    </p-tablist>
+
+    <p-tabpanels>
+      <p-tabpanel [value]="0">
         <div class="">
           <div class="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6">
             <div class="sm:col-span-1 md:col-span-1 lg:col-span-2 xl:col-span-3 2xl:col-span-4">
               <app-cluster-metrics [metrics]="cluster?.metrics"></app-cluster-metrics>
-              <app-cluster-description [cluster]="cluster" (edit)="switchTab(6)"></app-cluster-description>
+              <app-cluster-description [cluster]="cluster" (edit)="setTab(6)"></app-cluster-description>
               <app-cluster-acl class="p-2" [cluster]="cluster"></app-cluster-acl>
             </div>
 
@@ -41,153 +122,63 @@
             </div>
           </div>
         </div>
-      </ng-template>
-    </p-tabPanel>
+      </p-tabpanel>
 
-    <p-tabPanel header="{{ 'pages.clusters.details.ingresses.title' | translate }}">
-      <ng-template pTemplate="header">
-        <div class="flex text-nowrap">
-          <i class="pi pi-file mt-1"></i>
-          <span class="ml-2">{{ 'pages.clusters.details.ingresses.title' | translate }}</span>
-        </div>
-      </ng-template>
-      <ng-template pTemplate="content">
+      <p-tabpanel [value]="1">
         <div class="">
           <div class="dark:bg-darker flex flex-col rounded-md bg-white">
-            <div class="p-3 flex flex-col">
+            <div class="flex flex-col p-3">
               <!-- todo when cluster agent v2 is active remove this comment-->
               <!-- <app-cluster-ingress-table [cluster]="cluster"></app-cluster-ingress-table> -->
               <app-cluster-ingress-list [cluster]="cluster"></app-cluster-ingress-list>
             </div>
           </div>
         </div>
-      </ng-template>
-    </p-tabPanel>
+      </p-tabpanel>
 
-    <p-tabPanel header="nodepools">
-      <ng-template pTemplate="header">
-        <div class="flex text-nowrap">
-          <i class="pi pi-qrcode mt-1"></i>
-          <span class="ml-2">{{ 'pages.clusters.details.nodePools.title' | translate }}</span>
-        </div>
-      </ng-template>
-      <ng-template pTemplate="content">
+      <p-tabpanel [value]="2">
         <div class="">
           <div class="dark:bg-darker flex flex-col rounded-md bg-white">
             <app-cluster-nodepools [cluster]="cluster"></app-cluster-nodepools>
           </div>
         </div>
-      </ng-template>
-    </p-tabPanel>
+      </p-tabpanel>
 
-    <p-tabPanel>
-      <ng-template pTemplate="header">
-        <div class="flex text-nowrap">
-          <i class="pi pi-list mt-1"></i>
-          <span class="ml-2">{{ 'pages.clusters.details.policyreports.title' | translate }}</span>
-        </div>
-      </ng-template>
-      <ng-template pTemplate="content">
+      <p-tabpanel [value]="3">
         <app-cluster-policy-report></app-cluster-policy-report>
-      </ng-template>
-    </p-tabPanel>
+      </p-tabpanel>
 
-    <p-tabPanel>
-      <ng-template pTemplate="header">
-        <div class="flex text-nowrap">
-          <i class="pi pi-list mt-1"></i>
-          <span class="ml-2">{{ 'pages.clusters.details.vulnerabilityreports.title' | translate }}</span>
-        </div>
-      </ng-template>
-      <ng-template pTemplate="content">
+      <p-tabpanel [value]="4">
         <!-- todo when cluster agent v2 is active remove this comment-->
         <!-- <app-cluster-vulnerability [cluster]="cluster"></app-cluster-vulnerability> -->
         <app-cluster-vulnerability-report></app-cluster-vulnerability-report>
-      </ng-template>
-    </p-tabPanel>
+      </p-tabpanel>
 
-    <p-tabPanel>
-      <ng-template pTemplate="header">
-        <div class="flex text-nowrap">
-          <i class="pi pi-list mt-1"></i>
-          <span class="ml-2">{{ 'pages.clusters.details.compliancereports.title' | translate }}</span>
-        </div>
-      </ng-template>
-      <ng-template pTemplate="content">
+      <p-tabpanel [value]="5">
         <app-cluster-compliance-report [clusterId]="cluster?.clusterId"></app-cluster-compliance-report>
-      </ng-template>
-    </p-tabPanel>
+      </p-tabpanel>
 
-    <p-tabPanel header="{{ 'pages.clusters.details.raw' | translate }}">
-      <ng-template pTemplate="header">
-        <div class="flex text-nowrap">
-          <i class="pi pi-file mt-1"></i>
-          <span class="ml-2">{{ 'pages.clusters.details.raw' | translate }}</span>
-        </div>
-      </ng-template>
-      <ng-template pTemplate="content">
-        <div>
-          <app-cluster-raw [cluster]="cluster"></app-cluster-raw>
-        </div>
-      </ng-template>
-    </p-tabPanel>
+      <p-tabpanel [value]="6">
+        <app-cluster-raw [cluster]="cluster"></app-cluster-raw>
+      </p-tabpanel>
 
-    <p-tabPanel>
-      <ng-template pTemplate="header">
-        <div class="flex text-nowrap">
-          <i class="pi pi-cog mt-1"></i>
-          <span class="ml-2">{{ 'pages.clusters.details.metadata.title' | translate }}</span>
-          <p-badge
-            *ngIf="editInvalidCount?.length > 0 && editInvalidCount !== '0'"
-            class="ml-1"
-            [value]="editInvalidCount"
-            severity="danger"
-          ></p-badge>
-        </div>
-      </ng-template>
-      <div>
+      <p-tabpanel [value]="7">
         <app-cluster-metadata-page [cluster]="cluster" (refreshRequested)="fetchCluster(clusterId)"></app-cluster-metadata-page>
-      </div>
-    </p-tabPanel>
+      </p-tabpanel>
 
-    @if (adminOwner$ | async) {
-      <p-tabPanel>
-        <ng-template pTemplate="header">
-          <div class="flex text-nowrap">
-            <i class="pi pi-server mt-1"></i>
-            <span class="ml-2">{{ 'pages.clusters.details.resources.title' | translate }}</span>
-          </div>
-        </ng-template>
-        <ng-template pTemplate="content">
-          <app-cluster-resource-table [cluster]="cluster" (resourceSelected)="showSelectedResource($event)"></app-cluster-resource-table>
-        </ng-template>
-      </p-tabPanel>
+      <p-tabpanel [value]="8">
+        <app-cluster-resource-table [cluster]="cluster" (resourceSelected)="showSelectedResource($event)"></app-cluster-resource-table>
+      </p-tabpanel>
 
-      <p-tabPanel>
-        <ng-template pTemplate="header">
-          <div class="flex text-nowrap">
-            <i class="pi pi-bell mt-1"></i>
-            <span class="ml-2">{{ 'pages.clusters.details.notifications.title' | translate }}</span>
-          </div>
-        </ng-template>
-        <div>
-          <app-cluster-notifications [cluster]="cluster"></app-cluster-notifications>
-        </div>
-      </p-tabPanel>
+      <p-tabpanel [value]="9">
+        <app-cluster-notifications [cluster]="cluster"></app-cluster-notifications>
+      </p-tabpanel>
 
-      <p-tabPanel>
-        <ng-template pTemplate="header">
-          <div class="flex text-nowrap text-red-500 dark:text-red-400">
-            <i class="pi pi-ban mt-1"></i>
-            <span class="ml-2">{{ 'pages.clusters.details.delete.title' | translate }}</span>
-          </div>
-        </ng-template>
-        <div>
-          <app-cluster-delete [cluster]="cluster"></app-cluster-delete>
-        </div>
-      </p-tabPanel>
-    }
-  </p-tabView>
+      <p-tabpanel [value]="10">
+        <app-cluster-delete [cluster]="cluster"></app-cluster-delete>
+      </p-tabpanel>
+    </p-tabpanels>
+  </p-tabs>
 </div>
 <ng-template #loadingOrError>
   <ng-container *ngIf="clusterError; else clusterLoading">

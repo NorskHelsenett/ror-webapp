@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { FilterMatchMode, PrimeNGConfig, SelectItem } from 'primeng/api';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
+import { FilterMatchMode, SelectItem } from 'primeng/api';
+import { PrimeNG } from 'primeng/config';
 import { catchError, finalize, map, Observable, share, Subscription, tap } from 'rxjs';
 
 import { Cluster } from '../core/models/cluster';
@@ -16,14 +17,43 @@ import { AclAccess, AclScopes } from '../core/models/acl-scopes';
 import { AclService } from '../core/services/acl.service';
 import { SignalService } from '../create/create-cluster/services/signal.service';
 import { ClusterEnvironment } from '../core/models/clusterEnvironment';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
+import { RouterModule } from '@angular/router';
+import { TableModule } from 'primeng/table';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProviderComponent } from '../shared/components/provider/provider.component';
+import { TooltipModule } from 'primeng/tooltip';
+import { ClusterEnvironmentComponent, ClusterStatusComponent } from '../shared/components';
+import { FormatBytesPipe } from '../shared/pipes';
+import { TimePipe } from '../shared/pipes/time.pipe';
 
 @Component({
   selector: 'app-clusters',
   templateUrl: './clusters.component.html',
   styleUrls: ['./clusters.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    TranslateModule,
+    CommonModule,
+    RouterModule,
+    TableModule,
+    MultiSelectModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ProviderComponent,
+    TooltipModule,
+    ClusterStatusComponent,
+    FormatBytesPipe,
+    TimePipe,
+    ClusterEnvironmentComponent,
+  ],
+  standalone: true,
 })
 export class ClustersComponent implements OnInit, OnDestroy {
+  private configService = inject(ConfigService);
+
   clusters$: Observable<PaginationResult<Cluster>> | undefined;
   clustersError: any;
 
@@ -73,12 +103,12 @@ export class ClustersComponent implements OnInit, OnDestroy {
   private subscriptions = new Subscription();
 
   constructor(
+    @Inject(PLATFORM_ID) private platformId: object,
     private changeDetector: ChangeDetectorRef,
     private clusterService: ClustersService,
     private filterService: FilterService,
-    private primengConfig: PrimeNGConfig,
+    private primengConfig: PrimeNG,
     private exportService: ExportService,
-    private configService: ConfigService,
     private aclService: AclService,
     private signalService: SignalService,
   ) {
@@ -91,7 +121,7 @@ export class ClustersComponent implements OnInit, OnDestroy {
     this.fetchMetadata();
     this.setupEvents();
 
-    this.primengConfig.ripple = true;
+    this.primengConfig.ripple.set(true);
   }
 
   ngOnDestroy(): void {
@@ -110,186 +140,195 @@ export class ClustersComponent implements OnInit, OnDestroy {
   }
 
   setupColumns(): void {
-    this.selectedColumns = JSON.parse(localStorage.getItem('cluster-table-columns'));
-    this.baseCols = [
-      {
-        field: 'workspace.datacenter.provider',
-        header: 'provider',
-        searchEN: 'provider',
-        searchNO: 'leverandør',
-      },
-      {
-        field: 'clusterName',
-        header: 'clusterName',
-        searchEN: 'cluster name',
-        searchNO: 'clusternavn',
-      },
-      {
-        field: 'healthStatus.health',
-        header: 'status',
-        searchEN: 'status',
-        searchNO: 'status',
-      },
+    if (isPlatformBrowser(this.platformId)) {
+      this.selectedColumns = JSON.parse(localStorage.getItem('cluster-table-columns'));
 
-      {
-        field: 'metrics.cpuPercentage',
-        header: 'cpu',
-        searchEN: 'cpu',
-        searchNO: 'cpu',
-      },
-      {
-        field: 'metrics.memoryPercentage',
-        header: 'memory',
-        searchEN: 'memory',
-        searchNO: 'minne',
-      },
-      {
-        field: 'lastObserved',
-        header: 'lastObserved',
-        searchEN: 'last heartbeat',
-        searchNO: 'sist rapportert',
-      },
-      {
-        field: 'created',
-        header: 'created',
-        searchEN: 'created',
-        searchNO: 'opprettet',
-      },
-      {
-        field: 'versions.nhnTooling.version',
-        header: 'nhnTooling',
-        searchEN: 'tooling',
-        searchNO: 'tooling',
-      },
-      {
-        field: 'metadata.project.name',
-        header: 'projectName',
-        searchEN: 'project',
-        searchNO: 'prosjekt',
-      },
-    ];
-    this.cols = this.baseCols.concat([
-      {
-        field: 'firstObserved',
-        header: 'firstObserved',
-        searchEN: 'first heartbeat',
-        searchNO: 'først rapportert',
-      },
-      {
-        field: 'workspace.name',
-        header: 'workspace',
-        searchEN: 'workspace',
-        searchNO: 'arbeidsområde',
-      },
-      {
-        field: 'workspace.datacenter.name',
-        header: 'datacenter',
-        searchEN: 'datacenter',
-        searchNO: 'datasenter',
-      },
-      {
-        field: 'versions.nhnTooling.branch',
-        header: 'nhnToolingBranch',
-        searchEN: 'branch',
-        searchNO: 'gren',
-      },
-      {
-        field: 'versions.agent.version',
-        header: 'agentVersion',
-        searchEN: 'agent',
-        searchNO: 'agent',
-      },
-      {
-        field: 'versions.kubernetes',
-        header: 'k8sVersion',
-        searchEN: 'kubernetes',
-        searchNO: 'kubernetes',
-      },
-      {
-        field: 'ingresses.datacenter',
-        header: 'ingressesDatacenter',
-        searchEN: 'datacenter publications',
-        searchNO: 'publikasjoner datasenter',
-      },
-      {
-        field: 'ingresses.health',
-        header: 'ingressesHealth',
-        searchEN: 'helsenett publications',
-        searchNO: 'publikasjoner helsenett',
-      },
-      {
-        field: 'ingresses.internet',
-        header: 'ingressesInternet',
-        searchEN: 'internet publications',
-        searchNO: 'publikasjoner internett',
-      },
-      {
-        field: 'topology.egressIp',
-        header: 'egressIP',
-        searchEN: 'egress ip',
-        searchNO: 'egress ip',
-      },
-      {
-        field: 'environment',
-        header: 'environment',
-        searchEN: 'environment',
-        searchNO: 'miljø',
-      },
-      {
-        field: 'metadata.project.projectMetadata.billing.workorder',
-        header: 'workorder',
-        searchEN: 'workorder',
-        searchNO: 'arbeidsordre',
-      },
-    ]);
-    if (!this.selectedColumns) {
-      this.selectedColumns = [...this.baseCols];
+      this.baseCols = [
+        {
+          field: 'workspace.datacenter.provider',
+          header: 'provider',
+          searchEN: 'provider',
+          searchNO: 'leverandør',
+        },
+        {
+          field: 'clusterName',
+          header: 'clusterName',
+          searchEN: 'cluster name',
+          searchNO: 'clusternavn',
+        },
+        {
+          field: 'healthStatus.health',
+          header: 'status',
+          searchEN: 'status',
+          searchNO: 'status',
+        },
+
+        {
+          field: 'metrics.cpuPercentage',
+          header: 'cpu',
+          searchEN: 'cpu',
+          searchNO: 'cpu',
+        },
+        {
+          field: 'metrics.memoryPercentage',
+          header: 'memory',
+          searchEN: 'memory',
+          searchNO: 'minne',
+        },
+        {
+          field: 'lastObserved',
+          header: 'lastObserved',
+          searchEN: 'last heartbeat',
+          searchNO: 'sist rapportert',
+        },
+        {
+          field: 'created',
+          header: 'created',
+          searchEN: 'created',
+          searchNO: 'opprettet',
+        },
+        {
+          field: 'versions.nhnTooling.version',
+          header: 'nhnTooling',
+          searchEN: 'tooling',
+          searchNO: 'tooling',
+        },
+        {
+          field: 'metadata.project.name',
+          header: 'projectName',
+          searchEN: 'project',
+          searchNO: 'prosjekt',
+        },
+      ];
+      this.cols = this.baseCols.concat([
+        {
+          field: 'firstObserved',
+          header: 'firstObserved',
+          searchEN: 'first heartbeat',
+          searchNO: 'først rapportert',
+        },
+        {
+          field: 'workspace.name',
+          header: 'workspace',
+          searchEN: 'workspace',
+          searchNO: 'arbeidsområde',
+        },
+        {
+          field: 'workspace.datacenter.name',
+          header: 'datacenter',
+          searchEN: 'datacenter',
+          searchNO: 'datasenter',
+        },
+        {
+          field: 'versions.nhnTooling.branch',
+          header: 'nhnToolingBranch',
+          searchEN: 'branch',
+          searchNO: 'gren',
+        },
+        {
+          field: 'versions.agent.version',
+          header: 'agentVersion',
+          searchEN: 'agent',
+          searchNO: 'agent',
+        },
+        {
+          field: 'versions.kubernetes',
+          header: 'k8sVersion',
+          searchEN: 'kubernetes',
+          searchNO: 'kubernetes',
+        },
+        {
+          field: 'ingresses.datacenter',
+          header: 'ingressesDatacenter',
+          searchEN: 'datacenter publications',
+          searchNO: 'publikasjoner datasenter',
+        },
+        {
+          field: 'ingresses.health',
+          header: 'ingressesHealth',
+          searchEN: 'helsenett publications',
+          searchNO: 'publikasjoner helsenett',
+        },
+        {
+          field: 'ingresses.internet',
+          header: 'ingressesInternet',
+          searchEN: 'internet publications',
+          searchNO: 'publikasjoner internett',
+        },
+        {
+          field: 'topology.egressIp',
+          header: 'egressIP',
+          searchEN: 'egress ip',
+          searchNO: 'egress ip',
+        },
+        {
+          field: 'environment',
+          header: 'environment',
+          searchEN: 'environment',
+          searchNO: 'miljø',
+        },
+        {
+          field: 'metadata.project.projectMetadata.billing.workorder',
+          header: 'workorder',
+          searchEN: 'workorder',
+          searchNO: 'arbeidsordre',
+        },
+      ]);
+      if (!this.selectedColumns) {
+        this.selectedColumns = [...this.baseCols];
+      }
+      this.matchModeOptions = [
+        {
+          label: 'Contains',
+          value: FilterMatchMode.CONTAINS,
+        },
+        {
+          label: 'Equals',
+          value: FilterMatchMode.EQUALS,
+        },
+      ];
     }
-    this.matchModeOptions = [
-      {
-        label: 'Contains',
-        value: FilterMatchMode.CONTAINS,
-      },
-      {
-        label: 'Equals',
-        value: FilterMatchMode.EQUALS,
-      },
-    ];
   }
 
   resetColumns(): void {
-    this.selectedColumns = this.baseCols;
-    localStorage.removeItem('cluster-table-columns');
-    localStorage.removeItem('cluster-table');
-    this.fetchClusters(undefined);
-    this.changeDetector.detectChanges();
+    if (isPlatformBrowser(this.platformId)) {
+      this.selectedColumns = this.baseCols;
+      if (isPlatformBrowser(this.platformId)) {
+        localStorage.removeItem('cluster-table-columns');
+        localStorage.removeItem('cluster-table');
+        this.fetchClusters(undefined);
+        this.changeDetector.detectChanges();
+      }
+    }
   }
 
   fetchClusters(event: any): void {
-    if (event) {
-      this.filter = this.filterService.mapFilter(event);
+    if (isPlatformBrowser(this.platformId)) {
+      if (event) {
+        this.filter = this.filterService.mapFilter(event);
+      }
+      this.loading = true;
+      this.lastFilter = this.filter;
+      this.clustersError = undefined;
+      this.clusters$ = this.clusterService.getByFilter(this.filter).pipe(
+        share(),
+        map((clusters: PaginationResult<any>) => {
+          if (clusters?.data == null) {
+            clusters.data = [];
+          }
+          this.datacenters = Array.from(new Set(clusters.data.map((cluster) => cluster['workspace']['datacenter']['name']))).sort();
+          return clusters;
+        }),
+        catchError((error: any) => {
+          this.clustersError = error;
+          throw error;
+        }),
+        finalize(() => {
+          this.loading = false;
+          this.changeDetector.detectChanges();
+        }),
+      );
     }
-    this.loading = true;
-    this.lastFilter = this.filter;
-    this.clustersError = undefined;
-    this.clusters$ = this.clusterService.getByFilter(this.filter).pipe(
-      share(),
-      map((clusters: PaginationResult<any>) => {
-        if (clusters?.data == null) {
-          clusters.data = [];
-        }
-        this.datacenters = Array.from(new Set(clusters.data.map((cluster) => cluster['workspace']['datacenter']['name']))).sort();
-        return clusters;
-      }),
-      catchError((error: any) => {
-        this.clustersError = error;
-        throw error;
-      }),
-      finalize(() => {
-        this.loading = false;
-        this.changeDetector.detectChanges();
-      }),
-    );
   }
 
   fetchMetadata(): void {
@@ -301,12 +340,14 @@ export class ClustersComponent implements OnInit, OnDestroy {
   }
 
   getValueFromColumn(cluster: Cluster, column: string): any {
-    let nestedColumns: string[] = column.split('.');
-    let value: any = cluster[nestedColumns.shift()];
-    nestedColumns.forEach((col) => {
-      value = value[col];
-    });
-    return value;
+    if (isPlatformBrowser(this.platformId)) {
+      let nestedColumns: string[] = column.split('.');
+      let value: any = cluster[nestedColumns.shift()];
+      nestedColumns.forEach((col) => {
+        value = value[col];
+      });
+      return value;
+    }
   }
 
   countPublicationsForType(ingresses: any[], type: string): number {
@@ -329,24 +370,30 @@ export class ClustersComponent implements OnInit, OnDestroy {
 
     return duration.minutes();
   }
+
   updateColumns(): void {
-    let tableState: Object = JSON.parse(localStorage.getItem('cluster-table'));
-    if (!tableState) {
-      tableState = { first: 0, rows: this.rows };
+    if (isPlatformBrowser(this.platformId)) {
+      let tableState = JSON.parse(localStorage.getItem('cluster-table'));
+
+      if (!tableState) {
+        tableState = { first: 0, rows: this.rows };
+      }
+      if (!this.selectedColumns || this.selectedColumns?.length === 0) {
+        this.selectedColumns = [
+          {
+            field: 'clusterName',
+            header: 'clusterName',
+            searchEN: 'cluster name',
+            searchNO: 'clusternavn',
+          },
+        ];
+      }
+      tableState['columnOrder'] = this.selectedColumns.map((col) => col['field']);
+      if (isPlatformBrowser(this.platformId)) {
+        localStorage.setItem('cluster-table-columns', JSON.stringify(this.selectedColumns));
+        localStorage.setItem('cluster-table', JSON.stringify(tableState));
+      }
     }
-    if (!this.selectedColumns || this.selectedColumns?.length === 0) {
-      this.selectedColumns = [
-        {
-          field: 'clusterName',
-          header: 'clusterName',
-          searchEN: 'cluster name',
-          searchNO: 'clusternavn',
-        },
-      ];
-    }
-    tableState['columnOrder'] = this.selectedColumns.map((col) => col['field']);
-    localStorage.setItem('cluster-table-columns', JSON.stringify(this.selectedColumns));
-    localStorage.setItem('cluster-table', JSON.stringify(tableState));
   }
 
   exportToExcel(): void {
@@ -358,17 +405,19 @@ export class ClustersComponent implements OnInit, OnDestroy {
   }
 
   private exportData(type: string): void {
-    this.subscriptions.add(
-      this.clusterService.getByFilter(this.filter).subscribe((clustersPaginated: PaginationResult<Cluster>) => {
-        const clusters = this.exportClusters(clustersPaginated?.data);
-        if (type === 'csv') {
-          this.exportService.exportToCsv(clusters, 'ror-clusters.csv');
-        }
-        if (type === 'excel') {
-          this.exportService.exportAsExcelFile(clusters, 'ror-clusters.xlsx');
-        }
-      }),
-    );
+    if (isPlatformBrowser(this.platformId)) {
+      this.subscriptions.add(
+        this.clusterService.getByFilter(this.filter).subscribe((clustersPaginated: PaginationResult<Cluster>) => {
+          const clusters = this.exportClusters(clustersPaginated?.data);
+          if (type === 'csv') {
+            this.exportService.exportToCsv(clusters, 'ror-clusters.csv');
+          }
+          if (type === 'excel') {
+            this.exportService.exportAsExcelFile(clusters, 'ror-clusters.xlsx');
+          }
+        }),
+      );
+    }
   }
 
   private exportClusters(clusters: any[]): any[] {

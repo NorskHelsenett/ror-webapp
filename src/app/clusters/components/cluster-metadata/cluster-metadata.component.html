@@ -83,12 +83,12 @@
               <td class="px-2 py-1 text-center">
                 <span
                   *ngIf="cluster?.topology?.controlPlane?.nodes?.length > 1"
-                  class="mr-2 flex w-14 rounded-full bg-green-600 p-2 px-4 text-center leading-none text-white"
+                  class="mr-2 flex w-14 rounded-full bg-green-600 px-3 py-1 text-center leading-none text-white"
                   >{{ 'common.yes' | translate }}</span
                 >
                 <span
                   *ngIf="cluster?.topology?.controlPlane?.nodes?.length === 1"
-                  class="mr-2 flex w-14 rounded-full bg-purple-600 p-2 px-4 text-center leading-none text-white"
+                  class="mr-2 flex w-12 rounded-full bg-purple-600 px-3 py-1 text-center leading-none text-white"
                   >{{ 'common.no' | translate }}</span
                 >
               </td>

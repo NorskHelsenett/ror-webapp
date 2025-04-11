@@ -6,12 +6,12 @@
   <div class="dark:bg-darker max-w-full rounded-md bg-white p-2 xl:p-7">
     <div class="flex flex-col">
       <div>
-        <button
+        <a
           (click)="fetch()"
-          class="focus:ring-primary dark:focus:ring-offset-dark float-right ml-2 rounded-md bg-green-700 px-4 py-2 text-sm text-white hover:bg-green-500 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+          class="focus:ring-primary dark:focus:ring-offset-dark float-right ml-2 cursor-pointer rounded-md bg-green-700 px-4 py-2 text-sm text-white hover:bg-green-500 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
         >
           {{ 'common.refresh' | translate }}
-        </button>
+        </a>
         <a
           routerLink="./create"
           class="focus:ring-primary dark:focus:ring-offset-dark float-right rounded-md bg-green-700 px-4 py-2 text-sm text-white hover:bg-green-500 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
@@ -19,7 +19,7 @@
           {{ 'common.create' | translate }}
         </a>
       </div>
-      <div class="overflow-x-auto">
+      <div class="">
         <p-table
           [value]="prices$ | async"
           [rows]="rows"
@@ -28,7 +28,6 @@
           [rowsPerPageOptions]="rowsPerPage"
           [tableStyle]="{ 'min-width': '75rem' }"
           [rowHover]="true"
-          responsiveLayout="stack"
           sortField="group"
           [sortOrder]="1"
           [totalRecords]="(prices$ | async)?.length"
@@ -38,7 +37,7 @@
             'common.of' | translate | lowercase
           }} {totalRecords} {{ 'common.entries' | translate | lowercase }}"
         >
-          <ng-template pTemplate="header">
+          <ng-template #header>
             <tr>
               <th pSortableColumn="machineClass" class="p-1">
                 {{ 'pages.prices.table.column.machineClass' | translate }} <p-sortIcon field="machineClass"></p-sortIcon>
@@ -82,7 +81,7 @@
               <th class="p-1"></th>
             </tr>
           </ng-template>
-          <ng-template pTemplate="body" let-price let-expanded="expanded">
+          <ng-template #body let-price let-expanded="expanded">
             <tr>
               <td class="whitespace-nowrap px-6 py-4 text-sm font-medium">{{ price?.machineClass | titlecase }}</td>
               <td class="whitespace-nowrap px-6 py-4 text-sm font-light">{{ price?.price }} NOK</td>
@@ -94,24 +93,24 @@
               </td>
               <td class="whitespace-nowrap px-6 py-4 text-sm font-light">{{ (price?.to | time: 'DD. MMM YYYY HH:mm:ss') || '' }}</td>
               <td>
-                <button
+                <a
                   routerLink="./{{ price?.id }}/edit"
                   class="focus:ring-primary dark:focus:ring-offset-dark ml-2 rounded-md bg-green-700 px-4 py-2 text-sm text-white hover:bg-green-500 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
                 >
                   {{ 'common.edit' | translate }}
-                </button>
+                </a>
               </td>
               <td>
-                <button
+                <a
                   class="focus:ring-primary dark:focus:ring-offset-dark ml-2 rounded-md bg-gray-700 px-4 py-2 text-sm text-white hover:bg-gray-500 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
                   disabled
                 >
                   {{ 'common.delete' | translate }}
-                </button>
+                </a>
               </td>
             </tr>
           </ng-template>
-          <ng-template pTemplate="emptymessage">
+          <ng-template #emptymessage>
             <tr>
               <td colspan="6">{{ 'common.emptyList' | translate }}</td>
             </tr>

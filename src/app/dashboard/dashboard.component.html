@@ -1,11 +1,11 @@
 <div class="dark:border-primary-darker flex items-center justify-between border-b px-4 py-4 lg:py-6">
   <h1 class="text-2xl font-semibold">{{ 'pages.dashboard.title' | translate }}</h1>
-  <button
+  <a
     (click)="fetch()"
-    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark cursor-pointer rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
   >
     {{ 'common.refresh' | translate }}
-  </button>
+  </a>
 </div>
 
 <div class="mt-2" *ngIf="metricsCollection$ | async as metrics; else loadingOrError">
@@ -231,14 +231,14 @@
 
 <div class="px-4 py-4 lg:py-6" *ngIf="orders$ | async as orders">
   <ng-container *ngIf="orders?.length > 0">
-    <div class="flex mb-2">
-      <h2 class="text-xl flex-grow">{{ 'pages.dashboard.orders.title' | translate }}</h2>
-      <button
+    <div class="mb-2 flex">
+      <h2 class="flex-grow text-xl">{{ 'pages.dashboard.orders.title' | translate }}</h2>
+      <a
         (click)="fetchOrders()"
-        class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+        class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark cursor-pointer rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
       >
         {{ 'common.refresh' | translate }}
-      </button>
+      </a>
     </div>
 
     <p-table
@@ -249,13 +249,12 @@
       [sortOrder]="-1"
       [rowsPerPageOptions]="[5, 10, 20]"
       styleClass="p-datatable-sm"
-      responsiveLayout="scoll"
       [showCurrentPageReport]="true"
       currentPageReportTemplate="{{ 'common.showing' | translate }} {first} {{ 'common.to' | translate | lowercase }} {last} {{
         'common.of' | translate | lowercase
       }} {totalRecords} {{ 'common.entries' | translate | lowercase }}"
     >
-      <ng-template pTemplate="header">
+      <ng-template #header>
         <tr>
           <th class="p-1">{{ 'pages.dashboard.orders.table.name' | translate }}</th>
           <th class="p-1">{{ 'pages.dashboard.orders.table.provider' | translate }}</th>
@@ -266,13 +265,13 @@
           <th class="p-1"></th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-order>
+      <ng-template #body let-order>
         <tr>
           <td>
             <a
               *ngIf="(adminRead$ | async) === true"
               routerLink="orders/{{ order?.metadata?.uid }}"
-              class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md hover:bg-sky-700 hover:text-gray-50 hover:dark:text-white dark:hover:bg-sky-600 px-4 py-2 text-lg dark:text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+              class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md px-4 py-2 text-lg hover:bg-sky-700 hover:text-gray-50 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white dark:text-white dark:hover:bg-sky-600 hover:dark:text-white"
             >
               {{ order?.spec?.cluster }}</a
             >
@@ -305,14 +304,14 @@
               <a
                 *ngIf="(adminRead$ | async) === true"
                 routerLink="orders/{{ order?.metadata?.uid }}"
-                class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md dark:bg-sky-500 bg-sky-500 hover:bg-sky-700 dark:hover:bg-sky-600 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+                class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-sky-500 px-4 py-2 text-sm text-white hover:bg-sky-700 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white dark:bg-sky-500 dark:hover:bg-sky-600"
               >
                 {{ 'common.details' | translate }}
               </a>
               <button
                 *ngIf="(adminDelete$ | async) === true"
                 (click)="deleteOrder(order?.metadata?.uid)"
-                class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md dark:bg-red-700 bg-red-500 hover:bg-red-700 dark:hover:bg-red-600 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+                class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-red-500 px-4 py-2 text-sm text-white hover:bg-red-700 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white dark:bg-red-700 dark:hover:bg-red-600"
               >
                 {{ 'common.delete' | translate }}
               </button>

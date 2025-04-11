@@ -3,7 +3,7 @@
 </div>
 
 <div *ngIf="!error; else errorComponent" class="flex flex-col">
-  <div class="flex flex-row-reverse xl:pt-2 xl:pr-2">
+  <div class="flex flex-row-reverse xl:pr-2 xl:pt-2">
     <app-export-button [exportObjects]="formatExport(complianceReports$ | async)" [filename]="'compliance'"></app-export-button>
   </div>
   <div class="dark:bg-darker rounded-md bg-white xl:m-2 xl:p-2">
@@ -15,24 +15,24 @@
       [sortOrder]="-1"
       [tableStyle]="{ 'min-width': '50rem' }"
     >
-      <ng-template pTemplate="header" let-columns>
+      <ng-template #header let-columns>
         <tr>
-          <th class="border-r dark:border-primary-darker" rowspan="2" class="p-1">
+          <th class="dark:border-primary-darker border-r" rowspan="2" class="p-1">
             {{ 'pages.admin.compliancereports.' + 'cluster' | translate }}
           </th>
-          <th class="border-r border-b dark:border-primary-darker" colspan="2" class="p-1">CIS</th>
-          <th class="border-b dark:border-primary-darker" colspan="2" class="p-1">NSA</th>
+          <th class="dark:border-primary-darker border-b border-r" colspan="2" class="p-1">CIS</th>
+          <th class="dark:border-primary-darker border-b" colspan="2" class="p-1">NSA</th>
         </tr>
         <tr>
-          <th class="border-r dark:border-primary-darker" pSortableColumn="cis.passcount" class="p-1">
+          <th class="dark:border-primary-darker border-r" pSortableColumn="cis.passcount" class="p-1">
             {{ 'pages.admin.compliancereports.' + 'passcount' | translate }}
             <p-sortIcon field="cis.passcount"></p-sortIcon>
           </th>
-          <th class="border-r dark:border-primary-darker" pSortableColumn="cis.failcount" class="p-1">
+          <th class="dark:border-primary-darker border-r" pSortableColumn="cis.failcount" class="p-1">
             {{ 'pages.admin.compliancereports.' + 'failcount' | translate }}
             <p-sortIcon field="cis.failcount"></p-sortIcon>
           </th>
-          <th class="border-r dark:border-primary-darker" pSortableColumn="nsa.passcount" class="p-1">
+          <th class="dark:border-primary-darker border-r" pSortableColumn="nsa.passcount" class="p-1">
             {{ 'pages.admin.compliancereports.' + 'passcount' | translate }}
             <p-sortIcon field="nsa.passcount"></p-sortIcon>
           </th>
@@ -42,7 +42,7 @@
           </th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-complianceReport let-columns="columns">
+      <ng-template #body let-complianceReport let-columns="columns">
         <tr>
           <td *ngFor="let column of columns">
             <ng-container *ngIf="column?.field === 'clusterid'">
@@ -60,7 +60,7 @@
           </td>
         </tr>
       </ng-template>
-      <ng-template pTemplate="emptymessage">
+      <ng-template #emptymessage>
         <tr>
           <td [attr.colspan]="columns?.length">
             {{ 'common.emptyList' | translate }}
