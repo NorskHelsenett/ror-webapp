@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, isDevMode, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { Subscription, filter, tap } from 'rxjs';
 
@@ -36,12 +36,9 @@ export class AppComponent implements OnInit, OnDestroy {
     private translateService: TranslateService,
   ) {
     if (isPlatformBrowser(this.platformId)) {
-      let origin = '';
-      if (isPlatformBrowser(this.platformId)) {
-        let origin = window.location.origin;
-        if (environment.production) {
-          origin = origin.replace(/:\d+$/, '');
-        }
+      let origin = window.location.origin;
+      if (!isDevMode()) {
+        origin = origin.replace(/:\d+$/, '');
       }
 
       this.authService.authConfig.redirectUri = origin + this.authService.authConfig.redirectUri;
