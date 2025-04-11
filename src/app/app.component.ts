@@ -36,14 +36,15 @@ export class AppComponent implements OnInit, OnDestroy {
     private translateService: TranslateService,
   ) {
     if (isPlatformBrowser(this.platformId)) {
-      let origin = window.location.origin;
-      if (!isDevMode()) {
-        origin = origin.replace(/:\d+$/, '');
-      }
+      // let origin = window.location.origin;
+      // // if (!isDevMode()) {
+      // //   origin = origin.replace(/:\d+$/, '');
+      // // }
+      // console.log('origin', origin);
 
-      this.authService.authConfig.redirectUri = origin + this.authService.authConfig.redirectUri;
-      this.authService.authConfig.postLogoutRedirectUri = origin;
-      this.authService.authConfig.logoutUrl = origin;
+      // this.authService.authConfig.redirectUri = origin + this.authService.authConfig.redirectUri;
+      // this.authService.authConfig.postLogoutRedirectUri = origin;
+      // this.authService.authConfig.logoutUrl = origin;
 
       this.oauthService.configure(this.authService.authConfig);
       this.oauthService.loadDiscoveryDocumentAndLogin();
