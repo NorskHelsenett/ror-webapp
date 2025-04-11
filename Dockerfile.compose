@@ -16,4 +16,4 @@ FROM "${REGISTRY_PREFIX}nginxinc/nginx-unprivileged:alpine"
 
 WORKDIR /app
 
-COPY --from=builder /build/dist/ror-web/browser /app
+COPY --from=builder /build/dist/ror-webapp/browser /app
