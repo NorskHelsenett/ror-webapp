@@ -21,10 +21,6 @@ export class ClusterDescriptionComponent {
 
   editRequested(): void {
     if (isPlatformBrowser(this.platformId)) {
-      //this.loc.replaceState(`/cluster/${this.cluster.clusterId}?tab=metadata`);
-      //window.location.reload();
-      // window.location.reload();
-      // this.loc.go(`/cluster/${this.cluster.clusterId}?tab=metadata`);
       this.router.navigate([`/cluster/${this.cluster.clusterId}?tab=metadata`]);
     }
   }

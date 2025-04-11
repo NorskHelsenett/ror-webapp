@@ -32,7 +32,6 @@ export class AppComponent implements OnInit, OnDestroy {
     private changeDetector: ChangeDetectorRef,
     private oauthService: OAuthService,
     private authService: AuthService,
-    //private themeService: ThemeService,
     private titleService: Title,
     private translateService: TranslateService,
   ) {
@@ -55,18 +54,10 @@ export class AppComponent implements OnInit, OnDestroy {
       this.oauthService.events.pipe(filter((e) => e?.type === 'token_received')).subscribe((_) => {
         this.oauthService.loadUserProfile();
       });
-      //this.oauthService.setupAutomaticSilentRefresh();
     }
   }
 
   ngOnInit(): void {
-    // this.subscriptions.add(
-    //   this.themeService?.isDark?.subscribe((value) => {
-    //     this.isDark = value;
-    //     this.changeDetector.detectChanges();
-    //   }),
-    // );
-
     this.subscriptions.add(
       this.translateService.onLangChange
         .pipe(
