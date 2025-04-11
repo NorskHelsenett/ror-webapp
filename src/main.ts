@@ -1,14 +1,12 @@
 import { enableProdMode, isDevMode } from '@angular/core';
 
-import { environment } from './environments/environment';
-
 import { ConfigService } from './app/core/services/config.service';
 import { appConfig } from './app/app.config';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { AppComponent } from './app/app.component';
 import { isPlatformBrowser } from '@angular/common';
 
-if (environment.production) {
+if (!isDevMode()) {
   enableProdMode();
 }
 
@@ -22,16 +20,17 @@ if (environment.production) {
   configService.setConfig(config);
   const APP_CONFIG = configService.config;
 
-  if (isPlatformBrowser) {
-    let origin = window.location.origin;
-    if (!isDevMode()) {
-      origin = origin.replace(/:\d+$/, '');
-    }
+  // if (isPlatformBrowser) {
+  //   let origin = window.location.origin;
+  //   if (!isDevMode()) {
+  //     origin = window.location.origin.replace(/:\d+$/, '');
+  //   }
 
-    configService.config.auth.redirectUri = origin + config.auth.redirectUri;
-    configService.config.auth.postLogoutRedirectUri = origin;
-    configService.config.auth.logoutUrl = origin;
-  }
+  //   configService.config.auth.redirectUri = origin + config.auth.redirectUri;
+  //   configService.config.auth.postLogoutRedirectUri = origin;
+  //   configService.config.auth.logoutUrl = origin;
+  //   console.log('origin', origin);
+  // }
 
   appConfig.providers.unshift({
     provide: ConfigService,
