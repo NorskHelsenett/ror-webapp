@@ -1,11 +1,11 @@
 <div class="dark:border-primary-darker flex items-center justify-between border-b px-4 py-4 lg:py-6">
   <h1 class="text-2xl font-semibold">{{ 'pages.workspaces.title' | translate }}</h1>
-  <button
+  <a
     (click)="fetchMetrics(lastTableEvent)"
-    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark cursor-pointer rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
   >
     {{ 'common.refresh' | translate }}
-  </button>
+  </a>
 </div>
 
 <div class="mt-2">
@@ -36,7 +36,6 @@
             [rowsPerPageOptions]="rowsPerPage"
             [tableStyle]="{ 'min-width': '75rem' }"
             [rowHover]="true"
-            responsiveLayout="stack"
             sortField="group"
             [sortOrder]="1"
             [totalRecords]="(workspaceMetrics$ | async)?.totalCount"
@@ -46,7 +45,7 @@
               'common.of' | translate | lowercase
             }} {totalRecords} {{ 'common.entries' | translate | lowercase }}"
           >
-            <ng-template pTemplate="header">
+            <ng-template #header>
               <tr>
                 <th pSortableColumn="_id" class="p-1">
                   {{ 'pages.workspaces.table.column.name' | translate }} <p-sortIcon field="_id"></p-sortIcon>
@@ -68,7 +67,7 @@
                 </th>
               </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-metric let-expanded="expanded">
+            <ng-template #body let-metric let-expanded="expanded">
               <tr>
                 <td class="whitespace-nowrap px-2 py-2 text-sm font-medium">
                   <a class="hover:text-blue-800 hover:underline dark:hover:text-blue-400" [routerLink]="['./', metric?.workspace?.id]">{{
@@ -92,7 +91,7 @@
                 <td class="whitespace-nowrap px-2 py-2 text-sm font-light">{{ metric?.nodeCount }}</td>
               </tr>
             </ng-template>
-            <ng-template pTemplate="emptymessage">
+            <ng-template #emptymessage>
               <tr>
                 <td colspan="6">{{ 'common.emptyList' | translate }}</td>
               </tr>

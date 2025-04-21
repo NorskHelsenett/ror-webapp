@@ -15,7 +15,7 @@
               <div class="grid p-3 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
                 <div>
                   <h5>{{ 'pages.clusters.new.form.provider' | translate }}</h5>
-                  <p-dropdown
+                  <p-select
                     [options]="providerOptions"
                     placeholder="{{ 'pages.clusters.new.form.providerPlaceholder' | translate }}"
                     optionLabel="name"
@@ -23,7 +23,7 @@
                     [showClear]="false"
                     (click)="providerChanged($event)"
                     formControlName="provider"
-                  ></p-dropdown>
+                  ></p-select>
                   <span
                     *ngIf="clusterForm.get('provider').touched && clusterForm.get('provider').dirty && clusterForm.get('provider').errors"
                     class="text-red-400"
@@ -34,14 +34,14 @@
                 <div class="sm:mt-3 md:mt-0 lg:ml-3">
                   <h5>{{ 'pages.clusters.new.form.env' | translate }}</h5>
                   <div class="flex flex-col">
-                    <p-dropdown
+                    <p-select
                       [options]="environments"
                       placeholder="{{ 'pages.clusters.new.form.envPlaceholder' | translate }}"
                       optionLabel="name"
                       optionValue="value"
                       [showClear]="false"
                       formControlName="environment"
-                    ></p-dropdown>
+                    ></p-select>
                     <span
                       *ngIf="clusterForm.get('environment').touched && clusterForm.get('environment').dirty && clusterForm.get('environment').errors"
                       class="text-red-400"
@@ -53,14 +53,14 @@
                 <div class="sm:mt-3 md:mt-0 lg:ml-3">
                   <h5>{{ 'pages.clusters.new.form.datacenter' | translate }}</h5>
                   <div class="flex flex-col">
-                    <p-dropdown
+                    <p-select
                       [options]="datacenters"
                       placeholder="{{ 'pages.clusters.new.form.datacenterPlaceholder' | translate }}"
                       optionLabel="name"
                       [showClear]="true"
                       formControlName="datacenter"
                       (onChange)="datacenterChanged($event)"
-                    ></p-dropdown>
+                    ></p-select>
                     <span
                       *ngIf="clusterForm.get('datacenter').touched && clusterForm.get('datacenter').dirty && clusterForm.get('datacenter').errors"
                       class="text-red-400"
@@ -72,14 +72,14 @@
                 <div class="ml-3 sm:mt-3 md:mt-0">
                   <h5>{{ 'pages.clusters.new.form.workspace' | translate }}</h5>
                   <div class="flex flex-col">
-                    <p-dropdown
+                    <p-select
                       [options]="workspacesFiltered"
                       placeholder="{{ 'pages.clusters.new.form.workspacePlaceholder' | translate }}"
                       optionLabel="name"
                       [showClear]="true"
                       formControlName="workspace"
                       (onChange)="clusterNameChanged()"
-                    ></p-dropdown>
+                    ></p-select>
                     <span
                       *ngIf="clusterForm.get('workspace').touched && clusterForm.get('workspace').dirty && clusterForm.get('workspace').errors"
                       class="text-red-400"
@@ -177,7 +177,7 @@
                             styleClass="bg-green-600"
                             [min]="1"
                             [max]="10"
-                            [size]="1"
+                            [size]="'large'"
                             [allowEmpty]="false"
                           >
                           </p-inputNumber>
@@ -213,7 +213,7 @@
                               [step]="1"
                               [min]="1"
                               [max]="10"
-                              [size]="1"
+                              [size]="'large'"
                               [allowEmpty]="false"
                             >
                             </p-inputNumber>

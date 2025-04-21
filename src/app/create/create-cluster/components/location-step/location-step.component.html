@@ -1,7 +1,8 @@
 <form [formGroup]="clusterForm">
-  <div class="flex flex-col" *ngIf="projects$ | async as projects">
+  <div class="flex flex-col sm:w-full md:w-1/2 xl:w-1/3" *ngIf="projects$ | async as projects">
     <h5>{{ 'pages.create.cluster.steps.metadata.project' | translate }}</h5>
-    <p-dropdown
+    <p-select
+      styleClass="border border-gray-100 dark:border-gray-900"
       [options]="projects?.data"
       placeholder="{{ 'pages.create.cluster.steps.metadata.projectPlaceholder' | translate }}"
       optionLabel="name"
@@ -14,12 +15,12 @@
       [autofocus]="true"
     >
       <ng-template let-project pTemplate="item">
-        <div class="flex flex-col w-[500px]">
+        <div class="flex w-[500px] flex-col">
           <span class="text-lg">{{ project?.name }}</span>
-          <p class="text-sm truncate block">{{ project?.description }}</p>
+          <p class="block truncate text-sm">{{ project?.description }}</p>
         </div>
       </ng-template>
-    </p-dropdown>
+    </p-select>
     <span *ngIf="clusterForm.get('project').touched && clusterForm.get('project').dirty && clusterForm.get('project').errors" class="text-red-400">{{
       'pages.create.cluster.steps.metadata.projectError' | translate
     }}</span>
@@ -28,16 +29,17 @@
       ><a
         href="https://norskhelsenett.slack.com/archives/C01U0NUQ7PF"
         target="_blank"
-        class="text-blue-400 font-bold hover:underline dark:hover:text-blue-400"
+        class="font-bold text-blue-400 hover:underline dark:hover:text-blue-400"
         >#Drift-privatsky-devops</a
       >
     </div>
   </div>
 
-  <div class="mt-4 flex flex-col">
+  <div class="mt-4 flex flex-col sm:w-full md:w-1/2 xl:w-1/3">
     <h5>{{ 'pages.create.cluster.steps.location.provider' | translate }}</h5>
 
-    <p-dropdown
+    <p-select
+      class="border"
       [options]="providers$ | async"
       placeholder="{{ 'pages.create.cluster.steps.location.providerPlaceholder' | translate }}"
       optionLabel="name"
@@ -47,12 +49,12 @@
       (onChange)="updateEvent($event)"
     >
       <ng-template let-provider pTemplate="item">
-        <app-provider [providerTypeOrName]="provider?.type"></app-provider>
+        <app-provider [providerTypeOrName]="provider?.type" class="text-lg"></app-provider>
       </ng-template>
       <ng-template let-selectedProvider pTemplate="selectedItem">
-        <app-provider [providerTypeOrName]="selectedProvider?.type" *ngIf="selectedProvider"></app-provider>
+        <app-provider [providerTypeOrName]="selectedProvider?.type" *ngIf="selectedProvider" class="text-lg"></app-provider>
       </ng-template>
-    </p-dropdown>
+    </p-select>
     <span
       *ngIf="clusterForm.get('provider').touched && clusterForm.get('provider').dirty && clusterForm.get('provider').errors"
       class="text-red-400"
@@ -63,7 +65,7 @@
   <div formGroupName="providerConfig">
     <ng-container [ngSwitch]="true">
       <div
-        class="mt-4"
+        class="mt-4 sm:w-full md:w-1/2 xl:w-1/3"
         *ngSwitchCase="
           clusterForm?.get('provider')?.value?.type === 'Tanzu' ||
           clusterForm?.get('provider')?.value?.type === 'tanzu' ||
@@ -73,7 +75,7 @@
         <div formGroupName="tanzu">
           <h5>{{ 'pages.create.cluster.steps.location.workspace' | translate }}</h5>
           <div class="flex flex-col">
-            <p-dropdown
+            <p-select
               [options]="workspaces"
               placeholder="{{ 'pages.create.cluster.steps.location.workspacePlaceholder' | translate }}"
               optionLabel="name"
@@ -82,7 +84,7 @@
               filterBy="name"
               formControlName="workspace"
               (onChange)="updateEvent($event)"
-            ></p-dropdown>
+            ></p-select>
             <span
               *ngIf="
                 clusterForm?.get('providerConfig')?.get('workspace')?.touched &&
@@ -98,7 +100,7 @@
             ><a
               href="https://norskhelsenett.slack.com/archives/C01U0NUQ7PF"
               target="_blank"
-              class="text-blue-400 font-bold hover:underline dark:hover:text-blue-400"
+              class="font-bold text-blue-400 hover:underline dark:hover:text-blue-400"
               >#Drift-privatsky-devops</a
             >
           </div>
@@ -109,7 +111,7 @@
           <div class="mt-4">
             <h5>{{ 'pages.create.cluster.steps.location.subscription' | translate }}</h5>
             <div class="flex flex-col">
-              <p-dropdown
+              <p-select
                 [options]="azureSubscriptions"
                 placeholder="{{ 'pages.create.cluster.steps.location.subscriptionPlaceholder' | translate }}"
                 optionLabel="name"
@@ -118,7 +120,7 @@
                 filterBy="name"
                 formControlName="subscription"
                 (onChange)="updateEvent($event)"
-              ></p-dropdown>
+              ></p-select>
               <span
                 *ngIf="
                   clusterForm?.get('providerConfig')?.get('subscription')?.touched &&
@@ -133,7 +135,7 @@
           <div class="mt-4">
             <h5>{{ 'pages.create.cluster.steps.location.resourceGroup' | translate }}</h5>
             <div class="flex flex-col">
-              <p-dropdown
+              <p-select
                 [options]="azureResourceGroups"
                 placeholder="{{ 'pages.create.cluster.steps.location.resourceGroupPlaceholder' | translate }}"
                 optionLabel="name"
@@ -142,7 +144,7 @@
                 filterBy="name"
                 formControlName="resourceGroup"
                 (onChange)="updateEvent($event)"
-              ></p-dropdown>
+              ></p-select>
               <span
                 *ngIf="
                   clusterForm?.get('providerConfig')?.get('resourceGroup')?.touched &&
@@ -157,7 +159,7 @@
           <div class="mt-4">
             <h5>{{ 'pages.create.cluster.steps.location.region' | translate }}</h5>
             <div class="flex flex-col">
-              <p-dropdown
+              <p-select
                 [options]="azureRegions"
                 placeholder="{{ 'pages.create.cluster.steps.location.regionPlaceholder' | translate }}"
                 optionLabel="name"
@@ -166,7 +168,7 @@
                 filterBy="name"
                 formControlName="region"
                 (onChange)="updateEvent($event)"
-              ></p-dropdown>
+              ></p-select>
               <span
                 *ngIf="
                   clusterForm?.get('providerConfig')?.get('region')?.touched &&
@@ -183,11 +185,11 @@
     </ng-container>
   </div>
 
-  <div class="flex justify-start mt-5">
+  <div class="mt-5 flex justify-start">
     <button
-      [routerLink]="['../resources']"
+      (click)="nextSteps()"
       [disabled]="!validForm()"
-      class="flex-none delay-50 hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark float-left rounded-md bg-green-700 px-4 py-2 text-sm text-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white disabled:cursor-not-allowed disabled:bg-gray-900 disabled:opacity-25 disabled:hover:bg-gray-900"
+      class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark delay-50 float-left flex-none rounded-md bg-green-700 px-4 py-2 text-sm text-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white disabled:cursor-not-allowed disabled:bg-gray-900 disabled:opacity-25 disabled:hover:bg-gray-900"
     >
       <span>{{ 'common.next' | translate }}</span>
     </button>

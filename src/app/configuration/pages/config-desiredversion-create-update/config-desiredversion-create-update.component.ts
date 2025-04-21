@@ -1,20 +1,23 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { MessageService } from 'primeng/api';
 import { Subscription, catchError } from 'rxjs';
 import { DesiredVersion } from '../../../core/models/desiredversion';
 import { ConfigService } from '../../../core/services/config.service';
 import { DesiredversionsService } from '../../../core/services/desiredversions.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-config-desiredversion-create-update',
   templateUrl: './config-desiredversion-create-update.component.html',
   styleUrls: ['./config-desiredversion-create-update.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [TranslateModule, CommonModule, FormsModule, ReactiveFormsModule],
 })
 export class ConfigDesiredversionCreateUpdateComponent implements OnInit, OnDestroy {
+  private configService = inject(ConfigService);
   formGroup: FormGroup;
   createError: boolean;
   updateError: boolean;
@@ -30,7 +33,6 @@ export class ConfigDesiredversionCreateUpdateComponent implements OnInit, OnDest
     private desiredVersionsService: DesiredversionsService,
     private messageService: MessageService,
     private translateService: TranslateService,
-    private configService: ConfigService,
   ) {
     this.desiredVersion = this?.router?.getCurrentNavigation()?.extras?.state as DesiredVersion;
   }

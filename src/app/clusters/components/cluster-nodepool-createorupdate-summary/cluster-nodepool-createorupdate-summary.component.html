@@ -1,0 +1,119 @@
+<div>
+  <span class="text-lg">{{ 'pages.clusters.details.nodePools.createorupdate.summary.title' | translate }}</span>
+  <table class="mt-2">
+    <tbody>
+      <tr>
+        <td class="w-60">{{ 'pages.clusters.details.nodePools.createorupdate.form.name' | translate }}</td>
+        <td class="text-lg font-bold">{{ nodepoolForm?.get('name')?.value }}</td>
+      </tr>
+      <tr>
+        <td>{{ 'pages.clusters.details.nodePools.createorupdate.form.machineClass' | translate }}</td>
+        <td class="text-lg font-bold">{{ nodepoolForm?.get('price')?.value?.machineClass | titlecase }}</td>
+      </tr>
+      <tr>
+        <td>{{ 'pages.clusters.details.nodePools.createorupdate.form.autoScale' | translate }}</td>
+        <td class="text-lg font-bold"><app-true-false [trueOrFalse]="nodepoolForm?.get('autoScale')?.value"></app-true-false></td>
+      </tr>
+      @if (!nodepoolForm?.get('autoScale')?.value) {
+        <tr>
+          <td>{{ 'pages.clusters.details.nodePools.createorupdate.form.nodes' | translate }}</td>
+          <td class="text-lg font-bold">{{ nodepoolForm?.get('minNodes')?.value }}</td>
+        </tr>
+      } @else {
+        <tr>
+          <td>{{ 'pages.clusters.details.nodePools.createorupdate.form.minNodes' | translate }}</td>
+          <td class="text-lg font-bold">{{ nodepoolForm?.get('minNodes')?.value }}</td>
+        </tr>
+        <tr>
+          <td>{{ 'pages.clusters.details.nodePools.createorupdate.form.maxNodes' | translate }}</td>
+          <td class="text-lg font-bold">{{ nodepoolForm?.get('maxNodes')?.value }}</td>
+        </tr>
+      }
+
+      <tr>
+        <td class="align-top">{{ 'pages.clusters.details.nodePools.createorupdate.form.priceCalculation' | translate }}</td>
+        @if (nodepoolForm?.get('autoScale')?.value) {
+          <td>
+            <div></div>
+          </td>
+        } @else {
+          <td>
+            <div class="flex gap-3">
+              <span>{{ nodepoolForm?.get('minNodes')?.value }} nodes </span>
+              <span>*</span>
+              <span>{{ nodepoolForm?.get('price')?.value?.price | currency: 'NOK' : 'symbol-narrow' : '4.2-2' : 'no' }}</span>
+            </div>
+          </td>
+        }
+      </tr>
+      @if (nodepoolForm?.get('autoScale')?.value) {
+        <tr>
+          <td class="align-top">{{ 'pages.clusters.details.nodePools.createorupdate.form.estimatedPricePrMonth' | translate }}</td>
+          <td>
+            <div class="flex gap-3 font-bold">
+              <span
+                >{{
+                  nodepoolForm?.get('price')?.value?.price * nodepoolForm?.get('minNodes')?.value | currency: 'NOK' : 'symbol-narrow' : '4.2-2' : 'no'
+                }}
+              </span>
+              <span>-</span>
+              <span>{{
+                nodepoolForm?.get('price')?.value?.price * nodepoolForm?.get('maxNodes')?.value | currency: 'NOK' : 'symbol-narrow' : '4.2-2' : 'no'
+              }}</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="align-top">{{ 'pages.clusters.details.nodePools.createorupdate.form.estimatedPricePrYear' | translate }}</td>
+          <td>
+            <div class="flex gap-3 font-bold">
+              <span
+                >{{
+                  nodepoolForm?.get('price')?.value?.price * nodepoolForm?.get('minNodes')?.value * 12
+                    | currency: 'NOK' : 'symbol-narrow' : '4.2-2' : 'no'
+                }}
+              </span>
+              <span>-</span>
+              <span
+                >{{
+                  nodepoolForm?.get('price')?.value?.price * nodepoolForm?.get('maxNodes')?.value * 12
+                    | currency: 'NOK' : 'symbol-narrow' : '4.2-2' : 'no'
+                }}
+              </span>
+            </div>
+          </td>
+        </tr>
+      } @else {
+        <tr>
+          <td class="align-top">{{ 'pages.clusters.details.nodePools.createorupdate.form.estimatedPricePrMonth' | translate }}</td>
+          <td>
+            <div class="flex gap-3 font-bold">
+              <span
+                >{{
+                  nodepoolForm?.get('price')?.value?.price * nodepoolForm?.get('minNodes')?.value | currency: 'NOK' : 'symbol-narrow' : '4.2-2' : 'no'
+                }}
+              </span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="align-top">{{ 'pages.clusters.details.nodePools.createorupdate.form.estimatedPricePrYear' | translate }}</td>
+          <td>
+            <div class="flex gap-3 font-bold">
+              <span
+                >{{
+                  nodepoolForm?.get('price')?.value?.price * nodepoolForm?.get('minNodes')?.value * 12
+                    | currency: 'NOK' : 'symbol-narrow' : '4.2-2' : 'no'
+                }}
+              </span>
+            </div>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
+
+<!-- <div class="border-1 border-gray-400 bg-black">
+  <pre>{{ nodepoolForm?.value | json }}</pre>
+</div> -->

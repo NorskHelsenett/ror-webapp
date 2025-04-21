@@ -1,3 +1,4 @@
+import { Config } from 'unique-names-generator';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { catchError, Observable, share, Subscription } from 'rxjs';
 import { DesiredVersion } from '../../../core/models/desiredversion';
@@ -8,12 +9,26 @@ import { OperatorConfigsService } from '../../../core/services/operator-configs.
 import { TasksService } from '../../../core/services/tasks.service';
 import { UserService } from '../../../core/services/user.service';
 import { Task } from '../../../core/models/task';
+import { TranslateModule } from '@ngx-translate/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { ConfigDesiredversionListComponent, ConfigOperatorConfigListComponent, ConfigTaskListComponent } from '../../components';
+import { SpinnerComponent } from '../../../shared/components';
 
 @Component({
   selector: 'app-configuration',
   templateUrl: './configuration.component.html',
   styleUrls: ['./configuration.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    TranslateModule,
+    CommonModule,
+    RouterModule,
+    ConfigOperatorConfigListComponent,
+    SpinnerComponent,
+    ConfigTaskListComponent,
+    ConfigDesiredversionListComponent,
+  ],
 })
 export class ConfigurationComponent implements OnInit, OnDestroy {
   user$: Observable<User> | undefined;

@@ -1,5 +1,5 @@
-import { DOCUMENT } from '@angular/common';
-import { Inject, Injectable } from '@angular/core';
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { Inject, inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { HighlightLoader } from 'ngx-highlightjs';
 import { BehaviorSubject } from 'rxjs';
 
@@ -7,39 +7,61 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class ThemeService {
+  private document: Document = inject(DOCUMENT);
   isDark = new BehaviorSubject<boolean>(true);
 
   constructor(
-    @Inject(DOCUMENT) private document: Document,
+    @Inject(PLATFORM_ID) private platformId: object,
     private hljsLoader: HighlightLoader,
   ) {
-    const isDark = localStorage.getItem('isDark') == 'true';
+    let isDark = false;
+    if (isPlatformBrowser(this.platformId)) {
+      isDark = localStorage.getItem('isDark') == 'true';
+    }
+
     if (isDark === true) {
       this.isDark.next(true);
-      this.switchTheme('dark');
+      this.setDarkTheme();
     } else {
       this.isDark.next(false);
-      this.switchTheme('light');
+      this.setLightTheme();
     }
+
+    this.switchTheme();
   }
 
   setDark(setDark: boolean): void {
     this.isDark.next(setDark);
-    localStorage['isDark'] = setDark;
     if (this.isDark?.getValue() === true) {
-      this.switchTheme('dark');
+      this.setDarkTheme();
     } else {
-      this.switchTheme('light');
+      this.setLightTheme();
+    }
+
+    this.switchTheme();
+  }
+
+  switchTheme() {
+    if (isPlatformBrowser(this.platformId)) {
+      this.hljsLoader.setTheme(
+        this.isDark.getValue() ? 'assets/styles/highlight/tokyo-night-dark.css' : 'assets/styles/highlight/tokyo-night-light.css',
+      );
     }
   }
 
-  switchTheme(theme: string) {
-    let themeLink = this.document.getElementById('app-theme') as HTMLLinkElement;
-
-    if (themeLink) {
-      themeLink.href = `${theme}.css`;
+  setLightTheme(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem('isDark', false.toString());
+      document?.querySelector('html')?.classList.remove('dark');
+      document?.querySelector('body')?.classList.remove('dark');
     }
+  }
 
-    this.hljsLoader.setTheme(theme === 'dark' ? 'assets/styles/highlight/tokyo-night-dark.css' : 'assets/styles/highlight/tokyo-night-light.css');
+  setDarkTheme(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem('isDark', true.toString());
+      document?.querySelector('html')?.classList.add('dark');
+      document?.querySelector('body')?.classList.add('dark');
+    }
   }
 }

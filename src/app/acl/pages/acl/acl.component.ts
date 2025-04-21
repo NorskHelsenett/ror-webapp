@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Observable, Subscription, catchError, finalize, share } from 'rxjs';
 import { AclV2 } from '../../../core/models/aclv2';
@@ -10,14 +10,35 @@ import { AclService } from '../../../core/services/acl.service';
 import { ConfigService } from '../../../core/services/config.service';
 import { UserService } from '../../../core/services/user.service';
 import { FilterService } from '../../../core/services/filter.service';
+import { CommonModule } from '@angular/common';
+import { SpinnerComponent, TrueFalseComponent } from '../../../shared/components';
+import { RouterModule } from '@angular/router';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { TableModule } from 'primeng/table';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SelectModule } from 'primeng/select';
 
 @Component({
   selector: 'app-acl',
   templateUrl: './acl.component.html',
   styleUrls: ['./acl.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    TranslateModule,
+    CommonModule,
+    RouterModule,
+    TrueFalseComponent,
+    SpinnerComponent,
+    ConfirmDialogModule,
+    TableModule,
+    SelectModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
 })
 export class AclComponent implements OnInit, OnDestroy {
+  private configService = inject(ConfigService);
+
   user$: Observable<User> | undefined;
   acl$: Observable<PaginationResult<AclV2>> | undefined;
   fetchError: any;
@@ -45,7 +66,6 @@ export class AclComponent implements OnInit, OnDestroy {
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
     private translateService: TranslateService,
-    private configService: ConfigService,
   ) {}
 
   ngOnInit(): void {

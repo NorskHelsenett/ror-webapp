@@ -1,22 +1,44 @@
-import { enableProdMode } from '@angular/core';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { enableProdMode, isDevMode } from '@angular/core';
 
-import { AppModule } from './app/app.module';
-import { environment } from './environments/environment';
+import { ConfigService } from './app/core/services/config.service';
+import { appConfig } from './app/app.config';
+import { bootstrapApplication } from '@angular/platform-browser';
+import { AppComponent } from './app/app.component';
+import { isPlatformBrowser } from '@angular/common';
 
-import { APP_CONFIG } from './app.config';
+if (!isDevMode()) {
+  enableProdMode();
+}
 
-fetch(environment.configPath)
-  .then((response) => response.json())
-  .then((config) => {
-    if (environment.production) {
-      enableProdMode();
-    }
-    platformBrowserDynamic([{ provide: APP_CONFIG, useValue: config }])
-      .bootstrapModule(AppModule)
-      .catch((err) => console.error(err));
-  })
-  .catch((err) => {
-    console.error(err);
-    return 'Failed to load config';
+(async () => {
+  const response = await fetch('/assets/config/config.json');
+  if (!response.ok) {
+    throw new Error(`Failed to fetch JSON: ${response.statusText}`);
+  }
+  const config = await response.json();
+  const configService = new ConfigService();
+  configService.setConfig(config);
+  const APP_CONFIG = configService.config;
+
+  // if (isPlatformBrowser) {
+  //   let origin = window.location.origin;
+  //   if (!isDevMode()) {
+  //     origin = window.location.origin.replace(/:\d+$/, '');
+  //   }
+
+  //   configService.config.auth.redirectUri = origin + config.auth.redirectUri;
+  //   configService.config.auth.postLogoutRedirectUri = origin;
+  //   configService.config.auth.logoutUrl = origin;
+  //   console.log('origin', origin);
+  // }
+
+  appConfig.providers.unshift({
+    provide: ConfigService,
+    useValue: configService,
   });
+  appConfig.providers.unshift({
+    provide: APP_CONFIG,
+    useValue: APP_CONFIG,
+  });
+  bootstrapApplication(AppComponent, appConfig).catch((err) => console.error('Bootstrap failed:', err));
+})();

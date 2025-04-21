@@ -1,7 +1,6 @@
 import { catchError, finalize, map, Observable, share } from 'rxjs';
 import { Component, OnInit, ChangeDetectorRef, inject, ChangeDetectionStrategy, Output, EventEmitter, Input } from '@angular/core';
 import { Resourcesv2Service } from '../../../core/services/resourcesv2.service';
-import { SharedModule } from '../../../shared/shared.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
@@ -13,16 +12,26 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { FormsModule } from '@angular/forms';
 import { AclService } from '../../../core/services/acl.service';
 import { AclAccess, AclScopes } from '../../../core/models/acl-scopes';
-import { DropdownModule } from 'primeng/dropdown';
 import { FilterService } from '../../services/filter.service';
 import { ColumnDefinition } from '../../../resources/models/columnDefinition';
 import { TooltipModule } from 'primeng/tooltip';
 import { Resource, ResourceSet } from '@rork8s/ror-resources/models';
+import { ExportComponent, SpinnerComponent } from '../../../shared/components';
+import { SelectModule } from 'primeng/select';
 
 @Component({
   selector: 'app-resources-v2-list',
-  standalone: true,
-  imports: [CommonModule, TranslateModule, SharedModule, TableModule, MultiSelectModule, FormsModule, DropdownModule, TooltipModule],
+  imports: [
+    CommonModule,
+    TranslateModule,
+    TableModule,
+    MultiSelectModule,
+    FormsModule,
+    SelectModule,
+    TooltipModule,
+    ExportComponent,
+    SpinnerComponent,
+  ],
   templateUrl: './resources-v2-list.component.html',
   styleUrl: './resources-v2-list.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

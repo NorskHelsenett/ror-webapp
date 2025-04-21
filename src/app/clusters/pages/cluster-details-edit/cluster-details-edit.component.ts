@@ -1,6 +1,17 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { TranslateService } from '@ngx-translate/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { MessageService, ConfirmationService, ConfirmEventType } from 'primeng/api';
 import { catchError, Observable, of, Subscription, tap } from 'rxjs';
 import { ClusterMetadata } from '../../../core/models/clusterMetadata';
@@ -9,19 +20,47 @@ import { Project, ProjectRole } from '../../../core/models/project';
 import { ClustersService } from '../../../core/services/clusters.service';
 import { ConfigService } from '../../../core/services/config.service';
 import { ProjectService } from '../../../core/services/project.service';
+import { CommonModule, NgClass } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { TagModule } from 'primeng/tag';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { SpinnerComponent } from '../../../shared/components';
+import { SelectModule } from 'primeng/select';
+import { ChipModule } from 'primeng/chip';
+import { ColorService } from '../../../core/services/color.service';
+import { HexService } from '../../../core/services/hex.service';
 
 @Component({
   selector: 'app-cluster-details-edit',
   templateUrl: './cluster-details-edit.component.html',
   styleUrls: ['./cluster-details-edit.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    TranslateModule,
+    CommonModule,
+    RouterModule,
+    TagModule,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ChipModule,
+    ConfirmDialogModule,
+    SpinnerComponent,
+    SelectModule,
+    NgClass,
+  ],
 })
-export class ClusterDetailsEditComponent implements OnInit, OnDestroy {
+export class ClusterDetailsEditComponent implements OnInit, OnDestroy, AfterViewInit {
+  private configService = inject(ConfigService);
+  private colorService = inject(ColorService);
+  private hexService = inject(HexService);
+
   @Input() cluster: any | undefined;
   @Output() invalidCount = new EventEmitter<number>();
   @Output() updateOk = new EventEmitter<boolean>();
 
   clusterModelForm: FormGroup;
+  tagForm: FormGroup;
   environment: any;
 
   clusterUpdateError: any;
@@ -37,9 +76,9 @@ export class ClusterDetailsEditComponent implements OnInit, OnDestroy {
   selectedSensitivity: { name: string; value: number };
 
   availableRoles: any[];
+  tags: string[] = [];
 
   private subscriptions = new Subscription();
-  private tags: string[] = [];
   private fill = false;
   private rortextregex = this.configService.config.regex.forms;
 
@@ -51,13 +90,15 @@ export class ClusterDetailsEditComponent implements OnInit, OnDestroy {
     private translateService: TranslateService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
-    private configService: ConfigService,
   ) {}
 
   ngOnInit(): void {
     this.setAvailableRoles();
     this.setupObservables();
     this.setupAvailableCriticalitiesAndSensitivities();
+  }
+
+  ngAfterViewInit(): void {
     this.setupForm();
     this.invalidCount.emit(this.getInvalidCount(this.clusterModelForm));
   }
@@ -136,6 +177,11 @@ export class ClusterDetailsEditComponent implements OnInit, OnDestroy {
       tags: ['', { validators: [] }],
       roles: this.fb.array([], { validators: [Validators.required, Validators.minLength(2)] }),
     });
+
+    this.tagForm = this.fb.group({
+      tag: ['', { validators: [Validators.required, Validators.minLength(2), Validators.pattern(this.rortextregex)] }],
+    });
+    this.tagForm.reset();
   }
 
   private setAvailableRoles(): void {
@@ -262,6 +308,7 @@ export class ClusterDetailsEditComponent implements OnInit, OnDestroy {
         tags.push(key);
       });
     }
+    this.tags = tags;
 
     this.roles.clear();
     const roles: ProjectRole[] = [];
@@ -414,6 +461,36 @@ export class ClusterDetailsEditComponent implements OnInit, OnDestroy {
 
   clusterNameChanged($event): void {
     this.invalidCount.emit(this.getInvalidCount(this.clusterModelForm));
+  }
+
+  getColorByText(text: string): string {
+    const consthexColor = this.hexService.stringToSixCharHex(text);
+    const color = this.colorService.getTailwindColorName(consthexColor);
+    if (color) {
+      return color;
+    } else {
+      return 'gray-500';
+    }
+  }
+
+  addTag(tag: string): void {
+    if (!tag || tag.length === 0) {
+      return;
+    }
+
+    this.tags.push(tag);
+    this.clusterModelForm.patchValue({ tags: this.tags });
+    this.tagForm.reset();
+    this.changeDetector.detectChanges();
+  }
+
+  removeTag(tag: string): void {
+    if (!tag || tag.length === 0) {
+      return;
+    }
+    this.tags = this.tags.filter((t) => t !== tag);
+    this.clusterModelForm.patchValue({ tags: this.tags });
+    this.changeDetector.detectChanges();
   }
 
   private createServiceTagArray(): Map<string, string> {

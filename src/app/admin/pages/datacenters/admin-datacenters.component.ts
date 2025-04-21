@@ -1,17 +1,26 @@
 import { DatacenterService } from '../../../core/services/datacenter.service';
 import { catchError, finalize, Observable, share } from 'rxjs';
-import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy, inject } from '@angular/core';
 import { AclScopes, AclAccess } from '../../../core/models/acl-scopes';
 import { AclService } from '../../../core/services/acl.service';
 import { ConfigService } from '../../../core/services/config.service';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import { TableModule } from 'primeng/table';
+import { SpinnerComponent } from '../../../shared/components';
+import { TimePipe } from '../../../shared/pipes/time.pipe';
 
 @Component({
   selector: 'app-admin-datacenters',
   templateUrl: './admin-datacenters.component.html',
   styleUrls: ['./admin-datacenters.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [TranslateModule, CommonModule, RouterModule, TableModule],
 })
 export class AdminDatacentersComponent implements OnInit {
+  private configService = inject(ConfigService);
+
   datacenters$: Observable<any>;
   datacentersError: any;
   adminRead$: Observable<boolean> | undefined;
@@ -25,7 +34,6 @@ export class AdminDatacentersComponent implements OnInit {
     private changeDetector: ChangeDetectorRef,
     private datacentersService: DatacenterService,
     private aclService: AclService,
-    private configService: ConfigService,
   ) {}
 
   ngOnInit(): void {

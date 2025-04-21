@@ -1,19 +1,26 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Table } from 'primeng/table';
+import { Table, TableModule } from 'primeng/table';
 import { catchError, map, Observable, Subscription, tap } from 'rxjs';
 import { PolicyReportView } from '../../../core/models/policyReport';
 import { ClustersService } from '../../../core/services/clusters.service';
 import { ConfigService } from '../../../core/services/config.service';
 import { ExportService } from '../../../core/services/export.service';
+import { TranslateModule } from '@ngx-translate/core';
+import { PolicyBarComponent } from '../policy-bar/policy-bar.component';
+import { ButtonModule } from 'primeng/button';
+import { PolicyNamespaceComponent } from '../policy-namespace/policy-namespace.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-cluster-policy-report',
   templateUrl: './cluster-policy-report.component.html',
   styleUrls: ['./cluster-policy-report.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [TranslateModule, PolicyBarComponent, TableModule, ButtonModule, PolicyNamespaceComponent, CommonModule],
 })
 export class ClusterPolicyReportComponent implements OnInit, OnDestroy {
+  private configService = inject(ConfigService);
   @ViewChildren('resultTable')
   tables: QueryList<Table>;
 
@@ -34,7 +41,6 @@ export class ClusterPolicyReportComponent implements OnInit, OnDestroy {
     private changeDetector: ChangeDetectorRef,
     private route: ActivatedRoute,
     private clustersService: ClustersService,
-    private configService: ConfigService,
     private exportService: ExportService,
   ) {}
 

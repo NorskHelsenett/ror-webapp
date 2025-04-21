@@ -1,4 +1,4 @@
-import { Injectable, NgZone } from '@angular/core';
+import { inject, Injectable, NgZone } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { EventSourcePolyfill } from 'event-source-polyfill';
 import { Observable, Subscriber } from 'rxjs';
@@ -8,6 +8,10 @@ import { ConfigService } from '../../../core/services/config.service';
   providedIn: 'root',
 })
 export class SseService {
+  private configService = inject(ConfigService);
+  private oauthService = inject(OAuthService);
+  private ngZone = inject(NgZone);
+
   isConnected = false;
 
   private events: Observable<any> | undefined;
@@ -18,12 +22,6 @@ export class SseService {
   private reconnectFrecuencySeconds = 1;
 
   private url = `${this.configService?.config?.rorApi}${this.configService?.config?.sse?.postfixUrl}?ngsw-bypass=true`;
-
-  constructor(
-    private ngZone: NgZone,
-    private configService: ConfigService,
-    private oauthService: OAuthService,
-  ) {}
 
   getEvents(): Observable<any> {
     return new Observable((observer) => {

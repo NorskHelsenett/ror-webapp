@@ -1,16 +1,20 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { mergeMap, Observable, Subscription, tap } from 'rxjs';
 import { WorkspacesService } from '../../../core/services/workspaces.service';
 import { Workspace } from '../../../core/models/workspace';
 import { Project } from '../../../core/models/project';
 import { ProjectService } from '../../../core/services/project.service';
+import { TranslateModule } from '@ngx-translate/core';
+import { CommonModule } from '@angular/common';
+import { SelectModule } from 'primeng/select';
 
 @Component({
   selector: 'app-workspace-new',
   templateUrl: './workspace-new.component.html',
   styleUrls: ['./workspace-new.component.scss'],
+  imports: [TranslateModule, CommonModule, FormsModule, ReactiveFormsModule, SelectModule],
 })
 export class WorkspaceNewComponent implements OnInit, OnDestroy {
   form: FormGroup;

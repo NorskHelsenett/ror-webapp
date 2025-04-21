@@ -9,14 +9,15 @@ data:
           "issuer": "{{ .Values.web.authUrl }}",
           "clientId": "{{ .Values.web.authClientId}}",
           "redirectUri": "/auth/callback",
-          "scope": "profile email groups",
-          "response_type": "id_token token",
-          "requireHttps": true,
-          "strictDiscoveryDocumentValidation": true
+          "scope": "openid profile email groups offline_access",
+          "response_type": "code",
+          "requireHttps": true
       },
       "regex": {
           "forms": "^[@()\\/:?\\r\\n.,a-zA-Z æøåÆØÅ0-9_-]+$"
       },
+      "externalDocsUrl": "{{ .Values.docs.externalDocsUrl }}",
+      "docsUrl": "{{ .Values.docs.docsUrl }}",
       "rowsPerPage": [10, 25, 50, 75, 100],
       "rows": 25,
       "rorApi": "{{ .Values.web.apiUrl }}",

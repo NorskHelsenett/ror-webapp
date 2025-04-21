@@ -1,20 +1,24 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { TranslateService } from '@ngx-translate/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, inject, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ClipboardService } from 'ngx-clipboard';
 import { MessageService } from 'primeng/api';
 import { Subscription, catchError } from 'rxjs';
 import { UserApikeysService } from '../../../core/services/user-apikeys.service';
 import { ConfigService } from '../../../core/services/config.service';
 import { ApiKey } from '../../../core/models/apikey';
+import { CommonModule } from '@angular/common';
+import { DatePickerModule } from 'primeng/datepicker';
 
 @Component({
   selector: 'app-userprofile-create-apikey',
   templateUrl: './userprofile-create-apikey.component.html',
   styleUrls: ['./userprofile-create-apikey.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [TranslateModule, CommonModule, FormsModule, ReactiveFormsModule, DatePickerModule],
 })
 export class UserprofileCreateApikeyComponent implements OnInit, OnDestroy {
+  private configService = inject(ConfigService);
   @Input()
   upn: string;
 
@@ -38,7 +42,6 @@ export class UserprofileCreateApikeyComponent implements OnInit, OnDestroy {
     private clipboardService: ClipboardService,
     private messageService: MessageService,
     private translateService: TranslateService,
-    private configService: ConfigService,
   ) {}
 
   ngOnInit(): void {

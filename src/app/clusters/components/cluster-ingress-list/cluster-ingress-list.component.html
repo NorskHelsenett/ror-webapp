@@ -1,12 +1,12 @@
 <div class="grid space-y-8 lg:gap-8 lg:space-y-0">
-  <div class="dark:bg-darker flex items-center justify-between overflow-x-auto rounded-md bg-white">
-    <div class="dark:bg-darker col-span-2 overflow-x-auto rounded-md bg-white">
+  <div class="dark:bg-darker flex items-center justify-between rounded-md bg-white">
+    <div class="dark:bg-darker col-span-2 w-full rounded-md bg-white">
       <div class="dark:border-primary flex items-center justify-between border-b p-4">
         <h4 class="dark:text-light text-lg font-semibold text-gray-500">{{ 'pages.clusters.details.ingresses.title' | translate }}</h4>
       </div>
       <div class="p-4">
         <div class="">
-          <div class="overflow-x-auto">
+          <div class="">
             <p-table
               [value]="ingresses"
               [rows]="rows"
@@ -23,7 +23,7 @@
                 'common.of' | translate | lowercase
               }} {totalRecords} {{ 'common.entries' | translate | lowercase }}"
             >
-              <ng-template pTemplate="header">
+              <ng-template #header>
                 <tr>
                   <th pSortableColumn="name" class="p-1">
                     {{ 'pages.clusters.details.ingresses.name' | translate }} <p-sortIcon field="name"></p-sortIcon>
@@ -55,7 +55,7 @@
                   <th></th>
                 </tr>
               </ng-template>
-              <ng-template pTemplate="body" let-ingress>
+              <ng-template #body let-ingress>
                 <tr>
                   <td>
                     <a class="ml-2 hover:text-blue-800 hover:underline dark:hover:text-blue-400" [routerLink]="['ingresses', ingress?.name]">
@@ -100,7 +100,7 @@
                   </td>
                 </tr>
               </ng-template>
-              <ng-template pTemplate="emptymessage">
+              <ng-template #emptymessage>
                 <tr>
                   <td colspan="6">{{ 'common.emptyList' | translate }}</td>
                 </tr>

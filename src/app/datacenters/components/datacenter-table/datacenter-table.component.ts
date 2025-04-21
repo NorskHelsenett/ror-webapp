@@ -1,16 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, Input } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import { FormatBytesPipe } from '../../../shared/pipes';
 
 @Component({
   selector: 'app-datacenter-table',
   templateUrl: './datacenter-table.component.html',
   styleUrls: ['./datacenter-table.component.scss'],
+  imports: [TranslateModule, CommonModule, RouterModule, FormatBytesPipe],
 })
-export class DatacenterTableComponent implements OnInit {
+export class DatacenterTableComponent {
   @Input() datacenters: any[] = [];
-
-  constructor() {}
-
-  ngOnInit(): void {
-    return;
-  }
 }

@@ -1,16 +1,18 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
+import { TranslateService, LangChangeEvent, TranslateModule } from '@ngx-translate/core';
 import { catchError, Subscription, tap } from 'rxjs';
 import { TasksService } from '../../../core/services/tasks.service';
 import { Task } from '../../../core/models/task';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-config-task-create-update',
   templateUrl: './config-task-create-update.component.html',
   styleUrls: ['./config-task-create-update.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [TranslateModule, CommonModule],
 })
 export class ConfigTaskCreateUpdateComponent implements OnInit, OnDestroy {
   id: string;

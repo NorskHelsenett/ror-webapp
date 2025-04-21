@@ -10,18 +10,18 @@
           <span class="flex-grow"></span>
           <a
             [routerLink]="['./create']"
-            class="delay-50 hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark float-left rounded-md bg-green-700 px-4 py-2 text-sm text-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+            class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark delay-50 float-left rounded-md bg-green-700 px-4 py-2 text-sm text-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
           >
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
             </svg>
           </a>
-          <button
+          <a
             (click)="fetch(lastLazyLoad)"
-            class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark ml-2 rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+            class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark ml-2 cursor-pointer rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
           >
             {{ 'common.refresh' | translate }}
-          </button>
+          </a>
         </div>
         <div class="relative p-3">
           <div>
@@ -35,7 +35,6 @@
               [rowsPerPageOptions]="rowsPerPage"
               [tableStyle]="{ 'min-width': '75rem' }"
               [rowHover]="true"
-              responsiveLayout="stack"
               sortField="group"
               [sortOrder]="1"
               [totalRecords]="(acl$ | async)?.totalCount"
@@ -45,7 +44,7 @@
                 'common.of' | translate | lowercase
               }} {totalRecords} {{ 'common.entries' | translate | lowercase }}"
             >
-              <ng-template pTemplate="header">
+              <ng-template #header>
                 <tr>
                   <th pSortableColumn="group" class="p-1">
                     {{ 'pages.acl.table.columns.group' | translate }} <p-sortIcon field="group"></p-sortIcon>
@@ -89,7 +88,7 @@
                   <th class="p-1">
                     <p-columnFilter field="access.read" matchMode="equals" [showMenu]="false" style="width: 0.2rem">
                       <ng-template pTemplate="filter" let-value let-filter="filterCallback" style="width: 0.2rem">
-                        <p-dropdown
+                        <p-select
                           [style]="{ width: '3rem' }"
                           autowidth="false"
                           appendTo="body"
@@ -102,14 +101,14 @@
                           [showClear]="true"
                           [filter]="false"
                         >
-                        </p-dropdown>
+                        </p-select>
                       </ng-template>
                     </p-columnFilter>
                   </th>
                   <th class="p-1">
                     <p-columnFilter field="access.create" matchMode="equals" [showMenu]="false">
                       <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                        <p-dropdown
+                        <p-select
                           [style]="{ width: '3rem' }"
                           appendTo="body"
                           [ngModel]="value"
@@ -121,14 +120,14 @@
                           [showClear]="true"
                           [filter]="false"
                         >
-                        </p-dropdown>
+                        </p-select>
                       </ng-template>
                     </p-columnFilter>
                   </th>
                   <th class="p-1">
                     <p-columnFilter field="access.update" matchMode="equals" [showMenu]="false">
                       <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                        <p-dropdown
+                        <p-select
                           [style]="{ width: '3rem' }"
                           appendTo="body"
                           [ngModel]="value"
@@ -140,14 +139,14 @@
                           [showClear]="true"
                           [filter]="false"
                         >
-                        </p-dropdown>
+                        </p-select>
                       </ng-template>
                     </p-columnFilter>
                   </th>
                   <th class="p-1">
                     <p-columnFilter field="access.delete" matchMode="equals" [showMenu]="false">
                       <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                        <p-dropdown
+                        <p-select
                           [style]="{ width: '3rem' }"
                           appendTo="body"
                           [ngModel]="value"
@@ -159,14 +158,14 @@
                           [showClear]="true"
                           [filter]="false"
                         >
-                        </p-dropdown>
+                        </p-select>
                       </ng-template>
                     </p-columnFilter>
                   </th>
                   <th class="p-1">
                     <p-columnFilter field="access.owner" matchMode="equals" [showMenu]="false">
                       <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                        <p-dropdown
+                        <p-select
                           [style]="{ width: '3rem' }"
                           appendTo="body"
                           [ngModel]="value"
@@ -178,14 +177,14 @@
                           [showClear]="true"
                           [filter]="false"
                         >
-                        </p-dropdown>
+                        </p-select>
                       </ng-template>
                     </p-columnFilter>
                   </th>
                   <th class="p-1">
                     <p-columnFilter field="kubernetes.logon" matchMode="equals" [showMenu]="false">
                       <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                        <p-dropdown
+                        <p-select
                           [style]="{ width: '3rem' }"
                           appendTo="body"
                           [ngModel]="value"
@@ -197,14 +196,14 @@
                           [showClear]="true"
                           [filter]="false"
                         >
-                        </p-dropdown>
+                        </p-select>
                       </ng-template>
                     </p-columnFilter>
                   </th>
                   <th class="p-1"></th>
                 </tr>
               </ng-template>
-              <ng-template pTemplate="body" let-acl let-expanded="expanded">
+              <ng-template #body let-acl let-expanded="expanded">
                 <tr>
                   <td>
                     <a class="ml-2 cursor-pointer hover:text-blue-800 hover:underline dark:hover:text-blue-400" routerLink="./{{ acl?.id }}/edit">{{
@@ -235,23 +234,23 @@
                   </td>
                   <td>
                     <div class="flex">
-                      <button
+                      <a
                         routerLink="./{{ acl?.id }}/edit"
                         class="focus:ring-primary dark:focus:ring-offset-dark ml-2 rounded-md bg-green-700 px-4 py-2 text-sm text-white hover:bg-green-500 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
                       >
                         {{ 'common.edit' | translate }}
-                      </button>
-                      <button
+                      </a>
+                      <a
                         (click)="delete(acl)"
                         class="focus:ring-primary dark:focus:ring-offset-dark ml-2 flex rounded-md bg-red-700 px-4 py-2 text-sm text-white hover:bg-red-500 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
                       >
                         <span class="">{{ 'common.delete' | translate }}</span>
-                      </button>
+                      </a>
                     </div>
                   </td>
                 </tr>
               </ng-template>
-              <ng-template pTemplate="emptymessage">
+              <ng-template #emptymessage>
                 <tr>
                   <td colspan="6">{{ 'common.emptyList' | translate }}</td>
                 </tr>

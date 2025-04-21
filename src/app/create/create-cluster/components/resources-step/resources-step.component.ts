@@ -1,9 +1,8 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit, ChangeDetectorRef } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, Input, OnInit, ChangeDetectorRef, inject, model } from '@angular/core';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClusterFormService } from '../../services/cluster-form.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, tap, Subscription, map } from 'rxjs';
-import { TranslateService } from '@ngx-translate/core';
+import { Observable, tap, Subscription } from 'rxjs';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ClusterCapasity } from '../../../../clusters/models/clusterCapasity';
 import { ClusterEnvironment } from '../../../../core/models/clusterEnvironment';
 import { Price } from '../../../../core/models/price';
@@ -11,15 +10,23 @@ import { ProviderKubernetesVersion } from '../../../../core/models/provider';
 import { PriceService } from '../../../../core/services/price.service';
 import { ProvidersService } from '../../../../core/services/providers.service';
 import { ClusterProvider } from '../../../../clusters/models/clusterProvider';
+import { CommonModule } from '@angular/common';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { SelectModule } from 'primeng/select';
 
 @Component({
   selector: 'app-resources-step',
   templateUrl: './resources-step.component.html',
   styleUrls: ['./resources-step.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [TranslateModule, CommonModule, FormsModule, ReactiveFormsModule, SelectModule, InputNumberModule, RadioButtonModule],
 })
 export class ResourcesStepComponent implements OnInit {
+  private clusterFormService = inject(ClusterFormService);
   @Input() clusterForm: FormGroup = this.clusterFormService.clusterForm;
+  nextStep = model();
+  prevStep = model();
 
   nodePools: ClusterCapasity[] = [];
 
@@ -63,19 +70,12 @@ export class ResourcesStepComponent implements OnInit {
 
   constructor(
     private changeDetector: ChangeDetectorRef,
-    private router: Router,
-    private route: ActivatedRoute,
-    private clusterFormService: ClusterFormService,
     private priceService: PriceService,
     private translateService: TranslateService,
     private providersService: ProvidersService,
   ) {}
 
   ngOnInit(): void {
-    if (this.clusterFormService?.clusterForm?.pristine) {
-      this.router.navigate(['../'], { relativeTo: this.route });
-      this.changeDetector.detectChanges();
-    }
     this.fetchK8sVersions();
 
     this.haOptions = this.setupHaOptions();
@@ -199,6 +199,9 @@ export class ResourcesStepComponent implements OnInit {
   }
 
   private fetchPrices(): void {
+    this.pricesAll = [];
+    this.pricesFiltered = [];
+
     this.prices$ = this.priceService.getAll().pipe(
       tap((prices: Price[]) => {
         prices.forEach((price: any) => {
@@ -263,5 +266,13 @@ export class ResourcesStepComponent implements OnInit {
       return;
     }
     this.clusterFormService?.clusterForm?.get('k8sVersion')?.setValue(availableK8sversion[0]);
+  }
+
+  nextSteps(): void {
+    this.nextStep.set(true);
+  }
+
+  previousSteps(): void {
+    this.prevStep.set(true);
   }
 }

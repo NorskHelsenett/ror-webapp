@@ -2,7 +2,6 @@
   <p-table
     [columns]="selectedColumns"
     [value]="resources$ | async"
-    responsiveLayout="scroll"
     #resourcesTable
     [rowHover]="true"
     [rowsPerPageOptions]="rowsPerPage"
@@ -14,7 +13,7 @@
       'common.of' | translate | lowercase
     }} {totalRecords} {{ 'common.entries' | translate | lowercase }}"
   >
-    <ng-template pTemplate="caption">
+    <ng-template #caption>
       <div class="xs:flex-none sm:flex sm:justify-between">
         <div *ngIf="clusters$ | async as clusters">
           <app-resources-filter
@@ -52,10 +51,10 @@
         <app-export-button class="md:justify-self-end" [exportObjects]="export()" [filename]="'resources'"></app-export-button>
       </div>
     </ng-template>
-    <ng-template pTemplate="header" let-columns>
+    <ng-template #header let-columns>
       <tr>
         <th *ngFor="let col of columns" [pSortableColumn]="col?.field" class="p-1">
-          <div class="flex flex-cols">
+          <div class="flex-cols flex">
             <span>{{ col?.header }}</span> <p-sortIcon [field]="col?.field"></p-sortIcon>
           </div>
         </th>
@@ -76,26 +75,26 @@
         <th class="p-1"></th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-resource let-columns="columns">
+    <ng-template #body let-resource let-columns="columns">
       <tr>
         <td *ngFor="let col of columns">
           {{ extractData(resource, col.field) }}
         </td>
         <td>
           <a
-            class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md dark:bg-sky-500 bg-sky-500 hover:bg-sky-700 dark:hover:bg-sky-600 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+            class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-sky-500 px-4 py-2 text-sm text-white hover:bg-sky-700 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white dark:bg-sky-500 dark:hover:bg-sky-600"
             (click)="showDetails(resource)"
             >{{ 'common.details' | translate }}</a
           >
         </td>
       </tr>
     </ng-template>
-    <ng-template pTemplate="emptymessage">
+    <ng-template #emptymessage>
       <tr>
         <td colspan="7">
           <span *ngIf="filter?.kind && filter.scope">{{ 'pages.resources.table.empty' | translate }}</span>
           <div *ngIf="!filter?.kind || !filter.scope" class="text-gray-600 dark:text-gray-400">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
               <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18" />
             </svg>
 

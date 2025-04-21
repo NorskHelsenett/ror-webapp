@@ -1,24 +1,40 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import { ChangeDetectorRef, Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { MessageService } from 'primeng/api';
-import { Observable, Subscription, catchError, map } from 'rxjs';
+import { catchError, map, Observable, Subscription } from 'rxjs';
 import { AclV2 } from '../../../core/models/aclv2';
-import { Cluster } from '../../../core/models/cluster';
-import { PaginationResult } from '../../../core/models/paginatedResult';
 import { AclService } from '../../../core/services/acl.service';
 import { ClustersService } from '../../../core/services/clusters.service';
 import { ConfigService } from '../../../core/services/config.service';
+import { CommonModule } from '@angular/common';
+import { InputDropdownComponent } from '../../../shared/components/input-dropdown/input-dropdown.component';
+import { TimePipe } from '../../../shared/pipes/time.pipe';
+import { SelectModule } from 'primeng/select';
+import { PaginationResult } from '../../../core/models/paginatedResult';
+import { Cluster } from '../../../core/models/cluster';
 
 @Component({
   selector: 'app-acl-create-update',
   templateUrl: './acl-create-update.component.html',
   styleUrls: ['./acl-create-update.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    TranslateModule,
+    CommonModule,
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
+    InputDropdownComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    SelectModule,
+    TimePipe,
+  ],
 })
 export class AclCreateUpdateComponent implements OnInit, OnDestroy {
+  private configService = inject(ConfigService);
   @Input() set acl(value: AclV2 | undefined) {
     if (!value) {
       this.permission = undefined;
@@ -61,7 +77,6 @@ export class AclCreateUpdateComponent implements OnInit, OnDestroy {
     private translateService: TranslateService,
     private oauthService: OAuthService,
     private clustersService: ClustersService,
-    private configService: ConfigService,
   ) {}
 
   ngOnInit(): void {
@@ -210,15 +225,8 @@ export class AclCreateUpdateComponent implements OnInit, OnDestroy {
     }
   }
 
-  ownerOn(event: any): void {
-    if (!event) {
-      return;
-    }
-
-    let isControlDisabled: boolean;
-
-    if (event?.checked) {
-      isControlDisabled = true;
+  ownerOn(checked: boolean): void {
+    if (checked) {
       this.aclForm.patchValue({
         access: {
           read: true,
@@ -232,7 +240,6 @@ export class AclCreateUpdateComponent implements OnInit, OnDestroy {
       this.aclForm.get('access').get('update').disable();
       this.aclForm.get('access').get('delete').disable();
     } else {
-      isControlDisabled = false;
       this.aclForm.patchValue({
         access: {
           read: false,
@@ -275,7 +282,7 @@ export class AclCreateUpdateComponent implements OnInit, OnDestroy {
       this.scopeSelected({ value: this.permission.scope });
     }
     if (this.permission?.access?.owner) {
-      this.ownerOn({ checked: this.permission?.access?.owner });
+      this.ownerOn(this.permission?.access?.owner);
     }
     this.changeDetector.detectChanges();
   }

@@ -8,7 +8,6 @@ import { ResourcesV2QueryService } from '../../../resourcesv2/services/resources
 
 @Component({
   selector: 'app-cluster-resource-table',
-  standalone: true,
   imports: [TranslateModule, Resourcesv2FilterComponent, ResourcesV2ListComponent],
   templateUrl: './cluster-resource-table.component.html',
   styleUrl: './cluster-resource-table.component.scss',

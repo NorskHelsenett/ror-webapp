@@ -3,31 +3,7 @@
     <div class="">
       <div class="mb-3 mt-3 flex flex-col md:w-4/5 lg:w-1/2 xl:w-96">
         <label><span class="text-red-800 dark:text-red-300">*</span> {{ 'pages.acl.form.group' | translate }}</label>
-        <!-- <p-dropdown
-          [showClear]="true"
-          [group]="true"
-          formControlName="group"
-          optionLabel="label"
-          optionValue="value"
-          [options]="suggestedGroups"
-          [editable]="true"
-          [autofocus]="true"
-          emptyMessage="{{ 'common.emptyList' | translate }}"
-          placeholder="{{ 'pages.acl.create.groupPlaceholder' | translate }}"
-          class="w-full"
-          styleClass="w-full"
-        >
-          <ng-template let-group pTemplate="group">
-            <div class="align-items-center flex">
-              <strong>{{ group?.label }}</strong>
-            </div>
-          </ng-template>
-          <ng-template let-item pTemplate="item">
-            <div class="align-items-center flex gap-2">
-              <div class="pl-3">{{ item?.label }}</div>
-            </div>
-          </ng-template>
-        </p-dropdown> -->
+
         <app-input-dropdown
           [formGroup]="aclForm"
           [controlName]="'group'"
@@ -41,7 +17,7 @@
         >
           <ng-template let-group pTemplate="group">
             <div class="align-items-center flex">
-              <strong>{{ group?.label }} gaslkdfdsa</strong>
+              <strong>{{ group?.label }}</strong>
             </div>
           </ng-template>
           <ng-template let-item pTemplate="item">
@@ -56,14 +32,13 @@
             class="text-red-400"
             >{{ 'pages.acl.form.groupError' | translate }}</span
           >
-          <!-- <span id="group-help">{{ 'pages.acl.form.groupHelp' | translate }}</span> -->
         </div>
       </div>
       <div class="mb-3 mt-3">
-        <div class="flex flex-col">
+        <div class="">
           <label><span class="text-red-800 dark:text-red-300">*</span> {{ 'pages.acl.form.scope' | translate }}</label>
 
-          <p-dropdown
+          <p-select
             #scopeDrop
             formControlName="scope"
             *ngIf="scopes$ | async as scopes"
@@ -80,7 +55,7 @@
               <div class="align-items-center flex gap-2">
                 <div>{{ scopeDrop?.value | titlecase }}</div>
               </div>
-            </ng-template></p-dropdown
+            </ng-template></p-select
           >
         </div>
 
@@ -90,36 +65,10 @@
             class="text-red-400"
             >{{ 'pages.acl.form.scopeError' | translate }}</span
           >
-          <!-- <span id="scope-help">{{ 'pages.acl.form.scopeHelp' | translate }}</span> -->
         </div>
       </div>
       <div class="mb-3 mt-3 w-full md:w-4/5 lg:w-1/2 xl:w-96">
         <label><span class="text-red-800 dark:text-red-300">*</span> {{ 'pages.acl.form.subject' | translate }}</label>
-        <!-- <p-dropdown
-          [showClear]="true"
-          formControlName="subject"
-          [filter]="true"
-          [group]="true"
-          [options]="suggestedSubjects"
-          [editable]="true"
-          optionLabel="label"
-          optionValue="value"
-          emptyMessage="{{ 'common.emptyList' | translate }}"
-          placeholder="{{ 'pages.acl.create.subjectPlaceholder' | translate }}"
-          class="w-full"
-          styleClass="w-full"
-        >
-          <ng-template let-group pTemplate="group">
-            <div class="align-items-center flex">
-              <strong>{{ group?.label }}</strong>
-            </div>
-          </ng-template>
-          <ng-template let-item pTemplate="item">
-            <div class="align-items-center flex gap-2">
-              <div class="pl-3">{{ item?.label }}</div>
-            </div>
-          </ng-template>
-        </p-dropdown> -->
         <app-input-dropdown
           [formGroup]="aclForm"
           [controlName]="'subject'"
@@ -131,7 +80,19 @@
           optionValue="value"
           [options]="suggestedSubjects"
           placeholder="{{ 'pages.acl.create.subjectPlaceholder' | translate }}"
-        ></app-input-dropdown>
+        >
+          <ng-template let-group pTemplate="group">
+            <div class="align-items-center flex">
+              <strong>{{ group?.label }}</strong>
+            </div>
+          </ng-template>
+          <ng-template let-item pTemplate="item">
+            <div class="align-items-center flex gap-2">
+              <div class="pl-3">{{ item?.label }}</div>
+            </div>
+          </ng-template>
+        </app-input-dropdown>
+
         <div class="flex flex-col">
           <span
             *ngIf="
@@ -140,14 +101,16 @@
             class="text-red-400"
             >{{ 'pages.acl.form.subjectError' | translate }}</span
           >
-          <!-- <span id="subject-help">{{ 'pages.acl.form.subjectHelp' | translate }}</span> -->
         </div>
       </div>
 
       <div formGroupName="access" class="flex">
         <div class="mb-3 mt-3 xl:w-96">
-          <label><span class="text-red-800 dark:text-red-300">*</span> {{ 'pages.acl.form.read' | translate }}</label>
-          <p-inputSwitch formControlName="read"></p-inputSwitch>
+          <div class="flex gap-3">
+            <label><span class="text-red-800 dark:text-red-300">*</span> {{ 'pages.acl.form.read' | translate }}</label>
+
+            <input formControlName="read" type="checkbox" class="h-6 w-6" />
+          </div>
 
           <div class="flex flex-col">
             <span
@@ -164,8 +127,10 @@
           </div>
         </div>
         <div class="mb-3 mt-3 xl:w-96">
-          <label><span class="text-red-800 dark:text-red-300">*</span> {{ 'pages.acl.form.create' | translate }}</label>
-          <p-inputSwitch formControlName="create"></p-inputSwitch>
+          <div class="flex gap-3">
+            <label><span class="text-red-800 dark:text-red-300">*</span> {{ 'pages.acl.form.create' | translate }}</label>
+            <input formControlName="create" type="checkbox" class="h-6 w-6" />
+          </div>
 
           <div class="flex flex-col">
             <span
@@ -182,8 +147,10 @@
           </div>
         </div>
         <div class="mb-3 mt-3 xl:w-96">
-          <label><span class="text-red-800 dark:text-red-300">*</span> {{ 'pages.acl.form.update' | translate }}</label>
-          <p-inputSwitch formControlName="update"></p-inputSwitch>
+          <div class="flex gap-3">
+            <label><span class="text-red-800 dark:text-red-300">*</span> {{ 'pages.acl.form.update' | translate }}</label>
+            <input formControlName="update" type="checkbox" class="h-6 w-6" />
+          </div>
 
           <div class="flex flex-col">
             <span
@@ -200,8 +167,10 @@
           </div>
         </div>
         <div class="mb-3 mt-3 xl:w-96">
-          <label><span class="text-red-800 dark:text-red-300">*</span> {{ 'pages.acl.form.delete' | translate }}</label>
-          <p-inputSwitch formControlName="delete"></p-inputSwitch>
+          <div class="flex gap-3">
+            <label><span class="text-red-800 dark:text-red-300">*</span> {{ 'pages.acl.form.delete' | translate }}</label>
+            <input formControlName="delete" type="checkbox" class="h-6 w-6" />
+          </div>
 
           <div class="flex flex-col">
             <span
@@ -218,8 +187,10 @@
           </div>
         </div>
         <div class="mb-3 mt-3 xl:w-96">
-          <label><span class="text-red-800 dark:text-red-300">*</span> {{ 'pages.acl.form.owner' | translate }}</label>
-          <p-inputSwitch formControlName="owner" (onChange)="ownerOn($event)"></p-inputSwitch>
+          <div class="flex gap-3">
+            <label><span class="text-red-800 dark:text-red-300">*</span> {{ 'pages.acl.form.owner' | translate }}</label>
+            <input formControlName="owner" type="checkbox" (ngModelChange)="ownerOn($event)" class="h-6 w-6" />
+          </div>
 
           <div class="flex flex-col">
             <span
@@ -238,9 +209,10 @@
       </div>
       <div formGroupName="kubernetes" class="flex">
         <div class="mb-3 mt-3 xl:w-96">
-          <label><span class="text-red-800 dark:text-red-300">*</span> {{ 'pages.acl.form.logon' | translate }}</label>
-          <p-inputSwitch formControlName="logon"></p-inputSwitch>
-
+          <div class="flex gap-3">
+            <label><span class="text-red-800 dark:text-red-300">*</span> {{ 'pages.acl.form.logon' | translate }}</label>
+            <input formControlName="logon" type="checkbox" class="h-6 w-6" />
+          </div>
           <div class="flex flex-col">
             <span
               *ngIf="

@@ -1,16 +1,24 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import { Table } from 'primeng/table';
+import { PolicyBarComponent } from './../policy-bar/policy-bar.component';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { Table, TableModule } from 'primeng/table';
 import { Subscription } from 'rxjs';
 import { ConfigService } from '../../../core/services/config.service';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { FormsModule } from '@angular/forms';
+import { ButtonModule } from 'primeng/button';
+import { TagModule } from 'primeng/tag';
+import { PolicyResultComponent } from '../policy-result/policy-result.component';
 
 @Component({
   selector: 'app-policy-policy',
   templateUrl: './policy-policy.component.html',
   styleUrls: ['./policy-policy.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [TranslateModule, PolicyBarComponent, TableModule, MultiSelectModule, FormsModule, ButtonModule, TagModule, PolicyResultComponent],
 })
 export class PolicyPolicyComponent implements OnInit {
+  private configService = inject(ConfigService);
   @ViewChildren('policyTable')
   tables: QueryList<Table>;
 
@@ -40,7 +48,6 @@ export class PolicyPolicyComponent implements OnInit {
   constructor(
     private changeDetector: ChangeDetectorRef,
     private translateService: TranslateService,
-    private configService: ConfigService,
   ) {}
 
   ngOnInit(): void {

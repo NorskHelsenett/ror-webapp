@@ -17,7 +17,6 @@
             [rowsPerPageOptions]="rowsPerPage"
             [rowHover]="true"
             sortField="group"
-            responsiveLayout="stack"
             [sortOrder]="1"
             [totalRecords]="nodePool?.nodes?.length"
             [reorderableColumns]="true"
@@ -26,7 +25,7 @@
               'common.of' | translate | lowercase
             }} {totalRecords} {{ 'common.entries' | translate | lowercase }}"
           >
-            <ng-template pTemplate="header">
+            <ng-template #header>
               <tr>
                 <th pSortableColumn="name" class="p-1">
                   {{ 'pages.clusters.details.nodePools.table.column.name' | translate }} <p-sortIcon field="name"></p-sortIcon>
@@ -68,7 +67,7 @@
                 </th>
               </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-node>
+            <ng-template #body let-node>
               <tr>
                 <td>{{ node?.name }}</td>
                 <td>{{ node?.role }}</td>
@@ -81,7 +80,7 @@
                 </td>
               </tr>
             </ng-template>
-            <ng-template pTemplate="emptymessage">
+            <ng-template #emptymessage>
               <tr>
                 <td colspan="6">{{ 'common.emptyList' | translate }}</td>
               </tr>

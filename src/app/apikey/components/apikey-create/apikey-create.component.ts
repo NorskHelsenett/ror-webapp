@@ -1,19 +1,24 @@
-import { ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { TranslateService } from '@ngx-translate/core';
+import { ChangeDetectorRef, Component, EventEmitter, inject, OnDestroy, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ClipboardService } from 'ngx-clipboard';
 import { MessageService } from 'primeng/api';
 import { Subscription, catchError } from 'rxjs';
 import { ApiKey } from '../../../core/models/apikey';
 import { ApikeysService } from '../../../core/services/apikeys.service';
 import { ConfigService } from '../../../core/services/config.service';
+import { CommonModule } from '@angular/common';
+import { DatePickerModule } from 'primeng/datepicker';
+import { SelectModule } from 'primeng/select';
 
 @Component({
   selector: 'app-apikey-create',
   templateUrl: './apikey-create.component.html',
   styleUrls: ['./apikey-create.component.scss'],
+  imports: [TranslateModule, CommonModule, FormsModule, ReactiveFormsModule, SelectModule, DatePickerModule],
 })
 export class ApikeyCreateComponent implements OnInit, OnDestroy {
+  private configService = inject(ConfigService);
   @Output() cancelRequested = new EventEmitter<void>();
   @Output() created = new EventEmitter<void>();
 
@@ -36,7 +41,6 @@ export class ApikeyCreateComponent implements OnInit, OnDestroy {
     private clipboardService: ClipboardService,
     private messageService: MessageService,
     private translateService: TranslateService,
-    private configService: ConfigService,
   ) {}
 
   ngOnInit(): void {

@@ -1,24 +1,31 @@
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { MessageService } from 'primeng/api';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, inject, Input, model, OnInit, Output } from '@angular/core';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClusterFormService } from '../../services/cluster-form.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { Subscription, catchError } from 'rxjs';
 import { environment } from '../../../../../environments/environment';
 import { ClusterProvider } from '../../../../clusters/models/clusterProvider';
-import { ClusterOrderModel, ClusterOrderType, ProviderConfig } from '../../../../core/models/clusterOrder';
+import { ClusterOrderModel, ClusterOrderType } from '../../../../core/models/clusterOrder';
 import { OrderService } from '../../../../core/services/order.service';
+import { CommonModule } from '@angular/common';
+import { SummaryComponent } from '../summary/summary.component';
 
 @Component({
   selector: 'app-summary-step',
   templateUrl: './summary-step.component.html',
   styleUrls: ['./summary-step.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [TranslateModule, CommonModule, RouterModule, FormsModule, ReactiveFormsModule, SummaryComponent],
 })
 export class SummaryStepComponent implements OnInit {
+  private clusterFormService = inject(ClusterFormService);
   @Input() clusterForm: FormGroup = this.clusterFormService.clusterForm;
+  @Output() gotoStep = new EventEmitter<number | string>();
+
+  prevStep = model();
 
   account: any | undefined;
   createError: any | undefined;
@@ -29,7 +36,6 @@ export class SummaryStepComponent implements OnInit {
     private changeDetector: ChangeDetectorRef,
     private router: Router,
     private route: ActivatedRoute,
-    private clusterFormService: ClusterFormService,
     private oauthService: OAuthService,
     private orderService: OrderService,
     private messageService: MessageService,
@@ -37,12 +43,9 @@ export class SummaryStepComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (this.clusterFormService.clusterForm.pristine) {
-      this.router.navigate(['../'], { relativeTo: this.route });
-    }
-
     this.account = this.oauthService.getIdentityClaims();
   }
+
   createCluster(): void {
     this.createError = undefined;
     this.changeDetector.detectChanges();
@@ -148,7 +151,7 @@ export class SummaryStepComponent implements OnInit {
     let hasFalse = Array.from(validMap.values()).some((value) => value === false);
 
     let providerConfigValid = false;
-    if (this.clusterFormService?.selectedProvider?.type?.toLocaleLowerCase() === ClusterProvider.PrivatSky?.toLocaleLowerCase()) {
+    if (this.clusterFormService?.selectedProvider?.type?.toLocaleLowerCase() === ClusterProvider.Tanzu?.toLocaleLowerCase()) {
       providerConfigValid = this.clusterFormService?.clusterForm?.get('providerConfig')?.get('tanzu')?.valid;
     } else if (this.clusterFormService?.selectedProvider?.type?.toLocaleLowerCase() === ClusterProvider.Talos?.toLocaleLowerCase()) {
       providerConfigValid = true;
@@ -166,6 +169,14 @@ export class SummaryStepComponent implements OnInit {
     }
 
     return providerValid && providerConfigValid && !hasFalse && ownerGroupValid;
+  }
+
+  prevSteps(): void {
+    this.prevStep.set(true);
+  }
+
+  linkToStep(step: number | string): void {
+    this.gotoStep.emit(step);
   }
 
   private createTagArray(): Map<string, string> {

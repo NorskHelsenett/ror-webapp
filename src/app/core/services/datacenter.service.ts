@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Datacenter } from '../models/datacenter';
 import { ConfigService } from './config.service';
 
@@ -8,10 +8,8 @@ import { ConfigService } from './config.service';
   providedIn: 'root',
 })
 export class DatacenterService {
-  constructor(
-    private httpClient: HttpClient,
-    private configService: ConfigService,
-  ) {}
+  private configService = inject(ConfigService);
+  private httpClient = inject(HttpClient);
 
   get(): Observable<Array<Datacenter>> {
     const url = `${this.configService.config.rorApi}/v1/datacenters`;

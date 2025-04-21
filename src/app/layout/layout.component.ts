@@ -1,5 +1,6 @@
-import { TranslateService } from '@ngx-translate/core';
-import { ChangeDetectionStrategy, Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { ScrollTopModule } from 'primeng/scrolltop';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { ChangeDetectionStrategy, Component, OnInit, ChangeDetectorRef, OnDestroy, inject, PLATFORM_ID, Inject } from '@angular/core';
 import { ThemeService } from '../core/services/theme.service';
 import { Observable, Subscription, catchError, share, tap } from 'rxjs';
 import { AuthService } from '../core/services/auth.service';
@@ -9,16 +10,24 @@ import { SseService } from '../create/create-cluster/services/sse.service';
 import { SignalService } from '../create/create-cluster/services/signal.service';
 import { BigEventsService } from '../core/services/big-events.service';
 import { environment } from '../../environments/environment';
+import { ConfigService } from '../core/services/config.service';
+import { CommonModule, isPlatformBrowser, NgClass } from '@angular/common';
+import { DesemberGiftComponent } from '../shared/components/desember-gift/desember-gift.component';
+import { SantaComponent } from '../shared/components/santa/santa.component';
+import { RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [TranslateModule, DesemberGiftComponent, SantaComponent, RouterModule, ScrollTopModule, CommonModule, RouterLinkActive, RouterLink],
+  standalone: true,
 })
 export class LayoutComponent implements OnInit, OnDestroy {
+  private configService = inject(ConfigService);
   appVersion = environment.appVersion;
-  isDark = false;
+  isDark: boolean | undefined;
   showUserMenu = false;
   showSubMenu = false;
   showMobileMenu = false;
@@ -30,6 +39,8 @@ export class LayoutComponent implements OnInit, OnDestroy {
   birthday = false;
   desember = false;
   christmas = false;
+  rorDocsUrl: string | undefined;
+  externalDocsUrl: string | undefined;
 
   adminRead$: Observable<boolean> | undefined;
   adminOwner$: Observable<boolean> | undefined;
@@ -41,6 +52,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
   private subscriptions = new Subscription();
 
   constructor(
+    @Inject(PLATFORM_ID) private platformId: object,
     private changeDetector: ChangeDetectorRef,
     private themeService: ThemeService,
     private authService: AuthService,
@@ -52,7 +64,12 @@ export class LayoutComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.isDark = this.themeService.isDark.value;
+    this.subscriptions.add(
+      this.themeService.isDark.subscribe((isDark) => {
+        this.isDark = isDark;
+        this.changeDetector.detectChanges();
+      }),
+    );
     this.lang = this.translateService.currentLang;
     this.fetchAcl();
 
@@ -60,7 +77,12 @@ export class LayoutComponent implements OnInit, OnDestroy {
     this.birthday = this.bigEventsService.isRORBirthday();
     this.currentYear = new Date().getFullYear();
 
-    this.setupSSEClients();
+    if (isPlatformBrowser(this.platformId)) {
+      this.setupSSEClients();
+    }
+
+    this.rorDocsUrl = this.configService.config.docsUrl;
+    this.externalDocsUrl = this.configService.config.externalDocsUrl;
 
     this.changeDetector.detectChanges();
   }
@@ -138,7 +160,10 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
     this.translateService.use(lang);
     this.lang = lang;
-    localStorage.setItem('language', lang);
+
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem('language', lang);
+    }
     this.changeDetector.detectChanges();
   }
 

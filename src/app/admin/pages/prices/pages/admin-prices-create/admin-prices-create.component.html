@@ -23,7 +23,6 @@
                     type="text"
                     aria-describedby="provider-help"
                     formControlName="provider"
-                    pInputText
                   />
                   <div class="flex flex-col">
                     <span
@@ -126,7 +125,7 @@
 
                 <div class="mb-3 xl:w-96">
                   <h3>* {{ 'pages.admin.prices.form.from' | translate }}</h3>
-                  <p-calendar aria-describedby="from-help" formControlName="from"></p-calendar>
+                  <p-datepicker aria-describedby="from-help" formControlName="from"></p-datepicker>
                   <div class="flex flex-col">
                     <span *ngIf="priceForm.get('from').touched && priceForm.get('from').dirty && priceForm.get('from').errors" class="text-red-400">{{
                       'pages.admin.prices.form.fromError' | translate
@@ -137,7 +136,7 @@
 
                 <div class="mb-3 xl:w-96">
                   <h3>{{ 'pages.admin.prices.form.to' | translate }}</h3>
-                  <p-calendar aria-describedby="to-help" formControlName="to"></p-calendar>
+                  <p-datepicker aria-describedby="to-help" formControlName="to"></p-datepicker>
                   <div class="flex flex-col">
                     <span *ngIf="priceForm.get('to').touched && priceForm.get('to').dirty && priceForm.get('to').errors" class="text-red-400">{{
                       'pages.admin.prices.form.toError' | translate

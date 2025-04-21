@@ -1,6 +1,6 @@
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Observable, Subscription, catchError, tap } from 'rxjs';
 import dayjs from 'dayjs';
 import dayjsRelativeTime from 'dayjs/plugin/relativeTime';
@@ -11,12 +11,16 @@ import { WorkspacesService } from '../../../core/services/workspaces.service';
 import { DatacenterService } from '../../../core/services/datacenter.service';
 import { Datacenter } from '../../../core/models/datacenter';
 import { Workspace } from '../../../core/models/workspace';
+import { CommonModule } from '@angular/common';
+import { SpinnerComponent } from '../../../shared/components';
+import { TimePipe } from '../../../shared/pipes/time.pipe';
 
 @Component({
   selector: 'app-order-detail',
   templateUrl: './order-detail.component.html',
   styleUrls: ['./order-detail.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [TranslateModule, CommonModule, RouterModule, SpinnerComponent, TimePipe],
 })
 export class OrderDetailComponent implements OnInit {
   order$: Observable<ClusterOrder> | undefined;
