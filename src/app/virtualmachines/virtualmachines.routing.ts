@@ -3,7 +3,7 @@ import { VirtualmachinesComponent } from './pages/virtualmachines/virtualmachine
 
 import { Routes, RouterModule } from '@angular/router';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     component: VirtualmachinesComponent,

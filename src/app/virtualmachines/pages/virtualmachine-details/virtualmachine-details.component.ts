@@ -11,7 +11,7 @@ import { VirtualmachineMetadataComponent } from '../../components/virtualmachine
 import { VirtualmachineToolsComponent } from '../../components/virtualmachine-tools/virtualmachine-tools.component';
 import { VirtualmachineStatusComponent } from '../../components/virtualmachine-status/virtualmachine-status.component';
 import { VirtualmachineNetworkComponent } from '../../components/virtualmachine-network/virtualmachine-network.component';
-import { ProviderComponent } from '../../../shared/components/provider/provider.component';
+
 import { VirtualmachineOsComponent } from '../../components/virtualmachine-os/virtualmachine-os.component';
 import { VirtualmachineDisksComponent } from '../../components/virtualmachine-disks/virtualmachine-disks.component';
 import { VirtualmachineSpecsComponent } from '../../components/virtualmachine-specs/virtualmachine-specs.component';
@@ -23,10 +23,10 @@ import { VirtualmachineCpuComponent } from '../../components/virtualmachine-cpu/
 import { VirtualmachinePriceComponent } from '../../components/virtualmachine-price/virtualmachine-price.component';
 import { VirtualmachineMemoryComponent } from '../../components/virtualmachine-memory/virtualmachine-memory.component';
 import { VirtualmachineMetricsComponent } from '../../components/virtualmachine-metrics/virtualmachine-metrics.component';
+import { ProviderComponent } from '../../../shared/components/provider/provider.component';
 
 @Component({
   selector: 'app-virtualmachine-details',
-  standalone: true,
   imports: [
     TranslateModule,
     AsyncPipe,

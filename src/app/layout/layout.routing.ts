@@ -98,9 +98,16 @@ export const routes: Routes = [
           return m.ReleaseNotesComponent;
         },
       },
+      // {
+      //   path: 'virtualmachines',
+      //   loadChildren: () => import('../virtualmachines/virtualmachines.module').then((m) => m.VirtualmachinesModule),
+      // },
       {
         path: 'virtualmachines',
-        loadChildren: () => import('../virtualmachines/virtualmachines.module').then((m) => m.VirtualmachinesModule),
+        async loadChildren() {
+          const m = await import('../virtualmachines/virtualmachines.routing');
+          return m.routes;
+        },
       },
       { path: '**', redirectTo: 'error/404' },
     ],

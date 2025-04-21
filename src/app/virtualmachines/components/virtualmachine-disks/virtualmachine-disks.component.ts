@@ -1,18 +1,18 @@
 import { Component, inject, Input } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { DecimalPipe, LowerCasePipe, TitleCasePipe } from '@angular/common';
-import { SharedModule } from '../../../shared/shared.module';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { Resource } from '@rork8s/ror-resources/models';
 import { TabViewModule } from 'primeng/tabview';
 import { TableModule } from 'primeng/table';
 import { ConfigService } from '../../../core/services/config.service';
-import { Tooltip, TooltipModule } from 'primeng/tooltip';
+import { TooltipModule } from 'primeng/tooltip';
+import { TrueFalseComponent } from '../../../shared/components';
 
 @Component({
   selector: 'app-virtualmachine-disks',
   standalone: true,
-  imports: [TranslateModule, DecimalPipe, SharedModule, ProgressBarModule, TabViewModule, TableModule, TitleCasePipe, LowerCasePipe, TooltipModule],
+  imports: [TranslateModule, DecimalPipe, ProgressBarModule, TabViewModule, TableModule, TitleCasePipe, LowerCasePipe, TooltipModule, TrueFalseComponent],
   templateUrl: './virtualmachine-disks.component.html',
   styleUrl: './virtualmachine-disks.component.scss',
 })
