@@ -1,6 +1,6 @@
-import { AsyncPipe, Location, NgIf } from '@angular/common';
+import { AsyncPipe, isPlatformBrowser, Location, NgClass, NgIf } from '@angular/common';
 import { Resourcesv2Service } from './../../../core/services/resourcesv2.service';
-import { ChangeDetectionStrategy, Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit, ChangeDetectorRef, ViewChild, PLATFORM_ID, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { Resource } from '@rork8s/ror-resources/models';
@@ -24,13 +24,14 @@ import { VirtualmachinePriceComponent } from '../../components/virtualmachine-pr
 import { VirtualmachineMemoryComponent } from '../../components/virtualmachine-memory/virtualmachine-memory.component';
 import { VirtualmachineMetricsComponent } from '../../components/virtualmachine-metrics/virtualmachine-metrics.component';
 import { ProviderComponent } from '../../../shared/components/provider/provider.component';
+import { Tabs, TabsModule } from 'primeng/tabs';
 
 @Component({
   selector: 'app-virtualmachine-details',
   imports: [
     TranslateModule,
     AsyncPipe,
-    TabViewModule,
+    TabsModule,
     NgIf,
     VirtualmachinesRawComponent,
     VirtualmachineMetadataComponent,
@@ -47,6 +48,7 @@ import { ProviderComponent } from '../../../shared/components/provider/provider.
     VirtualmachineMemoryComponent,
     VirtualmachinePriceComponent,
     VirtualmachineMetricsComponent,
+    NgClass,
   ],
   templateUrl: './virtualmachine-details.component.html',
   styleUrl: './virtualmachine-details.component.scss',
@@ -66,6 +68,7 @@ export class VirtualmachineDetailsComponent implements OnInit {
       query: '',
     },
   ];
+  @ViewChild('tabs') tabsComponent: Tabs | undefined;
 
   private activeRoute = inject(ActivatedRoute);
   private router = inject(Router);
@@ -74,6 +77,8 @@ export class VirtualmachineDetailsComponent implements OnInit {
   private resourcesv2Service = inject(Resourcesv2Service);
   private oauthService = inject(OAuthService);
   private virtualmachineService = inject(VirtualmachineService);
+
+  constructor(@Inject(PLATFORM_ID) private platformId: object) {}
 
   ngOnInit() {
     const tab = this.activeRoute.snapshot.queryParams['tab'];
@@ -112,9 +117,17 @@ export class VirtualmachineDetailsComponent implements OnInit {
     );
   }
 
-  switchTab(selectedIndex: number): void {
+  setTab(index: number): void {
+    if (isPlatformBrowser(this.platformId)) {
+      this.activeTabIndex = index;
+      this.switchTab();
+      this.changeDetector.detectChanges();
+    }
+  }
+
+  switchTab(): void {
     try {
-      const tab = this.tabs[selectedIndex];
+      const tab = this.tabs[this.activeTabIndex];
       this.location.replaceState(`virtualmachines/${this.resourceId}`, tab?.query);
     } catch {
       //ignoring

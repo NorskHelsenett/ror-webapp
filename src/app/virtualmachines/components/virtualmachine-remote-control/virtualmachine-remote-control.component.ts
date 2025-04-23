@@ -1,18 +1,18 @@
-import { Location } from '@angular/common';
-import { Component, inject, Input } from '@angular/core';
+import { NgClass } from '@angular/common';
+import { Component, inject, Input, ViewChild } from '@angular/core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Resource } from '@rork8s/ror-resources/models';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { ClipboardService } from 'ngx-clipboard';
 import { MessageService } from 'primeng/api';
-import { TabViewModule } from 'primeng/tabview';
+import { Tabs, TabsModule } from 'primeng/tabs';
 import { TerminalModule, TerminalService } from 'primeng/terminal';
 import { VirtualmachineService } from '../../services/virtualmachine.service';
 
 @Component({
   selector: 'app-virtualmachine-remote-control',
   standalone: true,
-  imports: [TranslateModule, TabViewModule, TerminalModule],
+  imports: [TranslateModule, TabsModule, TerminalModule, NgClass],
   providers: [TerminalService],
   templateUrl: './virtualmachine-remote-control.component.html',
   styleUrl: './virtualmachine-remote-control.component.scss',
@@ -27,7 +27,8 @@ export class VirtualmachineRemoteControlComponent {
   sshCommand = '';
   mstscCommand = '';
 
-  private location = inject(Location);
+  @ViewChild('tabs') tabsComponent: Tabs | undefined;
+
   private clipboardService = inject(ClipboardService);
   private messageService = inject(MessageService);
   private translateService = inject(TranslateService);
@@ -64,9 +65,9 @@ export class VirtualmachineRemoteControlComponent {
     });
   }
 
-  switchTab(selectedIndex: number): void {
+  switchTab(): void {
     try {
-      const tab = this.tabs[selectedIndex];
+      const tab = this.tabs[this.activeTabIndex];
       //this.location.replaceState(`virtualmachines/${this.resourceId}`, tab?.query);
     } catch {
       //ignoring

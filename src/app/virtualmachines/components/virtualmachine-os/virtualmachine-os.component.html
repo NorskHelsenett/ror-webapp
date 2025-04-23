@@ -3,7 +3,7 @@
     <div class="dark:bg-darker col-span-2 overflow-x-auto rounded-md bg-white">
       <div class="dark:border-primary flex border-b p-4">
         <h4 class="dark:text-light text-lg font-semibold text-gray-500">{{ 'pages.virtualmachines.details.operatingSystem.title' | translate }}</h4>
-        <svg viewBox="0 0 24 24" class="h-6 w-6 ml-2 stroke-green-700" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg viewBox="0 0 24 24" class="ml-2 h-6 w-6 stroke-green-700" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
           <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
           <g id="SVGRepo_iconCarrier">
@@ -18,7 +18,7 @@
           </g>
         </svg>
       </div>
-      <div class="overflow-x-auto min-h-[240px]">
+      <div class="min-h-[240px] overflow-x-auto">
         <div class="relative mb-3">
           @if (virtualmachine?.virtualmachine?.status.operatingSystem) {
             <table class="w-full border-collapse text-left">
@@ -68,7 +68,7 @@
               </tbody>
             </table>
           } @else {
-            {{ 'common.empty' | translate }}
+            {{ 'common.unknown' | translate }}
           }
         </div>
       </div>

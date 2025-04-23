@@ -1,6 +1,6 @@
 <div *ngIf="resource$ | async"></div>
-<div class="dark:border-primary-darker flex items-center gap-4 border-b px-4 py-4 lg:py-6">
-  <h1 class="flex-grow text-2xl font-semibold flex">
+<div class="dark:border-primary-darker flex items-center gap-4 border-b px-2 py-2 lg:py-6">
+  <h1 class="flex flex-grow text-2xl font-semibold">
     <app-provider class="mr-2" [providerTypeOrName]="virtualMachine?.virtualmachine?.provider" [showText]="false"></app-provider>
     <span *ngIf="virtualMachine?.metadata?.name">{{ virtualMachine?.metadata?.name }}</span>
   </h1>
@@ -22,20 +22,71 @@
   </button>
 </div>
 
-<p-tabView styleClass="tabview" [(activeIndex)]="selectedTabIndex" (activeIndexChange)="switchTab($event)" [scrollable]="true">
-  <p-tabPanel>
-    <ng-template pTemplate="header">
+<p-tabs [(value)]="activeTabIndex" scrollable="true" #tabs (valueChange)="switchTab()">
+  <p-tablist>
+    <p-tab [value]="0" [ngClass]="{ 'bg-green-500 text-white dark:bg-green-700 dark:text-white': activeTabIndex === 0 }">
       <div class="flex text-nowrap">
         <i class="pi pi-server mt-1"></i>
         <span class="ml-2">{{ 'pages.virtualmachines.details.title' | translate }}</span>
       </div>
-    </ng-template>
-    <ng-template pTemplate="content">
+    </p-tab>
+
+    <p-tab [value]="1" [ngClass]="{ 'bg-green-500 text-white dark:bg-green-700 dark:text-white': activeTabIndex === 1 }">
+      <div class="flex text-nowrap">
+        <i class="pi pi-chart-bar mt-1"></i>
+        <span class="ml-2">{{ 'pages.virtualmachines.details.metrics.title' | translate }}</span>
+      </div>
+    </p-tab>
+
+    <p-tab [value]="2" [ngClass]="{ 'bg-green-500 text-white dark:bg-green-700 dark:text-white': activeTabIndex === 2 }">
+      <div class="flex text-nowrap">
+        <i class="pi pi-save mt-1"></i>
+        <span class="ml-2">{{ 'pages.virtualmachines.details.disks.title' | translate }}</span>
+      </div>
+    </p-tab>
+
+    <p-tab [value]="3" [ngClass]="{ 'bg-green-500 text-white dark:bg-green-700 dark:text-white': activeTabIndex === 3 }">
+      <div class="flex text-nowrap">
+        <i class="pi pi-wifi mt-1"></i>
+        <span class="ml-2">{{ 'pages.virtualmachines.details.network.title' | translate }}</span>
+      </div>
+    </p-tab>
+    <p-tab [value]="4" [ngClass]="{ 'bg-green-500 text-white dark:bg-green-700 dark:text-white': activeTabIndex === 4 }">
+      <div class="flex text-nowrap">
+        <i class="pi pi-file mt-1"></i>
+        <span class="ml-2">{{ 'pages.virtualmachines.details.metadata.title' | translate }}</span>
+      </div>
+    </p-tab>
+
+    <p-tab [value]="5" [ngClass]="{ 'bg-green-500 text-white dark:bg-green-700 dark:text-white': activeTabIndex === 5 }">
+      <div class="flex text-nowrap">
+        <i class="pi pi-objects-column mt-1"></i>
+        <span class="ml-2">{{ 'pages.virtualmachines.details.backups.title' | translate }}</span>
+      </div>
+    </p-tab>
+
+    <p-tab [value]="6" [ngClass]="{ 'bg-green-500 text-white dark:bg-green-700 dark:text-white': activeTabIndex === 6 }">
+      <div class="flex text-nowrap">
+        <i class="pi pi-desktop mt-1"></i>
+        <span class="ml-2">{{ 'pages.virtualmachines.details.remotecontrol.title' | translate }}</span>
+      </div>
+    </p-tab>
+
+    <p-tab [value]="7" [ngClass]="{ 'bg-green-500 text-white dark:bg-green-700 dark:text-white': activeTabIndex === 7 }">
+      <div class="flex text-nowrap">
+        <i class="pi pi-file mt-1"></i>
+        <span class="ml-2">{{ 'pages.virtualmachines.details.raw.title' | translate }}</span>
+      </div>
+    </p-tab>
+  </p-tablist>
+
+  <p-tabpanels>
+    <p-tabpanel [value]="0">
       <div class="">
         <div>
-          <div class="dark:bg-transparent flex flex-col gap-4 rounded-md bg-white">
-            <div class="p-3 flex flex-row gap-4">
-              <div class="flex-shrink w-3/4">
+          <div class="flex flex-col gap-2 rounded-md bg-white dark:bg-transparent">
+            <div class="flex flex-row gap-4">
+              <div class="w-3/4 flex-shrink">
                 <div class="flex flex-col gap-4">
                   <div class="grid grid-cols-3 gap-4">
                     <app-virtualmachine-cpu></app-virtualmachine-cpu>
@@ -43,9 +94,9 @@
                     <app-virtualmachine-price></app-virtualmachine-price>
                   </div>
                   <div class="flex gap-4">
-                    <app-virtualmachine-os class="mt-3 flex-grow overflow-y-auto h-full" [virtualmachine]="virtualMachine"></app-virtualmachine-os>
+                    <app-virtualmachine-os class="mt-3 h-full flex-grow overflow-y-auto" [virtualmachine]="virtualMachine"></app-virtualmachine-os>
                     <app-virtualmachine-network
-                      class="mt-3 flex-grow justify-stretch h-full"
+                      class="mt-3 h-full flex-grow justify-stretch"
                       [virtualmachine]="virtualMachine"
                     ></app-virtualmachine-network>
                   </div>
@@ -54,7 +105,7 @@
                 </div>
               </div>
 
-              <div class="flex-grow w-1/4">
+              <div class="w-1/4 flex-grow">
                 <div class="grid-cols grid gap-4">
                   <app-virtualmachine-status [virtualmachine]="virtualMachine"></app-virtualmachine-status>
                   <app-virtualmachine-specs [virtualmachine]="virtualMachine"></app-virtualmachine-specs>
@@ -66,132 +117,76 @@
           </div>
         </div>
       </div>
-    </ng-template>
-  </p-tabPanel>
+    </p-tabpanel>
 
-  <p-tabPanel header="{{ 'pages.virtualmachines.details.metrics.title' | translate }}">
-    <ng-template pTemplate="header">
-      <div class="flex text-nowrap">
-        <i class="pi pi-chart-bar mt-1"></i>
-        <span class="ml-2">{{ 'pages.virtualmachines.details.metrics.title' | translate }}</span>
-      </div>
-    </ng-template>
-    <ng-template pTemplate="content">
+    <p-tabpanel [value]="1">
       <div class="">
         <div class="flex flex-col rounded-md">
-          <div class="p-3 flex flex-col">
+          <div class="flex flex-col p-3">
             <app-virtualmachine-metrics [virtualmachine]="virtualMachine"></app-virtualmachine-metrics>
           </div>
         </div>
       </div>
-    </ng-template>
-  </p-tabPanel>
+    </p-tabpanel>
 
-  <p-tabPanel header="{{ 'pages.virtualmachines.details.disks.title' | translate }}">
-    <ng-template pTemplate="header">
-      <div class="flex text-nowrap">
-        <i class="pi pi-save mt-1"></i>
-        <span class="ml-2">{{ 'pages.virtualmachines.details.disks.title' | translate }}</span>
-      </div>
-    </ng-template>
-    <ng-template pTemplate="content">
+    <p-tabpanel [value]="2">
       <div class="">
         <div class="dark:bg-darker flex flex-col rounded-md bg-white">
-          <div class="p-3 flex flex-col">
+          <div class="flex flex-col p-3">
             <app-virtualmachine-disks [virtualmachine]="virtualMachine"></app-virtualmachine-disks>
           </div>
         </div>
       </div>
-    </ng-template>
-  </p-tabPanel>
+    </p-tabpanel>
 
-  <p-tabPanel header="{{ 'pages.virtualmachines.details.network.title' | translate }}">
-    <ng-template pTemplate="header">
-      <div class="flex text-nowrap">
-        <i class="pi pi-wifi mt-1"></i>
-        <span class="ml-2">{{ 'pages.virtualmachines.details.network.title' | translate }}</span>
-      </div>
-    </ng-template>
-    <ng-template pTemplate="content">
+    <p-tabpanel [value]="3">
       <div class="">
         <div class="dark:bg-darker flex flex-col rounded-md bg-white">
-          <div class="p-3 flex flex-col">
+          <div class="flex flex-col p-3">
             <app-virtualmachine-network [virtualmachine]="virtualMachine"></app-virtualmachine-network>
           </div>
         </div>
       </div>
-    </ng-template>
-  </p-tabPanel>
+    </p-tabpanel>
 
-  <p-tabPanel header="{{ 'pages.virtualmachines.details.metadata.title' | translate }}">
-    <ng-template pTemplate="header">
-      <div class="flex text-nowrap">
-        <i class="pi pi-file mt-1"></i>
-        <span class="ml-2">{{ 'pages.virtualmachines.details.metadata.title' | translate }}</span>
-      </div>
-    </ng-template>
-    <ng-template pTemplate="content">
+    <p-tabpanel [value]="4">
       <div class="">
         <div class="dark:bg-darker flex flex-col rounded-md bg-white">
-          <div class="p-3 flex flex-col">
+          <div class="flex flex-col p-3">
             <app-virtualmachine-metadata [virtualmachine]="virtualMachine"></app-virtualmachine-metadata>
           </div>
         </div>
       </div>
-    </ng-template>
-  </p-tabPanel>
+    </p-tabpanel>
 
-  <p-tabPanel header="{{ 'pages.virtualmachines.details.backups.title' | translate }}">
-    <ng-template pTemplate="header">
-      <div class="flex text-nowrap">
-        <i class="pi pi-objects-column mt-1"></i>
-        <span class="ml-2">{{ 'pages.virtualmachines.details.backups.title' | translate }}</span>
-      </div>
-    </ng-template>
-    <ng-template pTemplate="content">
+    <p-tabpanel [value]="5">
       <div class="">
         <div class="dark:bg-darker flex flex-col rounded-md bg-white">
-          <div class="p-3 flex flex-col">
+          <div class="flex flex-col p-3">
             <app-virtualmachine-backup [virtualmachine]="virtualMachine"></app-virtualmachine-backup>
           </div>
         </div>
       </div>
-    </ng-template>
-  </p-tabPanel>
+    </p-tabpanel>
 
-  <p-tabPanel header="{{ 'pages.virtualmachines.details.remotecontrol.title' | translate }}">
-    <ng-template pTemplate="header">
-      <div class="flex text-nowrap">
-        <i class="pi pi-desktop mt-1"></i>
-        <span class="ml-2">{{ 'pages.virtualmachines.details.remotecontrol.title' | translate }}</span>
-      </div>
-    </ng-template>
-    <ng-template pTemplate="content">
+    <p-tabpanel [value]="6">
       <div class="">
         <div class="dark:bg-darker flex flex-col rounded-md bg-white">
-          <div class="p-3 flex flex-col">
+          <div class="flex flex-col p-3">
             <app-virtualmachine-remote-control [virtualmachine]="virtualMachine"></app-virtualmachine-remote-control>
           </div>
         </div>
       </div>
-    </ng-template>
-  </p-tabPanel>
+    </p-tabpanel>
 
-  <p-tabPanel header="{{ 'pages.virtualmachines.details.raw.title' | translate }}">
-    <ng-template pTemplate="header">
-      <div class="flex text-nowrap">
-        <i class="pi pi-file mt-1"></i>
-        <span class="ml-2">{{ 'pages.virtualmachines.details.raw.title' | translate }}</span>
-      </div>
-    </ng-template>
-    <ng-template pTemplate="content">
+    <p-tabpanel [value]="7">
       <div class="">
         <div class="dark:bg-darker flex flex-col rounded-md bg-white">
-          <div class="p-3 flex flex-col">
+          <div class="flex flex-col p-3">
             <app-virtualmachines-raw [resource]="resource$ | async"></app-virtualmachines-raw>
           </div>
         </div>
       </div>
-    </ng-template>
-  </p-tabPanel>
-</p-tabView>
+    </p-tabpanel>
+  </p-tabpanels>
+</p-tabs>

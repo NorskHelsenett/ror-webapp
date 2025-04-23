@@ -1,90 +1,56 @@
-<div class="grid space-y-8 lg:gap-8 lg:space-y-0" w-full>
-  <div class="dark:bg-darker flex items-center justify-between overflow-x-auto rounded-md bg-white p-4 w-full">
-    <div class="dark:bg-darker col-span-2 overflow-x-auto rounded-md bg-white w-full">
+<div class="grid space-y-8 lg:gap-8 lg:space-y-0">
+  <div class="dark:bg-darker flex w-full items-center justify-between rounded-md bg-white p-4">
+    <div class="dark:bg-darker col-span-2 w-full rounded-md bg-white">
       <!-- <div class="dark:border-primary flex items-center justify-between border-b p-4">
         <h4 class="dark:text-light text-lg font-semibold text-gray-500">{{ 'pages.virtualmachines.details.remotecontrol.title' | translate }}</h4>
       </div> -->
-      <div class="overflow-x-auto w-full h-full">
-        <div class="relative mb-3">
-          <p-tabView
-            styleClass="tabview"
-            [(activeIndex)]="selectedTabIndex"
-            (activeIndexChange)="switchTab($event)"
-            [scrollable]="true"
-            class="h-full w-full"
-          >
-            @if (this.virtualmachine?.virtualmachine?.status?.operatingSystem?.family?.toLowerCase()?.includes('linux')) {
-              <p-tabPanel header="{{ 'pages.virtualmachines.details.remotecontrol.ssh' | translate }}">
-                <ng-template pTemplate="header">
-                  <div class="flex text-nowrap">
-                    <i class="pi pi-save mt-1"></i>
-                    <span class="ml-2">{{ 'pages.virtualmachines.details.remotecontrol.ssh' | translate }}</span>
-                  </div>
-                </ng-template>
-                <ng-template pTemplate="content" class="h-full">
-                  <div class="">
-                    <div class="bg-black text-green-600 h-96 border-2 p-2 border-gray-500">$ {{ sshCommand }}</div>
-                    <button
-                      (click)="copySSHCommand()"
-                      class="mt-2 focus:ring-primary dark:focus:ring-offset-dark ml-2 rounded-md bg-green-700 px-4 py-2 text-sm text-white hover:bg-green-500 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
-                    >
-                      {{ 'common.copy' | translate }}
-                    </button>
-                  </div>
-                </ng-template>
-              </p-tabPanel>
-            }
+      <div class="">
+        <div class="">
+          <p-tabs [(value)]="activeTabIndex" scrollable="true" #tabs (valueChange)="switchTab()">
+            <p-tablist>
+              <p-tab [value]="0" [ngClass]="{ 'bg-green-500 text-white dark:bg-green-700 dark:text-white': activeTabIndex === 0 }">
+                <div class="flex text-nowrap">
+                  <i class="pi pi-save mt-1"></i>
+                  <span class="ml-2">{{ 'pages.virtualmachines.details.remotecontrol.ssh' | translate }}</span>
+                </div>
+              </p-tab>
+              <p-tab [value]="1" [ngClass]="{ 'bg-green-500 text-white dark:bg-green-700 dark:text-white': activeTabIndex === 1 }">
+                <div class="flex text-nowrap">
+                  <i class="pi pi-save mt-1"></i>
+                  <span class="ml-2">{{ 'pages.virtualmachines.details.remotecontrol.mstsc' | translate }}</span>
+                </div>
+              </p-tab>
+            </p-tablist>
+            <p-tabpanels>
+              <p-tabpanel [value]="0">
+                <div class="">
+                  <div class="h-96 border-2 border-gray-500 bg-black p-2 text-green-600">$ {{ sshCommand }}</div>
+                  <button
+                    (click)="copySSHCommand()"
+                    class="focus:ring-primary dark:focus:ring-offset-dark ml-2 mt-2 rounded-md bg-green-700 px-4 py-2 text-sm text-white hover:bg-green-500 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+                  >
+                    {{ 'common.copy' | translate }}
+                  </button>
+                </div>
+              </p-tabpanel>
 
-            @if (this.virtualmachine?.virtualmachine?.status?.operatingSystem?.family?.toLowerCase()?.includes('window')) {
-              <p-tabPanel header="{{ 'pages.virtualmachines.details.remotecontrol.mstsc' | translate }}">
-                <ng-template pTemplate="header">
-                  <div class="flex text-nowrap">
-                    <i class="pi pi-save mt-1"></i>
-                    <span class="ml-2">{{ 'pages.virtualmachines.details.remotecontrol.mstsc' | translate }}</span>
-                  </div>
-                </ng-template>
-                <ng-template pTemplate="content">
-                  <div class="">
-                    <div class="dark:bg-darker flex flex-col rounded-md bg-white">
-                      <div class="p-3">
-                        <div class="bg-black text-white">mstsc /V:{{ virtualmachine?.virtualmachine?.spec?.name }}</div>
-                        <button
-                          (click)="copyMstscCommand()"
-                          class="focus:ring-primary dark:focus:ring-offset-dark ml-2 rounded-md bg-green-700 px-4 py-2 text-sm text-white hover:bg-green-500 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
-                        >
-                          {{ 'common.copy' | translate }}
-                        </button>
-                      </div>
+              <p-tabpanel [value]="1">
+                <div class="">
+                  <div class="dark:bg-darker flex flex-col rounded-md bg-white">
+                    <div class="p-3">
+                      <div class="bg-black text-white">mstsc /V:{{ virtualmachine?.virtualmachine?.spec?.name }}</div>
+                      <button
+                        (click)="copyMstscCommand()"
+                        class="focus:ring-primary dark:focus:ring-offset-dark ml-2 rounded-md bg-green-700 px-4 py-2 text-sm text-white hover:bg-green-500 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+                      >
+                        {{ 'common.copy' | translate }}
+                      </button>
                     </div>
                   </div>
-                </ng-template>
-              </p-tabPanel>
-            }
-
-            <p-tabPanel class="h-full w-full">
-              <ng-template pTemplate="header">
-                <div class="flex text-nowrap">
-                  <i class="pi pi-desktop mt-1"></i>
-                  <span class="ml-2">{{ 'pages.virtualmachines.details.remotecontrol.webview' | translate }}</span>
                 </div>
-              </ng-template>
-              <ng-template pTemplate="content" class="">
-                @if (this.virtualmachine?.virtualmachine?.status?.operatingSystem?.family?.toLowerCase()?.includes('window')) {
-                  <iframe
-                    class="w-full h-[calc(100vh-500px)] overflow-auto"
-                    src="https://www.youtube.com/embed/kfR0VmsCmzA?loop=1&mute=1&autoplay=1&controls=0&showinfo=0modestbranding=1"
-                  >
-                  </iframe>
-                } @else if (this.virtualmachine?.virtualmachine?.status?.operatingSystem?.family?.toLowerCase()?.includes('linux')) {
-                  <iframe
-                    class="w-full h-[calc(100vh-500px)] overflow-auto"
-                    src="https://www.youtube.com/embed/ba0iXYYEwGs?loop=1&mute=1&autoplay=1&controls=0&showinfo=0modestbranding=1"
-                  >
-                  </iframe>
-                }
-              </ng-template>
-            </p-tabPanel>
-          </p-tabView>
+              </p-tabpanel>
+            </p-tabpanels>
+          </p-tabs>
         </div>
       </div>
     </div>
