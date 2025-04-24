@@ -49,7 +49,7 @@
             <a
               routerLink=""
               [routerLinkActiveOptions]="{ exact: true }"
-              routerLinkActive="dark:bg-green-800 text-white"
+              routerLinkActive="dark:bg-green-800 text-white bg-green-700"
               class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
             >
               {{ 'nav.home' | translate }}
@@ -94,7 +94,7 @@
             <a
               routerLink="metrics"
               role="menuitem"
-              routerLinkActive="dark:bg-green-800 text-white"
+              routerLinkActive="dark:bg-green-800 text-white bg-green-700"
               class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
             >
               {{ 'nav.metrics' | translate }}
@@ -131,7 +131,7 @@
             <a
               routerLink="prices"
               role="menuitem"
-              routerLinkActive="dark:bg-green-800 text-white"
+              routerLinkActive="dark:bg-green-800 text-white bg-green-700"
               class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
             >
               {{ 'nav.prices' | translate }}
@@ -170,7 +170,7 @@
               <a
                 routerLink="/workspaces"
                 role="menuitem"
-                routerLinkActive="dark:bg-green-800 text-white"
+                routerLinkActive="dark:bg-green-800 text-white bg-green-700"
                 class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
               >
                 {{ 'nav.workspaces' | translate }}
@@ -179,7 +179,7 @@
                 *ngIf="(adminOwner$ | async) === true"
                 routerLink="admin/apikeys"
                 role="menuitem"
-                routerLinkActive="dark:bg-green-800 text-white"
+                routerLinkActive="dark:bg-green-800 text-white bg-green-700"
                 class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
               >
                 {{ 'nav.apikeys' | translate }}
@@ -188,7 +188,7 @@
                 *ngIf="(adminRead$ | async) === true"
                 routerLink="admin/auditlogs"
                 role="menuitem"
-                routerLinkActive="dark:bg-green-800 text-white"
+                routerLinkActive="dark:bg-green-800 text-white bg-green-700"
                 class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
               >
                 {{ 'nav.auditlogs' | translate }}
@@ -196,7 +196,7 @@
               <a
                 routerLink="admin/datacenter"
                 role="menuitem"
-                routerLinkActive="dark:bg-green-800 text-white"
+                routerLinkActive="dark:bg-green-800 text-white bg-green-700"
                 class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
               >
                 {{ 'nav.datacenters' | translate }}
@@ -214,7 +214,7 @@
                 *ngIf="(adminRead$ | async) === true"
                 routerLink="admin/policyreports"
                 role="menuitem"
-                routerLinkActive="dark:bg-green-800 text-white"
+                routerLinkActive="dark:bg-green-800 text-white bg-green-700"
                 class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
               >
                 {{ 'nav.policyreports' | translate }}
@@ -223,7 +223,7 @@
                 *ngIf="(adminRead$ | async) === true"
                 routerLink="admin/prices"
                 role="menuitem"
-                routerLinkActive="dark:bg-green-800 text-white"
+                routerLinkActive="dark:bg-green-800 text-white bg-green-700"
                 class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
               >
                 {{ 'nav.prices' | translate }}
@@ -231,7 +231,7 @@
               <a
                 routerLink="admin/projects"
                 role="menuitem"
-                routerLinkActive="dark:bg-green-800 text-white"
+                routerLinkActive="dark:bg-green-800 text-white bg-green-700"
                 class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
               >
                 {{ 'nav.projects' | translate }}
@@ -240,7 +240,7 @@
                 *ngIf="(adminOwner$ | async) === true"
                 routerLink="resourcesv2"
                 role="menuitem"
-                routerLinkActive="dark:bg-green-800 text-white"
+                routerLinkActive="dark:bg-green-800 text-white bg-green-700"
                 class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
               >
                 {{ 'nav.resourcesv2' | translate }}
@@ -249,7 +249,7 @@
                 *ngIf="(adminOwner$ | async) === true"
                 routerLink="admin/compliancereports"
                 role="menuitem"
-                routerLinkActive="dark:bg-green-800 text-white"
+                routerLinkActive="dark:bg-green-800 text-white bg-green-700"
                 class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
               >
                 {{ 'nav.compliancereports' | translate }}
@@ -258,7 +258,7 @@
                 *ngIf="(adminRead$ | async) === true"
                 routerLink="admin/vulnerabilityreports"
                 role="menuitem"
-                routerLinkActive="dark:bg-green-800 text-white"
+                routerLinkActive="dark:bg-green-800 text-white bg-green-700"
                 class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
               >
                 {{ 'nav.vulnerabilityreports' | translate }}
@@ -267,7 +267,7 @@
                 *ngIf="(adminOwner$ | async) === true"
                 routerLink="admin/acl"
                 role="menuitem"
-                routerLinkActive="dark:bg-green-800 text-white"
+                routerLinkActive="dark:bg-green-800 text-white bg-green-700"
                 class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
               >
                 {{ 'nav.acl' | translate }}
@@ -279,7 +279,7 @@
                 *ngIf="(adminOwner$ | async) === true"
                 routerLink="admin/acl"
                 role="menuitem"
-                routerLinkActive="dark:bg-green-800 text-white"
+                routerLinkActive="dark:bg-green-800 text-white bg-green-700"
                 class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
               >
                 {{ 'nav.acl' | translate }}
@@ -288,7 +288,7 @@
                 *ngIf="(adminOwner$ | async) === true"
                 routerLink="admin/apikeys"
                 role="menuitem"
-                routerLinkActive="dark:bg-green-800 text-white"
+                routerLinkActive="dark:bg-green-800 text-white bg-green-700"
                 class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
               >
                 {{ 'nav.apikeys' | translate }}
@@ -297,7 +297,7 @@
                 *ngIf="(adminOwner$ | async) === true"
                 routerLink="admin/auditlogs"
                 role="menuitem"
-                routerLinkActive="dark:bg-green-800 text-white"
+                routerLinkActive="dark:bg-green-800 text-white bg-green-700"
                 class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
               >
                 {{ 'nav.auditlogs' | translate }}
@@ -306,7 +306,7 @@
                 *ngIf="(adminOwner$ | async) === true"
                 routerLink="admin/configuration"
                 role="menuitem"
-                routerLinkActive="dark:bg-green-800 text-white"
+                routerLinkActive="dark:bg-green-800 text-white bg-green-700"
                 class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
               >
                 {{ 'nav.configuration' | translate }}
@@ -315,7 +315,7 @@
                 *ngIf="(adminOwner$ | async) === true"
                 routerLink="admin/compliancereports"
                 role="menuitem"
-                routerLinkActive="dark:bg-green-800 text-white"
+                routerLinkActive="dark:bg-green-800 text-white bg-green-700"
                 class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
               >
                 {{ 'nav.compliancereports' | translate }}
@@ -323,7 +323,7 @@
               <a
                 routerLink="admin/datacenter"
                 role="menuitem"
-                routerLinkActive="dark:bg-green-800 text-white"
+                routerLinkActive="dark:bg-green-800 text-white bg-green-700"
                 class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
               >
                 {{ 'nav.datacenters' | translate }}
@@ -332,7 +332,7 @@
                 *ngIf="(adminRead$ | async) === true"
                 routerLink="admin/policyreports"
                 role="menuitem"
-                routerLinkActive="dark:bg-green-800 text-white"
+                routerLinkActive="dark:bg-green-800 text-white bg-green-700"
                 class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
               >
                 {{ 'nav.policyreports' | translate }}
@@ -341,7 +341,7 @@
                 *ngIf="(adminRead$ | async) === true"
                 routerLink="admin/prices"
                 role="menuitem"
-                routerLinkActive="dark:bg-green-800 text-white"
+                routerLinkActive="dark:bg-green-800 text-white bg-green-700"
                 class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
               >
                 {{ 'nav.prices' | translate }}
@@ -349,7 +349,7 @@
               <a
                 routerLink="admin/projects"
                 role="menuitem"
-                routerLinkActive="dark:bg-green-800 text-white"
+                routerLinkActive="dark:bg-green-800 text-white bg-green-700"
                 class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
               >
                 {{ 'nav.projects' | translate }}
@@ -358,7 +358,7 @@
                 *ngIf="(adminOwner$ | async) === true"
                 routerLink="resourcesv2"
                 role="menuitem"
-                routerLinkActive="dark:bg-green-800 text-white"
+                routerLinkActive="dark:bg-green-800 text-white bg-green-700"
                 class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
               >
                 {{ 'nav.resourcesv2' | translate }}
@@ -367,7 +367,7 @@
                 *ngIf="(adminRead$ | async) === true"
                 routerLink="admin/vulnerabilityreports"
                 role="menuitem"
-                routerLinkActive="dark:bg-green-800 text-white"
+                routerLinkActive="dark:bg-green-800 text-white bg-green-700"
                 class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
               >
                 {{ 'nav.vulnerabilityreports' | translate }}
@@ -375,7 +375,7 @@
               <a
                 routerLink="/workspaces"
                 role="menuitem"
-                routerLinkActive="dark:bg-green-800 text-white"
+                routerLinkActive="dark:bg-green-800 text-white bg-green-700"
                 class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
               >
                 {{ 'nav.workspaces' | translate }}
@@ -415,7 +415,7 @@
               href="{{ externalDocsUrl }}"
               target="_blank"
               role="menuitem"
-              routerLinkActive="dark:bg-green-800 text-white"
+              routerLinkActive="dark:bg-green-800 text-white bg-green-700"
               class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
             >
               {{ 'nav.doc' | translate }}
@@ -427,7 +427,7 @@
             <a
               routerLink="/about"
               role="menuitem"
-              routerLinkActive="dark:bg-green-800 text-white"
+              routerLinkActive="dark:bg-green-800 text-white bg-green-700"
               class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
             >
               {{ 'nav.about' | translate }}
@@ -439,7 +439,7 @@
             <a
               routerLink="/releasenotes"
               role="menuitem"
-              routerLinkActive="dark:bg-green-800 text-white"
+              routerLinkActive="dark:bg-green-800 text-white bg-green-700"
               class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
             >
               {{ 'nav.releasenotes' | translate }}
