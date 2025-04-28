@@ -2,7 +2,7 @@ import { ScrollTopModule } from 'primeng/scrolltop';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ChangeDetectionStrategy, Component, OnInit, ChangeDetectorRef, OnDestroy, inject, PLATFORM_ID, Inject } from '@angular/core';
 import { ThemeService } from '../core/services/theme.service';
-import { Observable, Subscription, catchError, share, tap } from 'rxjs';
+import { Observable, Subscription, catchError, share, tap, of } from 'rxjs';
 import { AuthService } from '../core/services/auth.service';
 import { AclService } from '../core/services/acl.service';
 import { AclAccess, AclScopes } from '../core/models/acl-scopes';
@@ -74,6 +74,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
     this.desember = this.bigEventsService.isDesember();
     this.birthday = this.bigEventsService.isRORBirthday();
+    this.currentYear = new Date().getFullYear();
 
     if (isPlatformBrowser(this.platformId)) {
       this.setupSSEClients();

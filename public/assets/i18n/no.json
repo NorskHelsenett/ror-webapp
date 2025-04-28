@@ -150,7 +150,9 @@
     "compliancereports": "Samsvarsrapporter",
     "orders": "Ordrer",
     "resources": "Ressurser",
-    "resourcesv2": "Ressurser"
+    "resourcesv2": "Ressurser",
+    "virtualmachines": "Virtuelle maskiner",
+    "kubernetesclusters": "Kubernetes cluster"
   },
   "error": {
     "forbidden": "Forbudt område",
@@ -1514,6 +1516,114 @@
         }
       }
     },
+    "virtualmachines": {
+      "title": "Virtuelle maskiner",
+      "create": "Lag virtuell maskin",
+      "table": {
+        "empty": "Ingen virtuelle maskiner"
+      },
+      "details": {
+        "title": "Virtuellmaskin",
+        "cpu": {
+          "title": "CPU"
+        },
+        "backups": {
+          "title": "Backup"
+        },
+        "detail": {
+          "title": "Detaljer"
+        },
+        "disks": {
+          "title": "Lagring",
+          "table": "Tabell",
+          "list": "Liste",
+          "name": "Navn",
+          "ismounted": "Montert",
+          "size": "Størrelse",
+          "usage": "Bruk",
+          "usagepercentage": "Bruk %",
+          "type": "Type",
+          "mountpath": "Monteringspunkt"
+        },
+        "edit": {
+          "title": "Rediger"
+        },
+        "events": {
+          "title": "Hendelser"
+        },
+        "network": {
+          "title": "Nettverk",
+          "hostname": "Vertsnavn",
+          "networks": "Nettverk",
+          "ipv4": "IPv4",
+          "ipv6": "IPv6",
+          "mask": "Maske",
+          "gateway": "Gateway",
+          "dns": "DNS server",
+          "mac": "MAC"
+        },
+        "memory": {
+          "title": "Minne"
+        },
+        "metadata": {
+          "title": "Metadata",
+          "name": "Navn",
+          "provider": "Tilbyder",
+          "lastUpdated": "Sist oppdatert",
+          "tags": "Stikkord",
+          "location": "Lokasjon"
+        },
+        "metrics": {
+          "title": "Nøkkeltall",
+          "cpu": "CPU",
+          "memory": "Minne",
+          "disk": "Disk",
+          "cores": "kjerner"
+        },
+        "operatingSystem": {
+          "title": "Operativsystem",
+          "id": "Id",
+          "name": "Navn",
+          "version": "Versjon",
+          "hostname": "Vertsnavn",
+          "powerState": "Strømstatus",
+          "toolVersion": "Verktøyversjon",
+          "architecture": "Arkitektur",
+          "family": "Familie"
+        },
+        "remotecontrol": {
+          "title": "Fjernkontroll",
+          "webview": "Webvisning",
+          "mstsc": "Remote desktop",
+          "ssh": "SSH"
+        },
+        "raw": {
+          "title": "Rådata"
+        },
+        "status": {
+          "title": "Strømstatus",
+          "state": "Tilstand",
+          "turnoff": "Skru av",
+          "turnon": "Skru på",
+          "suspend": "Pause",
+          "restart": "Restart",
+          "delete": "Slett"
+        },
+        "specs": {
+          "title": "Konfigurasjon",
+          "cpusockets": "CPU Sockets",
+          "cpucorespersockets": "CPU Cores per socket",
+          "memory": "Minne",
+          "disk": "Disk"
+        },
+        "tools": {
+          "title": "Verktøy",
+          "sshcommandcopied": "SSH-kommando kopiert",
+          "mstsccommandcopied": "Remote Desktop-kommando kopiert",
+          "unknownOs": "Ukjent operativsystem"
+        }
+      }
+    },
     "workspaces": {
       "title": "Arbeidsområder",
       "details": {
@@ -1550,6 +1660,18 @@
     "trueOrFalse": {
       "true": "Sann",
       "false": "Usann"
+    },
+    "os": {
+      "linux": "Linux",
+      "windows": "Windows",
+      "mac": "Mac",
+      "unknown": "Ukjent"
+    },
+    "power": {
+      "on": "På",
+      "off": "Av",
+      "suspended": "Suspendert",
+      "unknown": "Ukjent"
     }
   }
 }

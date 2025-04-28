@@ -31,6 +31,9 @@ export class ColumnFactoryService {
     if (kind === 'AppProject' && apiVersion === 'argoproj.io/v1alpha1') {
       columns = this.getAppProject();
     }
+    if (kind === 'BackupJob' && apiVersion === 'backupjob.ror.internal/v1alpha1') {
+      columns = this.getBackupJob();
+    }
     if (kind === 'Certificate' && apiVersion === 'cert-manager.io/v1') {
       columns = this.getCertificate();
     }
@@ -113,22 +116,58 @@ export class ColumnFactoryService {
   getRORVirtualMachines(): ColumnDefinition[] {
     return [
       {
-        field: 'vm.name',
+        field: 'metadata.name',
         header: 'Name',
         type: 'text',
         enabled: true,
       },
       {
-        field: 'vm.config.memorySize',
-        header: 'Memory size',
-        type: 'numeric',
+        field: 'virtualmachine.status.operatingSystem.hostName',
+        header: 'Hostname',
+        type: 'text',
+        enabled: false,
+      },
+      {
+        field: 'virtualmachine.status.operatingSystem.id',
+        header: 'Operating system id',
+        type: 'text',
         enabled: true,
       },
       {
-        field: 'vm.config.cpuCount',
-        header: 'CPU count',
-        type: 'numeric',
+        field: 'virtualmachine.status.operatingSystem.powerState',
+        header: 'Power state',
+        type: 'text',
         enabled: true,
+      },
+      {
+        field: 'virtualmachine.status.operatingSystem.architecture',
+        header: 'Architecture',
+        type: 'text',
+        enabled: false,
+      },
+      {
+        field: 'virtualmachine.id',
+        header: 'Virtual machine id',
+        type: 'numeric',
+        enabled: false,
+      },
+      {
+        field: 'virtualmachine.spec.memory.sizeBytes',
+        header: 'Memory size (bytes',
+        type: 'numeric',
+        enabled: false,
+      },
+      {
+        field: 'virtualmachine.spec.cpu.sockets',
+        header: 'CPU Sockets',
+        type: 'numeric',
+        enabled: false,
+      },
+      {
+        field: 'virtualmachine.spec.cpu.coresPerSocket',
+        header: 'CPU Cores per socket',
+        type: 'numeric',
+        enabled: false,
       },
     ];
   }
@@ -190,6 +229,16 @@ export class ColumnFactoryService {
         field: 'metadata.creationTimestamp',
         header: 'Creation Time',
         type: 'date',
+        enabled: true,
+      },
+    ];
+  }
+  getBackupJob(): ColumnDefinition[] {
+    return [
+      {
+        field: 'metadata.name',
+        header: 'Name',
+        type: 'text',
         enabled: true,
       },
     ];
@@ -839,6 +888,10 @@ export class ColumnFactoryService {
   }
 
   private postProcessColumnDefinitions(kind: string, apiVersion: string, columns: ColumnDefinition[], showOwner: boolean = true): ColumnDefinition[] {
+    if (kind === 'VirtualMachine' && apiVersion === 'general.ror.internal/v1alpha1') {
+      return columns;
+    }
+
     columns.unshift({
       field: 'metadata.name',
       header: 'Name',

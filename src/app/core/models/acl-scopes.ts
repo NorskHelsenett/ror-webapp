@@ -10,6 +10,7 @@ export enum AclScopes {
   Project = 'project',
   Workspace = 'workspace',
   Price = 'price',
+  VirtualMachine = 'virtualmachine',
 }
 
 export enum AclAccess {

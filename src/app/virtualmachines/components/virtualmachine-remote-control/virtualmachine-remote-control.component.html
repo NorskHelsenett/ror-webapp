@@ -1,0 +1,58 @@
+<div class="grid space-y-8 lg:gap-8 lg:space-y-0">
+  <div class="dark:bg-darker flex w-full items-center justify-between rounded-md bg-white p-4">
+    <div class="dark:bg-darker col-span-2 w-full rounded-md bg-white">
+      <!-- <div class="dark:border-primary flex items-center justify-between border-b p-4">
+        <h4 class="dark:text-light text-lg font-semibold text-gray-500">{{ 'pages.virtualmachines.details.remotecontrol.title' | translate }}</h4>
+      </div> -->
+      <div class="">
+        <div class="">
+          <p-tabs [(value)]="activeTabIndex" scrollable="true" #tabs (valueChange)="switchTab()">
+            <p-tablist>
+              <p-tab [value]="0" [ngClass]="{ 'bg-green-500 text-white dark:bg-green-700 dark:text-white': activeTabIndex === 0 }">
+                <div class="flex text-nowrap">
+                  <i class="pi pi-save mt-1"></i>
+                  <span class="ml-2">{{ 'pages.virtualmachines.details.remotecontrol.ssh' | translate }}</span>
+                </div>
+              </p-tab>
+              <p-tab [value]="1" [ngClass]="{ 'bg-green-500 text-white dark:bg-green-700 dark:text-white': activeTabIndex === 1 }">
+                <div class="flex text-nowrap">
+                  <i class="pi pi-save mt-1"></i>
+                  <span class="ml-2">{{ 'pages.virtualmachines.details.remotecontrol.mstsc' | translate }}</span>
+                </div>
+              </p-tab>
+            </p-tablist>
+            <p-tabpanels>
+              <p-tabpanel [value]="0">
+                <div class="">
+                  <div class="h-96 border-2 border-gray-500 bg-black p-2 text-green-600">$ {{ sshCommand }}</div>
+                  <button
+                    (click)="copySSHCommand()"
+                    class="focus:ring-primary dark:focus:ring-offset-dark ml-2 mt-2 rounded-md bg-green-700 px-4 py-2 text-sm text-white hover:bg-green-500 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+                  >
+                    {{ 'common.copy' | translate }}
+                  </button>
+                </div>
+              </p-tabpanel>
+
+              <p-tabpanel [value]="1">
+                <div class="">
+                  <div class="dark:bg-darker flex flex-col rounded-md bg-white">
+                    <div class="p-3">
+                      <div class="bg-black text-white">mstsc /V:{{ virtualmachine?.virtualmachine?.spec?.name }}</div>
+                      <button
+                        (click)="copyMstscCommand()"
+                        class="focus:ring-primary dark:focus:ring-offset-dark ml-2 rounded-md bg-green-700 px-4 py-2 text-sm text-white hover:bg-green-500 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+                      >
+                        {{ 'common.copy' | translate }}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </p-tabpanel>
+            </p-tabpanels>
+          </p-tabs>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

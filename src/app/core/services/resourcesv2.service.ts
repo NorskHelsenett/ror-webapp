@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { ConfigService } from './config.service';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
-import { ResourceSet, ResourceQuery } from '@rork8s/ror-resources/models';
+import { ResourceSet, ResourceQuery, Resource, ResourceVirtualMachine } from '@rork8s/ror-resources/models';
 
 @Injectable({
   providedIn: 'root',
@@ -26,14 +26,15 @@ export class Resourcesv2Service {
     );
   }
 
-  getResourcesById(uid: string): Observable<ResourceSet> {
+  getResourcesById(uid: string): Observable<Resource> {
     const url = `${this.configService.config.rorApi}/v2/resources/uid/${uid}`;
-    return this.httpClient.get<ResourceSet>(url).pipe(
-      map((resources) => {
-        if (!resources) {
+    return this.httpClient.get<Resource[]>(url).pipe(
+      map((resources: Resource[]) => {
+        if (!resources || resources?.length !== 1) {
+          console.error('Resource not found');
           return null;
         }
-        return resources;
+        return resources[0];
       }),
     );
   }

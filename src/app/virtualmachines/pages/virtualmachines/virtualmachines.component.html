@@ -1,0 +1,39 @@
+<div class="dark:border-primary-darker flex items-center gap-4 border-b px-4 py-4 lg:py-6">
+  <h1 class="flex-grow text-2xl font-semibold">{{ 'pages.virtualmachines.title' | translate }}</h1>
+  <div
+    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark relative rounded-md bg-green-700 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+  ></div>
+  @if (isAdmin$ | async) {
+    <a
+      class="delay-50 hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark float-left rounded-md bg-orange-800 px-4 py-2 text-sm text-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+    >
+      <span>{{ 'pages.virtualmachines.create' | translate }}</span>
+    </a>
+  }
+  <button
+    (click)="resourcesTable.refreshData()"
+    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+  >
+    {{ 'common.refresh' | translate }}
+  </button>
+  <ng-container *ngIf="aclFetchError">
+    <div class="mx-auto my-4 flex items-center rounded-md bg-red-200 px-6 py-4 text-lg">
+      <span class="p-2 text-red-800"> {{ 'layout.userFetchError' | translate }} </span>
+      <button class="btn text-black">{{ 'common.tryAgain' | translate }}</button>
+    </div>
+  </ng-container>
+</div>
+
+<div class="m-4">
+  <div class="dark:bg-darker rounded-md bg-white p-2">
+    <div class="dark:bg-darker rounded-md bg-white">
+      <div class="dark:border-primary border-b p-3">
+        <app-resources-v2-list #resourcesTable (resourceSelected)="showSelectedResource($event)"></app-resources-v2-list>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p-sidebar [(visible)]="sidebarVisible" position="right" styleClass="sm:w-full md:w-1/2">
+  <app-resource-v2-details *ngIf="selectedResource" [resource]="selectedResource"></app-resource-v2-details>
+</p-sidebar>

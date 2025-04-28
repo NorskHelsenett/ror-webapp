@@ -45,7 +45,6 @@ export class SseService {
         });
       };
       this.eventSource.onmessage = (event: any) => {
-        console.log('event', event);
         this.ngZone.runGuarded(() => {
           this.observer.next(event);
         });
