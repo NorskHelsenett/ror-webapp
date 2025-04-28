@@ -1,6 +1,6 @@
 <div class="grid space-y-8 lg:gap-8 lg:space-y-0">
   <div class="dark:bg-darker flex items-center justify-between overflow-x-auto rounded-md bg-white p-4">
-    <div class="dark:bg-darker col-span-2 overflow-x-auto rounded-md bg-white w-full">
+    <div class="dark:bg-darker col-span-2 w-full overflow-x-auto rounded-md bg-white">
       <div class="dark:border-primary flex border-b p-4">
         <h4 class="dark:text-light text-lg font-semibold text-gray-500">{{ 'pages.virtualmachines.details.specs.title' | translate }}</h4>
         <svg
@@ -28,7 +28,7 @@
             <table class="w-full border-collapse text-left">
               <tbody>
                 <tr class="hover:bg-grey-light">
-                  <td class="px-2 py-1 w-64">{{ 'pages.virtualmachines.details.specs.cpusockets' | translate }}</td>
+                  <td class="w-64 px-2 py-1">{{ 'pages.virtualmachines.details.specs.cpusockets' | translate }}</td>
                   <td class="px-2 py-1">
                     {{ virtualmachine?.virtualmachine?.spec?.cpu?.sockets }}
                   </td>

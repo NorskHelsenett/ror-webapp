@@ -47,16 +47,6 @@
             <!-- active & hover classes 'text-gray-700 dark:text-light' -->
             <!-- inActive classes 'text-gray-400 dark:text-gray-400' -->
             <a
-              *ngIf="(multipleDashboards$ | async) === false"
-              routerLink=""
-              [routerLinkActiveOptions]="{ exact: true }"
-              routerLinkActive="dark:bg-green-800 text-white bg-green-700"
-              class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
-            >
-              {{ 'nav.home' | translate }}
-            </a>
-            <a
-              *ngIf="(multipleDashboards$ | async) === true"
               routerLink=""
               routerLinkActive="text-gray-800 bg-green-200 dark:bg-green-800 dark:text-white dark:hover:text-light"
               [routerLinkActiveOptions]="{ exact: true }"
@@ -66,7 +56,6 @@
               {{ 'nav.kubernetesclusters' | translate }}
             </a>
             <a
-              *ngIf="(multipleDashboards$ | async) === true"
               routerLink="/virtualmachines"
               routerLinkActive="text-gray-800 bg-green-200 dark:bg-green-800 dark:text-white dark:hover:text-light"
               [routerLinkActiveOptions]="{ exact: true }"

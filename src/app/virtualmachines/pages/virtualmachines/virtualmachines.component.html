@@ -3,11 +3,13 @@
   <div
     class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark relative rounded-md bg-green-700 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
   ></div>
-  <a
-    class="delay-50 hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark float-left rounded-md bg-orange-800 px-4 py-2 text-sm text-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
-  >
-    <span>{{ 'pages.virtualmachines.create' | translate }}</span>
-  </a>
+  @if (isAdmin$ | async) {
+    <a
+      class="delay-50 hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark float-left rounded-md bg-orange-800 px-4 py-2 text-sm text-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+    >
+      <span>{{ 'pages.virtualmachines.create' | translate }}</span>
+    </a>
+  }
   <button
     (click)="resourcesTable.refreshData()"
     class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"

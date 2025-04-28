@@ -1,9 +1,9 @@
 <div class="grid space-y-8 lg:gap-8 lg:space-y-0">
   <div class="dark:bg-darker flex items-center justify-between overflow-x-auto rounded-md bg-white p-4">
-    <div class="dark:bg-darker col-span-2 overflow-x-auto rounded-md bg-white w-full">
+    <div class="dark:bg-darker col-span-2 w-full overflow-x-auto rounded-md bg-white">
       <div class="dark:border-primary flex border-b p-4">
         <h4 class="dark:text-light text-lg font-semibold text-gray-500">{{ 'pages.virtualmachines.details.status.title' | translate }}</h4>
-        <svg viewBox="0 0 24 24" class="w-6 h-6 ml-2 fill-green-700" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg viewBox="0 0 24 24" class="ml-2 h-6 w-6 fill-green-700" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
           <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
           <g id="SVGRepo_iconCarrier">
@@ -38,33 +38,33 @@
           @if (virtualmachine?.virtualmachine?.status?.operatingSystem?.powerState === 'poweredOn') {
             <a
               (click)="turnOff()"
-              class="delay-50 hover:bg-red-600 focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-red-700 px-4 py-2 text-sm text-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+              class="delay-50 focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-red-700 px-4 py-2 text-sm text-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-red-600 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
             >
               <span>{{ 'pages.virtualmachines.details.status.turnoff' | translate }}</span>
             </a>
           } @else {
             <a
               (click)="turnOn()"
-              class="delay-50 hover:bg-yellow-600 focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-yellow-700 px-4 py-2 text-sm text-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+              class="delay-50 focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-yellow-700 px-4 py-2 text-sm text-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-yellow-600 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
             >
               <span>{{ 'pages.virtualmachines.details.status.turnon' | translate }}</span>
             </a>
           }
           <a
             (click)="restart()"
-            class="delay-50 hover:bg-yellow-600 focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-yellow-700 px-4 py-2 text-sm text-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+            class="delay-50 focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-yellow-700 px-4 py-2 text-sm text-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-yellow-600 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
           >
             <span>{{ 'pages.virtualmachines.details.status.restart' | translate }}</span>
           </a>
           <a
             (click)="suspend()"
-            class="delay-50 hover:bg-blue-600 focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-blue-700 px-4 py-2 text-sm text-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+            class="delay-50 focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-blue-700 px-4 py-2 text-sm text-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-blue-600 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
           >
             <span>{{ 'pages.virtualmachines.details.status.suspend' | translate }}</span>
           </a>
           <a
             (click)="delete()"
-            class="delay-50 hover:bg-red-600 focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-red-700 px-4 py-2 text-sm text-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+            class="delay-50 focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-red-700 px-4 py-2 text-sm text-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-red-600 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
           >
             <span>{{ 'pages.virtualmachines.details.status.delete' | translate }}</span>
           </a>

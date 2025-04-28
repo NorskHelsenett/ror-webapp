@@ -2,7 +2,7 @@ import { ScrollTopModule } from 'primeng/scrolltop';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ChangeDetectionStrategy, Component, OnInit, ChangeDetectorRef, OnDestroy, inject, PLATFORM_ID, Inject } from '@angular/core';
 import { ThemeService } from '../core/services/theme.service';
-import { Observable, Subscription, catchError, share, tap } from 'rxjs';
+import { Observable, Subscription, catchError, share, tap, of } from 'rxjs';
 import { AuthService } from '../core/services/auth.service';
 import { AclService } from '../core/services/acl.service';
 import { AclAccess, AclScopes } from '../core/models/acl-scopes';
@@ -44,7 +44,6 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
   adminRead$: Observable<boolean> | undefined;
   adminOwner$: Observable<boolean> | undefined;
-  multipleDashboards$: Observable<boolean> | undefined;
   aclFetchError: any;
 
   sse$: Observable<any> | undefined;
@@ -102,14 +101,6 @@ export class LayoutComponent implements OnInit, OnDestroy {
       }),
     );
     this.adminOwner$ = this.aclService.check(AclScopes.ROR, AclScopes.Global, AclAccess.Owner).pipe(
-      share(),
-      catchError((error: any) => {
-        this.aclFetchError = error;
-        this.changeDetector.detectChanges();
-        throw error;
-      }),
-    );
-    this.multipleDashboards$ = this.aclService.check(AclScopes.ROR, AclScopes.VirtualMachine, AclAccess.Owner).pipe(
       share(),
       catchError((error: any) => {
         this.aclFetchError = error;

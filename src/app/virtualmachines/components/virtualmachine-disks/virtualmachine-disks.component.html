@@ -1,10 +1,10 @@
 <div class="grid space-y-8 lg:gap-8 lg:space-y-0" w-full>
-  <div class="dark:bg-darker flex items-center justify-between overflow-x-auto rounded-md bg-white p-4 w-full">
-    <div class="dark:bg-darker col-span-2 overflow-x-auto rounded-md bg-white w-full">
+  <div class="dark:bg-darker flex w-full items-center justify-between overflow-x-auto rounded-md bg-white p-4">
+    <div class="dark:bg-darker col-span-2 w-full overflow-x-auto rounded-md bg-white">
       <div class="dark:border-primary flex border-b p-4">
         <h4 class="dark:text-light text-lg font-semibold text-gray-500">{{ 'pages.virtualmachines.details.disks.title' | translate }}</h4>
         <svg
-          class="w-6 h-6 ml-2 fill-green-700"
+          class="ml-2 h-6 w-6 fill-green-700"
           viewBox="0 0 256 256"
           id="Flat"
           xmlns="http://www.w3.org/2000/svg"
@@ -20,7 +20,7 @@
           </g>
         </svg>
       </div>
-      <div class="overflow-x-auto w-full">
+      <div class="w-full overflow-x-auto">
         <div class="relative mb-3">
           <p-tabView styleClass="tabview" [scrollable]="true">
             <p-tabPanel>
@@ -33,7 +33,7 @@
               <ng-template pTemplate="content">
                 <div class="">
                   <div>
-                    <div class="dark:bg-transparent flex flex-col gap-4 rounded-md bg-white">
+                    <div class="flex flex-col gap-4 rounded-md bg-white dark:bg-transparent">
                       <div class="">
                         <p-table
                           [value]="virtualmachine?.virtualmachine?.status?.disks"
@@ -63,7 +63,7 @@
                               <th pSortableColumn="usageBytes" class="p-1">
                                 {{ 'pages.virtualmachines.details.disks.usage' | translate }} <p-sortIcon field="usageBytes"></p-sortIcon>
                               </th>
-                              <th pSortableColumn="usageBytes" class="p-1 w-[450px]">
+                              <th pSortableColumn="usageBytes" class="w-[450px] p-1">
                                 {{ 'pages.virtualmachines.details.disks.usagepercentage' | translate }} <p-sortIcon field="usageBytes"></p-sortIcon>
                               </th>
                               <th pSortableColumn="type" class="p-1">
@@ -142,14 +142,14 @@
               <ng-template pTemplate="content">
                 <div class="">
                   <div>
-                    <div class="dark:bg-transparent flex flex-col gap-4 rounded-md bg-white">
+                    <div class="flex flex-col gap-4 rounded-md bg-white dark:bg-transparent">
                       <div class="">
                         @for (disk of virtualmachine?.virtualmachine?.status?.disks; track disk) {
                           <div class="mb-5 first:mt-2">
                             <table class="w-full border-collapse text-left">
                               <tbody>
                                 <tr class="hover:bg-grey-light">
-                                  <td class="px-2 py-1 w-32">{{ 'pages.virtualmachines.details.disks.ismounted' | translate }}</td>
+                                  <td class="w-32 px-2 py-1">{{ 'pages.virtualmachines.details.disks.ismounted' | translate }}</td>
                                   <td class="px-2 py-1">
                                     <app-true-false [trueOrFalse]="disk?.isMounted"></app-true-false>
                                   </td>

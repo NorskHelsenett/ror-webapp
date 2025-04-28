@@ -28,7 +28,7 @@ export class VirtualmachineMetadataComponent {
     return event;
   }
 
-  getRandomColor(): "info" | "success" | "warn" | "danger" | "secondary" | "contrast" {
+  getRandomColor(): 'info' | 'success' | 'warn' | 'danger' | 'secondary' | 'contrast' {
     switch (Math.floor(Math.random() * 8)) {
       case 0:
         return 'success';

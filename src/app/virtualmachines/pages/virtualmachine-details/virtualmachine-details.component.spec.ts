@@ -8,9 +8,8 @@ describe('VirtualmachineDetailsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [VirtualmachineDetailsComponent]
-    })
-    .compileComponents();
+      imports: [VirtualmachineDetailsComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(VirtualmachineDetailsComponent);
     component = fixture.componentInstance;

@@ -5,8 +5,6 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './virtualmachine-events.component.html',
-  styleUrl: './virtualmachine-events.component.scss'
+  styleUrl: './virtualmachine-events.component.scss',
 })
-export class VirtualmachineEventsComponent {
-
-}
+export class VirtualmachineEventsComponent {}

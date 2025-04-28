@@ -12,7 +12,17 @@ import { TrueFalseComponent } from '../../../shared/components';
 @Component({
   selector: 'app-virtualmachine-disks',
   standalone: true,
-  imports: [TranslateModule, DecimalPipe, ProgressBarModule, TabViewModule, TableModule, TitleCasePipe, LowerCasePipe, TooltipModule, TrueFalseComponent],
+  imports: [
+    TranslateModule,
+    DecimalPipe,
+    ProgressBarModule,
+    TabViewModule,
+    TableModule,
+    TitleCasePipe,
+    LowerCasePipe,
+    TooltipModule,
+    TrueFalseComponent,
+  ],
   templateUrl: './virtualmachine-disks.component.html',
   styleUrl: './virtualmachine-disks.component.scss',
 })
