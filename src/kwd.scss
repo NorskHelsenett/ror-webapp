@@ -58,6 +58,10 @@
   --color-violet-lighter: #a78bfa;
   --color-violet-dark: #6d28d9;
   --color-violet-darker: #5b21b6;
+
+  /*  */
+  --color-link: #155dfc;
+  --color-link-dark: #51a2ff;
 }
 
 /*! modern-normalize v1.0.0 | MIT License | https://github.com/sindresorhus/modern-normalize */
@@ -493,7 +497,7 @@ h6 {
    */
 
 a {
-  color: inherit;
+  color: var(--link-color);
   text-decoration: inherit;
 }
 
@@ -1626,6 +1630,14 @@ video {
 
 .dark .dark\:hover\:text-primary-100:hover {
   color: var(--color-primary-100);
+}
+
+.link-blue {
+  color: var(--color-link)
+}
+
+.dark .dark\:link-blue {
+  color: var(--color-link-dark)
 }
 
 .truncate {
