@@ -20,7 +20,9 @@
                     argoIngress?.ingressrules[0].ipaddresses !== null &&
                     argoIngress?.ingressrules[0].ipaddresses.length > 0
                   "
-                  ><span class="w-14 overflow-hidden truncate text-clip underline link-blue dark:link-blue">{{ argoIngress?.ingressrules[0].hostname }}</span></a
+                  ><span class="link-blue dark:link-blue w-14 overflow-hidden truncate text-clip underline">{{
+                    argoIngress?.ingressrules[0].hostname
+                  }}</span></a
                 >
               </td>
               <td
@@ -49,7 +51,9 @@
                     grafanaIngress?.ingressrules[0].ipaddresses !== null &&
                     grafanaIngress?.ingressrules[0].ipaddresses.length > 0
                   "
-                  ><span class="w-14 overflow-hidden truncate text-clip underline link-blue dark:link-blue">{{ grafanaIngress?.ingressrules[0].hostname }}</span></a
+                  ><span class="link-blue dark:link-blue w-14 overflow-hidden truncate text-clip underline">{{
+                    grafanaIngress?.ingressrules[0].hostname
+                  }}</span></a
                 >
               </td>
               <td
