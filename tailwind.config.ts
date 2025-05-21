@@ -1,7 +1,7 @@
-module.exports = {
-  mode: 'jit',
-  content: ['./src/**/*.{html,ts}'],
-  darkMode: 'class', // or 'media' or false
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ['./src/**/*.{html,ts,scss,css}'],
+  darkMode: 'class',
   theme: {
     hljs: {
       theme: 'night-owl',

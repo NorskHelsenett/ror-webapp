@@ -1632,14 +1632,6 @@ video {
   color: var(--color-primary-100);
 }
 
-.link-blue {
-  color: var(--color-link)
-}
-
-.dark .dark\:link-blue {
-  color: var(--color-link-dark)
-}
-
 .truncate {
   overflow: hidden;
   text-overflow: ellipsis;
