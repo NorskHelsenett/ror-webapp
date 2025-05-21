@@ -11,7 +11,7 @@
       }
     </div>
     <p-table
-      [value]="nodepools"
+      [value]=""
       [rows]="rows"
       [paginator]="false"
       [rowsPerPageOptions]="rowsPerPage"
@@ -109,3 +109,38 @@
     [nodepool]="selectedNodepool"
   ></app-cluster-nodepool-createorupdate>
 }
+@if (clusterResourceSet$ | async) {
+  <div>
+    <span>Kubernetes Cluster (new)</span>
+    <div class="bg-black text-green-500">
+      <pre>{{ clusterResource | json }}</pre>
+    </div>
+  </div>
+} @else {
+  @if (isLoading === true) {
+    <div class="flex h-full w-full items-center justify-center p-8">
+      <app-spinner></app-spinner>
+      <span class="ml-2 animate-bounce">{{ 'common.fetching' | translate }}</span>
+    </div>
+  } @else if (clusterResourceSetFetchError) {
+    <div class="mx-auto my-4 flex items-center rounded-md bg-red-200 px-6 py-4 text-lg">
+      <span class="p-2 text-red-800"> {{ 'common.errorLoading' | translate }} </span>
+      <button class="btn text-black" (click)="fetchKubernetesClusterResource()">{{ 'common.tryAgain' | translate }}</button>
+    </div>
+  } @else if (!clusterResource) {
+  } @else {
+    <div class="mx-auto my-4 flex items-center rounded-md bg-yellow-100 px-6 py-4 text-lg">
+      <span class="p-2 text-yellow-800">No cluster resource set found</span>
+      <button class="btn ml-2 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600" (click)="fetchKubernetesClusterResource()">
+        {{ 'common.tryAgain' | translate }}
+      </button>
+    </div>
+  }
+}
+
+<div class="mt-10">
+  <span>Cluster (old)</span>
+  <div class="mt-5 bg-black text-blue-500">
+    <pre>{{ cluster | json }}</pre>
+  </div>
+</div>

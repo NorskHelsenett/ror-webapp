@@ -109,15 +109,15 @@
         <div class="">
           <div class="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6">
             <div class="sm:col-span-1 md:col-span-1 lg:col-span-2 xl:col-span-3 2xl:col-span-4">
-              <app-cluster-metrics [metrics]="cluster?.metrics"></app-cluster-metrics>
-              <app-cluster-description [cluster]="cluster" (edit)="setTab(6)"></app-cluster-description>
-              <app-cluster-acl class="p-2" [cluster]="cluster"></app-cluster-acl>
+              <app-cluster-metrics *ngIf="activeTabIndex === 0" [metrics]="cluster?.metrics"></app-cluster-metrics>
+              <app-cluster-description *ngIf="activeTabIndex === 0" [cluster]="cluster" (edit)="setTab(6)"></app-cluster-description>
+              <app-cluster-acl *ngIf="activeTabIndex === 0" class="p-2" [cluster]="cluster"></app-cluster-acl>
             </div>
 
             <div class="sm:col-span-1 md:col-span-1 lg:col-span-1 lg:pl-3 xl:col-span-1 2xl:col-span-2">
               <div class="grid-cols grid gap-4">
-                <app-cluster-metadata [cluster]="cluster"></app-cluster-metadata>
-                <app-cluster-tools class="" [cluster]="cluster" [userClaims]="userClaims"></app-cluster-tools>
+                <app-cluster-metadata *ngIf="activeTabIndex === 0" [cluster]="cluster"></app-cluster-metadata>
+                <app-cluster-tools *ngIf="activeTabIndex === 0" class="" [cluster]="cluster" [userClaims]="userClaims"></app-cluster-tools>
               </div>
             </div>
           </div>
@@ -130,7 +130,7 @@
             <div class="flex flex-col p-3">
               <!-- todo when cluster agent v2 is active remove this comment-->
               <!-- <app-cluster-ingress-table [cluster]="cluster"></app-cluster-ingress-table> -->
-              <app-cluster-ingress-list [cluster]="cluster"></app-cluster-ingress-list>
+              <app-cluster-ingress-list *ngIf="activeTabIndex === 1" [cluster]="cluster"></app-cluster-ingress-list>
             </div>
           </div>
         </div>
@@ -139,43 +139,51 @@
       <p-tabpanel [value]="2">
         <div class="">
           <div class="dark:bg-darker flex flex-col rounded-md bg-white">
-            <app-cluster-nodepools [cluster]="cluster"></app-cluster-nodepools>
+            <app-cluster-nodepools *ngIf="activeTabIndex === 2" [cluster]="cluster"></app-cluster-nodepools>
           </div>
         </div>
       </p-tabpanel>
 
       <p-tabpanel [value]="3">
-        <app-cluster-policy-report></app-cluster-policy-report>
+        <app-cluster-policy-report *ngIf="activeTabIndex === 3"></app-cluster-policy-report>
       </p-tabpanel>
 
       <p-tabpanel [value]="4">
         <!-- todo when cluster agent v2 is active remove this comment-->
         <!-- <app-cluster-vulnerability [cluster]="cluster"></app-cluster-vulnerability> -->
-        <app-cluster-vulnerability-report></app-cluster-vulnerability-report>
+        <app-cluster-vulnerability-report *ngIf="activeTabIndex === 4"></app-cluster-vulnerability-report>
       </p-tabpanel>
 
       <p-tabpanel [value]="5">
-        <app-cluster-compliance-report [clusterId]="cluster?.clusterId"></app-cluster-compliance-report>
+        <app-cluster-compliance-report *ngIf="activeTabIndex === 5" [clusterId]="cluster?.clusterId"></app-cluster-compliance-report>
       </p-tabpanel>
 
       <p-tabpanel [value]="6">
-        <app-cluster-raw [cluster]="cluster"></app-cluster-raw>
+        <app-cluster-raw *ngIf="activeTabIndex === 6" [cluster]="cluster"></app-cluster-raw>
       </p-tabpanel>
 
       <p-tabpanel [value]="7">
-        <app-cluster-metadata-page [cluster]="cluster" (refreshRequested)="fetchCluster(clusterId)"></app-cluster-metadata-page>
+        <app-cluster-metadata-page
+          *ngIf="activeTabIndex === 7"
+          [cluster]="cluster"
+          (refreshRequested)="fetchCluster(clusterId)"
+        ></app-cluster-metadata-page>
       </p-tabpanel>
 
       <p-tabpanel [value]="8">
-        <app-cluster-resource-table [cluster]="cluster" (resourceSelected)="showSelectedResource($event)"></app-cluster-resource-table>
+        <app-cluster-resource-table
+          *ngIf="activeTabIndex === 8"
+          [cluster]="cluster"
+          (resourceSelected)="showSelectedResource($event)"
+        ></app-cluster-resource-table>
       </p-tabpanel>
 
       <p-tabpanel [value]="9">
-        <app-cluster-notifications [cluster]="cluster"></app-cluster-notifications>
+        <app-cluster-notifications *ngIf="activeTabIndex === 9" [cluster]="cluster"></app-cluster-notifications>
       </p-tabpanel>
 
       <p-tabpanel [value]="10">
-        <app-cluster-delete [cluster]="cluster"></app-cluster-delete>
+        <app-cluster-delete *ngIf="activeTabIndex === 10" [cluster]="cluster"></app-cluster-delete>
       </p-tabpanel>
     </p-tabpanels>
   </p-tabs>

@@ -1,5 +1,6 @@
+import { Resourcesv2Service } from './../../../core/services/resourcesv2.service';
 import { NodePool } from './../../../core/models/clusterOrder';
-import { AsyncPipe, LowerCasePipe, TitleCasePipe } from '@angular/common';
+import { AsyncPipe, JsonPipe, LowerCasePipe, TitleCasePipe } from '@angular/common';
 import { ConfigService } from './../../../core/services/config.service';
 import { ChangeDetectionStrategy, Component, inject, Input, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
@@ -10,8 +11,10 @@ import { ClusterNodepoolCreateorupdateComponent } from '../cluster-nodepool-crea
 import { MessageService } from 'primeng/api';
 import { AclService } from '../../../core/services/acl.service';
 import { AclAccess, AclScopes } from '../../../core/models/acl-scopes';
-import { catchError, Observable, share, tap } from 'rxjs';
+import { catchError, finalize, Observable, share, tap } from 'rxjs';
 import { FormatBytesPipe } from '../../../shared/pipes';
+import { Resource, ResourceQuery, ResourceSet } from '@rork8s/ror-resources/models';
+import { SpinnerComponent } from '../../../shared/components/spinner/spinner.component';
 
 @Component({
   selector: 'app-cluster-nodepool-list',
@@ -25,6 +28,8 @@ import { FormatBytesPipe } from '../../../shared/pipes';
     ClusterNodepoolCreateorupdateComponent,
     AsyncPipe,
     FormatBytesPipe,
+    SpinnerComponent,
+    JsonPipe,
   ],
   templateUrl: './cluster-nodepool-list.component.html',
   styleUrl: './cluster-nodepool-list.component.scss',
@@ -40,12 +45,16 @@ export class ClusterNodepoolListComponent implements OnInit, OnDestroy {
   aclFetchError: any;
   adminOwner$: Observable<boolean> | undefined;
 
+  clusterResource: Resource | undefined;
+  clusterResourceSet$: Observable<ResourceSet> | undefined;
+  clusterResourceSetFetchError: any;
+  isLoading = true; // Start with loading state active
+
   private configService = inject(ConfigService);
   private messageService = inject(MessageService);
   private aclService = inject(AclService);
   private changeDetector = inject(ChangeDetectorRef);
-
-  constructor() {}
+  private resourcesv2Service = inject(Resourcesv2Service);
 
   ngOnInit(): void {
     this.rows = this.configService?.config?.rows;
@@ -59,6 +68,8 @@ export class ClusterNodepoolListComponent implements OnInit, OnDestroy {
         throw error;
       }),
     );
+
+    this.fetchKubernetesClusterResource();
   }
 
   ngOnDestroy(): void {}
@@ -74,5 +85,63 @@ export class ClusterNodepoolListComponent implements OnInit, OnDestroy {
 
     const newlist = this.cluster?.topology?.nodePools.filter((np: any) => np?.name !== nodePool?.name);
     this.cluster.topology.nodePools = newlist;
+  }
+
+  fetchKubernetesClusterResource(): void {
+    this.isLoading = true;
+    this.clusterResourceSetFetchError = null;
+    this.clusterResource = undefined;
+    this.changeDetector.detectChanges(); // Force update to show loading state
+    console.log('Datacenter name:', this.cluster?.workspace?.datacenter?.name);
+    console.log('Cluster name:', this.cluster?.clusterName);
+    const query: ResourceQuery = {
+      versionkind: {
+        Group: '',
+        Kind: 'KubernetesCluster',
+        Version: 'general.ror.internal/v1alpha1',
+      },
+      filters: [
+        {
+          field: 'metadata.name',
+          type: 'string',
+          operator: 'eq',
+          value: this.cluster?.clusterName,
+        },
+        {
+          field: 'rormeta.ownerref.subject',
+          type: 'string',
+          operator: 'eq',
+          value: this.cluster?.workspace?.datacenter?.name,
+        },
+        {
+          field: 'rormeta.ownerref.scope',
+          type: 'string',
+          operator: 'eq',
+          value: 'datacenter',
+        },
+      ],
+    };
+    console.log('Query:', query);
+    this.clusterResourceSet$ = this.resourcesv2Service.getResources(query).pipe(
+      tap((data: ResourceSet) => {
+        if (data?.resources?.length === 1) {
+          this.clusterResource = data?.resources[0];
+          return this.clusterResource;
+        } else {
+          this.clusterResource = undefined;
+          return null;
+        }
+      }),
+      catchError((error: any) => {
+        this.clusterResourceSetFetchError = error;
+        this.isLoading = false;
+        this.changeDetector.detectChanges(); // Force update on error
+        throw error;
+      }),
+      finalize(() => {
+        this.isLoading = false;
+        this.changeDetector.detectChanges();
+      }),
+    );
   }
 }
