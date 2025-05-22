@@ -826,6 +826,7 @@
           "title": "Node pools",
           "machineClass": "Machine class",
           "create": "Create node pool",
+          "noteditable": "Not editable",
           "table": {
             "column": {
               "name": "Name",
@@ -836,7 +837,9 @@
               "cpu": "CPU",
               "cores": "Cores",
               "mem": "MEM",
-              "nodeCount": "Node count"
+              "nodeCount": "Node count",
+              "autoscaling": "Autoscaling",
+              "replicas": "Replicas"
             }
           },
           "createorupdate": {

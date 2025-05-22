@@ -827,6 +827,7 @@
           "title": "Nodegrupper",
           "machineClass": "Maskinklasse",
           "create": "Lag nodegruppe",
+          "noteditable": "Ikke redigerbar",
           "table": {
             "column": {
               "name": "Navn",
@@ -837,7 +838,9 @@
               "cpu": "CPU",
               "cores": "Kjerner",
               "mem": "MEM",
-              "nodeCount": "Antall noder"
+              "nodeCount": "Antall noder",
+              "autoscaling": "Autoskalering",
+              "replicas": "Antall replikaer"
             }
           },
           "createorupdate": {
