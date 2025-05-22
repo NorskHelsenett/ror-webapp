@@ -7,7 +7,7 @@ import { ClusterNodepoolListComponent } from '../../components/cluster-nodepool-
 
 import { ClusterNodepoolCreateorupdateComponent } from '../../components/cluster-nodepool-createorupdate/cluster-nodepool-createorupdate.component';
 import { SpinnerComponent } from '../../../shared/components';
-import { AsyncPipe, JsonPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Resourcesv2Service } from '../../../core/services/resourcesv2.service';
 import { MessageService } from 'primeng/api';
 import { Resource, ResourceQuery, ResourceSet } from '@rork8s/ror-resources/models';
@@ -15,22 +15,13 @@ import { LucideAngularModule, AsteriskIcon } from 'lucide-angular';
 
 @Component({
   selector: 'app-cluster-nodepools',
-  imports: [
-    TranslateModule,
-    ClusterNodepoolListComponent,
-    ClusterNodepoolCreateorupdateComponent,
-    SpinnerComponent,
-    AsyncPipe,
-    LucideAngularModule,
-    JsonPipe,
-  ],
+  imports: [TranslateModule, ClusterNodepoolListComponent, ClusterNodepoolCreateorupdateComponent, SpinnerComponent, AsyncPipe, LucideAngularModule],
   templateUrl: './cluster-nodepools.component.html',
   styleUrl: './cluster-nodepools.component.scss',
 })
 export class ClusterNodepoolsComponent implements OnInit, OnDestroy {
   readonly asteriskIcon = AsteriskIcon;
   @Input() cluster: any;
-  prices: Price[];
   showNodepoolEditor: boolean = false;
   selectedNodepool: any | undefined;
   nodepools: any[] = [];
@@ -49,13 +40,6 @@ export class ClusterNodepoolsComponent implements OnInit, OnDestroy {
   private subscriptions = new Subscription();
 
   ngOnInit(): void {
-    this.subscriptions.add(
-      this.priceService.getAll().subscribe((prices: Price[]) => {
-        this.prices = prices;
-        this.changeDetector.detectChanges();
-      }),
-    );
-
     this.fetchKubernetesClusterResource();
   }
 
