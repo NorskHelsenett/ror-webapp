@@ -99,22 +99,25 @@ export class ClusterNotificationsComponent implements OnInit {
   }
 
   handleCreate(): void {
-    // if (!this.resource) {
-    //   this.resource = {
-    //     kind: this.kind,
-    //     apiVersion: this.apiVersion,
-    //     rormeta: {
-    //       ownerref: {
-    //         scope: this.scope,
-    //         subject: this.cluster?.clusterId,
-    //       },
-    //       action: 'Add',
-    //     },
-    //     metadata: {
-    //       uid: v4(),
-    //     },
-    //   };
-    // }
+    if (!this.resource) {
+      this.resource = {
+        kind: this.kind,
+        apiVersion: this.apiVersion,
+        name: null,
+        allocated: null,
+        usage: null,
+        rormeta: {
+          ownerref: {
+            scope: this.scope,
+            subject: this.cluster?.clusterId,
+          },
+          action: 'Add',
+        },
+        metadata: {
+          uid: v4(),
+        },
+      };
+    }
     this.toggleEdit();
   }
 
