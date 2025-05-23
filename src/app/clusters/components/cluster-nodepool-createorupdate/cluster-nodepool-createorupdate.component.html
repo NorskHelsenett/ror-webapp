@@ -25,29 +25,42 @@
   <div class="col-span-2">
     <div class="overflow-x-auto">
       <form [formGroup]="nodepoolForm" class="flex flex-col gap-5">
-        <div class="mb-3 rounded-lg border border-solid border-gray-600 p-5">
+        <div class="mb-3 rounded-lg bg-gray-200 p-5 dark:bg-zinc-800">
           <div class="">
             <span class="text-lg font-bold">{{ 'pages.clusters.details.nodePools.createorupdate.form.name' | translate }}</span>
             <div class="flex flex-col">
               <div class="flex flex-row gap-4">
                 <input
-                  class="p-inputtext-lg w-1/3 border text-lg sm:w-full md:w-1/3"
+                  class="p-inputtext-lg w-1/3 bg-gray-50 text-lg dark:bg-zinc-900 sm:w-full md:w-1/3"
                   type="text"
                   pInputText
                   formControlName="name"
                   [autofocus]="true"
                 />
-                <button (click)="proposeNewName()" type="button" class="flex gap-2 p-3">
-                  <i class="pi pi-replay"></i> {{ 'pages.clusters.details.nodePools.createorupdate.form.nameRandom' | translate }}
-                </button>
+                <div class="flex flex-col">
+                  <button (click)="proposeNewName()" type="button" class="flex gap-2">
+                    <i class="pi pi-replay"></i> {{ 'pages.clusters.details.nodePools.createorupdate.form.nameRandom' | translate }}
+                  </button>
+
+                  @if (nodepoolForm?.get('name')?.value !== nodepool?.name) {
+                    <button
+                      (click)="resetName()"
+                      type="button"
+                      class="flex gap-2 disabled:bg-zinc-700 disabled:text-black"
+                      [disabled]="nodepoolForm?.get('name')?.value === nodepool?.name"
+                    >
+                      <i class="pi pi-replay"></i> {{ 'pages.clusters.details.nodePools.createorupdate.form.resetname' | translate }}
+                    </button>
+                  }
+                </div>
               </div>
-              @if (nodepoolForm.get('name').errors && nodepoolForm.get('name').touched && nodepoolForm.get('name').dirty) {
+              @if (nodepoolForm?.get('name').errors && nodepoolForm?.get('name').touched && nodepoolForm?.get('name').dirty) {
                 <span class="text-red-400">{{ 'pages.clusters.details.nodePools.createorupdate.form.nameError' | translate }} </span>
               }
             </div>
           </div>
         </div>
-        <div class="mb-3 rounded-lg border border-solid border-gray-600 p-5">
+        <div class="mb-3 rounded-lg bg-gray-200 p-5 dark:bg-zinc-800">
           <div class="">
             <span class="text-lg font-bold">{{ 'pages.clusters.details.nodePools.createorupdate.form.machineClass' | translate }}</span>
             <div class="flex flex-col">
@@ -61,8 +74,9 @@
                 [filter]="true"
                 filterBy="machineClass"
                 dataKey="id"
-                (onChange)="onPriceChange($event)"
+                (onChange)="onPriceChange($event?.value)"
                 [autofocus]="true"
+                [appendTo]="'body'"
               >
                 <ng-template let-price pTemplate="item">
                   <div class="flex w-[500px] flex-col gap-1">
@@ -93,21 +107,21 @@
                 </ng-template>
               </p-select>
 
-              @if (nodepoolForm.get('price').errors && nodepoolForm.get('price').touched && nodepoolForm.get('price').dirty) {
+              @if (nodepoolForm?.get('price').errors && nodepoolForm?.get('price').touched && nodepoolForm?.get('price').dirty) {
                 <span class="text-red-400">{{ 'pages.clusters.details.nodePools.createorupdate.form.machineClassError' | translate }} </span>
               }
             </div>
           </div>
         </div>
 
-        <div class="mb-3 rounded-lg border border-solid border-gray-600 p-5 dark:border-gray-800">
-          <div class="">
+        <div class="mb-3 rounded-lg bg-gray-200 p-5 dark:bg-zinc-800">
+          <div class="" formGroupName="autoscaling">
             <div class="">
               <div class="flex flex-row gap-4">
                 <p-checkbox
-                  class="border"
+                  class=""
                   [binary]="true"
-                  formControlName="autoScale"
+                  formControlName="enabled"
                   inputId="override-checkbox"
                   (onChange)="autoscaleChanged($event)"
                 ></p-checkbox>
@@ -116,7 +130,11 @@
               <div>
                 {{ 'pages.clusters.details.nodePools.createorupdate.form.autoScaleDescription' | translate }}
               </div>
-              @if (nodepoolForm.get('autoScale').errors && nodepoolForm.get('autoScale').touched && nodepoolForm.get('autoScale').dirty) {
+              @if (
+                nodepoolForm?.get('autoscaling')?.get('enabled')?.errors &&
+                nodepoolForm?.get('autoscaling')?.get('enabled')?.touched &&
+                nodepoolForm?.get('autoscaling')?.get('enabled')?.dirty
+              ) {
                 <span class="text-red-400">{{ 'pages.clusters.details.nodePools.createorupdate.form.autoScaleError' | translate }} </span>
               }
             </div>
@@ -131,7 +149,7 @@
                     buttonLayout="horizontal"
                     spinnerMode="horizontal"
                     [step]="1"
-                    formControlName="minNodes"
+                    formControlName="minReplicas"
                     class="m-1 bg-green-600 hover:bg-green-700"
                     [min]="1"
                     [max]="maxNodes"
@@ -139,11 +157,15 @@
                     (ngModelChange)="minNodesChanged($event)"
                   >
                   </p-inputNumber>
-                  @if (nodepoolForm.get('minNodes').errors && nodepoolForm.get('minNodes').touched && nodepoolForm.get('minNodes').dirty) {
+                  @if (
+                    nodepoolForm?.get('autoscaling')?.get('minReplicas').errors &&
+                    nodepoolForm?.get('autoscaling')?.get('minReplicas').touched &&
+                    nodepoolForm?.get('autoscaling')?.get('minReplicas').dirty
+                  ) {
                     <span class="text-red-400">{{ 'pages.clusters.details.nodePools.createorupdate.form.minNodesError' | translate }} </span>
                   }
                 </div>
-                @if (nodepoolForm.get('autoScale').value) {
+                @if (nodepoolForm?.get('autoscaling')?.get('enabled')?.value) {
                   <div class="flex flex-col gap-4">
                     <span>{{ 'pages.clusters.details.nodePools.createorupdate.form.maxNodes' | translate }}</span>
                     <p-inputNumber
@@ -155,14 +177,18 @@
                       [step]="1"
                       inputStyleClass=""
                       styleClass="bg-green-600"
-                      formControlName="maxNodes"
+                      formControlName="maxReplicas"
                       [min]="getMinMaxNodes()"
                       [max]="maxNodes"
                       [size]="'large'"
                       [allowEmpty]="false"
                     >
                     </p-inputNumber>
-                    @if (nodepoolForm.get('maxNodes').errors && nodepoolForm.get('maxNodes').touched && nodepoolForm.get('maxNodes').dirty) {
+                    @if (
+                      nodepoolForm?.get('autoscaling')?.get('maxReplicas').errors &&
+                      nodepoolForm?.get('autoscaling')?.get('maxReplicas').touched &&
+                      nodepoolForm?.get('autoscaling')?.get('maxReplicas').dirty
+                    ) {
                       <span class="text-red-400">{{ 'pages.clusters.details.nodePools.createorupdate.form.maxNodesError' | translate }} </span>
                     }
                   </div>
@@ -171,8 +197,8 @@
             </div>
           </div>
         </div>
-
-        <div class="mb-3 rounded-lg border border-solid border-gray-600 p-5">
+        <!--
+        <div class="mb-3 rounded-lg bg-gray-200 p-5 dark:bg-zinc-800">
           <div class="">
             <span class="text-lg font-bold">{{ 'pages.clusters.details.nodePools.createorupdate.form.tags' | translate }}</span>
             <table class="mt-2 w-3/4">
@@ -207,7 +233,7 @@
                 </ng-container>
               </tbody>
             </table>
-            @if (nodepoolForm.get('tags').errors && nodepoolForm.get('tags').touched && nodepoolForm.get('tags').dirty) {
+            @if (nodepoolForm?.get('tags').errors && nodepoolForm?.get('tags').touched && nodepoolForm?.get('tags').dirty) {
               <span class="text-red-400">{{ 'pages.clusters.details.nodePools.createorupdate.form.tagsError' | translate }} </span>
             }
           </div>
@@ -257,7 +283,7 @@
           </div>
         </div>
 
-        <div class="mb-3 rounded-lg border border-solid border-gray-600 p-5">
+        <div class="mb-3 rounded-lg bg-gray-200 p-5 dark:bg-zinc-800">
           <div class="">
             <span class="text-lg font-bold">{{ 'pages.clusters.details.nodePools.createorupdate.form.labels' | translate }}</span>
             <table class="mt-2 w-3/4">
@@ -292,7 +318,7 @@
                 </ng-container>
               </tbody>
             </table>
-            @if (nodepoolForm.get('labels').errors && nodepoolForm.get('labels').touched && nodepoolForm.get('labels').dirty) {
+            @if (nodepoolForm?.get('labels').errors && nodepoolForm?.get('labels').touched && nodepoolForm?.get('labels').dirty) {
               <span class="text-red-400">{{ 'pages.clusters.details.nodePools.createorupdate.form.labelsError' | translate }} </span>
             }
           </div>
@@ -345,12 +371,12 @@
               </div>
             </form>
           </div>
-        </div>
+        </div> -->
 
         <div>
           <button
             (click)="submit()"
-            [disabled]="!nodepoolForm.valid"
+            [disabled]="!nodepoolForm?.valid"
             class="rounded-xl bg-green-700 text-white disabled:bg-gray-300 disabled:text-white"
           >
             <div class="p-3">
@@ -365,11 +391,21 @@
       </form>
     </div>
   </div>
-  <div class="ml-3 rounded-lg border p-5">
+  <div class="ml-3 rounded-lg bg-gray-200 p-5 dark:bg-zinc-800">
     <app-cluster-nodepool-createorupdate-summary [nodepoolForm]="nodepoolForm"></app-cluster-nodepool-createorupdate-summary>
   </div>
 </div>
 
-<!-- <div class="bg-gray-800 text-gray-400">
-  <pre>{{ nodepoolForm.value | json }}</pre>
-</div> -->
+<div class="mt-4">
+  Nodepool
+  <div class="bg-gray-800 text-green-400">
+    <pre>{{ nodepool | json }}</pre>
+  </div>
+</div>
+
+<div class="mt-4">
+  NodepoolForm
+  <div class="bg-gray-800 text-gray-400">
+    <pre>{{ nodepoolForm?.value | json }}</pre>
+  </div>
+</div>

@@ -850,6 +850,7 @@
               "name": "Navn",
               "nameError": "Navn mangler, eller ugyldige tegn",
               "nameRandom": "Generer navn",
+              "resetname": "Tilbakestill navn",
               "machineClass": "Maskinklasse",
               "machineClassError": "Maskinklasse mangler",
               "machineClassPlaceholder": "Velg maskinklasse",

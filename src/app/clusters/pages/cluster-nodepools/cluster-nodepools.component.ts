@@ -1,8 +1,6 @@
 import { ChangeDetectorRef, Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
-import { PriceService } from '../../../core/services/price.service';
 import { catchError, finalize, Observable, Subscription, tap } from 'rxjs';
-import { Price } from '../../../core/models/price';
 import { ClusterNodepoolListComponent } from '../../components/cluster-nodepool-list/cluster-nodepool-list.component';
 
 import { ClusterNodepoolCreateorupdateComponent } from '../../components/cluster-nodepool-createorupdate/cluster-nodepool-createorupdate.component';
@@ -32,7 +30,6 @@ export class ClusterNodepoolsComponent implements OnInit, OnDestroy {
   isLoading = true;
   loadedFromResources = false;
 
-  private priceService = inject(PriceService);
   private changeDetector = inject(ChangeDetectorRef);
   private resourcesv2Service = inject(Resourcesv2Service);
   private messageService = inject(MessageService);
@@ -120,6 +117,7 @@ export class ClusterNodepoolsComponent implements OnInit, OnDestroy {
   }
 
   deleteNodepool(nodePool: any): void {
+    console.log('delete nodepool', nodePool);
     this.messageService.add({ severity: 'success', summary: 'Nodepool deleted', detail: 'Nodepool deleted successfully' }); // translate
 
     // const newlist = this.cluster?.topology?.nodePools.filter((np: any) => np?.name !== nodePool?.name);

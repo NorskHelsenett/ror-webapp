@@ -849,6 +849,7 @@
               "name": "Name",
               "nameError": "Name is missing or invalid characters",
               "nameRandom": "Generate name",
+              "resetname": "Reset name",
               "machineClass": "Machine class",
               "machineClassError": "Machine class is missing",
               "machineClassPlaceholder": "Choose machine class",
