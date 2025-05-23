@@ -331,6 +331,12 @@ export class ClusterDetailsComponent implements OnInit, OnDestroy, AfterContentI
     try {
       const tab = this.tabs[this.activeTabIndex];
       this.location.replaceState(`cluster/${this.clusterId}`, tab?.query);
+
+      // Explicitly trigger change detection when a tab is activated
+      // This ensures the components in the selected tab are initialized
+      setTimeout(() => {
+        this.changeDetector.detectChanges();
+      }, 0);
     } catch {
       //ignoring
     }
@@ -340,7 +346,10 @@ export class ClusterDetailsComponent implements OnInit, OnDestroy, AfterContentI
     if (isPlatformBrowser(this.platformId)) {
       this.activeTabIndex = index;
       this.switchTab();
-      this.changeDetector.detectChanges();
+      // Use setTimeout to ensure the components in the tab are initialized after the tab change
+      setTimeout(() => {
+        this.changeDetector.detectChanges();
+      }, 0);
     }
   }
 

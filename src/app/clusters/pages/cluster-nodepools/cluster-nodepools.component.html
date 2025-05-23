@@ -1,13 +1,92 @@
 <div class="grid space-y-8 lg:gap-8 lg:space-y-0">
   <div class="dark:bg-darker m-3 flex items-center justify-between overflow-x-auto rounded-md bg-white">
     <div class="dark:bg-darker col-span-2 w-full overflow-x-auto rounded-md bg-white">
-      <div class="dark:border-primary flex items-center justify-between border-b p-4">
-        <h4 class="dark:text-light text-lg font-semibold text-gray-500">{{ 'pages.clusters.details.nodePools.title' | translate }}</h4>
+      <div class="dark:border-primary flex justify-between border-b p-3">
+        <div class="flex">
+          <h4 class="dark:text-light text-lg font-semibold text-gray-500">{{ 'pages.clusters.details.nodePools.title' | translate }}</h4>
+          @if (!loadedFromResources) {
+            <span class="ml-2 flex"
+              >(<i-lucide class="text-red-800 dark:text-red-300" [img]="asteriskIcon"></i-lucide>
+              {{ 'pages.clusters.details.nodePools.noteditable' | translate }})</span
+            >
+          }
+        </div>
+        <span class="flex-grow"></span>
+
+        <a
+          (click)="fetchKubernetesClusterResource()"
+          class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark ml-2 cursor-pointer rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+        >
+          {{ 'common.refresh' | translate }}
+        </a>
       </div>
       <div class="p-4">
         <div class="">
           <div class="overflow-x-auto">
-            <app-cluster-nodepool-list [cluster]="cluster" [nodepools]="getCluster()?.topology?.nodePools"></app-cluster-nodepool-list>
+            <!-- <app-cluster-nodepool-list [cluster]="cluster"></app-cluster-nodepool-list> -->
+
+            @if (clusterResourceSet$ | async; as resourceSet) {
+              @if (!showNodepoolEditor) {
+                <app-cluster-nodepool-list
+                  [editable]="true"
+                  [nodepools]="nodepools"
+                  (onEdit)="editNodepool($event)"
+                  (onDelete)="deleteNodepool($event)"
+                ></app-cluster-nodepool-list>
+              } @else {
+                <app-cluster-nodepool-createorupdate
+                  (close)="toggleNodepoolEditor()"
+                  [cluster]="cluster"
+                  [nodepool]="selectedNodepool"
+                ></app-cluster-nodepool-createorupdate>
+              }
+              <!-- <div>
+                <span>Kubernetes Cluster (new)</span>
+                <div class="bg-black text-green-500">
+                  <pre>{{ clusterResource | json }}</pre>
+                </div>
+              </div> -->
+            } @else {
+              @if (isLoading === true) {
+                <div class="flex h-full w-full items-center justify-center p-8">
+                  <app-spinner></app-spinner>
+                  <span class="ml-2 animate-bounce">{{ 'common.fetching' | translate }}</span>
+                </div>
+              } @else if (clusterResourceSetFetchError) {
+                <div class="mx-auto my-4 flex items-center rounded-md bg-red-200 px-6 py-4 text-lg">
+                  <span class="p-2 text-red-800"> {{ 'common.errorLoading' | translate }} </span>
+                  <button class="btn text-black" (click)="fetchKubernetesClusterResource()">{{ 'common.tryAgain' | translate }}</button>
+                </div>
+              } @else if (!clusterResource && cluster?.topology?.nodePools?.length > 0) {
+                <app-cluster-nodepool-list
+                  [nodepools]="nodepools"
+                  [editable]="false"
+                  (onEdit)="editNodepool($event)"
+                  (onDelete)="deleteNodepool($event)"
+                ></app-cluster-nodepool-list>
+              } @else if (!clusterResource) {
+                <div class="mx-auto my-4 flex items-center rounded-md bg-yellow-100 px-6 py-4 text-lg">
+                  <span class="p-2 text-yellow-800">{{ 'common.missing' | translate }}</span>
+                  <button class="btn ml-2 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600" (click)="fetchKubernetesClusterResource()">
+                    {{ 'common.tryAgain' | translate }}
+                  </button>
+                </div>
+              } @else {
+                <div class="mx-auto my-4 flex items-center rounded-md bg-yellow-100 px-6 py-4 text-lg">
+                  <span class="p-2 text-yellow-800">{{ 'common.missing' | translate }}</span>
+                  <button class="btn ml-2 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600" (click)="fetchKubernetesClusterResource()">
+                    {{ 'common.tryAgain' | translate }}
+                  </button>
+                </div>
+              }
+            }
+
+            <!-- <div class="mt-10">
+              <span>Cluster (old)</span>
+              <div class="mt-5 bg-black text-blue-500">
+                <pre>{{ cluster | json }}</pre>
+              </div>
+            </div> -->
           </div>
         </div>
       </div>

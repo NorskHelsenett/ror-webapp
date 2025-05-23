@@ -8,7 +8,7 @@ import { ClusterService } from '../../services';
 import { TableModule } from 'primeng/table';
 import { PriceService } from '../../../core/services/price.service';
 import { Price } from '../../../core/models/price';
-import { CommonModule, TitleCasePipe } from '@angular/common';
+import { CommonModule, JsonPipe, TitleCasePipe } from '@angular/common';
 import { ConfigService } from '../../../core/services/config.service';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { ClusterNodepoolCreateorupdateSummaryComponent } from '../cluster-nodepool-createorupdate-summary/cluster-nodepool-createorupdate-summary.component';
@@ -18,6 +18,7 @@ import { Resourcesv2Service } from '../../../core/services/resourcesv2.service';
 import { MessageService } from 'primeng/api';
 import { ColorService } from '../../../core/services/color.service';
 import { SelectModule } from 'primeng/select';
+import { machine } from 'os';
 
 @Component({
   selector: 'app-cluster-nodepool-createorupdate',
@@ -32,6 +33,7 @@ import { SelectModule } from 'primeng/select';
     CheckboxModule,
     SelectModule,
     CommonModule,
+    JsonPipe,
   ],
   templateUrl: './cluster-nodepool-createorupdate.component.html',
   styleUrl: './cluster-nodepool-createorupdate.component.scss',
@@ -105,28 +107,27 @@ export class ClusterNodepoolCreateorupdateComponent implements OnInit, OnDestroy
     this.rows = this.configService?.config?.rows;
     this.rowsPerPage = this.configService?.config?.rowsPerPage;
 
-    const form = this.formbuilder.group({
+    let form = this.formbuilder.group({
       name: ['', [Validators.required, Validators.pattern(this.labelPattern)]],
       price: [, [Validators.required]],
-      autoScale: [false, [Validators.required]],
-      minNodes: [1, [Validators.required]],
-      maxNodes: [3, [Validators.required]],
-      labels: this.formbuilder.array([], { validators: [] }),
-      tags: this.formbuilder.array([], { validators: [] }),
+      machineClass: [null, [Validators.required]],
+      provider: [this.cluster?.workspace?.datacenter?.provider, [Validators.required]],
+      replicas: [null, [Validators.required]],
+      autoscaling: this.formbuilder.group({
+        enabled: [false],
+        minReplicas: [1, [Validators.required]],
+        maxReplicas: [3, [Validators.required]],
+        scalingRyles: this.formbuilder.array([], { validators: [] }),
+      }),
+      metadata: this.formbuilder.group({
+        labels: this.formbuilder.array([], { validators: [] }),
+        annotations: this.formbuilder.array([], { validators: [] }),
+      }),
+      taint: this.formbuilder.array([], { validators: [] }),
     });
+
     this.nodepoolService.nodepoolForm = form;
     this.nodepoolForm = form;
-
-    this.labelForm = this.formbuilder.group({
-      key: ['', [Validators.required, Validators.pattern(this.labelPattern)]],
-      value: ['', [Validators.required, Validators.pattern(this.labelValuePattern)]],
-    });
-
-    this.tagForm = this.formbuilder.group({
-      key: ['', [Validators.required, Validators.pattern(this.labelPattern)]],
-      value: ['', [Validators.required, Validators.pattern(this.labelValuePattern)]],
-      color: ['', [Validators.required]],
-    });
 
     this.proposeNewName();
 
@@ -184,6 +185,8 @@ export class ClusterNodepoolCreateorupdateComponent implements OnInit, OnDestroy
   onPriceSelected(price: Price): void {
     this.selectedPrice = price;
     this.nodepoolForm?.get('price')?.setValue(price);
+    this.nodepoolForm?.get('machineClass')?.setValue(price?.machineClass);
+    this.changeDetector.detectChanges();
   }
 
   private initializeNodepool(): void {
@@ -191,13 +194,24 @@ export class ClusterNodepoolCreateorupdateComponent implements OnInit, OnDestroy
       return;
     }
 
-    const nodeCount = this.nodePool?.nodes?.length;
+    const price = this.prices.find((price) => price?.machineClass === this.nodePool?.machineClass);
 
     this.nodepoolForm?.patchValue({
       name: this.nodePool?.name,
-      minNodes: nodeCount,
-      autoScale: false,
-      maxNodes: this.nodePool?.maxNodes || this.maxNodes,
+      price: price,
+      machineClass: this.nodePool?.machineClass,
+      provider: this.cluster?.workspace?.datacenter?.provider,
+      replicas: this.nodePool?.replicas,
+      autoscaling: {
+        enabled: false,
+        minReplicas: 1,
+        maxReplicas: 3,
+      },
+      metadata: {
+        labels: this.nodePool?.metadata?.labels || [],
+        annotations: this.nodePool?.metadata?.annotations || [],
+      },
+      taint: this.nodePool?.taint || [],
     });
   }
 
@@ -310,8 +324,15 @@ export class ClusterNodepoolCreateorupdateComponent implements OnInit, OnDestroy
     this.nodepoolForm?.get('name')?.setValue(this.getRandomName());
   }
 
-  onPriceChange(event: any): void {
-    this.nodepoolForm?.get('price')?.setValue(event.value);
+  resetName(): void {
+    this.nodepoolForm?.get('name')?.setValue(this.nodePool?.name);
+  }
+
+  onPriceChange(price: Price): void {
+    this.selectedPrice = price;
+    this.nodepoolForm?.get('price')?.setValue(this.selectedPrice);
+    this.nodepoolForm?.get('machineClass')?.setValue(this.selectedPrice?.machineClass);
+    this.changeDetector.detectChanges();
   }
 
   submit(): void {
@@ -388,32 +409,32 @@ export class ClusterNodepoolCreateorupdateComponent implements OnInit, OnDestroy
   }
 
   getMinMaxNodes(): number {
-    const minNodes = this.nodepoolForm?.get('minNodes')?.value;
-    const maxNodes = this.nodepoolForm?.get('maxNodes')?.value;
+    const minNodes = this.nodepoolForm?.get('autoscaling')?.get('minNodes')?.value;
+    const maxNodes = this.nodepoolForm?.get('autoscaling')?.get('maxReplicas')?.value;
     return minNodes;
   }
 
   minNodesChanged(event: any): void {
-    const minNodes = this.nodepoolForm?.get('minNodes')?.value;
-    const maxNodes = this.nodepoolForm?.get('maxNodes')?.value;
+    const minNodes = this.nodepoolForm?.get('autoscaling')?.get('minReplicas')?.value;
+    const maxNodes = this.nodepoolForm?.get('autoscaling')?.get('maxReplicas')?.value;
     if (minNodes > maxNodes) {
-      this.nodepoolForm?.get('maxNodes')?.setValue(minNodes);
+      this.nodepoolForm?.get('autoscaling')?.get('maxReplicas')?.setValue(minNodes);
     }
     this.changeDetector.detectChanges();
   }
 
   autoscaleChanged(event: any): void {
     if (event?.checked) {
-      const minNodes = this.nodepoolForm?.get('minNodes')?.value;
-      const maxNodes = this.nodepoolForm?.get('maxNodes')?.value;
+      const minNodes = this.nodepoolForm?.get('autoscaling')?.get('minReplicas')?.value;
+      const maxNodes = this.nodepoolForm?.get('autoscaling')?.get('maxReplicas')?.value;
       if (maxNodes !== 0) {
         let mxNodes = minNodes + 1;
         if (mxNodes > this.maxNodes) {
           mxNodes = this.maxNodes;
         }
-        this.nodepoolForm?.get('maxNodes')?.setValue(mxNodes);
+        this.nodepoolForm?.get('autoscaling')?.get('maxReplicas')?.setValue(mxNodes);
       } else {
-        this.nodepoolForm?.get('maxNodes')?.setValue(this.maxNodes);
+        this.nodepoolForm?.get('autoscaling')?.get('maxReplicas')?.setValue(this.maxNodes);
       }
     }
     this.changeDetector.detectChanges();
