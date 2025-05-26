@@ -7,7 +7,6 @@ import { ButtonModule } from 'primeng/button';
 import { AclService } from '../../../core/services/acl.service';
 import { AclAccess, AclScopes } from '../../../core/models/acl-scopes';
 import { catchError, Observable, share } from 'rxjs';
-import { NodePool } from '@rork8s/ror-resources/models';
 import { TrueFalseComponent } from '../../../shared/components/true-false/true-false.component';
 import { FormatBytesPipe } from '../../../shared/pipes';
 

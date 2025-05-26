@@ -126,7 +126,7 @@ export class ClusterNodepoolsComponent implements OnInit, OnDestroy {
   }
 
   setNodepools(clusterResource: Resource): void {
-    this.nodepools = clusterResource?.kubernetescluster?.spec?.topology?.workers.nodePools;
+    this.nodepools = clusterResource?.kubernetescluster?.spec?.topology?.workers?.nodePools || [];
     if (!this.nodepools) {
       this.nodepools = [];
     }
