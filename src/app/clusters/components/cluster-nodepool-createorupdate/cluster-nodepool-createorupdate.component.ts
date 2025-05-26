@@ -1,6 +1,6 @@
 import { ProviderFeaturesService } from './../../../core/services/provider-features.service';
 import { NodepoolService } from './../../services/nodepool.service';
-import { ChangeDetectorRef, Component, EventEmitter, inject, Input, OnDestroy, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, inject, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { catchError, finalize, map, Subscription } from 'rxjs';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -17,7 +17,7 @@ import { uniqueNamesGenerator, Config, adjectives, colors, animals, names } from
 import { Resourcesv2Service } from '../../../core/services/resourcesv2.service';
 import { MessageService } from 'primeng/api';
 import { ColorService } from '../../../core/services/color.service';
-import { SelectModule } from 'primeng/select';
+import { Select, SelectModule } from 'primeng/select';
 import { machine } from 'os';
 
 @Component({
@@ -74,7 +74,12 @@ export class ClusterNodepoolCreateorupdateComponent implements OnInit, OnDestroy
 
   nodepoolForm: FormGroup = this.nodepoolService?.nodepoolForm;
   labelForm: FormGroup | undefined;
-  tagForm: FormGroup | undefined;
+  taintForm: FormGroup | undefined;
+  taintEffects: any[] = [
+    { label: 'NoSchedule', value: 'NoSchedule' },
+    { label: 'PreferNoSchedule', value: 'PreferNoSchedule' },
+    { label: 'NoExecute', value: 'NoExecute' },
+  ];
   nodepoolFetchError: any;
   selectedPrice: Price | undefined;
 
@@ -83,11 +88,11 @@ export class ClusterNodepoolCreateorupdateComponent implements OnInit, OnDestroy
   maxNodes: number = 10;
 
   get labelsArray(): any {
-    return this.nodepoolForm?.get('labels');
+    return this.nodepoolForm?.get('metadata')?.get('labels');
   }
 
-  get tagsArray(): any {
-    return this.nodepoolForm?.get('tags');
+  get taintArray(): any {
+    return this.nodepoolForm?.get('taint');
   }
 
   private subscriptions = new Subscription();
@@ -128,6 +133,17 @@ export class ClusterNodepoolCreateorupdateComponent implements OnInit, OnDestroy
 
     this.nodepoolService.nodepoolForm = form;
     this.nodepoolForm = form;
+
+    this.labelForm = this.formbuilder.group({
+      key: ['', [Validators.required, Validators.pattern(this.labelPattern)]],
+      value: ['', [Validators.required, Validators.pattern(this.labelValuePattern)]],
+    });
+
+    this.taintForm = this.formbuilder.group({
+      key: ['', [Validators.required, Validators.pattern(this.labelPattern)]],
+      value: ['', [Validators.required, Validators.pattern(this.labelValuePattern)]],
+      effect: ['', [Validators.required]],
+    });
 
     this.proposeNewName();
 
@@ -196,6 +212,35 @@ export class ClusterNodepoolCreateorupdateComponent implements OnInit, OnDestroy
 
     const price = this.prices.find((price) => price?.machineClass === this.nodePool?.machineClass);
 
+    if (this.labelsArray?.length > 0) {
+      this.labelsArray?.clear();
+    }
+    if (this.taintArray?.length > 0) {
+      this.taintArray?.clear();
+    }
+
+    if (this.nodePool?.metadata?.labels) {
+      Object.entries(this.nodePool.metadata.labels).forEach(([key, value]) => {
+        console.log('label', { key, value });
+        this.labelsArray?.push(
+          this.formbuilder.group({
+            key: [key, [Validators.required, Validators.pattern(this.labelPattern)]],
+            value: [value, [Validators.required, Validators.pattern(this.labelValuePattern)]],
+          }),
+        );
+      });
+    }
+
+    for (const taint of this.nodePool?.taint) {
+      this.taintArray?.push(
+        this.formbuilder.group({
+          key: [taint?.key, [Validators.required, Validators.pattern(this.labelPattern)]],
+          value: [taint?.value, [Validators.required, Validators.pattern(this.labelValuePattern)]],
+          effect: [taint?.effect, [Validators.required]],
+        }),
+      );
+    }
+
     this.nodepoolForm?.patchValue({
       name: this.nodePool?.name,
       price: price,
@@ -208,10 +253,8 @@ export class ClusterNodepoolCreateorupdateComponent implements OnInit, OnDestroy
         maxReplicas: 3,
       },
       metadata: {
-        labels: this.nodePool?.metadata?.labels || [],
         annotations: this.nodePool?.metadata?.annotations || [],
       },
-      taint: this.nodePool?.taint || [],
     });
   }
 
@@ -234,7 +277,10 @@ export class ClusterNodepoolCreateorupdateComponent implements OnInit, OnDestroy
       return;
     }
 
-    for (const label of this.nodepoolForm.get('labels')?.value) {
+    const labelsArray = this.nodepoolForm.get('metadata')?.get('labels') as FormArray;
+    const labels = labelsArray?.value || [];
+
+    for (const label of labels) {
       if (label?.key === keyInput.value) {
         this.messageService?.add({
           severity: 'error',
@@ -245,7 +291,7 @@ export class ClusterNodepoolCreateorupdateComponent implements OnInit, OnDestroy
       }
     }
 
-    (this.nodepoolForm.get('labels') as FormArray).push(
+    labelsArray.push(
       this.formbuilder.group({
         key: [keyInput.value, [Validators.required, Validators.pattern(this.labelPattern)]],
         value: [valueInput.value, [Validators.required, Validators.pattern(this.labelValuePattern)]],
@@ -259,60 +305,72 @@ export class ClusterNodepoolCreateorupdateComponent implements OnInit, OnDestroy
     this.changeDetector.detectChanges();
   }
 
-  addTag(tagkeyInput: HTMLInputElement, tagvalueInput: HTMLInputElement): void {
-    if (!tagkeyInput?.value) {
+  addTaint(keyInput: HTMLInputElement, valueInput: HTMLInputElement, effectInput: Select): void {
+    if (!keyInput?.value) {
       this.messageService?.add({
         severity: 'error',
         summary: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.error'),
-        detail: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.tagKeyError'),
+        detail: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.taintKeyError'),
       });
       return;
     }
 
-    if (!tagvalueInput?.value) {
+    if (!valueInput?.value) {
       this.messageService?.add({
         severity: 'error',
         summary: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.error'),
-        detail: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.tagValueError'),
+        detail: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.taintValueError'),
       });
       return;
     }
 
-    for (const tag of this.nodepoolForm.get('tags')?.value) {
-      if (tag?.key === tagkeyInput.value) {
+    if (!effectInput?.value) {
+      this.messageService?.add({
+        severity: 'error',
+        summary: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.error'),
+        detail: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.taintEffectError'),
+      });
+      return;
+    }
+
+    const taintArray = this.nodepoolForm?.get('taint') as FormArray;
+    const taints = taintArray?.value || [];
+
+    for (const taint of taints) {
+      if (taint?.key === keyInput.value) {
         this.messageService?.add({
           severity: 'error',
           summary: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.error'),
-          detail: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.labelKeyExists'),
+          detail: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.taintKeyExists'),
         });
         return;
       }
     }
 
-    const colorHash = this.stringToSixCharHex(tagkeyInput.value);
-    let color = this.colorService.getHexColor(colorHash);
-
-    (this.nodepoolForm.get('tags') as FormArray).push(
+    taintArray.push(
       this.formbuilder.group({
-        key: [tagkeyInput.value, [Validators.required, Validators.pattern(this.labelPattern)]],
-        value: [tagvalueInput.value, [Validators.required, Validators.pattern(this.labelValuePattern)]],
-        color: [color, [Validators.required]],
+        key: [keyInput?.value, [Validators.required, Validators.pattern(this.labelPattern)]],
+        value: [valueInput?.value, [Validators.required, Validators.pattern(this.labelValuePattern)]],
+        effect: [effectInput?.value?.value, [Validators.required]],
       }),
     );
 
-    tagkeyInput.value = '';
-    tagvalueInput.value = '';
+    keyInput.value = '';
+    valueInput.value = '';
+    effectInput.value = undefined;
 
-    tagkeyInput.focus();
+    keyInput.focus();
     this.changeDetector.detectChanges();
   }
 
   removeLabel(label: FormControl): void {
-    (this.nodepoolForm.get('labels') as FormArray).removeAt((this.nodepoolForm.get('labels') as FormArray).controls.indexOf(label));
+    const labelsArray = this.nodepoolForm.get('metadata')?.get('labels') as FormArray;
+    labelsArray?.removeAt(labelsArray?.controls?.indexOf(label));
   }
 
-  removeTag(tag: FormControl): void {
-    (this.nodepoolForm.get('tags') as FormArray).removeAt((this.nodepoolForm.get('tags') as FormArray).controls.indexOf(tag));
+  removeTaint(taint: FormControl): void {
+    const taintArray = this.nodepoolForm?.get('taint') as FormArray;
+    taintArray?.removeAt(taintArray?.controls?.indexOf(taint));
   }
 
   getShortName(): string {
@@ -423,7 +481,7 @@ export class ClusterNodepoolCreateorupdateComponent implements OnInit, OnDestroy
     this.changeDetector.detectChanges();
   }
 
-  autoscaleChanged(event: any): void {
+  autoscalingChanged(event: any): void {
     if (event?.checked) {
       const minNodes = this.nodepoolForm?.get('autoscaling')?.get('minReplicas')?.value;
       const maxNodes = this.nodepoolForm?.get('autoscaling')?.get('maxReplicas')?.value;
@@ -438,10 +496,6 @@ export class ClusterNodepoolCreateorupdateComponent implements OnInit, OnDestroy
       }
     }
     this.changeDetector.detectChanges();
-  }
-
-  getColorFromHex(hex: string): string {
-    return this.colorService.getTailwindColorName(hex);
   }
 
   private getRandomName(): string {
@@ -473,24 +527,5 @@ export class ClusterNodepoolCreateorupdateComponent implements OnInit, OnDestroy
     }
 
     this.changeDetector.detectChanges();
-  }
-
-  private stringToSixCharHex(input: string): string {
-    // Convert string to a numeric hash
-    let hash = 0;
-    for (let i = 0; i < input.length; i++) {
-      const char = input.charCodeAt(i);
-      hash = (hash << 5) - hash + char;
-      hash = hash & hash; // Convert to 32bit integer
-    }
-
-    // Convert to hex and ensure positive value
-    const hex = (hash >>> 0).toString(16).toUpperCase();
-
-    // Pad or truncate to 6 characters
-    if (hex.length < 6) {
-      return hex.padStart(6, '0');
-    }
-    return hex.slice(0, 6);
   }
 }
