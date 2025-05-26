@@ -8,7 +8,7 @@ import { ClusterService } from '../../services';
 import { TableModule } from 'primeng/table';
 import { PriceService } from '../../../core/services/price.service';
 import { Price } from '../../../core/models/price';
-import { CommonModule, JsonPipe, TitleCasePipe } from '@angular/common';
+import { CommonModule, TitleCasePipe } from '@angular/common';
 import { ConfigService } from '../../../core/services/config.service';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { ClusterNodepoolCreateorupdateSummaryComponent } from '../cluster-nodepool-createorupdate-summary/cluster-nodepool-createorupdate-summary.component';
@@ -16,9 +16,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { uniqueNamesGenerator, Config, adjectives, colors, animals, names } from 'unique-names-generator';
 import { Resourcesv2Service } from '../../../core/services/resourcesv2.service';
 import { MessageService } from 'primeng/api';
-import { ColorService } from '../../../core/services/color.service';
 import { Select, SelectModule } from 'primeng/select';
-import { machine } from 'os';
 
 @Component({
   selector: 'app-cluster-nodepool-createorupdate',
@@ -33,7 +31,6 @@ import { machine } from 'os';
     CheckboxModule,
     SelectModule,
     CommonModule,
-    JsonPipe,
   ],
   templateUrl: './cluster-nodepool-createorupdate.component.html',
   styleUrl: './cluster-nodepool-createorupdate.component.scss',
@@ -60,7 +57,6 @@ export class ClusterNodepoolCreateorupdateComponent implements OnInit, OnDestroy
   private resourceV2Service = inject(Resourcesv2Service);
   private nodepoolService = inject(NodepoolService);
   private translateService = inject(TranslateService);
-  private colorService = inject(ColorService);
 
   @Output() close = new EventEmitter<void>();
 

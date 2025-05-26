@@ -23,8 +23,6 @@
       <div class="p-4">
         <div class="">
           <div class="overflow-x-auto">
-            <!-- <app-cluster-nodepool-list [cluster]="cluster"></app-cluster-nodepool-list> -->
-
             @if (clusterResourceSet$ | async; as resourceSet) {
               @if (!showNodepoolEditor) {
                 <app-cluster-nodepool-list
@@ -40,12 +38,6 @@
                   [nodepool]="selectedNodepool"
                 ></app-cluster-nodepool-createorupdate>
               }
-              <!-- <div>
-                <span>Kubernetes Cluster (new)</span>
-                <div class="bg-black text-green-500">
-                  <pre>{{ clusterResource | json }}</pre>
-                </div>
-              </div> -->
             } @else {
               @if (isLoading === true) {
                 <div class="flex h-full w-full items-center justify-center p-8">
@@ -80,13 +72,6 @@
                 </div>
               }
             }
-
-            <!-- <div class="mt-10">
-              <span>Cluster (old)</span>
-              <div class="mt-5 bg-black text-blue-500">
-                <pre>{{ cluster | json }}</pre>
-              </div>
-            </div> -->
           </div>
         </div>
       </div>
