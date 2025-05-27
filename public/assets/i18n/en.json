@@ -917,7 +917,20 @@
               "updateSuccess": "Node pool updated successfully",
               "updateError": "Error when updating node pool",
               "success": "Success",
-              "error": "Error"
+              "error": "Error",
+              "nodepoolDeleted": "Node pool deleted successfully",
+              "nodepoolDeletedError": "Error when deleting node pool",
+              "nodepoolDeletedErrorTitle": "Error when deleting",
+              "nodepoolDeletedTitle": "Node pool deleted",
+              "nodepoolResourceError": "Error when fetching node pool resources",
+              "nodepoolUpdated": "Node pool updated successfully",
+              "nodepoolUpdatedTitle": "Node pool updated",
+              "nodepoolUpdateError": "Error when updating node pool",
+              "nodepoolUpdateErrorTitle": "Error when updating",
+              "nodepoolCreated": "Node pool created successfully",
+              "nodepoolCreatedTitle": "Node pool created",
+              "nodepoolCreateError": "Error when creating node pool",
+              "nodepoolCreateErrorTitle": "Error when creating"
             },
             "summary": {
               "title": "Summary"

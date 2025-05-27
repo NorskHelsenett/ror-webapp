@@ -36,6 +36,8 @@
                   (close)="toggleNodepoolEditor()"
                   [cluster]="cluster"
                   [nodepool]="selectedNodepool"
+                  (onCreate)="createOrUpdateNodepool($event)"
+                  (onUpdate)="createOrUpdateNodepool($event)"
                 ></app-cluster-nodepool-createorupdate>
               }
             } @else {

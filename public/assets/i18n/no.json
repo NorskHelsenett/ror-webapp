@@ -918,7 +918,20 @@
               "updateSuccess": "Nodegruppe oppdatert",
               "updateError": "Feil ved oppdatering av nodegruppe",
               "success": "Vellykket",
-              "error": "Feilsituasjon"
+              "error": "Feilsituasjon",
+              "nodepoolDeleted": "Nodegruppe fjernet fra cluster",
+              "nodepoolDeletedError": "Feil ved sletting av nodegruppe",
+              "nodepoolDeletedErrorTitle": "Feil ved sletting",
+              "nodepoolDeletedTitle": "Nodegruppe slettet",
+              "nodepoolResourceError": "Feil ved henting av nodegruppe",
+              "nodepoolUpdated": "Node pool oppdatert",
+              "nodepoolUpdatedTitle": "Oppdatert",
+              "nodepoolUpdatedError": "Feil ved oppdatering av node pool",
+              "nodepoolUpdatedErrorTitle": "Feil ved oppdatering",
+              "nodepoolCreated": "Node pool opprettet",
+              "nodepoolCreatedTitle": "Opprettet",
+              "nodepoolCreatedError": "Feil ved opprettelse av node pool",
+              "nodepoolCreatedErrorTitle": "Feil ved opprettelse"
             },
             "summary": {
               "title": "Oppsummering"

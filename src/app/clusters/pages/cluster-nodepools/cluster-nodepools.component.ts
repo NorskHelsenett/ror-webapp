@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { catchError, finalize, Observable, Subscription, tap } from 'rxjs';
 import { ClusterNodepoolListComponent } from '../../components/cluster-nodepool-list/cluster-nodepool-list.component';
 
@@ -8,8 +8,9 @@ import { SpinnerComponent } from '../../../shared/components';
 import { AsyncPipe } from '@angular/common';
 import { Resourcesv2Service } from '../../../core/services/resourcesv2.service';
 import { MessageService } from 'primeng/api';
-import { Resource, ResourceQuery, ResourceSet } from '@rork8s/ror-resources/models';
+import { NodePool, Resource, ResourceQuery, ResourceSet } from '@rork8s/ror-resources/models';
 import { LucideAngularModule, AsteriskIcon } from 'lucide-angular';
+import { NodePoolChange } from '../../models/nodepool';
 
 @Component({
   selector: 'app-cluster-nodepools',
@@ -26,6 +27,7 @@ export class ClusterNodepoolsComponent implements OnInit, OnDestroy {
 
   clusterResource: Resource | undefined;
   clusterResourceSet$: Observable<ResourceSet> | undefined;
+  clusterResourceSet: ResourceSet | undefined;
   clusterResourceSetFetchError: any;
   isLoading = true;
   loadedFromResources = false;
@@ -33,6 +35,7 @@ export class ClusterNodepoolsComponent implements OnInit, OnDestroy {
   private changeDetector = inject(ChangeDetectorRef);
   private resourcesv2Service = inject(Resourcesv2Service);
   private messageService = inject(MessageService);
+  private translateService = inject(TranslateService);
 
   private subscriptions = new Subscription();
 
@@ -87,12 +90,14 @@ export class ClusterNodepoolsComponent implements OnInit, OnDestroy {
     this.clusterResourceSet$ = this.resourcesv2Service.getResources(query).pipe(
       tap((data: ResourceSet) => {
         if (data?.resources?.length === 1) {
+          this.clusterResourceSet = data;
           this.clusterResource = data?.resources[0];
           this.loadedFromResources = true;
           return this.clusterResource;
         } else {
           this.clusterResource = undefined;
           this.nodepools = undefined;
+          this.clusterResourceSet = undefined;
           return null;
         }
       }),
@@ -117,12 +122,49 @@ export class ClusterNodepoolsComponent implements OnInit, OnDestroy {
   }
 
   deleteNodepool(nodePool: any): void {
-    console.log('delete nodepool', nodePool);
-    this.messageService.add({ severity: 'success', summary: 'Nodepool deleted', detail: 'Nodepool deleted successfully' }); // translate
+    this.clusterResourceSet$?.subscribe((resourceSet: ResourceSet) => {
+      if (!resourceSet || !resourceSet.resources || resourceSet.resources.length === 0) {
+        this.messageService.add({
+          severity: 'error',
+          summary: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.nodepoolDeleteErrorTitle'),
+          detail: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.nodepoolResourceError'),
+        });
+        return;
+      }
+      let updatedResourceSet = this.clusterResourceSet;
+      let nodepoolList = resourceSet.resources[0]?.kubernetescluster?.spec?.topology?.workers?.nodePools || [];
+      const index = this.clusterResourceSet?.resources[0]?.kubernetescluster?.spec?.topology?.workers?.nodePools.findIndex(
+        (np) => np.name === nodePool?.name,
+      );
 
-    // const newlist = this.cluster?.topology?.nodePools.filter((np: any) => np?.name !== nodePool?.name);
-    // this.cluster.topology.nodePools = newlist;
-    // implement
+      nodepoolList.splice(index, 1);
+      updatedResourceSet.resources[0].kubernetescluster.spec.topology.workers.nodePools = nodepoolList;
+      this.subscriptions.add(
+        this.resourcesv2Service
+          .updateResourceSet(this.clusterResource?.metadata?.uid, updatedResourceSet)
+          .pipe(
+            tap(() => {
+              this.messageService.add({
+                severity: 'success',
+                summary: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.nodepoolDeletedTitle'),
+                detail: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.nodepoolDeleted'),
+              });
+              this.fetchKubernetesClusterResource();
+            }),
+            catchError((error: any) => {
+              this.messageService.add({
+                severity: 'error',
+                summary: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.nodepoolDeletedErrorTitle'),
+                detail: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.nodepoolDeletedError'),
+              });
+              this.changeDetector.detectChanges();
+              this.fetchKubernetesClusterResource();
+              throw error;
+            }),
+          )
+          .subscribe(),
+      );
+    });
   }
 
   setNodepools(clusterResource: Resource): void {
@@ -161,6 +203,88 @@ export class ClusterNodepoolsComponent implements OnInit, OnDestroy {
       }
     }
 
+    this.changeDetector.detectChanges();
+  }
+
+  createOrUpdateNodepool(nodePoolChange: NodePoolChange): void {
+    this.subscriptions.add(
+      this.clusterResourceSet$?.subscribe((resourceSet: ResourceSet) => {
+        if (!resourceSet || !resourceSet.resources || resourceSet.resources.length === 0) {
+          this.messageService.add({
+            severity: 'error',
+            summary: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.nodepoolDeleteErrorTitle'),
+            detail: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.nodepoolResourceError'),
+          });
+          return;
+        }
+
+        let updatedResourceSet = this.clusterResourceSet;
+        let nodepoolList = resourceSet.resources[0]?.kubernetescluster?.spec?.topology?.workers?.nodePools || [];
+        const index = this.clusterResourceSet?.resources[0]?.kubernetescluster?.spec?.topology?.workers?.nodePools.findIndex(
+          (np) => np.name === nodePoolChange?.previousNodePool?.name,
+        );
+        if (index !== -1) {
+          nodepoolList[index] = nodePoolChange.nodePool;
+          updatedResourceSet.resources[0].kubernetescluster.spec.topology.workers.nodePools = nodepoolList;
+          this.subscriptions.add(
+            this.resourcesv2Service
+              .updateResourceSet(this.clusterResource?.metadata?.uid, updatedResourceSet)
+              .pipe(
+                tap(() => {
+                  this.messageService.add({
+                    severity: 'success',
+                    summary: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.nodepoolUpdatedTitle'),
+                    detail: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.nodepoolUpdated'),
+                  });
+                  this.fetchKubernetesClusterResource();
+                }),
+                catchError((error: any) => {
+                  this.messageService.add({
+                    severity: 'error',
+                    summary: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.nodepoolUpdatedErrorTitle'),
+                    detail: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.nodepoolUpdatedError'),
+                  });
+                  this.changeDetector.detectChanges();
+                  this.fetchKubernetesClusterResource();
+                  throw error;
+                }),
+              )
+              .subscribe(),
+          );
+        } else {
+          nodepoolList.push(nodePoolChange?.nodePool);
+          updatedResourceSet.resources[0].kubernetescluster.spec.topology.workers.nodePools = nodepoolList;
+          this.subscriptions.add(
+            this.resourcesv2Service
+              .updateResourceSet(this.clusterResource?.metadata?.uid, updatedResourceSet)
+              .pipe(
+                tap(() => {
+                  this.messageService.add({
+                    severity: 'success',
+                    summary: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.nodepoolCreatedTitle'),
+                    detail: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.nodepoolCreated'),
+                  });
+                  this.fetchKubernetesClusterResource();
+                }),
+                catchError((error: any) => {
+                  this.messageService.add({
+                    severity: 'error',
+                    summary: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.nodepoolCreatedErrorTitle'),
+                    detail: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.nodepoolCreatedError'),
+                  });
+                  this.changeDetector.detectChanges();
+                  this.fetchKubernetesClusterResource();
+                  throw error;
+                }),
+              )
+              .subscribe(),
+          );
+        }
+      }),
+    );
+
+    this.showNodepoolEditor = false;
+    this.selectedNodepool = undefined;
     this.changeDetector.detectChanges();
   }
 }
