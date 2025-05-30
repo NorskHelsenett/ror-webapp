@@ -1,6 +1,6 @@
 import { ProviderFeaturesService } from './../../../core/services/provider-features.service';
 import { NodepoolService } from './../../services/nodepool.service';
-import { ChangeDetectorRef, Component, EventEmitter, inject, Input, OnDestroy, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, inject, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { catchError, finalize, map, Subscription } from 'rxjs';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -16,8 +16,8 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { uniqueNamesGenerator, Config, adjectives, colors, animals, names } from 'unique-names-generator';
 import { Resourcesv2Service } from '../../../core/services/resourcesv2.service';
 import { MessageService } from 'primeng/api';
-import { ColorService } from '../../../core/services/color.service';
-import { SelectModule } from 'primeng/select';
+import { Select, SelectModule } from 'primeng/select';
+import { NodePoolAction, NodePoolChange } from '../../models/nodepool';
 
 @Component({
   selector: 'app-cluster-nodepool-createorupdate',
@@ -40,7 +40,6 @@ export class ClusterNodepoolCreateorupdateComponent implements OnInit, OnDestroy
   Object: any;
   @Input() set nodepool(value: any | undefined) {
     this.nodePool = value;
-    this.nodePoolId = value?.id;
     this.initializeNodepool();
   }
   get nodepool(): any | undefined {
@@ -58,13 +57,13 @@ export class ClusterNodepoolCreateorupdateComponent implements OnInit, OnDestroy
   private resourceV2Service = inject(Resourcesv2Service);
   private nodepoolService = inject(NodepoolService);
   private translateService = inject(TranslateService);
-  private colorService = inject(ColorService);
 
   @Output() close = new EventEmitter<void>();
+  @Output() onCreate = new EventEmitter<NodePoolChange>();
+  @Output() onUpdate = new EventEmitter<NodePoolChange>();
 
   clusterId: string | undefined;
 
-  nodePoolId: string | undefined;
   nodePool: any | undefined;
   prices: Price[] = [];
   rows: number = 10;
@@ -72,7 +71,12 @@ export class ClusterNodepoolCreateorupdateComponent implements OnInit, OnDestroy
 
   nodepoolForm: FormGroup = this.nodepoolService?.nodepoolForm;
   labelForm: FormGroup | undefined;
-  tagForm: FormGroup | undefined;
+  taintForm: FormGroup | undefined;
+  taintEffects: any[] = [
+    { label: 'NoSchedule', value: 'NoSchedule' },
+    { label: 'PreferNoSchedule', value: 'PreferNoSchedule' },
+    { label: 'NoExecute', value: 'NoExecute' },
+  ];
   nodepoolFetchError: any;
   selectedPrice: Price | undefined;
 
@@ -81,11 +85,15 @@ export class ClusterNodepoolCreateorupdateComponent implements OnInit, OnDestroy
   maxNodes: number = 10;
 
   get labelsArray(): any {
-    return this.nodepoolForm?.get('labels');
+    return this.nodepoolForm?.get('metadata')?.get('labels');
   }
 
-  get tagsArray(): any {
-    return this.nodepoolForm?.get('tags');
+  get taintArray(): any {
+    return this.nodepoolForm?.get('taint');
+  }
+
+  get annotationArray(): any {
+    return this.nodepoolForm?.get('metadata')?.get('annotations');
   }
 
   private subscriptions = new Subscription();
@@ -105,15 +113,25 @@ export class ClusterNodepoolCreateorupdateComponent implements OnInit, OnDestroy
     this.rows = this.configService?.config?.rows;
     this.rowsPerPage = this.configService?.config?.rowsPerPage;
 
-    const form = this.formbuilder.group({
+    let form = this.formbuilder.group({
       name: ['', [Validators.required, Validators.pattern(this.labelPattern)]],
       price: [, [Validators.required]],
-      autoScale: [false, [Validators.required]],
-      minNodes: [1, [Validators.required]],
-      maxNodes: [3, [Validators.required]],
-      labels: this.formbuilder.array([], { validators: [] }),
-      tags: this.formbuilder.array([], { validators: [] }),
+      machineClass: [null, [Validators.required]],
+      provider: [this.cluster?.workspace?.datacenter?.provider, [Validators.required]],
+      replicas: [null, [Validators.required, Validators.min(1), Validators.max(this.maxNodes)]],
+      autoscaling: this.formbuilder.group({
+        enabled: [false, [Validators.required]],
+        minReplicas: [1, []],
+        maxReplicas: [3, []],
+        scalingRyles: this.formbuilder.array([], { validators: [] }),
+      }),
+      metadata: this.formbuilder.group({
+        labels: this.formbuilder.array([], { validators: [] }),
+        annotations: this.formbuilder.array([], { validators: [] }),
+      }),
+      taint: this.formbuilder.array([], { validators: [] }),
     });
+
     this.nodepoolService.nodepoolForm = form;
     this.nodepoolForm = form;
 
@@ -122,17 +140,14 @@ export class ClusterNodepoolCreateorupdateComponent implements OnInit, OnDestroy
       value: ['', [Validators.required, Validators.pattern(this.labelValuePattern)]],
     });
 
-    this.tagForm = this.formbuilder.group({
+    this.taintForm = this.formbuilder.group({
       key: ['', [Validators.required, Validators.pattern(this.labelPattern)]],
       value: ['', [Validators.required, Validators.pattern(this.labelValuePattern)]],
-      color: ['', [Validators.required]],
+      effect: ['', [Validators.required]],
     });
 
     this.proposeNewName();
-
-    if (this.nodePool) {
-      this.initializeNodepool();
-    }
+    this.initializeNodepool();
   }
 
   ngOnDestroy(): void {
@@ -166,6 +181,7 @@ export class ClusterNodepoolCreateorupdateComponent implements OnInit, OnDestroy
             this.prices = pricesPerProvider;
 
             this.setDefaultPrice();
+            this.initializeNodepool();
 
             return pricesPerProvider;
           }),
@@ -184,20 +200,58 @@ export class ClusterNodepoolCreateorupdateComponent implements OnInit, OnDestroy
   onPriceSelected(price: Price): void {
     this.selectedPrice = price;
     this.nodepoolForm?.get('price')?.setValue(price);
+    this.nodepoolForm?.get('machineClass')?.setValue(price?.machineClass);
+    this.changeDetector.detectChanges();
   }
 
   private initializeNodepool(): void {
-    if (!this.nodePool) {
-      return;
+    const price = this.prices.find((price) => price?.machineClass === this.nodePool?.machineClass);
+
+    if (this.labelsArray?.length > 0) {
+      this.labelsArray?.clear();
+    }
+    if (this.taintArray?.length > 0) {
+      this.taintArray?.clear();
     }
 
-    const nodeCount = this.nodePool?.nodes?.length;
+    if (this.nodePool?.metadata?.labels) {
+      Object.entries(this.nodePool.metadata.labels).forEach(([key, value]) => {
+        console.log('label', { key, value });
+        this.labelsArray?.push(
+          this.formbuilder.group({
+            key: [key, [Validators.required, Validators.pattern(this.labelPattern)]],
+            value: [value, [Validators.required, Validators.pattern(this.labelValuePattern)]],
+          }),
+        );
+      });
+    }
+
+    if (this.nodePool?.taint) {
+      for (const taint of this.nodePool?.taint) {
+        this.taintArray?.push(
+          this.formbuilder.group({
+            key: [taint?.key, [Validators.required, Validators.pattern(this.labelPattern)]],
+            value: [taint?.value, [Validators.required, Validators.pattern(this.labelValuePattern)]],
+            effect: [taint?.effect, [Validators.required]],
+          }),
+        );
+      }
+    }
 
     this.nodepoolForm?.patchValue({
       name: this.nodePool?.name,
-      minNodes: nodeCount,
-      autoScale: false,
-      maxNodes: this.nodePool?.maxNodes || this.maxNodes,
+      price: price,
+      machineClass: this.nodePool?.machineClass,
+      provider: this.cluster?.workspace?.datacenter?.provider,
+      replicas: this.nodePool?.replicas,
+      autoscaling: {
+        enabled: false,
+        minReplicas: 1,
+        maxReplicas: 3,
+      },
+      metadata: {
+        annotations: this.nodePool?.metadata?.annotations || [],
+      },
     });
   }
 
@@ -220,7 +274,10 @@ export class ClusterNodepoolCreateorupdateComponent implements OnInit, OnDestroy
       return;
     }
 
-    for (const label of this.nodepoolForm.get('labels')?.value) {
+    const labelsArray = this.nodepoolForm.get('metadata')?.get('labels') as FormArray;
+    const labels = labelsArray?.value || [];
+
+    for (const label of labels) {
       if (label?.key === keyInput.value) {
         this.messageService?.add({
           severity: 'error',
@@ -231,7 +288,7 @@ export class ClusterNodepoolCreateorupdateComponent implements OnInit, OnDestroy
       }
     }
 
-    (this.nodepoolForm.get('labels') as FormArray).push(
+    labelsArray.push(
       this.formbuilder.group({
         key: [keyInput.value, [Validators.required, Validators.pattern(this.labelPattern)]],
         value: [valueInput.value, [Validators.required, Validators.pattern(this.labelValuePattern)]],
@@ -245,60 +302,72 @@ export class ClusterNodepoolCreateorupdateComponent implements OnInit, OnDestroy
     this.changeDetector.detectChanges();
   }
 
-  addTag(tagkeyInput: HTMLInputElement, tagvalueInput: HTMLInputElement): void {
-    if (!tagkeyInput?.value) {
+  addTaint(keyInput: HTMLInputElement, valueInput: HTMLInputElement, effectInput: Select): void {
+    if (!keyInput?.value) {
       this.messageService?.add({
         severity: 'error',
         summary: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.error'),
-        detail: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.tagKeyError'),
+        detail: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.taintKeyError'),
       });
       return;
     }
 
-    if (!tagvalueInput?.value) {
+    if (!valueInput?.value) {
       this.messageService?.add({
         severity: 'error',
         summary: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.error'),
-        detail: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.tagValueError'),
+        detail: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.taintValueError'),
       });
       return;
     }
 
-    for (const tag of this.nodepoolForm.get('tags')?.value) {
-      if (tag?.key === tagkeyInput.value) {
+    if (!effectInput?.value) {
+      this.messageService?.add({
+        severity: 'error',
+        summary: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.error'),
+        detail: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.taintEffectError'),
+      });
+      return;
+    }
+
+    const taintArray = this.nodepoolForm?.get('taint') as FormArray;
+    const taints = taintArray?.value || [];
+
+    for (const taint of taints) {
+      if (taint?.key === keyInput.value) {
         this.messageService?.add({
           severity: 'error',
           summary: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.error'),
-          detail: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.labelKeyExists'),
+          detail: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.taintKeyExists'),
         });
         return;
       }
     }
 
-    const colorHash = this.stringToSixCharHex(tagkeyInput.value);
-    let color = this.colorService.getHexColor(colorHash);
-
-    (this.nodepoolForm.get('tags') as FormArray).push(
+    taintArray.push(
       this.formbuilder.group({
-        key: [tagkeyInput.value, [Validators.required, Validators.pattern(this.labelPattern)]],
-        value: [tagvalueInput.value, [Validators.required, Validators.pattern(this.labelValuePattern)]],
-        color: [color, [Validators.required]],
+        key: [keyInput?.value, [Validators.required, Validators.pattern(this.labelPattern)]],
+        value: [valueInput?.value, [Validators.required, Validators.pattern(this.labelValuePattern)]],
+        effect: [effectInput?.value?.value, [Validators.required]],
       }),
     );
 
-    tagkeyInput.value = '';
-    tagvalueInput.value = '';
+    keyInput.value = '';
+    valueInput.value = '';
+    effectInput.value = undefined;
 
-    tagkeyInput.focus();
+    keyInput.focus();
     this.changeDetector.detectChanges();
   }
 
   removeLabel(label: FormControl): void {
-    (this.nodepoolForm.get('labels') as FormArray).removeAt((this.nodepoolForm.get('labels') as FormArray).controls.indexOf(label));
+    const labelsArray = this.nodepoolForm.get('metadata')?.get('labels') as FormArray;
+    labelsArray?.removeAt(labelsArray?.controls?.indexOf(label));
   }
 
-  removeTag(tag: FormControl): void {
-    (this.nodepoolForm.get('tags') as FormArray).removeAt((this.nodepoolForm.get('tags') as FormArray).controls.indexOf(tag));
+  removeTaint(taint: FormControl): void {
+    const taintArray = this.nodepoolForm?.get('taint') as FormArray;
+    taintArray?.removeAt(taintArray?.controls?.indexOf(taint));
   }
 
   getShortName(): string {
@@ -310,117 +379,96 @@ export class ClusterNodepoolCreateorupdateComponent implements OnInit, OnDestroy
     this.nodepoolForm?.get('name')?.setValue(this.getRandomName());
   }
 
-  onPriceChange(event: any): void {
-    this.nodepoolForm?.get('price')?.setValue(event.value);
+  resetName(): void {
+    this.nodepoolForm?.get('name')?.setValue(this.nodePool?.name);
+  }
+
+  onPriceChange(price: Price): void {
+    this.selectedPrice = price;
+    this.nodepoolForm?.get('price')?.setValue(this.selectedPrice);
+    this.nodepoolForm?.get('machineClass')?.setValue(this.selectedPrice?.machineClass);
+    this.changeDetector.detectChanges();
   }
 
   submit(): void {
-    if (this.nodepoolForm?.valid) {
-      const nodePool = this.nodepoolForm?.value;
-
-      let nodes = [];
-      for (let i = 0; i < nodePool.minNodes; i++) {
-        let name = `${nodePool?.name}-${this.getRandomShortName()}`;
-        nodes.push({
-          name: name,
-          role: 'worker',
-          created: new Date(),
-          osImage: 'ACoolDistro',
-          machineName: name,
-          metrics: {
-            priceMonth: -1,
-            priceYear: -12,
-            cpu: 0,
-            memory: 0,
-            cpuConsumed: 0,
-            memoryConsumed: 0,
-            cpuPercentage: 0,
-            memoryPercentage: 0,
-            nodePoolCount: 0,
-            nodeCount: 0,
-            clusterCount: 0,
-          },
-          architecture: 'amd64',
-          containerRuntimeVersion: 'containerd://2.0.0',
-          kernelVersion: 'unknown',
-          kubeProxyVersion: 'unknown',
-          kubeletVersion: 'unknown',
-          operatingSystem: 'linux',
-          machineClass: nodePool?.price?.machineClass,
-        });
-      }
-
-      this.cluster?.topology?.nodePools?.push({
-        name: `${nodePool?.name}-${this.getRandomShortName()}`,
-        machineClass: nodePool?.price?.machineClass,
-        metrics: {
-          priceMonth: nodePool?.price?.price,
-          priceYear: nodePool?.price?.price * 12,
-          cpu: nodePool?.price?.cpu,
-          memory: nodePool?.price?.memory,
-          cpuConsumed: 0,
-          memoryConsumed: 0,
-          cpuPercentage: 0,
-          memoryPercentage: 0,
-          nodePoolCount: 0,
-          nodeCount: nodePool?.minNodes,
-          clusterCount: 0,
-        },
-        nodes: nodes,
-        minNodes: 1,
-      });
-
-      this.messageService?.add({
-        severity: 'success',
-        summary: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.success'),
-        detail: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.createSuccess'),
-      });
-      setTimeout(() => {
-        this.hide();
-      }, 100);
-    } else {
+    if (!this.nodepoolForm?.valid) {
       this.messageService?.add({
         severity: 'error',
         summary: this.translateService.instant('pages.clusters.details.nodePools.createorupdate.form.error'),
         detail: 'Form is invalid',
       });
+      return;
     }
+    let nodePool = this.nodepoolForm?.value;
+    nodePool.metadata.labels = {};
+
+    const labelsArray = this.labelsArray?.value || [];
+    labelsArray.forEach((label: any) => {
+      if (label?.key && label?.value) {
+        nodePool.metadata.labels[label.key] = label.value;
+      }
+    });
+
+    nodePool.metadata.annotations = {};
+    const annotationsArray = this.annotationArray?.value || [];
+    annotationsArray.forEach((annotation: any) => {
+      if (annotation?.key && annotation?.value) {
+        nodePool.metadata.annotation[annotation.key] = annotation.value;
+      }
+    });
+
+    console.log('submit nodepool', nodePool);
+
+    if (this.nodePool) {
+      this.onUpdate.emit({
+        action: NodePoolAction.Update,
+        nodePool: nodePool,
+        previousNodePool: this.nodePool,
+      });
+    } else {
+      this.onCreate.emit({
+        action: NodePoolAction.Create,
+        nodePool: nodePool,
+      });
+    }
+
+    setTimeout(() => {
+      this.hide();
+    }, 100);
   }
 
   getMinMaxNodes(): number {
-    const minNodes = this.nodepoolForm?.get('minNodes')?.value;
-    const maxNodes = this.nodepoolForm?.get('maxNodes')?.value;
+    const minNodes = this.nodepoolForm?.get('autoscaling')?.get('minNodes')?.value;
+    const maxNodes = this.nodepoolForm?.get('autoscaling')?.get('maxReplicas')?.value;
     return minNodes;
   }
 
   minNodesChanged(event: any): void {
-    const minNodes = this.nodepoolForm?.get('minNodes')?.value;
-    const maxNodes = this.nodepoolForm?.get('maxNodes')?.value;
+    const minNodes = this.nodepoolForm?.get('autoscaling')?.get('minReplicas')?.value;
+    const maxNodes = this.nodepoolForm?.get('autoscaling')?.get('maxReplicas')?.value;
     if (minNodes > maxNodes) {
-      this.nodepoolForm?.get('maxNodes')?.setValue(minNodes);
+      this.nodepoolForm?.get('autoscaling')?.get('maxReplicas')?.setValue(minNodes);
     }
+
+    this.nodepoolForm?.get('replicas')?.setValue(minNodes);
     this.changeDetector.detectChanges();
   }
 
-  autoscaleChanged(event: any): void {
+  autoscalingChanged(event: any): void {
     if (event?.checked) {
-      const minNodes = this.nodepoolForm?.get('minNodes')?.value;
-      const maxNodes = this.nodepoolForm?.get('maxNodes')?.value;
+      const minNodes = this.nodepoolForm?.get('autoscaling')?.get('minReplicas')?.value;
+      const maxNodes = this.nodepoolForm?.get('autoscaling')?.get('maxReplicas')?.value;
       if (maxNodes !== 0) {
         let mxNodes = minNodes + 1;
         if (mxNodes > this.maxNodes) {
           mxNodes = this.maxNodes;
         }
-        this.nodepoolForm?.get('maxNodes')?.setValue(mxNodes);
+        this.nodepoolForm?.get('autoscaling')?.get('maxReplicas')?.setValue(mxNodes);
       } else {
-        this.nodepoolForm?.get('maxNodes')?.setValue(this.maxNodes);
+        this.nodepoolForm?.get('autoscaling')?.get('maxReplicas')?.setValue(this.maxNodes);
       }
     }
     this.changeDetector.detectChanges();
-  }
-
-  getColorFromHex(hex: string): string {
-    return this.colorService.getTailwindColorName(hex);
   }
 
   private getRandomName(): string {
@@ -452,24 +500,5 @@ export class ClusterNodepoolCreateorupdateComponent implements OnInit, OnDestroy
     }
 
     this.changeDetector.detectChanges();
-  }
-
-  private stringToSixCharHex(input: string): string {
-    // Convert string to a numeric hash
-    let hash = 0;
-    for (let i = 0; i < input.length; i++) {
-      const char = input.charCodeAt(i);
-      hash = (hash << 5) - hash + char;
-      hash = hash & hash; // Convert to 32bit integer
-    }
-
-    // Convert to hex and ensure positive value
-    const hex = (hash >>> 0).toString(16).toUpperCase();
-
-    // Pad or truncate to 6 characters
-    if (hex.length < 6) {
-      return hex.padStart(6, '0');
-    }
-    return hex.slice(0, 6);
   }
 }

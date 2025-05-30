@@ -37,4 +37,37 @@ export class Resourcesv2Service {
       }),
     );
   }
+
+  updateResourceSet(uid: string, resource: ResourceSet): Observable<ResourceSet> {
+    const url = `${this.configService.config.rorApi}/v2/resources`;
+    return this.httpClient.post<ResourceSet>(url, resource).pipe(
+      map((updatedResource) => {
+        if (!updatedResource) {
+          return null;
+        }
+        return updatedResource;
+      }),
+    );
+  }
+
+  deleteResourceSet(uid: string): Observable<void> {
+    const url = `${this.configService.config.rorApi}/v2/resources/uid/${uid}`;
+    return this.httpClient.delete<void>(url).pipe(
+      map(() => {
+        return;
+      }),
+    );
+  }
+
+  createResourceSet(resourceSet: ResourceSet): Observable<ResourceSet> {
+    const url = `${this.configService.config.rorApi}/v2/resources`;
+    return this.httpClient.post<ResourceSet>(url, resourceSet).pipe(
+      map((createdResource) => {
+        if (!createdResource) {
+          return null;
+        }
+        return createdResource;
+      }),
+    );
+  }
 }

@@ -826,6 +826,7 @@
           "title": "Node pools",
           "machineClass": "Machine class",
           "create": "Create node pool",
+          "noteditable": "Not editable",
           "table": {
             "column": {
               "name": "Name",
@@ -836,7 +837,9 @@
               "cpu": "CPU",
               "cores": "Cores",
               "mem": "MEM",
-              "nodeCount": "Node count"
+              "nodeCount": "Node count",
+              "autoscaling": "Autoscaling",
+              "replicas": "Replicas"
             }
           },
           "createorupdate": {
@@ -846,6 +849,7 @@
               "name": "Name",
               "nameError": "Name is missing or invalid characters",
               "nameRandom": "Generate name",
+              "resetname": "Reset name",
               "machineClass": "Machine class",
               "machineClassError": "Machine class is missing",
               "machineClassPlaceholder": "Choose machine class",
@@ -885,6 +889,27 @@
               "labelValueError": "Value is missing or invalid characters",
               "submitLabel": "Add",
               "submitTag": "Add",
+              "taint": "Node taints",
+              "taintList": "Taint list",
+              "taintsHelp": "Additional taints for node pool?",
+              "taintsError": "Missing taints",
+              "addTaint": "New taint",
+              "deleteTaint": "Delete taint",
+              "taintKey": "Key",
+              "taintKeyError": "Key is missing or invalid characters",
+              "taintKeyExists": "Key already exists",
+              "taintValue": "Value",
+              "taintValueError": "Value is missing or invalid characters",
+              "taintValueExists": "Value already exists",
+              "taintEffectValues": {
+                "NoSchedule": "NoSchedule",
+                "PreferNoSchedule": "PreferNoSchedule",
+                "NoExecute": "NoExecute"
+              },
+              "taintEffect": "Effect",
+              "taintEffectError": "Effect is missing or invalid",
+              "taintEffectPlaceholder": "Choose effect",
+
               "create": "Create",
               "createSuccess": "Node pool created successfully",
               "createError": "Error when creating node pool",
@@ -892,7 +917,20 @@
               "updateSuccess": "Node pool updated successfully",
               "updateError": "Error when updating node pool",
               "success": "Success",
-              "error": "Error"
+              "error": "Error",
+              "nodepoolDeleted": "Node pool deleted successfully",
+              "nodepoolDeletedError": "Error when deleting node pool",
+              "nodepoolDeletedErrorTitle": "Error when deleting",
+              "nodepoolDeletedTitle": "Node pool deleted",
+              "nodepoolResourceError": "Error when fetching node pool resources",
+              "nodepoolUpdated": "Node pool updated successfully",
+              "nodepoolUpdatedTitle": "Node pool updated",
+              "nodepoolUpdateError": "Error when updating node pool",
+              "nodepoolUpdateErrorTitle": "Error when updating",
+              "nodepoolCreated": "Node pool created successfully",
+              "nodepoolCreatedTitle": "Node pool created",
+              "nodepoolCreateError": "Error when creating node pool",
+              "nodepoolCreateErrorTitle": "Error when creating"
             },
             "summary": {
               "title": "Summary"

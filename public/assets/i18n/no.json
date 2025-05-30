@@ -827,6 +827,7 @@
           "title": "Nodegrupper",
           "machineClass": "Maskinklasse",
           "create": "Lag nodegruppe",
+          "noteditable": "Ikke redigerbar",
           "table": {
             "column": {
               "name": "Navn",
@@ -837,7 +838,9 @@
               "cpu": "CPU",
               "cores": "Kjerner",
               "mem": "MEM",
-              "nodeCount": "Antall noder"
+              "nodeCount": "Antall noder",
+              "autoscaling": "Autoskalering",
+              "replicas": "Antall replikaer"
             }
           },
           "createorupdate": {
@@ -847,6 +850,7 @@
               "name": "Navn",
               "nameError": "Navn mangler, eller ugyldige tegn",
               "nameRandom": "Generer navn",
+              "resetname": "Tilbakestill navn",
               "machineClass": "Maskinklasse",
               "machineClassError": "Maskinklasse mangler",
               "machineClassPlaceholder": "Velg maskinklasse",
@@ -886,6 +890,27 @@
               "labelValueError": "Mangler verdi, eller ugyldige tegn",
               "submitLabel": "Opprett",
               "submitTag": "Opprett",
+              "taint": "Taint",
+              "taintHelp": "Ekstra taint for nodegruppen?",
+              "taintError": "Mangler taint",
+              "taintKey": "Nøkkel",
+              "taintKeyError": "Mangler nøkkel, eller ugyldige tegn",
+              "taintKeyExists": "Nøkkel eksisterer",
+              "taintValue": "Verdi",
+              "taintValueError": "Mangler verdi, eller ugyldige tegn",
+              "taintEffect": "Effekt",
+              "taintEffectError": "Mangler effekt",
+              "taintEffectPlaceholder": "Velg effekt",
+              "taintEffectExists": "Effekt eksisterer",
+              "taintEffectValues": {
+                "NoSchedule": "NoSchedule",
+                "PreferNoSchedule": "PreferNoSchedule",
+                "NoExecute": "NoExecute"
+              },
+              "taintList": "Taint-liste",
+              "addTaint": "Ny taint",
+              "deleteTaint": "Slett taint",
+              "submitTaint": "Opprett taint",
               "create": "Lag nodegruppe",
               "createSuccess": "Nodegruppe opprettet",
               "createError": "Feil ved opprettelse av nodegruppe",
@@ -893,7 +918,20 @@
               "updateSuccess": "Nodegruppe oppdatert",
               "updateError": "Feil ved oppdatering av nodegruppe",
               "success": "Vellykket",
-              "error": "Feilsituasjon"
+              "error": "Feilsituasjon",
+              "nodepoolDeleted": "Nodegruppe fjernet fra cluster",
+              "nodepoolDeletedError": "Feil ved sletting av nodegruppe",
+              "nodepoolDeletedErrorTitle": "Feil ved sletting",
+              "nodepoolDeletedTitle": "Nodegruppe slettet",
+              "nodepoolResourceError": "Feil ved henting av nodegruppe",
+              "nodepoolUpdated": "Node pool oppdatert",
+              "nodepoolUpdatedTitle": "Oppdatert",
+              "nodepoolUpdatedError": "Feil ved oppdatering av node pool",
+              "nodepoolUpdatedErrorTitle": "Feil ved oppdatering",
+              "nodepoolCreated": "Node pool opprettet",
+              "nodepoolCreatedTitle": "Opprettet",
+              "nodepoolCreatedError": "Feil ved opprettelse av node pool",
+              "nodepoolCreatedErrorTitle": "Feil ved opprettelse"
             },
             "summary": {
               "title": "Oppsummering"
