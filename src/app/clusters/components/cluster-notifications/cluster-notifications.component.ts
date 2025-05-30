@@ -104,8 +104,8 @@ export class ClusterNotificationsComponent implements OnInit {
         kind: this.kind,
         apiVersion: this.apiVersion,
         name: null,
-        allocated: null,
         usage: null,
+        allocated: null,
         rormeta: {
           ownerref: {
             scope: this.scope,
