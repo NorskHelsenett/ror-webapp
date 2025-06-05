@@ -25,29 +25,42 @@
   <div class="col-span-2">
     <div class="overflow-x-auto">
       <form [formGroup]="nodepoolForm" class="flex flex-col gap-5">
-        <div class="mb-3 rounded-lg border border-solid border-gray-600 p-5">
+        <div class="mb-3 rounded-lg bg-gray-200 p-5 dark:bg-zinc-800">
           <div class="">
             <span class="text-lg font-bold">{{ 'pages.clusters.details.nodePools.createorupdate.form.name' | translate }}</span>
             <div class="flex flex-col">
               <div class="flex flex-row gap-4">
                 <input
-                  class="p-inputtext-lg w-1/3 border text-lg sm:w-full md:w-1/3"
+                  class="p-inputtext-lg w-1/3 bg-gray-50 text-lg dark:bg-zinc-900 sm:w-full md:w-1/3"
                   type="text"
                   pInputText
                   formControlName="name"
                   [autofocus]="true"
                 />
-                <button (click)="proposeNewName()" type="button" class="flex gap-2 p-3">
-                  <i class="pi pi-replay"></i> {{ 'pages.clusters.details.nodePools.createorupdate.form.nameRandom' | translate }}
-                </button>
+                <div class="flex flex-col">
+                  <button (click)="proposeNewName()" type="button" class="flex gap-2">
+                    <i class="pi pi-replay"></i> {{ 'pages.clusters.details.nodePools.createorupdate.form.nameRandom' | translate }}
+                  </button>
+
+                  @if (nodePool && nodepoolForm?.get('name')?.value !== nodepool?.name) {
+                    <button
+                      (click)="resetName()"
+                      type="button"
+                      class="flex gap-2 disabled:bg-zinc-700 disabled:text-black"
+                      [disabled]="nodepoolForm?.get('name')?.value === nodepool?.name"
+                    >
+                      <i class="pi pi-replay"></i> {{ 'pages.clusters.details.nodePools.createorupdate.form.resetname' | translate }}
+                    </button>
+                  }
+                </div>
               </div>
-              @if (nodepoolForm.get('name').errors && nodepoolForm.get('name').touched && nodepoolForm.get('name').dirty) {
+              @if (nodepoolForm?.get('name').errors && nodepoolForm?.get('name').touched && nodepoolForm?.get('name').dirty) {
                 <span class="text-red-400">{{ 'pages.clusters.details.nodePools.createorupdate.form.nameError' | translate }} </span>
               }
             </div>
           </div>
         </div>
-        <div class="mb-3 rounded-lg border border-solid border-gray-600 p-5">
+        <div class="mb-3 rounded-lg bg-gray-200 p-5 dark:bg-zinc-800">
           <div class="">
             <span class="text-lg font-bold">{{ 'pages.clusters.details.nodePools.createorupdate.form.machineClass' | translate }}</span>
             <div class="flex flex-col">
@@ -61,8 +74,9 @@
                 [filter]="true"
                 filterBy="machineClass"
                 dataKey="id"
-                (onChange)="onPriceChange($event)"
+                (onChange)="onPriceChange($event?.value)"
                 [autofocus]="true"
+                [appendTo]="'body'"
               >
                 <ng-template let-price pTemplate="item">
                   <div class="flex w-[500px] flex-col gap-1">
@@ -93,30 +107,34 @@
                 </ng-template>
               </p-select>
 
-              @if (nodepoolForm.get('price').errors && nodepoolForm.get('price').touched && nodepoolForm.get('price').dirty) {
+              @if (nodepoolForm?.get('price').errors && nodepoolForm?.get('price').touched && nodepoolForm?.get('price').dirty) {
                 <span class="text-red-400">{{ 'pages.clusters.details.nodePools.createorupdate.form.machineClassError' | translate }} </span>
               }
             </div>
           </div>
         </div>
 
-        <div class="mb-3 rounded-lg border border-solid border-gray-600 p-5 dark:border-gray-800">
-          <div class="">
+        <div class="mb-3 rounded-lg bg-gray-200 p-5 dark:bg-zinc-800">
+          <div class="" formGroupName="autoscaling">
             <div class="">
               <div class="flex flex-row gap-4">
                 <p-checkbox
-                  class="border"
+                  class=""
                   [binary]="true"
-                  formControlName="autoScale"
+                  formControlName="enabled"
                   inputId="override-checkbox"
-                  (onChange)="autoscaleChanged($event)"
+                  (onChange)="autoscalingChanged($event)"
                 ></p-checkbox>
                 <span class="text-lg font-bold">{{ 'pages.clusters.details.nodePools.createorupdate.form.autoScale' | translate }}</span>
               </div>
               <div>
                 {{ 'pages.clusters.details.nodePools.createorupdate.form.autoScaleDescription' | translate }}
               </div>
-              @if (nodepoolForm.get('autoScale').errors && nodepoolForm.get('autoScale').touched && nodepoolForm.get('autoScale').dirty) {
+              @if (
+                nodepoolForm?.get('autoscaling')?.get('enabled')?.errors &&
+                nodepoolForm?.get('autoscaling')?.get('enabled')?.touched &&
+                nodepoolForm?.get('autoscaling')?.get('enabled')?.dirty
+              ) {
                 <span class="text-red-400">{{ 'pages.clusters.details.nodePools.createorupdate.form.autoScaleError' | translate }} </span>
               }
             </div>
@@ -131,7 +149,7 @@
                     buttonLayout="horizontal"
                     spinnerMode="horizontal"
                     [step]="1"
-                    formControlName="minNodes"
+                    formControlName="minReplicas"
                     class="m-1 bg-green-600 hover:bg-green-700"
                     [min]="1"
                     [max]="maxNodes"
@@ -139,11 +157,15 @@
                     (ngModelChange)="minNodesChanged($event)"
                   >
                   </p-inputNumber>
-                  @if (nodepoolForm.get('minNodes').errors && nodepoolForm.get('minNodes').touched && nodepoolForm.get('minNodes').dirty) {
+                  @if (
+                    nodepoolForm?.get('autoscaling')?.get('minReplicas').errors &&
+                    nodepoolForm?.get('autoscaling')?.get('minReplicas').touched &&
+                    nodepoolForm?.get('autoscaling')?.get('minReplicas').dirty
+                  ) {
                     <span class="text-red-400">{{ 'pages.clusters.details.nodePools.createorupdate.form.minNodesError' | translate }} </span>
                   }
                 </div>
-                @if (nodepoolForm.get('autoScale').value) {
+                @if (nodepoolForm?.get('autoscaling')?.get('enabled')?.value) {
                   <div class="flex flex-col gap-4">
                     <span>{{ 'pages.clusters.details.nodePools.createorupdate.form.maxNodes' | translate }}</span>
                     <p-inputNumber
@@ -155,14 +177,18 @@
                       [step]="1"
                       inputStyleClass=""
                       styleClass="bg-green-600"
-                      formControlName="maxNodes"
+                      formControlName="maxReplicas"
                       [min]="getMinMaxNodes()"
                       [max]="maxNodes"
                       [size]="'large'"
                       [allowEmpty]="false"
                     >
                     </p-inputNumber>
-                    @if (nodepoolForm.get('maxNodes').errors && nodepoolForm.get('maxNodes').touched && nodepoolForm.get('maxNodes').dirty) {
+                    @if (
+                      nodepoolForm?.get('autoscaling')?.get('maxReplicas').errors &&
+                      nodepoolForm?.get('autoscaling')?.get('maxReplicas').touched &&
+                      nodepoolForm?.get('autoscaling')?.get('maxReplicas').dirty
+                    ) {
                       <span class="text-red-400">{{ 'pages.clusters.details.nodePools.createorupdate.form.maxNodesError' | translate }} </span>
                     }
                   </div>
@@ -172,189 +198,238 @@
           </div>
         </div>
 
-        <div class="mb-3 rounded-lg border border-solid border-gray-600 p-5">
-          <div class="">
-            <span class="text-lg font-bold">{{ 'pages.clusters.details.nodePools.createorupdate.form.tags' | translate }}</span>
-            <table class="mt-2 w-3/4">
-              <thead>
-                <tr>
-                  <th class="w-2/6 text-left">{{ 'pages.clusters.details.nodePools.createorupdate.form.tagKey' | translate }}</th>
-                  <th class="w-3/6 text-left">{{ 'pages.clusters.details.nodePools.createorupdate.form.tagValue' | translate }}</th>
-                  <th class="w-1/6"></th>
-                </tr>
-              </thead>
+        <div formGroupName="metadata">
+          <div class="mb-3 rounded-lg bg-gray-200 p-5 dark:bg-zinc-800">
+            <div class="">
+              <span class="text-lg font-bold">{{ 'pages.clusters.details.nodePools.createorupdate.form.labels' | translate }}</span>
+              <table class="mt-2 w-3/4">
+                <thead>
+                  <tr>
+                    <th class="w-1/3 text-left">{{ 'pages.clusters.details.nodePools.createorupdate.form.labelKey' | translate }}</th>
+                    <th class="w-1/3 text-left">{{ 'pages.clusters.details.nodePools.createorupdate.form.labelValue' | translate }}</th>
+                    <th class="w-1/3"></th>
+                  </tr>
+                </thead>
 
-              <tbody>
-                <ng-container formArrayName="tags">
-                  <ng-container *ngFor="let tagForm of tagsArray?.controls; let i = index">
-                    <tr [formGroupName]="i" class="rounded-full" [ngClass]="'bg-' + getColorFromHex(tagForm?.value?.color)">
-                      <td class="text-left">
-                        <div class="text-lg">{{ tagForm?.value?.key }}</div>
-                      </td>
-                      <td class="text-left">
-                        <div class="text-lg">{{ tagForm?.value?.value }}</div>
-                      </td>
-                      <td class="text-center text-lg" [ngClass]="'bg-' + getColorFromHex(tagForm?.value?.color)">
-                        <button
-                          (click)="removeTag(tagForm)"
-                          class="focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-red-700 text-sm text-white hover:bg-red-500 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
-                        >
-                          <i class="pi pi-trash"></i>
-                        </button>
-                      </td>
-                    </tr>
+                <tbody>
+                  <ng-container formArrayName="labels">
+                    <ng-container *ngFor="let labelForm of labelsArray?.controls; let i = index">
+                      <tr [formGroupName]="i">
+                        <td>
+                          <div class="text-lg">{{ labelForm?.value?.key }}</div>
+                        </td>
+                        <td>
+                          <div class="text-lg">{{ labelForm?.value?.value }}</div>
+                        </td>
+                        <td>
+                          <button
+                            (click)="removeLabel(labelForm)"
+                            class="focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-red-700 text-sm text-white hover:bg-red-500 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+                          >
+                            <i class="pi pi-trash"></i>
+                          </button>
+                        </td>
+                      </tr>
+                    </ng-container>
                   </ng-container>
-                </ng-container>
-              </tbody>
-            </table>
-            @if (nodepoolForm.get('tags').errors && nodepoolForm.get('tags').touched && nodepoolForm.get('tags').dirty) {
-              <span class="text-red-400">{{ 'pages.clusters.details.nodePools.createorupdate.form.tagsError' | translate }} </span>
-            }
-          </div>
-          <div class="mt-3">
-            <form [formGroup]="tagForm">
-              <div class="flex gap-4">
-                <div class="flex w-1/3 flex-col gap-4">
-                  <input
-                    class="p-inputtext-lg rounded-lg border text-lg"
-                    type="text"
-                    placeholder="{{ 'pages.clusters.details.nodePools.createorupdate.form.tagKey' | translate }}"
-                    pInputText
-                    formControlName="key"
-                    [autofocus]="true"
-                    #tagKeyElement
-                  />
-                  @if (tagForm.get('key').errors && tagForm.get('key').touched && tagForm.get('key').dirty && !tagForm.get('key').pristine) {
-                    <span class="text-red-400">{{ 'pages.clusters.details.nodePools.createorupdate.form.tagKeyError' | translate }} </span>
-                  }
+                </tbody>
+              </table>
+              @if (
+                nodepoolForm?.get('metadata')?.get('labels').errors &&
+                nodepoolForm?.get('metadata')?.get('labels').touched &&
+                nodepoolForm?.get('metadata')?.get('labels').dirty
+              ) {
+                <span class="text-red-400">{{ 'pages.clusters.details.nodePools.createorupdate.form.labelsError' | translate }} </span>
+              }
+            </div>
+            <div class="mt-3">
+              <form [formGroup]="labelForm">
+                <div class="flex gap-4">
+                  <div class="flex w-1/3 flex-col gap-4">
+                    <input
+                      class="p-inputtext-lg rounded-lg border text-lg"
+                      type="text"
+                      placeholder="{{ 'pages.clusters.details.nodePools.createorupdate.form.labelKey' | translate }}"
+                      pInputText
+                      formControlName="key"
+                      [autofocus]="true"
+                      #labelKeyElement
+                    />
+                    @if (
+                      labelForm.get('key').errors && labelForm.get('key').touched && labelForm.get('key').dirty && !labelForm.get('key').pristine
+                    ) {
+                      <span class="text-red-400">{{ 'pages.clusters.details.nodePools.createorupdate.form.labelKeyError' | translate }} </span>
+                    }
+                  </div>
+                  <div class="flex w-1/3 flex-col gap-4">
+                    <input
+                      class="p-inputtext-lg rounded-lg border text-lg"
+                      type="text"
+                      placeholder="{{ 'pages.clusters.details.nodePools.createorupdate.form.labelValue' | translate }}"
+                      pInputText
+                      formControlName="value"
+                      #labelValueElement
+                      (keyup.enter)="addLabel(labelKeyElement, labelValueElement)"
+                    />
+                    @if (
+                      labelForm.get('value').errors &&
+                      labelForm.get('value').touched &&
+                      labelForm.get('value').dirty &&
+                      !labelForm.get('value').pristine
+                    ) {
+                      <span class="text-red-400">{{ 'pages.clusters.details.nodePools.createorupdate.form.labelValueError' | translate }} </span>
+                    }
+                  </div>
+                  <div>
+                    <button
+                      type="button"
+                      [disabled]="!labelForm.valid"
+                      [style.cursor]="!labelForm.valid ? 'not-allowed' : 'pointer'"
+                      (click)="addLabel(labelKeyElement, labelValueElement)"
+                      class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-blue-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white disabled:bg-gray-600"
+                    >
+                      {{ 'pages.clusters.details.nodePools.createorupdate.form.submitLabel' | translate }}
+                    </button>
+                  </div>
                 </div>
-                <div class="flex w-1/3 flex-col gap-4">
-                  <input
-                    class="p-inputtext-lg rounded-lg border text-lg"
-                    type="text"
-                    placeholder="{{ 'pages.clusters.details.nodePools.createorupdate.form.tagValue' | translate }}"
-                    pInputText
-                    formControlName="value"
-                    #tagValueElement
-                    (keyup.enter)="addTag(tagKeyElement, tagValueElement)"
-                  />
-                  @if (tagForm.get('value').errors && tagForm.get('value').touched && tagForm.get('value').dirty && !tagForm.get('value').pristine) {
-                    <span class="text-red-400">{{ 'pages.clusters.details.nodePools.createorupdate.form.tagValueError' | translate }} </span>
-                  }
-                </div>
-                <div>
-                  <button
-                    type="button"
-                    [disabled]="!tagForm.valid"
-                    (click)="addTag(tagKeyElement, tagValueElement)"
-                    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-blue-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white disabled:bg-gray-600"
-                  >
-                    {{ 'pages.clusters.details.nodePools.createorupdate.form.submitTag' | translate }}
-                  </button>
-                </div>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
         </div>
 
-        <div class="mb-3 rounded-lg border border-solid border-gray-600 p-5">
-          <div class="">
-            <span class="text-lg font-bold">{{ 'pages.clusters.details.nodePools.createorupdate.form.labels' | translate }}</span>
-            <table class="mt-2 w-3/4">
-              <thead>
-                <tr>
-                  <th class="w-1/3 text-left">{{ 'pages.clusters.details.nodePools.createorupdate.form.labelKey' | translate }}</th>
-                  <th class="w-1/3 text-left">{{ 'pages.clusters.details.nodePools.createorupdate.form.labelValue' | translate }}</th>
-                  <th class="w-1/3"></th>
-                </tr>
-              </thead>
+        <div>
+          <div class="mb-3 rounded-lg bg-gray-200 p-5 dark:bg-zinc-800">
+            <div class="">
+              <span class="text-lg font-bold">{{ 'pages.clusters.details.nodePools.createorupdate.form.taint' | translate }}</span>
+              <table class="mt-2 w-3/4">
+                <thead>
+                  <tr>
+                    <th class="w-1/3 text-left">{{ 'pages.clusters.details.nodePools.createorupdate.form.taintKey' | translate }}</th>
+                    <th class="w-1/3 text-left">{{ 'pages.clusters.details.nodePools.createorupdate.form.taintValue' | translate }}</th>
+                    <!-- <th class="w-1/3 text-left">{{ 'pages.clusters.details.nodePools.createorupdate.form.operator' | translate }}</th> -->
+                    <th class="w-1/3 text-left">{{ 'pages.clusters.details.nodePools.createorupdate.form.taintEffect' | translate }}</th>
+                    <th class="w-1/3"></th>
+                  </tr>
+                </thead>
 
-              <tbody>
-                <ng-container formArrayName="labels">
-                  <ng-container *ngFor="let labelForm of labelsArray?.controls; let i = index">
-                    <tr [formGroupName]="i">
-                      <td>
-                        <div class="text-lg">{{ labelForm?.value?.key }}</div>
-                      </td>
-                      <td>
-                        <div class="text-lg">{{ labelForm?.value?.value }}</div>
-                      </td>
-                      <td>
-                        <button
-                          (click)="removeLabel(labelForm)"
-                          class="focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-red-700 text-sm text-white hover:bg-red-500 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
-                        >
-                          <i class="pi pi-trash"></i>
-                        </button>
-                      </td>
-                    </tr>
+                <tbody>
+                  <ng-container formArrayName="taint">
+                    <ng-container *ngFor="let taintForm of taintArray?.controls; let i = index">
+                      <tr [formGroupName]="i">
+                        <td>
+                          <div class="text-lg">{{ taintForm?.value?.key }}</div>
+                        </td>
+                        <td>
+                          <div class="text-lg">{{ taintForm?.value?.value }}</div>
+                        </td>
+                        <!-- <td>
+                          <div class="text-lg">{{ taintForm?.value?.operator }}</div>
+                        </td> -->
+                        <td>
+                          <div class="text-lg">{{ taintForm?.value?.effect }}</div>
+                        </td>
+                        <td>
+                          <button
+                            (click)="removeTaint(taintForm)"
+                            class="focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-red-700 text-sm text-white hover:bg-red-500 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+                          >
+                            <i class="pi pi-trash"></i>
+                          </button>
+                        </td>
+                      </tr>
+                    </ng-container>
                   </ng-container>
-                </ng-container>
-              </tbody>
-            </table>
-            @if (nodepoolForm.get('labels').errors && nodepoolForm.get('labels').touched && nodepoolForm.get('labels').dirty) {
-              <span class="text-red-400">{{ 'pages.clusters.details.nodePools.createorupdate.form.labelsError' | translate }} </span>
-            }
-          </div>
-          <div class="mt-3">
-            <form [formGroup]="labelForm">
-              <div class="flex gap-4">
-                <div class="flex w-1/3 flex-col gap-4">
-                  <input
-                    class="p-inputtext-lg rounded-lg border text-lg"
-                    type="text"
-                    placeholder="{{ 'pages.clusters.details.nodePools.createorupdate.form.labelKey' | translate }}"
-                    pInputText
-                    formControlName="key"
-                    [autofocus]="true"
-                    #labelKeyElement
-                  />
-                  @if (labelForm.get('key').errors && labelForm.get('key').touched && labelForm.get('key').dirty && !labelForm.get('key').pristine) {
-                    <span class="text-red-400">{{ 'pages.clusters.details.nodePools.createorupdate.form.labelKeyError' | translate }} </span>
-                  }
+                </tbody>
+              </table>
+              @if (nodepoolForm?.get('taint').errors && nodepoolForm?.get('taint').touched && nodepoolForm?.get('taint').dirty) {
+                <span class="text-red-400">{{ 'pages.clusters.details.nodePools.createorupdate.form.taintError' | translate }} </span>
+              }
+            </div>
+            <div class="mt-3">
+              <form [formGroup]="taintForm">
+                <div class="flex gap-4">
+                  <div class="flex w-1/3 flex-col gap-4">
+                    <input
+                      class="p-inputtext-lg rounded-lg border text-lg"
+                      type="text"
+                      placeholder="{{ 'pages.clusters.details.nodePools.createorupdate.form.taintKey' | translate }}"
+                      pInputText
+                      formControlName="key"
+                      [autofocus]="true"
+                      #taintKeyElement
+                    />
+                    @if (
+                      taintForm.get('key').errors && taintForm.get('key').touched && taintForm.get('key').dirty && !taintForm.get('key').pristine
+                    ) {
+                      <span class="text-red-400">{{ 'pages.clusters.details.nodePools.createorupdate.form.taintKeyError' | translate }} </span>
+                    }
+                  </div>
+                  <div class="flex w-1/3 flex-col gap-4">
+                    <input
+                      class="p-inputtext-lg rounded-lg border text-lg"
+                      type="text"
+                      placeholder="{{ 'pages.clusters.details.nodePools.createorupdate.form.taintValue' | translate }}"
+                      pInputText
+                      formControlName="value"
+                      #taintValueElement
+                      (keyup.enter)="addTaint(taintKeyElement, taintValueElement, taintEffectElement)"
+                    />
+                    @if (
+                      taintForm.get('value').errors &&
+                      taintForm.get('value').touched &&
+                      taintForm.get('value').dirty &&
+                      !taintForm.get('value').pristine
+                    ) {
+                      <span class="text-red-400">{{ 'pages.clusters.details.nodePools.createorupdate.form.taintValueError' | translate }} </span>
+                    }
+                  </div>
                 </div>
-                <div class="flex w-1/3 flex-col gap-4">
-                  <input
-                    class="p-inputtext-lg rounded-lg border text-lg"
-                    type="text"
-                    placeholder="{{ 'pages.clusters.details.nodePools.createorupdate.form.labelValue' | translate }}"
-                    pInputText
-                    formControlName="value"
-                    #labelValueElement
-                    (keyup.enter)="addLabel(labelKeyElement, labelValueElement)"
-                  />
-                  @if (
-                    labelForm.get('value').errors &&
-                    labelForm.get('value').touched &&
-                    labelForm.get('value').dirty &&
-                    !labelForm.get('value').pristine
-                  ) {
-                    <span class="text-red-400">{{ 'pages.clusters.details.nodePools.createorupdate.form.labelValueError' | translate }} </span>
-                  }
+                <div class="mt-3 flex gap-4">
+                  <div>
+                    <p-select
+                      class=""
+                      [options]="taintEffects"
+                      placeholder="{{ 'pages.clusters.details.nodePools.createorupdate.form.taintEffectPlaceholder' | translate }}"
+                      optionLabel="label"
+                      formControlName="effect"
+                      [showClear]="true"
+                      [filter]="true"
+                      filterBy="label"
+                      dataKey="value"
+                      [appendTo]="'body'"
+                      #taintEffectElement
+                    >
+                    </p-select>
+                    @if (nodepoolForm?.get('effect')?.errors && nodepoolForm?.get('effect')?.touched && nodepoolForm?.get('effect')?.dirty) {
+                      <span class="text-red-400">{{ 'pages.clusters.details.nodePools.createorupdate.form.taintEffectError' | translate }} </span>
+                    }
+                  </div>
+                  <div>
+                    <button
+                      type="button"
+                      [disabled]="!taintForm.valid"
+                      [style.cursor]="!taintForm.valid ? 'not-allowed' : 'pointer'"
+                      (click)="addTaint(taintKeyElement, taintValueElement, taintEffectElement)"
+                      class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-blue-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white disabled:bg-gray-600"
+                    >
+                      {{ 'pages.clusters.details.nodePools.createorupdate.form.submitTaint' | translate }}
+                    </button>
+                  </div>
                 </div>
-                <div>
-                  <button
-                    type="button"
-                    [disabled]="!labelForm.valid"
-                    (click)="addLabel(labelKeyElement, labelValueElement)"
-                    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-blue-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white disabled:bg-gray-600"
-                  >
-                    {{ 'pages.clusters.details.nodePools.createorupdate.form.submitLabel' | translate }}
-                  </button>
-                </div>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
         </div>
 
         <div>
           <button
             (click)="submit()"
-            [disabled]="!nodepoolForm.valid"
-            class="rounded-xl bg-green-700 text-white disabled:bg-gray-300 disabled:text-white"
+            [disabled]="!nodepoolForm?.valid"
+            [style.cursor]="!nodepoolForm?.valid ? 'not-allowed' : 'pointer'"
+            class="focus:ring-primary dark:focus:ring-offset-dark rounded-xl bg-green-600 text-gray-100 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white hover:enabled:bg-green-700 disabled:bg-gray-500 hover:disabled:bg-gray-700"
           >
             <div class="p-3">
-              @if (nodePoolId) {
+              @if (nodePool) {
                 <span>{{ 'pages.clusters.details.nodePools.createorupdate.form.update' | translate }}</span>
               } @else {
                 <span>{{ 'pages.clusters.details.nodePools.createorupdate.form.create' | translate }}</span>
@@ -365,11 +440,7 @@
       </form>
     </div>
   </div>
-  <div class="ml-3 rounded-lg border p-5">
+  <div class="ml-3 rounded-lg bg-gray-200 p-5 dark:bg-zinc-800">
     <app-cluster-nodepool-createorupdate-summary [nodepoolForm]="nodepoolForm"></app-cluster-nodepool-createorupdate-summary>
   </div>
 </div>
-
-<!-- <div class="bg-gray-800 text-gray-400">
-  <pre>{{ nodepoolForm.value | json }}</pre>
-</div> -->
