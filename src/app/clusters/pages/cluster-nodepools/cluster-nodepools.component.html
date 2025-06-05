@@ -26,7 +26,7 @@
             @if (clusterResourceSet$ | async; as resourceSet) {
               @if (!showNodepoolEditor) {
                 <app-cluster-nodepool-list
-                  [editable]="true"
+                  [editable]="isNodepoolEditable"
                   [nodepools]="nodepools"
                   (onEdit)="editNodepool($event)"
                   (onDelete)="deleteNodepool($event)"

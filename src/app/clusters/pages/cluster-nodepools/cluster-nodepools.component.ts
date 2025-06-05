@@ -8,9 +8,10 @@ import { SpinnerComponent } from '../../../shared/components';
 import { AsyncPipe } from '@angular/common';
 import { Resourcesv2Service } from '../../../core/services/resourcesv2.service';
 import { MessageService } from 'primeng/api';
-import { NodePool, Resource, ResourceQuery, ResourceSet } from '@rork8s/ror-resources/models';
+import { Resource, ResourceQuery, ResourceSet } from '@rork8s/ror-resources/models';
 import { LucideAngularModule, AsteriskIcon } from 'lucide-angular';
 import { NodePoolChange } from '../../models/nodepool';
+import { ProviderFeaturesService } from '../../../core/services/provider-features.service';
 
 @Component({
   selector: 'app-cluster-nodepools',
@@ -24,6 +25,7 @@ export class ClusterNodepoolsComponent implements OnInit, OnDestroy {
   showNodepoolEditor: boolean = false;
   selectedNodepool: any | undefined;
   nodepools: any[] = [];
+  isNodepoolEditable = false;
 
   clusterResource: Resource | undefined;
   clusterResourceSet$: Observable<ResourceSet> | undefined;
@@ -36,6 +38,7 @@ export class ClusterNodepoolsComponent implements OnInit, OnDestroy {
   private resourcesv2Service = inject(Resourcesv2Service);
   private messageService = inject(MessageService);
   private translateService = inject(TranslateService);
+  private providerFeaturesService = inject(ProviderFeaturesService);
 
   private subscriptions = new Subscription();
 
@@ -93,6 +96,10 @@ export class ClusterNodepoolsComponent implements OnInit, OnDestroy {
           this.clusterResourceSet = data;
           this.clusterResource = data?.resources[0];
           this.loadedFromResources = true;
+          this.isNodepoolEditable = this.providerFeaturesService.isNodePoolEditable(
+            this.clusterResource?.kubernetescluster?.spec?.topology?.workers?.nodePools[0]?.provider,
+            this.cluster?.versions?.kubernetes || '',
+          );
           return this.clusterResource;
         } else {
           this.clusterResource = undefined;
