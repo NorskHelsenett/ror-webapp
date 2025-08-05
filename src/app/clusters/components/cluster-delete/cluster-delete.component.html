@@ -61,4 +61,6 @@
     </div>
   </div>
 </div>
-<div *ngIf="fetchNamespaces$ | async as namespaces"></div>
+@if (fetchNamespaces$ | async; as namespaces) {
+  <div></div>
+}

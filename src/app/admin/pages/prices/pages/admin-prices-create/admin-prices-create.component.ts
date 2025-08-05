@@ -1,4 +1,4 @@
-import { CommonModule, DatePipe } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -12,7 +12,7 @@ import { DatePickerModule } from 'primeng/datepicker';
   selector: 'app-admin-prices-create',
   templateUrl: './admin-prices-create.component.html',
   styleUrls: ['./admin-prices-create.component.scss'],
-  imports: [TranslateModule, CommonModule, FormsModule, ReactiveFormsModule, DatePickerModule],
+  imports: [TranslateModule, FormsModule, ReactiveFormsModule, DatePickerModule],
 })
 export class AdminPricesCreateComponent implements OnInit, OnDestroy {
   priceForm: FormGroup | undefined;

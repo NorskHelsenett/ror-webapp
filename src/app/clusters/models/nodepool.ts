@@ -1,4 +1,5 @@
-import { NodePool } from '@rork8s/ror-resources/models';
+import { KubernetesClusterNodePool } from '@rork8s/ror-resources/models';
+import { NodePool } from '../../core/models/clusterOrder';
 
 export enum NodePoolAction {
   Unknown = 0,
@@ -9,6 +10,6 @@ export enum NodePoolAction {
 
 export interface NodePoolChange {
   action: NodePoolAction;
-  nodePool: NodePool;
-  previousNodePool?: NodePool;
+  nodePool: KubernetesClusterNodePool;
+  previousNodePool?: KubernetesClusterNodePool;
 }

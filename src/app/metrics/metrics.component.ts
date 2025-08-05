@@ -6,7 +6,7 @@ import { Dialog, DialogModule } from 'primeng/dialog';
 import { MetricsService } from '../core/services/metrics.service';
 import { ThemeService } from '../core/services/theme.service';
 import { TranslateModule } from '@ngx-translate/core';
-import { CommonModule } from '@angular/common';
+
 import { ChartModule } from 'primeng/chart';
 
 @Component({
@@ -14,7 +14,7 @@ import { ChartModule } from 'primeng/chart';
   templateUrl: './metrics.component.html',
   styleUrls: ['./metrics.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [TranslateModule, CommonModule, ChartModule, DialogModule],
+  imports: [TranslateModule, ChartModule, DialogModule],
 })
 export class MetricsComponent implements OnInit, OnDestroy {
   chartOptions: ChartOptions = {

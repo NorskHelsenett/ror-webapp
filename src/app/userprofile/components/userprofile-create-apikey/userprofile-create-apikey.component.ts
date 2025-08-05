@@ -7,7 +7,7 @@ import { Subscription, catchError } from 'rxjs';
 import { UserApikeysService } from '../../../core/services/user-apikeys.service';
 import { ConfigService } from '../../../core/services/config.service';
 import { ApiKey } from '../../../core/models/apikey';
-import { CommonModule } from '@angular/common';
+
 import { DatePickerModule } from 'primeng/datepicker';
 
 @Component({
@@ -15,7 +15,7 @@ import { DatePickerModule } from 'primeng/datepicker';
   templateUrl: './userprofile-create-apikey.component.html',
   styleUrls: ['./userprofile-create-apikey.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [TranslateModule, CommonModule, FormsModule, ReactiveFormsModule, DatePickerModule],
+  imports: [TranslateModule, FormsModule, ReactiveFormsModule, DatePickerModule],
 })
 export class UserprofileCreateApikeyComponent implements OnInit, OnDestroy {
   private configService = inject(ConfigService);

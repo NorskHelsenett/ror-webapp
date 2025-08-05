@@ -10,7 +10,7 @@ import { environment } from '../../../../../environments/environment';
 import { ClusterProvider } from '../../../../clusters/models/clusterProvider';
 import { ClusterOrderModel, ClusterOrderType } from '../../../../core/models/clusterOrder';
 import { OrderService } from '../../../../core/services/order.service';
-import { CommonModule } from '@angular/common';
+
 import { SummaryComponent } from '../summary/summary.component';
 
 @Component({
@@ -18,7 +18,7 @@ import { SummaryComponent } from '../summary/summary.component';
   templateUrl: './summary-step.component.html',
   styleUrls: ['./summary-step.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [TranslateModule, CommonModule, RouterModule, FormsModule, ReactiveFormsModule, SummaryComponent],
+  imports: [TranslateModule, RouterModule, FormsModule, ReactiveFormsModule, SummaryComponent],
 })
 export class SummaryStepComponent implements OnInit {
   private clusterFormService = inject(ClusterFormService);

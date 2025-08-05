@@ -22,39 +22,41 @@
       </div>
     </ng-template>
   </p-select>
-  <p-select
-    *ngIf="clusterId === undefined"
-    [options]="owners"
-    [(ngModel)]="selectedOwner"
-    optionLabel="scope"
-    [showClear]="true"
-    placeholder="{{ 'pages.resources.filter.owner.placeholder' | translate }}"
-    emptyMessage="{{ 'common.dropdown.noResult' | translate }}"
-    emptyFilterMessage="{{ 'common.dropdown.noResults' | translate }}"
-    (onChange)="selectedOwnerChange($event)"
-    [filter]="true"
-    filterBy="scope"
-  >
-    <ng-template pTemplate="selectedItem" let-owner>
-      <div class="align-items-center flex gap-2">
-        <div>{{ owner?.scope }}</div>
-      </div>
-    </ng-template>
-    <ng-template let-owner pTemplate="item">
-      <div class="align-items-center flex gap-2">
-        <div>{{ owner?.scope }}</div>
-      </div>
-    </ng-template>
-  </p-select>
-  <p-select
-    *ngIf="showClusterDropdown && clusterId === undefined"
-    [(ngModel)]="selectedCluster"
-    [options]="clusters"
-    optionLabel="clusterName"
-    [showClear]="true"
-    placeholder="{{ 'pages.resources.filter.cluster.placeholder' | translate }}"
-    (onChange)="selectedClusterIdChange($event)"
-  ></p-select>
+  @if (clusterId === undefined) {
+    <p-select
+      [options]="owners"
+      [(ngModel)]="selectedOwner"
+      optionLabel="scope"
+      [showClear]="true"
+      placeholder="{{ 'pages.resources.filter.owner.placeholder' | translate }}"
+      emptyMessage="{{ 'common.dropdown.noResult' | translate }}"
+      emptyFilterMessage="{{ 'common.dropdown.noResults' | translate }}"
+      (onChange)="selectedOwnerChange($event)"
+      [filter]="true"
+      filterBy="scope"
+    >
+      <ng-template pTemplate="selectedItem" let-owner>
+        <div class="align-items-center flex gap-2">
+          <div>{{ owner?.scope }}</div>
+        </div>
+      </ng-template>
+      <ng-template let-owner pTemplate="item">
+        <div class="align-items-center flex gap-2">
+          <div>{{ owner?.scope }}</div>
+        </div>
+      </ng-template>
+    </p-select>
+  }
+  @if (showClusterDropdown && clusterId === undefined) {
+    <p-select
+      [(ngModel)]="selectedCluster"
+      [options]="clusters"
+      optionLabel="clusterName"
+      [showClear]="true"
+      placeholder="{{ 'pages.resources.filter.cluster.placeholder' | translate }}"
+      (onChange)="selectedClusterIdChange($event)"
+    ></p-select>
+  }
   <button (click)="resetFilter()">
     {{ 'common.reset' | translate }}
   </button>

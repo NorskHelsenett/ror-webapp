@@ -27,6 +27,8 @@
   </div>
 </div>
 
-<p-sidebar [(visible)]="sidebarVisible" position="right" styleClass="sm:w-full md:w-1/2">
-  <app-resource-v2-details *ngIf="selectedResource" [resource]="selectedResource"></app-resource-v2-details>
-</p-sidebar>
+<p-drawer [(visible)]="sidebarVisible" position="right" styleClass="sm:w-full md:w-1/2">
+  @if (selectedResource) {
+    <app-resource-v2-details [resource]="selectedResource"></app-resource-v2-details>
+  }
+</p-drawer>

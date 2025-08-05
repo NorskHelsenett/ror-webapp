@@ -1,4 +1,6 @@
-<div *ngIf="version$ | async"></div>
+@if (version$ | async) {
+  <div></div>
+}
 <div class="dark:border-primary-darker flex items-center justify-between border-b px-4 py-4 lg:py-6">
   <h1 class="text-2xl font-semibold">{{ 'pages.about.title' | translate }}</h1>
 </div>
@@ -29,18 +31,24 @@
                     <td class="px-2 py-1">{{ 'app.titleLong' | translate }}</td>
                     <td class="px-2 py-1">{{ appVersion }} ({{ commit }})</td>
                   </tr>
-                  <tr class="py-1 transition duration-300 ease-in-out hover:bg-gray-200 dark:hover:bg-gray-500" *ngIf="version">
-                    <td class="px-2 py-1">Api version</td>
-                    <td class="px-2 py-1">{{ version?.version }}</td>
-                  </tr>
-                  <tr class="py-1 transition duration-300 ease-in-out hover:bg-gray-200 dark:hover:bg-gray-500" *ngIf="version">
-                    <td class="px-2 py-1">Api library version</td>
-                    <td class="px-2 py-1">{{ version?.libVer }}</td>
-                  </tr>
-                  <tr class="py-1 transition duration-300 ease-in-out hover:bg-gray-200 dark:hover:bg-gray-500" *ngIf="version">
-                    <td class="px-2 py-1">Api commit</td>
-                    <td class="px-2 py-1">{{ version?.commit }}</td>
-                  </tr>
+                  @if (version) {
+                    <tr class="py-1 transition duration-300 ease-in-out hover:bg-gray-200 dark:hover:bg-gray-500">
+                      <td class="px-2 py-1">Api version</td>
+                      <td class="px-2 py-1">{{ version?.version }}</td>
+                    </tr>
+                  }
+                  @if (version) {
+                    <tr class="py-1 transition duration-300 ease-in-out hover:bg-gray-200 dark:hover:bg-gray-500">
+                      <td class="px-2 py-1">Api library version</td>
+                      <td class="px-2 py-1">{{ version?.libVer }}</td>
+                    </tr>
+                  }
+                  @if (version) {
+                    <tr class="py-1 transition duration-300 ease-in-out hover:bg-gray-200 dark:hover:bg-gray-500">
+                      <td class="px-2 py-1">Api commit</td>
+                      <td class="px-2 py-1">{{ version?.commit }}</td>
+                    </tr>
+                  }
                 </tbody>
               </table>
             </div>
@@ -79,20 +87,20 @@
   <div class="dark:bg-darker ml-4 mr-4 flex flex-col-reverse justify-between overflow-x-auto rounded-md bg-white p-4 md:flex-row">
     <div class="dark:bg-darker rounded-md bg-white">
       <div class="float-left p-3">
-        <div *ngIf="health$ | async as health; else loadingOrError">
-          <app-health-table [health]="health"></app-health-table>
-        </div>
-        <ng-template #loadingOrError>
-          <ng-container *ngIf="healthError; else workspaceLoading">
+        @if (health$ | async; as health) {
+          <div>
+            <app-health-table [health]="health"></app-health-table>
+          </div>
+        } @else {
+          @if (healthError) {
             <div class="mx-auto my-4 flex items-center rounded-md bg-red-200 px-6 py-4 text-lg">
               <span class="p-2 text-red-800"> {{ 'pages.dashboard.error' | translate }} </span>
               <button class="btn text-black" (click)="fetch()">{{ 'common.tryAgain' | translate }}</button>
             </div>
-          </ng-container>
-          <ng-template #workspaceLoading>
+          } @else {
             <app-spinner></app-spinner>
-          </ng-template>
-        </ng-template>
+          }
+        }
       </div>
     </div>
     <a

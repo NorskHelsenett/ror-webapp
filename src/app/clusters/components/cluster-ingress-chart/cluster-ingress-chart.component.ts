@@ -12,12 +12,12 @@ import {
 } from '@rork8s/ror-resources/models';
 import { TreeNode } from 'primeng/api';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { CommonModule } from '@angular/common';
+
 import { HealthStatus } from '../../../core/models/healthstatus';
 
 @Component({
   selector: 'app-cluster-ingress-chart',
-  imports: [CommonModule, TranslateModule, OrganizationChartModule, TooltipModule],
+  imports: [TranslateModule, OrganizationChartModule, TooltipModule],
   templateUrl: './cluster-ingress-chart.component.html',
   styleUrl: './cluster-ingress-chart.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

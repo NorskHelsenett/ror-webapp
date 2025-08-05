@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -6,7 +5,7 @@ import { TranslateModule } from '@ngx-translate/core';
   selector: 'app-cluster-status',
   templateUrl: './cluster-status.component.html',
   styleUrls: ['./cluster-status.component.scss'],
-  imports: [TranslateModule, CommonModule],
+  imports: [TranslateModule],
 })
 export class ClusterStatusComponent {
   @Input() status: number = 0;

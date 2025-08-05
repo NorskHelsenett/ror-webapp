@@ -9,7 +9,7 @@ import { FilterMatchMode } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { RippleModule } from 'primeng/ripple';
-import { SidebarModule } from 'primeng/sidebar';
+import { DrawerModule } from 'primeng/drawer';
 import { TableModule } from 'primeng/table';
 import { ResourcesFilterComponent } from '../resources-filter/resources-filter.component';
 import { ErrorComponent } from '../../../shared/components/error/error.component';
@@ -41,7 +41,7 @@ import { UtilsService } from '../../../shared/services';
     ResourcesFilterComponent,
     MultiSelectModule,
     FormsModule,
-    SidebarModule,
+    DrawerModule,
     HighlightModule,
     HighlightLineNumbers,
     ExportComponent,

@@ -26,20 +26,20 @@
       <td>{{ desiredVersion?.key }}</td>
       <td>
         <!-- <div *ngIf="isStringType(desiredVersion?.value)">
-          {{ desiredVersion?.value }}
-        </div>
+        {{ desiredVersion?.value }}
+      </div>
 
-        <pre *ngIf="">
-          {{ desiredVersion?.value | json }}
-        </pre> -->
-        <ng-container [ngSwitch]="isStringType(desiredVersion?.value)">
-          <ng-container *ngSwitchCase="true">
+      <pre *ngIf="">
+        {{ desiredVersion?.value | json }}
+      </pre> -->
+        @switch (isStringType(desiredVersion?.value)) {
+          @case (true) {
             {{ desiredVersion?.value }}
-          </ng-container>
-          <ng-container *ngSwitchDefault>
+          }
+          @default {
             {{ desiredVersion?.value | json }}
-          </ng-container>
-        </ng-container>
+          }
+        }
       </td>
       <td>
         <button

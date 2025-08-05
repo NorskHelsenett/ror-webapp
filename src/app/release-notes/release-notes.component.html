@@ -23,22 +23,24 @@
             <li>{{ 'pages.releaseNotes.changes.2023_12_13.description1' | translate }}</li>
             <li>
               {{ 'pages.releaseNotes.changes.2023_12_13.description' | translate }}
-              <img
-                *ngIf="!isDark"
-                src="/assets/images/changes/rightclick_white.png"
-                class="rounded-lg object-cover shadow-lg shadow-gray-700 dark:shadow-gray-600"
-                width="341"
-                height="155"
-                alt="rightclicklinks"
-              />
-              <img
-                *ngIf="isDark"
-                src="/assets/images/changes/rightclick.png"
-                class="rounded-lg object-cover shadow-lg shadow-gray-700 dark:shadow-gray-600"
-                width="346"
-                height="148"
-                alt="rightclicklinks"
-              />
+              @if (!isDark) {
+                <img
+                  src="/assets/images/changes/rightclick_white.png"
+                  class="rounded-lg object-cover shadow-lg shadow-gray-700 dark:shadow-gray-600"
+                  width="341"
+                  height="155"
+                  alt="rightclicklinks"
+                />
+              }
+              @if (isDark) {
+                <img
+                  src="/assets/images/changes/rightclick.png"
+                  class="rounded-lg object-cover shadow-lg shadow-gray-700 dark:shadow-gray-600"
+                  width="346"
+                  height="148"
+                  alt="rightclicklinks"
+                />
+              }
             </li>
           </ul>
         </div>

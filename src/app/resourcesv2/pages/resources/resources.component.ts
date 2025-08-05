@@ -11,20 +11,12 @@ import { ResourceType } from '../../../core/models/resources/resourceType';
 import { OwnerType } from '../../../core/models/resources/ownerType';
 import { ResourcesV2ListComponent } from '../../components/resources-v2-list/resources-v2-list.component';
 import { AsyncPipe, CommonModule } from '@angular/common';
-import { SidebarModule } from 'primeng/sidebar';
+import { DrawerModule } from 'primeng/drawer';
 import { ResourceV2DetailsComponent } from '../../components/resource-v2-details/resource-v2-details.component';
 
 @Component({
   selector: 'app-resources',
-  imports: [
-    CommonModule,
-    TranslateModule,
-    ResourcesV2ListComponent,
-    Resourcesv2FilterComponent,
-    AsyncPipe,
-    SidebarModule,
-    ResourceV2DetailsComponent,
-  ],
+  imports: [CommonModule, TranslateModule, ResourcesV2ListComponent, Resourcesv2FilterComponent, AsyncPipe, DrawerModule, ResourceV2DetailsComponent],
   templateUrl: './resources.component.html',
   styleUrl: './resources.component.scss',
 })

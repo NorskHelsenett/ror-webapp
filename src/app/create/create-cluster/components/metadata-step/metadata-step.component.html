@@ -1,151 +1,142 @@
-<div *ngIf="adminOwner$ | async">
-  <form [formGroup]="clusterForm">
-    <div class="mt-3">
-      <h5>{{ 'pages.create.cluster.steps.location.ownergroup' | translate }}</h5>
-      <app-input-dropdown
-        [options]="accessGroups"
-        [couldOverride]="adminOwner$ | async"
-        placeholder="{{ 'pages.create.cluster.steps.location.ownergroupPlaceholder' | translate }}"
-        [controlName]="'ownergroup'"
-        [formGroup]="clusterForm"
-        filterBy="name"
-        [showClear]="true"
-        optionLabel="name"
-        optionValue="name"
-        emptyListMessage="{{ 'common.emptyList' | translate }}"
-      ></app-input-dropdown>
-      <span
-        *ngIf="clusterForm.get('ownergroup').touched && clusterForm.get('ownergroup').dirty && clusterForm.get('ownergroup').errors"
-        class="text-red-400"
-        >{{ 'pages.create.cluster.steps.location.ownergroupError' | translate }}</span
-      >
-    </div>
-
-    <div class="mt-3">
-      <h5>{{ 'pages.create.cluster.steps.metadata.sensitivity' | translate }}</h5>
-      <p-select
-        [options]="availableSensitivities"
-        placeholder="{{ 'pages.create.cluster.steps.metadata.sensitivityPlaceholder' | translate }}"
-        optionLabel="name"
-        [showClear]="true"
-        formControlName="sensitivity"
-        [filter]="true"
-        filterBy="name"
-      >
-        <ng-template let-sensitivity pTemplate="item">
-          <div class="flex w-[500px] flex-col">
-            <span class="text-lg">{{ sensitivity?.name }}</span>
-          </div>
-        </ng-template>
-      </p-select>
-      <span
-        *ngIf="clusterForm.get('sensitivity').touched && clusterForm.get('sensitivity').dirty && clusterForm.get('sensitivity').errors"
-        class="text-red-400"
-        >{{ 'pages.create.cluster.steps.metadata.sensitivityError' | translate }}</span
-      >
-      <div class="mt-1">
-        <a href="https://docs.nhn.no/k8s/brukerdokumentasjon/obs/os_dashboard.html#tags" target="_blank" class="flex hover:text-green-500">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"
-            />
-          </svg>
-          <span>{{ 'pages.clusters.details.edit.form.moreInfo' | translate }}</span>
-        </a>
+@if (adminOwner$ | async) {
+  <div>
+    <form [formGroup]="clusterForm">
+      <div class="mt-3">
+        <h5>{{ 'pages.create.cluster.steps.location.ownergroup' | translate }}</h5>
+        <app-input-dropdown
+          [options]="accessGroups"
+          [couldOverride]="adminOwner$ | async"
+          placeholder="{{ 'pages.create.cluster.steps.location.ownergroupPlaceholder' | translate }}"
+          [controlName]="'ownergroup'"
+          [formGroup]="clusterForm"
+          filterBy="name"
+          [showClear]="true"
+          optionLabel="name"
+          optionValue="name"
+          emptyListMessage="{{ 'common.emptyList' | translate }}"
+        ></app-input-dropdown>
+        @if (clusterForm.get('ownergroup').touched && clusterForm.get('ownergroup').dirty && clusterForm.get('ownergroup').errors) {
+          <span class="text-red-400">{{ 'pages.create.cluster.steps.location.ownergroupError' | translate }}</span>
+        }
       </div>
-    </div>
-
-    <div class="mt-3">
-      <h5>{{ 'pages.create.cluster.steps.metadata.criticality' | translate }}</h5>
-      <p-select
-        [options]="availableCriticalities"
-        placeholder="{{ 'pages.create.cluster.steps.metadata.criticalityPlaceholder' | translate }}"
-        optionLabel="name"
-        [showClear]="true"
-        formControlName="criticality"
-        [filter]="true"
-        filterBy="name"
-      >
-        <ng-template let-criticality pTemplate="item">
-          <div class="flex w-[500px] flex-col">
-            <span class="text-lg">{{ criticality?.name }}</span>
-          </div>
-        </ng-template>
-      </p-select>
-      <span
-        *ngIf="clusterForm.get('criticality').touched && clusterForm.get('criticality').dirty && clusterForm.get('criticality').errors"
-        class="text-red-400"
-        >{{ 'pages.create.cluster.steps.metadata.criticalityError' | translate }}</span
-      >
-      <div class="mt-1">
-        <a href="https://docs.nhn.no/k8s/brukerdokumentasjon/obs/os_dashboard.html#tags" target="_blank" class="flex hover:text-green-500">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"
-            />
-          </svg>
-          <span class="mt-1">{{ 'pages.clusters.details.edit.form.moreInfo' | translate }}</span>
-        </a>
-      </div>
-    </div>
-
-    <div class="mt-3">
-      <div class="mt-10 flex flex-col" [formGroup]="tagForm">
-        <div class="mt-5 flex flex-col">
-          <label> {{ 'pages.admin.projects.form.serviceTags' | translate }}</label>
-
-          <div class="flex gap-3">
-            <input
-              class="border border-gray-600 text-lg"
-              type="text"
-              formControlName="tag"
-              minlength="2"
-              #tagInput
-              (keyup.enter)="addTag(tagInput?.value)"
-            />
-            <button
-              [disabled]="!tagForm?.valid"
-              (click)="addTag(tagInput?.value)"
-              type="button"
-              class="rounded-lg bg-green-600 p-2 text-white disabled:bg-gray-300 dark:disabled:bg-gray-400"
-            >
-              {{ 'common.create' | translate }}
-            </button>
-          </div>
-          <div class="mt-3 flex gap-3">
-            @for (tag of tags; track tag) {
-              <p-chip [removable]="true" (onRemove)="removeTag(tag)" [ngClass]="'bg-' + getColorByText(tag)">
-                <div [ngClass]="'bg-' + getColorByText(tag)">{{ tag }}</div>
-              </p-chip>
-            }
-          </div>
-          <span *ngIf="clusterForm?.get('tags').touched && clusterForm?.get('tags').dirty && clusterForm?.get('tags').errors" class="text-red-400">{{
-            'pages.admin.projects.form.serviceTagsError' | translate
-          }}</span>
+      <div class="mt-3">
+        <h5>{{ 'pages.create.cluster.steps.metadata.sensitivity' | translate }}</h5>
+        <p-select
+          [options]="availableSensitivities"
+          placeholder="{{ 'pages.create.cluster.steps.metadata.sensitivityPlaceholder' | translate }}"
+          optionLabel="name"
+          [showClear]="true"
+          formControlName="sensitivity"
+          [filter]="true"
+          filterBy="name"
+        >
+          <ng-template let-sensitivity pTemplate="item">
+            <div class="flex w-[500px] flex-col">
+              <span class="text-lg">{{ sensitivity?.name }}</span>
+            </div>
+          </ng-template>
+        </p-select>
+        @if (clusterForm.get('sensitivity').touched && clusterForm.get('sensitivity').dirty && clusterForm.get('sensitivity').errors) {
+          <span class="text-red-400">{{ 'pages.create.cluster.steps.metadata.sensitivityError' | translate }}</span>
+        }
+        <div class="mt-1">
+          <a href="https://docs.nhn.no/k8s/brukerdokumentasjon/obs/os_dashboard.html#tags" target="_blank" class="flex hover:text-green-500">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"
+              />
+            </svg>
+            <span>{{ 'pages.clusters.details.edit.form.moreInfo' | translate }}</span>
+          </a>
         </div>
       </div>
-    </div>
-
-    <div class="mt-3 flex justify-start">
-      <a
-        (click)="previousSteps()"
-        class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark delay-50 float-left flex-none rounded-md bg-gray-600 px-4 py-2 text-sm text-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
-      >
-        <span>{{ 'common.previous' | translate }}</span>
-      </a>
-      <div class="ml-3 flex-none"></div>
-      <button
-        (click)="nextSteps()"
-        type="button"
-        [disabled]="!clusterForm.get('ownergroup').valid || !clusterForm.get('sensitivity').valid || !clusterForm.get('criticality').valid"
-        class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark delay-50 float-left flex-none rounded-md bg-green-700 px-4 py-2 text-sm text-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white disabled:cursor-not-allowed disabled:bg-gray-900 disabled:opacity-25 disabled:hover:bg-gray-900"
-      >
-        <span>{{ 'common.next' | translate }}</span>
-      </button>
-    </div>
-  </form>
-</div>
+      <div class="mt-3">
+        <h5>{{ 'pages.create.cluster.steps.metadata.criticality' | translate }}</h5>
+        <p-select
+          [options]="availableCriticalities"
+          placeholder="{{ 'pages.create.cluster.steps.metadata.criticalityPlaceholder' | translate }}"
+          optionLabel="name"
+          [showClear]="true"
+          formControlName="criticality"
+          [filter]="true"
+          filterBy="name"
+        >
+          <ng-template let-criticality pTemplate="item">
+            <div class="flex w-[500px] flex-col">
+              <span class="text-lg">{{ criticality?.name }}</span>
+            </div>
+          </ng-template>
+        </p-select>
+        @if (clusterForm.get('criticality').touched && clusterForm.get('criticality').dirty && clusterForm.get('criticality').errors) {
+          <span class="text-red-400">{{ 'pages.create.cluster.steps.metadata.criticalityError' | translate }}</span>
+        }
+        <div class="mt-1">
+          <a href="https://docs.nhn.no/k8s/brukerdokumentasjon/obs/os_dashboard.html#tags" target="_blank" class="flex hover:text-green-500">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"
+              />
+            </svg>
+            <span class="mt-1">{{ 'pages.clusters.details.edit.form.moreInfo' | translate }}</span>
+          </a>
+        </div>
+      </div>
+      <div class="mt-3">
+        <div class="mt-10 flex flex-col" [formGroup]="tagForm">
+          <div class="mt-5 flex flex-col">
+            <label> {{ 'pages.admin.projects.form.serviceTags' | translate }}</label>
+            <div class="flex gap-3">
+              <input
+                class="border border-gray-600 text-lg"
+                type="text"
+                formControlName="tag"
+                minlength="2"
+                #tagInput
+                (keyup.enter)="addTag(tagInput?.value)"
+              />
+              <button
+                [disabled]="!tagForm?.valid"
+                (click)="addTag(tagInput?.value)"
+                type="button"
+                class="rounded-lg bg-green-600 p-2 text-white disabled:bg-gray-300 dark:disabled:bg-gray-400"
+              >
+                {{ 'common.create' | translate }}
+              </button>
+            </div>
+            <div class="mt-3 flex gap-3">
+              @for (tag of tags; track tag) {
+                <p-chip [removable]="true" (onRemove)="removeTag(tag)" [ngClass]="'bg-' + getColorByText(tag)">
+                  <div [ngClass]="'bg-' + getColorByText(tag)">{{ tag }}</div>
+                </p-chip>
+              }
+            </div>
+            @if (clusterForm?.get('tags').touched && clusterForm?.get('tags').dirty && clusterForm?.get('tags').errors) {
+              <span class="text-red-400">{{ 'pages.admin.projects.form.serviceTagsError' | translate }}</span>
+            }
+          </div>
+        </div>
+      </div>
+      <div class="mt-3 flex justify-start">
+        <a
+          (click)="previousSteps()"
+          class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark delay-50 float-left flex-none rounded-md bg-gray-600 px-4 py-2 text-sm text-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+        >
+          <span>{{ 'common.previous' | translate }}</span>
+        </a>
+        <div class="ml-3 flex-none"></div>
+        <button
+          (click)="nextSteps()"
+          type="button"
+          [disabled]="!clusterForm.get('ownergroup').valid || !clusterForm.get('sensitivity').valid || !clusterForm.get('criticality').valid"
+          class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark delay-50 float-left flex-none rounded-md bg-green-700 px-4 py-2 text-sm text-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white disabled:cursor-not-allowed disabled:bg-gray-900 disabled:opacity-25 disabled:hover:bg-gray-900"
+        >
+          <span>{{ 'common.next' | translate }}</span>
+        </button>
+      </div>
+    </form>
+  </div>
+}

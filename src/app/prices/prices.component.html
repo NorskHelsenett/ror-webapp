@@ -26,12 +26,12 @@
           <div class="flex flex-col">
             <div class="sm:-mx-6 lg:-mx-8">
               <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
-                <ng-container *ngIf="pricesError">
+                @if (pricesError) {
                   <div class="mx-auto my-4 flex items-center rounded-md bg-red-200 px-6 py-4 text-lg">
                     <span class="p-2 text-red-800"> {{ 'pages.dashboard.error' | translate }} </span>
                     <button class="btn text-black" (click)="fetch()">{{ 'common.tryAgain' | translate }}</button>
                   </div>
-                </ng-container>
+                }
 
                 <p-table
                   [value]="prices$ | async"

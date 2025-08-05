@@ -1,39 +1,41 @@
 <form [formGroup]="clusterForm">
-  <div class="flex flex-col sm:w-full md:w-1/2 xl:w-1/3" *ngIf="projects$ | async as projects">
-    <h5>{{ 'pages.create.cluster.steps.metadata.project' | translate }}</h5>
-    <p-select
-      styleClass="border border-gray-100 dark:border-gray-900"
-      [options]="projects?.data"
-      placeholder="{{ 'pages.create.cluster.steps.metadata.projectPlaceholder' | translate }}"
-      optionLabel="name"
-      [showClear]="true"
-      formControlName="project"
-      [filter]="true"
-      filterBy="name"
-      dataKey="name"
-      (onChange)="updateEvent($event)"
-      [autofocus]="true"
-    >
-      <ng-template let-project pTemplate="item">
-        <div class="flex w-[500px] flex-col">
-          <span class="text-lg">{{ project?.name }}</span>
-          <p class="block truncate text-sm">{{ project?.description }}</p>
-        </div>
-      </ng-template>
-    </p-select>
-    <span *ngIf="clusterForm.get('project').touched && clusterForm.get('project').dirty && clusterForm.get('project').errors" class="text-red-400">{{
-      'pages.create.cluster.steps.metadata.projectError' | translate
-    }}</span>
-    <div>
-      <span>{{ 'pages.create.cluster.steps.metadata.projectHelp' | translate }} </span
-      ><a
-        href="https://norskhelsenett.slack.com/archives/C01U0NUQ7PF"
-        target="_blank"
-        class="font-bold text-blue-400 hover:underline dark:hover:text-blue-400"
-        >#Drift-privatsky-devops</a
+  @if (projects$ | async; as projects) {
+    <div class="flex flex-col sm:w-full md:w-1/2 xl:w-1/3">
+      <h5>{{ 'pages.create.cluster.steps.metadata.project' | translate }}</h5>
+      <p-select
+        styleClass="border border-gray-100 dark:border-gray-900"
+        [options]="projects?.data"
+        placeholder="{{ 'pages.create.cluster.steps.metadata.projectPlaceholder' | translate }}"
+        optionLabel="name"
+        [showClear]="true"
+        formControlName="project"
+        [filter]="true"
+        filterBy="name"
+        dataKey="name"
+        (onChange)="updateEvent($event)"
+        [autofocus]="true"
       >
+        <ng-template let-project pTemplate="item">
+          <div class="flex w-[500px] flex-col">
+            <span class="text-lg">{{ project?.name }}</span>
+            <p class="block truncate text-sm">{{ project?.description }}</p>
+          </div>
+        </ng-template>
+      </p-select>
+      @if (clusterForm.get('project').touched && clusterForm.get('project').dirty && clusterForm.get('project').errors) {
+        <span class="text-red-400">{{ 'pages.create.cluster.steps.metadata.projectError' | translate }}</span>
+      }
+      <div>
+        <span>{{ 'pages.create.cluster.steps.metadata.projectHelp' | translate }} </span
+        ><a
+          href="https://norskhelsenett.slack.com/archives/C01U0NUQ7PF"
+          target="_blank"
+          class="font-bold text-blue-400 hover:underline dark:hover:text-blue-400"
+          >#Drift-privatsky-devops</a
+        >
+      </div>
     </div>
-  </div>
+  }
 
   <div class="mt-4 flex flex-col sm:w-full md:w-1/2 xl:w-1/3">
     <h5>{{ 'pages.create.cluster.steps.location.provider' | translate }}</h5>
@@ -52,137 +54,130 @@
         <app-provider [providerTypeOrName]="provider?.type" class="text-lg"></app-provider>
       </ng-template>
       <ng-template let-selectedProvider pTemplate="selectedItem">
-        <app-provider [providerTypeOrName]="selectedProvider?.type" *ngIf="selectedProvider" class="text-lg"></app-provider>
+        @if (selectedProvider) {
+          <app-provider [providerTypeOrName]="selectedProvider?.type" class="text-lg"></app-provider>
+        }
       </ng-template>
     </p-select>
-    <span
-      *ngIf="clusterForm.get('provider').touched && clusterForm.get('provider').dirty && clusterForm.get('provider').errors"
-      class="text-red-400"
-      >{{ 'pages.create.cluster.steps.location.providerError' | translate }}</span
-    >
+    @if (clusterForm.get('provider').touched && clusterForm.get('provider').dirty && clusterForm.get('provider').errors) {
+      <span class="text-red-400">{{ 'pages.create.cluster.steps.location.providerError' | translate }}</span>
+    }
   </div>
 
   <div formGroupName="providerConfig">
-    <ng-container [ngSwitch]="true">
-      <div
-        class="mt-4 sm:w-full md:w-1/2 xl:w-1/3"
-        *ngSwitchCase="
-          clusterForm?.get('provider')?.value?.type === 'Tanzu' ||
-          clusterForm?.get('provider')?.value?.type === 'tanzu' ||
-          clusterForm?.get('provider')?.value?.type === 'Unknown'
-        "
-      >
-        <div formGroupName="tanzu">
-          <h5>{{ 'pages.create.cluster.steps.location.workspace' | translate }}</h5>
-          <div class="flex flex-col">
-            <p-select
-              [options]="workspaces"
-              placeholder="{{ 'pages.create.cluster.steps.location.workspacePlaceholder' | translate }}"
-              optionLabel="name"
-              [showClear]="true"
-              [filter]="true"
-              filterBy="name"
-              formControlName="workspace"
-              (onChange)="updateEvent($event)"
-            ></p-select>
-            <span
-              *ngIf="
+    @switch (true) {
+      @case (
+        clusterForm?.get('provider')?.value?.type === 'Tanzu' ||
+        clusterForm?.get('provider')?.value?.type === 'tanzu' ||
+        clusterForm?.get('provider')?.value?.type === 'Unknown'
+      ) {
+        <div class="mt-4 sm:w-full md:w-1/2 xl:w-1/3">
+          <div formGroupName="tanzu">
+            <h5>{{ 'pages.create.cluster.steps.location.workspace' | translate }}</h5>
+            <div class="flex flex-col">
+              <p-select
+                [options]="workspaces"
+                placeholder="{{ 'pages.create.cluster.steps.location.workspacePlaceholder' | translate }}"
+                optionLabel="name"
+                [showClear]="true"
+                [filter]="true"
+                filterBy="name"
+                formControlName="workspace"
+                (onChange)="updateEvent($event)"
+              ></p-select>
+              @if (
                 clusterForm?.get('providerConfig')?.get('workspace')?.touched &&
                 clusterForm?.get('providerConfig')?.get('workspace')?.dirty &&
                 clusterForm?.get('providerConfig')?.get('workspace')?.errors
-              "
-              class="text-red-400"
-              >{{ 'pages.create.cluster.steps.location.workorderError' | translate }}</span
-            >
-          </div>
-          <div>
-            <span>{{ 'pages.create.cluster.steps.location.workspaceHelp' | translate }} </span
-            ><a
-              href="https://norskhelsenett.slack.com/archives/C01U0NUQ7PF"
-              target="_blank"
-              class="font-bold text-blue-400 hover:underline dark:hover:text-blue-400"
-              >#Drift-privatsky-devops</a
-            >
+              ) {
+                <span class="text-red-400">{{ 'pages.create.cluster.steps.location.workorderError' | translate }}</span>
+              }
+            </div>
+            <div>
+              <span>{{ 'pages.create.cluster.steps.location.workspaceHelp' | translate }} </span
+              ><a
+                href="https://norskhelsenett.slack.com/archives/C01U0NUQ7PF"
+                target="_blank"
+                class="font-bold text-blue-400 hover:underline dark:hover:text-blue-400"
+                >#Drift-privatsky-devops</a
+              >
+            </div>
           </div>
         </div>
-      </div>
-      <div class="mt-4" *ngSwitchCase="clusterForm?.get('provider')?.value?.value === 'AKS' || clusterForm?.get('provider')?.value?.value === 'aks'">
-        <div formGroupName="azure">
-          <div class="mt-4">
-            <h5>{{ 'pages.create.cluster.steps.location.subscription' | translate }}</h5>
-            <div class="flex flex-col">
-              <p-select
-                [options]="azureSubscriptions"
-                placeholder="{{ 'pages.create.cluster.steps.location.subscriptionPlaceholder' | translate }}"
-                optionLabel="name"
-                [showClear]="true"
-                [filter]="true"
-                filterBy="name"
-                formControlName="subscription"
-                (onChange)="updateEvent($event)"
-              ></p-select>
-              <span
-                *ngIf="
+      }
+      @case (clusterForm?.get('provider')?.value?.value === 'AKS' || clusterForm?.get('provider')?.value?.value === 'aks') {
+        <div class="mt-4">
+          <div formGroupName="azure">
+            <div class="mt-4">
+              <h5>{{ 'pages.create.cluster.steps.location.subscription' | translate }}</h5>
+              <div class="flex flex-col">
+                <p-select
+                  [options]="azureSubscriptions"
+                  placeholder="{{ 'pages.create.cluster.steps.location.subscriptionPlaceholder' | translate }}"
+                  optionLabel="name"
+                  [showClear]="true"
+                  [filter]="true"
+                  filterBy="name"
+                  formControlName="subscription"
+                  (onChange)="updateEvent($event)"
+                ></p-select>
+                @if (
                   clusterForm?.get('providerConfig')?.get('subscription')?.touched &&
                   clusterForm?.get('providerConfig')?.get('subscription')?.dirty &&
                   clusterForm?.get('providerConfig')?.get('subscription')?.errors
-                "
-                class="text-red-400"
-                >{{ 'pages.create.cluster.steps.location.subscriptionError' | translate }}</span
-              >
+                ) {
+                  <span class="text-red-400">{{ 'pages.create.cluster.steps.location.subscriptionError' | translate }}</span>
+                }
+              </div>
             </div>
-          </div>
-          <div class="mt-4">
-            <h5>{{ 'pages.create.cluster.steps.location.resourceGroup' | translate }}</h5>
-            <div class="flex flex-col">
-              <p-select
-                [options]="azureResourceGroups"
-                placeholder="{{ 'pages.create.cluster.steps.location.resourceGroupPlaceholder' | translate }}"
-                optionLabel="name"
-                [showClear]="true"
-                [filter]="true"
-                filterBy="name"
-                formControlName="resourceGroup"
-                (onChange)="updateEvent($event)"
-              ></p-select>
-              <span
-                *ngIf="
+            <div class="mt-4">
+              <h5>{{ 'pages.create.cluster.steps.location.resourceGroup' | translate }}</h5>
+              <div class="flex flex-col">
+                <p-select
+                  [options]="azureResourceGroups"
+                  placeholder="{{ 'pages.create.cluster.steps.location.resourceGroupPlaceholder' | translate }}"
+                  optionLabel="name"
+                  [showClear]="true"
+                  [filter]="true"
+                  filterBy="name"
+                  formControlName="resourceGroup"
+                  (onChange)="updateEvent($event)"
+                ></p-select>
+                @if (
                   clusterForm?.get('providerConfig')?.get('resourceGroup')?.touched &&
                   clusterForm?.get('providerConfig')?.get('resourceGroup')?.dirty &&
                   clusterForm?.get('providerConfig')?.get('resourceGroup')?.errors
-                "
-                class="text-red-400"
-                >{{ 'pages.create.cluster.steps.location.resourceGroupError' | translate }}</span
-              >
+                ) {
+                  <span class="text-red-400">{{ 'pages.create.cluster.steps.location.resourceGroupError' | translate }}</span>
+                }
+              </div>
             </div>
-          </div>
-          <div class="mt-4">
-            <h5>{{ 'pages.create.cluster.steps.location.region' | translate }}</h5>
-            <div class="flex flex-col">
-              <p-select
-                [options]="azureRegions"
-                placeholder="{{ 'pages.create.cluster.steps.location.regionPlaceholder' | translate }}"
-                optionLabel="name"
-                [showClear]="true"
-                [filter]="true"
-                filterBy="name"
-                formControlName="region"
-                (onChange)="updateEvent($event)"
-              ></p-select>
-              <span
-                *ngIf="
+            <div class="mt-4">
+              <h5>{{ 'pages.create.cluster.steps.location.region' | translate }}</h5>
+              <div class="flex flex-col">
+                <p-select
+                  [options]="azureRegions"
+                  placeholder="{{ 'pages.create.cluster.steps.location.regionPlaceholder' | translate }}"
+                  optionLabel="name"
+                  [showClear]="true"
+                  [filter]="true"
+                  filterBy="name"
+                  formControlName="region"
+                  (onChange)="updateEvent($event)"
+                ></p-select>
+                @if (
                   clusterForm?.get('providerConfig')?.get('region')?.touched &&
                   clusterForm?.get('providerConfig')?.get('region')?.dirty &&
                   clusterForm?.get('providerConfig')?.get('region')?.errors
-                "
-                class="text-red-400"
-                >{{ 'pages.create.cluster.steps.location.regionError' | translate }}</span
-              >
+                ) {
+                  <span class="text-red-400">{{ 'pages.create.cluster.steps.location.regionError' | translate }}</span>
+                }
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </ng-container>
+      }
+    }
   </div>
 
   <div class="mt-5 flex justify-start">

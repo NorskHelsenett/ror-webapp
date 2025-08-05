@@ -7,7 +7,6 @@ import { Subscription, catchError } from 'rxjs';
 import { ApiKey } from '../../../core/models/apikey';
 import { ApikeysService } from '../../../core/services/apikeys.service';
 import { ConfigService } from '../../../core/services/config.service';
-import { CommonModule } from '@angular/common';
 import { DatePickerModule } from 'primeng/datepicker';
 import { SelectModule } from 'primeng/select';
 
@@ -15,7 +14,7 @@ import { SelectModule } from 'primeng/select';
   selector: 'app-apikey-create',
   templateUrl: './apikey-create.component.html',
   styleUrls: ['./apikey-create.component.scss'],
-  imports: [TranslateModule, CommonModule, FormsModule, ReactiveFormsModule, SelectModule, DatePickerModule],
+  imports: [TranslateModule, FormsModule, ReactiveFormsModule, SelectModule, DatePickerModule],
 })
 export class ApikeyCreateComponent implements OnInit, OnDestroy {
   private configService = inject(ConfigService);

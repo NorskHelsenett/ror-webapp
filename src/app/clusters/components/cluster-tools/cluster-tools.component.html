@@ -9,65 +9,63 @@
           <tbody>
             <tr class="hover:bg-grey-light truncate">
               <td class="px-2 py-1">{{ 'pages.clusters.details.tools.argo' | translate }}</td>
-              <td class="truncate px-2 py-1" *ngIf="argoIngress">
-                <a
-                  href="https://{{ argoIngress?.ingressrules[0].hostname }}"
-                  target="_blank"
-                  class="overflow-hidden text-clip underline"
-                  *ngIf="
+              @if (argoIngress) {
+                <td class="truncate px-2 py-1">
+                  @if (
                     argoIngress?.ingressrules !== null &&
                     argoIngress?.ingressrules?.length > 0 &&
                     argoIngress?.ingressrules[0].ipaddresses !== null &&
                     argoIngress?.ingressrules[0].ipaddresses.length > 0
-                  "
-                  ><span class="w-14 overflow-hidden truncate text-clip text-blue-800 underline dark:text-blue-500">{{
-                    argoIngress?.ingressrules[0].hostname
-                  }}</span></a
-                >
-              </td>
-              <td
-                class="px-2 py-1"
-                *ngIf="
-                  !argoIngress ||
-                  !argoIngress?.ingressrules ||
-                  argoIngress?.ingressrules?.length === 0 ||
-                  !argoIngress?.ingressrules[0].ipaddresses ||
-                  argoIngress?.ingressrules[0].ipaddresses?.length === 0
-                "
-              >
-                {{ 'pages.clusters.details.tools.argoMissing' | translate }}
-              </td>
+                  ) {
+                    <a href="https://{{ argoIngress?.ingressrules[0].hostname }}" target="_blank" class="overflow-hidden text-clip underline"
+                      ><span class="w-14 overflow-hidden truncate text-clip text-blue-800 underline dark:text-blue-500">{{
+                        argoIngress?.ingressrules[0].hostname
+                      }}</span></a
+                    >
+                  }
+                </td>
+              }
+              @if (
+                !argoIngress ||
+                !argoIngress?.ingressrules ||
+                argoIngress?.ingressrules?.length === 0 ||
+                !argoIngress?.ingressrules[0].ipaddresses ||
+                argoIngress?.ingressrules[0].ipaddresses?.length === 0
+              ) {
+                <td class="px-2 py-1">
+                  {{ 'pages.clusters.details.tools.argoMissing' | translate }}
+                </td>
+              }
             </tr>
             <tr class="hover:bg-grey-light truncate">
               <td class="px-2 py-1">{{ 'pages.clusters.details.tools.grafana' | translate }}</td>
-              <td class="truncate px-2 py-1" *ngIf="grafanaIngress">
-                <a
-                  href="https://{{ grafanaIngress?.ingressrules[0].hostname }}"
-                  target="_blank"
-                  class="overflow-hidden text-clip underline"
-                  *ngIf="
+              @if (grafanaIngress) {
+                <td class="truncate px-2 py-1">
+                  @if (
                     grafanaIngress?.ingressrules !== null &&
                     grafanaIngress?.ingressrules?.length > 0 &&
                     grafanaIngress?.ingressrules[0].ipaddresses !== null &&
                     grafanaIngress?.ingressrules[0].ipaddresses.length > 0
-                  "
-                  ><span class="w-14 overflow-hidden truncate text-clip text-blue-800 underline dark:text-blue-500">{{
-                    grafanaIngress?.ingressrules[0].hostname
-                  }}</span></a
-                >
-              </td>
-              <td
-                class="px-2 py-1"
-                *ngIf="
-                  !grafanaIngress ||
-                  !grafanaIngress?.ingressrules ||
-                  grafanaIngress?.ingressrules?.length === 0 ||
-                  !grafanaIngress?.ingressrules[0].ipaddresses ||
-                  grafanaIngress?.ingressrules[0].ipaddresses?.length === 0
-                "
-              >
-                {{ 'pages.clusters.details.tools.grafanaMissing' | translate }}
-              </td>
+                  ) {
+                    <a href="https://{{ grafanaIngress?.ingressrules[0].hostname }}" target="_blank" class="overflow-hidden text-clip underline"
+                      ><span class="w-14 overflow-hidden truncate text-clip text-blue-800 underline dark:text-blue-500">{{
+                        grafanaIngress?.ingressrules[0].hostname
+                      }}</span></a
+                    >
+                  }
+                </td>
+              }
+              @if (
+                !grafanaIngress ||
+                !grafanaIngress?.ingressrules ||
+                grafanaIngress?.ingressrules?.length === 0 ||
+                !grafanaIngress?.ingressrules[0].ipaddresses ||
+                grafanaIngress?.ingressrules[0].ipaddresses?.length === 0
+              ) {
+                <td class="px-2 py-1">
+                  {{ 'pages.clusters.details.tools.grafanaMissing' | translate }}
+                </td>
+              }
             </tr>
             <tr class="hover:bg-grey-lighttruncate">
               <td class="px-2 py-1">{{ 'pages.clusters.details.tools.rorlogin' | translate }}</td>
@@ -79,16 +77,16 @@
                   {{ 'common.copy' | translate }}
                 </a>
                 <!-- <a
-                  (click)="toggleShowLogin()"
-                  class="cursor-pointer hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark ml-3 rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+                (click)="toggleShowLogin()"
+                class="cursor-pointer hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark ml-3 rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
                 >
-                  <span *ngIf="!showLogin">
-                    {{ 'common.show' | translate }}
-                  </span>
-                  <span *ngIf="showLogin">
-                    {{ 'common.hide' | translate }}
-                  </span>
-                </a> -->
+                <span *ngIf="!showLogin">
+                  {{ 'common.show' | translate }}
+                </span>
+                <span *ngIf="showLogin">
+                  {{ 'common.hide' | translate }}
+                </span>
+              </a> -->
               </td>
             </tr>
             <tr class="hover:bg-grey-light truncate">
@@ -101,26 +99,28 @@
                   {{ 'common.copy' | translate }}
                 </a>
                 <!-- <button
-                  (click)="toggleShowLogin()"
-                  class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark ml-3 rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
-                >
-                  <span *ngIf="!showLogin">
-                    {{ 'common.show' | translate }}
-                  </span>
-                  <span *ngIf="showLogin">
-                    {{ 'common.hide' | translate }}
-                  </span>
-                </button> -->
+              (click)="toggleShowLogin()"
+              class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark ml-3 rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+              >
+              <span *ngIf="!showLogin">
+                {{ 'common.show' | translate }}
+              </span>
+              <span *ngIf="showLogin">
+                {{ 'common.hide' | translate }}
+              </span>
+            </button> -->
               </td>
             </tr>
-            <tr *ngIf="showLogin">
-              <td colspan="2" class="px-2 py-1">
-                <div class="bg-black text-white">
-                  kubectl vsphere login --server={{ serverUrl }} -u {{ userClaims?.email }} --insecure-skip-tls-verify
-                  --tanzu-kubernetes-cluster-namespace {{ cluster?.workspace?.name }} --tanzu-kubernetes-cluster-name {{ cluster?.clusterName }}
-                </div>
-              </td>
-            </tr>
+            @if (showLogin) {
+              <tr>
+                <td colspan="2" class="px-2 py-1">
+                  <div class="bg-black text-white">
+                    kubectl vsphere login --server={{ serverUrl }} -u {{ userClaims?.email }} --insecure-skip-tls-verify
+                    --tanzu-kubernetes-cluster-namespace {{ cluster?.workspace?.name }} --tanzu-kubernetes-cluster-name {{ cluster?.clusterName }}
+                  </div>
+                </td>
+              </tr>
+            }
           </tbody>
         </table>
       </div>

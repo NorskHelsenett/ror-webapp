@@ -15,16 +15,18 @@
   >
     <ng-template #caption>
       <div class="xs:flex-none sm:flex sm:justify-between">
-        <div *ngIf="clusters$ | async as clusters">
-          <app-resources-filter
-            [owners]="owners"
-            [clusters]="clusters?.data"
-            [resourceTypes]="resourceTypes"
-            (filterChanged)="filterChanged($event)"
-            [filter]="filter"
-            [clusterId]="clusterId"
-          ></app-resources-filter>
-        </div>
+        @if (clusters$ | async; as clusters) {
+          <div>
+            <app-resources-filter
+              [owners]="owners"
+              [clusters]="clusters?.data"
+              [resourceTypes]="resourceTypes"
+              (filterChanged)="filterChanged($event)"
+              [filter]="filter"
+              [clusterId]="clusterId"
+            ></app-resources-filter>
+          </div>
+        }
 
         <p-multiSelect
           [options]="columnDefinitions"
@@ -53,33 +55,39 @@
     </ng-template>
     <ng-template #header let-columns>
       <tr>
-        <th *ngFor="let col of columns" [pSortableColumn]="col?.field" class="p-1">
-          <div class="flex-cols flex">
-            <span>{{ col?.header }}</span> <p-sortIcon [field]="col?.field"></p-sortIcon>
-          </div>
-        </th>
+        @for (col of columns; track col) {
+          <th [pSortableColumn]="col?.field" class="p-1">
+            <div class="flex-cols flex">
+              <span>{{ col?.header }}</span> <p-sortIcon [field]="col?.field"></p-sortIcon>
+            </div>
+          </th>
+        }
 
         <th class="p-1"></th>
       </tr>
       <tr>
-        <th *ngFor="let col of columns" class="p-1">
-          <p-columnFilter
-            [type]="col.type"
-            [field]="col.field"
-            matchMode="contains"
-            [showMenu]="true"
-            [matchModeOptions]="matchModeOptions"
-          ></p-columnFilter>
-        </th>
+        @for (col of columns; track col) {
+          <th class="p-1">
+            <p-columnFilter
+              [type]="col.type"
+              [field]="col.field"
+              matchMode="contains"
+              [showMenu]="true"
+              [matchModeOptions]="matchModeOptions"
+            ></p-columnFilter>
+          </th>
+        }
 
         <th class="p-1"></th>
       </tr>
     </ng-template>
     <ng-template #body let-resource let-columns="columns">
       <tr>
-        <td *ngFor="let col of columns">
-          {{ extractData(resource, col.field) }}
-        </td>
+        @for (col of columns; track col) {
+          <td>
+            {{ extractData(resource, col.field) }}
+          </td>
+        }
         <td>
           <a
             class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-sky-500 px-4 py-2 text-sm text-white hover:bg-sky-700 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white dark:bg-sky-500 dark:hover:bg-sky-600"
@@ -92,31 +100,32 @@
     <ng-template #emptymessage>
       <tr>
         <td colspan="7">
-          <span *ngIf="filter?.kind && filter.scope">{{ 'pages.resources.table.empty' | translate }}</span>
-          <div *ngIf="!filter?.kind || !filter.scope" class="text-gray-600 dark:text-gray-400">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18" />
-            </svg>
-
-            {{ 'pages.resources.table.missingfilter' | translate }}
-          </div>
+          @if (filter?.kind && filter.scope) {
+            <span>{{ 'pages.resources.table.empty' | translate }}</span>
+          }
+          @if (!filter?.kind || !filter.scope) {
+            <div class="text-gray-600 dark:text-gray-400">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18" />
+              </svg>
+              {{ 'pages.resources.table.missingfilter' | translate }}
+            </div>
+          }
         </td>
       </tr>
     </ng-template>
   </p-table>
 </div>
 <ng-template #loadingOrError>
-  <ng-container *ngIf="resourcesFetchError; else dataLoading">
+  @if (resourcesFetchError) {
     <app-error [error]="resourcesFetchError" (callback)="fetchResources()"></app-error>
-  </ng-container>
-
-  <ng-template #dataLoading>
+  } @else {
     <app-spinner></app-spinner>
-  </ng-template>
+  }
 </ng-template>
-<p-sidebar [(visible)]="sidebarVisible" position="right" styleClass="sm:w-full md:w-1/2">
+<p-drawer [(visible)]="sidebarVisible" position="right" styleClass="sm:w-full md:w-1/2">
   <h1 class="text-2xl font-semibold">{{ 'pages.resources.details.title' | translate }}</h1>
   <span>{{ filter?.apiVersion }}/{{ this.filter?.kind }} - {{ selectedResource?.metadata?.uid }}</span>
 
   <pre class=""><code class="" [highlight]="selectedResource | json" language="json" lineNumbers></code></pre>
-</p-sidebar>
+</p-drawer>

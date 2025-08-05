@@ -4,7 +4,6 @@ import { TreeNode } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import { ThemeService } from '../../../core/services/theme.service';
 import { OrganizationChartModule } from 'primeng/organizationchart';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-cluster-ingress-rules',
@@ -12,7 +11,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./cluster-ingress-rules.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [TranslateModule, OrganizationChartModule, CommonModule],
+  imports: [TranslateModule, OrganizationChartModule],
 })
 export class ClusterIngressRulesComponent implements OnInit {
   @Input() cluster: any = undefined;

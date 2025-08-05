@@ -12,13 +12,14 @@
         >
           {{ 'common.refresh' | translate }}
         </a>
-        <a
-          *ngIf="(adminRead$ | async) === true"
-          routerLink="./create"
-          class="focus:ring-primary dark:focus:ring-offset-dark float-right rounded-md bg-green-700 px-4 py-2 text-sm text-white hover:bg-green-500 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
-        >
-          {{ 'common.create' | translate }}
-        </a>
+        @if ((adminRead$ | async) === true) {
+          <a
+            routerLink="./create"
+            class="focus:ring-primary dark:focus:ring-offset-dark float-right rounded-md bg-green-700 px-4 py-2 text-sm text-white hover:bg-green-500 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+          >
+            {{ 'common.create' | translate }}
+          </a>
+        }
       </div>
 
       <div class="">
@@ -102,12 +103,12 @@
             </tr>
           </ng-template>
         </p-table>
-        <ng-container *ngIf="datacentersError">
+        @if (datacentersError) {
           <div class="mx-auto my-4 flex items-center rounded-md bg-red-200 px-6 py-4 text-lg">
             <span class="p-2 text-red-800"> {{ 'pages.dashboard.error' | translate }} </span>
             <button class="btn text-black" (click)="fetch()">{{ 'common.tryAgain' | translate }}</button>
           </div>
-        </ng-container>
+        }
       </div>
     </div>
   </div>

@@ -2,7 +2,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { MessageService } from 'primeng/api';
 import { Component, Input, OnInit } from '@angular/core';
 import { ClipboardService } from 'ngx-clipboard';
-import { CommonModule } from '@angular/common';
+
 import { RouterModule } from '@angular/router';
 import { TooltipModule } from 'primeng/tooltip';
 import { ProviderComponent } from '../../../shared/components/provider/provider.component';
@@ -18,7 +18,6 @@ import { TimePipe } from '../../../shared/pipes/time.pipe';
   standalone: true,
   imports: [
     TranslateModule,
-    CommonModule,
     RouterModule,
     TooltipModule,
     ProviderComponent,

@@ -43,9 +43,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let message of getIngressStatus().messages">
-            <td>{{ message }}</td>
-          </tr>
+          @for (message of getIngressStatus().messages; track message) {
+            <tr>
+              <td>{{ message }}</td>
+            </tr>
+          }
         </tbody>
       </table>
     </div>
