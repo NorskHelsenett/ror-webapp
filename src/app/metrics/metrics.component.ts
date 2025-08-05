@@ -1,11 +1,13 @@
-import { ChangeDetectionStrategy, Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, OnDestroy, ChangeDetectorRef, inject, PLATFORM_ID, Inject } from '@angular/core';
 import { Subscription, Observable, tap, catchError, interval } from 'rxjs';
 import { MetricsCustom, MetricsCustomItem } from '../core/models/metricsCustom';
 import { ChartOptions } from 'chart.js';
 import { Dialog, DialogModule } from 'primeng/dialog';
 import { MetricsService } from '../core/services/metrics.service';
 import { ThemeService } from '../core/services/theme.service';
+import { HydrationService } from '../core/services/hydration.service';
 import { TranslateModule } from '@ngx-translate/core';
+import { isPlatformBrowser } from '@angular/common';
 
 import { ChartModule } from 'primeng/chart';
 
@@ -17,6 +19,9 @@ import { ChartModule } from 'primeng/chart';
   imports: [TranslateModule, ChartModule, DialogModule],
 })
 export class MetricsComponent implements OnInit, OnDestroy {
+  private hydrationService = inject(HydrationService);
+  @Inject(PLATFORM_ID) private platformId = inject(PLATFORM_ID);
+
   chartOptions: ChartOptions = {
     plugins: {
       legend: {
@@ -56,9 +61,17 @@ export class MetricsComponent implements OnInit, OnDestroy {
         this.changeDetector.detectChanges();
       }),
     );
+
+    // Initial data load
     this.fetchDataNHNTooling();
     this.fetchDataK8sVersions();
-    this.fetchCustomMetrics();
+
+    // Defer polling until after hydration is stable
+    if (isPlatformBrowser(this.platformId)) {
+      this.hydrationService.afterHydration(() => {
+        this.fetchCustomMetrics();
+      }, 2000);
+    }
   }
 
   ngOnDestroy(): void {

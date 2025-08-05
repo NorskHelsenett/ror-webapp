@@ -9,6 +9,7 @@ import { AclAccess, AclScopes } from '../core/models/acl-scopes';
 import { SseService } from '../create/create-cluster/services/sse.service';
 import { SignalService } from '../create/create-cluster/services/signal.service';
 import { BigEventsService } from '../core/services/big-events.service';
+import { HydrationService } from '../core/services/hydration.service';
 import { environment } from '../../environments/environment';
 import { ConfigService } from '../core/services/config.service';
 import { CommonModule, isPlatformBrowser, NgClass } from '@angular/common';
@@ -26,6 +27,7 @@ import { RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
 })
 export class LayoutComponent implements OnInit, OnDestroy {
   private configService = inject(ConfigService);
+  private hydrationService = inject(HydrationService);
   appVersion = environment.appVersion;
   isDark: boolean | undefined;
   showUserMenu = false;
@@ -76,7 +78,10 @@ export class LayoutComponent implements OnInit, OnDestroy {
     this.birthday = this.bigEventsService.isRORBirthday();
 
     if (isPlatformBrowser(this.platformId)) {
-      this.setupSSEClients();
+      // Defer SSE connection until after hydration is complete
+      this.hydrationService.afterHydration(() => {
+        this.setupSSEClients();
+      }, 1000);
     }
 
     this.rorDocsUrl = this.configService.config.docsUrl;

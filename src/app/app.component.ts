@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { Title } from '@angular/platform-browser';
 import { AuthService } from './core/services/auth.service';
+import { HydrationService } from './core/services/hydration.service';
 import { isPlatformBrowser } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ToastModule } from 'primeng/toast';
@@ -34,6 +35,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private titleService: Title,
     private translateService: TranslateService,
+    private hydrationService: HydrationService,
   ) {
     if (isPlatformBrowser(this.platformId)) {
       let origin = window.location.origin;
@@ -48,7 +50,12 @@ export class AppComponent implements OnInit, OnDestroy {
 
       this.oauthService.configure(this.authService.authConfig);
       this.oauthService.loadDiscoveryDocumentAndLogin();
-      this.oauthService.setupAutomaticSilentRefresh();
+
+      // Defer automatic silent refresh until after hydration
+      this.hydrationService.afterHydration(() => {
+        this.oauthService.setupAutomaticSilentRefresh();
+      }, 1000);
+
       this.oauthService.events.pipe(filter((e) => e?.type === 'token_received')).subscribe((_) => {
         this.oauthService.loadUserProfile();
       });

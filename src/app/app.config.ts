@@ -2,7 +2,7 @@ import { ApplicationConfig, importProvidersFrom, isDevMode, PLATFORM_ID, provide
 import { provideRouter, withInMemoryScrolling, withRouterConfig } from '@angular/router';
 
 import { routes } from './app.routes';
-import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
+import { provideClientHydration, withEventReplay, withNoHttpTransferCache } from '@angular/platform-browser';
 import { provideHttpClient, withFetch, withInterceptorsFromDi, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { OAuthStorage, provideOAuthClient } from 'angular-oauth2-oidc';
@@ -34,7 +34,7 @@ export const appConfig: ApplicationConfig = {
         onSameUrlNavigation: 'ignore',
       }),
     ),
-    provideClientHydration(withEventReplay()),
+    provideClientHydration(withEventReplay(), withNoHttpTransferCache()),
     provideServerRendering(withRoutes(serverRoutes)),
     provideHttpClient(withFetch(), withInterceptorsFromDi()),
     {
