@@ -4,5 +4,5 @@ export const STORAGE_KEYS = {
   LANGUAGE: 'language',
   CLUSTER_TABLE_COLUMNS: 'cluster-table-columns',
   CLUSTER_TABLE: 'cluster-table',
-  IS_DARK: 'is_dark',
+  IS_DARK: 'isDark',
 } as const;

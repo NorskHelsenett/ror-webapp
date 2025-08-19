@@ -22,9 +22,9 @@ input {
 }
 
 :not(.dark) .p-paginator .p-paginator-pages .p-paginator-page.p-paginator-page-selected {
-  background-color: #3f3f46 !important; /* zinc-700 */
-  color: #ffffff !important;
-  border-color: #3f3f46 !important; /* zinc-700 */
+  background-color: #a1a1aa !important; /* zinc-400 */
+  color: #27272a !important; /* zinc-800 */
+  border-color: #a1a1aa !important; /* zinc-400 */
 }
 
 :not(.dark) .p-paginator .p-paginator-first,
@@ -77,5 +77,16 @@ input {
 
 :not(.dark) .p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-dropdown-item-selected {
   background-color: #3f3f46 !important; /* zinc-700 */
+  color: #ffffff !important;
+}
+
+/* Fix multiselect selected option in light mode */
+:not(.dark) .p-multiselect-option.p-multiselect-option-selected {
+  background-color: #a1a1aa !important; /* zinc-400 */
+  color: #27272a !important; /* zinc-800 */
+}
+
+:not(.dark) .p-multiselect-option.p-multiselect-option-selected.p-focus {
+  background-color: #71717a !important; /* zinc-500 */
   color: #ffffff !important;
 }

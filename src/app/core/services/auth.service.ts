@@ -22,6 +22,8 @@ export class AuthService {
   ) {
     this.setConfig();
     if (isPlatformBrowser(this.platformId)) {
+      // Ensure OAuth service uses localStorage
+      this.oauthService.setStorage(localStorage);
       this.oauthService.configure(this.authConfig);
     }
   }

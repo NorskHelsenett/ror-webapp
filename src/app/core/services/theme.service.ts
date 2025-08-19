@@ -17,7 +17,7 @@ export class ThemeService {
   ) {
     let isDark = false;
     if (isPlatformBrowser(this.platformId)) {
-      isDark = localStorage.getItem('isDark') == 'true';
+      isDark = localStorage.getItem(STORAGE_KEYS.IS_DARK) == 'true';
     }
 
     if (isDark === true) {
