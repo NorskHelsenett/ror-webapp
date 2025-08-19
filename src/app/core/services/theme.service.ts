@@ -2,6 +2,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { Inject, inject, Injectable, PLATFORM_ID, DOCUMENT } from '@angular/core';
 import { HighlightLoader } from 'ngx-highlightjs';
 import { BehaviorSubject } from 'rxjs';
+import { STORAGE_KEYS } from '../constants/storage-keys';
 
 @Injectable({
   providedIn: 'root',
@@ -51,7 +52,7 @@ export class ThemeService {
 
   setLightTheme(): void {
     if (isPlatformBrowser(this.platformId)) {
-      localStorage.setItem('isDark', false.toString());
+      localStorage.setItem(STORAGE_KEYS.IS_DARK, false.toString());
       document?.querySelector('html')?.classList.remove('dark');
       document?.querySelector('body')?.classList.remove('dark');
     }
@@ -59,7 +60,7 @@ export class ThemeService {
 
   setDarkTheme(): void {
     if (isPlatformBrowser(this.platformId)) {
-      localStorage.setItem('isDark', true.toString());
+      localStorage.setItem(STORAGE_KEYS.IS_DARK, true.toString());
       document?.querySelector('html')?.classList.add('dark');
       document?.querySelector('body')?.classList.add('dark');
     }

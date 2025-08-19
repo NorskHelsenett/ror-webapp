@@ -12,10 +12,11 @@ import { BigEventsService } from '../core/services/big-events.service';
 import { HydrationService } from '../core/services/hydration.service';
 import { environment } from '../../environments/environment';
 import { ConfigService } from '../core/services/config.service';
-import { CommonModule, isPlatformBrowser, NgClass } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { DesemberGiftComponent } from '../shared/components/desember-gift/desember-gift.component';
 import { SantaComponent } from '../shared/components/santa/santa.component';
 import { RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
+import { STORAGE_KEYS } from '../core/constants/storage-keys';
 
 @Component({
   selector: 'app-layout',
@@ -157,7 +158,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
     this.lang = lang;
 
     if (isPlatformBrowser(this.platformId)) {
-      localStorage.setItem('language', lang);
+      localStorage.setItem(STORAGE_KEYS.LANGUAGE, lang);
     }
     this.changeDetector.detectChanges();
   }

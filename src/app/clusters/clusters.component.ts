@@ -28,6 +28,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { ClusterEnvironmentComponent, ClusterStatusComponent } from '../shared/components';
 import { FormatBytesPipe } from '../shared/pipes';
 import { TimePipe } from '../shared/pipes/time.pipe';
+import { STORAGE_KEYS } from '../core/constants/storage-keys';
 
 @Component({
   selector: 'app-clusters',
@@ -141,7 +142,7 @@ export class ClustersComponent implements OnInit, OnDestroy {
 
   setupColumns(): void {
     if (isPlatformBrowser(this.platformId)) {
-      this.selectedColumns = JSON.parse(localStorage.getItem('cluster-table-columns'));
+      this.selectedColumns = JSON.parse(localStorage.getItem(STORAGE_KEYS.CLUSTER_TABLE_COLUMNS));
 
       this.baseCols = [
         {
@@ -294,8 +295,8 @@ export class ClustersComponent implements OnInit, OnDestroy {
     if (isPlatformBrowser(this.platformId)) {
       this.selectedColumns = this.baseCols;
       if (isPlatformBrowser(this.platformId)) {
-        localStorage.removeItem('cluster-table-columns');
-        localStorage.removeItem('cluster-table');
+        localStorage.removeItem(STORAGE_KEYS.CLUSTER_TABLE_COLUMNS);
+        localStorage.removeItem(STORAGE_KEYS.CLUSTER_TABLE);
         this.fetchClusters(undefined);
         this.changeDetector.detectChanges();
       }
@@ -373,7 +374,7 @@ export class ClustersComponent implements OnInit, OnDestroy {
 
   updateColumns(): void {
     if (isPlatformBrowser(this.platformId)) {
-      let tableState = JSON.parse(localStorage.getItem('cluster-table'));
+      let tableState = JSON.parse(localStorage.getItem(STORAGE_KEYS.CLUSTER_TABLE));
 
       if (!tableState) {
         tableState = { first: 0, rows: this.rows };
@@ -390,8 +391,8 @@ export class ClustersComponent implements OnInit, OnDestroy {
       }
       tableState['columnOrder'] = this.selectedColumns.map((col) => col['field']);
       if (isPlatformBrowser(this.platformId)) {
-        localStorage.setItem('cluster-table-columns', JSON.stringify(this.selectedColumns));
-        localStorage.setItem('cluster-table', JSON.stringify(tableState));
+        localStorage.setItem(STORAGE_KEYS.CLUSTER_TABLE_COLUMNS, JSON.stringify(this.selectedColumns));
+        localStorage.setItem(STORAGE_KEYS.CLUSTER_TABLE, JSON.stringify(tableState));
       }
     }
   }

@@ -3,9 +3,8 @@ import { AuthConfig, OAuthService } from 'angular-oauth2-oidc';
 import { Subject } from 'rxjs';
 import { UserService } from './user.service';
 import { ConfigService } from './config.service';
-import { jwtDecode } from 'jwt-decode';
 import { isPlatformBrowser } from '@angular/common';
-import { environment } from '../../../environments/environment';
+import { STORAGE_KEYS } from '../constants/storage-keys';
 
 @Injectable({
   providedIn: 'root',
@@ -29,7 +28,8 @@ export class AuthService {
 
   getToken(): string | null {
     if (isPlatformBrowser(this.platformId)) {
-      return sessionStorage.getItem('access_token');
+      // Use OAuth service's access token instead of manual storage
+      return this.oauthService.getAccessToken() || localStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN);
     } else {
       return null;
     }
@@ -38,35 +38,43 @@ export class AuthService {
   logout() {
     this.userService.user.next(null);
     if (isPlatformBrowser(this.platformId)) {
+      localStorage.removeItem(STORAGE_KEYS.ACCESS_TOKEN);
       this.oauthService.logOut();
-    }
-    if (isPlatformBrowser(this.platformId)) {
-      window.location.reload();
     }
   }
 
   isAuthenticated(): boolean {
     if (isPlatformBrowser(this.platformId)) {
-      return this.oauthService.hasValidAccessToken() && this.oauthService.hasValidIdToken();
+      const hasValidTokens = this.oauthService.hasValidAccessToken() && this.oauthService.hasValidIdToken();
+      const tokenExists = !!this.getToken();
+
+      if (!hasValidTokens && tokenExists) {
+        console.warn('Token exists but OAuth service reports invalid tokens, clearing storage');
+        localStorage.removeItem(STORAGE_KEYS.ACCESS_TOKEN);
+        return false;
+      }
+
+      return hasValidTokens;
     } else {
       return false;
     }
   }
 
   login() {
-    // this.oauthService
-    //   .loadDiscoveryDocumentAndLogin()
-    //   .then((result: boolean) => {
-    //     this.authenticationEventObservable.next(result);
-    //   })
-    //   .catch((error: any) => {
-    //     console.error('Error logging in', error);
-    //     this.logout();
-    //   });
     if (isPlatformBrowser(this.platformId)) {
-      this.oauthService.loadDiscoveryDocumentAndLogin();
-      // Optional
-      this.oauthService.setupAutomaticSilentRefresh();
+      this.oauthService
+        .loadDiscoveryDocumentAndLogin()
+        .then((result: boolean) => {
+          console.log('Login result:', result);
+          this.authenticationEventObservable.next(result);
+          if (result) {
+            this.oauthService.setupAutomaticSilentRefresh();
+          }
+        })
+        .catch((error: any) => {
+          console.error('Error logging in', error);
+          this.logout();
+        });
     }
   }
 
@@ -77,19 +85,11 @@ export class AuthService {
   }
 
   isTokenExpired(): boolean {
-    const token = this.getToken();
-    if (!token) {
-      return true;
+    if (isPlatformBrowser(this.platformId)) {
+      // Let OAuth service handle token expiration
+      return !this.oauthService.hasValidAccessToken();
     }
-    const decodedToken = jwtDecode(token);
-    if (!decodedToken) {
-      return true;
-    }
-
-    const now = new Date();
-    const exp = new Date(0);
-    exp.setUTCSeconds(decodedToken.exp);
-    return now > exp;
+    return true;
   }
 
   private setConfig() {

@@ -10,9 +10,9 @@ import { HydrationService } from './core/services/hydration.service';
 import { isPlatformBrowser } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ToastModule } from 'primeng/toast';
-import { environment } from '../environments/environment';
 import { registerLocaleData } from '@angular/common';
 import localeNo from '@angular/common/locales/no';
+import { STORAGE_KEYS } from './core/constants/storage-keys';
 registerLocaleData(localeNo);
 
 @Component({
@@ -79,7 +79,7 @@ export class AppComponent implements OnInit, OnDestroy {
     let lang = 'en';
     let userLang = '';
     if (isPlatformBrowser(this.platformId)) {
-      userLang = localStorage.getItem('language');
+      userLang = localStorage.getItem(STORAGE_KEYS.LANGUAGE) || '';
     }
     if (userLang && userLang.length > 0) {
       lang = userLang;

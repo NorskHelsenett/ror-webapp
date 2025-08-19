@@ -48,7 +48,7 @@ export const appConfig: ApplicationConfig = {
         if (isPlatformServer(platformId)) {
           return {}; // Return an empty object on the server
         }
-        return sessionStorage;
+        return localStorage;
       },
       deps: [PLATFORM_ID],
     },
