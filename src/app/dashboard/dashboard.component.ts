@@ -21,7 +21,7 @@ import { AclService } from '../core/services/acl.service';
 import { AclAccess, AclScopes } from '../core/models/acl-scopes';
 import { TableModule } from 'primeng/table';
 import { RouterModule } from '@angular/router';
-import { CommonModule, LowerCasePipe, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
+import { CommonModule, LowerCasePipe } from '@angular/common';
 import { ClustersComponent } from '../clusters/clusters.component';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { FormatBytesPipe } from '../shared/pipes';
@@ -37,9 +37,6 @@ import { SpinnerComponent } from '../shared/components';
     TableModule,
     RouterModule,
     LowerCasePipe,
-    NgSwitch,
-    NgSwitchCase,
-    NgSwitchDefault,
     ClustersComponent,
     ConfirmDialogModule,
     CommonModule,

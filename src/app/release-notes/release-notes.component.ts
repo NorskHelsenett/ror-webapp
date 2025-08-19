@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ThemeService } from '../core/services/theme.service';
 import { Subscription } from 'rxjs';
-import { CommonModule } from '@angular/common';
+
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
@@ -9,7 +9,7 @@ import { TranslateModule } from '@ngx-translate/core';
   templateUrl: './release-notes.component.html',
   styleUrl: './release-notes.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [TranslateModule, CommonModule],
+  imports: [TranslateModule],
 })
 export class ReleaseNotesComponent implements OnInit {
   isDark = false;

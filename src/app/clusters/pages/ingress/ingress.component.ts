@@ -6,7 +6,7 @@ import { catchError, finalize, map, Observable, Subscription, tap } from 'rxjs';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ClustersService } from '../../../core/services/clusters.service';
 import { HighlightModule } from 'ngx-highlightjs';
-import { TabViewModule } from 'primeng/tabview';
+import { TabsModule } from 'primeng/tabs';
 import { ClusterIngressAnnotationsComponent } from '../../components/cluster-ingress-annotations/cluster-ingress-annotations.component';
 import { ClusterIngressService } from '../../services/cluster-ingress.service';
 import { Resource, ResourceSet, ResourceQuery, ResourceIngressSpecTls, ResourceQueryFilter } from '@rork8s/ror-resources/models';
@@ -23,7 +23,7 @@ import { SpinnerComponent } from '../../../shared/components';
     TranslateModule,
     RouterLink,
     HighlightModule,
-    TabViewModule,
+    TabsModule,
     ClusterIngressAnnotationsComponent,
     ClusterIngressDetailsComponent,
     ClusterIngressChartComponent,

@@ -9,15 +9,19 @@
                 <span>DNS / IP</span>
               </div>
               <div class="mb-5 flex justify-center">
-                <div class="m-3 flex flex-col border p-3 text-center" *ngFor="let ingressRule of ingress?.ingressrules">
-                  <div class="flex justify-center">
-                    <img alt="avi" class="h-8 w-8" src="/assets/icons/tanzu/avi.png" height="80" width="80" />
+                @for (ingressRule of ingress?.ingressrules; track ingressRule) {
+                  <div class="m-3 flex flex-col border p-3 text-center">
+                    <div class="flex justify-center">
+                      <img alt="avi" class="h-8 w-8" src="/assets/icons/tanzu/avi.png" height="80" width="80" />
+                    </div>
+                    <span>{{ ingressRule?.hostname }}</span>
+                    <ul class="flex flex-col">
+                      @for (ip of ingressRule?.ipaddresses; track ip) {
+                        <li>{{ ip }}</li>
+                      }
+                    </ul>
                   </div>
-                  <span>{{ ingressRule?.hostname }}</span>
-                  <ul class="flex flex-col">
-                    <li *ngFor="let ip of ingressRule?.ipaddresses">{{ ip }}</li>
-                  </ul>
-                </div>
+                }
               </div>
             </div>
           </div>
@@ -34,12 +38,14 @@
 
                     <span class="">{{ node?.label }}</span>
 
-                    <span *ngIf="node?.data?.classError" class="mt-2 font-bold text-red-800 dark:text-red-300">{{
-                      'pages.clusters.details.ingresses.noIngressClass' | translate
-                    }}</span>
-                    <span *ngIf="!node?.data?.ingressrules || node?.data?.ingressrules?.length === 0" class="mt-2 text-red-800 dark:text-red-300">{{
-                      'pages.clusters.details.ingresses.noingressrules' | translate
-                    }}</span>
+                    @if (node?.data?.classError) {
+                      <span class="mt-2 font-bold text-red-800 dark:text-red-300">{{
+                        'pages.clusters.details.ingresses.noIngressClass' | translate
+                      }}</span>
+                    }
+                    @if (!node?.data?.ingressrules || node?.data?.ingressrules?.length === 0) {
+                      <span class="mt-2 text-red-800 dark:text-red-300">{{ 'pages.clusters.details.ingresses.noingressrules' | translate }}</span>
+                    }
                   </div>
                 </ng-template>
 
@@ -62,8 +68,12 @@
                           d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"
                         />
                       </svg>
-                      <span *ngIf="node?.data?.multiple === true">{{ node?.data?.hostname }}{{ node?.label }}</span>
-                      <span *ngIf="node?.data?.multiple === false">{{ node?.label }}</span>
+                      @if (node?.data?.multiple === true) {
+                        <span>{{ node?.data?.hostname }}{{ node?.label }}</span>
+                      }
+                      @if (node?.data?.multiple === false) {
+                        <span>{{ node?.label }}</span>
+                      }
                     </a>
                   </div>
                 </ng-template>
@@ -72,15 +82,15 @@
                   <div class="flex flex-col items-center justify-center text-center">
                     <img src="/assets/icons/k8s/resources/labeled/svc.svg" alt="service" height="66" width="68" />
                     <span>{{ node?.label }}</span>
-                    <span *ngIf="!node?.label" class="mt-2 font-bold text-red-500">{{
-                      'pages.clusters.details.ingresses.services.noService' | translate
-                    }}</span>
-                    <span *ngIf="node?.data?.type !== 'NodePort'" class="mt-2 font-bold text-red-500">{{
-                      'pages.clusters.details.ingresses.services.notNodePort' | translate
-                    }}</span>
-                    <span *ngIf="!node?.data?.endpoints || node?.data?.endpoints?.length === 0" class="mt-2 font-bold text-red-500">{{
-                      'pages.clusters.details.ingresses.services.noEndpoints' | translate
-                    }}</span>
+                    @if (!node?.label) {
+                      <span class="mt-2 font-bold text-red-500">{{ 'pages.clusters.details.ingresses.services.noService' | translate }}</span>
+                    }
+                    @if (node?.data?.type !== 'NodePort') {
+                      <span class="mt-2 font-bold text-red-500">{{ 'pages.clusters.details.ingresses.services.notNodePort' | translate }}</span>
+                    }
+                    @if (!node?.data?.endpoints || node?.data?.endpoints?.length === 0) {
+                      <span class="mt-2 font-bold text-red-500">{{ 'pages.clusters.details.ingresses.services.noEndpoints' | translate }}</span>
+                    }
                   </div>
                 </ng-template>
                 <ng-template let-node pTemplate="pod">

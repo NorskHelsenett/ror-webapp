@@ -2,7 +2,7 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { HighlightResult } from 'highlight.js';
 import { Task } from '../../../core/models/task';
 import { TranslateModule } from '@ngx-translate/core';
-import { CommonModule } from '@angular/common';
+
 import { HighlightModule } from 'ngx-highlightjs';
 
 @Component({
@@ -10,7 +10,7 @@ import { HighlightModule } from 'ngx-highlightjs';
   templateUrl: './config-task-detail.component.html',
   styleUrls: ['./config-task-detail.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  imports: [TranslateModule, CommonModule, HighlightModule],
+  imports: [TranslateModule, HighlightModule],
 })
 export class ConfigTaskDetailComponent {
   @Input()

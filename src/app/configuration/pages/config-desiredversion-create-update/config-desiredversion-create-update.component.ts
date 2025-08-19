@@ -7,14 +7,13 @@ import { Subscription, catchError } from 'rxjs';
 import { DesiredVersion } from '../../../core/models/desiredversion';
 import { ConfigService } from '../../../core/services/config.service';
 import { DesiredversionsService } from '../../../core/services/desiredversions.service';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-config-desiredversion-create-update',
   templateUrl: './config-desiredversion-create-update.component.html',
   styleUrls: ['./config-desiredversion-create-update.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [TranslateModule, CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [TranslateModule, FormsModule, ReactiveFormsModule],
 })
 export class ConfigDesiredversionCreateUpdateComponent implements OnInit, OnDestroy {
   private configService = inject(ConfigService);

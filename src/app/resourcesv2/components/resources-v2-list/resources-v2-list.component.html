@@ -1,4 +1,6 @@
-<div *ngIf="resourceSet$ | async"></div>
+@if (resourceSet$ | async) {
+  <div></div>
+}
 <div>
   <p-table
     [columns]="selectedColumns"
@@ -55,86 +57,106 @@
     </ng-template>
     <ng-template #header let-columns>
       <tr>
-        <th *ngFor="let col of columns" [pSortableColumn]="col?.field" class="">
-          <div class="flex-cols flex">
-            <span class="">{{ col?.header }}</span>
-            <p-sortIcon [field]="col?.field" pTooltip="{{ 'pages.resourcesv2.list.header.tooltip' | translate }}"></p-sortIcon>
-          </div>
-        </th>
+        @for (col of columns; track col) {
+          <th [pSortableColumn]="col?.field" class="">
+            <div class="flex-cols flex">
+              <span class="">{{ col?.header }}</span>
+              <p-sortIcon [field]="col?.field" pTooltip="{{ 'pages.resourcesv2.list.header.tooltip' | translate }}"></p-sortIcon>
+            </div>
+          </th>
+        }
       </tr>
       <tr>
-        <th *ngFor="let col of columns" class="p-1">
-          <ng-container [ngSwitch]="col.type">
-            <p-columnFilter
-              *ngSwitchCase="'text'"
-              [type]="col.type"
-              [field]="col.field"
-              matchMode="contains"
-              [showMenu]="true"
-              [matchModeOptions]="matchModeOptionsString"
-            >
-            </p-columnFilter>
-            <p-columnFilter
-              *ngSwitchCase="'numeric'"
-              [type]="col.type"
-              [field]="col.field"
-              matchMode="contains"
-              [showMenu]="true"
-              [matchModeOptions]="matchModeOptionsInt"
-            ></p-columnFilter>
-            <p-columnFilter
-              *ngSwitchCase="'boolean'"
-              [type]="col.type"
-              [field]="col.field"
-              matchMode="contains"
-              [showMenu]="true"
-              [matchModeOptions]="matchModeOptionsBool"
-            ></p-columnFilter>
-            <p-columnFilter
-              *ngSwitchDefault
-              [type]="col.type"
-              [field]="col.field"
-              matchMode="contains"
-              [showMenu]="true"
-              [matchModeOptions]="matchModeOptionsBool"
-            ></p-columnFilter>
-          </ng-container>
-        </th>
+        @for (col of columns; track col) {
+          <th class="p-1">
+            @switch (col.type) {
+              @case ('text') {
+                <p-columnFilter
+                  [type]="col.type"
+                  [field]="col.field"
+                  matchMode="contains"
+                  [showMenu]="true"
+                  [matchModeOptions]="matchModeOptionsString"
+                >
+                </p-columnFilter>
+              }
+              @case ('numeric') {
+                <p-columnFilter
+                  [type]="col.type"
+                  [field]="col.field"
+                  matchMode="contains"
+                  [showMenu]="true"
+                  [matchModeOptions]="matchModeOptionsInt"
+                ></p-columnFilter>
+              }
+              @case ('boolean') {
+                <p-columnFilter
+                  [type]="col.type"
+                  [field]="col.field"
+                  matchMode="contains"
+                  [showMenu]="true"
+                  [matchModeOptions]="matchModeOptionsBool"
+                ></p-columnFilter>
+              }
+              @default {
+                <p-columnFilter
+                  [type]="col.type"
+                  [field]="col.field"
+                  matchMode="contains"
+                  [showMenu]="true"
+                  [matchModeOptions]="matchModeOptionsBool"
+                ></p-columnFilter>
+              }
+            }
+          </th>
+        }
       </tr>
     </ng-template>
     <ng-template #body let-resource let-columns="columns">
       <tr class="h-10">
-        <td *ngFor="let col of columns" class="h-10">
-          @if (col?.header === 'Name' && (adminCreate$ | async) == true) {
-            <span class="cursor-pointer hover:underline" (click)="setSelectedResource(resource)">{{ extractData(resource, col.field) }}</span>
-          } @else {
-            <ng-container>{{ extractData(resource, col.field) }}</ng-container>
-          }
-        </td>
-        <td *ngIf="resource" class="h-10 w-40">
-          <a
-            class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
-            (click)="setSelectedResource(resource)"
-          >
-            {{ 'common.details' | translate }}
-          </a>
-        </td>
+        @for (col of columns; track col) {
+          <td class="h-10">
+            @if (col?.header === 'Name' && (adminCreate$ | async) == true) {
+              <span class="cursor-pointer hover:underline" (click)="setSelectedResource(resource)">{{ extractData(resource, col.field) }}</span>
+            } @else {
+              <ng-container>{{ extractData(resource, col.field) }}</ng-container>
+            }
+          </td>
+        }
+        @if (resource) {
+          <td class="h-10 w-40">
+            <a
+              class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+              (click)="setSelectedResource(resource)"
+            >
+              {{ 'common.details' | translate }}
+            </a>
+          </td>
+        }
       </tr>
     </ng-template>
     <ng-template #loadingbody let-columns="columns">
       <tr style="height: 46px">
-        <td *ngFor="let col of columns; let even = even">
-          <p-skeleton [ngStyle]="{ width: even ? (col.field === 'year' ? '30%' : '40%') : '60%' }" />
-        </td>
+        @for (col of columns; track col; let even = $even) {
+          <td>
+            <p-skeleton [ngStyle]="{ width: even ? (col.field === 'year' ? '30%' : '40%') : '60%' }" />
+          </td>
+        }
       </tr>
     </ng-template>
     <ng-template #emptymessage>
-      <tr *ngIf="!loading">
-        <td colspan="7">
-          <ng-container *ngIf="!loading">{{ 'common.emptyList' | translate }}</ng-container>
-          <ng-container *ngIf="loading"><app-spinner></app-spinner></ng-container>
-        </td>
-      </tr>
+      @if (!loading) {
+        <tr>
+          <td colspan="7">
+            @if (!loading) {
+              {{ 'common.emptyList' | translate }}
+            }
+            @if (loading) {
+              <app-spinner></app-spinner>
+            }
+          </td>
+        </tr>
+      }
     </ng-template>
     <ng-template pTemplate="summary">
       <div class="flex text-center">
@@ -142,13 +164,14 @@
       </div>
 
       <div class="text-center">
-        <button
-          *ngIf="showLoadMore"
-          (click)="loadMore()"
-          class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
-        >
-          {{ 'common.loadMore' | translate }}
-        </button>
+        @if (showLoadMore) {
+          <button
+            (click)="loadMore()"
+            class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+          >
+            {{ 'common.loadMore' | translate }}
+          </button>
+        }
       </div>
     </ng-template>
   </p-table>

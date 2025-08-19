@@ -18,7 +18,9 @@
 
         @if (!node?.children || node?.children.length === 0 || getHealthStatusForIngress()?.healthy === false) {
           <div class="text-red-500">
-            <span *ngFor="let message of getHealthStatusForIngress()?.messages" class="text-red-500">{{ message }}</span>
+            @for (message of getHealthStatusForIngress()?.messages; track message) {
+              <span class="text-red-500">{{ message }}</span>
+            }
           </div>
         }
       </div>
@@ -31,7 +33,9 @@
         <span>{{ node?.data?.pathType }}</span>
         @if (!node?.children || node?.children.length === 0 || getHealthStatusForIngressHttpPath(node?.data)?.healthy === false) {
           <div class="text-red-500">
-            <span *ngFor="let message of getHealthStatusForIngressHttpPath(node?.data)?.messages" class="text-red-500">{{ message }}</span>
+            @for (message of getHealthStatusForIngressHttpPath(node?.data)?.messages; track message) {
+              <span class="text-red-500">{{ message }}</span>
+            }
           </div>
         }
       </div>
@@ -51,19 +55,25 @@
           </ul>
         </div>
         <div>
-          <ul *ngIf="node?.data?.service?.spec?.clusterIPs">
-            @for (clusterip of node?.data?.service?.spec?.clusterIPs; track $index) {
-              <li>{{ clusterip }}</li>
-            }
-          </ul>
+          @if (node?.data?.service?.spec?.clusterIPs) {
+            <ul>
+              @for (clusterip of node?.data?.service?.spec?.clusterIPs; track $index) {
+                <li>{{ clusterip }}</li>
+              }
+            </ul>
+          }
         </div>
 
         @if (getHealthStatusForServices()?.healthy === false) {
-          <span *ngFor="let message of getHealthStatusForServices()?.messages" class="text-red-500">{{ message }}</span>
+          @for (message of getHealthStatusForServices()?.messages; track message) {
+            <span class="text-red-500">{{ message }}</span>
+          }
         }
         @if (!node?.children || node?.children?.length == 0 || getHealthStatusForEndpoints()?.healthy === false) {
           <div class="text-red-500">
-            <span *ngFor="let message of getHealthStatusForEndpoints()?.messages" class="text-red-500">{{ message }}</span>
+            @for (message of getHealthStatusForEndpoints()?.messages; track message) {
+              <span class="text-red-500">{{ message }}</span>
+            }
           </div>
         }
       </div>
@@ -78,7 +88,9 @@
         }
 
         @if (!node?.children || node?.children.length === 0 || getHealthStatusForEndpoints()?.healthy === false) {
-          <span *ngFor="let message of getHealthStatusForEndpoints()?.messages" class="text-red-500">{{ message }}</span>
+          @for (message of getHealthStatusForEndpoints()?.messages; track message) {
+            <span class="text-red-500">{{ message }}</span>
+          }
         }
       </div>
     </ng-template>
@@ -89,7 +101,9 @@
         <span>{{ node?.label }}</span>
 
         @if (!node?.children || node?.children.length === 0 || getHealthStatusForPod(node?.data)?.healthy === false) {
-          <span *ngFor="let message of getHealthStatusForPod(node?.data)?.messages" class="text-red-500">{{ message }}</span>
+          @for (message of getHealthStatusForPod(node?.data)?.messages; track message) {
+            <span class="text-red-500">{{ message }}</span>
+          }
         }
       </div>
     </ng-template>

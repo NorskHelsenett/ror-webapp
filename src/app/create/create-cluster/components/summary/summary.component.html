@@ -19,8 +19,8 @@
     <a (click)="linkToStep(1)" class="cursor-pointer">{{ value?.provider?.name }}</a>
   </div>
 
-  <ng-container [ngSwitch]="true">
-    <ng-container *ngSwitchCase="value?.provider?.type?.toLowerCase() === 'tanzu'">
+  @switch (true) {
+    @case (value?.provider?.type?.toLowerCase() === 'tanzu') {
       <div>{{ 'pages.create.cluster.steps.summary.workspace' | translate }}</div>
       <div class="font-bold underline">
         <a (click)="linkToStep(1)" class="cursor-pointer">{{ value?.providerConfig?.tanzu?.workspace?.name }}</a>
@@ -36,8 +36,8 @@
           {{ value?.providerConfig?.tanzu?.workspace?.datacenter?.location?.country }}
         </a>
       </div>
-    </ng-container>
-    <ng-container *ngSwitchCase="'AKS'">
+    }
+    @case (value?.provider?.type?.toLowerCase() === 'aks') {
       <div>{{ 'pages.create.cluster.steps.summary.subscription' | translate }}</div>
       <div class="font-bold underline">
         <a (click)="linkToStep(1)" class="cursor-pointer">{{ value?.providerConfig?.azure?.subscription?.name }}</a>
@@ -50,14 +50,14 @@
       <div class="font-bold underline">
         <a (click)="linkToStep(1)" class="cursor-pointer">{{ value?.providerConfig?.azure?.region?.name }}</a>
       </div>
-    </ng-container>
-  </ng-container>
+    }
+  }
 
   <div class="mt-3">{{ 'pages.create.cluster.steps.summary.availability' | translate }}</div>
   <div class="font-bold underline">
-    <a (click)="linkToStep(2)" class="cursor-pointer" *ngIf="value?.availability?.label"
-      >{{ value?.availability?.label }} ({{ value?.availability?.price }} NOK)</a
-    >
+    @if (value?.availability?.label) {
+      <a (click)="linkToStep(2)" class="cursor-pointer">{{ value?.availability?.label }} ({{ value?.availability?.price }} NOK)</a>
+    }
   </div>
 
   @if (value?.k8sVersion?.name?.length > 0) {
@@ -77,21 +77,26 @@
   </div>
   <div>{{ 'pages.create.cluster.steps.summary.clustername' | translate }}</div>
   <div class="font-bold underline">
-    <a (click)="linkToStep(2)" class="cursor-pointer"
-      ><span *ngIf="value?.environment">{{ value?.environment?.prefix }}-</span>{{ value?.clusterName }}</a
+    <a (click)="linkToStep(2)" class="cursor-pointer">
+      @if (value?.environment) {
+        <span>{{ value?.environment?.prefix }}-</span>
+      }
+      {{ value?.clusterName }}</a
     >
   </div>
 
-  <ng-container *ngIf="value?.environment?.prefix === 'p' && value?.availability && value?.availability?.price === 0">
+  @if (value?.environment?.prefix === 'p' && value?.availability && value?.availability?.price === 0) {
     <div></div>
     <div class="text-red-400">{{ 'pages.create.cluster.steps.resources.availabilityWarning' | translate }}</div>
-  </ng-container>
+  }
   <div>{{ 'pages.create.cluster.steps.summary.nodepools' | translate }}</div>
   <div class="flex gap-3">
     <ul>
-      <li *ngFor="let cap of value?.capasity" class="font-bold underline">
-        <a (click)="linkToStep(2)" class="cursor-pointer">{{ cap?.count }} x {{ cap?.machineClass }} = {{ cap?.price + cap?.count }}</a>
-      </li>
+      @for (cap of value?.capasity; track cap) {
+        <li class="font-bold underline">
+          <a (click)="linkToStep(2)" class="cursor-pointer">{{ cap?.count }} x {{ cap?.machineClass }} = {{ cap?.price + cap?.count }}</a>
+        </li>
+      }
     </ul>
   </div>
 
@@ -113,20 +118,22 @@
   <div>{{ 'pages.create.cluster.steps.summary.tags' | translate }}</div>
   <div class="flex gap-3 font-bold">
     <a (click)="linkToStep(3)" class="cursor-pointer">
-      <p-tag class="mr-1" *ngFor="let tag of value?.tags" severity="success" [value]="tag"></p-tag>
+      @for (tag of value?.tags; track tag) {
+        <p-tag class="mr-1" severity="success" [value]="tag"></p-tag>
+      }
     </a>
   </div>
 
   <div class="mt-3">{{ 'pages.create.cluster.steps.summary.sumMonth' | translate }}</div>
   <div class="font-bold">
-    <ng-container *ngIf="getNodePoolSum() > 0"
-      ><a (click)="linkToStep(2)" class="cursor-pointer">{{ getNodePoolSum() }} NOK</a></ng-container
-    >
+    @if (getNodePoolSum() > 0) {
+      <a (click)="linkToStep(2)" class="cursor-pointer">{{ getNodePoolSum() }} NOK</a>
+    }
   </div>
   <div>{{ 'pages.create.cluster.steps.summary.sumYear' | translate }}</div>
   <div class="font-bold">
-    <ng-container *ngIf="getNodePoolSum() > 0"
-      ><a (click)="linkToStep(2)" class="cursor-pointer">{{ getNodePoolSum() * 12 }} NOK</a></ng-container
-    >
+    @if (getNodePoolSum() > 0) {
+      <a (click)="linkToStep(2)" class="cursor-pointer">{{ getNodePoolSum() * 12 }} NOK</a>
+    }
   </div>
 </div>

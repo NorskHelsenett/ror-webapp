@@ -22,15 +22,16 @@
       </div>
     </ng-template>
   </p-select>
-  <p-select
-    *ngIf="showClusterDropdown && clusterId === undefined"
-    [(ngModel)]="selectedCluster"
-    [options]="clusters"
-    optionLabel="clusterName"
-    [showClear]="true"
-    placeholder="{{ 'pages.resources.filter.cluster.placeholder' | translate }}"
-    (onChange)="selectedClusterIdChange($event)"
-  ></p-select>
+  @if (showClusterDropdown && clusterId === undefined) {
+    <p-select
+      [(ngModel)]="selectedCluster"
+      [options]="clusters"
+      optionLabel="clusterName"
+      [showClear]="true"
+      placeholder="{{ 'pages.resources.filter.cluster.placeholder' | translate }}"
+      (onChange)="selectedClusterIdChange($event)"
+    ></p-select>
+  }
   <button (click)="resetFilter()">
     {{ 'common.reset' | translate }}
   </button>

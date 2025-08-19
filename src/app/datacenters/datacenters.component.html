@@ -13,24 +13,23 @@
     <div class="dark:bg-darker flex items-center justify-between rounded-md bg-white p-4">
       <div class="dark:bg-darker rounded-md bg-white">
         <div class="relative p-3">
-          <div *ngIf="datacenterMetrics$ | async as datacenters; else datacentersLoadingOrError">
-            <app-datacenter-table [datacenters]="datacenters?.items"></app-datacenter-table>
-            <span *ngIf="!datacenters || !datacenters?.items || datacenters?.items?.length === 0">{{
-              'pages.datacenters.table.empty' | translate
-            }}</span>
-          </div>
-          <ng-template #datacentersLoadingOrError>
-            <ng-container *ngIf="datacenterMetricsError; else datacenterLoading">
+          @if (datacenterMetrics$ | async; as datacenters) {
+            <div>
+              <app-datacenter-table [datacenters]="datacenters?.items"></app-datacenter-table>
+              @if (!datacenters || !datacenters?.items || datacenters?.items?.length === 0) {
+                <span>{{ 'pages.datacenters.table.empty' | translate }}</span>
+              }
+            </div>
+          } @else {
+            @if (datacenterMetricsError) {
               <div class="mx-auto my-4 flex items-center rounded-md bg-red-200 px-6 py-4 text-lg">
                 <span class="p-2 text-red-800"> {{ 'pages.dashboard.error' | translate }} </span>
                 <button class="btn text-black" (click)="fetchMetrics()">{{ 'common.tryAgain' | translate }}</button>
               </div>
-            </ng-container>
-
-            <ng-template #datacenterLoading>
+            } @else {
               <app-spinner></app-spinner>
-            </ng-template>
-          </ng-template>
+            }
+          }
         </div>
       </div>
     </div>

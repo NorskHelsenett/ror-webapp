@@ -7,3 +7,86 @@
 input {
   padding: 0.5rem 0.5rem;
 }
+
+/* Fix pagination buttons in light mode */
+:not(.dark) .p-paginator .p-paginator-pages .p-paginator-page {
+  background-color: #f4f4f5 !important; /* zinc-100 */
+  color: #3f3f46 !important; /* zinc-700 */
+  border-color: #d4d4d8 !important; /* zinc-300 */
+}
+
+:not(.dark) .p-paginator .p-paginator-pages .p-paginator-page:hover {
+  background-color: #e4e4e7 !important; /* zinc-200 */
+  color: #27272a !important; /* zinc-800 */
+  border-color: #a1a1aa !important; /* zinc-400 */
+}
+
+:not(.dark) .p-paginator .p-paginator-pages .p-paginator-page.p-paginator-page-selected {
+  background-color: #a1a1aa !important; /* zinc-400 */
+  color: #27272a !important; /* zinc-800 */
+  border-color: #a1a1aa !important; /* zinc-400 */
+}
+
+:not(.dark) .p-paginator .p-paginator-first,
+:not(.dark) .p-paginator .p-paginator-prev,
+:not(.dark) .p-paginator .p-paginator-next,
+:not(.dark) .p-paginator .p-paginator-last {
+  background-color: #f4f4f5 !important; /* zinc-100 */
+  color: #3f3f46 !important; /* zinc-700 */
+  border-color: #d4d4d8 !important; /* zinc-300 */
+}
+
+:not(.dark) .p-paginator .p-paginator-first:hover,
+:not(.dark) .p-paginator .p-paginator-prev:hover,
+:not(.dark) .p-paginator .p-paginator-next:hover,
+:not(.dark) .p-paginator .p-paginator-last:hover {
+  background-color: #e4e4e7 !important; /* zinc-200 */
+  color: #27272a !important; /* zinc-800 */
+  border-color: #a1a1aa !important; /* zinc-400 */
+}
+
+/* Fix dropdown styling in light mode */
+:not(.dark) .p-dropdown {
+  background-color: #ffffff !important;
+  color: #3f3f46 !important; /* zinc-700 */
+  border-color: #d4d4d8 !important; /* zinc-300 */
+}
+
+:not(.dark) .p-dropdown:hover {
+  border-color: #a1a1aa !important; /* zinc-400 */
+}
+
+:not(.dark) .p-dropdown:focus {
+  border-color: #3f3f46 !important; /* zinc-700 */
+  box-shadow: 0 0 0 1px #3f3f46 !important; /* zinc-700 */
+}
+
+:not(.dark) .p-dropdown-panel {
+  background-color: #ffffff !important;
+  border-color: #d4d4d8 !important; /* zinc-300 */
+}
+
+:not(.dark) .p-dropdown-panel .p-dropdown-items .p-dropdown-item {
+  color: #3f3f46 !important; /* zinc-700 */
+}
+
+:not(.dark) .p-dropdown-panel .p-dropdown-items .p-dropdown-item:hover {
+  background-color: #f4f4f5 !important; /* zinc-100 */
+  color: #27272a !important; /* zinc-800 */
+}
+
+:not(.dark) .p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-dropdown-item-selected {
+  background-color: #3f3f46 !important; /* zinc-700 */
+  color: #ffffff !important;
+}
+
+/* Fix multiselect selected option in light mode */
+:not(.dark) .p-multiselect-option.p-multiselect-option-selected {
+  background-color: #a1a1aa !important; /* zinc-400 */
+  color: #27272a !important; /* zinc-800 */
+}
+
+:not(.dark) .p-multiselect-option.p-multiselect-option-selected.p-focus {
+  background-color: #71717a !important; /* zinc-500 */
+  color: #ffffff !important;
+}

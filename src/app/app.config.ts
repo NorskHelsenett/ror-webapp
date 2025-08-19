@@ -2,8 +2,8 @@ import { ApplicationConfig, importProvidersFrom, isDevMode, PLATFORM_ID, provide
 import { provideRouter, withInMemoryScrolling, withRouterConfig } from '@angular/router';
 
 import { routes } from './app.routes';
-import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
-import { provideHttpClient, withFetch, withInterceptorsFromDi, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
+import { provideClientHydration, withEventReplay, withNoHttpTransferCache } from '@angular/platform-browser';
+import { provideHttpClient, withFetch, withInterceptorsFromDi, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { OAuthStorage, provideOAuthClient } from 'angular-oauth2-oidc';
 import { ConfirmationService, MessageService } from 'primeng/api';
@@ -11,14 +11,15 @@ import { providePrimeNG } from 'primeng/config';
 import { AuthInterceptor } from './core/interceptors/auth-interceptor';
 import { provideHighlightOptions } from 'ngx-highlightjs';
 import { provideServiceWorker } from '@angular/service-worker';
-import { TranslateLoader, TranslateModule, MissingTranslationHandler } from '@ngx-translate/core';
-import { CustomMissingTranslationHandler, HttpLoaderFactory } from './core/i18n/i18nfunctions';
+import { TranslateModule, MissingTranslationHandler } from '@ngx-translate/core';
+import { CustomMissingTranslationHandler } from './core/i18n/i18nfunctions';
 import { isPlatformServer } from '@angular/common';
 import RorTheme from './themes/ror-theme';
 import { ThemeService } from './core/services/theme.service';
-import { provideServerRouting } from '@angular/ssr';
-import { serverRoutes } from './app.routes.server';
+import { provideServerRendering, withRoutes } from '@angular/ssr';
 import { TypesService } from './resources/services/types.service';
+import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
+import { serverRoutes } from './app.routes.server';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -33,8 +34,8 @@ export const appConfig: ApplicationConfig = {
         onSameUrlNavigation: 'ignore',
       }),
     ),
-    provideServerRouting(serverRoutes),
-    provideClientHydration(withEventReplay()),
+    provideClientHydration(withEventReplay(), withNoHttpTransferCache()),
+    provideServerRendering(withRoutes(serverRoutes)),
     provideHttpClient(withFetch(), withInterceptorsFromDi()),
     {
       provide: HTTP_INTERCEPTORS,
@@ -47,7 +48,7 @@ export const appConfig: ApplicationConfig = {
         if (isPlatformServer(platformId)) {
           return {}; // Return an empty object on the server
         }
-        return sessionStorage;
+        return localStorage;
       },
       deps: [PLATFORM_ID],
     },
@@ -59,11 +60,10 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom([
       TranslateModule.forRoot({
         missingTranslationHandler: { provide: MissingTranslationHandler, useClass: CustomMissingTranslationHandler },
-        loader: {
-          provide: TranslateLoader,
-          useFactory: HttpLoaderFactory,
-          deps: [HttpClient],
-        },
+        loader: provideTranslateHttpLoader({
+          prefix: './assets/i18n/',
+          suffix: '.json',
+        }),
       }),
     ]),
     MessageService,

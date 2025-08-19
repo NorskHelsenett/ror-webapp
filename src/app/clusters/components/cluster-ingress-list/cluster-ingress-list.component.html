@@ -70,9 +70,15 @@
                     ></app-cluster-status>
                   </td>
                   <td>
-                    <span *ngIf="ingress?.class?.endsWith('internett')">{{ 'pages.clusters.details.ingresses.internet' | translate }}</span>
-                    <span *ngIf="ingress?.class?.endsWith('helsenett')">{{ 'pages.clusters.details.ingresses.health' | translate }}</span>
-                    <span *ngIf="ingress?.class?.endsWith('datacenter')">{{ 'pages.clusters.details.ingresses.datacenter' | translate }}</span>
+                    @if (ingress?.class?.endsWith('internett')) {
+                      <span>{{ 'pages.clusters.details.ingresses.internet' | translate }}</span>
+                    }
+                    @if (ingress?.class?.endsWith('helsenett')) {
+                      <span>{{ 'pages.clusters.details.ingresses.health' | translate }}</span>
+                    }
+                    @if (ingress?.class?.endsWith('datacenter')) {
+                      <span>{{ 'pages.clusters.details.ingresses.datacenter' | translate }}</span>
+                    }
                   </td>
                   <td class="whitespace-nowrap px-1 py-1 pl-2 align-top text-sm font-light">
                     <span>{{ ingress?.namespace }}</span>
@@ -80,22 +86,30 @@
 
                   <td>
                     <div class="flex flex-col">
-                      <span *ngFor="let rule of ingress?.ingressrules">
-                        <a class="hover:text-blue-800 hover:underline dark:hover:text-blue-400" href="https://{{ rule?.hostname }}" target="_blank"
-                          ><i class="pi pi-external-link mr-2"></i>{{ rule?.hostname }}</a
-                        ></span
-                      >
+                      @for (rule of ingress?.ingressrules; track rule) {
+                        <span>
+                          <a class="hover:text-blue-800 hover:underline dark:hover:text-blue-400" href="https://{{ rule?.hostname }}" target="_blank"
+                            ><i class="pi pi-external-link mr-2"></i>{{ rule?.hostname }}</a
+                          ></span
+                        >
+                      }
                     </div>
                   </td>
 
                   <td>
                     <div class="flex flex-col">
-                      <div class="" *ngFor="let rule of ingress.ingressrules">
-                        <span *ngFor="let address of rule?.ipaddresses; last as last">
-                          <span>{{ address }}</span>
-                          <span *ngIf="!last">, </span>
-                        </span>
-                      </div>
+                      @for (rule of ingress.ingressrules; track rule) {
+                        <div class="">
+                          @for (address of rule?.ipaddresses; track address; let last = $last) {
+                            <span>
+                              <span>{{ address }}</span>
+                              @if (!last) {
+                                <span>, </span>
+                              }
+                            </span>
+                          }
+                        </div>
+                      }
                     </div>
                   </td>
                 </tr>

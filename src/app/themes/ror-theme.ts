@@ -20,21 +20,19 @@ export const RorTheme = definePreset(BaseTheme, {
       light: {
         primary: {
           color: '{zinc.500}',
-          inverseColor: '#ffffff',
           hoverColor: '{zinc.600}',
           activeColor: '{zinc.800}',
         },
         highlight: {
-          background: '{zinc.800}',
+          background: '{zinc.200}',
           focusBackground: '{zinc.300}',
-          color: '#ffffff',
+          color: '#000000',
           focusColor: '#000000',
         },
       },
       dark: {
         primary: {
           color: '{zinc.700}',
-          inverseColor: '{zinc.950}',
           hoverColor: '{zinc.500}',
           activeColor: '{zinc.200}',
         },

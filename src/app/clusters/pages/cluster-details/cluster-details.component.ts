@@ -43,7 +43,7 @@ import { ClusterNodepoolsComponent } from '../cluster-nodepools/cluster-nodepool
 import { BadgeModule } from 'primeng/badge';
 import { ClusterMetadataPageComponent } from '../cluster-metadata-page/cluster-metadata-page.component';
 import { ClusterResourceTableComponent } from '../../components/cluster-resource-table/cluster-resource-table.component';
-import { SidebarModule } from 'primeng/sidebar';
+import { DrawerModule } from 'primeng/drawer';
 import { ResourceV2DetailsComponent } from '../../../resourcesv2/components/resource-v2-details/resource-v2-details.component';
 import { SpinnerComponent } from '../../../shared/components';
 import { Tabs, TabsModule } from 'primeng/tabs';
@@ -76,7 +76,7 @@ import { Tabs, TabsModule } from 'primeng/tabs';
     ClusterNotificationsComponent,
     ClusterDeleteComponent,
     SpinnerComponent,
-    SidebarModule,
+    DrawerModule,
     ResourceV2DetailsComponent,
   ],
   providers: [ClusterService],

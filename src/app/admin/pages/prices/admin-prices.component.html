@@ -119,16 +119,14 @@
       </div>
     </div>
     <ng-template #pricesLoadingOrError>
-      <ng-container *ngIf="pricesError; else priceLoading">
+      @if (pricesError) {
         <div class="mx-auto my-4 flex items-center rounded-md bg-red-200 px-6 py-4 text-lg">
           <span class="p-2 text-red-800"> {{ 'pages.dashboard.error' | translate }} </span>
           <button class="btn text-black" (click)="fetch()">{{ 'common.tryAgain' | translate }}</button>
         </div>
-      </ng-container>
-
-      <ng-template #priceLoading>
+      } @else {
         <app-spinner></app-spinner>
-      </ng-template>
+      }
     </ng-template>
   </div>
 </div>

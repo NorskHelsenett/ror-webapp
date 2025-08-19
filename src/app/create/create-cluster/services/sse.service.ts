@@ -24,7 +24,11 @@ export class SseService {
   private url = `${this.configService?.config?.rorApi}${this.configService?.config?.sse?.postfixUrl}?ngsw-bypass=true`;
 
   getEvents(): Observable<any> {
-    return new Observable((observer) => {
+    if (this.events) {
+      return this.events;
+    }
+
+    this.events = new Observable((observer) => {
       this.observer = observer;
       this.getEventSource(this.url);
       this.eventSource.onopen = (event: any) => {
@@ -51,9 +55,11 @@ export class SseService {
         });
       };
     });
+
+    return this.events;
   }
 
-  private getEventSource(url: string): void {
+  private getEventSource(url: string): EventSourcePolyfill {
     if (this.eventSource) {
       this.eventSource.close();
     }
@@ -68,7 +74,6 @@ export class SseService {
   }
 
   close(): void {
-    this.eventSource?.close();
     this.eventSource?.close();
     this.eventSource = undefined;
     this.events = undefined;

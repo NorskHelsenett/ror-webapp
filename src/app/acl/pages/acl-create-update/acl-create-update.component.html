@@ -1,7 +1,11 @@
 <div class="dark:border-primary-darker flex items-center gap-4 border-b px-4 py-4 lg:py-6">
   <h1 class="flex-grow text-2xl font-semibold">
-    <span *ngIf="!acl">{{ 'pages.acl.create.title' | translate }}</span>
-    <span *ngIf="acl">{{ 'pages.acl.update.title' | translate }}</span>
+    @if (!acl) {
+      <span>{{ 'pages.acl.create.title' | translate }}</span>
+    }
+    @if (acl) {
+      <span>{{ 'pages.acl.update.title' | translate }}</span>
+    }
   </h1>
 </div>
 

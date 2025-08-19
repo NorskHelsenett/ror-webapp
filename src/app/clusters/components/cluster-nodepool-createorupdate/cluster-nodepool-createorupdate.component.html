@@ -213,7 +213,7 @@
 
                 <tbody>
                   <ng-container formArrayName="labels">
-                    <ng-container *ngFor="let labelForm of labelsArray?.controls; let i = index">
+                    @for (labelForm of labelsArray?.controls; track labelForm; let i = $index) {
                       <tr [formGroupName]="i">
                         <td>
                           <div class="text-lg">{{ labelForm?.value?.key }}</div>
@@ -230,7 +230,7 @@
                           </button>
                         </td>
                       </tr>
-                    </ng-container>
+                    }
                   </ng-container>
                 </tbody>
               </table>
@@ -314,7 +314,7 @@
 
                 <tbody>
                   <ng-container formArrayName="taint">
-                    <ng-container *ngFor="let taintForm of taintArray?.controls; let i = index">
+                    @for (taintForm of taintArray?.controls; track taintForm; let i = $index) {
                       <tr [formGroupName]="i">
                         <td>
                           <div class="text-lg">{{ taintForm?.value?.key }}</div>
@@ -323,8 +323,8 @@
                           <div class="text-lg">{{ taintForm?.value?.value }}</div>
                         </td>
                         <!-- <td>
-                          <div class="text-lg">{{ taintForm?.value?.operator }}</div>
-                        </td> -->
+                                  <div class="text-lg">{{ taintForm?.value?.operator }}</div>
+                                </td> -->
                         <td>
                           <div class="text-lg">{{ taintForm?.value?.effect }}</div>
                         </td>
@@ -337,7 +337,7 @@
                           </button>
                         </td>
                       </tr>
-                    </ng-container>
+                    }
                   </ng-container>
                 </tbody>
               </table>

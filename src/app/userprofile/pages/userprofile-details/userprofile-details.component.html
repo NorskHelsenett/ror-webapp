@@ -23,7 +23,9 @@
               <td class="px-2 py-1 align-top">{{ 'pages.profile.groups' | translate }}</td>
               <td class="px-2 py-1">
                 <ul class="unstyled">
-                  <li *ngFor="let group of claims?.groups">{{ group }}&#64;{{ domain }}</li>
+                  @for (group of claims?.groups; track group) {
+                    <li>{{ group }}&#64;{{ domain }}</li>
+                  }
                 </ul>
               </td>
             </tr>

@@ -3,7 +3,7 @@
     <div class="dark:bg-darker rounded-md bg-white">
       <div class="dark:bg-darker rounded-md bg-white">
         <div class="relative p-3">
-          <ng-container *ngIf="projects$ | async as projects; else loadingOrError">
+          @if (projects$ | async; as projects) {
             <form [formGroup]="clusterModelForm">
               <div class="flex flex-col">
                 <div class="">
@@ -22,9 +22,11 @@
                       [showClear]="true"
                     >
                       <ng-template pTemplate="selectedItem">
-                        <div *ngIf="selectedProject">
-                          <div>{{ selectedProject.name }}</div>
-                        </div>
+                        @if (selectedProject) {
+                          <div>
+                            <div>{{ selectedProject.name }}</div>
+                          </div>
+                        }
                       </ng-template>
                       <ng-template let-project pTemplate="item">
                         <div class="flex w-96 flex-col">
@@ -33,19 +35,13 @@
                         </div>
                       </ng-template>
                     </p-select>
-
-                    <span
-                      *ngIf="
-                        clusterModelForm.get('projectId').touched &&
-                        clusterModelForm.get('projectId').dirty &&
-                        clusterModelForm.get('projectId').errors
-                      "
-                      class="text-red-400"
-                      >{{ 'pages.clusters.details.edit.form.projectError' | translate }}</span
-                    >
+                    @if (
+                      clusterModelForm.get('projectId').touched && clusterModelForm.get('projectId').dirty && clusterModelForm.get('projectId').errors
+                    ) {
+                      <span class="text-red-400">{{ 'pages.clusters.details.edit.form.projectError' | translate }}</span>
+                    }
                     <span id="projectId-help">{{ 'pages.clusters.details.edit.form.projectHelp' | translate }}</span>
                   </div>
-
                   <div class="mt-10 flex flex-col xl:w-96">
                     <label
                       ><span class="text-red-800 dark:text-red-300">*</span>
@@ -60,9 +56,11 @@
                       (ngModelChange)="criticalityChanged($event)"
                     >
                       <ng-template pTemplate="selectedItem">
-                        <div *ngIf="selectedCriticality">
-                          <div>{{ selectedCriticality?.name }}</div>
-                        </div>
+                        @if (selectedCriticality) {
+                          <div>
+                            <div>{{ selectedCriticality?.name }}</div>
+                          </div>
+                        }
                       </ng-template>
                       <ng-template let-criticality pTemplate="item">
                         <div>
@@ -70,16 +68,14 @@
                         </div>
                       </ng-template></p-select
                     >
-                    <span
-                      *ngIf="
-                        !clusterModelForm.get('criticality').pristine &&
-                        clusterModelForm.get('criticality').touched &&
-                        clusterModelForm.get('criticality').dirty &&
-                        clusterModelForm.get('criticality').errors
-                      "
-                      class="text-red-400"
-                      >{{ 'pages.clusters.details.edit.form.criticalityLevelError' | translate }}</span
-                    >
+                    @if (
+                      !clusterModelForm.get('criticality').pristine &&
+                      clusterModelForm.get('criticality').touched &&
+                      clusterModelForm.get('criticality').dirty &&
+                      clusterModelForm.get('criticality').errors
+                    ) {
+                      <span class="text-red-400">{{ 'pages.clusters.details.edit.form.criticalityLevelError' | translate }}</span>
+                    }
                     <div class="flex">
                       <span id="criticality-help">{{ 'pages.clusters.details.edit.form.criticalityLevelHelp' | translate }}</span>
                     </div>
@@ -103,7 +99,6 @@
                       </a>
                     </div>
                   </div>
-
                   <div class="mt-10 flex flex-col xl:w-96">
                     <label
                       ><span class="text-red-800 dark:text-red-300">*</span>
@@ -118,9 +113,11 @@
                       (ngModelChange)="sensitivityChanged($event)"
                     >
                       <ng-template pTemplate="selectedItem">
-                        <div *ngIf="selectedSensitivity">
-                          <div>{{ selectedSensitivity?.name }}</div>
-                        </div>
+                        @if (selectedSensitivity) {
+                          <div>
+                            <div>{{ selectedSensitivity?.name }}</div>
+                          </div>
+                        }
                       </ng-template>
                       <ng-template let-sensitivity pTemplate="item">
                         <div>
@@ -129,16 +126,14 @@
                       </ng-template>
                     </p-select>
                     <div class="flex">
-                      <span
-                        *ngIf="
-                          !clusterModelForm.get('sensitivity').pristine &&
-                          clusterModelForm.get('sensitivity').touched &&
-                          clusterModelForm.get('sensitivity').dirty &&
-                          clusterModelForm.get('sensitivity').errors
-                        "
-                        class="text-red-400"
-                        >{{ 'pages.clusters.details.edit.form.sensitivityLevelError' | translate }}</span
-                      >
+                      @if (
+                        !clusterModelForm.get('sensitivity').pristine &&
+                        clusterModelForm.get('sensitivity').touched &&
+                        clusterModelForm.get('sensitivity').dirty &&
+                        clusterModelForm.get('sensitivity').errors
+                      ) {
+                        <span class="text-red-400">{{ 'pages.clusters.details.edit.form.sensitivityLevelError' | translate }}</span>
+                      }
                       <span id="sensitivity-help">{{ 'pages.clusters.details.edit.form.sensitivityLevelHelp' | translate }}</span>
                     </div>
                     <div class="">
@@ -169,17 +164,14 @@
                     <h4 class="dark:text-light text-lg font-semibold text-gray-500">
                       {{ 'pages.admin.projects.form.roles.title' | translate }}
                     </h4>
-
-                    <span
-                      *ngIf="
-                        !clusterModelForm?.get('roles').pristine &&
-                        clusterModelForm?.get('roles').touched &&
-                        clusterModelForm?.get('roles').dirty &&
-                        clusterModelForm?.get('roles').errors
-                      "
-                      class="text-red-400"
-                      >{{ 'pages.admin.projects.form.rolesError' | translate }}</span
-                    >
+                    @if (
+                      !clusterModelForm?.get('roles').pristine &&
+                      clusterModelForm?.get('roles').touched &&
+                      clusterModelForm?.get('roles').dirty &&
+                      clusterModelForm?.get('roles').errors
+                    ) {
+                      <span class="text-red-400">{{ 'pages.admin.projects.form.rolesError' | translate }}</span>
+                    }
                     <button
                       (click)="addRole()"
                       type="button"
@@ -188,11 +180,9 @@
                       {{ 'pages.admin.projects.form.roles.add' | translate }}
                     </button>
                   </div>
-
                   <span>{{ 'pages.admin.projects.form.rolesHelp' | translate }}</span>
-
                   <ng-container formArrayName="roles">
-                    <ng-container *ngFor="let roleForm of roles?.controls; let i = index">
+                    @for (roleForm of roles?.controls; track roleForm; let i = $index) {
                       <div class="role-form-row flex" [formGroupName]="i">
                         <div class="mb-3 mt-3 xl:w-96">
                           <label
@@ -206,19 +196,16 @@
                             placeholder="{{ 'pages.admin.projects.form.roles.placeholder' | translate }}"
                           ></p-select>
                           <div class="flex">
-                            <span
-                              *ngIf="
-                                !roleForm.get('roleDefinition').pristine &&
-                                roleForm.get('roleDefinition').touched &&
-                                roleForm.get('roleDefinition').dirty &&
-                                roleForm.get('roleDefinition').errors
-                              "
-                              class="text-red-400"
-                              >{{ 'pages.admin.projects.form.nameError' | translate }}</span
-                            >
+                            @if (
+                              !roleForm.get('roleDefinition').pristine &&
+                              roleForm.get('roleDefinition').touched &&
+                              roleForm.get('roleDefinition').dirty &&
+                              roleForm.get('roleDefinition').errors
+                            ) {
+                              <span class="text-red-400">{{ 'pages.admin.projects.form.nameError' | translate }}</span>
+                            }
                           </div>
                         </div>
-
                         <div formGroupName="contactInfo" class="flex-auto">
                           <div class="mb-3 mt-3 xl:w-96">
                             <label
@@ -232,19 +219,16 @@
                               formControlName="upn"
                             />
                             <div class="flex">
-                              <span
-                                *ngIf="
-                                  !roleForm.get('contactInfo').get('upn').pristine &&
-                                  roleForm.get('contactInfo').get('upn').touched &&
-                                  roleForm.get('contactInfo').get('upn').dirty &&
-                                  roleForm.get('contactInfo').get('upn').errors
-                                "
-                                class="text-red-400"
-                                >{{ 'pages.admin.projects.form.roles.upnError' | translate }}</span
-                              >
+                              @if (
+                                !roleForm.get('contactInfo').get('upn').pristine &&
+                                roleForm.get('contactInfo').get('upn').touched &&
+                                roleForm.get('contactInfo').get('upn').dirty &&
+                                roleForm.get('contactInfo').get('upn').errors
+                              ) {
+                                <span class="text-red-400">{{ 'pages.admin.projects.form.roles.upnError' | translate }}</span>
+                              }
                             </div>
                           </div>
-
                           <div class="mb-3 mt-3 xl:w-96">
                             <label>{{ 'pages.admin.projects.form.roles.email' | translate }}</label>
                             <input
@@ -255,19 +239,16 @@
                               formControlName="email"
                             />
                             <div class="flex flex-col">
-                              <span
-                                *ngIf="
-                                  !roleForm.get('contactInfo').get('email').pristine &&
-                                  roleForm.get('contactInfo').get('email').touched &&
-                                  roleForm.get('contactInfo').get('email').dirty &&
-                                  roleForm.get('contactInfo').get('email').errors
-                                "
-                                class="text-red-400"
-                                >{{ 'pages.admin.projects.form.roles.emailError' | translate }}</span
-                              >
+                              @if (
+                                !roleForm.get('contactInfo').get('email').pristine &&
+                                roleForm.get('contactInfo').get('email').touched &&
+                                roleForm.get('contactInfo').get('email').dirty &&
+                                roleForm.get('contactInfo').get('email').errors
+                              ) {
+                                <span class="text-red-400">{{ 'pages.admin.projects.form.roles.emailError' | translate }}</span>
+                              }
                             </div>
                           </div>
-
                           <div class="mb-3 mt-3 xl:w-96">
                             <label>{{ 'pages.admin.projects.form.roles.phone' | translate }}</label>
                             <input
@@ -278,20 +259,17 @@
                               formControlName="phone"
                             />
                             <div class="flex flex-col">
-                              <span
-                                *ngIf="
-                                  !roleForm.get('contactInfo').get('phone').pristine &&
-                                  roleForm.get('contactInfo').get('phone').touched &&
-                                  roleForm.get('contactInfo').get('phone').dirty &&
-                                  roleForm.get('contactInfo').get('phone').errors
-                                "
-                                class="text-red-400"
-                                >{{ 'pages.admin.projects.form.phoneError' | translate }}</span
-                              >
+                              @if (
+                                !roleForm.get('contactInfo').get('phone').pristine &&
+                                roleForm.get('contactInfo').get('phone').touched &&
+                                roleForm.get('contactInfo').get('phone').dirty &&
+                                roleForm.get('contactInfo').get('phone').errors
+                              ) {
+                                <span class="text-red-400">{{ 'pages.admin.projects.form.phoneError' | translate }}</span>
+                              }
                             </div>
                           </div>
                         </div>
-
                         <div class="mb-3 mt-3 flex-none content-end">
                           <button
                             type="button"
@@ -303,9 +281,8 @@
                         </div>
                       </div>
                       <hr />
-                    </ng-container>
+                    }
                   </ng-container>
-
                   <div formGroupName="billing" class="mt-10">
                     <div class="xl:w-96">
                       <label
@@ -319,26 +296,22 @@
                         formControlName="workorder"
                         (ngModelChange)="clusterNameChanged($event)"
                       />
-                      <span
-                        *ngIf="
-                          !clusterModelForm.get('billing').get('workorder').pristine &&
-                          clusterModelForm.get('billing').get('workorder').touched &&
-                          clusterModelForm.get('billing').get('workorder').dirty &&
-                          clusterModelForm.get('billing').get('workorder').errors
-                        "
-                        class="text-red-400"
-                        >{{ 'pages.clusters.details.edit.form.workorderError' | translate }}</span
-                      >
+                      @if (
+                        !clusterModelForm.get('billing').get('workorder').pristine &&
+                        clusterModelForm.get('billing').get('workorder').touched &&
+                        clusterModelForm.get('billing').get('workorder').dirty &&
+                        clusterModelForm.get('billing').get('workorder').errors
+                      ) {
+                        <span class="text-red-400">{{ 'pages.clusters.details.edit.form.workorderError' | translate }}</span>
+                      }
                       <div class="flex flex-col">
                         <span id="workorder-help">{{ 'pages.clusters.details.edit.form.workorderHelp' | translate }}</span>
                       </div>
                     </div>
                   </div>
-
                   <div class="mt-8">
                     <span class="text-red-800 dark:text-red-300">* {{ 'common.required' | translate }}</span>
                   </div>
-
                   <div class="mt-10 flex flex-col" [formGroup]="tagForm">
                     <label> {{ 'pages.clusters.details.edit.form.serviceTags' | translate }}</label>
                     <div class="flex gap-3">
@@ -359,15 +332,11 @@
                         </p-chip>
                       }
                     </div>
-
-                    <span
-                      *ngIf="clusterModelForm.get('tags').touched && clusterModelForm.get('tags').dirty && clusterModelForm.get('tags').errors"
-                      class="text-red-400"
-                      >{{ 'pages.clusters.details.edit.form.serviceTagsError' | translate }}</span
-                    >
+                    @if (clusterModelForm.get('tags').touched && clusterModelForm.get('tags').dirty && clusterModelForm.get('tags').errors) {
+                      <span class="text-red-400">{{ 'pages.clusters.details.edit.form.serviceTagsError' | translate }}</span>
+                    }
                   </div>
                 </div>
-
                 <div class="mb-3 mt-3">
                   <label> {{ 'pages.clusters.details.edit.form.description' | translate }}</label>
                   <textarea
@@ -381,21 +350,18 @@
                     (ngModelChange)="clusterNameChanged($event)"
                   >
                   </textarea>
-                  <span
-                    *ngIf="
-                      !clusterModelForm.get('description').pristine &&
-                      clusterModelForm.get('description').touched &&
-                      clusterModelForm.get('description').dirty &&
-                      clusterModelForm.get('description').errors
-                    "
-                    class="text-red-400"
-                    >{{ 'pages.clusters.details.edit.form.descriptionError' | translate }}</span
-                  >
+                  @if (
+                    !clusterModelForm.get('description').pristine &&
+                    clusterModelForm.get('description').touched &&
+                    clusterModelForm.get('description').dirty &&
+                    clusterModelForm.get('description').errors
+                  ) {
+                    <span class="text-red-400">{{ 'pages.clusters.details.edit.form.descriptionError' | translate }}</span>
+                  }
                   <div class="flex flex-col">
                     <span id="description-help">{{ 'pages.clusters.details.edit.form.descriptionHelp' | translate }}</span>
                   </div>
                 </div>
-
                 <div class="mt-5 flex">
                   <button
                     type="button"
@@ -413,41 +379,41 @@
                     {{ 'common.reset' | translate }}
                   </button>
                 </div>
-
-                <div *ngIf="clusterUpdateError">
-                  <div class="mx-auto my-4 flex items-center rounded-md bg-red-200 px-6 py-4 text-lg">
-                    <span class="p-2 text-red-800"> {{ 'pages.admin.projects.form.updateError' | translate }} </span>
+                @if (clusterUpdateError) {
+                  <div>
+                    <div class="mx-auto my-4 flex items-center rounded-md bg-red-200 px-6 py-4 text-lg">
+                      <span class="p-2 text-red-800"> {{ 'pages.admin.projects.form.updateError' | translate }} </span>
+                    </div>
                   </div>
-                </div>
+                }
               </div>
             </form>
-          </ng-container>
-          <ng-template #loadingOrError>
-            <ng-container *ngIf="projectsFetchError; else dataLoading">
+          } @else {
+            @if (projectsFetchError) {
               <div class="mx-auto my-4 flex items-center rounded-md bg-red-200 px-6 py-4 text-lg">
                 <span class="p-2 text-red-800"> {{ 'pages.dashboard.error' | translate }} </span>
                 <button type="button" class="btn text-black" (click)="setupObservables()">{{ 'common.tryAgain' | translate }}</button>
               </div>
-            </ng-container>
-
-            <ng-template #dataLoading>
+            } @else {
               <app-spinner></app-spinner>
-            </ng-template>
-          </ng-template>
+            }
+          }
         </div>
       </div>
     </div>
-    <div class="dark:bg-darker flex justify-between rounded-md bg-white p-4" *ngIf="environment?.production === false">
-      <div class="dark:bg-darker rounded-md bg-white">
-        <div class="relative flex flex-col p-3">
-          <h2>Preview</h2>
-          <pre>{{ clusterModelForm.getRawValue() | json }}</pre>
-          <br />
-          <h3>Selected Project:</h3>
-          <pre>{{ selectedProject | json }}</pre>
+    @if (environment?.production === false) {
+      <div class="dark:bg-darker flex justify-between rounded-md bg-white p-4">
+        <div class="dark:bg-darker rounded-md bg-white">
+          <div class="relative flex flex-col p-3">
+            <h2>Preview</h2>
+            <pre>{{ clusterModelForm.getRawValue() | json }}</pre>
+            <br />
+            <h3>Selected Project:</h3>
+            <pre>{{ selectedProject | json }}</pre>
+          </div>
         </div>
       </div>
-    </div>
+    }
   </div>
 </div>
 <p-confirmDialog

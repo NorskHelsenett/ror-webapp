@@ -18,7 +18,7 @@
       <span>{{ 'common.create' | translate }}</span>
     </button>
   </div>
-  <ng-container *ngIf="createError">
+  @if (createError) {
     <div class="mx-auto my-4 flex flex-col items-center rounded-md px-6 py-4 text-lg">
       <span class="bg-red-200 p-2 dark:bg-red-900"> {{ 'pages.create.cluster.steps.summary.errorSubmit' | translate }} </span>
       <div class="flex flex-col dark:text-white">
@@ -26,5 +26,5 @@
         <span>{{ createError?.error?.message }}</span>
       </div>
     </div>
-  </ng-container>
+  }
 </form>

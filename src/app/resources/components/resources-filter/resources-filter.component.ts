@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
@@ -11,7 +10,7 @@ import { SelectModule } from 'primeng/select';
 
 @Component({
   selector: 'app-resources-filter',
-  imports: [CommonModule, FormsModule, TranslateModule, SelectModule, FormsModule],
+  imports: [FormsModule, TranslateModule, SelectModule, FormsModule],
   templateUrl: './resources-filter.component.html',
   styleUrl: './resources-filter.component.scss',
 })

@@ -25,19 +25,23 @@
     </tr>
   </thead>
   <tbody>
-    <tr class="transition duration-300 ease-in-out hover:bg-gray-200 dark:hover:bg-gray-500" *ngFor="let price of prices">
-      <td class="whitespace-nowrap px-6 py-4 text-sm font-medium">{{ price?.machineClass | titlecase }}</td>
-      <td class="whitespace-nowrap px-6 py-4 text-sm font-light">{{ price?.price }} NOK</td>
-      <td class="whitespace-nowrap px-6 py-4 text-sm font-light">{{ price?.cpu }}</td>
-      <td class="whitespace-nowrap px-6 py-4 text-sm font-light">{{ price?.memory }}</td>
-      <td class="whitespace-nowrap px-6 py-4 text-sm font-light">{{ price?.provider | titlecase }}</td>
-      <td class="whitespace-nowrap px-6 py-4 text-sm font-light">
-        {{ price?.from | time: 'DD. MMM YYYY HH:mm:ss' }}
-      </td>
-      <td class="whitespace-nowrap px-6 py-4 text-sm font-light">{{ (price?.to | time: 'DD. MMM YYYY HH:mm:ss') || '' }}</td>
-    </tr>
+    @for (price of prices; track price) {
+      <tr class="transition duration-300 ease-in-out hover:bg-gray-200 dark:hover:bg-gray-500">
+        <td class="whitespace-nowrap px-6 py-4 text-sm font-medium">{{ price?.machineClass | titlecase }}</td>
+        <td class="whitespace-nowrap px-6 py-4 text-sm font-light">{{ price?.price }} NOK</td>
+        <td class="whitespace-nowrap px-6 py-4 text-sm font-light">{{ price?.cpu }}</td>
+        <td class="whitespace-nowrap px-6 py-4 text-sm font-light">{{ price?.memory }}</td>
+        <td class="whitespace-nowrap px-6 py-4 text-sm font-light">{{ price?.provider | titlecase }}</td>
+        <td class="whitespace-nowrap px-6 py-4 text-sm font-light">
+          {{ price?.from | time: 'DD. MMM YYYY HH:mm:ss' }}
+        </td>
+        <td class="whitespace-nowrap px-6 py-4 text-sm font-light">{{ (price?.to | time: 'DD. MMM YYYY HH:mm:ss') || '' }}</td>
+      </tr>
+    }
   </tbody>
 </table>
-<div class="pt-3" *ngIf="!prices || prices?.length === 0">
-  <span>{{ 'pages.prices.table.empty' | translate }}</span>
-</div>
+@if (!prices || prices?.length === 0) {
+  <div class="pt-3">
+    <span>{{ 'pages.prices.table.empty' | translate }}</span>
+  </div>
+}

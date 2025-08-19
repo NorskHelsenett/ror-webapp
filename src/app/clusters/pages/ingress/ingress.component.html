@@ -31,56 +31,55 @@
   <div class="xs:m-1 md:ml-4 md:mt-2">
     <div class="dark:bg-darker flex flex-col rounded-md bg-white p-4">
       <div class="">
-        <p-tabView [scrollable]="true">
-          <p-tabPanel header="Details">
-            <ng-template pTemplate="header">
+        <p-tabs [scrollable]="true">
+          <p-tablist>
+            <p-tab>
               <div class="flex text-nowrap">
                 <i class="pi pi-objects-column mt-1"></i>
                 <span class="ml-2">{{ 'pages.clusters.details.ingresses.tabs.details' | translate }}</span>
               </div>
-            </ng-template>
-            <ng-template pTemplate="content">
-              <div>
-                <app-cluster-ingress-details></app-cluster-ingress-details>
-                <app-cluster-ingress-chart></app-cluster-ingress-chart>
-              </div>
-            </ng-template>
-          </p-tabPanel>
-          <p-tabPanel header="Annotations">
-            <ng-template pTemplate="header">
+            </p-tab>
+            <p-tab>
               <div class="flex text-nowrap">
                 <i class="pi pi-list mt-1"></i>
                 <span class="ml-2">{{ 'pages.clusters.details.ingress.annotations' | translate }}</span>
               </div>
-            </ng-template>
-
-            <ng-template pTemplate="content">
-              <app-cluster-ingress-annotations></app-cluster-ingress-annotations>
-            </ng-template>
-          </p-tabPanel>
-          @if (isCertManagerIngress(ingress) && certNames.length > 0) {
-            <p-tabPanel header="Cert manager">
-              <ng-template pTemplate="header">
-                <div class="flex text-nowrap">
-                  <i class="pi pi-book mt-1"></i>
-                  <span class="ml-2">{{ 'pages.clusters.details.ingresses.tabs.certmanager' | translate }}</span>
-                </div>
-              </ng-template>
-
-              <ng-template pTemplate="content"><app-cluster-ingress-certmanager></app-cluster-ingress-certmanager></ng-template>
-            </p-tabPanel>
-          }
-          <p-tabPanel header="Raw">
-            <ng-template pTemplate="header">
+            </p-tab>
+            <p-tab>
               <div class="flex text-nowrap">
                 <i class="pi pi-warehouse mt-1"></i>
                 <span class="ml-2">{{ 'pages.clusters.details.ingresses.tabs.raw' | translate }}</span>
               </div>
-            </ng-template>
-
-            <ng-template pTemplate="content"><app-cluster-ingress-raw></app-cluster-ingress-raw></ng-template>
-          </p-tabPanel>
-        </p-tabView>
+            </p-tab>
+            @if (isCertManagerIngress(ingress) && certNames.length > 0) {
+              <p-tab>
+                <div class="flex text-nowrap">
+                  <i class="pi pi-book mt-1"></i>
+                  <span class="ml-2">{{ 'pages.clusters.details.ingresses.tabs.certmanager' | translate }}</span>
+                </div>
+              </p-tab>
+            }
+          </p-tablist>
+          <p-tabpanels>
+            <p-tabpanel>
+              <div>
+                <app-cluster-ingress-details></app-cluster-ingress-details>
+                <app-cluster-ingress-chart></app-cluster-ingress-chart>
+              </div>
+            </p-tabpanel>
+            <p-tabpanel>
+              <app-cluster-ingress-annotations></app-cluster-ingress-annotations>
+            </p-tabpanel>
+            <p-tabpanel>
+              <app-cluster-ingress-raw></app-cluster-ingress-raw>
+            </p-tabpanel>
+            @if (isCertManagerIngress(ingress) && certNames.length > 0) {
+              <p-tabpanel>
+                <app-cluster-ingress-certmanager></app-cluster-ingress-certmanager>
+              </p-tabpanel>
+            }
+          </p-tabpanels>
+        </p-tabs>
       </div>
     </div>
   </div>

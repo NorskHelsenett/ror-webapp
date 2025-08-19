@@ -30,25 +30,33 @@
                         [routerLink]="['../../admin/projects/', cluster?.metadata?.project?.id]"
                         >{{ cluster?.metadata?.project?.name }}</a
                       >
-                      <span *ngIf="!cluster?.metadata?.project?.name">{{ 'common.unknown' | translate }}</span>
+                      @if (!cluster?.metadata?.project?.name) {
+                        <span>{{ 'common.unknown' | translate }}</span>
+                      }
                     </td>
                   </tr>
                   <tr>
                     <td class="px-2 py-1">{{ 'pages.clusters.details.metadata.criticality' | translate }}</td>
                     <td class="px-2 py-1 font-bold">
-                      <span *ngIf="cluster?.metadata?.criticality">
-                        {{ 'pages.clusters.details.edit.form.availableCriticalities.' + cluster?.metadata?.criticality | translate }}
-                      </span>
-                      <span *ngIf="!cluster?.metadata?.criticality">{{ 'common.unknown' | translate }}</span>
+                      @if (cluster?.metadata?.criticality) {
+                        <span>
+                          {{ 'pages.clusters.details.edit.form.availableCriticalities.' + cluster?.metadata?.criticality | translate }}
+                        </span>
+                      }
+                      @if (!cluster?.metadata?.criticality) {
+                        <span>{{ 'common.unknown' | translate }}</span>
+                      }
                     </td>
                   </tr>
                   <tr>
                     <td class="px-2 py-1">{{ 'pages.clusters.details.metadata.sensitivity' | translate }}</td>
                     <td class="px-2 py-1 font-bold">
-                      <span *ngIf="cluster?.metadata?.sensitivity">{{
-                        'pages.clusters.details.edit.form.availableSensitivities.' + cluster?.metadata?.sensitivity | translate
-                      }}</span>
-                      <span *ngIf="!cluster?.metadata?.sensitivity">{{ 'common.unknown' | translate }}</span>
+                      @if (cluster?.metadata?.sensitivity) {
+                        <span>{{ 'pages.clusters.details.edit.form.availableSensitivities.' + cluster?.metadata?.sensitivity | translate }}</span>
+                      }
+                      @if (!cluster?.metadata?.sensitivity) {
+                        <span>{{ 'common.unknown' | translate }}</span>
+                      }
                     </td>
                   </tr>
                   <tr>
@@ -62,7 +70,9 @@
                   <tr>
                     <td class="px-2 py-1">{{ 'pages.clusters.details.metadata.tags' | translate }}</td>
                     <td class="px-2 py-1 font-bold">
-                      <p-tag styleClass="mr-1 mt-1" *ngFor="let tag of tags" class="">{{ tag }}</p-tag>
+                      @for (tag of tags; track tag) {
+                        <p-tag styleClass="mr-1 mt-1" class="">{{ tag }}</p-tag>
+                      }
                     </td>
                   </tr>
                   <tr class="">
@@ -77,45 +87,47 @@
                     <td class="px-2 py-1 align-top">{{ 'pages.clusters.details.metadata.roles' | translate }}</td>
                     <td class="px-2 py-1 font-bold">
                       <div class="grid gap-3 md:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3">
-                        <div *ngFor="let role of cluster?.metadata?.roles || cluster?.metadata?.project?.projectMetadata?.roles" class="">
-                          <div class="rounded-lg border border-gray-300">
-                            <div class="px-1 py-4">
-                              <div class="mb-2">
-                                <span class="text-2xl">{{ role?.roleDefinition }}</span>
+                        @for (role of cluster?.metadata?.roles || cluster?.metadata?.project?.projectMetadata?.roles; track role) {
+                          <div class="">
+                            <div class="rounded-lg border border-gray-300">
+                              <div class="px-1 py-4">
+                                <div class="mb-2">
+                                  <span class="text-2xl">{{ role?.roleDefinition }}</span>
+                                </div>
+                                <table class="table-auto">
+                                  <tbody>
+                                    <tr>
+                                      <td class="text-sm">{{ 'pages.clusters.details.metadata.upn' | translate }}:</td>
+                                    </tr>
+                                    <tr>
+                                      <td class="break-all pl-3 text-lg">
+                                        <a href="mailto:{{ role?.contactInfo?.upn }}">{{ role?.contactInfo?.upn }}</a>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td class="text-sm">{{ 'pages.clusters.details.metadata.email' | translate }}:</td>
+                                    </tr>
+                                    <tr>
+                                      <td class="break-all pl-3 text-lg">
+                                        <a href="mailto:{{ role?.contactInfo?.email }}">{{ role?.contactInfo?.email }}</a>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td class="text-sm">{{ 'pages.clusters.details.metadata.phone' | translate }}:</td>
+                                    </tr>
+                                    <tr>
+                                      <td class="break-words pl-3 text-lg">
+                                        @if (role?.contactInfo?.phone?.length > 0) {
+                                          <a href="tel:{{ role?.contactInfo?.phone }}"> {{ role?.contactInfo?.phone }}</a>
+                                        }
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
                               </div>
-                              <table class="table-auto">
-                                <tbody>
-                                  <tr>
-                                    <td class="text-sm">{{ 'pages.clusters.details.metadata.upn' | translate }}:</td>
-                                  </tr>
-                                  <tr>
-                                    <td class="break-all pl-3 text-lg">
-                                      <a href="mailto:{{ role?.contactInfo?.upn }}">{{ role?.contactInfo?.upn }}</a>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td class="text-sm">{{ 'pages.clusters.details.metadata.email' | translate }}:</td>
-                                  </tr>
-                                  <tr>
-                                    <td class="break-all pl-3 text-lg">
-                                      <a href="mailto:{{ role?.contactInfo?.email }}">{{ role?.contactInfo?.email }}</a>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td class="text-sm">{{ 'pages.clusters.details.metadata.phone' | translate }}:</td>
-                                  </tr>
-                                  <tr>
-                                    <td class="break-words pl-3 text-lg">
-                                      <a href="tel:{{ role?.contactInfo?.phone }}" *ngIf="role?.contactInfo?.phone?.length > 0">
-                                        {{ role?.contactInfo?.phone }}</a
-                                      >
-                                    </td>
-                                  </tr>
-                                </tbody>
-                              </table>
                             </div>
                           </div>
-                        </div>
+                        }
                       </div>
                     </td>
                   </tr>
