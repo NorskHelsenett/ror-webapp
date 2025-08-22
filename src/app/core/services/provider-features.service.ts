@@ -32,6 +32,7 @@ export class ProviderFeaturesService {
     //return major > 1 || (major === 1 && minor >= 29);
     return false;
   }
+
   isTalosNodePoolEditable(k8sversion: string): boolean {
     throw new Error('Method not implemented.');
   }

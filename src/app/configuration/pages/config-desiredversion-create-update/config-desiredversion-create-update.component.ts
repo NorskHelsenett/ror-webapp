@@ -33,7 +33,7 @@ export class ConfigDesiredversionCreateUpdateComponent implements OnInit, OnDest
     private messageService: MessageService,
     private translateService: TranslateService,
   ) {
-    this.desiredVersion = this?.router?.getCurrentNavigation()?.extras?.state as DesiredVersion;
+    this.desiredVersion = this?.router?.currentNavigation()?.extras?.state as DesiredVersion;
   }
 
   ngOnInit(): void {
