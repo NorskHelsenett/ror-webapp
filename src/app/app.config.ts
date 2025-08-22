@@ -16,14 +16,14 @@ import { CustomMissingTranslationHandler } from './core/i18n/i18nfunctions';
 import { isPlatformServer } from '@angular/common';
 import RorTheme from './themes/ror-theme';
 import { ThemeService } from './core/services/theme.service';
-import { provideServerRendering, withRoutes } from '@angular/ssr';
 import { TypesService } from './resources/services/types.service';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
-import { serverRoutes } from './app.routes.server';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideZoneChangeDetection({ eventCoalescing: true }),
+    // Disable event coalescing as it may defer certain DOM events (e.g., Enter in PrimeNG column filters)
+    // and prevent immediate change detection/lazy load emissions in tables.
+    provideZoneChangeDetection({ eventCoalescing: false }),
     provideRouter(
       routes,
       withInMemoryScrolling({
@@ -35,7 +35,6 @@ export const appConfig: ApplicationConfig = {
       }),
     ),
     provideClientHydration(withEventReplay(), withNoHttpTransferCache()),
-    provideServerRendering(withRoutes(serverRoutes)),
     provideHttpClient(withFetch(), withInterceptorsFromDi()),
     {
       provide: HTTP_INTERCEPTORS,
