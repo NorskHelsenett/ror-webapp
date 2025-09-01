@@ -2,157 +2,154 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminReadGuard } from '../core/guards/admin-read.guard';
 
 import { AdminCreateGuard as AdminOwnerGuard } from '../core/guards/admin-create.guard';
-import { PolicyReportsComponent } from './pages/policy-reports/policy-reports.component';
-import { ComplianceReportsComponent } from './pages/compliance-reports/compliance-reports.component';
-import { AdminDatacentersComponent } from './pages/datacenters/admin-datacenters.component';
-import { AdminDatacenterCreateComponent } from './pages/datacenters/pages/admin-datacenter-create/admin-datacenter-create.component';
-import { AdminPricesComponent } from './pages/prices/admin-prices.component';
-import { AdminPricesCreateComponent } from './pages/prices/pages/admin-prices-create/admin-prices-create.component';
-import { AdminAuditlogsComponent } from './pages/auditlogs/admin-auditlogs.component';
-import { ProjectsComponent } from './pages/projects/projects.component';
-import { ProjectsCreateComponent } from './pages/projects/pages/projects-create/projects-create.component';
-import { ProjectDetailsComponent } from './pages/projects/pages/project-details/project-details.component';
-import { AclComponent } from '../acl/pages/acl/acl.component';
-import { AclCreateUpdatePageComponent } from '../acl/pages/acl-create-update/acl-create-update.component';
-import { ApikeysComponent } from '../apikey/pages/apikeys/apikeys.component';
-import { DatacenterDetailComponent } from '../datacenters/pages/datacenter-detail/datacenter-detail.component';
-import { ConfigurationComponent } from '../configuration/pages/configuration/configuration.component';
-import { ConfigOperatorconfigCreateUpdateComponent } from '../configuration/pages/config-operatorconfig-create-update/config-operatorconfig-create-update.component';
-import { ConfigTaskCreateUpdateComponent } from '../configuration/pages/config-task-create-update/config-task-create-update.component';
-import { ConfigDesiredversionCreateUpdateComponent } from '../configuration/pages/config-desiredversion-create-update/config-desiredversion-create-update.component';
-import { VulnerabilityReportsComponent } from './pages/vulnerability-reports/vulnerability-reports.component';
 
 export const routes: Routes = [
   {
     path: 'acl',
     canActivate: [AdminOwnerGuard],
-    component: AclComponent,
+    loadComponent: () => import('../acl/pages/acl/acl.component').then((m) => m.AclComponent),
   },
   {
     path: 'acl/create',
     canActivate: [AdminOwnerGuard],
-    component: AclCreateUpdatePageComponent,
+    loadComponent: () => import('../acl/pages/acl-create-update/acl-create-update.component').then((m) => m.AclCreateUpdatePageComponent),
   },
   {
     path: 'acl/:id/edit',
     canActivate: [AdminOwnerGuard],
-    component: AclCreateUpdatePageComponent,
+    loadComponent: () => import('../acl/pages/acl-create-update/acl-create-update.component').then((m) => m.AclCreateUpdatePageComponent),
   },
   {
     path: 'apikeys',
     canActivate: [AdminOwnerGuard],
-    component: ApikeysComponent,
+    loadComponent: () => import('../apikey/pages/apikeys/apikeys.component').then((m) => m.ApikeysComponent),
   },
   {
     path: 'apikeys',
     canActivate: [AdminOwnerGuard],
-    component: ApikeysComponent,
+    loadComponent: () => import('../apikey/pages/apikeys/apikeys.component').then((m) => m.ApikeysComponent),
   },
   {
     path: 'datacenter',
-    component: AdminDatacentersComponent,
+    loadComponent: () => import('./pages/datacenters/admin-datacenters.component').then((m) => m.AdminDatacentersComponent),
   },
   {
     path: 'datacenter/create',
     canActivate: [AdminReadGuard],
-    component: AdminDatacenterCreateComponent,
+    loadComponent: () =>
+      import('./pages/datacenters/pages/admin-datacenter-create/admin-datacenter-create.component').then((m) => m.AdminDatacenterCreateComponent),
   },
   {
     path: 'datacenter/:datacenterId/edit',
     canActivate: [AdminReadGuard],
-    component: AdminDatacenterCreateComponent,
+    loadComponent: () =>
+      import('./pages/datacenters/pages/admin-datacenter-create/admin-datacenter-create.component').then((m) => m.AdminDatacenterCreateComponent),
   },
   {
     path: 'prices',
     canActivate: [AdminReadGuard],
-    component: AdminPricesComponent,
+    loadComponent: () => import('./pages/prices/admin-prices.component').then((m) => m.AdminPricesComponent),
   },
   {
     path: 'prices/create',
     canActivate: [AdminReadGuard],
-    component: AdminPricesCreateComponent,
+    loadComponent: () => import('./pages/prices/pages/admin-prices-create/admin-prices-create.component').then((m) => m.AdminPricesCreateComponent),
   },
   {
     path: 'prices/:id/edit',
     canActivate: [AdminReadGuard],
-    component: AdminPricesCreateComponent,
+    loadComponent: () => import('./pages/prices/pages/admin-prices-create/admin-prices-create.component').then((m) => m.AdminPricesCreateComponent),
   },
   {
     path: 'auditlogs',
     canActivate: [AdminOwnerGuard],
-    component: AdminAuditlogsComponent,
+    loadComponent: () => import('./pages/auditlogs/admin-auditlogs.component').then((m) => m.AdminAuditlogsComponent),
   },
   {
     path: 'projects',
-    component: ProjectsComponent,
+    loadComponent: () => import('./pages/projects/projects.component').then((m) => m.ProjectsComponent),
   },
   {
     path: 'projects/create',
     canActivate: [AdminReadGuard],
-    component: ProjectsCreateComponent,
+    loadComponent: () => import('./pages/projects/pages/projects-create/projects-create.component').then((m) => m.ProjectsCreateComponent),
   },
   {
     path: 'projects/:id/edit',
     canActivate: [AdminReadGuard],
-    component: ProjectsCreateComponent,
+    loadComponent: () => import('./pages/projects/pages/projects-create/projects-create.component').then((m) => m.ProjectsCreateComponent),
   },
   {
     path: 'projects/:id',
-    component: ProjectDetailsComponent,
+    loadComponent: () => import('./pages/projects/projects.component').then((m) => m.ProjectsComponent),
   },
   {
     path: 'datacenter/:datacenterName',
-    component: DatacenterDetailComponent,
+    loadComponent: () => import('./pages/datacenters/admin-datacenters.component').then((m) => m.AdminDatacentersComponent),
   },
   {
     path: 'configuration',
     canActivate: [AdminOwnerGuard],
-    component: ConfigurationComponent,
+    loadComponent: () => import('../configuration/pages/configuration/configuration.component').then((m) => m.ConfigurationComponent),
   },
   {
     path: 'configuration/operatorconfig/create',
     canActivate: [AdminOwnerGuard],
-    component: ConfigOperatorconfigCreateUpdateComponent,
+    loadComponent: () =>
+      import('../configuration/pages/config-operatorconfig-create-update/config-operatorconfig-create-update.component').then(
+        (m) => m.ConfigOperatorconfigCreateUpdateComponent,
+      ),
   },
   {
     path: 'configuration/operatorconfig/:id/edit',
     canActivate: [AdminOwnerGuard],
-    component: ConfigOperatorconfigCreateUpdateComponent,
+    loadComponent: () =>
+      import('../configuration/pages/config-operatorconfig-create-update/config-operatorconfig-create-update.component').then(
+        (m) => m.ConfigOperatorconfigCreateUpdateComponent,
+      ),
   },
   {
     path: 'configuration/task/create',
     canActivate: [AdminOwnerGuard],
-    component: ConfigTaskCreateUpdateComponent,
+    loadComponent: () =>
+      import('../configuration/pages/config-task-create-update/config-task-create-update.component').then((m) => m.ConfigTaskCreateUpdateComponent),
   },
   {
     path: 'configuration/task/:id/edit',
     canActivate: [AdminOwnerGuard],
-    component: ConfigTaskCreateUpdateComponent,
+    loadComponent: () =>
+      import('../configuration/pages/config-task-create-update/config-task-create-update.component').then((m) => m.ConfigTaskCreateUpdateComponent),
   },
   {
     path: 'configuration/desiredversion/create',
     canActivate: [AdminOwnerGuard],
-    component: ConfigDesiredversionCreateUpdateComponent,
+    loadComponent: () =>
+      import('../configuration/pages/config-desiredversion-create-update/config-desiredversion-create-update.component').then(
+        (m) => m.ConfigDesiredversionCreateUpdateComponent,
+      ),
   },
   {
     path: 'configuration/desiredversion/edit',
     canActivate: [AdminOwnerGuard],
-    component: ConfigDesiredversionCreateUpdateComponent,
+    loadComponent: () =>
+      import('../configuration/pages/config-desiredversion-create-update/config-desiredversion-create-update.component').then(
+        (m) => m.ConfigDesiredversionCreateUpdateComponent,
+      ),
   },
   {
     path: 'policyreports',
     canActivate: [AdminReadGuard],
-    component: PolicyReportsComponent,
+    loadComponent: () => import('./pages/policy-reports/policy-reports.component').then((m) => m.PolicyReportsComponent),
   },
   {
     path: 'vulnerabilityreports',
     canActivate: [AdminReadGuard],
-    component: VulnerabilityReportsComponent,
+    loadComponent: () => import('./pages/vulnerability-reports/vulnerability-reports.component').then((m) => m.VulnerabilityReportsComponent),
   },
   {
     path: 'compliancereports',
     canActivate: [AdminReadGuard],
-    component: ComplianceReportsComponent,
+    loadComponent: () => import('./pages/compliance-reports/compliance-reports.component').then((m) => m.ComplianceReportsComponent),
   },
 ];
 

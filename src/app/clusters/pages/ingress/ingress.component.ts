@@ -34,6 +34,7 @@ import { SpinnerComponent } from '../../../shared/components';
   templateUrl: './ingress.component.html',
   styleUrl: './ingress.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
 })
 export class IngressComponent implements OnInit, OnDestroy {
   clusterId: string | undefined;
