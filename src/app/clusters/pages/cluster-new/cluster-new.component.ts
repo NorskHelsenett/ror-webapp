@@ -24,6 +24,7 @@ import { SelectModule } from 'primeng/select';
   styleUrls: ['./cluster-new.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
+  standalone: true,
   imports: [TranslateModule, CommonModule, InputNumberModule, FormsModule, ReactiveFormsModule, SelectModule, SpinnerComponent],
 })
 export class ClusterNewComponent implements OnInit {

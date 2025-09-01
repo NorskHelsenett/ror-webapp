@@ -18,6 +18,10 @@ export const RorTheme = definePreset(BaseTheme, {
     },
     colorScheme: {
       light: {
+        formField: {
+          // Use a light gray background for inputs in light mode to improve visibility (e.g., column filters)
+          background: '{surface.200}',
+        },
         primary: {
           color: '{zinc.500}',
           hoverColor: '{zinc.600}',

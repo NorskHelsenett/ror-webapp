@@ -53,6 +53,7 @@ import { Tabs, TabsModule } from 'primeng/tabs';
   templateUrl: './cluster-details.component.html',
   styleUrls: ['./cluster-details.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
   imports: [
     TranslateModule,
     CommonModule,
