@@ -105,6 +105,7 @@ export class ClusterDetailsComponent implements OnInit, OnDestroy, AfterContentI
   sidebarVisible = false;
 
   @ViewChild('tabs') tabsComponent: Tabs | undefined;
+  useNewVulnerability: boolean;
 
   private subscriptions = new Subscription();
   private tabs: any[] = [
@@ -216,6 +217,16 @@ export class ClusterDetailsComponent implements OnInit, OnDestroy, AfterContentI
     );
     this.userClaims = this.oauthService.getIdentityClaims();
     this.clusterId = this.route.snapshot.params['id'];
+    this.adminOwner$ = this.aclService.check(AclScopes.ROR, AclScopes.Global, AclAccess.Owner).pipe(
+      share(),
+      catchError((error: any) => {
+        this.aclFetchError = error;
+        this.changeDetector.detectChanges();
+        throw error;
+      }),
+    );
+
+    this.useNewVulnerability = localStorage.getItem('useNewVulnerability') === 'true';
   }
 
   ngAfterContentInit(): void {}
@@ -362,5 +373,9 @@ export class ClusterDetailsComponent implements OnInit, OnDestroy, AfterContentI
     } else {
       this.sidebarVisible = true;
     }
+  }
+
+  updateVulnerabilityPreference(): void {
+    localStorage.setItem('useNewVulnerability', String(this.useNewVulnerability));
   }
 }

@@ -1101,7 +1101,9 @@
           "fixedVersion": "Fikset i versjon",
           "description": "Beskrivelse",
           "artifactRepository": "Repository",
-          "artifactTag": "Versjon"
+          "artifactTag": "Versjon",
+          "useNew": "Bruk ny versjon",
+          "useOld": "Bruk gammel versjon"
         },
         "compliancereports": {
           "title": "Samsvarsrapporter",
