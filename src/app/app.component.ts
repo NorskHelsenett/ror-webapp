@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, isDevMode, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { Subscription, filter, tap } from 'rxjs';
 
@@ -39,8 +39,9 @@ export class AppComponent implements OnInit, OnDestroy {
   ) {
     if (isPlatformBrowser(this.platformId)) {
       let origin = window.location.origin;
-      if (!isDevMode()) {
-        origin = window.location.origin.replace(/:\d+$/, '');
+      // When running locally via port 8080 we strip the port so OAuth redirect/logout URIs match the configured domain.
+      if (window.location.port === '8080') {
+        origin = origin.replace(/:8080$/, '');
       }
       console.log('origin', origin);
 
