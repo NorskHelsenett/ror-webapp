@@ -17,6 +17,7 @@ export interface Auth {
   issuer: string;
   clientId: string;
   redirectUri: string;
+  redirectHost?: string;
   scope: string;
   responseType: string;
   logoutUrl: string;

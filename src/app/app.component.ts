@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
+import { config } from './app.config.server';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, isDevMode, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { Subscription, filter, tap } from 'rxjs';
 
@@ -13,6 +14,7 @@ import { ToastModule } from 'primeng/toast';
 import { registerLocaleData } from '@angular/common';
 import localeNo from '@angular/common/locales/no';
 import { STORAGE_KEYS } from './core/constants/storage-keys';
+import { ConfigService } from './core/services/config.service';
 registerLocaleData(localeNo);
 
 @Component({
@@ -33,17 +35,18 @@ export class AppComponent implements OnInit, OnDestroy {
     private changeDetector: ChangeDetectorRef,
     private oauthService: OAuthService,
     private authService: AuthService,
+    private configService: ConfigService,
     private titleService: Title,
     private translateService: TranslateService,
     private hydrationService: HydrationService,
   ) {
     if (isPlatformBrowser(this.platformId)) {
       let origin = window.location.origin;
-      // When running locally via port 8080 we strip the port so OAuth redirect/logout URIs match the configured domain.
-      if (window.location.port === '8080') {
-        origin = origin.replace(/:8080$/, '');
+      if (this.configService.config.auth.redirectHost) {
+        origin = this.configService.config.auth.redirectHost;
+      } else if (!isDevMode()) {
+        origin = window.location.origin.replace(/:\d+$/, '');
       }
-      console.log('origin', origin);
 
       this.authService.authConfig.redirectUri = origin + this.authService.authConfig.redirectUri;
       this.authService.authConfig.postLogoutRedirectUri = origin;

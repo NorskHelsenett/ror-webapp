@@ -10,6 +10,7 @@ export class ConfigService {
       issuer: 'http://localhost:5556/dex',
       clientId: 'ror.sky.test.nhn.no',
       redirectUri: '/auth/callback',
+      redirectHost: 'http://localhost:11000',
       scope: 'openid profile email groups offline_access',
       responseType: 'code',
       requireHttps: false,
