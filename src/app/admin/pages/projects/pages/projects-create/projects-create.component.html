@@ -119,7 +119,14 @@
                       <div class="mt-5 flex flex-col">
                         <label> {{ 'pages.admin.projects.form.serviceTags' | translate }}</label>
                         <div class="flex gap-3">
-                          <input class="text-lg" type="text" formControlName="tag" minlength="2" #tagInput (keyup.enter)="addTag(tagInput?.value)" />
+                          <input
+                            class="border-1 rounded-lg border-gray-300 text-lg dark:border-gray-600 dark:bg-gray-700"
+                            type="text"
+                            formControlName="tag"
+                            minlength="2"
+                            #tagInput
+                            (keyup.enter)="addTag(tagInput?.value)"
+                          />
                           <button
                             [disabled]="!tagForm?.valid"
                             (click)="addTag(tagInput?.value)"
