@@ -472,9 +472,13 @@
           <div role="menu" class="mt-2 space-y-2 px-7" aria-label="Dashboards">
             <!-- active & hover classes 'text-gray-700 dark:text-light' -->
             <!-- inActive classes 'text-gray-400 dark:text-gray-400' -->
-            <a href="https://beta.ror.nhn.no" target="_blank" role="menuitem"
+            <a
+              href="https://beta.ror.nhn.no"
+              target="_blank"
+              role="menuitem"
               routerLinkActive="dark:bg-green-800 text-white bg-green-700"
-              class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700">
+              class="block cursor-pointer rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700"
+            >
               {{ 'nav.betaRor' | translate }}
             </a>
           </div>
@@ -1001,12 +1005,12 @@
                 </div>
               </div>
               <div role="menu" class="mt-2 space-y-2 px-7" aria-label="Dashboards">
-                <a 
-                (click)="toggleMobileMenu()"
-                  href="https://beta.ror.nhn.no" 
-                  target="_blank" 
+                <a
+                  (click)="toggleMobileMenu()"
+                  href="https://beta.ror.nhn.no"
+                  target="_blank"
                   role="menuitem"
-                  class="block rounded-md p-2 text-sm hover:bg-green-700 active:bg-green-700 text-gray-400 transition-colors duration-200 hover:text-gray-700 dark:hover:text-white"
+                  class="block rounded-md p-2 text-sm text-gray-400 transition-colors duration-200 hover:bg-green-700 hover:text-gray-700 active:bg-green-700 dark:hover:text-white"
                 >
                   {{ 'nav.betaRor' | translate }}
                 </a>
