@@ -146,6 +146,8 @@
     "projects": "Projects",
     "nodes": "Nodes",
     "help": "Help",
+    "newRor": "New ROR",
+    "betaRor": "Beta ROR",
     "search": "Search",
     "profile": "User profile",
     "logout": "Logout",
