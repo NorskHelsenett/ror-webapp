@@ -1,6 +1,6 @@
 @if (observables$ | async) {
   <div>
-    <div class="dark:border-primary-darker flex items-center justify-between border-b px-4 py-4 lg:py-6">
+    <div class="dark:border-primary-darker px-4 py-4 lg:py-6 flex items-center justify-between border-b">
       <h1 class="text-2xl font-semibold">{{ 'common.edit' | translate }}: {{ workspaceName }}</h1>
     </div>
     <div class="dark:bg-darker m-2 rounded-md bg-white p-2" [formGroup]="form">

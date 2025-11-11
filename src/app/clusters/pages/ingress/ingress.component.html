@@ -2,13 +2,13 @@
 @let ingress = ingress$ | async;
 
 @defer (when cluster && ingress) {
-  <div class="dark:border-primary-darker flex items-center justify-between border-b px-4 py-4 lg:py-6">
-    <div class="flex flex-row gap-3">
+  <div class="dark:border-primary-darker px-4 py-4 lg:py-6 flex items-center justify-between border-b">
+    <div class="gap-3 flex flex-row">
       <img src="/assets/icons/k8s/logo.svg" alt="k8s logo" height="5" width="30" />
       <a routerLink="../../" class="text-2xl font-bold hover:underline">{{ cluster?.clusterName }}</a>
       <span> - </span>
 
-      <div class="flex gap-1">
+      <div class="gap-1 flex">
         <i class="pi pi-bars mt-2"></i>
         <a class="text-2xl" [routerLink]="['../../']" [queryParams]="{ tab: 'ingresses' }">{{
           'pages.clusters.details.ingress.ingresses' | translate
@@ -23,13 +23,13 @@
 
     <a
       (click)="refresh()"
-      class="focus:ring-primary dark:focus:ring-offset-dark cursor-pointer rounded-md bg-green-700 px-4 py-2 text-sm text-white hover:bg-green-600 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+      class="focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white hover:bg-green-600 focus:ring-offset-white cursor-pointer focus:ring focus:ring-offset-1 focus:outline-none"
     >
       {{ 'common.refresh' | translate }}
     </a>
   </div>
   <div class="xs:m-1 md:ml-4 md:mt-2">
-    <div class="dark:bg-darker flex flex-col rounded-md bg-white p-4">
+    <div class="dark:bg-darker rounded-md bg-white p-4 flex flex-col">
       <div class="">
         <p-tabs [scrollable]="true">
           <p-tablist>
@@ -94,7 +94,7 @@
     {{ 'common.fetching' | translate }} and more ...
   </div>
 } @error {
-  <div class="mx-auto my-4 flex items-center rounded-md bg-red-200 px-6 py-4 text-lg">
+  <div class="my-4 rounded-md bg-red-200 px-6 py-4 text-lg mx-auto flex items-center">
     <span class="p-2 text-red-800"> {{ 'pages.apikeys.error' | translate }} </span>
     <button class="btn text-black" (click)="refresh()">{{ 'common.tryAgain' | translate }}</button>
   </div>

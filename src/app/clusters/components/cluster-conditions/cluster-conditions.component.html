@@ -2,11 +2,11 @@
   @for (condition of conditions; track condition) {
     @if (condition?.type === 'ToolingOk' && condition?.status === 'False') {
       <div
-        class="xs:flex-none m-3 rounded-lg bg-gradient-to-r from-red-700 to-yellow-500 p-3 text-white shadow-pink-500 drop-shadow-lg hover:from-yellow-500 hover:to-red-700 dark:shadow-red-300 md:flex"
+        class="xs:flex-none m-3 rounded-lg from-red-700 to-yellow-500 p-3 text-white shadow-pink-500 drop-shadow-lg hover:from-yellow-500 hover:to-red-700 dark:shadow-red-300 md:flex bg-gradient-to-r"
       >
-        <span class="relative mr-3 flex h-6 w-6">
-          <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-75"></span>
-          <span class="ml-2 mt-2 h-2 w-2 rounded-full bg-white"></span>
+        <span class="mr-3 h-6 w-6 relative flex">
+          <span class="animate-ping bg-white absolute inline-flex h-full w-full rounded-full opacity-75"></span>
+          <span class="ml-2 mt-2 h-2 w-2 bg-white rounded-full"></span>
         </span>
         <span class="text-lg font-bold">{{ 'pages.clusters.details.conditions.toolingAutosyncError' | translate }}</span>
         <span class="ml-1">

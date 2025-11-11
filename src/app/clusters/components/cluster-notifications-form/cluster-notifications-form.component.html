@@ -1,7 +1,7 @@
-<div class="grid gap-8 p-4">
-  <div class="dark:bg-darker flex justify-between overflow-x-auto rounded-md bg-white p-4">
-    <div class="dark:bg-darker w-full rounded-md bg-white">
-      <form class="flex flex-col gap-4" [formGroup]="routeForm">
+<div class="gap-8 p-4 grid">
+  <div class="dark:bg-darker rounded-md bg-white p-4 flex justify-between overflow-x-auto">
+    <div class="dark:bg-darker rounded-md bg-white w-full">
+      <form class="gap-4 flex flex-col" [formGroup]="routeForm">
         <div class="flex flex-col">
           <label class="text-xl font-bold" for="apiVersion">{{ 'pages.clusters.details.notifications.notificationkind' | translate }}</label>
           <p-select
@@ -21,8 +21,8 @@
                 <label>{{ 'pages.clusters.details.notifications.channelid' | translate }}</label>
                 <ng-container [formGroupName]="$index">
                   <div class="flex flex-col">
-                    <input class="p-inputtext-lg border text-lg" type="text" pInputText formControlName="channelId" />
-                    <div class="m-2 flex gap-2">
+                    <input class="p-inputtext-lg text-lg border" type="text" pInputText formControlName="channelId" />
+                    <div class="m-2 gap-2 flex">
                       @if ($last) {
                         <button
                           pButton
@@ -51,12 +51,12 @@
             </div>
           </ng-container>
         </div>
-        <div class="flex gap-2">
+        <div class="gap-2 flex">
           @if (create) {
             <button
               pButton
               pRipple
-              class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white hover:bg-green-900 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white disabled:bg-gray-500 disabled:hover:bg-gray-800"
+              class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white hover:bg-green-900 focus:ring-offset-white disabled:bg-gray-500 disabled:hover:bg-gray-800 focus:ring focus:ring-offset-1 focus:outline-none"
               type="submit"
               (click)="onSubmit()"
               [disabled]="!routeForm.valid"
@@ -68,7 +68,7 @@
             <button
               pButton
               pRipple
-              class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white hover:bg-green-900 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white disabled:bg-gray-500 disabled:hover:bg-gray-800"
+              class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white hover:bg-green-900 focus:ring-offset-white disabled:bg-gray-500 disabled:hover:bg-gray-800 focus:ring focus:ring-offset-1 focus:outline-none"
               type="submit"
               (click)="onSubmit()"
               [disabled]="!routeForm.valid"
@@ -80,7 +80,7 @@
           <button
             pButton
             pRipple
-            class="focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-gray-500 px-4 py-2 text-sm text-white hover:bg-gray-700 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+            class="focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-gray-500 px-4 py-2 text-sm text-white hover:bg-gray-700 focus:ring-offset-white focus:ring focus:ring-offset-1 focus:outline-none"
             (click)="cancel()"
           >
             {{ 'common.cancel' | translate }}

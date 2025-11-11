@@ -14,18 +14,18 @@
       </div>
       <a
         (click)="fetch()"
-        class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark cursor-pointer rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+        class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring-offset-white cursor-pointer focus:ring focus:ring-offset-1 focus:outline-none"
       >
         {{ 'common.refresh' | translate }}
       </a>
     </div>
     <div class="mt-2 p-2">
-      <div class="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6">
+      <div class="sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 grid">
         <div class="sm:col-span-1 md:col-span-1 lg:col-span-2 xl:col-span-3 2xl:col-span-4">
           <app-cluster-ingress-rules [cluster]="cluster" [ingressName]="ingressId"></app-cluster-ingress-rules>
         </div>
         <div class="sm:col-span-1 md:col-span-1 lg:col-span-1 lg:pl-3 xl:col-span-1 2xl:col-span-2">
-          <div class="grid-cols grid gap-4">
+          <div class="grid-cols gap-4 grid">
             <app-cluster-ingress-metadata [cluster]="cluster" [ingressName]="ingressId"></app-cluster-ingress-metadata>
           </div>
         </div>
@@ -34,7 +34,7 @@
   </div>
 } @else {
   @if (clusterError) {
-    <div class="mx-auto my-4 flex items-center rounded-md bg-red-200 px-6 py-4 text-lg">
+    <div class="my-4 rounded-md bg-red-200 px-6 py-4 text-lg mx-auto flex items-center">
       <span class="p-2 text-red-800"> {{ 'pages.dashboard.error' | translate }} </span>
       <button class="btn text-black" (click)="fetchCluster(clusterId || '')">{{ 'common.tryAgain' | translate }}</button>
     </div>

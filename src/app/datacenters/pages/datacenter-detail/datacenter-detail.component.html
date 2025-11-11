@@ -1,8 +1,8 @@
-<div class="dark:border-primary-darker flex items-center justify-between border-b px-4 py-4 lg:py-6">
+<div class="dark:border-primary-darker px-4 py-4 lg:py-6 flex items-center justify-between border-b">
   <h1 class="text-2xl font-semibold">{{ 'pages.datacenters.details.title' | translate }}: {{ datacenterName }}</h1>
   <a
     (click)="fetch()"
-    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark cursor-pointer rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring-offset-white cursor-pointer focus:ring focus:ring-offset-1 focus:outline-none"
   >
     {{ 'common.refresh' | translate }}
   </a>
@@ -11,11 +11,11 @@
 <div class="mt-2">
   @if (datacenterMetrics$ | async; as datacenterMetrics) {
     <div>
-      <div class="grid gap-4 p-4 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
-        <div class="dark:bg-darker flex flex-col rounded-md bg-white">
-          <div class="flex items-center justify-between p-4">
+      <div class="gap-4 p-4 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 grid">
+        <div class="dark:bg-darker rounded-md bg-white flex flex-col">
+          <div class="p-4 flex items-center justify-between">
             <div>
-              <h6 class="dark:text-primary-lighter text-xs font-medium uppercase leading-none tracking-wider text-gray-500">
+              <h6 class="dark:text-primary-lighter text-xs font-medium tracking-wider text-gray-500 leading-none uppercase">
                 {{ 'nav.workspaces' | translate }}
               </h6>
               <span class="text-xl font-semibold"> {{ workspaceCount || 0 }} </span>
@@ -46,14 +46,14 @@
           <a class="hover:underline" routerLink="workspaces">{{ 'pages.dashboard.seeAll' | translate }}</a>
         </div> -->
         </div>
-        <div class="dark:bg-darker flex flex-col rounded-md bg-white">
-          <div class="flex items-center justify-between p-4">
+        <div class="dark:bg-darker rounded-md bg-white flex flex-col">
+          <div class="p-4 flex items-center justify-between">
             <div>
-              <h6 class="dark:text-primary-lighter text-xs font-medium uppercase leading-none tracking-wider text-gray-500">
+              <h6 class="dark:text-primary-lighter text-xs font-medium tracking-wider text-gray-500 leading-none uppercase">
                 {{ 'nav.clusters' | translate }}
               </h6>
               <span class="text-xl font-semibold">{{ datacenterMetrics?.metrics?.clusterCount || 0 }}</span>
-              <span class="ml-2 inline-block rounded-md bg-green-100 px-2 py-px text-xs text-green-900">
+              <span class="ml-2 rounded-md bg-green-100 px-2 text-xs text-green-900 inline-block py-px">
                 {{ datacenterMetrics?.metrics?.clusterCount || 0 }} <span>{{ 'pages.dashboard.total' | translate }}</span></span
               >
             </div>
@@ -80,10 +80,10 @@
           <a class="hover:underline" routerLink="clusters">{{ 'pages.dashboard.seeAll' | translate }}</a>
         </div> -->
         </div>
-        <div class="dark:bg-darker flex flex-col rounded-md bg-white">
-          <div class="flex items-center justify-between p-4">
+        <div class="dark:bg-darker rounded-md bg-white flex flex-col">
+          <div class="p-4 flex items-center justify-between">
             <div>
-              <h6 class="dark:text-primary-lighter text-xs font-medium uppercase leading-none tracking-wider text-gray-500">
+              <h6 class="dark:text-primary-lighter text-xs font-medium tracking-wider text-gray-500 leading-none uppercase">
                 {{ 'nav.nodes' | translate }}
               </h6>
               <span class="text-xl font-semibold">{{ datacenterMetrics?.metrics?.nodeCount || 0 }}</span>
@@ -112,14 +112,14 @@
           </div>
           <div class="p-2"></div>
         </div>
-        <div class="dark:bg-darker flex flex-col rounded-md bg-white">
-          <div class="flex items-center justify-between p-4">
+        <div class="dark:bg-darker rounded-md bg-white flex flex-col">
+          <div class="p-4 flex items-center justify-between">
             <div>
-              <h6 class="dark:text-primary-lighter text-xs font-medium uppercase leading-none tracking-wider text-gray-500">
+              <h6 class="dark:text-primary-lighter text-xs font-medium tracking-wider text-gray-500 leading-none uppercase">
                 {{ 'pages.dashboard.metrics.cpu' | translate }}
               </h6>
               <span class="text-xl font-semibold">{{ datacenterMetrics?.metrics?.cpuPercentage }} %</span>
-              <span class="ml-2 inline-block rounded-md bg-green-100 px-2 py-px text-xs text-green-900"
+              <span class="ml-2 rounded-md bg-green-100 px-2 text-xs text-green-900 inline-block py-px"
                 ><span> {{ datacenterMetrics?.metrics?.cpu || 0 }}</span> {{ 'pages.dashboard.metrics.cores' | translate }}
               </span>
             </div>
@@ -144,14 +144,14 @@
           </div>
           <div class="p-2"></div>
         </div>
-        <div class="dark:bg-darker flex flex-col rounded-md bg-white">
-          <div class="flex items-center justify-between p-4">
+        <div class="dark:bg-darker rounded-md bg-white flex flex-col">
+          <div class="p-4 flex items-center justify-between">
             <div>
-              <h6 class="dark:text-primary-lighter text-xs font-medium uppercase leading-none tracking-wider text-gray-500">
+              <h6 class="dark:text-primary-lighter text-xs font-medium tracking-wider text-gray-500 leading-none uppercase">
                 {{ 'pages.dashboard.metrics.memory' | translate }}
               </h6>
               <span class="text-xl font-semibold">{{ datacenterMetrics?.metrics?.memoryPercentage }} %</span>
-              <span class="ml-2 inline-block rounded-md bg-green-100 px-2 py-px text-xs text-green-900">
+              <span class="ml-2 rounded-md bg-green-100 px-2 text-xs text-green-900 inline-block py-px">
                 {{ datacenterMetrics?.metrics?.memory | formatBytes: 2 : true }}
               </span>
             </div>
@@ -180,7 +180,7 @@
     </div>
   } @else {
     @if (datacenterMetricsError) {
-      <div class="my-4 flex items-center rounded-md bg-red-200 px-6 py-4 text-lg">
+      <div class="my-4 rounded-md bg-red-200 px-6 py-4 text-lg flex items-center">
         <span class="p-2 text-red-800"> {{ 'pages.dashboard.error' | translate }} </span>
         <button class="btn text-black" (click)="fetchDatacenterMetrics()">{{ 'common.tryAgain' | translate }}</button>
       </div>
@@ -191,18 +191,18 @@
 </div>
 
 <div class="mt-2 p-4">
-  <div class="dark:bg-darker flex items-center justify-between rounded-md bg-white p-4">
-    <div class="dark:bg-darker col-span-2 rounded-md bg-white">
-      <div class="dark:border-primary flex items-center justify-between border-b p-4">
+  <div class="dark:bg-darker rounded-md bg-white p-4 flex items-center justify-between">
+    <div class="dark:bg-darker rounded-md bg-white col-span-2">
+      <div class="dark:border-primary p-4 flex items-center justify-between border-b">
         <h4 class="dark:text-light text-lg font-semibold text-gray-500">{{ 'nav.workspaces' | translate }}</h4>
       </div>
-      <div class="relative p-3">
+      <div class="p-3 relative">
         @if (workspaceMetrics$ | async; as workspaces) {
           <div>
-            <table class="dark:text-light min-w-full text-gray-900">
+            <table class="dark:text-light text-gray-900 min-w-full">
               <thead class="">
                 <tr>
-                  <th scope="col" class="text-md px-2 py-2 text-left font-medium">
+                  <th scope="col" class="text-md px-2 py-2 font-medium text-left">
                     <div class="flex">
                       <a (click)="changeSort('_id')">{{ 'pages.datacenters.table.column.name' | translate }}</a>
                       @if (filter?.sort[0].sortField === '_id' && filter?.sort[0].sortOrder === 1) {
@@ -213,7 +213,7 @@
                       }
                     </div>
                   </th>
-                  <th scope="col" class="text-md px-2 py-2 text-left font-medium">
+                  <th scope="col" class="text-md px-2 py-2 font-medium text-left">
                     <div class="flex">
                       <a (click)="changeSort('totalCpuPercentage')">{{ 'pages.datacenters.table.column.cpu' | translate }}</a>
                       @if (filter?.sort[0].sortField === 'totalCpuPercentage' && filter?.sort[0].sortOrder === 1) {
@@ -224,7 +224,7 @@
                       }
                     </div>
                   </th>
-                  <th scope="col" class="text-md px-2 py-2 text-left font-medium">
+                  <th scope="col" class="text-md px-2 py-2 font-medium text-left">
                     <div class="flex">
                       <a (click)="changeSort('totalMemoryPercentage')">{{ 'pages.datacenters.table.column.memory' | translate }}</a>
                       @if (filter?.sort[0].sortField === 'totalMemoryPercentage' && filter?.sort[0].sortOrder === 1) {
@@ -235,7 +235,7 @@
                       }
                     </div>
                   </th>
-                  <th scope="col" class="text-md px-2 py-2 text-left font-medium">
+                  <th scope="col" class="text-md px-2 py-2 font-medium text-left">
                     <div class="flex">
                       <a (click)="changeSort('totalClusterCount')">{{ 'pages.datacenters.table.column.cluster' | translate }}</a>
                       @if (filter?.sort[0].sortField === 'totalClusterCount' && filter?.sort[0].sortOrder === 1) {
@@ -250,32 +250,32 @@
               </thead>
               <tbody>
                 @for (workspace of workspaces?.data; track workspace) {
-                  <tr class="transition duration-300 ease-in-out hover:bg-gray-200 dark:hover:bg-gray-500">
-                    <td class="whitespace-nowrap px-2 py-2 text-sm font-medium">
-                      <a class="hover:text-blue-800 hover:underline dark:hover:text-blue-400" [routerLink]="['../../../workspaces', workspace?.id]">{{
+                  <tr class="ease-in-out hover:bg-gray-200 dark:hover:bg-gray-500 transition duration-300">
+                    <td class="px-2 py-2 text-sm font-medium whitespace-nowrap">
+                      <a class="hover:text-blue-800 dark:hover:text-blue-400 hover:underline" [routerLink]="['../../../workspaces', workspace?.id]">{{
                         workspace?.name
                       }}</a>
                     </td>
-                    <td class="whitespace-nowrap px-2 py-2 text-sm font-light">
+                    <td class="px-2 py-2 text-sm font-light whitespace-nowrap">
                       {{ workspace?.cpuPercentage }} % ({{ workspace?.cpu }} {{ 'pages.datacenters.table.column.cores' | translate }})
                     </td>
-                    <td class="whitespace-nowrap px-2 py-2 text-sm font-light">
+                    <td class="px-2 py-2 text-sm font-light whitespace-nowrap">
                       {{ workspace?.memoryPercentage }} % ({{ workspace?.memory | formatBytes: 2 : true }})
                     </td>
-                    <td class="whitespace-nowrap px-2 py-2 text-sm font-light">{{ workspace?.clusterCount }}</td>
+                    <td class="px-2 py-2 text-sm font-light whitespace-nowrap">{{ workspace?.clusterCount }}</td>
                   </tr>
                 }
               </tbody>
             </table>
-            <div class="relative mt-2 flex flex-row">
+            <div class="mt-2 relative flex flex-row">
               <nav aria-label="Page navigation" class="flex-none">
-                <ul class="inline-flex space-x-2">
+                <ul class="space-x-2 inline-flex">
                   @if (pages?.length > 0) {
                     <li>
                       <button
                         [disabled]="currentPage === pages[0]"
                         (click)="setPage(currentPage - 1)"
-                        class="focus:shadow-outline flex h-10 w-10 items-center justify-center rounded-full text-green-600 transition-colors duration-150 hover:bg-green-100 disabled:text-gray-600"
+                        class="focus:shadow-outline h-10 w-10 text-green-600 hover:bg-green-100 disabled:text-gray-600 flex items-center justify-center rounded-full transition-colors duration-150"
                       >
                         <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20">
                           <path
@@ -291,7 +291,7 @@
                     <div class="relative inline-flex">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        class="pointer-events-none absolute right-0 top-0 m-3 h-4 w-4"
+                        class="right-0 top-0 m-3 h-4 w-4 pointer-events-none absolute"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -302,7 +302,7 @@
                       <select
                         [(ngModel)]="currentPage"
                         (ngModelChange)="setPage(currentPage)"
-                        class="h-8 appearance-none rounded-full border border-gray-300 bg-white pl-2 pr-8 text-gray-600 hover:border-gray-400 focus:outline-none dark:border-green-300 dark:bg-green-700 dark:text-white"
+                        class="h-8 border-gray-300 bg-white pl-2 pr-8 text-gray-600 hover:border-gray-400 dark:border-green-300 dark:bg-green-700 dark:text-white appearance-none rounded-full border focus:outline-none"
                       >
                         @for (pageNumber of pages; track pageNumber) {
                           <option [value]="pageNumber">{{ pageNumber }}</option>
@@ -315,7 +315,7 @@
                       <button
                         [disabled]="currentPage === pages[pages.length - 1]"
                         (click)="setPage(currentPage + 1)"
-                        class="focus:shadow-outline flex h-10 w-10 items-center justify-center rounded-full text-green-600 transition-colors duration-150 hover:bg-green-100 disabled:text-gray-600"
+                        class="focus:shadow-outline h-10 w-10 text-green-600 hover:bg-green-100 disabled:text-gray-600 flex items-center justify-center rounded-full transition-colors duration-150"
                       >
                         <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20">
                           <path
@@ -340,7 +340,7 @@
                   <span class="mr-2 mt-2">{{ 'common.pageSize' | translate }}</span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    class="pointer-events-none absolute right-0 top-0 m-3 h-4 w-4"
+                    class="right-0 top-0 m-3 h-4 w-4 pointer-events-none absolute"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -351,7 +351,7 @@
                   <select
                     [(ngModel)]="itemsPerPage"
                     (change)="itemPerPageChanged(itemsPerPage)"
-                    class="h-8 appearance-none rounded-full border border-gray-300 bg-white pl-2 pr-8 text-gray-600 hover:border-gray-400 focus:outline-none dark:border-green-300 dark:bg-green-700 dark:text-white"
+                    class="h-8 border-gray-300 bg-white pl-2 pr-8 text-gray-600 hover:border-gray-400 dark:border-green-300 dark:bg-green-700 dark:text-white appearance-none rounded-full border focus:outline-none"
                   >
                     @for (limit of pageSizes; track limit) {
                       <option [ngValue]="limit">{{ limit }}</option>
@@ -363,7 +363,7 @@
           </div>
         } @else {
           @if (workspaceMetricsError) {
-            <div class="mx-auto my-4 flex items-center rounded-md bg-red-200 px-6 py-4 text-lg">
+            <div class="my-4 rounded-md bg-red-200 px-6 py-4 text-lg mx-auto flex items-center">
               <span class="p-2 text-red-800"> {{ 'pages.dashboard.error' | translate }} </span>
               <button class="btn text-black" (click)="fetchWorkspaceMetrics()">{{ 'common.tryAgain' | translate }}</button>
             </div>

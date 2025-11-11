@@ -45,7 +45,7 @@
           <div class="">
             <p-select [options]="rowsPerPage" [(ngModel)]="rows" (onChange)="selectedRowsChange($event)">
               <ng-template let-row pTemplate="item">
-                <div class="align-items-center flex gap-2">
+                <div class="align-items-center gap-2 flex">
                   <div>{{ row }}</div>
                 </div>
               </ng-template>
@@ -126,7 +126,7 @@
         @if (resource) {
           <td class="h-10 w-40">
             <a
-              class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+              class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring-offset-white focus:ring focus:ring-offset-1 focus:outline-none"
               (click)="setSelectedResource(resource)"
             >
               {{ 'common.details' | translate }}
@@ -167,7 +167,7 @@
         @if (showLoadMore) {
           <button
             (click)="loadMore()"
-            class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+            class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring-offset-white focus:ring focus:ring-offset-1 focus:outline-none"
           >
             {{ 'common.loadMore' | translate }}
           </button>

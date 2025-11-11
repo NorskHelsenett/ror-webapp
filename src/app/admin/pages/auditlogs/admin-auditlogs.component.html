@@ -1,8 +1,8 @@
-<div class="dark:border-primary-darker flex items-center justify-between border-b px-4 py-4 lg:py-6">
-  <h1 class="flex-grow text-2xl font-semibold">{{ 'pages.admin.auditlogs.title' | translate }}</h1>
+<div class="dark:border-primary-darker px-4 py-4 lg:py-6 flex items-center justify-between border-b">
+  <h1 class="text-2xl font-semibold flex-grow">{{ 'pages.admin.auditlogs.title' | translate }}</h1>
   <a
     (click)="fetchAuditlogs(lastLazyLoad)"
-    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark cursor-pointer rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring-offset-white cursor-pointer focus:ring focus:ring-offset-1 focus:outline-none"
   >
     {{ 'common.refresh' | translate }}
   </a>
@@ -131,7 +131,7 @@
         <tr>
           <td colspan="6">
             <div class="p-3">
-              <div class="flex flex-col lg:flex-row">
+              <div class="lg:flex-row flex flex-col">
                 <p-fieldset
                   class="flex-grow"
                   legend="{{ 'pages.admin.auditlogs.view.new.title' | translate }}"
@@ -156,7 +156,7 @@
     </p-table>
   } @else {
     <ng-container>
-      <div class="mx-auto my-4 flex items-center rounded-md bg-red-200 px-6 py-4 text-lg">
+      <div class="my-4 rounded-md bg-red-200 px-6 py-4 text-lg mx-auto flex items-center">
         <span class="p-2 text-red-800">
           {{ 'common.errorLoading' | translate }} <br />
           {{ ('common.error' | translate) + ': ' + auditlogsError }}

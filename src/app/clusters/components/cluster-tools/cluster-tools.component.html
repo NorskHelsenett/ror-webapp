@@ -1,16 +1,16 @@
-<div class="grid gap-8">
-  <div class="dark:bg-darker flex items-center justify-between overflow-y-auto rounded-md bg-white p-4">
-    <div class="dark:bg-darker overflow-y-auto rounded-md bg-white">
-      <div class="dark:border-primary flex items-center justify-between border-b p-4">
+<div class="gap-8 grid">
+  <div class="dark:bg-darker rounded-md bg-white p-4 flex items-center justify-between overflow-y-auto">
+    <div class="dark:bg-darker rounded-md bg-white overflow-y-auto">
+      <div class="dark:border-primary p-4 flex items-center justify-between border-b">
         <h4 class="dark:text-light text-lg font-semibold text-gray-500">{{ 'pages.clusters.details.tools.title' | translate }}</h4>
       </div>
-      <div class="relative p-3">
+      <div class="p-3 relative">
         <table class="w-full border-collapse text-left">
           <tbody>
             <tr class="hover:bg-grey-light truncate">
               <td class="px-2 py-1">{{ 'pages.clusters.details.tools.argo' | translate }}</td>
               @if (argoIngress) {
-                <td class="truncate px-2 py-1">
+                <td class="px-2 py-1 truncate">
                   @if (
                     argoIngress?.ingressrules !== null &&
                     argoIngress?.ingressrules?.length > 0 &&
@@ -18,7 +18,7 @@
                     argoIngress?.ingressrules[0].ipaddresses.length > 0
                   ) {
                     <a href="https://{{ argoIngress?.ingressrules[0].hostname }}" target="_blank" class="overflow-hidden text-clip underline"
-                      ><span class="w-14 overflow-hidden truncate text-clip text-blue-800 underline dark:text-blue-500">{{
+                      ><span class="w-14 text-blue-800 dark:text-blue-500 truncate overflow-hidden text-clip underline">{{
                         argoIngress?.ingressrules[0].hostname
                       }}</span></a
                     >
@@ -40,7 +40,7 @@
             <tr class="hover:bg-grey-light truncate">
               <td class="px-2 py-1">{{ 'pages.clusters.details.tools.grafana' | translate }}</td>
               @if (grafanaIngress) {
-                <td class="truncate px-2 py-1">
+                <td class="px-2 py-1 truncate">
                   @if (
                     grafanaIngress?.ingressrules !== null &&
                     grafanaIngress?.ingressrules?.length > 0 &&
@@ -48,7 +48,7 @@
                     grafanaIngress?.ingressrules[0].ipaddresses.length > 0
                   ) {
                     <a href="https://{{ grafanaIngress?.ingressrules[0].hostname }}" target="_blank" class="overflow-hidden text-clip underline"
-                      ><span class="w-14 overflow-hidden truncate text-clip text-blue-800 underline dark:text-blue-500">{{
+                      ><span class="w-14 text-blue-800 dark:text-blue-500 truncate overflow-hidden text-clip underline">{{
                         grafanaIngress?.ingressrules[0].hostname
                       }}</span></a
                     >
@@ -69,10 +69,10 @@
             </tr>
             <tr class="hover:bg-grey-lighttruncate">
               <td class="px-2 py-1">{{ 'pages.clusters.details.tools.rorlogin' | translate }}</td>
-              <td class="truncate px-2 py-1">
+              <td class="px-2 py-1 truncate">
                 <a
                   (click)="copyRorLogin()"
-                  class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark cursor-pointer rounded-md bg-green-700 px-4 py-1 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+                  class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-1 text-sm text-white focus:ring-offset-white cursor-pointer focus:ring focus:ring-offset-1 focus:outline-none"
                 >
                   {{ 'common.copy' | translate }}
                 </a>
@@ -91,10 +91,10 @@
             </tr>
             <tr class="hover:bg-grey-light truncate">
               <td class="px-2 py-1">{{ 'pages.clusters.details.tools.kubectlLogin' | translate }}</td>
-              <td class="truncate px-2 py-1">
+              <td class="px-2 py-1 truncate">
                 <a
                   (click)="copyLogin()"
-                  class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark cursor-pointer rounded-md bg-green-700 px-4 py-1 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+                  class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-1 text-sm text-white focus:ring-offset-white cursor-pointer focus:ring focus:ring-offset-1 focus:outline-none"
                 >
                   {{ 'common.copy' | translate }}
                 </a>

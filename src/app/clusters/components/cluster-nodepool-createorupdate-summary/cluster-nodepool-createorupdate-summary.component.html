@@ -38,7 +38,7 @@
           </td>
         } @else {
           <td>
-            <div class="flex gap-3">
+            <div class="gap-3 flex">
               <span>{{ nodepoolForm?.get('autoscaling')?.get('minReplicas')?.value }} nodes </span>
               <span>*</span>
               <span>{{ nodepoolForm?.get('price')?.value?.price | currency: 'NOK' : 'symbol-narrow' : '4.2-2' : 'no' }}</span>
@@ -50,7 +50,7 @@
         <tr>
           <td class="align-top">{{ 'pages.clusters.details.nodePools.createorupdate.form.estimatedPricePrMonth' | translate }}</td>
           <td>
-            <div class="flex gap-3 font-bold">
+            <div class="gap-3 font-bold flex">
               <span
                 >{{
                   nodepoolForm?.get('price')?.value?.price * nodepoolForm?.get('autoscaling')?.get('minReplicas')?.value
@@ -68,7 +68,7 @@
         <tr>
           <td class="align-top">{{ 'pages.clusters.details.nodePools.createorupdate.form.estimatedPricePrYear' | translate }}</td>
           <td>
-            <div class="flex gap-3 font-bold">
+            <div class="gap-3 font-bold flex">
               <span
                 >{{
                   nodepoolForm?.get('price')?.value?.price * nodepoolForm?.get('autoscaling')?.get('minReplicas')?.value * 12
@@ -89,7 +89,7 @@
         <tr>
           <td class="align-top">{{ 'pages.clusters.details.nodePools.createorupdate.form.estimatedPricePrMonth' | translate }}</td>
           <td>
-            <div class="flex gap-3 font-bold">
+            <div class="gap-3 font-bold flex">
               <span
                 >{{
                   nodepoolForm?.get('price')?.value?.price * nodepoolForm?.get('autoscaling')?.get('minReplicas')?.value
@@ -102,7 +102,7 @@
         <tr>
           <td class="align-top">{{ 'pages.clusters.details.nodePools.createorupdate.form.estimatedPricePrYear' | translate }}</td>
           <td>
-            <div class="flex gap-3 font-bold">
+            <div class="gap-3 font-bold flex">
               <span
                 >{{
                   nodepoolForm?.get('price')?.value?.price * nodepoolForm?.get('autoscaling')?.get('minNodes')?.value * 12

@@ -1,6 +1,6 @@
 <div [formGroup]="formGroup">
   @if (override) {
-    <input class="m-3 w-full border bg-gray-800 p-5 dark:bg-gray-700" type="text" [formControlName]="controlName" placeholder="{{ placeholder }}" />
+    <input class="m-3 bg-gray-800 p-5 dark:bg-gray-700 w-full border" type="text" [formControlName]="controlName" placeholder="{{ placeholder }}" />
   }
   @if (!override) {
     <p-select
@@ -19,7 +19,7 @@
   }
 
   @if (couldOverride) {
-    <div class="align-items-center mt-2 flex gap-1">
+    <div class="align-items-center mt-2 gap-1 flex">
       <p-checkbox
         class=""
         [(ngModel)]="override"
