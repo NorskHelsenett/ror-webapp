@@ -315,7 +315,9 @@
                   <div class="mt-10 flex flex-col" [formGroup]="tagForm">
                     <label> {{ 'pages.clusters.details.edit.form.serviceTags' | translate }}</label>
                     <div class="flex gap-3">
-                      <input class="text-lg" type="text" formControlName="tag" minlength="2" #tagInput (keyup.enter)="addTag(tagInput?.value)" />
+                      <input
+                      class="border-1 rounded-lg border-gray-300 text-lg dark:border-gray-600 dark:bg-gray-700 focus:bg-white focus:outline-none text-gray-800 dark:text-gray-800"
+                       type="text" formControlName="tag" minlength="2" #tagInput (keyup.enter)="addTag(tagInput?.value)" />
                       <button
                         [disabled]="!tagForm?.valid"
                         (click)="addTag(tagInput?.value)"
