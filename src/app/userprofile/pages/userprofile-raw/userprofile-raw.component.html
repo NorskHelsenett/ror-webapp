@@ -1,13 +1,13 @@
-<div class="space-y-8lg:gap-8 grid grid-cols-1 lg:space-y-0">
-  <div class="dark:bg-darker col-span-2 rounded-md bg-white">
+<div class="space-y-8lg:gap-8 lg:space-y-0 grid grid-cols-1">
+  <div class="dark:bg-darker rounded-md bg-white col-span-2">
     <div class="overflow-auto">
-      <div class="grid grid-cols-1 gap-8 p-4 lg:grid-cols-2 xl:grid-cols-4">
+      <div class="gap-8 p-4 lg:grid-cols-2 xl:grid-cols-4 grid grid-cols-1">
         <code>
           <pre>{{ claims | json }}</pre>
         </code>
       </div>
 
-      <div class="grid grid-cols-1 gap-8 p-4 lg:grid-cols-2 xl:grid-cols-4">
+      <div class="gap-8 p-4 lg:grid-cols-2 xl:grid-cols-4 grid grid-cols-1">
         <code>
           {{ authHeaders | json }}
         </code>

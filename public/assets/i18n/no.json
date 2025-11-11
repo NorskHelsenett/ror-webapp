@@ -496,6 +496,7 @@
           "serviceTags": "Stikkord",
           "serviceTagsHelp": "Ekstra strikkord for prosjekt?",
           "serviceTagsError": "Mangler stikkord",
+          "servicetagsPlaceholder": "Sett inn stikkord",
           "workorder": "Arbeidsordre",
           "workorderHelp": "Fyll inn arbeidsordre",
           "workorderError": "Mangler arbeidsordre",

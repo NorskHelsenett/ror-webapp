@@ -1,6 +1,6 @@
-<div class="grid space-y-8 lg:gap-8 lg:space-y-0">
-  <div class="dark:bg-darker flex items-center justify-between overflow-x-auto rounded-md bg-white">
-    <div class="dark:bg-darker col-span-2 overflow-x-auto rounded-md bg-white">
+<div class="space-y-8 lg:gap-8 lg:space-y-0 grid">
+  <div class="dark:bg-darker rounded-md bg-white flex items-center justify-between overflow-x-auto">
+    <div class="dark:bg-darker rounded-md bg-white col-span-2 overflow-x-auto">
       <div class="p-4">
         <div class="">
           <div>
@@ -10,7 +10,7 @@
               </div>
               <div class="mb-5 flex justify-center">
                 @for (ingressRule of ingress?.ingressrules; track ingressRule) {
-                  <div class="m-3 flex flex-col border p-3 text-center">
+                  <div class="m-3 p-3 flex flex-col border text-center">
                     <div class="flex justify-center">
                       <img alt="avi" class="h-8 w-8" src="/assets/icons/tanzu/avi.png" height="80" width="80" />
                     </div>
@@ -25,7 +25,7 @@
               </div>
             </div>
           </div>
-          <hr class="mb-4 border border-dashed border-b-gray-700" />
+          <hr class="mb-4 border-b-gray-700 border border-dashed" />
 
           <div #containerRef class="overflow-x-auto">
             <div class="justify-content-center flex overflow-x-auto">

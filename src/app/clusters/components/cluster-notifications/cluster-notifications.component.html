@@ -4,7 +4,7 @@
   @if (!routeError) {
     <p-table [value]="resources$ | async" dataKey="metadata.uid" [tableStyle]="{ 'min-width': '50rem' }">
       <ng-template caption>
-        <div class="flex gap-2">
+        <div class="gap-2 flex">
           <button pButton pRipple (click)="handleCreate()" class="rounded-md bg-green-700 px-3 py-2 text-white hover:bg-green-600 focus:bg-green-600">
             {{ 'pages.clusters.details.notifications.route.configure' | translate }}
           </button>
@@ -38,7 +38,7 @@
       </ng-template>
     </p-table>
     <p-dialog [header]="'common.areyousure' | translate" [modal]="true" [(visible)]="showPopup">
-      <div class="flex gap-2">
+      <div class="gap-2 flex">
         <p-button pRipple class="rounded-md bg-red-700 px-3 py-2 hover:bg-red-600 focus:bg-red-600" (onClick)="deleteRoute()">
           {{ 'common.yes' | translate }}
         </p-button>
@@ -50,7 +50,7 @@
   } @else {
     <ng-template
       ><ng-container>
-        <div class="mx-auto my-4 flex items-center rounded-md bg-red-200 px-6 py-4 text-lg">
+        <div class="my-4 rounded-md bg-red-200 px-6 py-4 text-lg mx-auto flex items-center">
           <span class="p-2 text-red-800">
             {{ 'common.errorLoading' | translate }} <br />
             {{ ('common.error' | translate) + ': ' + routeError }}

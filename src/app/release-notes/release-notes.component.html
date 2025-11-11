@@ -1,24 +1,24 @@
-<div class="dark:border-primary-darker flex items-center justify-between border-b px-4 py-4 lg:py-6">
+<div class="dark:border-primary-darker px-4 py-4 lg:py-6 flex items-center justify-between border-b">
   <h1 class="text-2xl font-semibold">{{ 'pages.releaseNotes.title' | translate }}</h1>
 </div>
 
 <div class="mt-2">
-  <div class="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3">
-    <div class="grid gap-8 p-4 sm:col-span-1 md:col-span-1 lg:col-span-2">
+  <div class="sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 grid">
+    <div class="gap-8 p-4 sm:col-span-1 md:col-span-1 lg:col-span-2 grid">
       <div
-        class="border-blue-gray-50 dark:border-primary-darker dark:bg-darker shadow-blue-gray-500/10 whitespace-normal break-words rounded-lg border bg-white p-4 font-sans text-sm font-normal shadow-lg focus:outline-none"
+        class="border-blue-gray-50 dark:border-primary-darker dark:bg-darker shadow-blue-gray-500/10 rounded-lg bg-white p-4 font-sans text-sm font-normal shadow-lg border break-words whitespace-normal focus:outline-none"
       >
-        <div class="mb-2 flex items-center gap-3">
+        <div class="mb-2 gap-3 flex items-center">
           <span class="text-lg">
             {{ 'pages.releaseNotes.changes.2023_12_13.title' | translate }}
           </span>
           <div
-            class="center relative inline-block select-none whitespace-nowrap rounded-full bg-green-500 px-2 py-1 align-baseline font-sans text-xs font-medium capitalize leading-none tracking-wide text-white"
+            class="center bg-green-500 px-2 py-1 font-sans text-xs font-medium tracking-wide text-white relative inline-block rounded-full align-baseline leading-none whitespace-nowrap capitalize select-none"
           >
             <div class="mt-px">User interface</div>
           </div>
         </div>
-        <div class="ml-4 block font-sans font-normal leading-normal antialiased">
+        <div class="ml-4 font-sans font-normal leading-normal block antialiased">
           <ul class="list-disc">
             <li>{{ 'pages.releaseNotes.changes.2023_12_13.description1' | translate }}</li>
             <li>
@@ -26,7 +26,7 @@
               @if (!isDark) {
                 <img
                   src="/assets/images/changes/rightclick_white.png"
-                  class="rounded-lg object-cover shadow-lg shadow-gray-700 dark:shadow-gray-600"
+                  class="rounded-lg shadow-lg shadow-gray-700 dark:shadow-gray-600 object-cover"
                   width="341"
                   height="155"
                   alt="rightclicklinks"
@@ -35,7 +35,7 @@
               @if (isDark) {
                 <img
                   src="/assets/images/changes/rightclick.png"
-                  class="rounded-lg object-cover shadow-lg shadow-gray-700 dark:shadow-gray-600"
+                  class="rounded-lg shadow-lg shadow-gray-700 dark:shadow-gray-600 object-cover"
                   width="346"
                   height="148"
                   alt="rightclicklinks"

@@ -1,19 +1,19 @@
-<div class="dark:border-primary-darker flex items-center justify-between border-b px-4 py-4 lg:py-6">
+<div class="dark:border-primary-darker px-4 py-4 lg:py-6 flex items-center justify-between border-b">
   <h1 class="text-2xl font-semibold">{{ 'pages.clusters.new.title' | translate }}</h1>
 </div>
 
 <form [formGroup]="clusterForm">
-  <div class="xs:p-2 m-2 flex flex-col-reverse gap-3 p-1 sm:p-2 md:p-4 xl:flex-row">
+  <div class="xs:p-2 m-2 gap-3 p-1 sm:p-2 md:p-4 xl:flex-row flex flex-col-reverse">
     <div class="sm:basis-full md:basis-2/3">
-      <div class="dark:bg-darker flex flex-col rounded-md bg-white pb-3">
+      <div class="dark:bg-darker rounded-md bg-white pb-3 flex flex-col">
         <div class="card flex justify-center">
           <p-stepper [(value)]="activeStep" class="m-3 w-full">
             <p-step-list>
-              <p-step [value]="1" class="flex flex-auto flex-row gap-2">
+              <p-step [value]="1" class="gap-2 flex flex-auto flex-row">
                 <ng-template #content let-activateCallback="activateCallback" let-value="value">
-                  <div class="inline-flex flex-col gap-2 bg-transparent">
+                  <div class="gap-2 inline-flex flex-col bg-transparent">
                     <span
-                      class="inline-flex h-12 w-12 items-center justify-center rounded-full"
+                      class="h-12 w-12 inline-flex items-center justify-center rounded-full"
                       [ngClass]="{
                         'bg-primary text-primary-contrast border-primary': value <= activeStep,
                         'border-surface': value > activeStep,
@@ -26,11 +26,11 @@
                 </ng-template>
               </p-step>
 
-              <p-step [value]="2" class="flex flex-auto flex-row gap-2">
+              <p-step [value]="2" class="gap-2 flex flex-auto flex-row">
                 <ng-template #content let-activateCallback="activateCallback" let-value="value">
-                  <div class="inline-flex flex-col gap-2 bg-transparent">
+                  <div class="gap-2 inline-flex flex-col bg-transparent">
                     <span
-                      class="inline-flex h-12 w-12 items-center justify-center rounded-full"
+                      class="h-12 w-12 inline-flex items-center justify-center rounded-full"
                       [ngClass]="{
                         'bg-primary text-primary-contrast': value <= activeStep,
                         'border-surface': value > activeStep,
@@ -43,11 +43,11 @@
                 </ng-template>
               </p-step>
 
-              <p-step [value]="3" class="flex flex-auto flex-row gap-2">
+              <p-step [value]="3" class="gap-2 flex flex-auto flex-row">
                 <ng-template #content let-activateCallback="activateCallback" let-value="value">
-                  <div class="inline-flex flex-col gap-2 bg-transparent">
+                  <div class="gap-2 inline-flex flex-col bg-transparent">
                     <span
-                      class="inline-flex h-12 w-12 items-center justify-center rounded-full"
+                      class="h-12 w-12 inline-flex items-center justify-center rounded-full"
                       [ngClass]="{
                         'bg-primary text-primary-contrast': value <= activeStep,
                         'border-surface': value > activeStep,
@@ -60,11 +60,11 @@
                 </ng-template>
               </p-step>
 
-              <p-step [value]="4" class="flex flex-auto flex-row gap-2">
+              <p-step [value]="4" class="gap-2 flex flex-auto flex-row">
                 <ng-template #content let-activateCallback="activateCallback" let-value="value">
-                  <div class="inline-flex flex-col gap-2 bg-transparent">
+                  <div class="gap-2 inline-flex flex-col bg-transparent">
                     <span
-                      class="inline-flex h-12 w-12 items-center justify-center rounded-full"
+                      class="h-12 w-12 inline-flex items-center justify-center rounded-full"
                       [ngClass]="{
                         'bg-primary text-primary-contrast border-primary': value <= activeStep,
                         'border-surface': value > activeStep,
@@ -117,7 +117,7 @@
     </div>
 
     <div class="xs:basis-full md:basis-1/3">
-      <div class="dark:bg-darker flex flex-col rounded-md bg-white">
+      <div class="dark:bg-darker rounded-md bg-white flex flex-col">
         <app-summary [value]="clusterForm?.value" (gotoStep)="linkToStep($event)"></app-summary>
       </div>
     </div>

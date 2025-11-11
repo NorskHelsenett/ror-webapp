@@ -1,8 +1,8 @@
 <div class="">
-  <div class="grid gap-4 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2">
+  <div class="gap-4 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2 grid">
     <div class="dark:bg-darker rounded-md bg-white">
       <div class="dark:bg-darker rounded-md bg-white">
-        <div class="relative p-3">
+        <div class="p-3 relative">
           @if (projects$ | async; as projects) {
             <form [formGroup]="clusterModelForm">
               <div class="flex flex-col">
@@ -29,7 +29,7 @@
                         }
                       </ng-template>
                       <ng-template let-project pTemplate="item">
-                        <div class="flex w-96 flex-col">
+                        <div class="w-96 flex flex-col">
                           <div>{{ project?.name }}</div>
                           <small class="truncate">{{ project?.description }}</small>
                         </div>
@@ -42,7 +42,7 @@
                     }
                     <span id="projectId-help">{{ 'pages.clusters.details.edit.form.projectHelp' | translate }}</span>
                   </div>
-                  <div class="mt-10 flex flex-col xl:w-96">
+                  <div class="mt-10 xl:w-96 flex flex-col">
                     <label
                       ><span class="text-red-800 dark:text-red-300">*</span>
                       {{ 'pages.clusters.details.edit.form.criticalityLevel' | translate }}</label
@@ -80,7 +80,7 @@
                       <span id="criticality-help">{{ 'pages.clusters.details.edit.form.criticalityLevelHelp' | translate }}</span>
                     </div>
                     <div class="">
-                      <a href="https://docs.sky.nhn.no/leveransemodell/veiledere/tags.html" target="_blank" class="flex hover:text-green-500">
+                      <a href="https://docs.sky.nhn.no/leveransemodell/veiledere/tags.html" target="_blank" class="hover:text-green-500 flex">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
@@ -99,7 +99,7 @@
                       </a>
                     </div>
                   </div>
-                  <div class="mt-10 flex flex-col xl:w-96">
+                  <div class="mt-10 xl:w-96 flex flex-col">
                     <label
                       ><span class="text-red-800 dark:text-red-300">*</span>
                       {{ 'pages.clusters.details.edit.form.sensitivityLevel' | translate }}</label
@@ -140,7 +140,7 @@
                       <a
                         href="https://docs.nhn.no/k8s/brukerdokumentasjon/obs/os_dashboard.html#tags"
                         target="_blank"
-                        class="flex hover:text-green-500"
+                        class="hover:text-green-500 flex"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -160,7 +160,7 @@
                       </a>
                     </div>
                   </div>
-                  <div class="dark:border-primary flex justify-between border-b p-4">
+                  <div class="dark:border-primary p-4 flex justify-between border-b">
                     <h4 class="dark:text-light text-lg font-semibold text-gray-500">
                       {{ 'pages.admin.projects.form.roles.title' | translate }}
                     </h4>
@@ -175,7 +175,7 @@
                     <button
                       (click)="addRole()"
                       type="button"
-                      class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white disabled:cursor-not-allowed disabled:bg-gray-500 disabled:opacity-75 disabled:hover:bg-gray-800"
+                      class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring-offset-white disabled:bg-gray-500 disabled:hover:bg-gray-800 focus:ring focus:ring-offset-1 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75"
                     >
                       {{ 'pages.admin.projects.form.roles.add' | translate }}
                     </button>
@@ -212,7 +212,7 @@
                               ><span class="text-red-800 dark:text-red-300">*</span> {{ 'pages.admin.projects.form.roles.upn' | translate }}</label
                             >
                             <input
-                              class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-base font-normal text-gray-600 transition ease-in-out focus:bg-white focus:text-gray-700 focus:outline-none dark:bg-gray-700 dark:text-white"
+                              class="form-control m-0 rounded border-gray-300 bg-white px-3 py-1.5 text-base font-normal text-gray-600 ease-in-out focus:bg-white focus:text-gray-700 dark:bg-gray-700 dark:text-white block w-full border border-solid bg-clip-padding transition focus:outline-none"
                               type="email"
                               aria-describedby="upn-help"
                               pInputText
@@ -232,7 +232,7 @@
                           <div class="mb-3 mt-3 xl:w-96">
                             <label>{{ 'pages.admin.projects.form.roles.email' | translate }}</label>
                             <input
-                              class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-base font-normal text-gray-600 transition ease-in-out focus:bg-white focus:text-gray-700 focus:outline-none dark:bg-gray-700 dark:text-white"
+                              class="form-control m-0 rounded border-gray-300 bg-white px-3 py-1.5 text-base font-normal text-gray-600 ease-in-out focus:bg-white focus:text-gray-700 dark:bg-gray-700 dark:text-white block w-full border border-solid bg-clip-padding transition focus:outline-none"
                               type="email"
                               aria-describedby="email-help"
                               pInputText
@@ -252,7 +252,7 @@
                           <div class="mb-3 mt-3 xl:w-96">
                             <label>{{ 'pages.admin.projects.form.roles.phone' | translate }}</label>
                             <input
-                              class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-base font-normal text-gray-600 transition ease-in-out focus:bg-white focus:text-gray-700 focus:outline-none dark:bg-gray-700 dark:text-white"
+                              class="form-control m-0 rounded border-gray-300 bg-white px-3 py-1.5 text-base font-normal text-gray-600 ease-in-out focus:bg-white focus:text-gray-700 dark:bg-gray-700 dark:text-white block w-full border border-solid bg-clip-padding transition focus:outline-none"
                               type="text"
                               aria-describedby="phone-help"
                               pInputText
@@ -274,7 +274,7 @@
                           <button
                             type="button"
                             (click)="deleteRole(i)"
-                            class="focus:ring-primary dark:focus:ring-offset-dark ml-2 content-end rounded-md bg-red-700 px-4 py-2 text-sm text-white hover:bg-red-500 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+                            class="focus:ring-primary dark:focus:ring-offset-dark ml-2 rounded-md bg-red-700 px-4 py-2 text-sm text-white hover:bg-red-500 focus:ring-offset-white content-end focus:ring focus:ring-offset-1 focus:outline-none"
                           >
                             {{ 'common.delete' | translate }}
                           </button>
@@ -289,7 +289,7 @@
                         ><span class="text-red-800 dark:text-red-300">*</span> {{ 'pages.clusters.details.edit.form.workorder' | translate }}</label
                       >
                       <input
-                        class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-base font-normal text-gray-600 transition ease-in-out focus:bg-white focus:text-gray-700 focus:outline-none dark:bg-gray-700 dark:text-white"
+                        class="form-control m-0 rounded border-gray-300 bg-white px-3 py-1.5 text-base font-normal text-gray-600 ease-in-out focus:bg-white focus:text-gray-700 dark:bg-gray-700 dark:text-white block w-full border border-solid bg-clip-padding transition focus:outline-none"
                         type="text"
                         aria-describedby="workorder-help"
                         pInputText
@@ -314,8 +314,15 @@
                   </div>
                   <div class="mt-10 flex flex-col" [formGroup]="tagForm">
                     <label> {{ 'pages.clusters.details.edit.form.serviceTags' | translate }}</label>
-                    <div class="flex gap-3">
-                      <input class="text-lg" type="text" formControlName="tag" minlength="2" #tagInput (keyup.enter)="addTag(tagInput?.value)" />
+                    <div class="gap-3 flex">
+                      <input
+                        class="rounded-lg border-gray-300 text-lg dark:border-gray-600 dark:bg-gray-700 focus:bg-white text-gray-800 dark:text-gray-800 border-1 focus:outline-none"
+                        type="text"
+                        formControlName="tag"
+                        minlength="2"
+                        #tagInput
+                        (keyup.enter)="addTag(tagInput?.value)"
+                      />
                       <button
                         [disabled]="!tagForm?.valid"
                         (click)="addTag(tagInput?.value)"
@@ -325,7 +332,7 @@
                         {{ 'common.create' | translate }}
                       </button>
                     </div>
-                    <div class="mt-3 flex gap-3">
+                    <div class="mt-3 gap-3 flex">
                       @for (tag of tags; track tag) {
                         <p-chip [removable]="true" (onRemove)="removeTag(tag)" [ngClass]="'bg-' + getColorByText(tag)">
                           <div [ngClass]="'bg-' + getColorByText(tag)">{{ tag }}</div>
@@ -340,7 +347,7 @@
                 <div class="mb-3 mt-3">
                   <label> {{ 'pages.clusters.details.edit.form.description' | translate }}</label>
                   <textarea
-                    class="form-control h-120 m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-base font-normal text-gray-600 transition ease-in-out focus:bg-white focus:text-gray-700 focus:outline-none dark:bg-gray-700 dark:text-white"
+                    class="form-control h-120 m-0 rounded border-gray-300 bg-white px-3 py-1.5 text-base font-normal text-gray-600 ease-in-out focus:bg-white focus:text-gray-700 dark:bg-gray-700 dark:text-white block w-full border border-solid bg-clip-padding transition focus:outline-none"
                     type="text"
                     aria-describedby="description-help"
                     pInputTextarea
@@ -367,21 +374,21 @@
                     type="button"
                     [disabled]="!clusterModelForm?.valid"
                     (click)="updateCluster()"
-                    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white disabled:cursor-not-allowed disabled:bg-gray-900 disabled:opacity-25 disabled:hover:bg-gray-900"
+                    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring-offset-white disabled:bg-gray-900 disabled:hover:bg-gray-900 focus:ring focus:ring-offset-1 focus:outline-none disabled:cursor-not-allowed disabled:opacity-25"
                   >
                     {{ 'common.update' | translate }}
                   </button>
                   <button
                     type="button"
                     (click)="regretChanges()"
-                    class="hover:bg-primary-lighter focus:ring-primary dark:focus:ring-offset-dark ml-3 rounded-md bg-neutral-500 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+                    class="hover:bg-primary-lighter focus:ring-primary dark:focus:ring-offset-dark ml-3 rounded-md bg-neutral-500 px-4 py-2 text-sm text-white focus:ring-offset-white focus:ring focus:ring-offset-1 focus:outline-none"
                   >
                     {{ 'common.reset' | translate }}
                   </button>
                 </div>
                 @if (clusterUpdateError) {
                   <div>
-                    <div class="mx-auto my-4 flex items-center rounded-md bg-red-200 px-6 py-4 text-lg">
+                    <div class="my-4 rounded-md bg-red-200 px-6 py-4 text-lg mx-auto flex items-center">
                       <span class="p-2 text-red-800"> {{ 'pages.admin.projects.form.updateError' | translate }} </span>
                     </div>
                   </div>
@@ -390,7 +397,7 @@
             </form>
           } @else {
             @if (projectsFetchError) {
-              <div class="mx-auto my-4 flex items-center rounded-md bg-red-200 px-6 py-4 text-lg">
+              <div class="my-4 rounded-md bg-red-200 px-6 py-4 text-lg mx-auto flex items-center">
                 <span class="p-2 text-red-800"> {{ 'pages.dashboard.error' | translate }} </span>
                 <button type="button" class="btn text-black" (click)="setupObservables()">{{ 'common.tryAgain' | translate }}</button>
               </div>
@@ -402,9 +409,9 @@
       </div>
     </div>
     @if (environment?.production === false) {
-      <div class="dark:bg-darker flex justify-between rounded-md bg-white p-4">
+      <div class="dark:bg-darker rounded-md bg-white p-4 flex justify-between">
         <div class="dark:bg-darker rounded-md bg-white">
-          <div class="relative flex flex-col p-3">
+          <div class="p-3 relative flex flex-col">
             <h2>Preview</h2>
             <pre>{{ clusterModelForm.getRawValue() | json }}</pre>
             <br />

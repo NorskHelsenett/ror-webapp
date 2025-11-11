@@ -1,5 +1,5 @@
-<div class="dark:border-primary-darker flex items-center gap-4 border-b px-4 py-4 lg:py-6">
-  <h1 class="flex-grow text-2xl font-semibold">
+<div class="dark:border-primary-darker gap-4 px-4 py-4 lg:py-6 flex items-center border-b">
+  <h1 class="text-2xl font-semibold flex-grow">
     @if (!desiredVersion) {
       <span>{{ 'pages.configuration.desiredVersion.create.title' | translate }}</span>
     }
@@ -10,19 +10,19 @@
 </div>
 
 <div class="m-4">
-  <div class="dark:bg-darker items-center justify-between rounded-md bg-white p-2">
+  <div class="dark:bg-darker rounded-md bg-white p-2 items-center justify-between">
     <div class="dark:bg-darker rounded-md bg-white">
-      <div class="dark:border-primary flex items-center justify-between border-b p-4">
+      <div class="dark:border-primary p-4 flex items-center justify-between border-b">
         <span class="flex-grow"></span>
       </div>
-      <div class="relative p-3">
+      <div class="p-3 relative">
         <form [formGroup]="formGroup">
           <div class="flex flex-col">
             <div class="">
               <div class="mb-3 mt-3 xl:w-96">
                 <label><span class="text-red-800 dark:text-red-300">*</span> {{ 'pages.configuration.desiredVersion.form.key' | translate }} </label>
                 <input
-                  class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-base font-normal text-gray-600 transition ease-in-out focus:bg-white focus:text-gray-700 focus:outline-none dark:bg-gray-700 dark:text-white"
+                  class="form-control m-0 rounded border-gray-300 bg-white px-3 py-1.5 text-base font-normal text-gray-600 ease-in-out focus:bg-white focus:text-gray-700 dark:bg-gray-700 dark:text-white block w-full border border-solid bg-clip-padding transition focus:outline-none"
                   type="text"
                   aria-describedby="key-help"
                   pInputText
@@ -40,7 +40,7 @@
                   ><span class="text-red-800 dark:text-red-300">*</span> {{ 'pages.configuration.desiredVersion.form.value' | translate }}
                 </label>
                 <input
-                  class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-base font-normal text-gray-600 transition ease-in-out focus:bg-white focus:text-gray-700 focus:outline-none dark:bg-gray-700 dark:text-white"
+                  class="form-control m-0 rounded border-gray-300 bg-white px-3 py-1.5 text-base font-normal text-gray-600 ease-in-out focus:bg-white focus:text-gray-700 dark:bg-gray-700 dark:text-white block w-full border border-solid bg-clip-padding transition focus:outline-none"
                   type="text"
                   aria-describedby="value-help"
                   pInputText
@@ -67,7 +67,7 @@
               <button
                 [disabled]="!formGroup?.valid"
                 (click)="create()"
-                class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white disabled:bg-gray-500 disabled:hover:bg-gray-800"
+                class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring-offset-white disabled:bg-gray-500 disabled:hover:bg-gray-800 focus:ring focus:ring-offset-1 focus:outline-none"
               >
                 {{ 'common.create' | translate }}
               </button>
@@ -76,28 +76,28 @@
               <button
                 [disabled]="!formGroup?.valid"
                 (click)="update()"
-                class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white disabled:bg-gray-500 disabled:hover:bg-gray-800"
+                class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring-offset-white disabled:bg-gray-500 disabled:hover:bg-gray-800 focus:ring focus:ring-offset-1 focus:outline-none"
               >
                 {{ 'common.update' | translate }}
               </button>
             }
             <button
               (click)="reset()"
-              class="hover:bg-primary-lighter focus:ring-primary dark:focus:ring-offset-dark ml-3 rounded-md bg-neutral-500 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+              class="hover:bg-primary-lighter focus:ring-primary dark:focus:ring-offset-dark ml-3 rounded-md bg-neutral-500 px-4 py-2 text-sm text-white focus:ring-offset-white focus:ring focus:ring-offset-1 focus:outline-none"
             >
               {{ 'common.reset' | translate }}
             </button>
           </div>
           @if (createError) {
             <div>
-              <div class="mx-auto my-4 flex items-center rounded-md bg-red-200 px-6 py-4 text-lg">
+              <div class="my-4 rounded-md bg-red-200 px-6 py-4 text-lg mx-auto flex items-center">
                 <span class="p-2 text-red-800"> {{ 'pages.configuration.desiredVersion.create.error' | translate }} </span>
               </div>
             </div>
           }
           @if (updateError) {
             <div>
-              <div class="mx-auto my-4 flex items-center rounded-md bg-red-200 px-6 py-4 text-lg">
+              <div class="my-4 rounded-md bg-red-200 px-6 py-4 text-lg mx-auto flex items-center">
                 <span class="p-2 text-red-800"> {{ 'pages.configuration.desiredVersion.update.error' | translate }} </span>
               </div>
             </div>

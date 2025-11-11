@@ -2,7 +2,7 @@
   @case (
     providerTypeOrName === 'tanzu' || providerTypeOrName === 'Tanzu' || providerTypeOrName === 'Privat sky' || providerTypeOrName === 'Privat Sky'
   ) {
-    <div class="flex gap-2">
+    <div class="gap-2 flex">
       <img [ngClass]="iconSize === '' ? 'w-6' : iconSize" src="/assets/icons/tanzu/tanzu.png" alt="Tanzu" width="6" height="6" />
       @if (showText) {
         <span>{{ providerTypeOrName | titlecase }}</span>
@@ -10,7 +10,7 @@
     </div>
   }
   @case (providerTypeOrName === 'k3d' || providerTypeOrName === 'K3d' || providerTypeOrName === 'K3D') {
-    <div class="flex gap-2">
+    <div class="gap-2 flex">
       @if (showIcon) {
         <img [ngClass]="iconSize === '' ? 'w-6' : iconSize" src="/assets/icons/k3d/k3d_logo_black_blue.svg" width="6" height="6" alt="K3D" />
       }
@@ -20,7 +20,7 @@
     </div>
   }
   @case (providerTypeOrName === 'kind' || providerTypeOrName === 'KIND' || providerTypeOrName === 'Kind') {
-    <div class="flex gap-2">
+    <div class="gap-2 flex">
       @if (showIcon) {
         <img [ngClass]="iconSize === '' ? 'w-6' : iconSize" src="/assets/icons/kind/kind-logo.png" width="6" height="6" alt="K3D" />
       }
@@ -30,7 +30,7 @@
     </div>
   }
   @case (providerTypeOrName === 'talos' || providerTypeOrName === 'TALOS' || providerTypeOrName === 'Talos') {
-    <div class="flex gap-2">
+    <div class="gap-2 flex">
       @if (showIcon) {
         <img [ngClass]="iconSize === '' ? 'w-6' : iconSize" src="/assets/icons/talos/talos-logo.svg" width="6" height="6" alt="K3D" />
       }
@@ -40,7 +40,7 @@
     </div>
   }
   @case (providerTypeOrName === 'azure' || providerTypeOrName === 'Azure' || providerTypeOrName === 'AKS' || providerTypeOrName === 'aks') {
-    <div class="flex gap-2">
+    <div class="gap-2 flex">
       @if (showIcon) {
         <svg [ngClass]="iconSize === '' ? 'w-6' : iconSize" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -105,7 +105,7 @@
     </div>
   }
   @default {
-    <div class="flex gap-2 dark:fill-white">
+    <div class="gap-2 dark:fill-white flex">
       @if (showIcon) {
         <svg
           [ngClass]="iconSize === '' ? 'w-6' : iconSize"

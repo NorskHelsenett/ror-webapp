@@ -1,4 +1,4 @@
-<div class="flex w-full gap-4">
+<div class="gap-4 flex w-full">
   <div class="flex items-start justify-start">
     <i class="pi pi-qrcode mr-1 mt-1"></i>
     @if (!nodePool) {
@@ -15,7 +15,7 @@
   <div class="justify-end">
     <button
       (click)="cancel()"
-      class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+      class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring-offset-white focus:ring focus:ring-offset-1 focus:outline-none"
     >
       {{ 'common.cancel' | translate }}
     </button>
@@ -24,21 +24,21 @@
 <div class="mt-4 grid grid-cols-3">
   <div class="col-span-2">
     <div class="overflow-x-auto">
-      <form [formGroup]="nodepoolForm" class="flex flex-col gap-5">
+      <form [formGroup]="nodepoolForm" class="gap-5 flex flex-col">
         <div class="mb-3 rounded-lg bg-gray-200 p-5 dark:bg-zinc-800">
           <div class="">
             <span class="text-lg font-bold">{{ 'pages.clusters.details.nodePools.createorupdate.form.name' | translate }}</span>
             <div class="flex flex-col">
-              <div class="flex flex-row gap-4">
+              <div class="gap-4 flex flex-row">
                 <input
-                  class="p-inputtext-lg w-1/3 bg-gray-50 text-lg dark:bg-zinc-900 sm:w-full md:w-1/3"
+                  class="p-inputtext-lg bg-gray-50 text-lg dark:bg-zinc-900 sm:w-full md:w-1/3 w-1/3"
                   type="text"
                   pInputText
                   formControlName="name"
                   [autofocus]="true"
                 />
                 <div class="flex flex-col">
-                  <button (click)="proposeNewName()" type="button" class="flex gap-2">
+                  <button (click)="proposeNewName()" type="button" class="gap-2 flex">
                     <i class="pi pi-replay"></i> {{ 'pages.clusters.details.nodePools.createorupdate.form.nameRandom' | translate }}
                   </button>
 
@@ -46,7 +46,7 @@
                     <button
                       (click)="resetName()"
                       type="button"
-                      class="flex gap-2 disabled:bg-zinc-700 disabled:text-black"
+                      class="gap-2 disabled:bg-zinc-700 disabled:text-black flex"
                       [disabled]="nodepoolForm?.get('name')?.value === nodepool?.name"
                     >
                       <i class="pi pi-replay"></i> {{ 'pages.clusters.details.nodePools.createorupdate.form.resetname' | translate }}
@@ -79,21 +79,21 @@
                 [appendTo]="'body'"
               >
                 <ng-template let-price pTemplate="item">
-                  <div class="flex w-[500px] flex-col gap-1">
+                  <div class="gap-1 flex w-[500px] flex-col">
                     <span class="text-lg">{{ price?.machineClass | titlecase }}</span>
-                    <span class="block truncate text-sm"
+                    <span class="text-sm block truncate"
                       >{{ 'pages.clusters.details.nodePools.createorupdate.form.cpu' | translate }}: {{ price?.cpu }}</span
                     >
-                    <span class="block truncate text-sm"
+                    <span class="text-sm block truncate"
                       >{{ 'pages.clusters.details.nodePools.createorupdate.form.memory' | translate }}: {{ price?.memory }} Gb</span
                     >
-                    <span class="block truncate text-sm"
+                    <span class="text-sm block truncate"
                       >{{ 'pages.clusters.details.nodePools.createorupdate.form.pricePrNode' | translate }}: {{ price?.price }} NOK</span
                     >
                   </div>
                 </ng-template>
                 <ng-template let-price pTemplate="selectedItem">
-                  <div class="flex w-[500px] flex-row gap-1">
+                  <div class="gap-1 flex w-[500px] flex-row">
                     <span class="text-lg">{{ price?.machineClass | titlecase }}</span>
 
                     <span class="mt-1 text-sm">({{ 'pages.clusters.details.nodePools.createorupdate.form.cpu' | translate }}: {{ price?.cpu }}</span>
@@ -117,7 +117,7 @@
         <div class="mb-3 rounded-lg bg-gray-200 p-5 dark:bg-zinc-800">
           <div class="" formGroupName="autoscaling">
             <div class="">
-              <div class="flex flex-row gap-4">
+              <div class="gap-4 flex flex-row">
                 <p-checkbox
                   class=""
                   [binary]="true"
@@ -140,8 +140,8 @@
             </div>
 
             <div class="mb-3">
-              <div class="flex flex-row gap-4">
-                <div class="flex flex-col gap-4">
+              <div class="gap-4 flex flex-row">
+                <div class="gap-4 flex flex-col">
                   <span class="">{{ 'pages.clusters.details.nodePools.createorupdate.form.minNodes' | translate }}</span>
                   <p-inputNumber
                     [format]="false"
@@ -166,7 +166,7 @@
                   }
                 </div>
                 @if (nodepoolForm?.get('autoscaling')?.get('enabled')?.value) {
-                  <div class="flex flex-col gap-4">
+                  <div class="gap-4 flex flex-col">
                     <span>{{ 'pages.clusters.details.nodePools.createorupdate.form.maxNodes' | translate }}</span>
                     <p-inputNumber
                       class="m-1 bg-green-600 hover:bg-green-700"
@@ -224,7 +224,7 @@
                         <td>
                           <button
                             (click)="removeLabel(labelForm)"
-                            class="focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-red-700 text-sm text-white hover:bg-red-500 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+                            class="focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-red-700 text-sm text-white hover:bg-red-500 focus:ring-offset-white focus:ring focus:ring-offset-1 focus:outline-none"
                           >
                             <i class="pi pi-trash"></i>
                           </button>
@@ -244,10 +244,10 @@
             </div>
             <div class="mt-3">
               <form [formGroup]="labelForm">
-                <div class="flex gap-4">
-                  <div class="flex w-1/3 flex-col gap-4">
+                <div class="gap-4 flex">
+                  <div class="gap-4 flex w-1/3 flex-col">
                     <input
-                      class="p-inputtext-lg rounded-lg border text-lg"
+                      class="p-inputtext-lg rounded-lg text-lg border"
                       type="text"
                       placeholder="{{ 'pages.clusters.details.nodePools.createorupdate.form.labelKey' | translate }}"
                       pInputText
@@ -261,9 +261,9 @@
                       <span class="text-red-400">{{ 'pages.clusters.details.nodePools.createorupdate.form.labelKeyError' | translate }} </span>
                     }
                   </div>
-                  <div class="flex w-1/3 flex-col gap-4">
+                  <div class="gap-4 flex w-1/3 flex-col">
                     <input
-                      class="p-inputtext-lg rounded-lg border text-lg"
+                      class="p-inputtext-lg rounded-lg text-lg border"
                       type="text"
                       placeholder="{{ 'pages.clusters.details.nodePools.createorupdate.form.labelValue' | translate }}"
                       pInputText
@@ -286,7 +286,7 @@
                       [disabled]="!labelForm.valid"
                       [style.cursor]="!labelForm.valid ? 'not-allowed' : 'pointer'"
                       (click)="addLabel(labelKeyElement, labelValueElement)"
-                      class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-blue-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white disabled:bg-gray-600"
+                      class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-blue-700 px-4 py-2 text-sm text-white focus:ring-offset-white disabled:bg-gray-600 focus:ring focus:ring-offset-1 focus:outline-none"
                     >
                       {{ 'pages.clusters.details.nodePools.createorupdate.form.submitLabel' | translate }}
                     </button>
@@ -331,7 +331,7 @@
                         <td>
                           <button
                             (click)="removeTaint(taintForm)"
-                            class="focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-red-700 text-sm text-white hover:bg-red-500 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+                            class="focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-red-700 text-sm text-white hover:bg-red-500 focus:ring-offset-white focus:ring focus:ring-offset-1 focus:outline-none"
                           >
                             <i class="pi pi-trash"></i>
                           </button>
@@ -347,10 +347,10 @@
             </div>
             <div class="mt-3">
               <form [formGroup]="taintForm">
-                <div class="flex gap-4">
-                  <div class="flex w-1/3 flex-col gap-4">
+                <div class="gap-4 flex">
+                  <div class="gap-4 flex w-1/3 flex-col">
                     <input
-                      class="p-inputtext-lg rounded-lg border text-lg"
+                      class="p-inputtext-lg rounded-lg text-lg border"
                       type="text"
                       placeholder="{{ 'pages.clusters.details.nodePools.createorupdate.form.taintKey' | translate }}"
                       pInputText
@@ -364,9 +364,9 @@
                       <span class="text-red-400">{{ 'pages.clusters.details.nodePools.createorupdate.form.taintKeyError' | translate }} </span>
                     }
                   </div>
-                  <div class="flex w-1/3 flex-col gap-4">
+                  <div class="gap-4 flex w-1/3 flex-col">
                     <input
-                      class="p-inputtext-lg rounded-lg border text-lg"
+                      class="p-inputtext-lg rounded-lg text-lg border"
                       type="text"
                       placeholder="{{ 'pages.clusters.details.nodePools.createorupdate.form.taintValue' | translate }}"
                       pInputText
@@ -384,7 +384,7 @@
                     }
                   </div>
                 </div>
-                <div class="mt-3 flex gap-4">
+                <div class="mt-3 gap-4 flex">
                   <div>
                     <p-select
                       class=""
@@ -410,7 +410,7 @@
                       [disabled]="!taintForm.valid"
                       [style.cursor]="!taintForm.valid ? 'not-allowed' : 'pointer'"
                       (click)="addTaint(taintKeyElement, taintValueElement, taintEffectElement)"
-                      class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-blue-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white disabled:bg-gray-600"
+                      class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-blue-700 px-4 py-2 text-sm text-white focus:ring-offset-white disabled:bg-gray-600 focus:ring focus:ring-offset-1 focus:outline-none"
                     >
                       {{ 'pages.clusters.details.nodePools.createorupdate.form.submitTaint' | translate }}
                     </button>
@@ -426,7 +426,7 @@
             (click)="submit()"
             [disabled]="!nodepoolForm?.valid"
             [style.cursor]="!nodepoolForm?.valid ? 'not-allowed' : 'pointer'"
-            class="focus:ring-primary dark:focus:ring-offset-dark rounded-xl bg-green-600 text-gray-100 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white hover:enabled:bg-green-700 disabled:bg-gray-500 hover:disabled:bg-gray-700"
+            class="focus:ring-primary dark:focus:ring-offset-dark rounded-xl bg-green-600 text-gray-100 focus:ring-offset-white hover:enabled:bg-green-700 disabled:bg-gray-500 hover:disabled:bg-gray-700 focus:ring focus:ring-offset-1 focus:outline-none"
           >
             <div class="p-3">
               @if (nodePool) {

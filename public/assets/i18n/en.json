@@ -499,6 +499,7 @@
           "serviceTags": "Service tags",
           "serviceTagsHelp": "Additional tags for project?",
           "serviceTagsError": "Missing service tags",
+          "servicetagsPlaceholder": "Insert service tags",
           "createError": "Error when trying to create, please look over inputs",
           "updateError": "Error when trying to update, please look over inputs"
         }

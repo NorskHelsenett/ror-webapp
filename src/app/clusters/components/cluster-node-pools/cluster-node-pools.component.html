@@ -1,12 +1,12 @@
-<div class="grid space-y-8 lg:gap-8 lg:space-y-0">
-  <div class="dark:bg-darker flex items-center justify-between overflow-x-auto rounded-md bg-white p-4">
-    <div class="dark:bg-darker col-span-2 overflow-x-auto rounded-md bg-white">
-      <div class="dark:border-primary flex items-center justify-between border-b p-4">
+<div class="space-y-8 lg:gap-8 lg:space-y-0 grid">
+  <div class="dark:bg-darker rounded-md bg-white p-4 flex items-center justify-between overflow-x-auto">
+    <div class="dark:bg-darker rounded-md bg-white col-span-2 overflow-x-auto">
+      <div class="dark:border-primary p-4 flex items-center justify-between border-b">
         <h4 class="dark:text-light text-lg font-semibold text-gray-500">{{ 'pages.clusters.details.nodePools.title' | translate }}</h4>
       </div>
       <div class="overflow-x-auto">
         @for (nodePool of cluster?.topology?.nodePools; track nodePool) {
-          <div class="relative mb-3">
+          <div class="mb-3 relative">
             <h2 class="text-xl">
               {{ nodePool?.name | titlecase }}
               <span class="text-sm">({{ 'pages.clusters.details.nodePools.machineClass' | translate }}: {{ nodePool?.machineClass }})</span>

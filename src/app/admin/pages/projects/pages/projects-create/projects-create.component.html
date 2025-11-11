@@ -1,20 +1,20 @@
-<div class="dark:border-primary-darker flex items-center justify-between border-b px-4 py-4 lg:py-6">
+<div class="dark:border-primary-darker px-4 py-4 lg:py-6 flex items-center justify-between border-b">
   @if (!projectId) {
-    <h1 class="flex-grow text-2xl font-semibold">{{ 'pages.admin.projects.create.title' | translate }}</h1>
+    <h1 class="text-2xl font-semibold flex-grow">{{ 'pages.admin.projects.create.title' | translate }}</h1>
   }
   @if (projectId?.length > 0 && project !== null) {
-    <h1 class="flex-grow text-2xl font-semibold">{{ 'pages.admin.projects.update.title' | translate }}: {{ project?.name }}</h1>
+    <h1 class="text-2xl font-semibold flex-grow">{{ 'pages.admin.projects.update.title' | translate }}: {{ project?.name }}</h1>
   }
 </div>
 
 <div class="mt-2">
-  <div class="grid gap-4 p-4 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2">
+  <div class="gap-4 p-4 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2 grid">
     <div class="dark:bg-darker rounded-md bg-white p-4">
       <div class="dark:bg-darker rounded-md bg-white">
-        <div class="relative p-3">
+        <div class="p-3 relative">
           @if (projectFetchError) {
             <div>
-              <div class="mx-auto my-4 rounded-md bg-red-200 px-6 py-4 text-lg">
+              <div class="my-4 rounded-md bg-red-200 px-6 py-4 text-lg mx-auto">
                 <span class="p-2 text-red-800"> {{ 'pages.admin.projects.form.fetcherror' | translate }} </span>
               </div>
             </div>
@@ -26,7 +26,7 @@
                   <div class="mb-3 mt-3 xl:w-96">
                     <label><span class="text-red-800 dark:text-red-300">*</span> {{ 'pages.admin.projects.form.name' | translate }}</label>
                     <input
-                      class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-base font-normal text-gray-600 transition ease-in-out focus:bg-white focus:text-gray-700 focus:outline-none dark:bg-gray-700 dark:text-white"
+                      class="form-control m-0 rounded border-gray-300 bg-white px-3 py-1.5 text-base font-normal text-gray-600 ease-in-out focus:bg-white focus:text-gray-700 dark:bg-gray-700 dark:text-white block w-full border border-solid bg-clip-padding transition focus:outline-none"
                       type="text"
                       aria-describedby="name-help"
                       pInputText
@@ -47,7 +47,7 @@
                   <div class="mt-3">
                     <label><span class="text-red-800 dark:text-red-300">*</span> {{ 'pages.admin.projects.form.description' | translate }}</label>
                     <textarea
-                      class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-base font-normal text-gray-600 transition ease-in-out focus:bg-white focus:text-gray-700 focus:outline-none dark:bg-gray-700 dark:text-white"
+                      class="form-control m-0 rounded border-gray-300 bg-white px-3 py-1.5 text-base font-normal text-gray-600 ease-in-out focus:bg-white focus:text-gray-700 dark:bg-gray-700 dark:text-white block w-full border border-solid bg-clip-padding transition focus:outline-none"
                       type="text"
                       aria-describedby="description-help"
                       rows="5"
@@ -96,7 +96,7 @@
                       <div class="mb-3 mt-3 xl:w-96">
                         <label><span class="text-red-800 dark:text-red-300">*</span> {{ 'pages.admin.projects.form.workorder' | translate }}</label>
                         <input
-                          class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-base font-normal text-gray-600 transition ease-in-out focus:bg-white focus:text-gray-700 focus:outline-none dark:bg-gray-700 dark:text-white"
+                          class="form-control m-0 rounded border-gray-300 bg-white px-3 py-1.5 text-base font-normal text-gray-600 ease-in-out focus:bg-white focus:text-gray-700 dark:bg-gray-700 dark:text-white block w-full border border-solid bg-clip-padding transition focus:outline-none"
                           type="text"
                           aria-describedby="workorder-help"
                           pInputText
@@ -118,12 +118,13 @@
                     <div class="mt-10 flex flex-col" [formGroup]="tagForm">
                       <div class="mt-5 flex flex-col">
                         <label> {{ 'pages.admin.projects.form.serviceTags' | translate }}</label>
-                        <div class="flex gap-3">
+                        <div class="gap-3 flex">
                           <input
-                            class="border-1 rounded-lg border-gray-300 text-lg dark:border-gray-600 dark:bg-gray-700"
+                            class="rounded-lg border-gray-300 text-lg dark:border-gray-600 dark:bg-gray-700 focus:bg-white text-gray-800 dark:text-gray-800 border-1 focus:outline-none"
                             type="text"
                             formControlName="tag"
                             minlength="2"
+                            placeholder="{{ 'pages.admin.projects.form.servicetagsPlaceholder' | translate }}"
                             #tagInput
                             (keyup.enter)="addTag(tagInput?.value)"
                           />
@@ -136,7 +137,7 @@
                             {{ 'common.create' | translate }}
                           </button>
                         </div>
-                        <div class="mt-3 flex gap-3">
+                        <div class="mt-3 gap-3 flex">
                           @for (tag of tags; track tag) {
                             <p-chip [removable]="true" (onRemove)="removeTag(tag)" [ngClass]="'bg-' + getColorByText(tag)">
                               <div [ngClass]="'bg-' + getColorByText(tag)">{{ tag }}</div>
@@ -152,7 +153,7 @@
                         }
                       </div>
                     </div>
-                    <div class="dark:border-primary flex justify-between border-b p-4">
+                    <div class="dark:border-primary p-4 flex justify-between border-b">
                       <h4 class="dark:text-light text-lg font-semibold text-gray-500">
                         {{ 'pages.admin.projects.form.roles.title' | translate }}
                       </h4>
@@ -166,7 +167,7 @@
                       }
                       <button
                         (click)="addRole()"
-                        class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white disabled:cursor-not-allowed disabled:bg-gray-500 disabled:opacity-75 disabled:hover:bg-gray-800"
+                        class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring-offset-white disabled:bg-gray-500 disabled:hover:bg-gray-800 focus:ring focus:ring-offset-1 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75"
                       >
                         {{ 'pages.admin.projects.form.roles.add' | translate }}
                       </button>
@@ -203,7 +204,7 @@
                                 ><span class="text-red-800 dark:text-red-300">*</span> {{ 'pages.admin.projects.form.roles.upn' | translate }}</label
                               >
                               <input
-                                class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-base font-normal text-gray-600 transition ease-in-out focus:bg-white focus:text-gray-700 focus:outline-none dark:bg-gray-700 dark:text-white"
+                                class="form-control m-0 rounded border-gray-300 bg-white px-3 py-1.5 text-base font-normal text-gray-600 ease-in-out focus:bg-white focus:text-gray-700 dark:bg-gray-700 dark:text-white block w-full border border-solid bg-clip-padding transition focus:outline-none"
                                 type="email"
                                 aria-describedby="upn-help"
                                 pInputText
@@ -226,7 +227,7 @@
                                 ><span class="text-red-800 dark:text-red-300">*</span>{{ 'pages.admin.projects.form.roles.email' | translate }}</label
                               >
                               <input
-                                class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-base font-normal text-gray-600 transition ease-in-out focus:bg-white focus:text-gray-700 focus:outline-none dark:bg-gray-700 dark:text-white"
+                                class="form-control m-0 rounded border-gray-300 bg-white px-3 py-1.5 text-base font-normal text-gray-600 ease-in-out focus:bg-white focus:text-gray-700 dark:bg-gray-700 dark:text-white block w-full border border-solid bg-clip-padding transition focus:outline-none"
                                 type="email"
                                 aria-describedby="email-help"
                                 pInputText
@@ -249,7 +250,7 @@
                                 ><span class="text-red-800 dark:text-red-300">*</span>{{ 'pages.admin.projects.form.roles.phone' | translate }}</label
                               >
                               <input
-                                class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-base font-normal text-gray-600 transition ease-in-out focus:bg-white focus:text-gray-700 focus:outline-none dark:bg-gray-700 dark:text-white"
+                                class="form-control m-0 rounded border-gray-300 bg-white px-3 py-1.5 text-base font-normal text-gray-600 ease-in-out focus:bg-white focus:text-gray-700 dark:bg-gray-700 dark:text-white block w-full border border-solid bg-clip-padding transition focus:outline-none"
                                 type="text"
                                 aria-describedby="phone-help"
                                 pInputText
@@ -271,7 +272,7 @@
                           <div class="mb-3 mt-3 flex-none content-end">
                             <button
                               (click)="deleteRole(i)"
-                              class="focus:ring-primary dark:focus:ring-offset-dark ml-2 content-end rounded-md bg-red-700 px-4 py-2 text-sm text-white hover:bg-red-500 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+                              class="focus:ring-primary dark:focus:ring-offset-dark ml-2 rounded-md bg-red-700 px-4 py-2 text-sm text-white hover:bg-red-500 focus:ring-offset-white content-end focus:ring focus:ring-offset-1 focus:outline-none"
                             >
                               {{ 'common.delete' | translate }}
                             </button>
@@ -288,7 +289,7 @@
                     <button
                       [disabled]="!projectForm?.valid"
                       (click)="createProject()"
-                      class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white disabled:cursor-not-allowed disabled:bg-gray-500 disabled:opacity-75 disabled:hover:bg-gray-800"
+                      class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring-offset-white disabled:bg-gray-500 disabled:hover:bg-gray-800 focus:ring focus:ring-offset-1 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75"
                     >
                       {{ 'common.create' | translate }}
                     </button>
@@ -297,7 +298,7 @@
                     <button
                       [disabled]="!projectForm?.valid"
                       (click)="updateProject()"
-                      class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white disabled:cursor-not-allowed disabled:bg-gray-900 disabled:opacity-25 disabled:hover:bg-gray-900"
+                      class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring-offset-white disabled:bg-gray-900 disabled:hover:bg-gray-900 focus:ring focus:ring-offset-1 focus:outline-none disabled:cursor-not-allowed disabled:opacity-25"
                     >
                       {{ 'common.update' | translate }}
                     </button>
@@ -305,7 +306,7 @@
                   @if (this.projectId?.length === 0) {
                     <button
                       (click)="reset()"
-                      class="hover:bg-primary-lighter focus:ring-primary dark:focus:ring-offset-dark ml-3 rounded-md bg-neutral-500 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+                      class="hover:bg-primary-lighter focus:ring-primary dark:focus:ring-offset-dark ml-3 rounded-md bg-neutral-500 px-4 py-2 text-sm text-white focus:ring-offset-white focus:ring focus:ring-offset-1 focus:outline-none"
                     >
                       {{ 'common.reset' | translate }}
                     </button>
@@ -313,7 +314,7 @@
                   @if (this.projectId?.length !== 0) {
                     <button
                       (click)="regretChanges()"
-                      class="hover:bg-primary-lighter focus:ring-primary dark:focus:ring-offset-dark ml-3 rounded-md bg-neutral-500 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+                      class="hover:bg-primary-lighter focus:ring-primary dark:focus:ring-offset-dark ml-3 rounded-md bg-neutral-500 px-4 py-2 text-sm text-white focus:ring-offset-white focus:ring focus:ring-offset-1 focus:outline-none"
                     >
                       {{ 'common.reset' | translate }}
                     </button>
@@ -321,14 +322,14 @@
                 </div>
                 @if (projectCreateError) {
                   <div>
-                    <div class="mx-auto my-4 flex items-center rounded-md bg-red-200 px-6 py-4 text-lg">
+                    <div class="my-4 rounded-md bg-red-200 px-6 py-4 text-lg mx-auto flex items-center">
                       <span class="p-2 text-red-800"> {{ 'pages.admin.projects.form.createError' | translate }} </span>
                     </div>
                   </div>
                 }
                 @if (projectUpdateError) {
                   <div>
-                    <div class="mx-auto my-4 flex items-center rounded-md bg-red-200 px-6 py-4 text-lg">
+                    <div class="my-4 rounded-md bg-red-200 px-6 py-4 text-lg mx-auto flex items-center">
                       <span class="p-2 text-red-800"> {{ 'pages.admin.projects.form.updateError' | translate }} </span>
                     </div>
                   </div>
@@ -340,9 +341,9 @@
       </div>
     </div>
     @if (environment?.production === false) {
-      <div class="dark:bg-darker flex justify-between rounded-md bg-white p-4">
+      <div class="dark:bg-darker rounded-md bg-white p-4 flex justify-between">
         <div class="dark:bg-darker rounded-md bg-white">
-          <div class="relative flex flex-col p-3">
+          <div class="p-3 relative flex flex-col">
             <h2>Preview</h2>
             <pre>{{ projectForm.getRawValue() | json }}</pre>
           </div>

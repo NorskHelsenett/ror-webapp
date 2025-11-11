@@ -1,9 +1,9 @@
-<div class="dark:border-primary-darker flex items-center gap-4 border-b px-4 py-4 lg:py-6">
-  <h1 class="flex-grow text-2xl font-semibold">{{ 'pages.prices.title' | translate }}</h1>
+<div class="dark:border-primary-darker gap-4 px-4 py-4 lg:py-6 flex items-center border-b">
+  <h1 class="text-2xl font-semibold flex-grow">{{ 'pages.prices.title' | translate }}</h1>
 
   <a
     [routerLink]="['../admin/prices/create']"
-    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark delay-50 float-left rounded-md bg-green-700 px-4 py-2 text-sm text-white transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white ease-in-out hover:-translate-y-1 focus:ring-offset-white float-left transition delay-50 duration-300 hover:scale-110 focus:ring focus:ring-offset-1 focus:outline-none"
   >
     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
       <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
@@ -12,22 +12,22 @@
 
   <a
     (click)="fetch()"
-    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark cursor-pointer rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:outline-none focus:ring focus:ring-offset-1 focus:ring-offset-white"
+    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring-offset-white cursor-pointer focus:ring focus:ring-offset-1 focus:outline-none"
   >
     {{ 'common.refresh' | translate }}
   </a>
 </div>
 
 <div class="mt-2">
-  <div class="grid gap-8 p-4">
-    <div class="dark:bg-darker flex justify-between rounded-md bg-white p-4">
+  <div class="gap-8 p-4 grid">
+    <div class="dark:bg-darker rounded-md bg-white p-4 flex justify-between">
       <div class="dark:bg-darker rounded-md bg-white">
         <div class="p-3">
           <div class="flex flex-col">
             <div class="sm:-mx-6 lg:-mx-8">
-              <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+              <div class="py-2 sm:px-6 lg:px-8 inline-block min-w-full">
                 @if (pricesError) {
-                  <div class="mx-auto my-4 flex items-center rounded-md bg-red-200 px-6 py-4 text-lg">
+                  <div class="my-4 rounded-md bg-red-200 px-6 py-4 text-lg mx-auto flex items-center">
                     <span class="p-2 text-red-800"> {{ 'pages.dashboard.error' | translate }} </span>
                     <button class="btn text-black" (click)="fetch()">{{ 'common.tryAgain' | translate }}</button>
                   </div>
@@ -96,15 +96,15 @@
                   </ng-template>
                   <ng-template #body let-price let-expanded="expanded">
                     <tr>
-                      <td class="whitespace-nowrap px-6 py-4 text-sm font-medium">{{ price?.machineClass | titlecase }}</td>
-                      <td class="whitespace-nowrap px-6 py-4 text-sm font-light">{{ price?.price }} NOK</td>
-                      <td class="whitespace-nowrap px-6 py-4 text-sm font-light">{{ price?.cpu }}</td>
-                      <td class="whitespace-nowrap px-6 py-4 text-sm font-light">{{ price?.memory }}</td>
-                      <td class="whitespace-nowrap px-6 py-4 text-sm font-light">{{ price?.provider | titlecase }}</td>
-                      <td class="whitespace-nowrap px-6 py-4 text-sm font-light">
+                      <td class="px-6 py-4 text-sm font-medium whitespace-nowrap">{{ price?.machineClass | titlecase }}</td>
+                      <td class="px-6 py-4 text-sm font-light whitespace-nowrap">{{ price?.price }} NOK</td>
+                      <td class="px-6 py-4 text-sm font-light whitespace-nowrap">{{ price?.cpu }}</td>
+                      <td class="px-6 py-4 text-sm font-light whitespace-nowrap">{{ price?.memory }}</td>
+                      <td class="px-6 py-4 text-sm font-light whitespace-nowrap">{{ price?.provider | titlecase }}</td>
+                      <td class="px-6 py-4 text-sm font-light whitespace-nowrap">
                         {{ price?.from | time: 'DD. MMM YYYY HH:mm:ss' }}
                       </td>
-                      <td class="whitespace-nowrap px-6 py-4 text-sm font-light">{{ (price?.to | time: 'DD. MMM YYYY HH:mm:ss') || '' }}</td>
+                      <td class="px-6 py-4 text-sm font-light whitespace-nowrap">{{ (price?.to | time: 'DD. MMM YYYY HH:mm:ss') || '' }}</td>
                     </tr>
                   </ng-template>
                   <ng-template #emptymessage>
