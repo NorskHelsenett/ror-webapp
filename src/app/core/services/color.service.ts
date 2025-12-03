@@ -1,5 +1,51 @@
 import { Injectable } from '@angular/core';
-import { closest } from 'color-2-name';
+
+// Custom implementation to avoid ESM/browser bundle issues with color-2-name
+interface ColorResult {
+  name: string;
+  hex: string;
+}
+
+function hexToRgb(hex: string): { r: number; g: number; b: number } | null {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result
+    ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16),
+      }
+    : null;
+}
+
+function colorDistance(rgb1: { r: number; g: number; b: number }, rgb2: [number, number, number, string]): number {
+  const dr = rgb1.r - rgb2[0];
+  const dg = rgb1.g - rgb2[1];
+  const db = rgb1.b - rgb2[2];
+  return dr * dr + dg * dg + db * db;
+}
+
+function findClosestColor(hex: string, colors: [number, number, number, string][]): ColorResult {
+  const rgb = hexToRgb(hex);
+  if (!rgb) {
+    return { name: 'error', hex: '#F00' };
+  }
+
+  let minDistance = Number.MAX_SAFE_INTEGER;
+  let closestName = 'error';
+  let closestHex = '#F00';
+
+  for (const color of colors) {
+    const distance = colorDistance(rgb, color);
+    if (distance < minDistance) {
+      minDistance = distance;
+      closestName = color[3];
+      closestHex = `#${color[0].toString(16).padStart(2, '0')}${color[1].toString(16).padStart(2, '0')}${color[2].toString(16).padStart(2, '0')}`;
+    }
+    if (distance === 0) break;
+  }
+
+  return { name: closestName, hex: closestHex };
+}
 
 @Injectable({
   providedIn: 'root',
@@ -13,8 +59,8 @@ export class ColorService {
     if (colorHex.charAt(0) !== '#') {
       colorHex = `#${colorHex}`;
     }
-    const closestColor = closest(colorHex, this.rorColors, { info: true });
-    return closestColor?.name;
+    const closestColor = findClosestColor(colorHex, this.rorColors);
+    return closestColor.name;
   }
 
   getHexColor(colorHex: string): string {
@@ -25,8 +71,8 @@ export class ColorService {
     if (colorHex.charAt(0) !== '#') {
       colorHex = `#${colorHex}`;
     }
-    const closestColor: any = closest(colorHex, this.rorColors, { info: true });
-    return closestColor?.hex;
+    const closestColor = findClosestColor(colorHex, this.rorColors);
+    return closestColor.hex;
   }
 
   private rorColors: [number, number, number, string][] = [

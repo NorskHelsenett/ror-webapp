@@ -38,7 +38,7 @@ export class ProjectsCreateComponent implements OnInit, OnDestroy {
 
   availableRoles: any[];
   tagForm: FormGroup;
-  tags: string[];
+  tags: string[] = [];
 
   private submitted: boolean = false;
 

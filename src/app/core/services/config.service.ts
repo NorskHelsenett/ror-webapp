@@ -7,7 +7,7 @@ import { AppConfig } from '../../../app-config';
 export class ConfigService {
   config: AppConfig = {
     auth: {
-      issuer: 'http://localhost:5556/dex',
+      issuer: 'http://localhost:6556/dex',
       clientId: 'ror.sky.test.nhn.no',
       redirectUri: '/auth/callback',
       scope: 'openid profile email groups offline_access',
