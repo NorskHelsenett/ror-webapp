@@ -2,9 +2,9 @@ import { RenderMode, ServerRoute } from '@angular/ssr';
 
 export const serverRoutes: ServerRoute[] = [
   { path: 'error', renderMode: RenderMode.Prerender },
-  { path: 'auth/callback', renderMode: RenderMode.Prerender },
-  { path: 'auth/login', renderMode: RenderMode.Prerender },
-  { path: '', renderMode: RenderMode.Prerender },
+  { path: 'auth/callback', renderMode: RenderMode.Client },
+  { path: 'auth/login', renderMode: RenderMode.Client },
+  { path: '', renderMode: RenderMode.Client },
   { path: 'cluster/:id', renderMode: RenderMode.Client },
   { path: 'cluster/:id/ingresses/:ingressid', renderMode: RenderMode.Client },
   { path: 'cluster/:id/ingress/:ingressid', renderMode: RenderMode.Client },
