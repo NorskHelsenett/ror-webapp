@@ -552,7 +552,11 @@
         <!-- Desktop Right buttons -->
         <nav aria-label="Secondary" class="space-x-2 md:flex md:items-center hidden">
           <!-- Toggle dark theme button -->
-          <button aria-hidden="true" class="relative focus:outline-none" (click)="toggleDark()">
+          <button
+            [attr.aria-label]="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
+            class="relative focus:outline-none"
+            (click)="toggleDark()"
+          >
             <div class="bg-primary-100 dark:bg-primary-lighter h-6 w-12 rounded-full transition outline-none"></div>
             <div
               class="left-0 top-0 h-6 w-6 shadow-sm absolute inline-flex scale-110 transform items-center justify-center rounded-full transition-all duration-150"
@@ -696,7 +700,11 @@
           <nav class="dark:bg-darker inset-x-4 top-16 rounded-md bg-white p-4 shadow-lg md:hidden absolute flex items-center" aria-label="Secondary">
             <div class="space-x-2">
               <!-- Toggle dark theme button -->
-              <button aria-hidden="true" class="relative focus:outline-none" (click)="toggleDark()">
+              <button
+                [attr.aria-label]="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
+                class="relative focus:outline-none"
+                (click)="toggleDark()"
+              >
                 <div class="bg-primary-100 dark:bg-primary-lighter h-6 w-12 rounded-full transition outline-none"></div>
                 <div
                   class="left-0 top-0 h-6 w-6 shadow-sm absolute inline-flex scale-110 transform items-center justify-center rounded-full transition-all duration-200"
