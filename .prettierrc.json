@@ -4,7 +4,7 @@
   "endOfLine": "auto",
   "printWidth": 150,
   "plugins": ["prettier-plugin-tailwindcss"],
-  "tailwindStylesheet": "./src/styles.scss",
+  "tailwindStylesheet": "./src/tailwind.css",
   "overrides": [
     {
       "files": "*.yml",

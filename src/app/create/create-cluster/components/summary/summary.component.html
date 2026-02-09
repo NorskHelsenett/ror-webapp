@@ -1,4 +1,4 @@
-<div class="mb-5 gap-1 pl-5 grid grid-cols-2">
+<div class="mb-5 grid grid-cols-2 gap-1 pl-5">
   <h2>{{ 'pages.create.cluster.steps.summary.title' | translate }}</h2>
   <div></div>
 
@@ -62,7 +62,7 @@
 
   @if (value?.k8sVersion?.name?.length > 0) {
     <div class="">{{ 'pages.create.cluster.steps.summary.k8sVersion' | translate }}</div>
-    <div class="gap-3 flex">
+    <div class="flex gap-3">
       <div class="font-bold underline">
         <a (click)="linkToStep(2)" class="cursor-pointer">
           {{ value?.k8sVersion?.name }}
@@ -90,7 +90,7 @@
     <div class="text-red-400">{{ 'pages.create.cluster.steps.resources.availabilityWarning' | translate }}</div>
   }
   <div>{{ 'pages.create.cluster.steps.summary.nodepools' | translate }}</div>
-  <div class="gap-3 flex">
+  <div class="flex gap-3">
     <ul>
       @for (cap of value?.capasity; track cap) {
         <li class="font-bold underline">
@@ -101,7 +101,7 @@
   </div>
 
   <div class="mt-3">{{ 'pages.create.cluster.steps.summary.ownergroup' | translate }}</div>
-  <div class="gap-3 font-bold flex">
+  <div class="flex gap-3 font-bold">
     <a (click)="linkToStep(3)" class="cursor-pointer">
       <span>{{ value?.ownergroup }}</span>
     </a>
@@ -116,7 +116,7 @@
     <a (click)="linkToStep(3)" class="cursor-pointer">{{ value?.criticality?.name }}</a>
   </div>
   <div>{{ 'pages.create.cluster.steps.summary.tags' | translate }}</div>
-  <div class="gap-3 font-bold flex">
+  <div class="flex gap-3 font-bold">
     <a (click)="linkToStep(3)" class="cursor-pointer">
       @for (tag of value?.tags; track tag) {
         <p-tag class="mr-1" severity="success" [value]="tag"></p-tag>

@@ -1,7 +1,7 @@
-<div class="space-y-8 lg:gap-8 lg:space-y-0 grid">
-  <div class="dark:bg-darker rounded-md bg-white flex items-center justify-between">
-    <div class="dark:bg-darker rounded-md bg-white col-span-2 w-full">
-      <div class="dark:border-primary p-4 flex items-center justify-between border-b">
+<div class="grid space-y-8 lg:gap-8 lg:space-y-0">
+  <div class="dark:bg-darker flex items-center justify-between rounded-md bg-white">
+    <div class="dark:bg-darker col-span-2 w-full rounded-md bg-white">
+      <div class="dark:border-primary flex items-center justify-between border-b p-4">
         <h4 class="dark:text-light text-lg font-semibold text-gray-500">{{ 'pages.clusters.details.ingresses.title' | translate }}</h4>
       </div>
       <div class="p-4">
@@ -58,7 +58,7 @@
               <ng-template #body let-ingress>
                 <tr>
                   <td>
-                    <a class="ml-2 hover:text-blue-800 dark:hover:text-blue-400 hover:underline" [routerLink]="['ingresses', ingress?.name]">
+                    <a class="ml-2 hover:text-blue-800 hover:underline dark:hover:text-blue-400" [routerLink]="['ingresses', ingress?.name]">
                       {{ ingress?.name }}</a
                     >
                   </td>
@@ -80,7 +80,7 @@
                       <span>{{ 'pages.clusters.details.ingresses.datacenter' | translate }}</span>
                     }
                   </td>
-                  <td class="px-1 py-1 pl-2 text-sm font-light align-top whitespace-nowrap">
+                  <td class="px-1 py-1 pl-2 align-top text-sm font-light whitespace-nowrap">
                     <span>{{ ingress?.namespace }}</span>
                   </td>
 
@@ -88,7 +88,7 @@
                     <div class="flex flex-col">
                       @for (rule of ingress?.ingressrules; track rule) {
                         <span>
-                          <a class="hover:text-blue-800 dark:hover:text-blue-400 hover:underline" href="https://{{ rule?.hostname }}" target="_blank"
+                          <a class="hover:text-blue-800 hover:underline dark:hover:text-blue-400" href="https://{{ rule?.hostname }}" target="_blank"
                             ><i class="pi pi-external-link mr-2"></i>{{ rule?.hostname }}</a
                           ></span
                         >

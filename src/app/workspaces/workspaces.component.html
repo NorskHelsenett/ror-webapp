@@ -1,27 +1,27 @@
-<div class="dark:border-primary-darker px-4 py-4 lg:py-6 flex items-center justify-between border-b">
+<div class="dark:border-primary-darker flex items-center justify-between border-b px-4 py-4 lg:py-6">
   <h1 class="text-2xl font-semibold">{{ 'pages.workspaces.title' | translate }}</h1>
   <a
     (click)="fetchMetrics(lastTableEvent)"
-    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring-offset-white cursor-pointer focus:ring focus:ring-offset-1 focus:outline-none"
+    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark cursor-pointer rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
   >
     {{ 'common.refresh' | translate }}
   </a>
 </div>
 
 <div class="mt-2">
-  <div class="gap-8 p-4 grid">
-    <div class="dark:bg-darker rounded-md bg-white p-4 flex items-center justify-between">
+  <div class="grid gap-8 p-4">
+    <div class="dark:bg-darker flex items-center justify-between rounded-md bg-white p-4">
       <div class="dark:bg-darker rounded-md bg-white">
         @if (workspaces$ | async) {
-          <div class="p-3 relative">
+          <div class="relative p-3">
             @if (workspacesError) {
-              <div class="my-4 rounded-md bg-red-200 px-2 py-2 text-lg mx-auto flex items-center">
+              <div class="mx-auto my-4 flex items-center rounded-md bg-red-200 px-2 py-2 text-lg">
                 <span class="p-2 text-red-800"> {{ 'pages.dashboard.error' | translate }} </span>
                 <button class="btn text-black" (click)="fetchMetrics(lastTableEvent)">{{ 'common.tryAgain' | translate }}</button>
               </div>
             }
             @if (workspaceMetricsError) {
-              <div class="my-4 rounded-md bg-red-200 px-2 py-2 text-lg mx-auto flex items-center">
+              <div class="mx-auto my-4 flex items-center rounded-md bg-red-200 px-2 py-2 text-lg">
                 <span class="p-2 text-red-800"> {{ 'pages.dashboard.error' | translate }} </span>
                 <button class="btn text-black" (click)="fetchMetrics(lastTableEvent)">{{ 'common.tryAgain' | translate }}</button>
               </div>
@@ -70,13 +70,13 @@
               <ng-template #body let-metric let-expanded="expanded">
                 <tr>
                   <td class="px-2 py-2 text-sm font-medium whitespace-nowrap">
-                    <a class="hover:text-blue-800 dark:hover:text-blue-400 hover:underline" [routerLink]="['./', metric?.workspace?.id]">{{
+                    <a class="hover:text-blue-800 hover:underline dark:hover:text-blue-400" [routerLink]="['./', metric?.workspace?.id]">{{
                       metric?.workspace?.name
                     }}</a>
                   </td>
                   <td class="px-2 py-2 text-sm font-light whitespace-nowrap">
                     <a
-                      class="hover:text-blue-800 dark:hover:text-blue-400 hover:underline"
+                      class="hover:text-blue-800 hover:underline dark:hover:text-blue-400"
                       [routerLink]="['../admin/datacenter', metric?.workspace?.datacenter?.id]"
                       >{{ metric?.workspace?.datacenter?.name }}</a
                     >

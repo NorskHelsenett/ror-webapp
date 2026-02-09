@@ -1,9 +1,9 @@
-<div class="space-y-8 lg:grid-cols-3 lg:gap-8 lg:space-y-0 grid grid-cols-1">
-  <div class="dark:bg-darker rounded-md bg-white col-span-2">
-    <div class="dark:border-primary p-4 flex items-center justify-between border-b">
+<div class="grid grid-cols-1 space-y-8 lg:grid-cols-3 lg:gap-8 lg:space-y-0">
+  <div class="dark:bg-darker col-span-2 rounded-md bg-white">
+    <div class="dark:border-primary flex items-center justify-between border-b p-4">
       <h4 class="dark:text-light text-lg font-semibold text-gray-500">{{ 'pages.profile.description' | translate }}</h4>
     </div>
-    <div class="p-3 relative">
+    <div class="relative p-3">
       <div class="my-6 rounded">
         <table class="w-full border-collapse text-left">
           <tbody>
@@ -36,10 +36,10 @@
   </div>
 
   <div class="dark:bg-darker rounded-md bg-white">
-    <div class="dark:border-primary p-4 flex items-center justify-between border-b">
+    <div class="dark:border-primary flex items-center justify-between border-b p-4">
       <h4 class="dark:text-light text-lg font-semibold text-gray-500">{{ 'pages.profile.accessToken' | translate }}</h4>
     </div>
-    <div class="p-3 relative">
+    <div class="relative p-3">
       <div class="my-6 rounded">
         <table class="w-full border-collapse text-left">
           <tbody>
@@ -70,16 +70,16 @@
           </tbody>
         </table>
       </div>
-      <div class="gap-3 flex flex-col">
+      <div class="flex flex-col gap-3">
         <a
           (click)="copyAccessToken(false)"
-          class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring-offset-white cursor-pointer focus:ring focus:ring-offset-1 focus:outline-none"
+          class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark cursor-pointer rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
         >
           {{ 'common.copy' | translate }}
         </a>
         <a
           (click)="copyAccessToken(true)"
-          class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring-offset-white cursor-pointer focus:ring focus:ring-offset-1 focus:outline-none"
+          class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark cursor-pointer rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
         >
           {{ 'pages.profile.copyWith' | translate }}
         </a>

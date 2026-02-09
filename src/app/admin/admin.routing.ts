@@ -88,55 +88,6 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/datacenters/admin-datacenters.component').then((m) => m.AdminDatacentersComponent),
   },
   {
-    path: 'configuration',
-    canActivate: [AdminOwnerGuard],
-    loadComponent: () => import('../configuration/pages/configuration/configuration.component').then((m) => m.ConfigurationComponent),
-  },
-  {
-    path: 'configuration/operatorconfig/create',
-    canActivate: [AdminOwnerGuard],
-    loadComponent: () =>
-      import('../configuration/pages/config-operatorconfig-create-update/config-operatorconfig-create-update.component').then(
-        (m) => m.ConfigOperatorconfigCreateUpdateComponent,
-      ),
-  },
-  {
-    path: 'configuration/operatorconfig/:id/edit',
-    canActivate: [AdminOwnerGuard],
-    loadComponent: () =>
-      import('../configuration/pages/config-operatorconfig-create-update/config-operatorconfig-create-update.component').then(
-        (m) => m.ConfigOperatorconfigCreateUpdateComponent,
-      ),
-  },
-  {
-    path: 'configuration/task/create',
-    canActivate: [AdminOwnerGuard],
-    loadComponent: () =>
-      import('../configuration/pages/config-task-create-update/config-task-create-update.component').then((m) => m.ConfigTaskCreateUpdateComponent),
-  },
-  {
-    path: 'configuration/task/:id/edit',
-    canActivate: [AdminOwnerGuard],
-    loadComponent: () =>
-      import('../configuration/pages/config-task-create-update/config-task-create-update.component').then((m) => m.ConfigTaskCreateUpdateComponent),
-  },
-  {
-    path: 'configuration/desiredversion/create',
-    canActivate: [AdminOwnerGuard],
-    loadComponent: () =>
-      import('../configuration/pages/config-desiredversion-create-update/config-desiredversion-create-update.component').then(
-        (m) => m.ConfigDesiredversionCreateUpdateComponent,
-      ),
-  },
-  {
-    path: 'configuration/desiredversion/edit',
-    canActivate: [AdminOwnerGuard],
-    loadComponent: () =>
-      import('../configuration/pages/config-desiredversion-create-update/config-desiredversion-create-update.component').then(
-        (m) => m.ConfigDesiredversionCreateUpdateComponent,
-      ),
-  },
-  {
     path: 'policyreports',
     canActivate: [AdminReadGuard],
     loadComponent: () => import('./pages/policy-reports/policy-reports.component').then((m) => m.PolicyReportsComponent),

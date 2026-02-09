@@ -1,12 +1,12 @@
-<div class="gap-4 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-1 2xl:grid-cols-2 grid">
-  <div class="dark:bg-darker rounded-md bg-white flex flex-col">
-    <div class="p-4 flex items-center justify-between">
+<div class="grid gap-4 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-1 2xl:grid-cols-2">
+  <div class="dark:bg-darker flex flex-col rounded-md bg-white">
+    <div class="flex items-center justify-between p-4">
       <div>
-        <h6 class="dark:text-primary-lighter text-xs font-medium tracking-wider text-gray-500 leading-none uppercase">
+        <h6 class="dark:text-primary-lighter text-xs leading-none font-medium tracking-wider text-gray-500 uppercase">
           {{ 'pages.clusters.details.metrics.priceMonth' | translate }}
         </h6>
         <span class="text-xl font-semibold">{{ metrics?.priceMonth || 0 | currency: 'NOK' : 'symbol' : '.0' : 'no' }}</span>
-        <span class="ml-2 rounded-md bg-green-100 px-2 text-xs text-green-900 inline-block py-px">
+        <span class="ml-2 inline-block rounded-md bg-green-100 px-2 py-px text-xs text-green-900">
           {{ metrics?.priceYear || 0 | currency: 'NOK' : 'symbol' : '.0' : 'no' }}
           <span>{{ 'pages.clusters.details.metrics.priceYear' | translate }}</span></span
         >
@@ -33,14 +33,14 @@
     <span class="mb-2 ml-2 text-xs text-green-600">{{ 'common.priceEst' | translate }}</span>
   </div>
 
-  <div class="dark:bg-darker rounded-md bg-white flex flex-col">
-    <div class="p-4 flex items-center justify-between">
+  <div class="dark:bg-darker flex flex-col rounded-md bg-white">
+    <div class="flex items-center justify-between p-4">
       <div>
-        <h6 class="dark:text-primary-lighter text-xs font-medium tracking-wider text-gray-500 leading-none uppercase">
+        <h6 class="dark:text-primary-lighter text-xs leading-none font-medium tracking-wider text-gray-500 uppercase">
           {{ 'nav.nodes' | translate }}
         </h6>
         <span class="text-xl font-semibold">{{ metrics?.nodeCount || 0 }}</span>
-        <span class="ml-2 rounded-md bg-green-100 px-2 text-xs text-green-900 inline-block py-px">
+        <span class="ml-2 inline-block rounded-md bg-green-100 px-2 py-px text-xs text-green-900">
           {{ metrics?.nodePoolCount || 0 }} <span>{{ 'pages.clusters.details.metrics.nodePool' | translate }}</span></span
         >
       </div>
@@ -66,14 +66,14 @@
     <div class="p-2"></div>
   </div>
 
-  <div class="dark:bg-darker rounded-md bg-white flex flex-col">
-    <div class="p-4 flex items-center justify-between">
+  <div class="dark:bg-darker flex flex-col rounded-md bg-white">
+    <div class="flex items-center justify-between p-4">
       <div>
-        <h6 class="dark:text-primary-lighter text-xs font-medium tracking-wider text-gray-500 leading-none uppercase">
+        <h6 class="dark:text-primary-lighter text-xs leading-none font-medium tracking-wider text-gray-500 uppercase">
           {{ 'pages.dashboard.metrics.cpu' | translate }}
         </h6>
         <span class="text-xl font-semibold">{{ metrics?.cpuPercentage || 0 }} %</span>
-        <span class="ml-2 rounded-md bg-green-100 px-2 text-xs text-green-900 inline-block py-px"
+        <span class="ml-2 inline-block rounded-md bg-green-100 px-2 py-px text-xs text-green-900"
           ><span> {{ metrics?.cpu || 0 }}</span> {{ 'pages.dashboard.metrics.cores' | translate }}
         </span>
       </div>
@@ -99,14 +99,14 @@
     <div class="p-2"></div>
   </div>
 
-  <div class="dark:bg-darker rounded-md bg-white flex flex-col">
-    <div class="p-4 flex items-center justify-between">
+  <div class="dark:bg-darker flex flex-col rounded-md bg-white">
+    <div class="flex items-center justify-between p-4">
       <div>
-        <h6 class="dark:text-primary-lighter text-xs font-medium tracking-wider text-gray-500 leading-none uppercase">
+        <h6 class="dark:text-primary-lighter text-xs leading-none font-medium tracking-wider text-gray-500 uppercase">
           {{ 'pages.dashboard.metrics.memory' | translate }}
         </h6>
         <span class="text-xl font-semibold">{{ metrics?.memoryPercentage || 0 }} %</span>
-        <span class="ml-2 rounded-md bg-green-100 px-2 text-xs text-green-900 inline-block py-px">
+        <span class="ml-2 inline-block rounded-md bg-green-100 px-2 py-px text-xs text-green-900">
           {{ metrics?.memory | formatBytes: 2 : true }}
         </span>
       </div>

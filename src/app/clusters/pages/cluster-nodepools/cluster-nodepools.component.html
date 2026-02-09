@@ -1,7 +1,7 @@
-<div class="space-y-8 lg:gap-8 lg:space-y-0 grid">
-  <div class="dark:bg-darker m-3 rounded-md bg-white flex items-center justify-between overflow-x-auto">
-    <div class="dark:bg-darker rounded-md bg-white col-span-2 w-full overflow-x-auto">
-      <div class="dark:border-primary p-3 flex justify-between border-b">
+<div class="grid space-y-8 lg:gap-8 lg:space-y-0">
+  <div class="dark:bg-darker m-3 flex items-center justify-between overflow-x-auto rounded-md bg-white">
+    <div class="dark:bg-darker col-span-2 w-full overflow-x-auto rounded-md bg-white">
+      <div class="dark:border-primary flex justify-between border-b p-3">
         <div class="flex">
           <h4 class="dark:text-light text-lg font-semibold text-gray-500">{{ 'pages.clusters.details.nodePools.title' | translate }}</h4>
           @if (!loadedFromResources) {
@@ -15,7 +15,7 @@
 
         <a
           (click)="fetchKubernetesClusterResource()"
-          class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark ml-2 rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring-offset-white cursor-pointer focus:ring focus:ring-offset-1 focus:outline-none"
+          class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark ml-2 cursor-pointer rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
         >
           {{ 'common.refresh' | translate }}
         </a>
@@ -42,12 +42,12 @@
               }
             } @else {
               @if (isLoading === true) {
-                <div class="p-8 flex h-full w-full items-center justify-center">
+                <div class="flex h-full w-full items-center justify-center p-8">
                   <app-spinner></app-spinner>
                   <span class="ml-2 animate-bounce">{{ 'common.fetching' | translate }}</span>
                 </div>
               } @else if (clusterResourceSetFetchError) {
-                <div class="my-4 rounded-md bg-red-200 px-6 py-4 text-lg mx-auto flex items-center">
+                <div class="mx-auto my-4 flex items-center rounded-md bg-red-200 px-6 py-4 text-lg">
                   <span class="p-2 text-red-800"> {{ 'common.errorLoading' | translate }} </span>
                   <button class="btn text-black" (click)="fetchKubernetesClusterResource()">{{ 'common.tryAgain' | translate }}</button>
                 </div>
@@ -59,14 +59,14 @@
                   (onDelete)="deleteNodepool($event)"
                 ></app-cluster-nodepool-list>
               } @else if (!clusterResource) {
-                <div class="my-4 rounded-md bg-yellow-100 px-6 py-4 text-lg mx-auto flex items-center">
+                <div class="mx-auto my-4 flex items-center rounded-md bg-yellow-100 px-6 py-4 text-lg">
                   <span class="p-2 text-yellow-800">{{ 'common.missing' | translate }}</span>
                   <button class="btn ml-2 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600" (click)="fetchKubernetesClusterResource()">
                     {{ 'common.tryAgain' | translate }}
                   </button>
                 </div>
               } @else {
-                <div class="my-4 rounded-md bg-yellow-100 px-6 py-4 text-lg mx-auto flex items-center">
+                <div class="mx-auto my-4 flex items-center rounded-md bg-yellow-100 px-6 py-4 text-lg">
                   <span class="p-2 text-yellow-800">{{ 'common.missing' | translate }}</span>
                   <button class="btn ml-2 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600" (click)="fetchKubernetesClusterResource()">
                     {{ 'common.tryAgain' | translate }}

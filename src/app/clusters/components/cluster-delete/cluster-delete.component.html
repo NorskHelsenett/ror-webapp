@@ -1,14 +1,14 @@
-<div class="space-y-8 lg:gap-8 lg:space-y-0 grid">
-  <div class="dark:bg-darker rounded-md bg-white flex items-center justify-between overflow-x-auto">
-    <div class="dark:bg-darker rounded-md bg-white col-span-2 overflow-x-auto">
-      <div class="dark:border-primary gap-5 p-4 text-red-500 flex border-b">
+<div class="grid space-y-8 lg:gap-8 lg:space-y-0">
+  <div class="dark:bg-darker flex items-center justify-between overflow-x-auto rounded-md bg-white">
+    <div class="dark:bg-darker col-span-2 overflow-x-auto rounded-md bg-white">
+      <div class="dark:border-primary flex gap-5 border-b p-4 text-red-500">
         <h1 class="text-md font-semibold text-red-500 dark:text-red-500">{{ 'pages.clusters.details.delete.subTitle' | translate }}</h1>
         :
         <h2 class="text-lg font-semibold text-red-500 dark:text-red-500">{{ 'pages.clusters.details.delete.title' | translate }}</h2>
         <div class="flex-col">
           <a
             (click)="refresh()"
-            class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring-offset-white cursor-pointer focus:ring focus:ring-offset-1 focus:outline-none"
+            class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark cursor-pointer rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
           >
             {{ 'common.refresh' | translate }}
           </a>
@@ -23,9 +23,9 @@
               {{ 'pages.clusters.details.delete.sub2text' | translate }}
             </div>
 
-            <code class="mb- mt-5 space-x-4 rounded-lg bg-gray-800 p-4 pl-6 text-sm text-white sm:text-base inline-flex items-center text-left">
-              <span class="gap-4 flex">
-                <span class="text-gray-500 shrink-0"> $ </span>
+            <code class="mb- mt-5 inline-flex items-center space-x-4 rounded-lg bg-gray-800 p-4 pl-6 text-left text-sm text-white sm:text-base">
+              <span class="flex gap-4">
+                <span class="shrink-0 text-gray-500"> $ </span>
 
                 <span class="flex-1">
                   <span> kubectl create namespace </span>
@@ -50,7 +50,7 @@
                 (click)="scheduleDeletion()"
                 pButton
                 pRipple
-                class="focus:ring-primary dark:focus:ring-offset-dark ml-2 rounded-md bg-red-700 px-4 py-2 text-sm text-white hover:bg-red-500 focus:ring-offset-white content-end focus:ring focus:ring-offset-1 focus:outline-none"
+                class="focus:ring-primary dark:focus:ring-offset-dark ml-2 content-end rounded-md bg-red-700 px-4 py-2 text-sm text-white hover:bg-red-500 focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
               >
                 {{ 'common.delete' | translate }}
               </button>

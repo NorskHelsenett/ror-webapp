@@ -1,14 +1,14 @@
 <div class="">
   <div class="grid grid-cols-1">
-    <div class="gap-2 col-span-1 grid">
-      <div class="dark:bg-darker rounded-md bg-white p-4 flex justify-between overflow-x-auto">
-        <div class="dark:bg-darker rounded-md bg-white w-full">
+    <div class="col-span-1 grid gap-2">
+      <div class="dark:bg-darker flex justify-between overflow-x-auto rounded-md bg-white p-4">
+        <div class="dark:bg-darker w-full rounded-md bg-white">
           <div class="">
             <div class="overflow-x-auto">
-              <div class="mt-2 relative">
+              <div class="relative mt-2">
                 <a
                   (click)="copy()"
-                  class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark m-2 rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring-offset-white cursor-pointer focus:ring focus:ring-offset-1 focus:outline-none"
+                  class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark m-2 cursor-pointer rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
                 >
                   {{ 'common.copy' | translate }}
                 </a>
@@ -17,7 +17,7 @@
                 ><code class="" [highlight]="cluster | json" language="json" (highlighted)="onHighlight($event)" lineNumbers></code></pre>
                 <a
                   (click)="copy()"
-                  class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark m-2 rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring-offset-white cursor-pointer focus:ring focus:ring-offset-1 focus:outline-none"
+                  class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark m-2 cursor-pointer rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
                 >
                   {{ 'common.copy' | translate }}
                 </a>
