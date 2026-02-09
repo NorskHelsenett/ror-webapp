@@ -24,19 +24,22 @@
                 <div class="flex gap-2">
                   <button
                     (click)="copyApiKey()"
-                    class="hover:bg-primary-lighter focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-neutral-500 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
+                    class="hover:bg-primary-lighter focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-neutral-500 px-4 py-2 text-sm
+                      text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
                   >
                     {{ 'pages.profile.apikeys.create.copyApikey' | translate }}
                   </button>
                   <button
                     (click)="startOver()"
-                    class="hover:bg-primary-lighter focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-neutral-500 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
+                    class="hover:bg-primary-lighter focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-neutral-500 px-4 py-2 text-sm
+                      text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
                   >
                     {{ 'pages.profile.apikeys.create.startOver' | translate }}
                   </button>
                   <button
                     (click)="cancel()"
-                    class="hover:bg-primary-lighter focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-neutral-500 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
+                    class="hover:bg-primary-lighter focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-neutral-500 px-4 py-2 text-sm
+                      text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
                   >
                     {{ 'common.close' | translate }}
                   </button>
@@ -73,7 +76,9 @@
                 <div class="mt-3 mb-3 xl:w-96">
                   <label><span class="text-red-800 dark:text-red-300">*</span> {{ 'pages.profile.apikeys.create.displayName' | translate }}</label>
                   <input
-                    class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-base font-normal text-gray-600 transition ease-in-out focus:bg-white focus:text-gray-700 focus:outline-none dark:bg-gray-700 dark:text-white"
+                    class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-base
+                      font-normal text-gray-600 transition ease-in-out focus:bg-white focus:text-gray-700 focus:outline-none dark:bg-gray-700
+                      dark:text-white"
                     type="text"
                     aria-describedby="displayName-help"
                     pInputText
@@ -121,19 +126,22 @@
               <button
                 [disabled]="!apikeyForm?.valid"
                 (click)="create()"
-                class="rounded-md bg-green-500 px-4 py-2 text-lg text-gray-800 hover:bg-green-100 hover:text-white disabled:bg-gray-300 disabled:text-gray-100 disabled:hover:bg-gray-100 dark:text-gray-100 hover:dark:bg-green-500 dark:hover:text-gray-100"
+                class="rounded-md bg-green-500 px-4 py-2 text-lg text-gray-800 hover:bg-green-100 hover:text-white disabled:bg-gray-300
+                  disabled:text-gray-100 disabled:hover:bg-gray-100 dark:text-gray-100 hover:dark:bg-green-500 dark:hover:text-gray-100"
               >
                 {{ 'common.create' | translate }}
               </button>
               <a
                 (click)="reset()"
-                class="rounded-md bg-gray-400 px-4 py-2 text-lg text-gray-800 hover:bg-gray-500 dark:text-gray-100 dark:hover:bg-gray-900 dark:hover:text-gray-100"
+                class="rounded-md bg-gray-400 px-4 py-2 text-lg text-gray-800 hover:bg-gray-500 dark:text-gray-100 dark:hover:bg-gray-900
+                  dark:hover:text-gray-100"
               >
                 {{ 'common.reset' | translate }}
               </a>
               <a
                 (click)="cancel()"
-                class="rounded-md bg-orange-400 px-4 py-2 text-lg text-gray-800 hover:bg-orange-500 dark:text-gray-100 dark:hover:bg-orange-500 dark:hover:text-gray-100"
+                class="rounded-md bg-orange-400 px-4 py-2 text-lg text-gray-800 hover:bg-orange-500 dark:text-gray-100 dark:hover:bg-orange-500
+                  dark:hover:text-gray-100"
               >
                 {{ 'common.cancel' | translate }}
               </a>

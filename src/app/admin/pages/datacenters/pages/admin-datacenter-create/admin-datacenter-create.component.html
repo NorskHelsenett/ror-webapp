@@ -1,9 +1,9 @@
 <div class="dark:border-primary-darker flex items-center justify-between border-b px-4 py-4 lg:py-6">
   @if (!datacenterName) {
-    <h1 class="flex-grow text-2xl font-semibold">{{ 'pages.admin.datacenters.create.title' | translate }}</h1>
+    <h1 class="grow text-2xl font-semibold">{{ 'pages.admin.datacenters.create.title' | translate }}</h1>
   }
   @if (datacenterName?.length > 0) {
-    <h1 class="flex-grow text-2xl font-semibold">{{ 'pages.admin.datacenters.edit.title' | translate }}: {{ datacenterName }}</h1>
+    <h1 class="grow text-2xl font-semibold">{{ 'pages.admin.datacenters.edit.title' | translate }}: {{ datacenterName }}</h1>
   }
 </div>
 
@@ -26,7 +26,9 @@
                   <div class="mb-3 xl:w-96">
                     <label>* {{ 'pages.admin.datacenters.form.name' | translate }}</label>
                     <input
-                      class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-base font-normal text-gray-600 transition ease-in-out focus:bg-white focus:text-gray-700 focus:outline-none dark:bg-gray-700 dark:text-white"
+                      class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-base
+                        font-normal text-gray-600 transition ease-in-out focus:bg-white focus:text-gray-700 focus:outline-none dark:bg-gray-700
+                        dark:text-white"
                       type="text"
                       aria-describedby="name-help"
                       pInputText
@@ -43,7 +45,9 @@
                     <label>* {{ 'pages.admin.datacenters.form.provider' | translate }}</label>
                     <input
                       formControlName="provider"
-                      class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-base font-normal text-gray-600 transition ease-in-out focus:bg-white focus:text-gray-700 focus:outline-none dark:bg-gray-700 dark:text-white"
+                      class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-base
+                        font-normal text-gray-600 transition ease-in-out focus:bg-white focus:text-gray-700 focus:outline-none dark:bg-gray-700
+                        dark:text-white"
                       type="text"
                       aria-describedby="provider-help"
                       pInputText
@@ -60,7 +64,9 @@
                       <label>* {{ 'pages.admin.datacenters.form.region' | translate }}</label>
                       <input
                         formControlName="region"
-                        class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-base font-normal text-gray-600 transition ease-in-out focus:bg-white focus:text-gray-700 focus:outline-none dark:bg-gray-700 dark:text-white"
+                        class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5
+                          text-base font-normal text-gray-600 transition ease-in-out focus:bg-white focus:text-gray-700 focus:outline-none
+                          dark:bg-gray-700 dark:text-white"
                         type="text"
                         aria-describedby="region-help"
                         pInputText
@@ -80,7 +86,9 @@
                       <label>* {{ 'pages.admin.datacenters.form.country' | translate }}</label>
                       <input
                         formControlName="country"
-                        class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-base font-normal text-gray-600 transition ease-in-out focus:bg-white focus:text-gray-700 focus:outline-none dark:bg-gray-700 dark:text-white"
+                        class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5
+                          text-base font-normal text-gray-600 transition ease-in-out focus:bg-white focus:text-gray-700 focus:outline-none
+                          dark:bg-gray-700 dark:text-white"
                         type="text"
                         aria-describedby="country-help"
                         pInputText
@@ -101,7 +109,9 @@
                     <label>{{ 'pages.admin.datacenters.form.apiEndpoint' | translate }}</label>
                     <input
                       formControlName="apiEndpoint"
-                      class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-base font-normal text-gray-600 transition ease-in-out focus:bg-white focus:text-gray-700 focus:outline-none dark:bg-gray-700 dark:text-white"
+                      class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-base
+                        font-normal text-gray-600 transition ease-in-out focus:bg-white focus:text-gray-700 focus:outline-none dark:bg-gray-700
+                        dark:text-white"
                       type="url"
                       aria-describedby="apiEndpoint-help"
                       pInputText
@@ -124,7 +134,8 @@
                     <button
                       [disabled]="!datacenterForm?.valid"
                       (click)="createDatacenter()"
-                      class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none disabled:bg-gray-500 disabled:hover:bg-gray-800"
+                      class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white
+                        focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none disabled:bg-gray-500 disabled:hover:bg-gray-800"
                     >
                       {{ 'common.create' | translate }}
                     </button>
@@ -133,14 +144,16 @@
                     <button
                       [disabled]="!datacenterForm?.valid"
                       (click)="updateDatacenter()"
-                      class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none disabled:bg-gray-500 disabled:hover:bg-gray-800"
+                      class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white
+                        focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none disabled:bg-gray-500 disabled:hover:bg-gray-800"
                     >
                       {{ 'common.update' | translate }}
                     </button>
                   }
                   <button
                     (click)="reset()"
-                    class="hover:bg-primary-lighter focus:ring-primary dark:focus:ring-offset-dark ml-3 rounded-md bg-neutral-500 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
+                    class="hover:bg-primary-lighter focus:ring-primary dark:focus:ring-offset-dark ml-3 rounded-md bg-neutral-500 px-4 py-2 text-sm
+                      text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
                   >
                     {{ 'common.reset' | translate }}
                   </button>

@@ -1,8 +1,9 @@
 <div class="dark:border-primary-darker flex items-center justify-between border-b px-4 py-4 lg:py-6">
-  <h1 class="flex-grow text-2xl font-semibold">{{ 'pages.admin.auditlogs.title' | translate }}</h1>
+  <h1 class="grow text-2xl font-semibold">{{ 'pages.admin.auditlogs.title' | translate }}</h1>
   <a
     (click)="fetchAuditlogs(lastLazyLoad)"
-    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark cursor-pointer rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
+    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark cursor-pointer rounded-md bg-green-700 px-4 py-2 text-sm text-white
+      focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
   >
     {{ 'common.refresh' | translate }}
   </a>
@@ -132,20 +133,10 @@
           <td colspan="6">
             <div class="p-3">
               <div class="flex flex-col lg:flex-row">
-                <p-fieldset
-                  class="flex-grow"
-                  legend="{{ 'pages.admin.auditlogs.view.new.title' | translate }}"
-                  [toggleable]="true"
-                  [collapsed]="false"
-                >
+                <p-fieldset class="grow" legend="{{ 'pages.admin.auditlogs.view.new.title' | translate }}" [toggleable]="true" [collapsed]="false">
                   <div [innerHTML]="auditlog?.data?.new_object | highlightDifference: auditlog?.data?.old_object : 0"></div>
                 </p-fieldset>
-                <p-fieldset
-                  class="flex-grow"
-                  legend="{{ 'pages.admin.auditlogs.view.old.title' | translate }}"
-                  [toggleable]="true"
-                  [collapsed]="false"
-                >
+                <p-fieldset class="grow" legend="{{ 'pages.admin.auditlogs.view.old.title' | translate }}" [toggleable]="true" [collapsed]="false">
                   <div [innerHTML]="auditlog?.data?.old_object | highlightDifference: auditlog?.data?.new_object : 1"></div>
                 </p-fieldset>
               </div>

@@ -1424,7 +1424,8 @@
     "metrics": {
       "title": "Nøkkeltall",
       "nhnTooling": "Fordeling NHN Tooling versjoner",
-      "kubernetesVersions": "Fordeling Kubernetes versjoner"
+      "kubernetesVersions": "Fordeling Kubernetes versjoner",
+      "kubernetesProviders": "Fordeling Kubernetes tilbydere"
     },
     "orders": {
       "title": "Bestillinger",

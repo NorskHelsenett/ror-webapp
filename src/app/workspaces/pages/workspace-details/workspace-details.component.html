@@ -1,8 +1,9 @@
 <div class="dark:border-primary-darker flex items-center gap-4 border-b px-4 py-4 lg:py-6">
-  <h1 class="flex-grow text-2xl font-semibold">{{ 'pages.workspaces.details.title' | translate }}: {{ workspaceName }}</h1>
+  <h1 class="grow text-2xl font-semibold">{{ 'pages.workspaces.details.title' | translate }}: {{ workspaceName }}</h1>
 
   <a
-    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark cursor-pointer rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
+    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark cursor-pointer rounded-md bg-green-700 px-4 py-2 text-sm text-white
+      focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
     (click)="fetch()"
   >
     {{ 'common.refresh' | translate }}
@@ -322,7 +323,8 @@
                       <button
                         [disabled]="currentPage === pages[0]"
                         (click)="setPage(currentPage - 1)"
-                        class="focus:shadow-outline flex h-10 w-10 items-center justify-center rounded-full text-green-600 transition-colors duration-150 hover:bg-green-100 disabled:text-gray-600"
+                        class="focus:shadow-outline flex h-10 w-10 items-center justify-center rounded-full text-green-600 transition-colors
+                          duration-150 hover:bg-green-100 disabled:text-gray-600"
                       >
                         <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20">
                           <path
@@ -349,7 +351,8 @@
                       <select
                         [(ngModel)]="currentPage"
                         (ngModelChange)="setPage(currentPage)"
-                        class="h-8 appearance-none rounded-full border border-gray-300 bg-white pr-8 pl-2 text-gray-600 hover:border-gray-400 focus:outline-none dark:border-green-300 dark:bg-green-700 dark:text-white"
+                        class="h-8 appearance-none rounded-full border border-gray-300 bg-white pr-8 pl-2 text-gray-600 hover:border-gray-400
+                          focus:outline-none dark:border-green-300 dark:bg-green-700 dark:text-white"
                       >
                         @for (pageNumber of pages; track pageNumber) {
                           <option [value]="pageNumber">{{ pageNumber }}</option>
@@ -362,7 +365,8 @@
                       <button
                         [disabled]="currentPage === pages[pages.length - 1]"
                         (click)="setPage(currentPage + 1)"
-                        class="focus:shadow-outline flex h-10 w-10 items-center justify-center rounded-full text-green-600 transition-colors duration-150 hover:bg-green-100 disabled:text-gray-600"
+                        class="focus:shadow-outline flex h-10 w-10 items-center justify-center rounded-full text-green-600 transition-colors
+                          duration-150 hover:bg-green-100 disabled:text-gray-600"
                       >
                         <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20">
                           <path
@@ -398,7 +402,8 @@
                   <select
                     [(ngModel)]="itemsPerPage"
                     (change)="itemPerPageChanged(itemsPerPage)"
-                    class="h-8 appearance-none rounded-full border border-gray-300 bg-white pr-8 pl-2 text-gray-600 hover:border-gray-400 focus:outline-none dark:border-green-300 dark:bg-green-700 dark:text-white"
+                    class="h-8 appearance-none rounded-full border border-gray-300 bg-white pr-8 pl-2 text-gray-600 hover:border-gray-400
+                      focus:outline-none dark:border-green-300 dark:bg-green-700 dark:text-white"
                   >
                     @for (limit of pageSizes; track limit) {
                       <option [ngValue]="limit">{{ limit }}</option>

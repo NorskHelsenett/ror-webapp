@@ -1,5 +1,5 @@
 <div class="dark:border-primary-darker flex items-center justify-between border-b px-4 py-4 lg:py-6">
-  <h1 class="flex-grow text-2xl font-semibold">{{ 'pages.datacenters.title' | translate }}</h1>
+  <h1 class="grow text-2xl font-semibold">{{ 'pages.datacenters.title' | translate }}</h1>
 </div>
 
 <div class="mt-2 gap-4 p-4">
@@ -8,14 +8,16 @@
       <div>
         <a
           (click)="fetch()"
-          class="focus:ring-primary dark:focus:ring-offset-dark float-right ml-2 cursor-pointer rounded-md bg-green-700 px-4 py-2 text-sm text-white hover:bg-green-500 focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
+          class="focus:ring-primary dark:focus:ring-offset-dark float-right ml-2 cursor-pointer rounded-md bg-green-700 px-4 py-2 text-sm text-white
+            hover:bg-green-500 focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
         >
           {{ 'common.refresh' | translate }}
         </a>
         @if ((adminRead$ | async) === true) {
           <a
             routerLink="./create"
-            class="focus:ring-primary dark:focus:ring-offset-dark float-right rounded-md bg-green-700 px-4 py-2 text-sm text-white hover:bg-green-500 focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
+            class="focus:ring-primary dark:focus:ring-offset-dark float-right rounded-md bg-green-700 px-4 py-2 text-sm text-white hover:bg-green-500
+              focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
           >
             {{ 'common.create' | translate }}
           </a>
@@ -89,7 +91,8 @@
                 <div class="flex">
                   <button
                     routerLink="./{{ datacenter?.id }}/edit"
-                    class="p-button-smfocus:ring-primary dark:focus:ring-offset-dark ml-2 rounded-md bg-green-700 px-4 py-2 text-sm text-white hover:bg-green-500 focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
+                    class="p-button-smfocus:ring-primary dark:focus:ring-offset-dark ml-2 rounded-md bg-green-700 px-4 py-2 text-sm text-white
+                      hover:bg-green-500 focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
                   >
                     {{ 'common.edit' | translate }}
                   </button>

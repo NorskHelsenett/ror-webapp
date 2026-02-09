@@ -33,6 +33,7 @@ export class MetricsComponent implements OnInit, OnDestroy {
   };
   chartDataNHNTooling: any | undefined;
   chartDataK8sVersions: any | undefined;
+  chartDataK8sProviders: any | undefined;
   isDark = false;
 
   backgroundColors = ['#00467A', '#372770', '#6B1E27', '#E85800'];
@@ -43,6 +44,7 @@ export class MetricsComponent implements OnInit, OnDestroy {
   metricsError: any;
   customMetricsDataNHNTooling: MetricsCustom | undefined;
   customMetricsDataK8sVersions: MetricsCustom | undefined;
+  customMetricsDataK8sProviders: MetricsCustom | undefined;
 
   display: boolean = false;
 
@@ -65,7 +67,7 @@ export class MetricsComponent implements OnInit, OnDestroy {
     // Initial data load
     this.fetchDataNHNTooling();
     this.fetchDataK8sVersions();
-
+    this.fetchDataK8sProviders();
     // Defer polling until after hydration is stable
     if (isPlatformBrowser(this.platformId)) {
       this.hydrationService.afterHydration(() => {
@@ -92,6 +94,7 @@ export class MetricsComponent implements OnInit, OnDestroy {
           tap(() => {
             this.fetchDataNHNTooling();
             this.fetchDataK8sVersions();
+            this.fetchDataK8sProviders();
           }),
         )
         .subscribe(),
@@ -136,6 +139,25 @@ export class MetricsComponent implements OnInit, OnDestroy {
     );
   }
 
+  fetchDataK8sProviders(): void {
+    this.subscriptions.add(
+      this.metricsService
+        .getForClusterByProperty('workspace.datacenter.provider')
+        .pipe(
+          tap((data: MetricsCustom) => {
+            this.customMetricsDataK8sProviders = data;
+            this.setChartDataK8sProviders();
+            this.changeDetector.detectChanges();
+          }),
+          catchError((error) => {
+            this.metricsError = error;
+            return error;
+          }),
+        )
+        .subscribe(),
+    );
+  }
+
   setChartDataNHNTooling(): void {
     let labels: string[] = [];
     let data: number[] = [];
@@ -168,6 +190,28 @@ export class MetricsComponent implements OnInit, OnDestroy {
     });
 
     this.chartDataK8sVersions = {
+      responsive: true,
+      labels: labels,
+      datasets: [
+        {
+          data: data,
+          backgroundColor: this.isDark ? this.backgroundColors : this.lightbackgroundColors,
+          hoverBackgroundColor: this.isDark ? this.lightbackgroundColors : this.backgroundColors,
+        },
+      ],
+    };
+  }
+
+  setChartDataK8sProviders(): void {
+    let labels: string[] = [];
+    let data: number[] = [];
+
+    this.customMetricsDataK8sProviders?.data?.forEach((element: MetricsCustomItem) => {
+      labels.push(element?.text);
+      data.push(element?.value);
+    });
+
+    this.chartDataK8sProviders = {
       responsive: true,
       labels: labels,
       datasets: [

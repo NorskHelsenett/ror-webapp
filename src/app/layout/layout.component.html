@@ -486,7 +486,8 @@
         <!-- Mobile menu button  -->
         <button
           (click)="toggleMobileMenu(); showUserMenu = false; showSubMenu = false"
-          class="text-primary-lighter bg-primary-50 hover:text-primary hover:bg-primary-100 dark:hover:text-light dark:hover:bg-primary-dark dark:bg-dark rounded-md p-1 transition-colors duration-200 focus:ring focus:outline-none md:hidden"
+          class="text-primary-lighter bg-primary-50 hover:text-primary hover:bg-primary-100 dark:hover:text-light dark:hover:bg-primary-dark
+            dark:bg-dark rounded-md p-1 transition-colors duration-200 focus:ring focus:outline-none md:hidden"
         >
           <span class="sr-only">Open main menu </span>
           <span aria-hidden="true">
@@ -514,7 +515,8 @@
         <!-- Mobile sub menu button -->
         <button
           (click)="toggleSubMenu()"
-          class="text-primary-lighter bg-primary-50 hover:text-primary hover:bg-primary-100 dark:hover:text-light dark:hover:bg-primary-dark dark:bg-dark rounded-md p-1 transition-colors duration-200 focus:ring focus:outline-none md:hidden"
+          class="text-primary-lighter bg-primary-50 hover:text-primary hover:bg-primary-100 dark:hover:text-light dark:hover:bg-primary-dark
+            dark:bg-dark rounded-md p-1 transition-colors duration-200 focus:ring focus:outline-none md:hidden"
         >
           <span class="sr-only">Open sub manu</span>
           <span aria-hidden="true">
@@ -539,7 +541,8 @@
           >
             <div class="bg-primary-100 dark:bg-primary-lighter h-6 w-12 rounded-full transition outline-none"></div>
             <div
-              class="absolute top-0 left-0 inline-flex h-6 w-6 scale-110 transform items-center justify-center rounded-full shadow-sm transition-all duration-150"
+              class="absolute top-0 left-0 inline-flex h-6 w-6 scale-110 transform items-center justify-center rounded-full shadow-sm transition-all
+                duration-150"
             >
               @if (!isDark) {
                 <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -594,7 +597,9 @@
           <!-- Settings button -->
           <button
             (click)="toggleSettings()"
-            class="text-primary-lighter bg-primary-50 hover:text-primary hover:bg-primary-100 dark:hover:text-light dark:hover:bg-primary-dark dark:bg-dark focus:bg-primary-100 dark:focus:bg-primary-dark focus:ring-primary-darker rounded-full p-2 transition-colors duration-200 focus:outline-none"
+            class="text-primary-lighter bg-primary-50 hover:text-primary hover:bg-primary-100 dark:hover:text-light dark:hover:bg-primary-dark
+              dark:bg-dark focus:bg-primary-100 dark:focus:bg-primary-dark focus:ring-primary-darker rounded-full p-2 transition-colors duration-200
+              focus:outline-none"
           >
             <span class="sr-only">Open settings panel</span>
             <svg class="h-7 w-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -612,7 +617,9 @@
           <a
             href="{{ externalDocsUrl }}"
             target="_blank"
-            class="text-primary-lighter bg-primary-50 hover:text-primary hover:bg-primary-100 dark:hover:text-light dark:hover:bg-primary-dark dark:bg-dark focus:bg-primary-100 dark:focus:bg-primary-dark focus:ring-primary-darker rounded-full p-2 transition-colors duration-200 focus:outline-none"
+            class="text-primary-lighter bg-primary-50 hover:text-primary hover:bg-primary-100 dark:hover:text-light dark:hover:bg-primary-dark
+              dark:bg-dark focus:bg-primary-100 dark:focus:bg-primary-dark focus:ring-primary-darker rounded-full p-2 transition-colors duration-200
+              focus:outline-none"
           >
             <span class="sr-only">Go to docs</span>
             <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -630,7 +637,8 @@
               type="button"
               aria-haspopup="true"
               (click)="toggleUserMenu()"
-              class="rounded-full transition-opacity duration-200 focus:ring focus:outline-none dark:opacity-75 dark:hover:opacity-100 dark:focus:opacity-100"
+              class="rounded-full transition-opacity duration-200 focus:ring focus:outline-none dark:opacity-75 dark:hover:opacity-100
+                dark:focus:opacity-100"
             >
               <span class="sr-only">User menu</span>
               @if (!desember) {
@@ -687,7 +695,8 @@
               >
                 <div class="bg-primary-100 dark:bg-primary-lighter h-6 w-12 rounded-full transition outline-none"></div>
                 <div
-                  class="absolute top-0 left-0 inline-flex h-6 w-6 scale-110 transform items-center justify-center rounded-full shadow-sm transition-all duration-200"
+                  class="absolute top-0 left-0 inline-flex h-6 w-6 scale-110 transform items-center justify-center rounded-full shadow-sm
+                    transition-all duration-200"
                 >
                   @if (!isDark) {
                     <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -714,7 +723,9 @@
               <!-- Notification button -->
               <button
                 (click)="toggleNotifications(); toggleSubMenu()"
-                class="text-primary-lighter bg-primary-50 hover:text-primary hover:bg-primary-100 dark:hover:text-light dark:hover:bg-primary-dark dark:bg-dark focus:bg-primary-100 dark:focus:bg-primary-dark focus:ring-primary-darker rounded-full p-2 transition-colors duration-200 focus:outline-none"
+                class="text-primary-lighter bg-primary-50 hover:text-primary hover:bg-primary-100 dark:hover:text-light dark:hover:bg-primary-dark
+                  dark:bg-dark focus:bg-primary-100 dark:focus:bg-primary-dark focus:ring-primary-darker rounded-full p-2 transition-colors
+                  duration-200 focus:outline-none"
               >
                 <span class="sr-only">Open notifications panel</span>
                 <svg class="h-7 w-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -729,7 +740,9 @@
               <!-- Search button -->
               <button
                 (click)="toggleSearch(); toggleSubMenu()"
-                class="text-primary-lighter bg-primary-50 hover:text-primary hover:bg-primary-100 dark:hover:text-light dark:hover:bg-primary-dark dark:bg-dark focus:bg-primary-100 dark:focus:bg-primary-dark focus:ring-primary-darker rounded-full p-2 transition-colors duration-200 focus:outline-none"
+                class="text-primary-lighter bg-primary-50 hover:text-primary hover:bg-primary-100 dark:hover:text-light dark:hover:bg-primary-dark
+                  dark:bg-dark focus:bg-primary-100 dark:focus:bg-primary-dark focus:ring-primary-darker rounded-full p-2 transition-colors
+                  duration-200 focus:outline-none"
               >
                 <span class="sr-only">Open search panel</span>
                 <svg class="h-7 w-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -739,7 +752,9 @@
               <!-- Settings button -->
               <button
                 (click)="toggleSettings(); toggleSubMenu()"
-                class="text-primary-lighter bg-primary-50 hover:text-primary hover:bg-primary-100 dark:hover:text-light dark:hover:bg-primary-dark dark:bg-dark focus:bg-primary-100 dark:focus:bg-primary-dark focus:ring-primary-darker rounded-full p-2 transition-colors duration-200 focus:outline-none"
+                class="text-primary-lighter bg-primary-50 hover:text-primary hover:bg-primary-100 dark:hover:text-light dark:hover:bg-primary-dark
+                  dark:bg-dark focus:bg-primary-100 dark:focus:bg-primary-dark focus:ring-primary-darker rounded-full p-2 transition-colors
+                  duration-200 focus:outline-none"
               >
                 <span class="sr-only">Open settings panel</span>
                 <svg class="h-7 w-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -757,7 +772,9 @@
             <a
               href="{{ externalDocsUrl }}"
               target="_blank"
-              class="text-primary-lighter bg-primary-50 hover:text-primary hover:bg-primary-100 dark:hover:text-light dark:hover:bg-primary-dark dark:bg-dark focus:bg-primary-100 dark:focus:bg-primary-dark focus:ring-primary-darker rounded-full p-2 transition-colors duration-200 focus:outline-none"
+              class="text-primary-lighter bg-primary-50 hover:text-primary hover:bg-primary-100 dark:hover:text-light dark:hover:bg-primary-dark
+                dark:bg-dark focus:bg-primary-100 dark:focus:bg-primary-dark focus:ring-primary-darker rounded-full p-2 transition-colors duration-200
+                focus:outline-none"
             >
               <span class="sr-only">Go to docs</span>
               <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -774,7 +791,8 @@
                 (click)="toggleUserMenu(); toggleMobileMenu()"
                 type="button"
                 aria-haspopup="true"
-                class="block rounded-full transition-opacity duration-200 focus:ring focus:outline-none dark:opacity-75 dark:hover:opacity-100 dark:focus:opacity-100"
+                class="block rounded-full transition-opacity duration-200 focus:ring focus:outline-none dark:opacity-75 dark:hover:opacity-100
+                  dark:focus:opacity-100"
               >
                 <span class="sr-only">User menu</span>
                 <img class="h-10 w-10 rounded-full" src="/assets/images/blank_profile.png" height="50" width="50" alt="User menu" />
@@ -973,7 +991,8 @@
                     href="{{ externalDocsUrl }}"
                     target="_blank"
                     role="menuitem"
-                    class="dark:text-light dark:hover:text-light block rounded-md p-2 text-sm text-gray-700 transition-colors duration-200 hover:text-gray-700"
+                    class="dark:text-light dark:hover:text-light block rounded-md p-2 text-sm text-gray-700 transition-colors duration-200
+                      hover:text-gray-700"
                   >
                     {{ 'nav.doc' | translate }}
                   </a>
@@ -998,7 +1017,8 @@
                   href="https://beta.ror.nhn.no"
                   target="_blank"
                   role="menuitem"
-                  class="block rounded-md p-2 text-sm text-gray-400 transition-colors duration-200 hover:bg-green-700 hover:text-gray-700 active:bg-green-700 dark:hover:text-white"
+                  class="block rounded-md p-2 text-sm text-gray-400 transition-colors duration-200 hover:bg-green-700 hover:text-gray-700
+                    active:bg-green-700 dark:hover:text-white"
                 >
                   {{ 'nav.betaRor' | translate }}
                 </a>
@@ -1090,7 +1110,9 @@
               @if (isDark) {
                 <button
                   (click)="toggleDark()"
-                  class="dark:border-primary dark:hover:text-primary-100 dark:hover:border-primary-light focus:ring-primary-lighter dark:focus:ring-offset-dark dark:focus:ring-primary-dark flex items-center justify-center space-x-4 rounded-md border px-4 py-2 transition-colors hover:border-gray-900 hover:text-gray-900 focus:ring focus:ring-offset-2 focus:outline-none"
+                  class="dark:border-primary dark:hover:text-primary-100 dark:hover:border-primary-light focus:ring-primary-lighter
+                    dark:focus:ring-offset-dark dark:focus:ring-primary-dark flex items-center justify-center space-x-4 rounded-md border px-4 py-2
+                    transition-colors hover:border-gray-900 hover:text-gray-900 focus:ring focus:ring-offset-2 focus:outline-none"
                 >
                   <span>
                     <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1109,7 +1131,9 @@
               @if (!isDark) {
                 <button
                   (click)="toggleDark()"
-                  class="dark:border-primary dark:hover:text-primary-100 dark:hover:border-primary-light focus:ring-primary-lighter dark:focus:ring-offset-dark dark:focus:ring-primary-dark flex items-center justify-center space-x-4 rounded-md border px-4 py-2 transition-colors hover:border-gray-900 hover:text-gray-900 focus:ring focus:ring-offset-2 focus:outline-none"
+                  class="dark:border-primary dark:hover:text-primary-100 dark:hover:border-primary-light focus:ring-primary-lighter
+                    dark:focus:ring-offset-dark dark:focus:ring-primary-dark flex items-center justify-center space-x-4 rounded-md border px-4 py-2
+                    transition-colors hover:border-gray-900 hover:text-gray-900 focus:ring focus:ring-offset-2 focus:outline-none"
                 >
                   <span>
                     <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1139,13 +1163,17 @@
               <button
                 (click)="useLanguage('no')"
                 [ngClass]="{ 'border-green-700 dark:bg-green-500': lang === 'no' }"
-                class="dark:border-primary dark:hover:text-primary-100 dark:hover:border-primary-light focus:ring-primary-lighter dark:focus:ring-offset-dark dark:focus:ring-primary-dark flex items-center justify-center space-x-4 rounded-md border px-4 py-2 transition-colors hover:border-gray-900 hover:text-gray-900 focus:ring focus:ring-offset-2 focus:outline-none"
+                class="dark:border-primary dark:hover:text-primary-100 dark:hover:border-primary-light focus:ring-primary-lighter
+                  dark:focus:ring-offset-dark dark:focus:ring-primary-dark flex items-center justify-center space-x-4 rounded-md border px-4 py-2
+                  transition-colors hover:border-gray-900 hover:text-gray-900 focus:ring focus:ring-offset-2 focus:outline-none"
               >
                 <span>Norsk</span>
               </button>
               <button
                 (click)="useLanguage('en')"
-                class="dark:border-primary dark:hover:text-primary-100 dark:hover:border-primary-light focus:ring-primary-lighter dark:focus:ring-offset-dark dark:focus:ring-primary-dark flex items-center justify-center space-x-4 rounded-md border px-4 py-2 transition-colors hover:border-gray-900 hover:text-gray-900 focus:ring focus:ring-offset-2 focus:outline-none"
+                class="dark:border-primary dark:hover:text-primary-100 dark:hover:border-primary-light focus:ring-primary-lighter
+                  dark:focus:ring-offset-dark dark:focus:ring-primary-dark flex items-center justify-center space-x-4 rounded-md border px-4 py-2
+                  transition-colors hover:border-gray-900 hover:text-gray-900 focus:ring focus:ring-offset-2 focus:outline-none"
                 [ngClass]="{ 'border-green-700 dark:bg-green-500': lang === 'en' }"
               >
                 <span>English</span>
@@ -1354,7 +1382,8 @@
       <div class="flex h-screen flex-col">
         <!-- Panel header (Search input) -->
         <div
-          class="dark:border-primary-darker dark:focus-within:text-light relative flex-shrink-0 border-b px-4 py-8 text-gray-400 focus-within:text-gray-700"
+          class="dark:border-primary-darker dark:focus-within:text-light relative flex-shrink-0 border-b px-4 py-8 text-gray-400
+            focus-within:text-gray-700"
         >
           <span class="absolute inset-y-0 inline-flex items-center px-4">
             <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">

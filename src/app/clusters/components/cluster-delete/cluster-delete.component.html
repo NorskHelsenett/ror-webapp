@@ -8,7 +8,8 @@
         <div class="flex-col">
           <a
             (click)="refresh()"
-            class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark cursor-pointer rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
+            class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark cursor-pointer rounded-md bg-green-700 px-4 py-2 text-sm
+              text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
           >
             {{ 'common.refresh' | translate }}
           </a>
@@ -50,7 +51,8 @@
                 (click)="scheduleDeletion()"
                 pButton
                 pRipple
-                class="focus:ring-primary dark:focus:ring-offset-dark ml-2 content-end rounded-md bg-red-700 px-4 py-2 text-sm text-white hover:bg-red-500 focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
+                class="focus:ring-primary dark:focus:ring-offset-dark ml-2 content-end rounded-md bg-red-700 px-4 py-2 text-sm text-white
+                  hover:bg-red-500 focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
               >
                 {{ 'common.delete' | translate }}
               </button>

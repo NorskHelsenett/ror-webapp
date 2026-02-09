@@ -7,11 +7,12 @@
   <div class="dark:bg-darker items-center justify-between rounded-md bg-white p-2">
     <div class="dark:bg-darker rounded-md bg-white">
       <div class="dark:border-primary flex items-center justify-between border-b p-3">
-        <span class="flex-grow"></span>
+        <span class="grow"></span>
 
         <a
           (click)="fetchResource()"
-          class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark ml-2 cursor-pointer rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
+          class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark ml-2 cursor-pointer rounded-md bg-green-700 px-4 py-2 text-sm
+            text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
         >
           {{ 'common.refresh' | translate }}
         </a>

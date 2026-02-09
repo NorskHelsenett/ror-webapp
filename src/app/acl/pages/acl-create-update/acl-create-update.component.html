@@ -1,5 +1,5 @@
 <div class="dark:border-primary-darker flex items-center gap-4 border-b px-4 py-4 lg:py-6">
-  <h1 class="flex-grow text-2xl font-semibold">
+  <h1 class="grow text-2xl font-semibold">
     @if (!acl) {
       <span>{{ 'pages.acl.create.title' | translate }}</span>
     }
@@ -13,7 +13,7 @@
   <div class="dark:bg-darker items-center justify-between rounded-md bg-white p-2">
     <div class="dark:bg-darker rounded-md bg-white">
       <div class="dark:border-primary flex items-center justify-between border-b p-4">
-        <span class="flex-grow"></span>
+        <span class="grow"></span>
       </div>
       <div class="relative p-3">
         <app-acl-create-update [acl]="acl"></app-acl-create-update>

@@ -11,11 +11,12 @@
       </h4>
     }
   </div>
-  <div class="flex-grow"></div>
+  <div class="grow"></div>
   <div class="justify-end">
     <button
       (click)="cancel()"
-      class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
+      class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring
+        focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
     >
       {{ 'common.cancel' | translate }}
     </button>
@@ -224,7 +225,8 @@
                         <td>
                           <button
                             (click)="removeLabel(labelForm)"
-                            class="focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-red-700 text-sm text-white hover:bg-red-500 focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
+                            class="focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-red-700 text-sm text-white hover:bg-red-500 focus:ring
+                              focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
                           >
                             <i class="pi pi-trash"></i>
                           </button>
@@ -286,7 +288,8 @@
                       [disabled]="!labelForm.valid"
                       [style.cursor]="!labelForm.valid ? 'not-allowed' : 'pointer'"
                       (click)="addLabel(labelKeyElement, labelValueElement)"
-                      class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-blue-700 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none disabled:bg-gray-600"
+                      class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-blue-700 px-4 py-2 text-sm text-white
+                        focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none disabled:bg-gray-600"
                     >
                       {{ 'pages.clusters.details.nodePools.createorupdate.form.submitLabel' | translate }}
                     </button>
@@ -331,7 +334,8 @@
                         <td>
                           <button
                             (click)="removeTaint(taintForm)"
-                            class="focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-red-700 text-sm text-white hover:bg-red-500 focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
+                            class="focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-red-700 text-sm text-white hover:bg-red-500 focus:ring
+                              focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
                           >
                             <i class="pi pi-trash"></i>
                           </button>
@@ -410,7 +414,8 @@
                       [disabled]="!taintForm.valid"
                       [style.cursor]="!taintForm.valid ? 'not-allowed' : 'pointer'"
                       (click)="addTaint(taintKeyElement, taintValueElement, taintEffectElement)"
-                      class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-blue-700 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none disabled:bg-gray-600"
+                      class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-blue-700 px-4 py-2 text-sm text-white
+                        focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none disabled:bg-gray-600"
                     >
                       {{ 'pages.clusters.details.nodePools.createorupdate.form.submitTaint' | translate }}
                     </button>
@@ -426,7 +431,8 @@
             (click)="submit()"
             [disabled]="!nodepoolForm?.valid"
             [style.cursor]="!nodepoolForm?.valid ? 'not-allowed' : 'pointer'"
-            class="focus:ring-primary dark:focus:ring-offset-dark rounded-xl bg-green-600 text-gray-100 focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none hover:enabled:bg-green-700 disabled:bg-gray-500 hover:disabled:bg-gray-700"
+            class="focus:ring-primary dark:focus:ring-offset-dark rounded-xl bg-green-600 text-gray-100 focus:ring focus:ring-offset-1
+              focus:ring-offset-white focus:outline-none hover:enabled:bg-green-700 disabled:bg-gray-500 hover:disabled:bg-gray-700"
           >
             <div class="p-3">
               @if (nodePool) {

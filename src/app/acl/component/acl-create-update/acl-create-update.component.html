@@ -246,7 +246,8 @@
       <button
         [disabled]="!aclForm?.valid"
         (click)="create()"
-        class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none disabled:bg-gray-500 disabled:hover:bg-gray-800"
+        class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring
+          focus:ring-offset-1 focus:ring-offset-white focus:outline-none disabled:bg-gray-500 disabled:hover:bg-gray-800"
       >
         {{ 'common.create' | translate }}
       </button>
@@ -255,14 +256,16 @@
       <button
         [disabled]="!aclForm?.valid"
         (click)="update()"
-        class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none disabled:bg-gray-500 disabled:hover:bg-gray-800"
+        class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring
+          focus:ring-offset-1 focus:ring-offset-white focus:outline-none disabled:bg-gray-500 disabled:hover:bg-gray-800"
       >
         {{ 'common.update' | translate }}
       </button>
     }
     <button
       (click)="reset()"
-      class="hover:bg-primary-lighter focus:ring-primary dark:focus:ring-offset-dark ml-3 rounded-md bg-neutral-500 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
+      class="hover:bg-primary-lighter focus:ring-primary dark:focus:ring-offset-dark ml-3 rounded-md bg-neutral-500 px-4 py-2 text-sm text-white
+        focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
     >
       {{ 'common.reset' | translate }}
     </button>
