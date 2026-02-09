@@ -1,10 +1,10 @@
-<div class="dark:border-primary-darker px-4 py-4 lg:py-6 flex items-center justify-between border-b">
-  <h1 class="text-2xl font-semibold flex-grow">{{ 'nav.compliancereports' | translate }}</h1>
+<div class="dark:border-primary-darker flex items-center justify-between border-b px-4 py-4 lg:py-6">
+  <h1 class="flex-grow text-2xl font-semibold">{{ 'nav.compliancereports' | translate }}</h1>
 </div>
 
 @if (!error) {
   <div class="flex flex-col">
-    <div class="xl:pr-2 xl:pt-2 flex flex-row-reverse">
+    <div class="flex flex-row-reverse xl:pt-2 xl:pr-2">
       <app-export-button [exportObjects]="formatExport(complianceReports$ | async)" [filename]="'compliance'"></app-export-button>
     </div>
     <div class="dark:bg-darker rounded-md bg-white xl:m-2 xl:p-2">
@@ -51,7 +51,7 @@
                   <a
                     [routerLink]="['./../../cluster/' + complianceReport[column?.field]]"
                     [queryParams]="{ tab: 'complianceReports' }"
-                    class="ml-2 hover:text-blue-800 dark:hover:text-blue-400 cursor-pointer hover:underline"
+                    class="ml-2 cursor-pointer hover:text-blue-800 hover:underline dark:hover:text-blue-400"
                   >
                     {{ getValue(column?.field, complianceReport) }}
                   </a>
@@ -74,7 +74,7 @@
     </div>
   </div>
 } @else {
-  <div class="my-4 rounded-md bg-red-200 px-6 py-4 text-lg mx-auto flex items-center">
+  <div class="mx-auto my-4 flex items-center rounded-md bg-red-200 px-6 py-4 text-lg">
     <span class="p-2 text-red-800">
       {{ 'common.errorLoading' | translate }} <br />
       {{ ('common.error' | translate) + ': ' + error?.message }}

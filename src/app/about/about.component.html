@@ -1,14 +1,14 @@
 @if (version$ | async) {
   <div></div>
 }
-<div class="dark:border-primary-darker px-4 py-4 lg:py-6 flex items-center justify-between border-b">
+<div class="dark:border-primary-darker flex items-center justify-between border-b px-4 py-4 lg:py-6">
   <h1 class="text-2xl font-semibold">{{ 'pages.about.title' | translate }}</h1>
 </div>
 
 <div class="mt-2">
-  <div class="sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 grid">
-    <div class="gap-8 p-4 sm:col-span-1 md:col-span-1 lg:col-span-2 grid">
-      <div class="dark:bg-darker rounded-md bg-white p-4 flex justify-between overflow-x-auto">
+  <div class="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3">
+    <div class="grid gap-8 p-4 sm:col-span-1 md:col-span-1 lg:col-span-2">
+      <div class="dark:bg-darker flex justify-between overflow-x-auto rounded-md bg-white p-4">
         <div class="dark:bg-darker rounded-md bg-white">
           <div class="p-3">
             <img class="" src="/assets/icons/ror.svg" alt="Ror logo" height="350" width="350" priority />
@@ -17,34 +17,34 @@
         </div>
       </div>
     </div>
-    <div class="gap-8 p-4 grid">
-      <div class="gap-3 flex flex-col">
-        <div class="dark:bg-darker rounded-md bg-white p-4 flex justify-between overflow-x-auto">
+    <div class="grid gap-8 p-4">
+      <div class="flex flex-col gap-3">
+        <div class="dark:bg-darker flex justify-between overflow-x-auto rounded-md bg-white p-4">
           <div class="dark:bg-darker rounded-md bg-white">
-            <div class="dark:border-primary p-4 flex items-center justify-between border-b">
+            <div class="dark:border-primary flex items-center justify-between border-b p-4">
               <h4 class="dark:text-light text-lg font-semibold text-gray-500">{{ 'pages.about.versions' | translate }}</h4>
             </div>
             <div class="p-3">
               <table class="w-full border-collapse text-left">
                 <tbody>
-                  <tr class="py-1 ease-in-out hover:bg-gray-200 dark:hover:bg-gray-500 transition duration-300">
+                  <tr class="py-1 transition duration-300 ease-in-out hover:bg-gray-200 dark:hover:bg-gray-500">
                     <td class="px-2 py-1">{{ 'app.titleLong' | translate }}</td>
                     <td class="px-2 py-1">{{ appVersion }} ({{ commit }})</td>
                   </tr>
                   @if (version) {
-                    <tr class="py-1 ease-in-out hover:bg-gray-200 dark:hover:bg-gray-500 transition duration-300">
+                    <tr class="py-1 transition duration-300 ease-in-out hover:bg-gray-200 dark:hover:bg-gray-500">
                       <td class="px-2 py-1">Api version</td>
                       <td class="px-2 py-1">{{ version?.version }}</td>
                     </tr>
                   }
                   @if (version) {
-                    <tr class="py-1 ease-in-out hover:bg-gray-200 dark:hover:bg-gray-500 transition duration-300">
+                    <tr class="py-1 transition duration-300 ease-in-out hover:bg-gray-200 dark:hover:bg-gray-500">
                       <td class="px-2 py-1">Api library version</td>
                       <td class="px-2 py-1">{{ version?.libVer }}</td>
                     </tr>
                   }
                   @if (version) {
-                    <tr class="py-1 ease-in-out hover:bg-gray-200 dark:hover:bg-gray-500 transition duration-300">
+                    <tr class="py-1 transition duration-300 ease-in-out hover:bg-gray-200 dark:hover:bg-gray-500">
                       <td class="px-2 py-1">Api commit</td>
                       <td class="px-2 py-1">{{ version?.commit }}</td>
                     </tr>
@@ -55,16 +55,16 @@
           </div>
         </div>
 
-        <div class="dark:bg-darker rounded-md bg-white p-4 flex justify-between overflow-x-auto">
+        <div class="dark:bg-darker flex justify-between overflow-x-auto rounded-md bg-white p-4">
           <div class="dark:bg-darker rounded-md bg-white">
-            <div class="dark:border-primary p-4 flex items-center justify-between border-b">
+            <div class="dark:border-primary flex items-center justify-between border-b p-4">
               <h4 class="dark:text-light text-lg font-semibold text-gray-500">{{ 'pages.about.shoutouts' | translate }}</h4>
             </div>
             <div class="p-3">
               <ul>
                 <li>
                   <a
-                    class="hover:text-blue-800 dark:hover:text-blue-400 hover:underline"
+                    class="hover:text-blue-800 hover:underline dark:hover:text-blue-400"
                     href="https://github.com/Kamona-WD/kwd-dashboard"
                     target="_blank"
                     >K-WD Dashboard</a
@@ -79,21 +79,21 @@
   </div>
 </div>
 
-<div class="px-4 pb-4 pt-0 flex items-center justify-between">
+<div class="flex items-center justify-between px-4 pt-0 pb-4">
   <h1 class="text-xl font-semibold">{{ 'pages.about.health.title' | translate }}</h1>
 </div>
 
-<div class="xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 grid">
-  <div class="dark:bg-darker ml-4 mr-4 rounded-md bg-white p-4 md:flex-row flex flex-col-reverse justify-between overflow-x-auto">
+<div class="xs:grid-cols-1 grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
+  <div class="dark:bg-darker mr-4 ml-4 flex flex-col-reverse justify-between overflow-x-auto rounded-md bg-white p-4 md:flex-row">
     <div class="dark:bg-darker rounded-md bg-white">
-      <div class="p-3 float-left">
+      <div class="float-left p-3">
         @if (health$ | async; as health) {
           <div>
             <app-health-table [health]="health"></app-health-table>
           </div>
         } @else {
           @if (healthError) {
-            <div class="my-4 rounded-md bg-red-200 px-6 py-4 text-lg mx-auto flex items-center">
+            <div class="mx-auto my-4 flex items-center rounded-md bg-red-200 px-6 py-4 text-lg">
               <span class="p-2 text-red-800"> {{ 'pages.dashboard.error' | translate }} </span>
               <button class="btn text-black" (click)="fetch()">{{ 'common.tryAgain' | translate }}</button>
             </div>
@@ -105,7 +105,7 @@
     </div>
     <a
       (click)="fetch()"
-      class="focus:ring-primary dark:focus:ring-offset-dark m-2 max-h-10 rounded-md bg-green-700 px-4 py-2 text-sm text-white hover:bg-green-700 focus:ring-offset-white float-left focus:ring focus:ring-offset-1 focus:outline-none"
+      class="focus:ring-primary dark:focus:ring-offset-dark float-left m-2 max-h-10 rounded-md bg-green-700 px-4 py-2 text-sm text-white hover:bg-green-700 focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
     >
       {{ 'common.refresh' | translate }}
     </a>

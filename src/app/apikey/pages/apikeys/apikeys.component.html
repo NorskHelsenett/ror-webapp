@@ -1,20 +1,20 @@
 @if (user$ | async; as user) {
   <div>
-    <div class="dark:border-primary-darker gap-4 px-4 py-4 lg:py-6 flex items-center border-b">
-      <h1 class="text-2xl font-semibold flex-grow">{{ 'pages.apikeys.title' | translate }}</h1>
+    <div class="dark:border-primary-darker flex items-center gap-4 border-b px-4 py-4 lg:py-6">
+      <h1 class="flex-grow text-2xl font-semibold">{{ 'pages.apikeys.title' | translate }}</h1>
     </div>
     <div #createContent [hidden]="createIsHidden" class="p-4">
       <app-apikey-create (cancelRequested)="createIsHidden = !createIsHidden" (created)="fetch(lastFilter)"></app-apikey-create>
     </div>
     <div class="m-4">
-      <div class="dark:bg-darker rounded-md bg-white p-2 items-center justify-between">
+      <div class="dark:bg-darker items-center justify-between rounded-md bg-white p-2">
         <div class="dark:bg-darker rounded-md bg-white">
-          <div class="dark:border-primary p-3 flex items-center justify-between border-b">
+          <div class="dark:border-primary flex items-center justify-between border-b p-3">
             <span class="flex-grow"></span>
             <button
               [disabled]="!createIsHidden"
               (click)="toggleCreateVisibility()"
-              class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white ease-in-out hover:-translate-y-1 focus:ring-offset-white disabled:bg-gray-500 disabled:hover:bg-gray-800 float-left transition delay-50 duration-300 hover:scale-110 focus:ring focus:ring-offset-1 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75"
+              class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark float-left rounded-md bg-green-700 px-4 py-2 text-sm text-white transition delay-50 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none disabled:cursor-not-allowed disabled:bg-gray-500 disabled:opacity-75 disabled:hover:bg-gray-800"
             >
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
@@ -22,7 +22,7 @@
             </button>
             <a
               (click)="fetch(lastLazyLoad)"
-              class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark ml-2 rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring-offset-white cursor-pointer focus:ring focus:ring-offset-1 focus:outline-none"
+              class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark ml-2 cursor-pointer rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
             >
               {{ 'common.refresh' | translate }}
             </a>
@@ -122,7 +122,7 @@
                       <button
                         (click)="delete(apikey)"
                         icon="pi pi-trash"
-                        class="focus:ring-primary dark:focus:ring-offset-dark ml-2 rounded-md bg-red-700 px-4 py-2 text-sm text-white hover:bg-red-500 focus:ring-offset-white flex focus:ring focus:ring-offset-1 focus:outline-none"
+                        class="focus:ring-primary dark:focus:ring-offset-dark ml-2 flex rounded-md bg-red-700 px-4 py-2 text-sm text-white hover:bg-red-500 focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -152,7 +152,7 @@
             </div>
             <ng-template #loadingOrError>
               @if (fetchError) {
-                <div class="my-4 rounded-md bg-red-200 px-6 py-4 text-lg mx-auto flex items-center">
+                <div class="mx-auto my-4 flex items-center rounded-md bg-red-200 px-6 py-4 text-lg">
                   <span class="p-2 text-red-800"> {{ 'pages.apikeys.error' | translate }} </span>
                   <button class="btn text-black" (click)="fetch(lastLazyLoad)">{{ 'common.tryAgain' | translate }}</button>
                 </div>

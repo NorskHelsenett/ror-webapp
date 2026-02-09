@@ -1,32 +1,32 @@
 <div class="">
   <div class="grid grid-cols-1">
-    <div class="gap-2 sm:col-span-1 md:col-span-1 lg:col-span-2 grid">
-      <div class="dark:bg-darker rounded-md bg-white p-4 flex justify-between overflow-x-auto">
-        <div class="dark:bg-darker rounded-md bg-white flex w-full flex-col">
-          <div class="dark:border-primary p-3 flex justify-between border-b">
+    <div class="grid gap-2 sm:col-span-1 md:col-span-1 lg:col-span-2">
+      <div class="dark:bg-darker flex justify-between overflow-x-auto rounded-md bg-white p-4">
+        <div class="dark:bg-darker flex w-full flex-col rounded-md bg-white">
+          <div class="dark:border-primary flex justify-between border-b p-3">
             <span class="flex-grow"></span>
             <a
               (click)="toggleEdit()"
-              class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white ease-in-out hover:-translate-y-1 focus:ring-offset-white disabled:bg-gray-500 disabled:hover:bg-gray-800 float-left cursor-pointer transition delay-50 duration-300 hover:scale-110 focus:ring focus:ring-offset-1 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75"
+              class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark float-left cursor-pointer rounded-md bg-green-700 px-4 py-2 text-sm text-white transition delay-50 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none disabled:cursor-not-allowed disabled:bg-gray-500 disabled:opacity-75 disabled:hover:bg-gray-800"
             >
               {{ 'common.edit' | translate }}
             </a>
             <a
               (click)="refreshRequested.emit()"
-              class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark ml-2 rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring-offset-white cursor-pointer focus:ring focus:ring-offset-1 focus:outline-none"
+              class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark ml-2 cursor-pointer rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
             >
               {{ 'common.refresh' | translate }}
             </a>
           </div>
           @if (!edit) {
-            <div class="p-3 w-full">
+            <div class="w-full p-3">
               <table class="w-full border-collapse text-left">
                 <tbody class="">
                   <tr>
                     <td class="px-2 py-1">{{ 'pages.clusters.details.metadata.project' | translate }}</td>
                     <td class="px-2 py-1 font-bold">
                       <a
-                        class="hover:text-blue-800 dark:hover:text-blue-400 hover:underline"
+                        class="hover:text-blue-800 hover:underline dark:hover:text-blue-400"
                         [routerLink]="['../../admin/projects/', cluster?.metadata?.project?.id]"
                         >{{ cluster?.metadata?.project?.name }}</a
                       >
@@ -78,7 +78,7 @@
                   <tr class="">
                     <td class="px-2 py-1 align-top">{{ 'pages.clusters.details.metadata.description' | translate }}</td>
                     <td class="">
-                      <div class="dark:text-light p-3 text-gray-800 whitespace-pre-line">
+                      <div class="dark:text-light p-3 whitespace-pre-line text-gray-800">
                         {{ cluster?.metadata?.description }}
                       </div>
                     </td>
@@ -86,10 +86,10 @@
                   <tr>
                     <td class="px-2 py-1 align-top">{{ 'pages.clusters.details.metadata.roles' | translate }}</td>
                     <td class="px-2 py-1 font-bold">
-                      <div class="gap-3 md:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 grid">
+                      <div class="grid gap-3 md:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3">
                         @for (role of cluster?.metadata?.roles || cluster?.metadata?.project?.projectMetadata?.roles; track role) {
                           <div class="">
-                            <div class="rounded-lg border-gray-300 border">
+                            <div class="rounded-lg border border-gray-300">
                               <div class="px-1 py-4">
                                 <div class="mb-2">
                                   <span class="text-2xl">{{ role?.roleDefinition }}</span>

@@ -17,7 +17,5 @@ export const serverRoutes: ServerRoute[] = [
   { path: 'admin/prices/:id/edit', renderMode: RenderMode.Client },
   { path: 'admin/projects/:id/edit', renderMode: RenderMode.Client },
   { path: 'admin/datacenter/:datacenterName', renderMode: RenderMode.Client },
-  { path: 'admin/configuration/operatorconfig/:id/edit', renderMode: RenderMode.Client },
-  { path: 'admin/configuration/task/:id/edit', renderMode: RenderMode.Client },
   { path: '**', renderMode: RenderMode.Client },
 ];

@@ -6,13 +6,13 @@
   ></app-userprofile-create-apikey>
 </div>
 
-<div class="dark:bg-darker rounded-md bg-white col-span-2">
-  <div class="dark:border-primary p-4 flex items-center justify-between border-b">
-    <h4 class="dark:text-light text-lg font-semibold text-gray-500 flex-grow">{{ 'pages.profile.apikeys.title' | translate }}</h4>
+<div class="dark:bg-darker col-span-2 rounded-md bg-white">
+  <div class="dark:border-primary flex items-center justify-between border-b p-4">
+    <h4 class="dark:text-light flex-grow text-lg font-semibold text-gray-500">{{ 'pages.profile.apikeys.title' | translate }}</h4>
     @if (createIsHidden) {
       <a
         (click)="toggleCreateVisibility()"
-        class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white ease-in-out hover:-translate-y-1 focus:ring-offset-white disabled:bg-gray-500 disabled:hover:bg-gray-800 float-left transition delay-50 duration-300 hover:scale-110 focus:ring focus:ring-offset-1 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75"
+        class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark float-left rounded-md bg-green-700 px-4 py-2 text-sm text-white transition delay-50 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none disabled:cursor-not-allowed disabled:bg-gray-500 disabled:opacity-75 disabled:hover:bg-gray-800"
       >
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
@@ -21,12 +21,12 @@
     }
     <a
       (click)="fetchApikeys(lastFilter)"
-      class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark ml-2 rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring-offset-white cursor-pointer focus:ring focus:ring-offset-1 focus:outline-none"
+      class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark ml-2 cursor-pointer rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
     >
       {{ 'common.refresh' | translate }}
     </a>
   </div>
-  <div class="p-3 relative">
+  <div class="relative p-3">
     <div class="my-6 rounded">
       <div>
         <p-table
@@ -91,7 +91,7 @@
                 <button
                   (click)="deleteApiKey(apikey)"
                   icon="pi pi-trash"
-                  class="focus:ring-primary dark:focus:ring-offset-dark ml-2 rounded-md bg-red-700 px-4 py-2 text-sm text-white hover:bg-red-500 focus:ring-offset-white flex focus:ring focus:ring-offset-1 focus:outline-none"
+                  class="focus:ring-primary dark:focus:ring-offset-dark ml-2 flex rounded-md bg-red-700 px-4 py-2 text-sm text-white hover:bg-red-500 focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
                     <path
@@ -115,7 +115,7 @@
       </div>
       <ng-template #loadingOrError>
         @if (apikeysFetchError) {
-          <div class="my-4 rounded-md bg-red-200 px-6 py-4 text-lg mx-auto flex items-center">
+          <div class="mx-auto my-4 flex items-center rounded-md bg-red-200 px-6 py-4 text-lg">
             <span class="p-2 text-red-800"> {{ 'pages.apikeys.error' | translate }} </span>
             <button class="btn text-black" (click)="fetchApikeys(lastFilter)">{{ 'common.tryAgain' | translate }}</button>
           </div>

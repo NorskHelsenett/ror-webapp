@@ -12,12 +12,12 @@
     filterBy="displayName"
   >
     <ng-template pTemplate="selectedItem" let-resourceType>
-      <div class="align-items-center gap-2 flex">
+      <div class="align-items-center flex gap-2">
         <div>{{ resourceType?.displayName }}</div>
       </div>
     </ng-template>
     <ng-template let-resourceType pTemplate="item">
-      <div class="align-items-center gap-2 flex">
+      <div class="align-items-center flex gap-2">
         <div>{{ resourceType?.displayName }}</div>
       </div>
     </ng-template>
@@ -36,12 +36,12 @@
       filterBy="scope"
     >
       <ng-template pTemplate="selectedItem" let-owner>
-        <div class="align-items-center gap-2 flex">
+        <div class="align-items-center flex gap-2">
           <div>{{ owner?.scope }}</div>
         </div>
       </ng-template>
       <ng-template let-owner pTemplate="item">
-        <div class="align-items-center gap-2 flex">
+        <div class="align-items-center flex gap-2">
           <div>{{ owner?.scope }}</div>
         </div>
       </ng-template>

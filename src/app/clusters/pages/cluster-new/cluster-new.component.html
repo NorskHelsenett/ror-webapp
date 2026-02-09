@@ -1,19 +1,19 @@
-<div class="dark:border-primary-darker px-4 py-4 lg:py-6 flex items-center justify-between border-b">
+<div class="dark:border-primary-darker flex items-center justify-between border-b px-4 py-4 lg:py-6">
   <h1 class="text-2xl font-semibold">{{ 'pages.clusters.new.title' | translate }}</h1>
 </div>
 
-<div class="gap-8 p-4 grid">
-  <div class="dark:bg-darker rounded-md bg-white p-4 flex justify-between overflow-x-auto">
-    <div class="dark:bg-darker rounded-md bg-white w-full">
+<div class="grid gap-8 p-4">
+  <div class="dark:bg-darker flex justify-between overflow-x-auto rounded-md bg-white p-4">
+    <div class="dark:bg-darker w-full rounded-md bg-white">
       @if (data$ | async; as data) {
         <div class="relative">
           <form [formGroup]="clusterForm">
             <div class="col-span-2">
               <div class="">
-                <div class="p-4 flex items-center justify-between">
+                <div class="flex items-center justify-between p-4">
                   <h4 class="dark:text-light text-lg font-semibold text-gray-500">{{ 'pages.clusters.new.clusterDetails' | translate }}</h4>
                 </div>
-                <div class="p-3 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 grid">
+                <div class="grid p-3 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
                   <div>
                     <h5>{{ 'pages.clusters.new.form.provider' | translate }}</h5>
                     <p-select
@@ -77,12 +77,12 @@
                       }
                     </div>
                   </div>
-                  <div class="sm:mt-3 col-span-2">
+                  <div class="col-span-2 sm:mt-3">
                     <div>
                       <h5>{{ 'pages.clusters.new.form.clusterName' | translate }}</h5>
                       <div class="flex flex-col">
                         <input
-                          class="p-inputtext-lg text-lg border"
+                          class="p-inputtext-lg border text-lg"
                           type="text"
                           pInputText
                           formControlName="clusterNameInput"
@@ -104,7 +104,7 @@
                       }
                     </div>
                   </div>
-                  <div class="ml-3 mt-3 col-span-2">
+                  <div class="col-span-2 mt-3 ml-3">
                     <h5>{{ 'pages.clusters.new.form.tags' | translate }}</h5>
                     <div class="">
                       <p-chips formControlName="tags"></p-chips>
@@ -116,30 +116,30 @@
                 </div>
               </div>
               <div class="">
-                <div class="dark:border-primary p-4 flex items-center justify-between border-b">
+                <div class="dark:border-primary flex items-center justify-between border-b p-4">
                   <h4 class="dark:text-light text-lg font-semibold text-gray-500">{{ 'pages.clusters.new.form.nodePools.title' | translate }}</h4>
                 </div>
-                <div class="p-3 xl:grid-cols-3 grid grid-cols-1">
-                  <table class="dark:text-light text-gray-900 sm:col-span-1 lg:col-span-2 relative">
+                <div class="grid grid-cols-1 p-3 xl:grid-cols-3">
+                  <table class="dark:text-light relative text-gray-900 sm:col-span-1 lg:col-span-2">
                     <thead class="border-b">
                       <tr>
-                        <th scope="col" class="px-1 py-1 text-sm font-medium text-left">
+                        <th scope="col" class="px-1 py-1 text-left text-sm font-medium">
                           {{ 'pages.clusters.new.form.nodePools.machineClass' | translate }}
                         </th>
-                        <th scope="col" class="px-1 py-1 text-sm font-medium text-left">{{ 'pages.clusters.new.form.nodePools.cpu' | translate }}</th>
-                        <th scope="col" class="px-1 py-1 text-sm font-medium text-left">{{ 'pages.clusters.new.form.nodePools.mem' | translate }}</th>
-                        <th scope="col" class="px-1 py-1 text-sm font-medium text-left">
+                        <th scope="col" class="px-1 py-1 text-left text-sm font-medium">{{ 'pages.clusters.new.form.nodePools.cpu' | translate }}</th>
+                        <th scope="col" class="px-1 py-1 text-left text-sm font-medium">{{ 'pages.clusters.new.form.nodePools.mem' | translate }}</th>
+                        <th scope="col" class="px-1 py-1 text-left text-sm font-medium">
                           {{ 'pages.clusters.new.form.nodePools.pricePrNode' | translate }}
                         </th>
-                        <th scope="col" class="w-14 px-1 py-1 text-sm font-medium text-left">
+                        <th scope="col" class="w-14 px-1 py-1 text-left text-sm font-medium">
                           {{ 'pages.clusters.new.form.nodePools.count' | translate }}
                         </th>
-                        <th scope="col" class="px-1 py-1 text-sm font-medium text-left"></th>
+                        <th scope="col" class="px-1 py-1 text-left text-sm font-medium"></th>
                       </tr>
                     </thead>
                     <tbody>
                       @for (price of pricesFiltered; track price) {
-                        <tr class="ease-in-out hover:bg-gray-200 dark:hover:bg-gray-500 transition duration-300">
+                        <tr class="transition duration-300 ease-in-out hover:bg-gray-200 dark:hover:bg-gray-500">
                           <td class="px-1 py-1 text-sm font-light whitespace-nowrap">{{ price?.machineClass | titlecase }}</td>
                           <td class="px-1 py-1 text-sm font-light whitespace-nowrap">{{ price?.cpu }}</td>
                           <td class="px-1 py-1 text-sm font-light whitespace-nowrap">{{ price?.memory }} Gb</td>
@@ -221,7 +221,7 @@
               </div>
               <div>
                 <div class="sm:w-full md:w-1/2">
-                  <div class="dark:border-primary p-4 flex items-center justify-between border-b">
+                  <div class="dark:border-primary flex items-center justify-between border-b p-4">
                     <h4 class="dark:text-light text-lg font-semibold text-gray-500">{{ 'pages.clusters.new.form.summary.title' | translate }}</h4>
                   </div>
                   <table class="border-collapse text-left">
@@ -258,20 +258,20 @@
                 <button
                   [disabled]="!clusterForm?.valid"
                   (click)="createCluster()"
-                  class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring-offset-white disabled:bg-gray-500 disabled:hover:bg-gray-800 focus:ring focus:ring-offset-1 focus:outline-none"
+                  class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none disabled:bg-gray-500 disabled:hover:bg-gray-800"
                 >
                   {{ 'common.create' | translate }}
                 </button>
                 <button
                   (click)="reset(true)"
-                  class="hover:bg-primary-lighter focus:ring-primary dark:focus:ring-offset-dark ml-3 rounded-md bg-neutral-500 px-4 py-2 text-sm text-white focus:ring-offset-white focus:ring focus:ring-offset-1 focus:outline-none"
+                  class="hover:bg-primary-lighter focus:ring-primary dark:focus:ring-offset-dark ml-3 rounded-md bg-neutral-500 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
                 >
                   {{ 'common.reset' | translate }}
                 </button>
               </div>
               @if (submitted === true) {
                 <div class="mb-10">
-                  <div class="dark:border-primary p-4 flex items-center justify-between border-b">
+                  <div class="dark:border-primary flex items-center justify-between border-b p-4">
                     <h4 class="dark:text-light text-lg font-semibold text-gray-500"></h4>
                   </div>
                   <pre class="bg-black">
@@ -285,7 +285,7 @@
         </div>
       } @else {
         @if (dataError) {
-          <div class="my-4 rounded-md bg-red-200 px-6 py-4 text-lg mx-auto flex items-center">
+          <div class="mx-auto my-4 flex items-center rounded-md bg-red-200 px-6 py-4 text-lg">
             <span class="p-2 text-red-800"> {{ 'pages.dashboard.error' | translate }} </span>
             <button class="btn text-black" (click)="fetchData()">{{ 'common.tryAgain' | translate }}</button>
           </div>
