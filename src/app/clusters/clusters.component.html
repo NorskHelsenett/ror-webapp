@@ -1,7 +1,8 @@
 <div class="dark:border-primary-darker flex items-center gap-4 border-b px-4 py-4 lg:py-6">
   <h1 class="grow text-2xl font-semibold">{{ 'pages.clusters.title' | translate }}</h1>
   <div
-    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark relative rounded-md bg-green-700 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
+    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark relative rounded-md bg-green-700 text-sm text-white focus:ring
+      focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
     (click)="showExportChoises = !showExportChoises"
   >
     <div class="relative flex w-fit cursor-pointer items-center justify-center rounded-md px-4 py-2">
@@ -16,12 +17,14 @@
       <div class="absolute z-50 mt-2 w-fit cursor-pointer rounded-md p-3">
         <a
           (click)="exportToCsv()"
-          class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark mt-0 w-full rounded-md bg-blue-700 px-4 py-2 text-sm text-white opacity-75 focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
+          class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark mt-0 w-full rounded-md bg-blue-700 px-4 py-2 text-sm text-white
+            opacity-75 focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
         >
           CSV
         </a>
         <div
-          class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark mt-2 w-full rounded-md bg-blue-700 px-4 py-2 text-sm text-white opacity-75 focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
+          class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark mt-2 w-full rounded-md bg-blue-700 px-4 py-2 text-sm text-white
+            opacity-75 focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
           (click)="exportToExcel()"
         >
           Excel
@@ -33,14 +36,17 @@
   @if ((adminCreate$ | async) === true) {
     <a
       [routerLink]="['./create/cluster']"
-      class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark float-left rounded-md bg-green-700 px-4 py-2 text-sm text-white transition delay-50 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
+      class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark float-left rounded-md bg-green-700 px-4 py-2 text-sm text-white
+        transition delay-50 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 focus:ring focus:ring-offset-1 focus:ring-offset-white
+        focus:outline-none"
     >
       <span>{{ 'pages.clusters.create' | translate }}</span>
     </a>
   }
   <a
     (click)="fetchClusters(lastLazyLoad)"
-    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark cursor-pointer rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
+    class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark cursor-pointer rounded-md bg-green-700 px-4 py-2 text-sm text-white
+      focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
   >
     {{ 'common.refresh' | translate }}
   </a>

@@ -1,7 +1,8 @@
 <ng-container *ngIf="complianceReports$ | async as complianceReports">
   <div class="dark:border-primary-darker flex flex-row-reverse items-center gap-4 border-b px-4 pb-2 lg:pb-4">
     <div
-      class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark relative rounded-md bg-green-700 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
+      class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark relative rounded-md bg-green-700 text-sm text-white focus:ring
+        focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
       (click)="showExportChoices = !showExportChoices"
     >
       <div class="relative flex w-fit cursor-pointer items-center justify-center rounded-md px-4 py-2">
@@ -14,13 +15,15 @@
       </div>
       <div *ngIf="showExportChoices" class="absolute z-50 mt-2 w-fit cursor-pointer rounded-md p-3">
         <a
-          class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark mt-0 w-full rounded-md bg-blue-700 px-4 py-2 text-sm text-white opacity-75 focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
+          class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark mt-0 w-full rounded-md bg-blue-700 px-4 py-2 text-sm text-white
+            opacity-75 focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
           (click)="exportToCsv(complianceReports)"
         >
           CSV
         </a>
         <div
-          class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark mt-2 w-full rounded-md bg-blue-700 px-4 py-2 text-sm text-white opacity-75 focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
+          class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark mt-2 w-full rounded-md bg-blue-700 px-4 py-2 text-sm text-white
+            opacity-75 focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
           (click)="exportToExcel(complianceReports)"
         >
           Excel

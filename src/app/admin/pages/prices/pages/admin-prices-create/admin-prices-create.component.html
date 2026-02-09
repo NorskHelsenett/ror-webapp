@@ -26,7 +26,9 @@
                   <div class="mb-3 xl:w-96">
                     <label>* {{ 'pages.admin.prices.form.provider' | translate }}</label>
                     <input
-                      class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-base font-normal text-gray-600 transition ease-in-out focus:bg-white focus:text-gray-700 focus:outline-none dark:bg-gray-700 dark:text-white"
+                      class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-base
+                        font-normal text-gray-600 transition ease-in-out focus:bg-white focus:text-gray-700 focus:outline-none dark:bg-gray-700
+                        dark:text-white"
                       type="text"
                       aria-describedby="provider-help"
                       formControlName="provider"
@@ -41,7 +43,9 @@
                   <div class="mb-3 xl:w-96">
                     <label>* {{ 'pages.admin.prices.form.machineClass' | translate }}</label>
                     <input
-                      class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-base font-normal text-gray-600 transition ease-in-out focus:bg-white focus:text-gray-700 focus:outline-none dark:bg-gray-700 dark:text-white"
+                      class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-base
+                        font-normal text-gray-600 transition ease-in-out focus:bg-white focus:text-gray-700 focus:outline-none dark:bg-gray-700
+                        dark:text-white"
                       type="text"
                       aria-describedby="machineClass-help"
                       formControlName="machineClass"
@@ -57,7 +61,9 @@
                   <div class="mb-3 xl:w-96">
                     <label>* {{ 'pages.admin.prices.form.cpu' | translate }}</label>
                     <input
-                      class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-base font-normal text-gray-600 transition ease-in-out focus:bg-white focus:text-gray-700 focus:outline-none dark:bg-gray-700 dark:text-white"
+                      class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-base
+                        font-normal text-gray-600 transition ease-in-out focus:bg-white focus:text-gray-700 focus:outline-none dark:bg-gray-700
+                        dark:text-white"
                       type="number"
                       aria-describedby="cpu-help"
                       formControlName="cpu"
@@ -72,7 +78,9 @@
                   <div class="mb-3 xl:w-96">
                     <label>* {{ 'pages.admin.prices.form.memoryBytes' | translate }}</label>
                     <input
-                      class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-base font-normal text-gray-600 transition ease-in-out focus:bg-white focus:text-gray-700 focus:outline-none dark:bg-gray-700 dark:text-white"
+                      class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-base
+                        font-normal text-gray-600 transition ease-in-out focus:bg-white focus:text-gray-700 focus:outline-none dark:bg-gray-700
+                        dark:text-white"
                       type="number"
                       aria-describedby="memoryBytes-help"
                       formControlName="memoryBytes"
@@ -87,7 +95,9 @@
                   <div class="mb-3 xl:w-96">
                     <label>* {{ 'pages.admin.prices.form.memory' | translate }}</label>
                     <input
-                      class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-base font-normal text-gray-600 transition ease-in-out focus:bg-white focus:text-gray-700 focus:outline-none dark:bg-gray-700 dark:text-white"
+                      class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-base
+                        font-normal text-gray-600 transition ease-in-out focus:bg-white focus:text-gray-700 focus:outline-none dark:bg-gray-700
+                        dark:text-white"
                       type="number"
                       aria-describedby="memory-help"
                       formControlName="memory"
@@ -102,7 +112,9 @@
                   <div class="mb-3 xl:w-96">
                     <label>* {{ 'pages.admin.prices.form.price' | translate }}</label>
                     <input
-                      class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-base font-normal text-gray-600 transition ease-in-out focus:bg-white focus:text-gray-700 focus:outline-none dark:bg-gray-700 dark:text-white"
+                      class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-base
+                        font-normal text-gray-600 transition ease-in-out focus:bg-white focus:text-gray-700 focus:outline-none dark:bg-gray-700
+                        dark:text-white"
                       type="number"
                       aria-describedby="price-help"
                       formControlName="price"
@@ -138,7 +150,9 @@
                   <div class="mt-5 flex">
                     @if (!id) {
                       <button
-                        class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none disabled:bg-gray-500 disabled:hover:bg-gray-800"
+                        class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm
+                          text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none disabled:bg-gray-500
+                          disabled:hover:bg-gray-800"
                         type="button"
                         [disabled]="!priceForm?.valid"
                         (click)="createPrice()"
@@ -149,7 +163,9 @@
                     }
                     @if (id?.length > 0) {
                       <button
-                        class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none disabled:bg-gray-500 disabled:hover:bg-gray-800"
+                        class="hover:bg-primary-dark focus:ring-primary dark:focus:ring-offset-dark rounded-md bg-green-700 px-4 py-2 text-sm
+                          text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none disabled:bg-gray-500
+                          disabled:hover:bg-gray-800"
                         type="button"
                         [disabled]="!priceForm?.valid"
                         (click)="updatePrice()"
@@ -160,7 +176,8 @@
                     }
                     <button
                       (click)="reset()"
-                      class="hover:bg-primary-lighter focus:ring-primary dark:focus:ring-offset-dark ml-3 rounded-md bg-neutral-500 px-4 py-2 text-sm text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
+                      class="hover:bg-primary-lighter focus:ring-primary dark:focus:ring-offset-dark ml-3 rounded-md bg-neutral-500 px-4 py-2 text-sm
+                        text-white focus:ring focus:ring-offset-1 focus:ring-offset-white focus:outline-none"
                     >
                       {{ 'common.reset' | translate }}
                     </button>
