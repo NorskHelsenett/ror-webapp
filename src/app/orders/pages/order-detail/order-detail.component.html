@@ -1,7 +1,7 @@
 @if (order$ | async; as order) {
   <div>
     <div class="dark:border-primary-darker flex items-center gap-4 border-b px-4 py-4 lg:py-6">
-      <h1 class="flex-grow text-2xl font-semibold">
+      <h1 class="grow text-2xl font-semibold">
         <span>{{ 'pages.orders.details.title' | translate }}</span>
       </h1>
       <a
@@ -23,7 +23,7 @@
           <div class="dark:bg-darker items-center justify-between rounded-md bg-white p-2">
             <div class="dark:bg-darker rounded-md bg-white">
               <div class="dark:border-primary flex items-center justify-between border-b p-4">
-                <span class="flex-grow"></span>
+                <span class="grow"></span>
               </div>
               <div class="relative p-3">
                 <table class="border-collapse text-left sm:w-full md:w-1/2 lg:w-2/3">
@@ -125,7 +125,7 @@
           <div class="dark:bg-darker mt-3 items-center justify-between rounded-md bg-white p-2">
             <div class="dark:bg-darker rounded-md bg-white">
               <div class="dark:border-primary flex items-center justify-between border-b p-4">
-                <span class="flex-grow">Status</span>
+                <span class="grow">Status</span>
               </div>
               <div class="relative p-3">
                 <table class="border-collapse text-left sm:w-full md:w-1/2 lg:w-1/3">
@@ -170,7 +170,7 @@
           <div class="dark:bg-darker items-center justify-between rounded-md bg-white p-2">
             <div class="dark:bg-darker rounded-md bg-white">
               <div class="dark:border-primary flex items-center justify-between border-b p-4">
-                <span class="flex-grow">Raw</span>
+                <span class="grow">Raw</span>
                 <button
                   (click)="showRaw = !showRaw"
                   class="focus:ring-primary ml-2 rounded-md bg-orange-400 px-4 py-2 text-sm text-white hover:scale-110 focus:outline-none"

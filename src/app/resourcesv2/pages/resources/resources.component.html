@@ -1,5 +1,5 @@
 <div class="dark:border-primary-darker flex items-center gap-4 border-b px-4 py-4 lg:py-6">
-  <h1 class="flex-grow text-2xl font-semibold">{{ 'pages.resourcesv2.title' | translate }}</h1>
+  <h1 class="grow text-2xl font-semibold">{{ 'pages.resourcesv2.title' | translate }}</h1>
 </div>
 
 <div class="m-4">
@@ -7,7 +7,7 @@
     <div class="dark:bg-darker rounded-md bg-white">
       <div class="dark:border-primary flex items-center justify-between border-b p-3">
         <app-resourcesv2-filter
-          class="flex-grow"
+          class="grow"
           [clusters]="(clusters$ | async)?.data"
           [resourceTypes]="resourceTypes"
           (filterChange)="resourcesTable.filterChanged($event)"

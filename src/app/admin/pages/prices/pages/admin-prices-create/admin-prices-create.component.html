@@ -1,9 +1,9 @@
 <div class="dark:border-primary-darker flex items-center justify-between border-b px-4 py-4 lg:py-6">
   @if (!id) {
-    <h1 class="flex-grow text-2xl font-semibold">{{ 'pages.admin.prices.create.title' | translate }}</h1>
+    <h1 class="grow text-2xl font-semibold">{{ 'pages.admin.prices.create.title' | translate }}</h1>
   }
   @if (id?.length > 0) {
-    <h1 class="flex-grow text-2xl font-semibold">{{ 'pages.admin.prices.edit.title' | translate }}: {{ id }}</h1>
+    <h1 class="grow text-2xl font-semibold">{{ 'pages.admin.prices.edit.title' | translate }}: {{ id }}</h1>
   }
 </div>
 

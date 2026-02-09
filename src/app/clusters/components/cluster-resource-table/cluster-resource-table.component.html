@@ -1,7 +1,7 @@
 <div class="dark:bg-darker flex flex-col rounded-md bg-white">
   <div class="dark:border-primary flex items-center justify-between border-b p-3">
     <app-resourcesv2-filter
-      class="flex-grow"
+      class="grow"
       [clusters]="[cluster]"
       [resourceTypes]="resourceTypes"
       (filterChange)="resourcesTable.filterChanged($event)"

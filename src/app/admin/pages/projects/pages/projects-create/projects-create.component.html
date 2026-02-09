@@ -1,9 +1,9 @@
 <div class="dark:border-primary-darker flex items-center justify-between border-b px-4 py-4 lg:py-6">
   @if (!projectId) {
-    <h1 class="flex-grow text-2xl font-semibold">{{ 'pages.admin.projects.create.title' | translate }}</h1>
+    <h1 class="grow text-2xl font-semibold">{{ 'pages.admin.projects.create.title' | translate }}</h1>
   }
   @if (projectId?.length > 0 && project !== null) {
-    <h1 class="flex-grow text-2xl font-semibold">{{ 'pages.admin.projects.update.title' | translate }}: {{ project?.name }}</h1>
+    <h1 class="grow text-2xl font-semibold">{{ 'pages.admin.projects.update.title' | translate }}: {{ project?.name }}</h1>
   }
 </div>
 

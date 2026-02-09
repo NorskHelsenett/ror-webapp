@@ -1,9 +1,9 @@
 <div class="dark:border-primary-darker flex items-center justify-between border-b px-4 py-4 lg:py-6">
   @if (!datacenterName) {
-    <h1 class="flex-grow text-2xl font-semibold">{{ 'pages.admin.datacenters.create.title' | translate }}</h1>
+    <h1 class="grow text-2xl font-semibold">{{ 'pages.admin.datacenters.create.title' | translate }}</h1>
   }
   @if (datacenterName?.length > 0) {
-    <h1 class="flex-grow text-2xl font-semibold">{{ 'pages.admin.datacenters.edit.title' | translate }}: {{ datacenterName }}</h1>
+    <h1 class="grow text-2xl font-semibold">{{ 'pages.admin.datacenters.edit.title' | translate }}: {{ datacenterName }}</h1>
   }
 </div>
 
