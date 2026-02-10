@@ -1,6 +1,6 @@
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LangChangeEvent, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { catchError, Subscription, tap } from 'rxjs';
@@ -8,7 +8,7 @@ import { environment } from '../../../../../../environments/environment';
 import { Project } from '../../../../../core/models/project';
 import { ConfigService } from '../../../../../core/services/config.service';
 import { ProjectService } from '../../../../../core/services/project.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgClass } from '@angular/common';
 import { ChipModule } from 'primeng/chip';
 import { SelectModule } from 'primeng/select';
 import { ColorService } from '../../../../../core/services/color.service';
@@ -19,7 +19,7 @@ import { HexService } from '../../../../../core/services/hex.service';
   templateUrl: './projects-create.component.html',
   styleUrls: ['./projects-create.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [TranslateModule, CommonModule, FormsModule, ReactiveFormsModule, ToggleButtonModule, SelectModule, ChipModule],
+  imports: [TranslateModule, CommonModule, FormsModule, ReactiveFormsModule, ToggleButtonModule, SelectModule, ChipModule, NgClass],
 })
 export class ProjectsCreateComponent implements OnInit, OnDestroy {
   private configService = inject(ConfigService);
@@ -39,6 +39,8 @@ export class ProjectsCreateComponent implements OnInit, OnDestroy {
   availableRoles: any[];
   tagForm: FormGroup;
   tags: string[] = [];
+
+  activeProjectChecked: boolean = true;
 
   private submitted: boolean = false;
 
@@ -97,19 +99,23 @@ export class ProjectsCreateComponent implements OnInit, OnDestroy {
         name: this.translateService.instant('pages.admin.projects.form.roles.availableRoles.responsible'),
         value: 'Responsible',
       },
+      {
+        name: this.translateService.instant('pages.admin.projects.form.roles.availableRoles.technicalContact'),
+        value: 'TechnicalContact',
+      },
     ];
   }
 
   setupForm(): void {
     this.projectForm = this.fb.group({
       name: [null, { validators: [Validators.required, Validators.minLength(1), Validators.pattern(this.rortextregex)] }],
-      description: [null, { validators: [Validators.minLength(1), Validators.pattern(this.rortextregex)] }],
+      description: [null, { validators: [Validators.minLength(1)] }],
       active: [true, { validators: [Validators.required] }],
       projectMetadata: this.fb.group({
         billing: this.fb.group({
           workorder: [null, { validators: [Validators.required, Validators.minLength(1)] }],
         }),
-        roles: this.fb.array([], { validators: [Validators.required, Validators.minLength(2)] }),
+        roles: this.fb.array([], { validators: [Validators.required, this.requiredRolesValidator] }),
         tags: [[], { validators: [] }],
       }),
     });
@@ -128,13 +134,37 @@ export class ProjectsCreateComponent implements OnInit, OnDestroy {
       roleDefinition: [null, { validators: [Validators.required, Validators.minLength(1)] }],
       contactInfo: this.fb.group({
         upn: [null, { validators: [Validators.required, Validators.email] }],
-        email: [null, { validators: [Validators.email] }],
-        phone: [null, { validators: [Validators.minLength(1), Validators.pattern(this.rortextregex)] }],
+        email: [null, { validators: [Validators.required, Validators.email] }],
+        phone: [null, { validators: [Validators.required, Validators.pattern(/^\+?[\d\s\-\(\)]{4,18}$/)] }],
       }),
+    });
+
+    // Adjust upn validation based on role type
+    roleForm.get('roleDefinition').valueChanges.subscribe((role) => {
+      const upnControl = roleForm.get('contactInfo').get('upn');
+      if (role === 'TechnicalContact') {
+        upnControl.setValidators([Validators.email]);
+      } else {
+        upnControl.setValidators([Validators.required, Validators.email]);
+      }
+      upnControl.updateValueAndValidity();
+      this.roles.updateValueAndValidity();
     });
 
     this.roles.push(roleForm);
     this.changeDetector.detectChanges();
+  }
+
+  private requiredRolesValidator(control: AbstractControl): ValidationErrors | null {
+    const roles = control as FormArray;
+    const roleValues = roles.controls.map((c) => c.get('roleDefinition')?.value);
+    const hasOwner = roleValues.includes('Owner');
+    const hasResponsible = roleValues.includes('Responsible');
+    const hasTechnicalContact = roleValues.includes('TechnicalContact');
+    if (!hasOwner || (!hasResponsible && !hasTechnicalContact)) {
+      return { requiredRoles: true };
+    }
+    return null;
   }
 
   deleteRole(lessonIndex: number) {

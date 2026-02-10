@@ -437,6 +437,11 @@
             "name": "Navn",
             "email": "E-post"
           },
+          "technicalContact": {
+            "title": "Teknisk kontakt",
+            "name": "Navn",
+            "email": "E-post"
+          },
           "billing": {
             "title": "Fakturering",
             "workorder": "Arbeidsordre"
@@ -476,7 +481,7 @@
             "false": "Inaktiv"
           },
           "rolesHelp": "To roller må legges til, en for eier og en for ansvarlig",
-          "rolesError": "Mangler roller, minimum to roller, eier og ansvarlig må være satt",
+          "rolesError": "Mangler roller, eller ugyldige verdier. To (eller flere) roller må være definert. En eier, og en ansvarlig eller teknisk kontakt",
           "roles": {
             "title": "Roler",
             "add": "Legg til rolle",
@@ -484,13 +489,16 @@
             "roleName": "Rolle",
             "upn": "Brukernavn (UPN)",
             "upnError": "Mangler brukernavn (UPN)",
-            "email": "Email",
-            "emailError": "Email er mangler eller er ikke valid",
-            "phone": "Phone",
+            "email": "E-post",
+            "emailError": "E-post mangler eller er ikke valid",
+            "phone": "Telefonnummer",
+            "phoneError": "Telefonnummer mangler eller er ikke godkjent (minimum 4 siffer, kan inneholde +, -, (), og mellomrom)",
             "placeholder": "Velg en rolle",
+            "roledefinitionError": "Mangler rolledefinisjon",
             "availableRoles": {
-              "owner": "Owner",
-              "responsible": "Responsible"
+              "owner": "Eier",
+              "responsible": "Ansvarlig",
+              "technicalContact": "Teknisk kontaktperson"
             }
           },
           "serviceTags": "Stikkord",
