@@ -1,3 +1,4 @@
+import { environment } from './../../../../environments/environment.prod';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -60,7 +61,7 @@ export class ClusterDetailsEditComponent implements OnInit, OnDestroy, AfterView
 
   clusterModelForm: FormGroup;
   tagForm: FormGroup;
-  environment: any;
+  environment = environment;
 
   clusterUpdateError: any;
   projects$: Observable<PaginationResult<Project>> = undefined;

@@ -343,7 +343,7 @@
         </div>
       </div>
     </div>
-    @if (environment?.production === false) {
+    @if (!environment?.production) {
       <div class="dark:bg-darker flex justify-between rounded-md bg-white p-4">
         <div class="dark:bg-darker rounded-md bg-white">
           <div class="relative flex flex-col p-3">
