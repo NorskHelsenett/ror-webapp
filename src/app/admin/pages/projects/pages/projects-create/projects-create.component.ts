@@ -34,7 +34,7 @@ export class ProjectsCreateComponent implements OnInit, OnDestroy {
 
   project: Project | undefined;
   projectFetchError: any;
-  environment: any;
+  environment = environment;
 
   availableRoles: any[];
   tagForm: FormGroup;
@@ -59,7 +59,6 @@ export class ProjectsCreateComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.setAvailableRoles();
     this.setupForm();
-    this.environment = environment;
 
     this.subscriptions.add(
       this.route.params.subscribe((param) => {
