@@ -10,7 +10,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { MessageService, ConfirmationService, ConfirmEventType } from 'primeng/api';
 import { catchError, Observable, of, Subscription, tap } from 'rxjs';
@@ -20,7 +20,7 @@ import { Project, ProjectRole } from '../../../core/models/project';
 import { ClustersService } from '../../../core/services/clusters.service';
 import { ConfigService } from '../../../core/services/config.service';
 import { ProjectService } from '../../../core/services/project.service';
-import { CommonModule, NgClass } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { TagModule } from 'primeng/tag';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
@@ -47,7 +47,6 @@ import { HexService } from '../../../core/services/hex.service';
     ConfirmDialogModule,
     SpinnerComponent,
     SelectModule,
-    NgClass,
   ],
 })
 export class ClusterDetailsEditComponent implements OnInit, OnDestroy, AfterViewInit {
@@ -94,12 +93,12 @@ export class ClusterDetailsEditComponent implements OnInit, OnDestroy, AfterView
 
   ngOnInit(): void {
     this.setAvailableRoles();
+    this.setupForm();
     this.setupObservables();
     this.setupAvailableCriticalitiesAndSensitivities();
   }
 
   ngAfterViewInit(): void {
-    this.setupForm();
     this.invalidCount.emit(this.getInvalidCount(this.clusterModelForm));
   }
 
@@ -167,7 +166,7 @@ export class ClusterDetailsEditComponent implements OnInit, OnDestroy, AfterView
 
   setupForm(): void {
     this.clusterModelForm = this.fb.group({
-      description: [null, { validators: [Validators.minLength(1), Validators.pattern(this.rortextregex)] }],
+      description: [null, { validators: [Validators.minLength(1)] }],
       projectId: [null, { validators: [Validators.required, Validators.minLength(1)] }],
       sensitivity: [null, { validators: [Validators.required, Validators.min(1), Validators.max(4)] }],
       criticality: [null, { validators: [Validators.required, Validators.min(1), Validators.max(4)] }],
@@ -175,13 +174,25 @@ export class ClusterDetailsEditComponent implements OnInit, OnDestroy, AfterView
         workorder: [null, { validators: [Validators.required, Validators.minLength(1), Validators.pattern(this.rortextregex)] }],
       }),
       tags: ['', { validators: [] }],
-      roles: this.fb.array([], { validators: [Validators.required, Validators.minLength(2)] }),
+      roles: this.fb.array([], { validators: [Validators.required, this.requiredRolesValidator] }),
     });
 
     this.tagForm = this.fb.group({
       tag: ['', { validators: [Validators.required, Validators.minLength(2), Validators.pattern(this.rortextregex)] }],
     });
     this.tagForm.reset();
+  }
+
+  private requiredRolesValidator(control: AbstractControl): ValidationErrors | null {
+    const roles = control as FormArray;
+    const roleValues = roles.controls.map((c) => c.get('roleDefinition')?.value);
+    const hasOwner = roleValues.includes('Owner');
+    const hasResponsible = roleValues.includes('Responsible');
+    const hasTechnicalContact = roleValues.includes('TechnicalContact');
+    if (!hasOwner || (!hasResponsible && !hasTechnicalContact)) {
+      return { requiredRoles: true };
+    }
+    return null;
   }
 
   private setAvailableRoles(): void {
@@ -193,6 +204,10 @@ export class ClusterDetailsEditComponent implements OnInit, OnDestroy, AfterView
       {
         name: this.translateService.instant('pages.admin.projects.form.roles.availableRoles.responsible'),
         value: 'Responsible',
+      },
+      {
+        name: this.translateService.instant('pages.admin.projects.form.roles.availableRoles.technicalContact'),
+        value: 'TechnicalContact',
       },
     ];
   }
@@ -206,10 +221,24 @@ export class ClusterDetailsEditComponent implements OnInit, OnDestroy, AfterView
       roleDefinition: [null, { validators: [Validators.required, Validators.minLength(1)] }],
       contactInfo: this.fb.group({
         upn: [null, { validators: [Validators.required, Validators.email] }],
-        email: [null, { validators: [Validators.email] }],
-        phone: [null, { validators: [Validators.minLength(1)] }],
+        email: [null, { validators: [Validators.required, Validators.email] }],
+        phone: [null, { validators: [Validators.required, Validators.pattern(/^\+?[\d\s\-\(\)]{4,18}$/)] }],
       }),
     });
+
+    // Adjust upn validation based on role type
+    this.subscriptions.add(
+      roleForm.get('roleDefinition').valueChanges.subscribe((role) => {
+        const upnControl = roleForm.get('contactInfo').get('upn');
+        if (role === 'Technical Contact') {
+          upnControl.setValidators([Validators.email]);
+        } else {
+          upnControl.setValidators([Validators.required, Validators.email]);
+        }
+        upnControl.updateValueAndValidity();
+        this.roles.updateValueAndValidity();
+      }),
+    );
 
     this.roles.push(roleForm);
     this.changeDetector.detectChanges();
@@ -347,6 +376,7 @@ export class ClusterDetailsEditComponent implements OnInit, OnDestroy, AfterView
           tap(() => {
             this.updateOk.emit(true);
             this.messageService.add({ severity: 'success', summary: 'Cluster updated' });
+
             return of(null);
           }),
           catchError((error) => {

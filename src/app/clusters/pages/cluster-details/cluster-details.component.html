@@ -100,11 +100,7 @@
               <div class="sm:col-span-1 md:col-span-1 lg:col-span-2 xl:col-span-3 2xl:col-span-4">
                 @if (activeTabIndex === 0) {
                   <app-cluster-metrics [metrics]="cluster?.metrics"></app-cluster-metrics>
-                }
-                @if (activeTabIndex === 0) {
-                  <app-cluster-description [cluster]="cluster" (edit)="setTab(6)"></app-cluster-description>
-                }
-                @if (activeTabIndex === 0) {
+                  <app-cluster-description [cluster]="cluster" (edit)="setTab(7, true)"></app-cluster-description>
                   <app-cluster-acl class="p-2" [cluster]="cluster"></app-cluster-acl>
                 }
               </div>
@@ -112,8 +108,6 @@
                 <div class="grid-cols grid gap-4">
                   @if (activeTabIndex === 0) {
                     <app-cluster-metadata [cluster]="cluster"></app-cluster-metadata>
-                  }
-                  @if (activeTabIndex === 0) {
                     <app-cluster-tools class="" [cluster]="cluster" [userClaims]="userClaims"></app-cluster-tools>
                   }
                 </div>
@@ -167,7 +161,11 @@
         </p-tabpanel>
         <p-tabpanel [value]="7">
           @if (activeTabIndex === 7) {
-            <app-cluster-metadata-page [cluster]="cluster" (refreshRequested)="fetchCluster(clusterId)"></app-cluster-metadata-page>
+            <app-cluster-metadata-page
+              [cluster]="cluster"
+              [startInEdit]="metadataStartInEdit"
+              (refreshRequested)="fetchCluster(clusterId)"
+            ></app-cluster-metadata-page>
           }
         </p-tabpanel>
         <p-tabpanel [value]="8">

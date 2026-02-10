@@ -437,6 +437,11 @@
             "name": "Name",
             "email": "Email"
           },
+          "technicalContact": {
+            "title": "Technical contact",
+            "name": "Name",
+            "email": "Email"
+          },
           "billing": {
             "title": "Billing",
             "workorder": "Workorder"
@@ -478,8 +483,8 @@
           "workorder": "Work order",
           "workorderHelp": "Fill in the work order",
           "workorderError": "Missing work order",
-          "rolesHelp": "Two roles must be added, one for owner and one for responsible",
-          "rolesError": "Missing roles, minimum 2 roles required, owner and responsible",
+          "rolesHelp": "Two roles must be added, one for owner and one for responsible or technical contact",
+          "rolesError": "Missing roles, or not valid input. Must have two (or more) roles defined. One owner, and one responsible or technical contact",
           "roles": {
             "title": "Roles",
             "add": "Add role",
@@ -490,10 +495,13 @@
             "email": "Email",
             "emailError": "Email missing or is not valid",
             "phone": "Phone",
+            "phoneError": "Phone number missing or is not valid (minimum 4 digits, can contain +, -, (), and spaces)",
             "placeholder": "Velg en rolle",
+            "roledefinitionError": "Missing role definition",
             "availableRoles": {
               "owner": "Owner",
-              "responsible": "Responsible"
+              "responsible": "Responsible",
+              "technicalContact": "Technical contact"
             }
           },
           "serviceTags": "Service tags",

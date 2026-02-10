@@ -164,14 +164,7 @@
                     <h4 class="dark:text-light text-lg font-semibold text-gray-500">
                       {{ 'pages.admin.projects.form.roles.title' | translate }}
                     </h4>
-                    @if (
-                      !clusterModelForm?.get('roles').pristine &&
-                      clusterModelForm?.get('roles').touched &&
-                      clusterModelForm?.get('roles').dirty &&
-                      clusterModelForm?.get('roles').errors
-                    ) {
-                      <span class="text-red-400">{{ 'pages.admin.projects.form.rolesError' | translate }}</span>
-                    }
+
                     <button
                       (click)="addRole()"
                       type="button"
@@ -183,6 +176,12 @@
                     </button>
                   </div>
                   <span>{{ 'pages.admin.projects.form.rolesHelp' | translate }}</span>
+
+                  @if (clusterModelForm?.get('roles').invalid) {
+                    <div class="text-lg font-bold">
+                      <span class="text-red-400">{{ 'pages.admin.projects.form.rolesError' | translate }}</span>
+                    </div>
+                  }
                   <ng-container formArrayName="roles">
                     @for (roleForm of roles?.controls; track roleForm; let i = $index) {
                       <div class="role-form-row flex" [formGroupName]="i">
@@ -197,14 +196,10 @@
                             optionLabel="name"
                             placeholder="{{ 'pages.admin.projects.form.roles.placeholder' | translate }}"
                           ></p-select>
+
                           <div class="flex">
-                            @if (
-                              !roleForm.get('roleDefinition').pristine &&
-                              roleForm.get('roleDefinition').touched &&
-                              roleForm.get('roleDefinition').dirty &&
-                              roleForm.get('roleDefinition').errors
-                            ) {
-                              <span class="text-red-400">{{ 'pages.admin.projects.form.nameError' | translate }}</span>
+                            @if (roleForm.get('roleDefinition').errors) {
+                              <span class="text-red-400">{{ 'pages.admin.projects.form.roles.roledefinitionError' | translate }}</span>
                             }
                           </div>
                         </div>
@@ -215,65 +210,54 @@
                             >
                             <input
                               class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5
-                                text-base font-normal text-gray-600 transition ease-in-out focus:bg-white focus:text-gray-700 focus:outline-none
-                                dark:bg-gray-700 dark:text-white"
+                                text-base font-normal text-gray-600 transition ease-in-out focus:text-gray-700 focus:outline-none dark:bg-black
+                                dark:text-gray-300"
                               type="email"
                               aria-describedby="upn-help"
                               pInputText
                               formControlName="upn"
                             />
                             <div class="flex">
-                              @if (
-                                !roleForm.get('contactInfo').get('upn').pristine &&
-                                roleForm.get('contactInfo').get('upn').touched &&
-                                roleForm.get('contactInfo').get('upn').dirty &&
-                                roleForm.get('contactInfo').get('upn').errors
-                              ) {
+                              @if (roleForm.get('contactInfo').get('upn').errors) {
                                 <span class="text-red-400">{{ 'pages.admin.projects.form.roles.upnError' | translate }}</span>
                               }
                             </div>
                           </div>
                           <div class="mt-3 mb-3 xl:w-96">
-                            <label>{{ 'pages.admin.projects.form.roles.email' | translate }}</label>
+                            <label
+                              ><span class="text-red-800 dark:text-red-300">*</span> {{ 'pages.admin.projects.form.roles.email' | translate }}</label
+                            >
                             <input
                               class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5
-                                text-base font-normal text-gray-600 transition ease-in-out focus:bg-white focus:text-gray-700 focus:outline-none
-                                dark:bg-gray-700 dark:text-white"
+                                text-base font-normal text-gray-600 transition ease-in-out focus:text-gray-700 focus:outline-none dark:bg-black
+                                dark:text-gray-300"
                               type="email"
                               aria-describedby="email-help"
                               pInputText
                               formControlName="email"
                             />
                             <div class="flex flex-col">
-                              @if (
-                                !roleForm.get('contactInfo').get('email').pristine &&
-                                roleForm.get('contactInfo').get('email').touched &&
-                                roleForm.get('contactInfo').get('email').dirty &&
-                                roleForm.get('contactInfo').get('email').errors
-                              ) {
+                              @if (roleForm.get('contactInfo').get('email').errors) {
                                 <span class="text-red-400">{{ 'pages.admin.projects.form.roles.emailError' | translate }}</span>
                               }
                             </div>
                           </div>
                           <div class="mt-3 mb-3 xl:w-96">
-                            <label>{{ 'pages.admin.projects.form.roles.phone' | translate }}</label>
+                            <label
+                              ><span class="text-red-800 dark:text-red-300">*</span> {{ 'pages.admin.projects.form.roles.phone' | translate }}</label
+                            >
                             <input
                               class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5
-                                text-base font-normal text-gray-600 transition ease-in-out focus:bg-white focus:text-gray-700 focus:outline-none
-                                dark:bg-gray-700 dark:text-white"
+                                text-base font-normal text-gray-600 transition ease-in-out focus:text-gray-700 focus:outline-none dark:bg-black
+                                dark:text-gray-300"
                               type="text"
                               aria-describedby="phone-help"
                               pInputText
                               formControlName="phone"
                             />
                             <div class="flex flex-col">
-                              @if (
-                                !roleForm.get('contactInfo').get('phone').pristine &&
-                                roleForm.get('contactInfo').get('phone').touched &&
-                                roleForm.get('contactInfo').get('phone').dirty &&
-                                roleForm.get('contactInfo').get('phone').errors
-                              ) {
-                                <span class="text-red-400">{{ 'pages.admin.projects.form.phoneError' | translate }}</span>
+                              @if (roleForm.get('contactInfo').get('phone').errors) {
+                                <span class="text-red-400">{{ 'pages.admin.projects.form.roles.phoneError' | translate }}</span>
                               }
                             </div>
                           </div>
@@ -299,8 +283,8 @@
                       >
                       <input
                         class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5
-                          text-base font-normal text-gray-600 transition ease-in-out focus:bg-white focus:text-gray-700 focus:outline-none
-                          dark:bg-gray-700 dark:text-white"
+                          text-base font-normal text-gray-600 transition ease-in-out focus:text-gray-700 focus:outline-none dark:bg-black
+                          dark:text-gray-300"
                         type="text"
                         aria-describedby="workorder-help"
                         pInputText
@@ -327,8 +311,8 @@
                     <label> {{ 'pages.clusters.details.edit.form.serviceTags' | translate }}</label>
                     <div class="flex gap-3">
                       <input
-                        class="rounded-lg border-1 border-gray-300 text-lg text-gray-800 focus:bg-white focus:outline-none dark:border-gray-600
-                          dark:bg-gray-700 dark:text-gray-800"
+                        class="rounded-lg border border-gray-300 text-lg text-gray-800 focus:outline-none dark:border-gray-600 dark:bg-black
+                          dark:text-gray-300"
                         type="text"
                         formControlName="tag"
                         minlength="2"
@@ -346,8 +330,8 @@
                     </div>
                     <div class="mt-3 flex gap-3">
                       @for (tag of tags; track tag) {
-                        <p-chip [removable]="true" (onRemove)="removeTag(tag)" [ngClass]="'bg-' + getColorByText(tag)">
-                          <div [ngClass]="'bg-' + getColorByText(tag)">{{ tag }}</div>
+                        <p-chip [removable]="true" (onRemove)="removeTag(tag)">
+                          <div>{{ tag }}</div>
                         </p-chip>
                       }
                     </div>
@@ -359,9 +343,9 @@
                 <div class="mt-3 mb-3">
                   <label> {{ 'pages.clusters.details.edit.form.description' | translate }}</label>
                   <textarea
-                    class="form-control m-0 block h-120 w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5
-                      text-base font-normal text-gray-600 transition ease-in-out focus:bg-white focus:text-gray-700 focus:outline-none
-                      dark:bg-gray-700 dark:text-white"
+                    class="form-control m-0 block h-120 w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding p-2 px-3 py-1.5
+                      text-base font-normal text-gray-600 transition ease-in-out focus:text-gray-700 focus:outline-none dark:bg-black
+                      dark:text-gray-300"
                     type="text"
                     aria-describedby="description-help"
                     pInputTextarea
@@ -425,7 +409,8 @@
         </div>
       </div>
     </div>
-    @if (environment?.production === false) {
+
+    @if (!environment?.production) {
       <div class="dark:bg-darker flex justify-between rounded-md bg-white p-4">
         <div class="dark:bg-darker rounded-md bg-white">
           <div class="relative flex flex-col p-3">

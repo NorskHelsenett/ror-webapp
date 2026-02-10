@@ -1,6 +1,11 @@
 <div [formGroup]="formGroup">
   @if (override) {
-    <input class="m-3 w-full border bg-gray-800 p-5 dark:bg-gray-700" type="text" [formControlName]="controlName" placeholder="{{ placeholder }}" />
+    <input
+      class="m-3 w-full border bg-gray-800 p-5 dark:bg-black dark:text-gray-300"
+      type="text"
+      [formControlName]="controlName"
+      placeholder="{{ placeholder }}"
+    />
   }
   @if (!override) {
     <p-select

@@ -97,6 +97,7 @@ export class ClusterDetailsComponent implements OnInit, OnDestroy, AfterContentI
   activeTabIndex: string | number = 0;
 
   selectedTabIndex: number = 0;
+  metadataStartInEdit = false;
   adminOwner$: Observable<boolean> | undefined;
   aclFetchError: any;
 
@@ -343,8 +344,9 @@ export class ClusterDetailsComponent implements OnInit, OnDestroy, AfterContentI
     }
   }
 
-  setTab(index: number): void {
+  setTab(index: number, editMetadata = false): void {
     if (isPlatformBrowser(this.platformId)) {
+      this.metadataStartInEdit = editMetadata;
       this.activeTabIndex = index;
       this.switchTab();
       // Use setTimeout to ensure the components in the tab are initialized after the tab change

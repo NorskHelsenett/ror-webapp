@@ -75,16 +75,8 @@
                     <td class="px-2 py-1">{{ 'pages.clusters.details.metadata.tags' | translate }}</td>
                     <td class="px-2 py-1 font-bold">
                       @for (tag of tags; track tag) {
-                        <p-tag styleClass="mr-1 mt-1" class="">{{ tag }}</p-tag>
+                        <p-tag class="mt-1 mr-1">{{ tag }}</p-tag>
                       }
-                    </td>
-                  </tr>
-                  <tr class="">
-                    <td class="px-2 py-1 align-top">{{ 'pages.clusters.details.metadata.description' | translate }}</td>
-                    <td class="">
-                      <div class="dark:text-light p-3 whitespace-pre-line text-gray-800">
-                        {{ cluster?.metadata?.description }}
-                      </div>
                     </td>
                   </tr>
                   <tr>
@@ -96,7 +88,15 @@
                             <div class="rounded-lg border border-gray-300">
                               <div class="px-1 py-4">
                                 <div class="mb-2">
-                                  <span class="text-2xl">{{ role?.roleDefinition }}</span>
+                                  <span class="text-2xl">
+                                    @if (role?.roleDefinition) {
+                                      {{
+                                        'pages.admin.projects.form.roles.availableRoles.' + getRoleTranslationKey(role?.roleDefinition) | translate
+                                      }}
+                                    } @else {
+                                      {{ 'common.unknown' | translate }}
+                                    }
+                                  </span>
                                 </div>
                                 <table class="table-auto">
                                   <tbody>
@@ -120,7 +120,7 @@
                                       <td class="text-sm">{{ 'pages.clusters.details.metadata.phone' | translate }}:</td>
                                     </tr>
                                     <tr>
-                                      <td class="pl-3 text-lg break-words">
+                                      <td class="pl-3 text-lg wrap-break-word">
                                         @if (role?.contactInfo?.phone?.length > 0) {
                                           <a href="tel:{{ role?.contactInfo?.phone }}"> {{ role?.contactInfo?.phone }}</a>
                                         }
@@ -132,6 +132,14 @@
                             </div>
                           </div>
                         }
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="px-2 py-1 align-top">{{ 'pages.clusters.details.metadata.description' | translate }}</td>
+                    <td class="">
+                      <div class="dark:text-light h-120 p-3 whitespace-pre-line text-gray-800">
+                        {{ cluster?.metadata?.description }}
                       </div>
                     </td>
                   </tr>

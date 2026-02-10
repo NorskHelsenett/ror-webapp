@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { ClusterService } from '../../services';
 
 import { TranslateModule } from '@ngx-translate/core';
@@ -17,15 +17,16 @@ import { ClusterDetailsEditComponent } from '../cluster-details-edit/cluster-det
 })
 export class ClusterMetadataPageComponent implements OnInit {
   private clusterService = inject(ClusterService);
-  private changeDetector = inject(ChangeDetectorRef);
 
   @Input() cluster: any;
+  @Input() startInEdit = false;
   @Output() refreshRequested = new EventEmitter<void>();
   edit = false;
 
   tags: string[] = [];
 
   ngOnInit(): void {
+    this.edit = this.startInEdit;
     this.tags = this.clusterService.fillTags(this.cluster.metadata?.serviceTags || this.cluster.metadata?.project?.projectMetadata?.serviceTags);
   }
 
@@ -34,9 +35,22 @@ export class ClusterMetadataPageComponent implements OnInit {
   }
 
   onUpdateOk(event: boolean): void {
-    if (event) {
-      this.toggleEdit();
-      this.refreshRequested.emit();
+    this.toggleEdit();
+    this.refreshRequested.emit();
+  }
+
+  getRoleTranslationKey(roleDefinition: string): string {
+    // to lowercase to handle any case variations and ensure matching
+    const value = roleDefinition.toLowerCase();
+    switch (value) {
+      case 'owner':
+        return 'owner';
+      case 'responsible':
+        return 'responsible';
+      case 'technicalcontact':
+        return 'technicalContact';
+      default:
+        return 'unknown';
     }
   }
 }

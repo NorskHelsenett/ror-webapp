@@ -1,6 +1,5 @@
-import { isPlatformBrowser, Location } from '@angular/common';
-import { Component, EventEmitter, Inject, inject, Input, Output, PLATFORM_ID } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
@@ -12,16 +11,9 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class ClusterDescriptionComponent {
   @Input() cluster: any;
-  @Output() edit = new EventEmitter<string>();
-
-  loc = inject(Location);
-  router = inject(Router);
-
-  constructor(@Inject(PLATFORM_ID) private platformId: object) {}
+  @Output() edit = new EventEmitter<void>();
 
   editRequested(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      this.router.navigate([`/cluster/${this.cluster.clusterId}?tab=metadata`]);
-    }
+    this.edit.emit();
   }
 }
