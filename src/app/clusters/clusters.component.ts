@@ -203,6 +203,12 @@ export class ClustersComponent implements OnInit, OnDestroy {
       ];
       this.cols = this.baseCols.concat([
         {
+          field: 'clusterId',
+          header: 'clusterId',
+          searchEN: 'clusterid',
+          searchNO: 'clusterid',
+        },
+        {
           field: 'firstObserved',
           header: 'firstObserved',
           searchEN: 'first heartbeat',

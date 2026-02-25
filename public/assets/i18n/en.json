@@ -1156,6 +1156,7 @@
           "status": "Status",
           "name": "Name",
           "clusterName": "Cluster name",
+          "clusterId": "Cluster id",
           "projectName": "Project name",
           "workspace": "Workspace",
           "datacenter": "Datacenter",
