@@ -133,6 +133,15 @@
                         [matchModeOptions]="matchModeOptions"
                       ></p-columnFilter>
                     }
+                    @if (col.field === 'clusterId') {
+                      <p-columnFilter
+                        type="text"
+                        [field]="col.field"
+                        matchMode="contains"
+                        [showMenu]="true"
+                        [matchModeOptions]="matchModeOptions"
+                      ></p-columnFilter>
+                    }
                     @if (col.field === 'metadata.project.name') {
                       <p-columnFilter type="text" [field]="col.field" matchMode="contains" [showMenu]="false"></p-columnFilter>
                     }
@@ -286,7 +295,14 @@
                         <a
                           class="ml-2 cursor-pointer hover:text-blue-800 hover:underline dark:hover:text-blue-400"
                           [routerLink]="['./cluster', cluster.clusterId]"
-                          >{{ cluster?.clusterName }}</a
+                          >{{ cluster?.clusterName || cluster?.clusterId }}</a
+                        >
+                      }
+                      @case ('clusterId') {
+                        <a
+                          class="ml-2 cursor-pointer hover:text-blue-800 hover:underline dark:hover:text-blue-400"
+                          [routerLink]="['./cluster', cluster.clusterId]"
+                          >{{ cluster?.clusterId }}</a
                         >
                       }
                       @case ('metadata.project.name') {

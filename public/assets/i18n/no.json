@@ -1158,6 +1158,7 @@
           "status": "Status",
           "name": "Navn",
           "clusterName": "Clusternavn",
+          "clusterId": "Cluster id",
           "projectName": "Prosjektnavn",
           "workspace": "Arbeidsområde",
           "datacenter": "Datasenter",
