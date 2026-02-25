@@ -49,7 +49,7 @@ jobs:
       - name: Use node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22.x'
+          node-version: '24.x'
       - name: Build webapp
         run: |
           echo "Building ${{ env.APP }} ${{ needs.setenv.outputs.rorversion}} (${{ needs.setenv.outputs.shortsha}})"

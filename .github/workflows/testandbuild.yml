@@ -16,7 +16,13 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22.x'
-      - run: npm ci
+          node-version: '24.x'
+          cache: 'npm'
+      - name: Run npm ci
+        run: npm ci
+        env:
+          npm_config_fetch_retries: 5
+          npm_config_fetch_retry_mintimeout: 15000
+          npm_config_fetch_retry_maxtimeout: 120000
       - run: npm run checkformat
       - run: npm run build:prod
