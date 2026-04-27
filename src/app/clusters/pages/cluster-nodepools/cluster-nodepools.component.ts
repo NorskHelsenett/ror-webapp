@@ -97,7 +97,7 @@ export class ClusterNodepoolsComponent implements OnInit, OnDestroy {
           this.clusterResource = data?.resources[0];
           this.loadedFromResources = true;
           this.isNodepoolEditable = this.providerFeaturesService.isNodePoolEditable(
-            this.clusterResource?.kubernetescluster?.spec?.topology?.workers?.nodePools[0]?.provider,
+            this.clusterResource?.kubernetescluster?.spec?.vitiSpec?.topology?.workers?.nodePools[0]?.provider,
             this.cluster?.versions?.kubernetes || '',
           );
           return this.clusterResource;
@@ -139,13 +139,13 @@ export class ClusterNodepoolsComponent implements OnInit, OnDestroy {
         return;
       }
       let updatedResourceSet = this.clusterResourceSet;
-      let nodepoolList = resourceSet.resources[0]?.kubernetescluster?.spec?.topology?.workers?.nodePools || [];
-      const index = this.clusterResourceSet?.resources[0]?.kubernetescluster?.spec?.topology?.workers?.nodePools.findIndex(
+      let nodepoolList = resourceSet.resources[0]?.kubernetescluster?.spec?.vitiSpec?.topology?.workers?.nodePools || [];
+      const index = this.clusterResourceSet?.resources[0]?.kubernetescluster?.spec?.vitiSpec?.topology?.workers?.nodePools.findIndex(
         (np) => np.name === nodePool?.name,
       );
 
       nodepoolList.splice(index, 1);
-      updatedResourceSet.resources[0].kubernetescluster.spec.topology.workers.nodePools = nodepoolList;
+      updatedResourceSet.resources[0].kubernetescluster.spec.vitiSpec.topology.workers.nodePools = nodepoolList;
       this.subscriptions.add(
         this.resourcesv2Service
           .updateResourceSet(this.clusterResource?.metadata?.uid, updatedResourceSet)
@@ -175,7 +175,7 @@ export class ClusterNodepoolsComponent implements OnInit, OnDestroy {
   }
 
   setNodepools(clusterResource: Resource): void {
-    this.nodepools = clusterResource?.kubernetescluster?.spec?.topology?.workers?.nodePools || [];
+    this.nodepools = clusterResource?.kubernetescluster?.spec?.vitiSpec?.topology?.workers?.nodePools || [];
     if (!this.nodepools) {
       this.nodepools = [];
     }
@@ -226,13 +226,13 @@ export class ClusterNodepoolsComponent implements OnInit, OnDestroy {
         }
 
         let updatedResourceSet = this.clusterResourceSet;
-        let nodepoolList = resourceSet.resources[0]?.kubernetescluster?.spec?.topology?.workers?.nodePools || [];
-        const index = this.clusterResourceSet?.resources[0]?.kubernetescluster?.spec?.topology?.workers?.nodePools.findIndex(
+        let nodepoolList = resourceSet.resources[0]?.kubernetescluster?.spec?.vitiSpec?.topology?.workers?.nodePools || [];
+        const index = this.clusterResourceSet?.resources[0]?.kubernetescluster?.spec?.vitiSpec?.topology?.workers?.nodePools.findIndex(
           (np) => np.name === nodePoolChange?.previousNodePool?.name,
         );
         if (index !== -1) {
           nodepoolList[index] = nodePoolChange.nodePool;
-          updatedResourceSet.resources[0].kubernetescluster.spec.topology.workers.nodePools = nodepoolList;
+          updatedResourceSet.resources[0].kubernetescluster.spec.vitiSpec.topology.workers.nodePools = nodepoolList;
           this.subscriptions.add(
             this.resourcesv2Service
               .updateResourceSet(this.clusterResource?.metadata?.uid, updatedResourceSet)
@@ -260,7 +260,7 @@ export class ClusterNodepoolsComponent implements OnInit, OnDestroy {
           );
         } else {
           nodepoolList.push(nodePoolChange?.nodePool);
-          updatedResourceSet.resources[0].kubernetescluster.spec.topology.workers.nodePools = nodepoolList;
+          updatedResourceSet.resources[0].kubernetescluster.spec.vitiSpec.topology.workers.nodePools = nodepoolList;
           this.subscriptions.add(
             this.resourcesv2Service
               .updateResourceSet(this.clusterResource?.metadata?.uid, updatedResourceSet)
