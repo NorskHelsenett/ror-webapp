@@ -1110,7 +1110,9 @@
           "fixedVersion": "Fixed version",
           "description": "Description",
           "artifactRepository": "Repository",
-          "artifactTag": "Tag"
+          "artifactTag": "Tag",
+          "useNew": "Use new version",
+          "useOld": "Use old version"
         },
         "compliancereports": {
           "title": "Compliance reports",
