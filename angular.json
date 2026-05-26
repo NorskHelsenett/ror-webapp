@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
-            "allowedCommonJsDependencies": ["dayjs", "dayjs/locale/nb", "dayjs/locale/en", "file-saver", "event-source-polyfill", "exceljs"],
+            "allowedCommonJsDependencies": ["dayjs", "dayjs/locale/nb", "dayjs/locale/en", "file-saver", "event-source-polyfill"],
             "outputPath": "dist/ror-webapp",
             "index": "src/index.html",
             "browser": "src/main.ts",
