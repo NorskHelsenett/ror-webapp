@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import * as FileSaver from 'file-saver';
 import { MessageService } from 'primeng/api';
-import * as ExcelJS from 'exceljs';
-import { saveAs } from 'file-saver';
+import writeExcelFile, { CellObject, Row } from 'write-excel-file/browser';
 
 @Injectable({
   providedIn: 'root',
@@ -43,23 +42,32 @@ export class ExportService {
       return;
     }
 
-    const workbook = new ExcelJS.Workbook();
-    const worksheet = workbook.addWorksheet('Sheet 1');
-
     const headers = Object.keys(data[0]);
-    worksheet.addRow(headers);
+    const headerRow: Row = headers.map((header) => ({ value: header, fontWeight: 'bold', type: String }));
+    const rows: Row[] = data.map((item) => headers.map((header) => this.toCell(item[header])));
 
-    data.forEach((item) => {
-      const row = [];
-      headers.forEach((header) => {
-        row.push(item[header]);
+    const fileName = filename.toLowerCase().endsWith('.xlsx') ? filename : `${filename}.xlsx`;
+    writeExcelFile([headerRow, ...rows], { sheet: 'Sheet 1' })
+      .toFile(fileName)
+      .catch(() => {
+        this.messageService.add({
+          severity: 'error',
+          summary: this.translateService.instant('shared.export.errorSummary'),
+          detail: this.translateService.instant('shared.export.errorDetail'),
+        });
       });
-      worksheet.addRow(row);
-    });
+  }
 
-    workbook.xlsx.writeBuffer().then((buffer) => {
-      const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-      saveAs(blob, `${filename}.xlsx`);
-    });
+  private toCell(value: any): CellObject {
+    if (value === null || value === undefined) {
+      return { value: '', type: String };
+    }
+    if (typeof value === 'number' && Number.isFinite(value)) {
+      return { value, type: Number };
+    }
+    if (typeof value === 'boolean') {
+      return { value, type: Boolean };
+    }
+    return { value: String(value), type: String };
   }
 }
