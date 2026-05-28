@@ -46,8 +46,9 @@ export class ExportService {
     const headerRow: Row = headers.map((header) => ({ value: header, fontWeight: 'bold', type: String }));
     const rows: Row[] = data.map((item) => headers.map((header) => this.toCell(item[header])));
 
+    const fileName = filename.toLowerCase().endsWith('.xlsx') ? filename : `${filename}.xlsx`;
     writeExcelFile([headerRow, ...rows], { sheet: 'Sheet 1' })
-      .toFile(`${filename}.xlsx`)
+      .toFile(fileName)
       .catch(() => {
         this.messageService.add({
           severity: 'error',
