@@ -12,7 +12,7 @@ import { PriceService } from '../../../core/services/price.service';
 import { ClusterEnvironment } from '../../../core/models/clusterEnvironment';
 import { ClustersService } from '../../../core/services/clusters.service';
 import ClusterNameValidator from '../../../shared/validators/clusterNameValidator';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { SpinnerComponent } from '../../../shared/components';
@@ -25,7 +25,7 @@ import { SelectModule } from 'primeng/select';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   standalone: true,
-  imports: [TranslateModule, CommonModule, InputNumberModule, FormsModule, ReactiveFormsModule, SelectModule, SpinnerComponent],
+  imports: [TranslatePipe, CommonModule, InputNumberModule, FormsModule, ReactiveFormsModule, SelectModule, SpinnerComponent],
 })
 export class ClusterNewComponent implements OnInit {
   clusterForm: FormGroup | undefined;

@@ -23,7 +23,7 @@ import { ClustersService } from '../../../core/services/clusters.service';
 import { ResourceType } from '../../../core/models/resources/resourceType';
 import { ResourceQuery } from '@rork8s/ror-resources/models';
 import { ClusterService } from '../../services';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
 import {
   ClusterACLComponent,
@@ -55,7 +55,7 @@ import { Tabs, TabsModule } from 'primeng/tabs';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
-    TranslateModule,
+    TranslatePipe,
     CommonModule,
     RouterModule,
     ClusterConditionsComponent,

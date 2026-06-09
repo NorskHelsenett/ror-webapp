@@ -74,7 +74,7 @@ export class AppComponent implements OnInit, OnDestroy {
     );
 
     this.translateService.addLangs(['en', 'no']);
-    this.translateService.setDefaultLang('no');
+    this.translateService.setFallbackLang('no');
 
     let lang = 'en';
     let userLang = '';

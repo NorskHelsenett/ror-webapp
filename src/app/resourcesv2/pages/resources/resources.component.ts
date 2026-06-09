@@ -1,6 +1,5 @@
 import { ResourcesV2QueryService } from './../../services/resources-v2-query.service';
 import { Component, inject, OnInit } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
 import { Resourcesv2FilterComponent } from '../../components/resourcesv2-filter/resourcesv2-filter.component';
 import { ClustersService } from '../../../core/services/clusters.service';
 import { catchError, Observable } from 'rxjs';
@@ -13,10 +12,11 @@ import { ResourcesV2ListComponent } from '../../components/resources-v2-list/res
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { DrawerModule } from 'primeng/drawer';
 import { ResourceV2DetailsComponent } from '../../components/resource-v2-details/resource-v2-details.component';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-resources',
-  imports: [CommonModule, TranslateModule, ResourcesV2ListComponent, Resourcesv2FilterComponent, AsyncPipe, DrawerModule, ResourceV2DetailsComponent],
+  imports: [TranslatePipe, CommonModule, ResourcesV2ListComponent, Resourcesv2FilterComponent, AsyncPipe, DrawerModule, ResourceV2DetailsComponent],
   templateUrl: './resources.component.html',
   styleUrl: './resources.component.scss',
 })

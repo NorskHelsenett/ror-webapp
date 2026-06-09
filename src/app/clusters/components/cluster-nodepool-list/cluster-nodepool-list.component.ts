@@ -1,7 +1,7 @@
 import { AsyncPipe, LowerCasePipe, TitleCasePipe } from '@angular/common';
 import { ConfigService } from './../../../core/services/config.service';
 import { Component, inject, Input, OnDestroy, OnInit, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { AclService } from '../../../core/services/acl.service';
@@ -12,7 +12,7 @@ import { FormatBytesPipe } from '../../../shared/pipes';
 
 @Component({
   selector: 'app-cluster-nodepool-list',
-  imports: [TranslateModule, TableModule, LowerCasePipe, TitleCasePipe, ButtonModule, AsyncPipe, TrueFalseComponent, FormatBytesPipe],
+  imports: [TranslatePipe, TableModule, LowerCasePipe, TitleCasePipe, ButtonModule, AsyncPipe, TrueFalseComponent, FormatBytesPipe],
   templateUrl: './cluster-nodepool-list.component.html',
   styleUrl: './cluster-nodepool-list.component.scss',
 })

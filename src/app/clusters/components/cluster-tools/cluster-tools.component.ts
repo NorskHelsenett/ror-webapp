@@ -1,7 +1,7 @@
 import { ClipboardService } from 'ngx-clipboard';
 import { Component, Input, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { Ingress } from '../../../core/models/ingress';
 
 @Component({
@@ -9,7 +9,7 @@ import { Ingress } from '../../../core/models/ingress';
   templateUrl: './cluster-tools.component.html',
   styleUrls: ['./cluster-tools.component.scss'],
   standalone: true,
-  imports: [TranslateModule],
+  imports: [TranslatePipe],
 })
 export class ClusterToolsComponent implements OnInit {
   @Input() cluster: any = undefined;

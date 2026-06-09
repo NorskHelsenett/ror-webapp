@@ -4,6 +4,6 @@ import { MissingTranslationHandler, MissingTranslationHandlerParams } from '@ngx
 @Injectable()
 export class CustomMissingTranslationHandler implements MissingTranslationHandler {
   handle(params: MissingTranslationHandlerParams) {
-    return `*missing (${params.translateService.currentLang}): ${params.key}*`;
+    return `*missing (${params.translateService.currentLang()}): ${params.key}*`;
   }
 }

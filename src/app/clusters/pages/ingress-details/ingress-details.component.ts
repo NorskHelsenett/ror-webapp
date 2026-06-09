@@ -3,7 +3,7 @@ import { Component, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrateg
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Observable, Subscription, tap, catchError } from 'rxjs';
 import { ClustersService } from '../../../core/services/clusters.service';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { ClusterIngressMetadataComponent, ClusterIngressRulesComponent } from '../../components';
 import { CommonModule } from '@angular/common';
 import { SpinnerComponent } from '../../../shared/components';
@@ -13,7 +13,7 @@ import { SpinnerComponent } from '../../../shared/components';
   templateUrl: './ingress-details.component.html',
   styleUrls: ['./ingress-details.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [TranslateModule, RouterModule, ClusterIngressMetadataComponent, ClusterIngressRulesComponent, CommonModule, SpinnerComponent],
+  imports: [TranslatePipe, RouterModule, ClusterIngressMetadataComponent, ClusterIngressRulesComponent, CommonModule, SpinnerComponent],
   standalone: true,
 })
 export class IngressDetailsComponent implements OnInit, OnDestroy {

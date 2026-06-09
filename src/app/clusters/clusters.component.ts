@@ -18,7 +18,7 @@ import { AclService } from '../core/services/acl.service';
 import { SignalService } from '../create/create-cluster/services/signal.service';
 import { ClusterEnvironment } from '../core/models/clusterEnvironment';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { RouterModule } from '@angular/router';
 import { TableModule } from 'primeng/table';
 import { MultiSelectModule } from 'primeng/multiselect';
@@ -36,7 +36,7 @@ import { STORAGE_KEYS } from '../core/constants/storage-keys';
   styleUrls: ['./clusters.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    TranslateModule,
+    TranslatePipe,
     CommonModule,
     RouterModule,
     TableModule,

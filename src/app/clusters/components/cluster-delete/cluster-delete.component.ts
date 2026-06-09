@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { ClipboardService } from 'ngx-clipboard';
 import { MessageService } from 'primeng/api';
 import { ResourcesService } from '../../../core/services/resources.service';
@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './cluster-delete.component.html',
   styleUrl: './cluster-delete.component.scss',
   standalone: true,
-  imports: [TranslateModule, CommonModule],
+  imports: [TranslatePipe, CommonModule],
 })
 export class ClusterDeleteComponent implements OnInit {
   @Input() cluster: any | undefined;

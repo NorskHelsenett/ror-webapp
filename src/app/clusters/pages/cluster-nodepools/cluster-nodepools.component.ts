@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { catchError, finalize, Observable, Subscription, tap } from 'rxjs';
 import { ClusterNodepoolListComponent } from '../../components/cluster-nodepool-list/cluster-nodepool-list.component';
 
@@ -15,7 +15,7 @@ import { ProviderFeaturesService } from '../../../core/services/provider-feature
 
 @Component({
   selector: 'app-cluster-nodepools',
-  imports: [TranslateModule, ClusterNodepoolListComponent, ClusterNodepoolCreateorupdateComponent, SpinnerComponent, AsyncPipe, LucideAngularModule],
+  imports: [TranslatePipe, ClusterNodepoolListComponent, ClusterNodepoolCreateorupdateComponent, SpinnerComponent, AsyncPipe, LucideAngularModule],
   templateUrl: './cluster-nodepools.component.html',
   styleUrl: './cluster-nodepools.component.scss',
 })

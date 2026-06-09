@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
-import { LangChangeEvent, TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslatePipe, LangChangeEvent, TranslateService } from '@ngx-translate/core';
 import { TreeNode } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import { ThemeService } from '../../../core/services/theme.service';
@@ -11,7 +11,7 @@ import { OrganizationChartModule } from 'primeng/organizationchart';
   styleUrls: ['./cluster-ingress-rules.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [TranslateModule, OrganizationChartModule],
+  imports: [TranslatePipe, OrganizationChartModule],
 })
 export class ClusterIngressRulesComponent implements OnInit {
   @Input() cluster: any = undefined;

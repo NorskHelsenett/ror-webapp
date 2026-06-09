@@ -5,13 +5,13 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { Router, ActivatedRoute } from '@angular/router';
 import { Datacenter } from '../../../../../core/models/datacenter';
 
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-admin-datacenter-create',
   templateUrl: './admin-datacenter-create.component.html',
   styleUrls: ['./admin-datacenter-create.component.scss'],
-  imports: [TranslateModule, FormsModule, ReactiveFormsModule],
+  imports: [TranslatePipe, FormsModule, ReactiveFormsModule],
 })
 export class AdminDatacenterCreateComponent implements OnInit, OnDestroy {
   datacenterForm: FormGroup | undefined;

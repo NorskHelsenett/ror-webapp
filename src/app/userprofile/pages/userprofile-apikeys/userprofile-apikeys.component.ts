@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, inject, Input, OnInit } from '@angular/core';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { ConfirmationService, LazyLoadEvent, MessageService } from 'primeng/api';
 import { Observable, Subscription, catchError, finalize, share, tap } from 'rxjs';
 import { FilterService } from '../../../core/services/filter.service';
@@ -19,7 +19,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
   selector: 'app-userprofile-apikeys',
   templateUrl: './userprofile-apikeys.component.html',
   styleUrls: ['./userprofile-apikeys.component.scss'],
-  imports: [TranslateModule, CommonModule, UserprofileCreateApikeyComponent, TableModule, TimePipe, SpinnerComponent, ConfirmDialogModule],
+  imports: [TranslatePipe, CommonModule, UserprofileCreateApikeyComponent, TableModule, TimePipe, SpinnerComponent, ConfirmDialogModule],
 })
 export class UserprofileApikeysComponent implements OnInit {
   private configService = inject(ConfigService);

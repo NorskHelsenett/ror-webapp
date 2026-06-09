@@ -2,7 +2,7 @@ import { ToggleButtonModule } from 'primeng/togglebutton';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LangChangeEvent, TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslatePipe, LangChangeEvent, TranslateService } from '@ngx-translate/core';
 import { catchError, Subscription, tap } from 'rxjs';
 import { environment } from '../../../../../../environments/environment';
 import { Project } from '../../../../../core/models/project';
@@ -19,7 +19,7 @@ import { HexService } from '../../../../../core/services/hex.service';
   templateUrl: './projects-create.component.html',
   styleUrls: ['./projects-create.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [TranslateModule, CommonModule, FormsModule, ReactiveFormsModule, ToggleButtonModule, SelectModule, ChipModule, NgClass],
+  imports: [TranslatePipe, CommonModule, FormsModule, ReactiveFormsModule, ToggleButtonModule, SelectModule, ChipModule, NgClass],
 })
 export class ProjectsCreateComponent implements OnInit, OnDestroy {
   private configService = inject(ConfigService);

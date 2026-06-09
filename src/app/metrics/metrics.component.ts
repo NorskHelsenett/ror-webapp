@@ -6,17 +6,17 @@ import { Dialog, DialogModule } from 'primeng/dialog';
 import { MetricsService } from '../core/services/metrics.service';
 import { ThemeService } from '../core/services/theme.service';
 import { HydrationService } from '../core/services/hydration.service';
-import { TranslateModule } from '@ngx-translate/core';
 import { isPlatformBrowser } from '@angular/common';
 
 import { ChartModule } from 'primeng/chart';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-metrics',
   templateUrl: './metrics.component.html',
   styleUrls: ['./metrics.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [TranslateModule, ChartModule, DialogModule],
+  imports: [TranslatePipe, ChartModule, DialogModule],
 })
 export class MetricsComponent implements OnInit, OnDestroy {
   private hydrationService = inject(HydrationService);

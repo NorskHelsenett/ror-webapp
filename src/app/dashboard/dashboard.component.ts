@@ -1,5 +1,5 @@
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { LangChangeEvent, TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslatePipe, LangChangeEvent, TranslateService } from '@ngx-translate/core';
 import { MetricsTotal } from '../core/models/metricsTotal';
 import { ThemeService } from '../core/services/theme.service';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
@@ -33,7 +33,7 @@ import { SpinnerComponent } from '../shared/components';
   styleUrls: ['./dashboard.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    TranslateModule,
+    TranslatePipe,
     TableModule,
     RouterModule,
     LowerCasePipe,
@@ -311,7 +311,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   timeSince(date: string): string {
-    return dayjs(date).locale(this.translateService.currentLang).fromNow();
+    return dayjs(date)
+      .locale(this.translateService.currentLang() ?? undefined)
+      .fromNow();
   }
 
   deleteOrder(orderUid: any): void {

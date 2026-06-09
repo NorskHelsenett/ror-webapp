@@ -1,7 +1,7 @@
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, inject, Input, model, OnDestroy, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input, model, OnDestroy, OnInit } from '@angular/core';
 import { tap, Subscription, Observable, catchError, map } from 'rxjs';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 import { WorkspacesService } from '../../../../core/services/workspaces.service';
 import { ClusterFormService } from '../../services/cluster-form.service';
@@ -13,17 +13,17 @@ import { Workspace } from '../../../../core/models/workspace';
 import { ProjectService } from '../../../../core/services/project.service';
 import { ProvidersService } from '../../../../core/services/providers.service';
 import { Provider } from '../../../../core/models/provider';
-import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { ProviderComponent } from '../../../../shared/components/provider/provider.component';
 import { SelectModule } from 'primeng/select';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-location-step',
   templateUrl: './location-step.component.html',
   styleUrls: ['./location-step.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [TranslateModule, CommonModule, RouterModule, FormsModule, ReactiveFormsModule, SelectModule, ProviderComponent],
+  imports: [TranslatePipe, CommonModule, RouterModule, FormsModule, ReactiveFormsModule, SelectModule, ProviderComponent],
 })
 export class LocationStepComponent implements OnInit, OnDestroy {
   private clusterFormService = inject(ClusterFormService);

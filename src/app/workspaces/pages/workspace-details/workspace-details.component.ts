@@ -8,19 +8,19 @@ import { MetricsService } from '../../../core/services/metrics.service';
 import { UserService } from '../../../core/services/user.service';
 import { ConfigService } from '../../../core/services/config.service';
 import { PaginationResult } from '../../../core/models/paginatedResult';
-import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { FormatBytesPipe } from '../../../shared/pipes';
 import { ClusterStatusComponent, SpinnerComponent } from '../../../shared/components';
 import { IconSortAscComponent, IconSortDescComponent } from '../../../shared/icons';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-workspace-details',
   templateUrl: './workspace-details.component.html',
   styleUrls: ['./workspace-details.component.scss'],
   imports: [
-    TranslateModule,
+    TranslatePipe,
     CommonModule,
     FormatBytesPipe,
     SpinnerComponent,

@@ -6,4 +6,4 @@ WORKDIR /app
 # this file is not used in production, but is kept for reference
 COPY nginx/http_prod.conf /etc/nginx/conf.d/default.conf
 
-COPY dist/ror-webapp /app
+COPY dist/ror-webapp/browser /app

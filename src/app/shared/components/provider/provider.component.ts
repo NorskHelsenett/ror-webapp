@@ -1,10 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
-  imports: [CommonModule, TranslateModule],
+  imports: [TranslatePipe, CommonModule],
   selector: 'app-provider',
   templateUrl: './provider.component.html',
   styleUrls: ['./provider.component.scss'],

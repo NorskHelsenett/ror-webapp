@@ -1,4 +1,4 @@
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { MessageService } from 'primeng/api';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, inject, Input, model, OnInit, Output } from '@angular/core';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -18,7 +18,7 @@ import { SummaryComponent } from '../summary/summary.component';
   templateUrl: './summary-step.component.html',
   styleUrls: ['./summary-step.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [TranslateModule, RouterModule, FormsModule, ReactiveFormsModule, SummaryComponent],
+  imports: [TranslatePipe, RouterModule, FormsModule, ReactiveFormsModule, SummaryComponent],
 })
 export class SummaryStepComponent implements OnInit {
   private clusterFormService = inject(ClusterFormService);

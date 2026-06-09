@@ -1,7 +1,7 @@
 import { ClusterFormService } from './services/cluster-form.service';
 import { Subscription, tap } from 'rxjs';
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ChangeDetectorRef, inject } from '@angular/core';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { environment } from '../../../environments/environment';
@@ -17,7 +17,7 @@ import { ButtonModule } from 'primeng/button';
   styleUrls: ['./create-cluster.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    TranslateModule,
+    TranslatePipe,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,

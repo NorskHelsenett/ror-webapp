@@ -3,7 +3,7 @@ import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Va
 import { ResourcesService } from '../../../core/services/resources.service';
 import { catchError, Observable, tap } from 'rxjs';
 import { Resource, ResourceRoute, ResourceSet } from '@rork8s/ror-resources/models';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { SelectModule } from 'primeng/select';
 
@@ -12,7 +12,7 @@ import { SelectModule } from 'primeng/select';
   templateUrl: './cluster-notifications-form.component.html',
   styleUrl: './cluster-notifications-form.component.scss',
   standalone: true,
-  imports: [TranslateModule, CommonModule, FormsModule, SelectModule, ReactiveFormsModule],
+  imports: [TranslatePipe, CommonModule, FormsModule, SelectModule, ReactiveFormsModule],
 })
 export class ClusterNotificationsFormComponent implements OnInit {
   @Input() resource: Resource;

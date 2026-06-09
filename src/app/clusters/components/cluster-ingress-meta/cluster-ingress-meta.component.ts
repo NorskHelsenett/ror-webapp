@@ -5,13 +5,13 @@ import { HighlightModule } from 'ngx-highlightjs';
 import { HealthStatus } from '../../../core/models/healthstatus';
 import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { RouterModule } from '@angular/router';
 import { ClusterStatusComponent } from '../../../shared/components';
 
 @Component({
   selector: 'app-cluster-ingress-meta',
-  imports: [CommonModule, HighlightModule, TableModule, TranslateModule, RouterModule, ClusterStatusComponent],
+  imports: [TranslatePipe, CommonModule, HighlightModule, TableModule, RouterModule, ClusterStatusComponent],
   templateUrl: './cluster-ingress-meta.component.html',
   styleUrl: './cluster-ingress-meta.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

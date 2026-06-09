@@ -1,11 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ResourceTableComponent } from '../../components/resource-table/resource-table.component';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-resources',
-  imports: [TranslateModule, ResourceTableComponent],
-  providers: [],
+  imports: [TranslatePipe, ResourceTableComponent],
   templateUrl: './resources.component.html',
   styleUrl: './resources.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -10,7 +10,7 @@ import { AuditlogService } from '../../../core/services/auditlog.service';
 import { ConfigService } from '../../../core/services/config.service';
 import { TableModule } from 'primeng/table';
 import { AsyncPipe, CommonModule } from '@angular/common';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
@@ -24,9 +24,9 @@ import { HighlightModule } from 'ngx-highlightjs';
   styleUrls: ['./admin-auditlogs.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
+    TranslatePipe,
     TableModule,
     AsyncPipe,
-    TranslateModule,
     MultiSelectModule,
     CommonModule,
     FormsModule,

@@ -1,4 +1,4 @@
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { catchError, finalize, Observable, share, Subscription } from 'rxjs';
@@ -24,7 +24,7 @@ import { SelectModule } from 'primeng/select';
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [TranslateModule, CommonModule, RouterModule, TableModule, SelectModule, FormsModule, ReactiveFormsModule, TimePipe, ConfirmDialogModule],
+  imports: [TranslatePipe, CommonModule, RouterModule, TableModule, SelectModule, FormsModule, ReactiveFormsModule, TimePipe, ConfirmDialogModule],
 })
 export class ProjectsComponent implements OnInit {
   private configService = inject(ConfigService);

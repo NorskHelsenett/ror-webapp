@@ -6,15 +6,15 @@ import { WorkspacesService } from '../../../core/services/workspaces.service';
 import { Workspace } from '../../../core/models/workspace';
 import { Project } from '../../../core/models/project';
 import { ProjectService } from '../../../core/services/project.service';
-import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { SelectModule } from 'primeng/select';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-workspace-new',
   templateUrl: './workspace-new.component.html',
   styleUrls: ['./workspace-new.component.scss'],
-  imports: [TranslateModule, CommonModule, FormsModule, ReactiveFormsModule, SelectModule],
+  imports: [TranslatePipe, CommonModule, FormsModule, ReactiveFormsModule, SelectModule],
 })
 export class WorkspaceNewComponent implements OnInit, OnDestroy {
   form: FormGroup;

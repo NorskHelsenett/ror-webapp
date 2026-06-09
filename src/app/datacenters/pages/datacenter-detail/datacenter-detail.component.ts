@@ -5,12 +5,12 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Filter } from '../../../core/models/apiFilter';
 import { PaginationResult } from '../../../core/models/paginatedResult';
 import { ConfigService } from '../../../core/services/config.service';
-import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { FormatBytesPipe } from '../../../shared/pipes';
 import { SpinnerComponent } from '../../../shared/components';
 import { IconSortAscComponent, IconSortDescComponent } from '../../../shared/icons';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-datacenter-detail',
@@ -18,7 +18,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   styleUrls: ['./datacenter-detail.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    TranslateModule,
+    TranslatePipe,
     CommonModule,
     FormatBytesPipe,
     SpinnerComponent,

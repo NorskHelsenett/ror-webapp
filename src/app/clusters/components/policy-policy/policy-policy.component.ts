@@ -1,6 +1,6 @@
 import { PolicyBarComponent } from './../policy-bar/policy-bar.component';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { Table, TableModule } from 'primeng/table';
 import { Subscription } from 'rxjs';
 import { ConfigService } from '../../../core/services/config.service';
@@ -15,7 +15,7 @@ import { PolicyResultComponent } from '../policy-result/policy-result.component'
   templateUrl: './policy-policy.component.html',
   styleUrls: ['./policy-policy.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [TranslateModule, PolicyBarComponent, TableModule, MultiSelectModule, FormsModule, ButtonModule, TagModule, PolicyResultComponent],
+  imports: [TranslatePipe, PolicyBarComponent, TableModule, MultiSelectModule, FormsModule, ButtonModule, TagModule, PolicyResultComponent],
 })
 export class PolicyPolicyComponent implements OnInit {
   private configService = inject(ConfigService);

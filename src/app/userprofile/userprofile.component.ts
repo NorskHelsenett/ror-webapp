@@ -4,16 +4,16 @@ import { Component, OnInit, ChangeDetectorRef, OnDestroy, Inject, PLATFORM_ID, V
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { Subscription } from 'rxjs';
-import { TranslateModule } from '@ngx-translate/core';
 import { UserprofileApikeysComponent } from './pages';
 import { Tabs, TabsModule } from 'primeng/tabs';
 import { LucideAngularModule, UserIcon, KeyIcon } from 'lucide-angular';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-userprofile',
   templateUrl: './userprofile.component.html',
   styleUrls: ['./userprofile.component.scss'],
-  imports: [TranslateModule, TabsModule, UserprofileDetailsComponent, UserprofileApikeysComponent, LucideAngularModule, RouterModule, NgClass],
+  imports: [TranslatePipe, TabsModule, UserprofileDetailsComponent, UserprofileApikeysComponent, LucideAngularModule, RouterModule, NgClass],
 })
 export class UserprofileComponent implements OnInit, OnDestroy, AfterViewInit {
   readonly userIcon = UserIcon;

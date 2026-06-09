@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Input, OnInit, ChangeDetectorRef, i
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClusterFormService } from '../../services/cluster-form.service';
 import { Observable, tap, Subscription } from 'rxjs';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { ClusterCapasity } from '../../../../clusters/models/clusterCapasity';
 import { ClusterEnvironment } from '../../../../core/models/clusterEnvironment';
 import { Price } from '../../../../core/models/price';
@@ -20,7 +20,7 @@ import { SelectModule } from 'primeng/select';
   templateUrl: './resources-step.component.html',
   styleUrls: ['./resources-step.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [TranslateModule, CommonModule, FormsModule, ReactiveFormsModule, SelectModule, InputNumberModule, RadioButtonModule],
+  imports: [TranslatePipe, CommonModule, FormsModule, ReactiveFormsModule, SelectModule, InputNumberModule, RadioButtonModule],
 })
 export class ResourcesStepComponent implements OnInit {
   private clusterFormService = inject(ClusterFormService);

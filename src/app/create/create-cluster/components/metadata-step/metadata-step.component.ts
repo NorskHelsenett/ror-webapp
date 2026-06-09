@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { ClusterFormService } from '../../services/cluster-form.service';
 import { Observable, Subscription, catchError, share, tap } from 'rxjs';
 import { OAuthService } from 'angular-oauth2-oidc';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { AclScopes, AclAccess } from '../../../../core/models/acl-scopes';
 import { AclService } from '../../../../core/services/acl.service';
 import { CommonModule } from '@angular/common';
@@ -19,7 +19,7 @@ import { HexService } from '../../../../core/services/hex.service';
   templateUrl: './metadata-step.component.html',
   styleUrls: ['./metadata-step.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [TranslateModule, CommonModule, SelectModule, InputDropdownComponent, FormsModule, ReactiveFormsModule, ChipModule],
+  imports: [TranslatePipe, CommonModule, SelectModule, InputDropdownComponent, FormsModule, ReactiveFormsModule, ChipModule],
 })
 export class MetadataStepComponent implements OnInit, OnDestroy, AfterViewInit {
   private clusterFormService = inject(ClusterFormService);

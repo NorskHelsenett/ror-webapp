@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, effect, ChangeDetectorRef, inject } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { HighlightModule } from 'ngx-highlightjs';
 
 import { ClusterIngressService } from '../../services/cluster-ingress.service';
@@ -8,7 +8,7 @@ import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-cluster-ingress-raw',
-  imports: [TranslateModule, HighlightModule, JsonPipe],
+  imports: [TranslatePipe, HighlightModule, JsonPipe],
   templateUrl: './cluster-ingress-raw.component.html',
   styleUrl: './cluster-ingress-raw.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

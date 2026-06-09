@@ -1,4 +1,4 @@
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { MessageService } from 'primeng/api';
 import { Component, Input, OnInit } from '@angular/core';
 import { ClipboardService } from 'ngx-clipboard';
@@ -16,16 +16,7 @@ import { TimePipe } from '../../../shared/pipes/time.pipe';
   templateUrl: './cluster-metadata.component.html',
   styleUrls: ['./cluster-metadata.component.scss'],
   standalone: true,
-  imports: [
-    TranslateModule,
-    RouterModule,
-    TooltipModule,
-    ProviderComponent,
-    TagModule,
-    ClusterStatusComponent,
-    ClusterEnvironmentComponent,
-    TimePipe,
-  ],
+  imports: [TranslatePipe, RouterModule, TooltipModule, ProviderComponent, TagModule, ClusterStatusComponent, ClusterEnvironmentComponent, TimePipe],
 })
 export class ClusterMetadataComponent implements OnInit {
   @Input() cluster: any = undefined;

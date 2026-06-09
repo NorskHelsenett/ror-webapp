@@ -1,13 +1,13 @@
 import { CommonModule, UpperCasePipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
 import { ChipModule } from 'primeng/chip';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-cluster-environment',
   templateUrl: './cluster-environment.component.html',
   styleUrls: ['./cluster-environment.component.scss'],
-  imports: [TranslateModule, CommonModule, ChipModule, UpperCasePipe],
+  imports: [TranslatePipe, CommonModule, ChipModule, UpperCasePipe],
 })
 export class ClusterEnvironmentComponent {
   @Input()

@@ -1,6 +1,6 @@
 import { ApikeyCreateComponent } from './../../components/apikey-create/apikey-create.component';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Observable, Subscription, catchError, finalize, share, tap } from 'rxjs';
 import { User } from '../../../core/models/user';
@@ -26,7 +26,7 @@ import { SelectModule } from 'primeng/select';
   styleUrls: ['./apikeys.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    TranslateModule,
+    TranslatePipe,
     CommonModule,
     TimePipe,
     SpinnerComponent,

@@ -1,5 +1,5 @@
 import { ScrollTopModule } from 'primeng/scrolltop';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { ChangeDetectionStrategy, Component, OnInit, ChangeDetectorRef, OnDestroy, inject, PLATFORM_ID, Inject } from '@angular/core';
 import { ThemeService } from '../core/services/theme.service';
 import { Observable, Subscription, catchError, share, tap } from 'rxjs';
@@ -23,7 +23,7 @@ import { STORAGE_KEYS } from '../core/constants/storage-keys';
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [TranslateModule, DesemberGiftComponent, SantaComponent, RouterModule, ScrollTopModule, CommonModule, RouterLinkActive, RouterLink],
+  imports: [TranslatePipe, DesemberGiftComponent, SantaComponent, RouterModule, ScrollTopModule, CommonModule, RouterLinkActive, RouterLink],
   standalone: true,
 })
 export class LayoutComponent implements OnInit, OnDestroy {
@@ -72,7 +72,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
         this.changeDetector.detectChanges();
       }),
     );
-    this.lang = this.translateService.currentLang;
+    this.lang = this.translateService.currentLang() ?? '';
     this.fetchAcl();
 
     this.desember = this.bigEventsService.isDesember();

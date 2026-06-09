@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Params, Router, RouterModule } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
 import { HighlightModule } from 'ngx-highlightjs';
 import { HighlightLineNumbers } from 'ngx-highlightjs/line-numbers';
 import { FilterMatchMode } from 'primeng/api';
@@ -27,12 +26,13 @@ import { ConfigService } from '../../../core/services/config.service';
 import { ResourceQuery } from '@rork8s/ror-resources/models';
 import { ExportComponent, SpinnerComponent } from '../../../shared/components';
 import { UtilsService } from '../../../shared/services';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-resource-table',
   imports: [
+    TranslatePipe,
     CommonModule,
-    TranslateModule,
     RouterModule,
     TableModule,
     ErrorComponent,

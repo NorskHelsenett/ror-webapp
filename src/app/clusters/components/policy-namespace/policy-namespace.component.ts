@@ -1,7 +1,7 @@
 import { Component, inject, Input, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { Table, TableModule } from 'primeng/table';
 import { ConfigService } from '../../../core/services/config.service';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { PolicyBarComponent } from '../policy-bar/policy-bar.component';
 import { ButtonModule } from 'primeng/button';
 import { PolicyPolicyComponent } from '../policy-policy/policy-policy.component';
@@ -10,7 +10,7 @@ import { PolicyPolicyComponent } from '../policy-policy/policy-policy.component'
   selector: 'app-policy-namespace',
   templateUrl: './policy-namespace.component.html',
   styleUrls: ['./policy-namespace.component.scss'],
-  imports: [TranslateModule, TableModule, PolicyBarComponent, ButtonModule, PolicyPolicyComponent],
+  imports: [TranslatePipe, TableModule, PolicyBarComponent, ButtonModule, PolicyPolicyComponent],
 })
 export class PolicyNamespaceComponent implements OnInit {
   private configService = inject(ConfigService);

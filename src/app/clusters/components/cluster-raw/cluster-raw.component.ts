@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { HighlightResult } from 'highlight.js';
 import { ClipboardService } from 'ngx-clipboard';
 import { HighlightModule } from 'ngx-highlightjs';
@@ -11,7 +11,7 @@ import { MessageService } from 'primeng/api';
   templateUrl: './cluster-raw.component.html',
   styleUrls: ['./cluster-raw.component.scss'],
   standalone: true,
-  imports: [TranslateModule, CommonModule, HighlightModule],
+  imports: [TranslatePipe, CommonModule, HighlightModule],
 })
 export class ClusterRawComponent {
   @Input() cluster: any = undefined;
