@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { MessageService } from 'primeng/api';
 import { catchError, map, Observable, Subscription } from 'rxjs';
@@ -21,7 +21,7 @@ import { Cluster } from '../../../core/models/cluster';
   templateUrl: './acl-create-update.component.html',
   styleUrls: ['./acl-create-update.component.scss'],
   imports: [
-    TranslateModule,
+    TranslatePipe,
     CommonModule,
     RouterModule,
     FormsModule,

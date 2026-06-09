@@ -1,14 +1,14 @@
 import { Resourcesv2Service } from './../../../core/services/resourcesv2.service';
 import { AsyncPipe, JsonPipe, CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
 import { HighlightModule } from 'ngx-highlightjs';
 import { Observable } from 'rxjs';
 import { SpinnerComponent } from '../../../shared/components';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-resource-v2-details',
-  imports: [CommonModule, HighlightModule, TranslateModule, JsonPipe, AsyncPipe, SpinnerComponent],
+  imports: [TranslatePipe, CommonModule, HighlightModule, JsonPipe, AsyncPipe, SpinnerComponent],
   templateUrl: './resource-v2-details.component.html',
   styleUrl: './resource-v2-details.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

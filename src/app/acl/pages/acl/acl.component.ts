@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Observable, Subscription, catchError, finalize, share } from 'rxjs';
 import { AclV2 } from '../../../core/models/aclv2';
@@ -24,7 +24,7 @@ import { SelectModule } from 'primeng/select';
   styleUrls: ['./acl.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    TranslateModule,
+    TranslatePipe,
     CommonModule,
     RouterModule,
     TrueFalseComponent,

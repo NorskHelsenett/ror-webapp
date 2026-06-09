@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-error',
-  imports: [TranslateModule],
+  imports: [TranslatePipe],
   templateUrl: './error.component.html',
   styleUrl: './error.component.scss',
 })

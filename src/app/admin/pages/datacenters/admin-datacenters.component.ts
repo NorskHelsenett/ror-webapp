@@ -6,7 +6,7 @@ import { AclService } from '../../../core/services/acl.service';
 import { ConfigService } from '../../../core/services/config.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { TableModule } from 'primeng/table';
 import { SpinnerComponent } from '../../../shared/components';
 import { TimePipe } from '../../../shared/pipes/time.pipe';
@@ -16,7 +16,7 @@ import { TimePipe } from '../../../shared/pipes/time.pipe';
   templateUrl: './admin-datacenters.component.html',
   styleUrls: ['./admin-datacenters.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [TranslateModule, CommonModule, RouterModule, TableModule],
+  imports: [TranslatePipe, CommonModule, RouterModule, TableModule],
 })
 export class AdminDatacentersComponent implements OnInit {
   private configService = inject(ConfigService);

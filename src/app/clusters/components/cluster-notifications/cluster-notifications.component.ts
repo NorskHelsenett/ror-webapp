@@ -3,7 +3,7 @@ import { ResourcesService } from '../../../core/services/resources.service';
 import { v4 } from 'uuid';
 import { catchError, map, mergeMap, Observable, tap } from 'rxjs';
 import { Resource, ResourceQuery, ResourceRoute, ResourceSet } from '@rork8s/ror-resources/models';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { ClusterNotificationsFormComponent } from '../cluster-notifications-form/cluster-notifications-form.component';
 import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
@@ -15,7 +15,7 @@ import { AsyncPipe } from '@angular/common';
   templateUrl: './cluster-notifications.component.html',
   styleUrl: './cluster-notifications.component.scss',
   standalone: true,
-  imports: [TranslateModule, ClusterNotificationsFormComponent, TableModule, DialogModule, ButtonModule, AsyncPipe],
+  imports: [TranslatePipe, ClusterNotificationsFormComponent, TableModule, DialogModule, ButtonModule, AsyncPipe],
 })
 export class ClusterNotificationsComponent implements OnInit {
   @Input({ required: true }) cluster!: any;

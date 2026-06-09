@@ -12,7 +12,7 @@ import {
   Output,
 } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { MessageService, ConfirmationService, ConfirmEventType } from 'primeng/api';
 import { catchError, Observable, of, Subscription, tap } from 'rxjs';
 import { ClusterMetadata } from '../../../core/models/clusterMetadata';
@@ -37,7 +37,7 @@ import { HexService } from '../../../core/services/hex.service';
   styleUrls: ['./cluster-details-edit.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    TranslateModule,
+    TranslatePipe,
     CommonModule,
     RouterModule,
     TagModule,

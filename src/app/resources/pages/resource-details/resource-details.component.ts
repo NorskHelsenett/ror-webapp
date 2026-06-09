@@ -3,13 +3,13 @@ import { Observable, Subscription, catchError } from 'rxjs';
 import { ResourcesService } from './../../../core/services/resources.service';
 import { Component, OnDestroy, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
 import { ErrorComponent } from '../../../shared/components/error/error.component';
 import { SpinnerComponent } from '../../../shared/components';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-resource-details',
-  imports: [CommonModule, RouterModule, TranslateModule, ErrorComponent, SpinnerComponent],
+  imports: [TranslatePipe, CommonModule, RouterModule, ErrorComponent, SpinnerComponent],
   templateUrl: './resource-details.component.html',
   styleUrl: './resource-details.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

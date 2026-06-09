@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { ClipboardService } from 'ngx-clipboard';
 import { MessageService } from 'primeng/api';
 import { TimePipe } from '../../../shared/pipes/time.pipe';
@@ -8,7 +8,7 @@ import { TimePipe } from '../../../shared/pipes/time.pipe';
   selector: 'app-userprofile-details',
   templateUrl: './userprofile-details.component.html',
   styleUrls: ['./userprofile-details.component.scss'],
-  imports: [TranslateModule, TimePipe],
+  imports: [TranslatePipe, TimePipe],
 })
 export class UserprofileDetailsComponent implements OnInit {
   @Input()

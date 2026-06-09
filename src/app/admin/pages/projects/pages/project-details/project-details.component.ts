@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { LangChangeEvent, TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslatePipe, LangChangeEvent, TranslateService } from '@ngx-translate/core';
 import { catchError, Observable, share, Subscription, tap } from 'rxjs';
 import { AclScopes, AclAccess } from '../../../../../core/models/acl-scopes';
 import { ClusterInfo } from '../../../../../core/models/clusterInfo';
@@ -21,7 +21,7 @@ import { TimePipe } from '../../../../../shared/pipes/time.pipe';
   styleUrls: ['./project-details.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    TranslateModule,
+    TranslatePipe,
     CommonModule,
     RouterModule,
     TableModule,

@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, EventEmitter, inject, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { ClipboardService } from 'ngx-clipboard';
 import { MessageService } from 'primeng/api';
 import { Subscription, catchError } from 'rxjs';
@@ -14,7 +14,7 @@ import { SelectModule } from 'primeng/select';
   selector: 'app-apikey-create',
   templateUrl: './apikey-create.component.html',
   styleUrls: ['./apikey-create.component.scss'],
-  imports: [TranslateModule, FormsModule, ReactiveFormsModule, SelectModule, DatePickerModule],
+  imports: [TranslatePipe, FormsModule, ReactiveFormsModule, SelectModule, DatePickerModule],
 })
 export class ApikeyCreateComponent implements OnInit, OnDestroy {
   private configService = inject(ConfigService);

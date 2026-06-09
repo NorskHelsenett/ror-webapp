@@ -1,6 +1,6 @@
 import { Resourcesv2Service } from './../../../core/services/resourcesv2.service';
 import { CommonModule } from '@angular/common';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject, OnDestroy } from '@angular/core';
 import { catchError, finalize, map, Observable, Subscription, tap } from 'rxjs';
 import { ActivatedRoute, RouterLink } from '@angular/router';
@@ -19,8 +19,8 @@ import { SpinnerComponent } from '../../../shared/components';
 @Component({
   selector: 'app-ingress',
   imports: [
+    TranslatePipe,
     CommonModule,
-    TranslateModule,
     RouterLink,
     HighlightModule,
     TabsModule,

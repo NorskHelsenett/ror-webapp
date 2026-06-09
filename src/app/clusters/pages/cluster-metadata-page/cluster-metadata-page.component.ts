@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { ClusterService } from '../../services';
 
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { SharedModule } from 'primeng/api';
 import { RouterModule } from '@angular/router';
 import { TagModule } from 'primeng/tag';
@@ -12,7 +12,7 @@ import { ClusterDetailsEditComponent } from '../cluster-details-edit/cluster-det
   templateUrl: './cluster-metadata-page.component.html',
   styleUrl: './cluster-metadata-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [TranslateModule, SharedModule, RouterModule, TagModule, ClusterDetailsEditComponent],
+  imports: [TranslatePipe, SharedModule, RouterModule, TagModule, ClusterDetailsEditComponent],
   providers: [ClusterService],
 })
 export class ClusterMetadataPageComponent implements OnInit {

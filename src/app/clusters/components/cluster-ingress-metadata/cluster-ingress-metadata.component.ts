@@ -1,6 +1,6 @@
 import { Router, RouterModule } from '@angular/router';
 import { Component, Input, OnInit } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { TooltipModule } from 'primeng/tooltip';
 import { CommonModule } from '@angular/common';
 import { ClusterStatusComponent } from '../../../shared/components';
@@ -10,7 +10,7 @@ import { ClusterStatusComponent } from '../../../shared/components';
   templateUrl: './cluster-ingress-metadata.component.html',
   styleUrls: ['./cluster-ingress-metadata.component.scss'],
   standalone: true,
-  imports: [TranslateModule, TooltipModule, RouterModule, CommonModule, ClusterStatusComponent],
+  imports: [TranslatePipe, TooltipModule, RouterModule, CommonModule, ClusterStatusComponent],
 })
 export class ClusterIngressMetadataComponent implements OnInit {
   @Input() cluster: any = undefined;

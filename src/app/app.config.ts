@@ -1,4 +1,4 @@
-import { ApplicationConfig, importProvidersFrom, isDevMode, PLATFORM_ID, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, isDevMode, PLATFORM_ID, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter, withInMemoryScrolling, withRouterConfig } from '@angular/router';
 
 import { routes } from './app.routes';
@@ -11,7 +11,7 @@ import { providePrimeNG } from 'primeng/config';
 import { AuthInterceptor } from './core/interceptors/auth-interceptor';
 import { provideHighlightOptions } from 'ngx-highlightjs';
 import { provideServiceWorker } from '@angular/service-worker';
-import { TranslateModule, MissingTranslationHandler } from '@ngx-translate/core';
+import { provideTranslateService } from '@ngx-translate/core';
 import { CustomMissingTranslationHandler } from './core/i18n/i18nfunctions';
 import { isPlatformServer } from '@angular/common';
 import RorTheme from './themes/ror-theme';
@@ -56,15 +56,13 @@ export const appConfig: ApplicationConfig = {
         sendAccessToken: true,
       },
     }),
-    importProvidersFrom([
-      TranslateModule.forRoot({
-        missingTranslationHandler: { provide: MissingTranslationHandler, useClass: CustomMissingTranslationHandler },
-        loader: provideTranslateHttpLoader({
-          prefix: './assets/i18n/',
-          suffix: '.json',
-        }),
+    provideTranslateService({
+      missingTranslationHandler: CustomMissingTranslationHandler,
+      loader: provideTranslateHttpLoader({
+        prefix: './assets/i18n/',
+        suffix: '.json',
       }),
-    ]),
+    }),
     MessageService,
     ThemeService,
     ConfirmationService,

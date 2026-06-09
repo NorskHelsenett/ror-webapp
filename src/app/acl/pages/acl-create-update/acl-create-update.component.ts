@@ -3,7 +3,7 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Subscription, catchError } from 'rxjs';
 import { AclV2 } from '../../../core/models/aclv2';
 import { AclService } from '../../../core/services/acl.service';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AclCreateUpdateComponent } from '../../component';
@@ -13,7 +13,7 @@ import { AclCreateUpdateComponent } from '../../component';
   templateUrl: './acl-create-update.component.html',
   styleUrls: ['./acl-create-update.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [TranslateModule, RouterModule, FormsModule, ReactiveFormsModule, AclCreateUpdateComponent],
+  imports: [TranslatePipe, RouterModule, FormsModule, ReactiveFormsModule, AclCreateUpdateComponent],
 })
 export class AclCreateUpdatePageComponent implements OnInit, OnDestroy {
   id: string;

@@ -2,12 +2,12 @@ import { OAuthService } from 'angular-oauth2-oidc';
 import { ChangeDetectorRef, Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { Router } from '@angular/router';
 import { filter } from 'rxjs';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-callback',
-  imports: [TranslateModule],
+  imports: [TranslatePipe],
   templateUrl: './callback.component.html',
   styleUrl: './callback.component.scss',
 })

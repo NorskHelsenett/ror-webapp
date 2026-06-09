@@ -1,4 +1,4 @@
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Observable, Subscription, catchError, tap } from 'rxjs';
@@ -20,7 +20,7 @@ import { TimePipe } from '../../../shared/pipes/time.pipe';
   templateUrl: './order-detail.component.html',
   styleUrls: ['./order-detail.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [TranslateModule, CommonModule, RouterModule, SpinnerComponent, TimePipe],
+  imports: [TranslatePipe, CommonModule, RouterModule, SpinnerComponent, TimePipe],
 })
 export class OrderDetailComponent implements OnInit {
   order$: Observable<ClusterOrder> | undefined;
@@ -46,7 +46,7 @@ export class OrderDetailComponent implements OnInit {
     private datacenterService: DatacenterService,
     private translateService: TranslateService,
   ) {
-    dayjs.locale(this.translateService.currentLang);
+    dayjs.locale(this.translateService.currentLang() ?? undefined);
     dayjs.extend(dayjsRelativeTime);
   }
 
@@ -96,12 +96,14 @@ export class OrderDetailComponent implements OnInit {
   }
 
   getTime(date: string): Date {
-    let result = dayjs(date).locale(this.translateService.currentLang);
+    let result = dayjs(date).locale(this.translateService.currentLang() ?? undefined);
     return result.toDate();
   }
 
   timeSince(date: string): string {
-    return dayjs(date).locale(this.translateService.currentLang).fromNow();
+    return dayjs(date)
+      .locale(this.translateService.currentLang() ?? undefined)
+      .fromNow();
   }
 
   private fetchWorkspace(workspaceId: string): void {

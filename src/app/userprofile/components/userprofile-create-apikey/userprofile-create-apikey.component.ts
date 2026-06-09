@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, inject, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { ClipboardService } from 'ngx-clipboard';
 import { MessageService } from 'primeng/api';
 import { Subscription, catchError } from 'rxjs';
@@ -15,7 +15,7 @@ import { DatePickerModule } from 'primeng/datepicker';
   templateUrl: './userprofile-create-apikey.component.html',
   styleUrls: ['./userprofile-create-apikey.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [TranslateModule, FormsModule, ReactiveFormsModule, DatePickerModule],
+  imports: [TranslatePipe, FormsModule, ReactiveFormsModule, DatePickerModule],
 })
 export class UserprofileCreateApikeyComponent implements OnInit, OnDestroy {
   private configService = inject(ConfigService);

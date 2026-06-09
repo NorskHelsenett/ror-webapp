@@ -1,7 +1,6 @@
 import { catchError, finalize, map, Observable, share } from 'rxjs';
 import { Component, OnInit, ChangeDetectorRef, inject, ChangeDetectionStrategy, Output, EventEmitter, Input } from '@angular/core';
 import { Resourcesv2Service } from '../../../core/services/resourcesv2.service';
-import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
 import { ConfigService } from '../../../core/services/config.service';
@@ -18,20 +17,11 @@ import { TooltipModule } from 'primeng/tooltip';
 import { Resource, ResourceSet } from '@rork8s/ror-resources/models';
 import { ExportComponent, SpinnerComponent } from '../../../shared/components';
 import { SelectModule } from 'primeng/select';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-resources-v2-list',
-  imports: [
-    CommonModule,
-    TranslateModule,
-    TableModule,
-    MultiSelectModule,
-    FormsModule,
-    SelectModule,
-    TooltipModule,
-    ExportComponent,
-    SpinnerComponent,
-  ],
+  imports: [TranslatePipe, CommonModule, TableModule, MultiSelectModule, FormsModule, SelectModule, TooltipModule, ExportComponent, SpinnerComponent],
   templateUrl: './resources-v2-list.component.html',
   styleUrl: './resources-v2-list.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

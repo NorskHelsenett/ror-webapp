@@ -3,7 +3,7 @@ import { PriceService } from '../../../core/services/price.service';
 import { Component, Input, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef, inject } from '@angular/core';
 import { Price } from '../../../core/models/price';
 import { ConfigService } from '../../../core/services/config.service';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { TableModule } from 'primeng/table';
 import { CommonModule, LowerCasePipe } from '@angular/common';
 import { FormatBytesPipe } from '../../../shared/pipes';
@@ -13,7 +13,7 @@ import { FormatBytesPipe } from '../../../shared/pipes';
   templateUrl: './cluster-node-pools.component.html',
   styleUrls: ['./cluster-node-pools.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [TranslateModule, TableModule, LowerCasePipe, CommonModule, FormatBytesPipe],
+  imports: [TranslatePipe, TableModule, LowerCasePipe, CommonModule, FormatBytesPipe],
 })
 export class ClusterNodePoolsComponent implements OnInit, OnDestroy {
   private configService = inject(ConfigService);

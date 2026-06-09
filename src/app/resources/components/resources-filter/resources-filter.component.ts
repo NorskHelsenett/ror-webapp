@@ -1,16 +1,16 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { TranslateModule } from '@ngx-translate/core';
 import { OwnerType } from '../../../core/models/resources/ownerType';
 import { ResourceType } from '../../../core/models/resources/resourceType';
 import { Cluster } from '../../../core/models/cluster';
 import { ResourceFilter } from '../../models/resourceFilter';
 import { UtilsService } from '../../../shared/services/utils.service';
 import { SelectModule } from 'primeng/select';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-resources-filter',
-  imports: [FormsModule, TranslateModule, SelectModule, FormsModule],
+  imports: [TranslatePipe, FormsModule, SelectModule, FormsModule],
   templateUrl: './resources-filter.component.html',
   styleUrl: './resources-filter.component.scss',
 })

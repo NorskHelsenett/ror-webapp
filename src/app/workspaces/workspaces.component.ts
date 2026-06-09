@@ -6,18 +6,18 @@ import { Filter } from '../core/models/apiFilter';
 import { PaginationResult } from '../core/models/paginatedResult';
 import { FilterService } from '../core/services/filter.service';
 import { ConfigService } from '../core/services/config.service';
-import { TranslateModule } from '@ngx-translate/core';
 import { TableModule } from 'primeng/table';
 import { CommonModule } from '@angular/common';
-import { Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { FormatBytesPipe } from '../shared/pipes';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-workspaces',
   templateUrl: './workspaces.component.html',
   styleUrls: ['./workspaces.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [TranslateModule, CommonModule, TableModule, RouterModule, FormatBytesPipe],
+  imports: [TranslatePipe, CommonModule, TableModule, RouterModule, FormatBytesPipe],
 })
 export class WorkspacesComponent implements OnInit {
   private configService = inject(ConfigService);

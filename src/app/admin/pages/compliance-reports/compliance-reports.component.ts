@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ComplianceReportsService } from '../../../core/services/compliance-reports.service';
 import { ComplianceReport, ComplianceReportGlobal } from '../../../core/models/complianceReport';
 import { Observable, catchError, map, of } from 'rxjs';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
 import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
@@ -13,7 +13,7 @@ import { ExportComponent } from '../../../shared/components';
   selector: 'app-compliance-reports',
   templateUrl: './compliance-reports.component.html',
   styleUrl: './compliance-reports.component.scss',
-  imports: [TranslateModule, CommonModule, TableModule, RouterModule, ExportComponent],
+  imports: [TranslatePipe, CommonModule, TableModule, RouterModule, ExportComponent],
 })
 export class ComplianceReportsComponent implements OnInit {
   complianceReports$: Observable<ComplianceReportGlobal[]>;

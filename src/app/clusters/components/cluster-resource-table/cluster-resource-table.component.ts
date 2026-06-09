@@ -1,6 +1,6 @@
 import { TypesService } from './../../../resources/services/types.service';
 import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { ResourcesV2ListComponent } from '../../../resourcesv2/components/resources-v2-list/resources-v2-list.component';
 import { Resourcesv2FilterComponent } from '../../../resourcesv2/components/resourcesv2-filter/resourcesv2-filter.component';
 import { ResourceType } from '../../../core/models/resources/resourceType';
@@ -8,7 +8,7 @@ import { ResourcesV2QueryService } from '../../../resourcesv2/services/resources
 
 @Component({
   selector: 'app-cluster-resource-table',
-  imports: [TranslateModule, Resourcesv2FilterComponent, ResourcesV2ListComponent],
+  imports: [TranslatePipe, Resourcesv2FilterComponent, ResourcesV2ListComponent],
   templateUrl: './cluster-resource-table.component.html',
   styleUrl: './cluster-resource-table.component.scss',
   providers: [TypesService],

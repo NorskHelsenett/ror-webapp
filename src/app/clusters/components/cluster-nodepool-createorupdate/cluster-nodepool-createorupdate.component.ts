@@ -2,7 +2,7 @@ import { ProviderFeaturesService } from './../../../core/services/provider-featu
 import { NodepoolService } from './../../services/nodepool.service';
 import { ChangeDetectorRef, Component, EventEmitter, inject, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { catchError, finalize, map, Subscription } from 'rxjs';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ClusterService } from '../../services';
 import { TableModule } from 'primeng/table';
@@ -22,7 +22,7 @@ import { NodePoolAction, NodePoolChange } from '../../models/nodepool';
 @Component({
   selector: 'app-cluster-nodepool-createorupdate',
   imports: [
-    TranslateModule,
+    TranslatePipe,
     ReactiveFormsModule,
     TableModule,
     TitleCasePipe,

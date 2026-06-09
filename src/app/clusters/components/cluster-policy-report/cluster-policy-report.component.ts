@@ -6,7 +6,7 @@ import { PolicyReportView } from '../../../core/models/policyReport';
 import { ClustersService } from '../../../core/services/clusters.service';
 import { ConfigService } from '../../../core/services/config.service';
 import { ExportService } from '../../../core/services/export.service';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { PolicyBarComponent } from '../policy-bar/policy-bar.component';
 import { ButtonModule } from 'primeng/button';
 import { PolicyNamespaceComponent } from '../policy-namespace/policy-namespace.component';
@@ -17,7 +17,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './cluster-policy-report.component.html',
   styleUrls: ['./cluster-policy-report.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [TranslateModule, PolicyBarComponent, TableModule, ButtonModule, PolicyNamespaceComponent, CommonModule],
+  imports: [TranslatePipe, PolicyBarComponent, TableModule, ButtonModule, PolicyNamespaceComponent, CommonModule],
 })
 export class ClusterPolicyReportComponent implements OnInit, OnDestroy {
   private configService = inject(ConfigService);

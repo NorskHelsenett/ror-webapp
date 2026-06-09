@@ -1,14 +1,14 @@
-import { TranslateModule } from '@ngx-translate/core';
 import { ClusterFormService } from '../../services/cluster-form.service';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { TagModule } from 'primeng/tag';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-summary',
   templateUrl: './summary.component.html',
   styleUrls: ['./summary.component.scss'],
-  imports: [TranslateModule, TagModule],
+  imports: [TranslatePipe, TagModule],
 })
 export class SummaryComponent {
   @Input() value: any;

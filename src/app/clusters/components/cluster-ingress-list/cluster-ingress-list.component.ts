@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input, OnInit } from '@angular/core';
 import { ConfigService } from '../../../core/services/config.service';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
 import { RouterModule } from '@angular/router';
@@ -13,7 +13,7 @@ import { ClusterStatusComponent } from '../../../shared/components';
   styleUrls: ['./cluster-ingress-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [TranslateModule, CommonModule, TableModule, RouterModule, TooltipModule, ClusterStatusComponent],
+  imports: [TranslatePipe, CommonModule, TableModule, RouterModule, TooltipModule, ClusterStatusComponent],
 })
 export class ClusterIngressListComponent implements OnInit {
   private configService = inject(ConfigService);

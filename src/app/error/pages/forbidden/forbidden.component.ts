@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-forbidden',
+  imports: [TranslatePipe],
   templateUrl: './forbidden.component.html',
   styleUrls: ['./forbidden.component.scss'],
-  imports: [TranslateModule],
 })
 export class ForbiddenComponent {}

@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { MessageService } from 'primeng/api';
 import { Observable, catchError } from 'rxjs';
 import { PolicyReportGlobal, PolicyReportGlobalQueryType } from '../../../core/models/policyReport';
@@ -15,7 +15,7 @@ import { ExportComponent } from '../../../shared/components';
   selector: 'app-policy-reports',
   templateUrl: './policy-reports.component.html',
   styleUrls: ['./policy-reports.component.scss'],
-  imports: [TranslateModule, CommonModule, RouterModule, TableModule, ButtonModule, PerPolicyTableComponent, ExportComponent],
+  imports: [TranslatePipe, CommonModule, RouterModule, TableModule, ButtonModule, PerPolicyTableComponent, ExportComponent],
 })
 export class PolicyReportsComponent implements OnInit {
   policyReportsPerCluster$: Observable<PolicyReportGlobal[]>;
