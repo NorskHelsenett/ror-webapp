@@ -1,7 +1,7 @@
 {
   "auth": {
     "issuer": "http://localhost:6556/dex",
-    "clientId": "ror.sky.test.nhn.no",
+    "clientId": "dex.local.ror",
     "redirectUri": "/auth/callback",
     "scope": "openid profile email groups offline_access",
     "response_type": "code",
