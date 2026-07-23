@@ -331,6 +331,13 @@ export class ClusterDetailsComponent implements OnInit, OnDestroy, AfterContentI
 
   switchTab(): void {
     try {
+      if (this.activeTabIndex === 4) {
+        window.open(`https://spam.sikkerhet.nhn.no/cluster/${this.clusterId}`, '_blank');
+        this.activeTabIndex = this.selectedTabIndex;
+        this.changeDetector.detectChanges();
+        return;
+      }
+      this.selectedTabIndex = this.activeTabIndex as number;
       const tab = this.tabs[this.activeTabIndex];
       this.location.replaceState(`cluster/${this.clusterId}`, tab?.query);
 

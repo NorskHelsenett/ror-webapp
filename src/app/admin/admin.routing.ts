@@ -95,7 +95,9 @@ export const routes: Routes = [
   {
     path: 'vulnerabilityreports',
     canActivate: [AdminReadGuard],
-    loadComponent: () => import('./pages/vulnerability-reports/vulnerability-reports.component').then((m) => m.VulnerabilityReportsComponent),
+    loadComponent: () =>
+      import('../shared/components/external-redirect/external-redirect.component').then((m) => m.ExternalRedirectComponent),
+    data: { externalUrl: 'https://spam.sikkerhet.nhn.no/' },
   },
   {
     path: 'compliancereports',
