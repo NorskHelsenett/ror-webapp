@@ -7,3 +7,4 @@ WORKDIR /app
 COPY nginx/http_prod.conf /etc/nginx/conf.d/default.conf
 
 COPY dist/ror-webapp/browser /app
+RUN cp /app/index.csr.html /app/index.html
