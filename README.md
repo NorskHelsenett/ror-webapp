@@ -1,6 +1,4 @@
-# Admin portal
-
-GUI for ROR.
+# ROR Web 1.0
 
 # Prerequsites:
  - Node LTS
@@ -10,7 +8,7 @@ GUI for ROR.
 ```npm i```
 2. Start application
 ```npm start```
-3. Go to [localhost:4200](http://localhost:4200)
+3. Go to [localhost:11000](http://localhost:11000)
    - The application is dependent on Dex and other applications that could be started with docker-compose (```<repo>/: docker-compose up```)
 
 # Build and release
